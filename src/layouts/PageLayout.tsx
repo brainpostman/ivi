@@ -1,15 +1,9 @@
 import HeadModif from '@/components/HeadModif/HeadModif'
 import Header from '@/components/Header/Header'
+import { IHead } from '@/types/head.interface'
 import { FC, PropsWithChildren } from 'react'
 
-interface IProps {
-	title: string
-	description?: string
-	keywords?: string
-	noIndex?: boolean
-}
-
-const PageLayout: FC<PropsWithChildren<IProps>> = ({
+const PageLayout: FC<PropsWithChildren<IHead>> = ({
 	title,
 	description,
 	keywords,
