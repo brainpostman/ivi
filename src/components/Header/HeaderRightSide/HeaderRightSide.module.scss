@@ -1,0 +1,38 @@
+.wrapper {
+	display: flex;
+	align-items: stretch;
+	gap: 20px;
+}
+
+.notifIcon {
+	width: 22px !important;
+	height: 22px !important;
+
+	transition: transform 0.4s;
+
+	&:hover {
+		transform: scale(1.1);
+	}
+}
+
+.personIcon {
+	align-self: center;
+	color: $gray;
+
+	border: 2px solid $gray;
+	border-radius: 8px;
+	cursor: pointer;
+
+	padding: 12px;
+
+	width: 50px;
+	height: 50px;
+
+	// FIXME: border-color почему-то не меняет цвет без important
+	transition: border-color 0.4s, box-shadow 0.4s !important;
+
+	&:hover {
+		border-color: #fff;
+		box-shadow: 0 0 20px 5px rgba($color: #fff, $alpha: 0.15);
+	}
+}
