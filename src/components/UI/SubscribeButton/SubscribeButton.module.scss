@@ -1,0 +1,14 @@
+.button {
+	align-self: center;
+
+	font-size: 13px;
+	line-height: 16px;
+
+	background-image: linear-gradient(270deg, #ea003d 0, #c447ff 100%);
+	// Если в браузере не поддерживается градиент
+	background-color: #ea003d;
+
+	border-radius: 8px;
+
+	padding: 7px 11px;
+}
