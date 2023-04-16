@@ -1,0 +1,15 @@
+.text {
+	color: $gray;
+
+	cursor: pointer;
+
+	transition: color 0.4s;
+
+	&:hover {
+		color: #fff;
+	}
+}
+
+.hide {
+	display: none !important;
+}

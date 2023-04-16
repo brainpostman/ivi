@@ -1,0 +1,37 @@
+// UI vars
+$ui-space-step: 4px;
+$ui-font-step: 4px;
+
+@mixin ui-margin($direction, $size) {
+	@if ($direction == top) {
+		margin-top: $ui-space-step * $size;
+	}
+	@if ($direction == bottom) {
+		margin-bottom: $ui-space-step * $size;
+	}
+	@if ($direction == right) {
+		margin-right: $ui-space-step * $size;
+	}
+	@if ($direction == left) {
+		margin-left: $ui-space-step * $size;
+	}
+}
+
+@mixin ui-padding($direction, $size) {
+	@if ($direction == top) {
+		padding-top: $ui-space-step * $size;
+	}
+	@if ($direction == bottom) {
+		padding-bottom: $ui-space-step * $size;
+	}
+	@if ($direction == right) {
+		padding-right: $ui-space-step * $size;
+	}
+	@if ($direction == left) {
+		padding-left: $ui-space-step * $size;
+	}
+}
+
+@mixin ui-font($size) {
+	font-size: $ui-font-step * $size;
+}
