@@ -1,0 +1,26 @@
+.wrapper {
+	background-color: #100e19;
+
+	@include ui-padding(top, 1);
+}
+
+.container {
+	position: relative;
+	display: flex;
+	justify-content: space-between;
+
+	max-width: 1240px;
+
+	border-top-left-radius: 8px;
+	border-top-right-radius: 8px;
+
+	// TODO: Нужна ли анимация ???
+	transition: background-color 0.1s;
+
+	margin: auto;
+	padding: 0 12px;
+}
+
+.effect {
+	background-color: #1f1b2e;
+}
