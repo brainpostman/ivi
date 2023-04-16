@@ -1,0 +1,24 @@
+.wrapper {
+	display: flex;
+}
+
+.leftSide {
+	height: 100%;
+	border-right: 1px solid $border-gray;
+
+	@include ui-margin(right, 8);
+	@include ui-padding(right, 4);
+}
+
+.list {
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
+}
+
+.middleSide {
+	display: flex;
+	flex-direction: column;
+
+	gap: 32px;
+}
