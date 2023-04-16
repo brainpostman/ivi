@@ -1,0 +1,25 @@
+.wrapper {
+	display: flex;
+	gap: 28px;
+}
+
+.logo {
+	width: 66px;
+	height: 72px;
+}
+
+.nav {
+	display: flex;
+
+	color: $gray;
+	font-weight: 500;
+
+	> a {
+		display: flex;
+		align-items: center;
+
+		@extend .text;
+
+		padding: 0 8px;
+	}
+}
