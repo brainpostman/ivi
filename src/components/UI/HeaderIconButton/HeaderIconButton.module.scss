@@ -1,0 +1,23 @@
+.wrapper {
+	display: flex;
+	align-items: center;
+
+	color: $gray;
+	background-color: transparent;
+
+	cursor: default;
+}
+
+.container {
+	display: flex;
+	align-items: center;
+
+	cursor: pointer;
+
+	> svg {
+		width: 18px;
+		height: 18px;
+
+		margin-right: 8px;
+	}
+}
