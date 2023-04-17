@@ -1,0 +1,29 @@
+import {
+	Meta,
+	Title,
+	Description,
+	Primary,
+	Controls,
+	ColorPalette,
+	ColorItem,
+} from '@storybook/blocks'
+import * as LongButton from './LongButton.stories.tsx'
+
+<Meta of={LongButton} />
+
+<Title />
+<Description />
+<Primary />
+<Controls />
+
+## Цветовая палитра
+
+<br />
+
+<ColorPalette>
+	<ColorItem
+		title='Цвет кнопки'
+		subtitle='При действиях над ней'
+		colors={{ Default: '#1f1b2e', Hover: '#231f34' }}
+	/>
+</ColorPalette>
