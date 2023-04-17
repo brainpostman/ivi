@@ -1,31 +1,41 @@
 import { headerHoverBlockContent } from '@/data/headerHoverBlock.data'
-import { IHeaderFilter } from '@/types/header.interface'
+import { IHeaderTab } from '@/types/header.interface'
 import { FC } from 'react'
 import style from './HeaderHoverBlock.module.scss'
+import HeaderProfileBlock from './HeaderProfileBlock/HeaderProfileBlock'
 import HeaderTvBlock from './HeaderTvBlock/HeaderTvBlock'
+import HeaderMovieBlock from './HedaerMovieBlock/HedaerMovieBlock'
 import HoverFilterBlock from './HoverFilterBlock/HoverFilterBlock'
 
 interface IProps {
-	filter: IHeaderFilter
+	tab: IHeaderTab
 	hideHoverBlock: () => void
 }
 
-const HeaderHoverBlock: FC<IProps> = ({ hideHoverBlock, filter }) => {
-	const filterList: IHeaderFilter[] = ['films', 'series', 'cartoons']
+const HeaderHoverBlock: FC<IProps> = ({ hideHoverBlock, tab }) => {
+	const tabList: IHeaderTab[] = ['films', 'series', 'cartoons']
 
-	const currentBlock = headerHoverBlockContent.find(
-		block => block.filter === filter
-	)
+	const tabsWithMovieBlock: IHeaderTab[] = [
+		'films',
+		'series',
+		'cartoons',
+		'TV+',
+	]
 
-	// TODO: сделать контент для TV+
+	const currentBlock = headerHoverBlockContent.find(block => block.tab === tab)
+
 	return (
 		<article className={style.wrapper} onMouseLeave={hideHoverBlock}>
-			{filterList.includes(filter) ? (
+			{tabList.includes(tab) ? (
 				<HoverFilterBlock currentBlock={currentBlock} />
-			) : (
+			) : tab === 'TV+' ? (
 				<HeaderTvBlock />
+			) : tab === 'profile' ? (
+				<HeaderProfileBlock />
+			) : (
+				<></>
 			)}
-			<div className={style.movieBlock}></div>
+			{tabsWithMovieBlock.includes(tab) && <HeaderMovieBlock />}
 		</article>
 	)
 }
