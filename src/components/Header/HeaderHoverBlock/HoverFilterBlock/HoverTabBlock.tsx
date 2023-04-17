@@ -2,7 +2,7 @@ import { IHeaderHoverBlockContent } from '@/types/hoverblock.interface'
 import { getNumGridColumns } from '@/utils/grid.utils'
 import { FC, useState } from 'react'
 import styleParent from '../HeaderHoverBlock.module.scss'
-import style from './HoverFilterBlock.module.scss'
+import style from './HoverTabBlock.module.scss'
 
 // Количество строк в сетке фильтра
 const gridColumnLines = 11

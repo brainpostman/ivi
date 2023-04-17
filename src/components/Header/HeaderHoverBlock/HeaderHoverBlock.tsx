@@ -4,8 +4,8 @@ import { FC } from 'react'
 import style from './HeaderHoverBlock.module.scss'
 import HeaderProfileBlock from './HeaderProfileBlock/HeaderProfileBlock'
 import HeaderTvBlock from './HeaderTvBlock/HeaderTvBlock'
-import HeaderMovieBlock from './HedaerMovieBlock/HedaerMovieBlock'
-import HoverFilterBlock from './HoverFilterBlock/HoverFilterBlock'
+import HeaderMovieBlock from './HedaerMovieBlock/HeaderMovieBlock'
+import HoverTabBlock from './HoverFilterBlock/HoverTabBlock'
 
 interface IProps {
 	tab: IHeaderTab
@@ -27,7 +27,7 @@ const HeaderHoverBlock: FC<IProps> = ({ hideHoverBlock, tab }) => {
 	return (
 		<article className={style.wrapper} onMouseLeave={hideHoverBlock}>
 			{tabList.includes(tab) ? (
-				<HoverFilterBlock currentBlock={currentBlock} />
+				<HoverTabBlock currentBlock={currentBlock} />
 			) : tab === 'TV+' ? (
 				<HeaderTvBlock />
 			) : tab === 'profile' ? (
