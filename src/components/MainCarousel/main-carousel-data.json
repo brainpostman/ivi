@@ -1,0 +1,38 @@
+[
+    {
+        "title": "Брутально и мужественно",
+        "subtitle": "Лучшие боевики последних лет",
+        "imgUrl": "MainCarousel/action.jpg",
+        "imgUrlMobile": "MainCarousel/action_mobile.jpg"
+    },
+    {
+        "title": "Самым маленьким россиянам",
+        "subtitle": "Мультфильмы отечественного производства",
+        "imgUrl": "MainCarousel/cartoons.jpg",
+        "imgUrlMobile": "MainCarousel/cartoons_mobile.jpg"
+    },
+    {
+        "title": "Очень смешно",
+        "subtitle": "Комедийные фильмы",
+        "imgUrl": "MainCarousel/comedies.jpg",
+        "imgUrlMobile": "MainCarousel/comedies_mobile.jpg"
+    },
+    {
+        "title": "Наша гордость",
+        "subtitle": "Фильмы отечественного производства",
+        "imgUrl": "MainCarousel/russian.jpg",
+        "imgUrlMobile": "MainCarousel/russian_mobile.jpg"
+    },
+    {
+        "title": "Окно в будущее",
+        "subtitle": "Подборка научно-фантастических фильмов",
+        "imgUrl": "MainCarousel/scifi.jpg",
+        "imgUrlMobile": "MainCarousel/scifi_mobile.jpg"
+    },
+    {
+        "title": "Захватывающее зрелище",
+        "subtitle": "Подборка лучших триллеров последних лет",
+        "imgUrl": "MainCarousel/thrillers.jpg",
+        "imgUrlMobile": "MainCarousel/thrillers_mobile.jpg"
+    }
+]

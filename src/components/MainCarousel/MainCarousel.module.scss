@@ -1,0 +1,97 @@
+@mixin slider-transition {
+    transition: transform 0.6s, opacity 0.6s; //cubic-bezier(.84,.23,.53,.95);
+}
+
+.container {
+    max-height: 524px;
+    height: auto;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.window {
+    z-index: 0;
+    display: flex;
+    flex-shrink: 0;
+    height: 100%;
+    width: clamp(1px, 90%, 1216px);
+}
+
+.arrowArea {
+    position: relative;
+    z-index: 950;
+    height: auto;
+    width: 100%;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    &_left {
+        &::before {
+            z-index: 900;
+            position: absolute;
+            content: "";
+            background-image: linear-gradient(to left, rgba(31, 27, 46, 0), rgba(31, 27, 46, 0.72));
+            height: 100%;
+            width: 800px;
+            right: 0;
+            opacity: 0;
+            transition: all 200ms ease;
+        }
+        &:hover {
+            &::before {
+                opacity: 1;
+            }
+        }
+    }
+
+    &_right {
+        &::before {
+            z-index: 900;
+            position: absolute;
+            content: "";
+            background-image: linear-gradient(to right, rgba(31, 27, 46, 0), rgba(31, 27, 46, 0.72));
+            height: 100%;
+            width: 800px;
+            left: 0;
+            opacity: 0;
+            transition: all 200ms ease;
+        }
+        &:hover {
+            &::before {
+                opacity: 1;
+            }
+        }
+    }
+
+    &:hover {
+        & .arrow {
+            color: #fff;
+        }
+    }
+    &:active {
+        & .arrow {
+            transform: scale(0.8);
+            color: #fff;
+            transition: all 200ms ease;
+        }
+    }
+}
+
+.arrow {
+    z-index: 999;
+    color: #a6a7aa;
+    font-size: 40px;
+    font-weight: bolder;
+    transition: all 200ms ease;
+    user-select: none;
+    &_left {
+        margin-right: 20px;
+        align-self: flex-end;
+    }
+    &_right {
+        margin-left: 20px;
+        align-self: flex-start;
+    }
+}
