@@ -1,4 +1,4 @@
-export type IHeaderFilter =
+export type IHeaderTab =
 	| 'films'
 	| 'series'
 	| 'cartoons'
@@ -8,5 +8,5 @@ export type IHeaderFilter =
 
 export interface IHeaderBlock {
 	isShow: boolean
-	filter: IHeaderFilter
+	tab: IHeaderTab
 }

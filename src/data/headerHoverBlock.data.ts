@@ -1,9 +1,9 @@
-import { IHeaderFilter } from '@/types/header.interface'
+import { IHeaderTab } from '@/types/header.interface'
 import { IHeaderHoverBlockContent } from '@/types/hoverblock.interface'
 
 export const headerHoverBlockContent: IHeaderHoverBlockContent[] = [
 	{
-		filter: 'films',
+		tab: 'films',
 		columns: [
 			{
 				title: 'Жанры',
@@ -61,7 +61,7 @@ export const headerHoverBlockContent: IHeaderHoverBlockContent[] = [
 		],
 	},
 	{
-		filter: 'series',
+		tab: 'series',
 		columns: [
 			{
 				title: 'Жанры',
@@ -122,7 +122,7 @@ export const headerHoverBlockContent: IHeaderHoverBlockContent[] = [
 		],
 	},
 	{
-		filter: 'cartoons',
+		tab: 'cartoons',
 		columns: [
 			{
 				title: 'Жанры',

@@ -1,7 +1,7 @@
-import { IHeaderFilter } from './header.interface'
+import { IHeaderTab } from './header.interface'
 
 export interface IHeaderHoverBlockContent {
-	filter: IHeaderFilter
+	tab: IHeaderTab
 	columns: { title?: string; rows: string[] }[]
 }
 

@@ -1,4 +1,4 @@
-import { IHeaderFilter } from '@/types/header.interface'
+import { IHeaderTab } from '@/types/header.interface'
 import Image from 'next/image'
 import Link from 'next/link'
 import { FC } from 'react'
@@ -8,7 +8,7 @@ const logoSrc =
 	'https://solea-parent.dfs.ivi.ru/picture/ea003d,ffffff/reposition_iviLogoPlateRounded.svg'
 
 interface IProps {
-	showHoverBlock: (filter: IHeaderFilter) => void
+	showHoverBlock: (tab: IHeaderTab) => void
 }
 
 const HeaderLeftSide: FC<IProps> = ({ showHoverBlock }) => {
