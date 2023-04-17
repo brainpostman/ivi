@@ -1,27 +1,29 @@
-import HeadModif from '@/components/HeadModif/HeadModif'
-import Header from '@/components/Header/Header'
-import { IHead } from '@/types/head.interface'
-import { FC, PropsWithChildren } from 'react'
+import Footer from '@/components/Footer/Footer';
+import HeadModif from '@/components/HeadModif/HeadModif';
+import Header from '@/components/Header/Header';
+import { IHead } from '@/types/head.interface';
+import { FC, PropsWithChildren } from 'react';
 
 const PageLayout: FC<PropsWithChildren<IHead>> = ({
-	title,
-	description,
-	keywords,
-	noIndex,
-	children,
+    title,
+    description,
+    keywords,
+    noIndex,
+    children,
 }) => {
-	return (
-		<>
-			<HeadModif
-				title={title}
-				description={description}
-				keywords={keywords}
-				noIndex={noIndex}
-			/>
-			<Header />
-			<main>{children}</main>
-		</>
-	)
-}
+    return (
+        <>
+            <HeadModif
+                title={title}
+                description={description}
+                keywords={keywords}
+                noIndex={noIndex}
+            />
+            <Header />
+            <main>{children}</main>
+            <Footer />
+        </>
+    );
+};
 
-export default PageLayout
+export default PageLayout;

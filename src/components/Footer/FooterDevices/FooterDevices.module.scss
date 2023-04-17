@@ -1,0 +1,47 @@
+.container {
+    display: flex;
+    gap: 12px;
+}
+
+.button {
+    @include ui-padding("hor", 3);
+}
+
+.icon {
+    width: 18px;
+    height: 18px;
+    color: white;
+}
+
+.description {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    @include ui-margin(left, 2);
+}
+
+.firstLine {
+    font-size: 10px;
+    color: $gray;
+    font-weight: 600;
+    height: 12px;
+    line-height: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.secondLine,
+.alldevices {
+    font-size: 15px;
+    font-weight: 600;
+    height: 20px;
+    line-height: 1.33;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.alldevices {
+    @include ui-margin(left, 2);
+}
