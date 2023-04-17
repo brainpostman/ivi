@@ -15,6 +15,14 @@ $ui-font-step: 4px;
 	@if ($direction == left) {
 		margin-left: $ui-space-step * $size;
 	}
+	@if ($direction == 'ver') {
+		margin-top: $ui-space-step * $size;
+		margin-bottom: $ui-space-step * $size;
+	}
+	@if ($direction == 'hor') {
+		margin-left: $ui-space-step * $size;
+		margin-right: $ui-space-step * $size;
+	}
 }
 
 @mixin ui-padding($direction, $size) {
@@ -30,8 +38,22 @@ $ui-font-step: 4px;
 	@if ($direction == left) {
 		padding-left: $ui-space-step * $size;
 	}
+	@if ($direction == 'ver') {
+		padding-top: $ui-space-step * $size;
+		padding-bottom: $ui-space-step * $size;
+	}
+	@if ($direction == 'hor') {
+		padding-left: $ui-space-step * $size;
+		padding-right: $ui-space-step * $size;
+	}
 }
 
 @mixin ui-font($size) {
 	font-size: $ui-font-step * $size;
+}
+
+@mixin center-content {
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
