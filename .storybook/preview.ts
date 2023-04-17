@@ -4,6 +4,10 @@ import '../src/styles/globals.scss'
 
 const preview: Preview = {
 	parameters: {
+		backgrounds: {
+			default: 'dark',
+			values: [{ name: 'dark', value: '#100e19' }],
+		},
 		docs: {
 			page: DocsTemplate,
 		},
