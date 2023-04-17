@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import styles from './MainCarousel.module.scss';
-import { IMainCarouselProps } from '../../types/MainCarouselTypes';
+import { IMainCarouselProps } from '../../types/MainCarousel/MainCarouselTypes';
 import MainCarouselItem from './MainCarouselItem/MainCarouselItem';
 
 const MainCarousel = ({
