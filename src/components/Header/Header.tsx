@@ -16,8 +16,8 @@ const Header = () => {
 			? `${style.container} ${style.effect}`
 			: style.container
 
-	const showHoverBlock = (filter: IHeaderTab) => {
-		setHoverTabs({ isShow: true, tab: filter })
+	const showHoverBlock = (tab: IHeaderTab) => {
+		setHoverTabs({ isShow: true, tab })
 	}
 
 	const hideHoverBlock = () => {
@@ -27,10 +27,7 @@ const Header = () => {
 	return (
 		<header className={style.wrapper}>
 			<section className={classNameContainer} onMouseLeave={hideHoverBlock}>
-				<HeaderLeftSide
-					showHoverBlock={showHoverBlock}
-					hideHoverBlock={hideHoverBlock}
-				/>
+				<HeaderLeftSide showHoverBlock={showHoverBlock} />
 				<HeaderRightSide showHoverBlock={showHoverBlock} />
 				{hoverTabs.isShow && hoverTabs.tab && (
 					<HeaderHoverBlock
