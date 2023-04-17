@@ -8,7 +8,7 @@ import { getCarouselFunction } from './HeaderCarousel.util'
 // @elementsView - Количество элементов, которые отображаются в карусели
 // @elemntsMove - Количество элементов, на которое мы двигаем карусель
 // @elementLen - полная длина элемента, включая отступ
-// @blocksData - данные для блоков карусели
+// @blockList - данные для элементов карусели
 
 interface IProps {
 	blockList: IHeaderChannels | IHeaderBroadCast[]
