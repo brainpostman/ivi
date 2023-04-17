@@ -1,0 +1,29 @@
+$main-color: #1f1b2e;
+$hover-color: #2e2844;
+$active-color: #0e0c14;
+
+.button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 40px;
+    font-family: inherit;
+    cursor: pointer;
+    background-color: $main-color;
+    transition: background-color 400ms;
+    padding: 0;
+    &:hover {
+        background-color: $hover-color;
+        transition: background-color 80ms;
+    }
+    &:active {
+        background-color: $active-color;
+        transition: background-color 80ms;
+    }
+    &:focus,
+    &:active {
+        outline: none;
+    }
+    user-select: none;
+    -webkit-user-drag: none;
+}

@@ -1,7 +1,15 @@
 import { useEffect, useRef, useState } from 'react';
 import styles from './MainCarousel.module.scss';
-import { IMainCarouselProps } from '../../types/MainCarousel/MainCarouselTypes';
+import { IMainCarouselItem } from '../../types/IMainCarouselItem';
 import MainCarouselItem from './MainCarouselItem/MainCarouselItem';
+
+interface IMainCarouselProps {
+    items: IMainCarouselItem[];
+    speed: number;
+    autoScroll: boolean;
+    autoscrollSpeed: number;
+    className?: string;
+}
 
 const MainCarousel = ({
     items = [],

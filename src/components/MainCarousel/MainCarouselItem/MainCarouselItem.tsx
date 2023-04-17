@@ -1,6 +1,13 @@
-import { IMainCarouselItemProps } from '../../../types/MainCarouselTypes';
-import BasicBtn from '../../BasicBtn/BasicBtn';
+import HighlightButton from '@/components/UI/HighlightButton/HighlightButton';
+import { IMainCarouselItem } from '../../../types/IMainCarouselItem';
 import styles from './MainCarouselItem.module.scss';
+
+interface IMainCarouselItemProps {
+    item: IMainCarouselItem;
+    transition: boolean;
+    speed: number;
+    active: boolean;
+}
 
 const MainCarouselItem = ({
     item,
@@ -22,9 +29,9 @@ const MainCarouselItem = ({
                     style={{
                         transition: !transition ? 'none' : `opacity ${speed}ms`,
                     }}>
-                    <BasicBtn btnType={'text'} variant={1}>
+                    <HighlightButton variant='primary'>
                         <span style={{ color: 'white' }}>Показать подборку</span>
-                    </BasicBtn>
+                    </HighlightButton>
                 </div>
             </div>
             <div className={styles.background}>
