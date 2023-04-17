@@ -1,19 +1,22 @@
+$main-color: #ea003d;
+$hover-color: #ff0f4d;
+$active-color: #c10032;
+
 .button {
 	line-height: 20px;
 
-	background-color: #c10032;
-	border: 1px solid #c10032;
+	background-color: $main-color;
 	border-radius: 8px;
 
 	padding: 9px 15px;
 
 	transition: background-color 0.4s, border-color 0.4s;
 
-	&:hover {
-		background-color: #ff0f4d;
-		border-color: #ff0f4d;
+	&:active {
+		background-color: $active-color !important;
 	}
-}
 
-.secondary {
+	&:hover {
+		background-color: $hover-color;
+	}
 }

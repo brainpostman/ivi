@@ -1,3 +1,6 @@
+$main-color: #1f1b2e;
+$hover-color: #231f34;
+
 .button {
 	display: flex;
 	align-items: center;
@@ -6,7 +9,7 @@
 	font-size: 15px;
 	line-height: 20px;
 
-	background-color: #1f1b2e;
+	background-color: $main-color;
 	border-radius: 8px;
 
 	transition: background-color 0.4s;
@@ -14,7 +17,7 @@
 	padding: 8px 16px;
 
 	&:hover {
-		background-color: #231f34;
+		background-color: $hover-color;
 	}
 
 	> img {

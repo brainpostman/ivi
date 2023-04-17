@@ -1,12 +1,19 @@
+$main-color: #ea003d;
+$start-gradient-color: #c447ff;
+
 .button {
 	align-self: center;
 
 	font-size: 13px;
 	line-height: 16px;
 
-	background-image: linear-gradient(270deg, #ea003d 0, #c447ff 100%);
+	background-image: linear-gradient(
+		270deg,
+		$main-color 0,
+		$start-gradient-color 100%
+	);
 	// Если в браузере не поддерживается градиент
-	background-color: #ea003d;
+	background-color: $main-color;
 
 	border-radius: 8px;
 
