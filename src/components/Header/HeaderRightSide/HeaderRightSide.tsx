@@ -3,8 +3,7 @@ import SubscribeButton from '@/components/UI/SubscribeButton/SubscribeButton'
 import { IHeaderTab } from '@/types/header.interface'
 import { FC } from 'react'
 import { IoPersonOutline } from 'react-icons/io5'
-import { MdOutlineNotifications } from 'react-icons/md'
-import { RiSearchLine } from 'react-icons/ri'
+
 import style from './HeaderRightSide.module.scss'
 
 interface IProps {
@@ -17,10 +16,8 @@ const HeaderRightSide: FC<IProps> = ({ showHoverBlock }) => {
 	return (
 		<article className={style.wrapper}>
 			<SubscribeButton>Оплатить подписку</SubscribeButton>
-			<HeaderIconButton icon={<RiSearchLine />}>Поиск</HeaderIconButton>
-			<HeaderIconButton
-				icon={<MdOutlineNotifications className={style.notifIcon} />}
-			/>
+			<HeaderIconButton icon='search'>Поиск</HeaderIconButton>
+			<HeaderIconButton icon='notification' />
 			<IoPersonOutline
 				className={classNamePersonIcon}
 				onMouseEnter={() => showHoverBlock('profile')}
