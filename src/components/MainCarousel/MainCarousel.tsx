@@ -25,7 +25,7 @@ const MainCarousel = ({
     const controlsTimeoutRef = useRef<number | null>(null);
     const autoscrollIntervalRef = useRef<number | null>(null);
 
-    const itemGap = 15;
+    const itemGapPx = 15;
 
     useEffect(() => {
         if (autoScroll) {
@@ -122,7 +122,7 @@ const MainCarousel = ({
     }, [currentIndex]);
 
     return (
-        <div className={`${styles.container} ${className}`} style={{ gap: itemGap }}>
+        <div className={`${styles.container} ${className}`} style={{ gap: itemGapPx }}>
             <div
                 className={styles.arrowArea + ' ' + styles.arrowArea_left}
                 onClick={handlePrevious}>
@@ -132,9 +132,9 @@ const MainCarousel = ({
                 className={styles.window}
                 style={{
                     transform: `translateX(calc(-${currentIndex * 100}% - ${
-                        itemGap * currentIndex + 2
+                        itemGapPx * currentIndex + 2
                     }px))`,
-                    gap: itemGap,
+                    gap: itemGapPx,
                     transition: !transitionEnabled
                         ? 'none'
                         : `transform ${speed}ms, opacity ${speed}ms`,

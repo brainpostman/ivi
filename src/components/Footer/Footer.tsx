@@ -5,7 +5,9 @@ import FooterSubscribe from './FooterSubscribe/FooterSubscribe';
 import FooterSupport from './FooterSupport/FooterSupport';
 import about from '../../data/Footer/footerAbout';
 import sections from '../../data/Footer/footerSections';
-import FooterList from './FooterList/FooterList';
+import List from '../UI/List/List';
+import { IFooterListItem } from '@/types/IFooterListItem';
+import FooterListItem from './FooterListItem/FooterListItem';
 
 const Footer = () => {
     return (
@@ -14,11 +16,23 @@ const Footer = () => {
                 <div className={`${styles.row} ${styles.row_1}`}>
                     <div className={styles.about}>
                         <h3 className={styles.title}>О нас</h3>
-                        <FooterList items={about} />
+                        <List
+                            items={about}
+                            renderItem={(item: IFooterListItem) => {
+                                return <FooterListItem item={item} />;
+                            }}
+                            className={styles.list}
+                        />
                     </div>
                     <div className={styles.sections}>
                         <h3 className={styles.title}>Разделы</h3>
-                        <FooterList items={sections} />
+                        <List
+                            items={sections}
+                            renderItem={(item: IFooterListItem) => {
+                                return <FooterListItem item={item} />;
+                            }}
+                            className={styles.list}
+                        />
                         <p className={styles.activecert}>
                             <a href={'https://www.ivi.ru/cert'}>Активация сертификата</a>
                         </p>

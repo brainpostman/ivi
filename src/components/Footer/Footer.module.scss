@@ -36,6 +36,12 @@
     font-size: 15px;
 }
 
+.list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
 .activecert {
     @include ui-margin('top', 2);
     font-size: 15px;
