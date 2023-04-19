@@ -42,3 +42,5 @@ yarn-error.log*
 .eslintrc.cjs
 .prettierrc.cjs
 .prettierrc.json
+
+package-lock.json
