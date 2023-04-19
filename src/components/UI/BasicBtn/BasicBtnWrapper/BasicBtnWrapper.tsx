@@ -3,9 +3,9 @@ import { IBasicBtnProps } from '../BasicBtn.interface'
 
 const BasicBtnWrapper: FC<
 	Pick<IBasicBtnProps, 'href' | 'children' | 'className' | 'target'>
-> = ({ href, children, target, className }) =>
+> = ({ href, children, ...props }) =>
 	href ? (
-		<a href={href} target={target} rel='noreferrer' className={className}>
+		<a href={href} rel='noreferrer' {...props}>
 			{children}
 		</a>
 	) : (
