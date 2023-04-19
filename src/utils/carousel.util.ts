@@ -1,4 +1,3 @@
-import { IHeaderBroadCast, IHeaderChannels } from '@/types/hoverblock.interface'
 import { Dispatch, SetStateAction } from 'react'
 
 // @elementsView - Количество элементов, которые отображаются в карусели
@@ -6,18 +5,24 @@ import { Dispatch, SetStateAction } from 'react'
 // @elementLen - полная длина элемента, включая отступ
 // @blocksData - данные для блоков карусели
 
-export const getCarouselFunction = (
+// TODO: переименовать channels
+export const getCarouselFunctions = (
 	move: number,
 	setMove: Dispatch<SetStateAction<number>>,
 	elementLen: number,
 	elemntsMove: number,
 	elementsView: number,
-	blocksData: IHeaderChannels | IHeaderBroadCast[]
+	blocksData:
+		| { channels: { img: string; href: string }[] }
+		| { title: string }[]
 ) => {
 	const oneMove = elemntsMove * elementLen
 
+	const __getNumTails = (listLength: number) =>
+		(listLength - Math.abs(elementsView - elemntsMove)) % elemntsMove
+
 	const __getLastMoves = (listLength: number) => {
-		const numTailElems = (listLength - 1) % elemntsMove
+		const numTailElems = __getNumTails(listLength)
 
 		const numMoves = Math.floor(listLength / elementsView)
 		const preLastMove = numMoves * elemntsMove * elementLen
@@ -26,19 +31,19 @@ export const getCarouselFunction = (
 		return { preLastMove, lastMove }
 	}
 
-	const onClickRightArrow = (
-		blockList: IHeaderChannels | IHeaderBroadCast[]
-	) => {
+	const onClickRightArrow = () => {
 		const listLength =
-			'channels' in blockList ? blockList.channels.length : blockList.length
+			'channels' in blocksData ? blocksData.channels.length : blocksData.length
 
 		const { lastMove, preLastMove } = __getLastMoves(listLength)
-		const numTailElems = (listLength - 2) % elemntsMove
+
+		const numTailElemsMove =
+			__getNumTails(listLength) - Math.abs(elementsView - elemntsMove)
 
 		if (move + oneMove >= lastMove - elementLen) return
 
 		if (move + oneMove >= preLastMove) {
-			setMove(prev => prev + numTailElems * elementLen)
+			setMove(prev => prev + numTailElemsMove * elementLen + elementLen / 2)
 			return
 		}
 

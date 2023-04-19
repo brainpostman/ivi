@@ -1,20 +1,17 @@
 import { headerPopularBroadcastsData } from '@/data/headerTVBlock.data'
 import HeaderCarousel from '../HeaderCarousel/HeaderCarousel'
 import styleParent from '../HeaderHoverBlock.module.scss'
-import style from './HeaderPopularBroadcasts.module.scss'
 
 const HeaderPopularBroadCasts = () => {
 	return (
-		<div className={style.wrapper}>
+		<div>
 			<p className={styleParent.title}>Популярные трансляции</p>
-			<ul>
-				<HeaderCarousel
-					blockList={headerPopularBroadcastsData}
-					elementLen={260 + 16}
-					elemntsMove={3}
-					elementsView={3}
-				/>
-			</ul>
+			<HeaderCarousel
+				blockList={headerPopularBroadcastsData}
+				elementLen={262 + 16}
+				elemntsMove={2}
+				elementsView={2}
+			/>
 		</div>
 	)
 }

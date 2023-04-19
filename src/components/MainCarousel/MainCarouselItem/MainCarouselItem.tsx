@@ -35,8 +35,20 @@ const MainCarouselItem = ({
             </div>
         </div>
         <div className={styles.background}>
-            <Image src={item.imgUrl} alt={'Banner'} placeholder='blur' />
-            <Image src={item.imgUrlMobile} alt={'Banner'} placeholder='blur' />
+            <Image
+                src={item.imgUrl}
+                alt={'Banner'}
+                placeholder='empty'
+                fill={true}
+                className={styles.image}
+            />
+            <Image
+                src={item.imgUrlMobile}
+                alt={'Banner'}
+                placeholder='empty'
+                fill={true}
+                className={`${styles.image} ${styles.image_mobile}`}
+            />
         </div>
     </article>
 );

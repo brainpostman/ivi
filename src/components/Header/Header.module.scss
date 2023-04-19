@@ -2,7 +2,7 @@
 	background-color: #100e19;
 
 	// NOTE: для StoryBook
-	width: 1240px;
+	width: $max-width;
 
 	margin: auto;
 	@include ui-padding(top, 1);
@@ -26,5 +26,5 @@
 }
 
 .effect {
-	background-color: #1f1b2e;
+	background-color: $dark;
 }
