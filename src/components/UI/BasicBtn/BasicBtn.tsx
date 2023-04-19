@@ -10,8 +10,6 @@ const BasicBtn: FC<IBasicBtnProps> = ({
 	children,
 	title,
 	suptitle,
-	target,
-	href,
 	...props
 }) => {
 	const classNameBtnType = getClassNameBtnType(btnType)
@@ -19,7 +17,7 @@ const BasicBtn: FC<IBasicBtnProps> = ({
 	const currentClassName = `${style.button} ${classNameBtnType} ${className}`
 
 	return (
-		<BasicBtnWrapper className={currentClassName} href={href} target={target}>
+		<BasicBtnWrapper className={currentClassName} {...props}>
 			{btnType === 'textPlusIcon' ? (
 				<>
 					{children}

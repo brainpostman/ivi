@@ -3,7 +3,10 @@
 }
 
 .leftSide {
-	height: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+
 	border-right: 1px solid $border-gray;
 
 	@include ui-margin(right, 8);
@@ -14,6 +17,8 @@
 	display: flex;
 	flex-direction: column;
 	gap: 12px;
+
+	@include ui-padding(left, 5);
 }
 
 .middleSide {
@@ -21,4 +26,12 @@
 	flex-direction: column;
 
 	gap: 32px;
+}
+
+.tvProgramBtn {
+	background-color: #282338;
+	width: 178px;
+
+	@include ui-margin(left, 4);
+	padding: 12px 0;
 }
