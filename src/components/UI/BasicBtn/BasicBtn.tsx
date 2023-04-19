@@ -16,24 +16,21 @@ const BasicBtn: FC<IBasicBtnProps> = ({
 }) => {
 	const classNameBtnType = getClassNameBtnType(btnType)
 
+	const currentClassName = `${style.button} ${classNameBtnType} ${className}`
+
 	return (
-		<BasicBtnWrapper className={className} href={href} target={target}>
-			<button
-				className={`${style.button} ${classNameBtnType} ${className}`}
-				{...props}
-			>
-				{btnType === 'textPlusIcon' ? (
-					<>
-						{children}
-						<div className={style.description}>
-							{suptitle && <p className={style.suptitle}>{suptitle}</p>}
-							<p className={style.title}>{title}</p>
-						</div>
-					</>
-				) : (
-					children
-				)}
-			</button>
+		<BasicBtnWrapper className={currentClassName} href={href} target={target}>
+			{btnType === 'textPlusIcon' ? (
+				<>
+					{children}
+					<div className={style.description}>
+						{suptitle && <p className={style.suptitle}>{suptitle}</p>}
+						<p className={style.title}>{title}</p>
+					</div>
+				</>
+			) : (
+				children
+			)}
 		</BasicBtnWrapper>
 	)
 }
