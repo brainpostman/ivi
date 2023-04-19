@@ -1,4 +1,15 @@
 .container {
-	max-width: $max-width;
-	margin: auto;
+    flex: 1 1 auto;
+    max-width: $max-width;
+    margin: 0 auto;
+}
+
+.wrapper {
+    overflow-y: auto;
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100%;
 }
