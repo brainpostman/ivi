@@ -3,7 +3,7 @@
 }
 
 .container {
-    max-height: 524px;
+    position: relative;
     height: auto;
     width: 100%;
     display: flex;
@@ -13,21 +13,23 @@
 .window {
     z-index: 0;
     display: flex;
-    flex-shrink: 0;
     height: 100%;
-    width: clamp(1px, 90%, 1216px);
+    max-width: 1216px;
+    flex: 0 0 1216px;
+    margin: 0 auto;
 }
 
 .arrowArea {
-    position: relative;
+    position: absolute;
     z-index: 950;
-    height: auto;
+    height: 100%;
     width: 100%;
     cursor: pointer;
     display: flex;
     flex-direction: column;
     justify-content: center;
     &_left {
+        right: 100%;
         &::before {
             z-index: 900;
             position: absolute;
@@ -47,6 +49,7 @@
     }
 
     &_right {
+        left: 100%;
         &::before {
             z-index: 900;
             position: absolute;
@@ -87,11 +90,26 @@
     transition: all 200ms ease;
     user-select: none;
     &_left {
-        margin-right: 20px;
+        margin-right: 3%;
         align-self: flex-end;
     }
     &_right {
-        margin-left: 20px;
+        margin-left: 3%;
         align-self: flex-start;
+    }
+}
+
+@media (max-width: 1330px) {
+    .window {
+        flex-basis: 90%;
+    }
+
+    .arrow {
+        &_left {
+            margin-right: -3%;
+        }
+        &_right {
+            margin-left: -3%;
+        }
     }
 }
