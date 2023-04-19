@@ -1,59 +1,25 @@
-import { IBtnType } from '@/types/button.interface'
-import { FC, PropsWithChildren } from 'react'
+import { FC } from 'react'
+import { IBasicBtnProps } from './BasicBtn.interface'
 import style from './BasicBtn.module.scss'
+import { getClassNameBtnType } from './BasicBtn.util'
+import BasicBtnWrapper from './BasicBtnWrapper/BasicBtnWrapper'
 
-export interface IBasicBtnProps
-	extends React.DetailedHTMLProps<
-		React.ButtonHTMLAttributes<HTMLButtonElement>,
-		HTMLButtonElement
-	> {
-	btnType: IBtnType
-	href?: string
-	suptitle?: string
-	title?: string
-}
-
-const getClassNameBtnType = (btnType: IBtnType) => {
-	switch (btnType) {
-		case 'textPlusIcon':
-			return style.textPlusIcon
-		case 'icon':
-			return style.icon
-		case 'iconCircle':
-			return style.iconCircle
-		default:
-			return style.text
-	}
-}
-
-const WrapperButton: FC<
-	PropsWithChildren<{ href: string | undefined; className: string }>
-> = ({ href, className, children }) =>
-	href ? (
-		<a href={href} target='_blank' rel='noreferrer' className={className}>
-			{children}
-		</a>
-	) : (
-		<>{children}</>
-	)
-
-const BasicBtn = ({
+const BasicBtn: FC<IBasicBtnProps> = ({
 	className = '',
 	btnType = 'text',
 	children,
 	title,
 	suptitle,
+	target,
 	href,
 	...props
-}: IBasicBtnProps) => {
+}) => {
 	const classNameBtnType = getClassNameBtnType(btnType)
 
 	return (
-		<WrapperButton className={className} href={href}>
+		<BasicBtnWrapper className={className} href={href} target={target}>
 			<button
-				className={`${style.button} ${classNameBtnType} ${
-					href ? '' : className
-				}`}
+				className={`${style.button} ${classNameBtnType} ${className}`}
 				{...props}
 			>
 				{btnType === 'textPlusIcon' ? (
@@ -68,7 +34,7 @@ const BasicBtn = ({
 					children
 				)}
 			</button>
-		</WrapperButton>
+		</BasicBtnWrapper>
 	)
 }
 
