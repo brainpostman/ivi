@@ -13,26 +13,26 @@ const FooterSocials = () => {
 	return (
 		<div className={styles.container}>
 			<BasicBtn btnType='iconCircle' href='https://vk.com/iviru'>
-				<FaVk className={styles.icon} />
+				<FaVk />
 			</BasicBtn>
 
 			<BasicBtn btnType='iconCircle' href='https://ok.ru/ivi.ru'>
-				<FaOdnoklassniki className={styles.icon} />
+				<FaOdnoklassniki />
 			</BasicBtn>
 			<BasicBtn btnType='iconCircle' href='https://twitter.com/ivi_ru'>
-				<FaTwitter className={styles.icon} />
+				<FaTwitter />
 			</BasicBtn>
 			<BasicBtn btnType='iconCircle' href='https://vb.me/a0544c'>
-				<FaViber className={styles.icon} />
+				<FaViber />
 			</BasicBtn>
 			<BasicBtn
 				btnType='iconCircle'
 				href='https://www.linkedin.com/company/2543415/'
 			>
-				<FaLinkedinIn className={styles.icon} />
+				<FaLinkedinIn />
 			</BasicBtn>
 			<BasicBtn btnType='iconCircle' href='https://t.me/official_iviru'>
-				<FaTelegramPlane className={styles.icon} />
+				<FaTelegramPlane />
 			</BasicBtn>
 		</div>
 	)

@@ -21,6 +21,11 @@ $active-color: #0e0c14;
 		background-color: $active-color;
 	}
 
+	svg {
+		width: 18px;
+		height: 18px;
+	}
+
 	> a {
 		color: #fff;
 	}
@@ -34,11 +39,6 @@ $active-color: #0e0c14;
 	@include center-content;
 	height: 40px;
 	padding: 0 12px;
-
-	> svg {
-		width: 18px;
-		height: 18px;
-	}
 }
 
 .iconCircle {
