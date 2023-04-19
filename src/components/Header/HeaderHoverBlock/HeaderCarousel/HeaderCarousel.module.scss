@@ -26,7 +26,7 @@
 	height: 100%;
 
 	// TODO: переделать тень
-	background-image: linear-gradient(90deg, rgba(8, 7, 11, 0) 70%, #1f1b2e 100%);
+	background-image: linear-gradient(90deg, rgba(8, 7, 11, 0) 70%, $dark 100%);
 
 	pointer-events: none;
 }

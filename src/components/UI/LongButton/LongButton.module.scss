@@ -1,4 +1,3 @@
-$main-color: #1f1b2e;
 $hover-color: #231f34;
 
 .button {
@@ -9,7 +8,7 @@ $hover-color: #231f34;
 	font-size: 15px;
 	line-height: 20px;
 
-	background-color: $main-color;
+	background-color: $dark;
 	border-radius: 8px;
 
 	transition: background-color 0.4s;
