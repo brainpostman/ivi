@@ -6,7 +6,11 @@ const preview: Preview = {
 	parameters: {
 		backgrounds: {
 			default: 'dark',
-			values: [{ name: 'dark', value: '#100e19' }],
+			values: [
+				{ name: 'dark', value: '#100e19' },
+				{ name: 'darkSoft', value: '#353147' },
+				{ name: 'light', value: '#ffffff' },
+			],
 		},
 		docs: {
 			page: DocsTemplate,
