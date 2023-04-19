@@ -1,3 +1,4 @@
+import BasicBtn from '@/components/UI/BasicBtn/BasicBtn'
 import { listTV } from '@/data/headerTVBlock.data'
 import HeaderChannels from '../HeaderChannels/HeaderChannels'
 import HeaderPopularBroadCasts from '../HeaderPopularBroadcasts/HeaderPopularBroadcasts'
@@ -15,6 +16,13 @@ const HeaderTvBlock = () => {
 						</li>
 					))}
 				</ul>
+
+				<BasicBtn
+					className={style.tvProgramBtn}
+					href='https://www.ivi.ru/tvplus/tv-schedule-today'
+				>
+					Телепрограмма
+				</BasicBtn>
 			</div>
 
 			{/*MIDDLE SIDE*/}
