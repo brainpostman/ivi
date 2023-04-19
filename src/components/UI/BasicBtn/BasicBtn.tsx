@@ -26,6 +26,17 @@ const getClassNameBtnType = (btnType: IBtnType) => {
 	}
 }
 
+const WrapperButton: FC<
+	PropsWithChildren<{ href: string | undefined; className: string }>
+> = ({ href, className, children }) =>
+	href ? (
+		<a href={href} target='_blank' rel='noreferrer' className={className}>
+			{children}
+		</a>
+	) : (
+		<>{children}</>
+	)
+
 const BasicBtn = ({
 	className = '',
 	btnType = 'text',
@@ -37,17 +48,8 @@ const BasicBtn = ({
 }: IBasicBtnProps) => {
 	const classNameBtnType = getClassNameBtnType(btnType)
 
-	const WrapperButton: FC<PropsWithChildren<unknown>> = ({ children }) =>
-		href ? (
-			<a href={href} target='_blank' rel='noreferrer' className={className}>
-				{children}
-			</a>
-		) : (
-			<>{children}</>
-		)
-
 	return (
-		<WrapperButton>
+		<WrapperButton className={className} href={href}>
 			<button
 				className={`${style.button} ${classNameBtnType} ${
 					href ? '' : className
