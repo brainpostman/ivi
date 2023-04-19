@@ -1,78 +1,65 @@
 .container {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
 }
 
 .title {
-    @include ui-margin("bottom", 2);
-    font-size: 15px;
+	@include ui-margin('bottom', 2);
+	font-size: 15px;
 }
 
 .description {
-    color: $gray;
-    font-size: 15px;
-    @include ui-margin("bottom", 5);
+	color: $gray;
+	font-size: 15px;
+	@include ui-margin('bottom', 5);
 }
 
 .chat {
-    color: #fff;
-    @include ui-margin("left", 5);
-    @include ui-margin("right", 5);
+	color: #fff;
+	@include ui-margin('left', 5);
+	@include ui-margin('right', 5);
 }
 
 .buttons {
-    position: relative;
-    display: flex;
-    gap: 12px;
-    @include ui-margin("top", 3);
-}
-
-.link {
-    @include center-content;
-    height: 100%;
-    width: 100%;
-}
-
-.icon {
-    height: 20px;
-    width: 20px;
-    color: white;
+	position: relative;
+	display: flex;
+	gap: 12px;
+	@include ui-margin('top', 3);
 }
 
 .askivi {
-    @include ui-margin("top", 6);
-    & a {
-        color: white;
-        @include ui-font(4);
-    }
+	@include ui-margin('top', 6);
+	& a {
+		color: white;
+		@include ui-font(4);
+	}
 
-    & p {
-        color: $gray;
-        font-size: 15px;
-    }
-}
-
-.phone {
-    position: relative;
+	& p {
+		color: $gray;
+		font-size: 15px;
+	}
 }
 
 .popup {
-    position: absolute;
-    white-space: nowrap;
-    top: 100%;
-    margin-top: 6px;
-    opacity: 0;
-    transition: all 200ms linear;
-    visibility: hidden;
-    padding: 24px 57px 24px 15px;
-    & a {
-        color: white;
-    }
+	@include center-content;
+	position: absolute;
+
+	top: 24px;
+	left: -16px;
+
+	transition: opacity 0.2s, background-color 0.2s;
+	opacity: 0;
+
+	white-space: nowrap;
+
+	padding: 24px 57px 24px 15px;
+
+	& a {
+		color: white;
+	}
 }
 
-.popup_active {
-    opacity: 1;
-    margin-top: 12px;
-    visibility: visible;
+.popupActive {
+	opacity: 1;
 }

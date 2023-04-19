@@ -1,29 +1,83 @@
-$main-color: #1f1b2e;
 $hover-color: #2e2844;
 $active-color: #0e0c14;
 
 .button {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 40px;
-    font-family: inherit;
-    cursor: pointer;
-    background-color: $main-color;
-    transition: background-color 400ms;
-    padding: 0;
-    &:hover {
-        background-color: $hover-color;
-        transition: background-color 80ms;
-    }
-    &:active {
-        background-color: $active-color;
-        transition: background-color 80ms;
-    }
-    &:focus,
-    &:active {
-        outline: none;
-    }
-    user-select: none;
-    -webkit-user-drag: none;
+	background-color: $dark;
+	color: #fff;
+
+	height: 100%;
+
+	border-radius: 8px;
+
+	padding: 9px 15px;
+
+	transition: background-color 0.4s;
+
+	&:hover {
+		background-color: $hover-color;
+	}
+
+	&:active {
+		background-color: $active-color;
+	}
+
+	svg {
+		width: 18px;
+		height: 18px;
+	}
+
+	> a {
+		color: #fff;
+	}
+}
+
+.text {
+	width: 196px;
+}
+
+.icon {
+	@include center-content;
+	height: 40px;
+	padding: 0 12px;
+}
+
+.iconCircle {
+	@include center-content;
+	height: 40px;
+	padding: 0 12px;
+	border-radius: 100%;
+}
+
+.description {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	@include ui-margin(left, 2);
+}
+
+.suptitle {
+	font-size: 10px;
+	color: $gray;
+	font-weight: 600;
+	height: 12px;
+	line-height: 1;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.title {
+	font-size: 15px;
+	font-weight: 600;
+	height: 20px;
+	line-height: 1.33;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.textPlusIcon {
+	display: flex;
+	align-items: center;
+	padding: 4px 12px;
 }
