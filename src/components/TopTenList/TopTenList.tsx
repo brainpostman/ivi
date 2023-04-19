@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import style from "./TopTenList.module.scss"
+import Link from "next/link"
 
 interface Film {
     title: string;
@@ -71,12 +72,14 @@ const filmsTop:Film[]=[
         <h2>Топ 10 за неделю</h2>
         <div className={style.sliderTop10}>
                 {filmsTop.map((film,index) => (
-                    <div key={index}
+                    //<Link href={`/films/${id}`}>
+                    <div key={index} 
                     className={style.sliderBlock}
                     style={{ transform: `translateX(-${(position*110)}%)`}}>
                             <img src={film.imageUrl} alt={film.title} />
                             <h3>{ index + 1}</h3>
                     </div>
+                   // </Link>
                 ))}
         </div>
         {activeLeft && (
