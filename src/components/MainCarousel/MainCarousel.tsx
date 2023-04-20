@@ -36,7 +36,7 @@ const MainCarousel = ({
     }, [autoScroll]);
 
     const start = () => {
-        if (autoscrollIntervalRef.current != null) {
+        if (autoscrollIntervalRef.current) {
             return;
         }
         restart();
