@@ -44,7 +44,12 @@ const HeaderCarousel: FC<IProps> = ({
 				) : (
 					<HedaerCarouselBroadcasts move={move} blockList={blockList} />
 				)}
-				<div className={`${style.rightShadow} ${viewArrow('right')}`}></div>
+				<div
+					className={`${style.shadow} ${style.shadow_left} ${viewArrow(
+						'left'
+					)}`}
+				></div>
+				<div className={`${style.shadow} ${viewArrow('right')}`}></div>
 			</div>
 			<div className={style.arrows}>
 				<div onClick={onClickLeftArrow} className={viewArrow('left')}>
