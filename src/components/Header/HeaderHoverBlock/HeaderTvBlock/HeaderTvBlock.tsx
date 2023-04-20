@@ -8,7 +8,7 @@ const HeaderTvBlock = () => {
 	return (
 		<div className={style.wrapper}>
 			{/*LEFT SIDE*/}
-			<div className={style.leftSide}>
+			<div className={style.left_side}>
 				<ul className={style.list}>
 					{listTV.map(el => (
 						<li key={el} className='text'>
@@ -18,7 +18,7 @@ const HeaderTvBlock = () => {
 				</ul>
 
 				<BasicBtn
-					className={style.tvProgramBtn}
+					className={style.tv_program_btn}
 					href='https://www.ivi.ru/tvplus/tv-schedule-today'
 				>
 					Телепрограмма
@@ -26,7 +26,7 @@ const HeaderTvBlock = () => {
 			</div>
 
 			{/*MIDDLE SIDE*/}
-			<div className={style.middleSide}>
+			<div className={style.middle_side}>
 				<HeaderChannels />
 				<HeaderPopularBroadCasts />
 			</div>

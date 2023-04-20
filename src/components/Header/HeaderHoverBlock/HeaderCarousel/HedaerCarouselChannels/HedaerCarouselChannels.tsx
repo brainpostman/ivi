@@ -14,7 +14,7 @@ const HedaerCarouselChannels: FC<IProps> = ({ move, blockList }) => {
 
 	return (
 		<ul
-			className={`${styleParent.list} ${style.channelList}`}
+			className={`${styleParent.list} ${style.channel_list}`}
 			style={{ transform: translate }}
 		>
 			{blockList.channels.map(channel => (

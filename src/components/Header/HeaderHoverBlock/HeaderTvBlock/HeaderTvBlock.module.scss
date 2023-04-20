@@ -2,7 +2,7 @@
 	display: flex;
 }
 
-.leftSide {
+.left_side {
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
@@ -19,14 +19,18 @@
 	gap: 12px;
 }
 
-.middleSide {
+.middle_side {
 	display: flex;
 	flex-direction: column;
 
 	gap: 32px;
 }
 
-.tvProgramBtn {
+.tv_program_btn {
 	background-color: #282338;
 	width: 178px;
+
+	&:active {
+		background-color: #282338;
+	}
 }
