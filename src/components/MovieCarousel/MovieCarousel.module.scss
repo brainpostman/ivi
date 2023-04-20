@@ -1,6 +1,7 @@
 .wrapperTitle {
 	display: flex;
 	align-items: center;
+	gap: 4px;
 
 	font-size: 24px;
 	line-height: 28px;
@@ -8,7 +9,12 @@
 
 	color: #fff;
 
+	cursor: pointer;
+
 	> svg {
+		width: 20px;
+		height: 20px;
+
 		transform: rotate(180deg);
 	}
 }
