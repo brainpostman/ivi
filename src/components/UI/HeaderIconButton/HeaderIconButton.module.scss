@@ -21,3 +21,14 @@
 		margin-right: 8px;
 	}
 }
+
+.notif_icon {
+	width: 22px !important;
+	height: 22px !important;
+
+	transition: transform 0.4s;
+
+	&:hover {
+		transform: scale(1.1);
+	}
+}
