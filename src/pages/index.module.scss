@@ -1,0 +1,20 @@
+.buttons {
+	display: flex;
+	gap: 16px;
+
+	@include ui-margin(ver, 6);
+
+	> a {
+		width: 100%;
+		> button {
+			width: 100%;
+		}
+	}
+}
+
+.carousels {
+	display: flex;
+	flex-direction: column;
+
+	gap: 44px;
+}
