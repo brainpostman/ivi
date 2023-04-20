@@ -1,0 +1,21 @@
+.wrapper{
+    display: block;
+    height: 600px;
+    background-image:url(https://gambit-parent.dfs.ivi.ru/static/23.04.05/images/_main/pageNotFound/bg404.png?ver=fc692232fc07e54ca53a317f4173bbb2);
+    background-size: cover;
+    color:#fff;
+    .content{
+        text-align: center;
+        padding-top: 250px;
+
+        h1{
+            font-size: 40px;
+            font-weight: 900;
+        }
+        h2{
+            font-size: 15px;
+            font-weight: 400;
+            color:#a5a1b2;
+        }
+    }
+}
