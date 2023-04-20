@@ -1,5 +1,3 @@
-export default function actor() {
-  return (
-    <div>actor</div>
-  )
+export default function Actor() {
+	return <div>actor</div>
 }

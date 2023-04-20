@@ -1,6 +1,8 @@
 import { IMovieCarouselElem } from '@/types/moviecarousel.interface'
 import { getCarouselFunctions } from '@/utils/carousel.util'
+import { Url } from 'next/dist/shared/lib/router/router'
 import Image from 'next/image'
+import Link from 'next/link'
 import { FC, useState } from 'react'
 import { MdArrowBackIosNew } from 'react-icons/md'
 import style from './MovieCarousel.module.scss'
@@ -19,9 +21,10 @@ const elementLen = 153 + 24
 interface IProps {
 	title: string
 	movieList: IMovieCarouselElem[]
+	href: Url
 }
 
-const MovieCarousel: FC<IProps> = ({ title, movieList }) => {
+const MovieCarousel: FC<IProps> = ({ title, href, movieList }) => {
 	const [move, setMove] = useState(0)
 
 	const translate = `translate3d(-${move}px, 0, 0)`
@@ -38,10 +41,10 @@ const MovieCarousel: FC<IProps> = ({ title, movieList }) => {
 
 	return (
 		<article>
-			<div className={style.wrapperTitle}>
-				<h1>{title}</h1>
+			<Link href={href} className={style.wrapperTitle}>
+				<p>{title}</p>
 				<MdArrowBackIosNew />
-			</div>
+			</Link>
 
 			<div className={style.wrapperCarousel}>
 				<div className={style.container}>
