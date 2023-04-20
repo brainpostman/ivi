@@ -11,7 +11,7 @@ interface IProps {
 }
 
 const HeaderRightSide: FC<IProps> = ({ showHoverBlock }) => {
-	const classNamePersonIcon = `text ${style.personIcon}`
+	const classNamePersonIcon = `text ${style.person_icon}`
 
 	return (
 		<article className={style.wrapper}>

@@ -1,99 +1,76 @@
-import React, { useEffect, useState } from 'react'
-import style from "./TopTenList.module.scss"
-import Link from "next/link"
+import { topTenListData } from '@/data/topTenList.data'
+import { getCarouselFunctions } from '@/utils/carousel.util'
+import Image from 'next/image'
+import React, { useState } from 'react'
+import { MdArrowBackIosNew } from 'react-icons/md'
+import style from './TopTenList.module.scss'
 
-interface Film {
-    title: string;
-    imageUrl: string;
-  }
-const filmsTop:Film[]=[
-    {
-        title:'фильм 1',
-        imageUrl:'https://thumbs.dfs.ivi.ru/storage4/contents/2/c/3b8e2a957b926355725e1237e188bf.jpg//304x620//?q=85'
-    },
-    {
-        title:'фильм 2',
-        imageUrl:'https://thumbs.dfs.ivi.ru/storage4/contents/2/c/3b8e2a957b926355725e1237e188bf.jpg//304x620//?q=85'
-    },
-    {
-        title:'фильм 3',
-        imageUrl:'https://thumbs.dfs.ivi.ru/storage4/contents/2/c/3b8e2a957b926355725e1237e188bf.jpg//304x620//?q=85'
-    },
-    {
-        title:'фильм 4',
-        imageUrl:'https://thumbs.dfs.ivi.ru/storage4/contents/2/c/3b8e2a957b926355725e1237e188bf.jpg//304x620//?q=85'
-    },
-    {
-        title:'фильм 5',
-        imageUrl:'https://thumbs.dfs.ivi.ru/storage4/contents/2/c/3b8e2a957b926355725e1237e188bf.jpg//304x620//?q=85'
-    },
-    {
-        title:'фильм 6',
-        imageUrl:'https://thumbs.dfs.ivi.ru/storage4/contents/2/c/3b8e2a957b926355725e1237e188bf.jpg//304x620//?q=85'
-    },
-    {
-        title:'фильм 7',
-        imageUrl:'https://thumbs.dfs.ivi.ru/storage4/contents/2/c/3b8e2a957b926355725e1237e188bf.jpg//304x620//?q=85'
-    },
-    {
-        title:'фильм 8',
-        imageUrl:'https://thumbs.dfs.ivi.ru/storage4/contents/2/c/3b8e2a957b926355725e1237e188bf.jpg//304x620//?q=85'
-    },
-    {
-        title:'фильм 9',
-        imageUrl:'https://thumbs.dfs.ivi.ru/storage4/contents/2/c/3b8e2a957b926355725e1237e188bf.jpg//304x620//?q=85'
-    },
-    {
-        title:'фильм 10',
-        imageUrl:'https://thumbs.dfs.ivi.ru/storage4/contents/2/c/3b8e2a957b926355725e1237e188bf.jpg//304x620//?q=85'
-    },
-];
- const TopTenList: React.FC=()=> {
-    const [position,setPosition]=useState(0)
+const imgNumbers = [
+	'https://solea-parent.dfs.ivi.ru/picture/bypass/number1.svg',
+	'https://solea-parent.dfs.ivi.ru/picture/bypass/number2.svg',
+	'https://solea-parent.dfs.ivi.ru/picture/bypass/number3.svg',
+	'https://solea-parent.dfs.ivi.ru/picture/bypass/number4.svg',
+	'https://solea-parent.dfs.ivi.ru/picture/bypass/number5.svg',
+	'https://solea-parent.dfs.ivi.ru/picture/bypass/number6.svg',
+	'https://solea-parent.dfs.ivi.ru/picture/bypass/number7.svg',
+	'https://solea-parent.dfs.ivi.ru/picture/bypass/number8.svg',
+	'https://solea-parent.dfs.ivi.ru/picture/bypass/number9.svg',
+	'https://solea-parent.dfs.ivi.ru/picture/bypass/number10.svg',
+]
 
-    const [activeRight,setActiveRight]=useState(true)
-    const [activeLeft,setActiveLeft]=useState(false)
+const TopTenList: React.FC = () => {
+	const [move, setMove] = useState(0)
 
-    const setLeft=()=>{
-        if (position > 0) setPosition(position - 5);
-         
-    }
+	const translate = `translate3d(-${move}px, 0, 0)`
 
-    const setRight=()=>{
-        if (position === 0) setPosition(position + 5);
-    }
-    useEffect(() => {
-        setActiveRight(position !== 5);
-        setActiveLeft(position !== 0);
-      }, [position]);
+	const { onClickLeftArrow, onClickRightArrow, viewArrow } =
+		getCarouselFunctions(move, setMove, 224 + 24, 5, 5, topTenListData)
 
-  return (
-    <div className={style.main}>
-        <h2>Топ 10 за неделю</h2>
-        <div className={style.sliderTop10}>
-                {filmsTop.map((film,index) => (
-                    //<Link href={`/films/${id}`}>
-                    <div key={index} 
-                    className={style.sliderBlock}
-                    style={{ transform: `translateX(-${(position*110)}%)`}}>
-                            <img src={film.imageUrl} alt={film.title} />
-                            <h3>{ index + 1}</h3>
-                    </div>
-                   // </Link>
-                ))}
-        </div>
-        {activeLeft && (
-        <button onClick={setLeft} className={style.buttonPrev}>
-          {"<"}
-        </button>
-      )}
-      {activeRight && (
-        <button onClick={setRight} className={style.buttonNext}>
-          {">"}
-        </button>
-      )}
-    </div>
-    
-  )
+	return (
+		<div className={style.wrapper}>
+			<div className={style.title}>
+				<Image
+					src='https://solea-parent.dfs.ivi.ru/picture/bypass/top10.svg'
+					alt='top10'
+					width={116}
+					height={28}
+				/>
+				<span>за неделю</span>
+			</div>
+
+			<div className={style.container}>
+				<ul className={style.list} style={{ transform: translate }}>
+					{topTenListData.map((movie, index) => (
+						<li key={movie.title}>
+							<Image
+								src={movie.img}
+								alt={movie.title}
+								width={224}
+								height={457}
+							/>
+
+							<Image
+								src={imgNumbers[index]}
+								alt='number'
+								className={style.number}
+								width={48}
+								height={66}
+							/>
+
+							<div className={style.shadow}></div>
+						</li>
+					))}
+				</ul>
+			</div>
+			<div className={style.arrows}>
+				<div onClick={onClickLeftArrow} className={viewArrow('left')}>
+					<MdArrowBackIosNew />
+				</div>
+				<div onClick={onClickRightArrow} className={viewArrow('right')}>
+					<MdArrowBackIosNew />
+				</div>
+			</div>
+		</div>
+	)
 }
-export default TopTenList;
+export default TopTenList

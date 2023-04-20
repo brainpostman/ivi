@@ -1,13 +1,13 @@
 import { useEffect, useRef, useState } from 'react';
-import styles from './MainCarousel.module.scss';
 import { IMainCarouselItem } from '../../types/IMainCarouselItem';
+import styles from './MainCarousel.module.scss';
 import MainCarouselItem from './MainCarouselItem/MainCarouselItem';
 
 interface IMainCarouselProps {
     items: IMainCarouselItem[];
-    speed: number;
-    autoScroll: boolean;
-    autoscrollSpeed: number;
+    speed?: number;
+    autoScroll?: boolean;
+    autoscrollSpeed?: number;
     className?: string;
 }
 
@@ -18,12 +18,12 @@ const MainCarousel = ({
     speed = 400,
     className = '',
 }: IMainCarouselProps) => {
-    const [carouselItems, setCarouselItems] = useState([...items]);
+    const [carouselItems, setCarouselItems] = useState(items);
     const [transitionEnabled, setTransitionEnabled] = useState(true);
     const [controlsEnabled, setControlsEnabled] = useState(true);
     const [currentIndex, setCurrentIndex] = useState(2);
-    const controlsTimeoutRef = useRef<number | null>(null);
-    const autoscrollIntervalRef = useRef<number | null>(null);
+    const controlsTimeoutRef = useRef<number>(0);
+    const autoscrollIntervalRef = useRef<number>(0);
 
     const itemGapPx = 12;
 
@@ -51,7 +51,7 @@ const MainCarousel = ({
     };
 
     const stop = () => {
-        clearInterval(autoscrollIntervalRef.current as number);
+        clearInterval(autoscrollIntervalRef.current);
     };
 
     useEffect(() => {
@@ -63,9 +63,11 @@ const MainCarousel = ({
 
     const handlePrevious = () => {
         if (controlsEnabled) {
-            stop();
-            restart();
-            clearTimeout(controlsTimeoutRef.current as number);
+            if (autoScroll) {
+                stop();
+                restart();
+            }
+            clearTimeout(controlsTimeoutRef.current);
             setControlsEnabled(false);
             setCurrentIndex((prevIndex) => prevIndex - 1);
             controlsTimeoutRef.current = window.setTimeout(() => {
@@ -76,9 +78,11 @@ const MainCarousel = ({
 
     const handleNext = () => {
         if (controlsEnabled) {
-            stop();
-            restart();
-            clearTimeout(controlsTimeoutRef.current as number);
+            if (autoScroll) {
+                stop();
+                restart();
+            }
+            clearTimeout(controlsTimeoutRef.current);
             setControlsEnabled(false);
             setCurrentIndex((prevIndex) => prevIndex + 1);
             controlsTimeoutRef.current = window.setTimeout(() => {
@@ -89,7 +93,7 @@ const MainCarousel = ({
 
     useEffect(() => {
         if (currentIndex > carouselItems.length - 3) {
-            clearTimeout(controlsTimeoutRef.current as number);
+            clearTimeout(controlsTimeoutRef.current);
             setControlsEnabled(false);
             window.setTimeout(() => {
                 setTransitionEnabled(false);
@@ -101,7 +105,7 @@ const MainCarousel = ({
         }
 
         if (currentIndex < 2) {
-            clearTimeout(controlsTimeoutRef.current as number);
+            clearTimeout(controlsTimeoutRef.current);
             setControlsEnabled(false);
             window.setTimeout(() => {
                 setTransitionEnabled(false);

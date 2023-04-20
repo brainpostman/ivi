@@ -18,8 +18,8 @@
 	animation: show 0.4s;
 
 	@include ui-padding(top, 8);
-	@include ui-padding(bottom, 4);
-	@include ui-padding(left, 7);
+	@include ui-padding(bottom, 5);
+	@include ui-padding(left, 6);
 	@include ui-padding(right, 7);
 
 	z-index: 1000;

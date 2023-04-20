@@ -1,13 +1,13 @@
+import about from '@/data/footer/footerAbout';
+import sections from '@/data/footer/footerSections';
+import { IFooterListItem } from '@/types/IFooterListItem';
+import List from '../UI/List/List';
 import styles from './Footer.module.scss';
 import FooterDevices from './FooterDevices/FooterDevices';
+import FooterListItem from './FooterListItem/FooterListItem';
 import FooterSocials from './FooterSocials/FooterSocials';
 import FooterSubscribe from './FooterSubscribe/FooterSubscribe';
 import FooterSupport from './FooterSupport/FooterSupport';
-import about from '../../data/Footer/footerAbout';
-import sections from '../../data/Footer/footerSections';
-import List from '../UI/List/List';
-import { IFooterListItem } from '@/types/IFooterListItem';
-import FooterListItem from './FooterListItem/FooterListItem';
 
 const Footer = () => {
     return (
@@ -19,7 +19,7 @@ const Footer = () => {
                         <List
                             items={about}
                             renderItem={(item: IFooterListItem) => {
-                                return <FooterListItem item={item} />;
+                                return <FooterListItem item={item} key={item.url} />;
                             }}
                             className={styles.list}
                         />
@@ -29,7 +29,7 @@ const Footer = () => {
                         <List
                             items={sections}
                             renderItem={(item: IFooterListItem) => {
-                                return <FooterListItem item={item} />;
+                                return <FooterListItem item={item} key={item.url} />;
                             }}
                             className={styles.list}
                         />

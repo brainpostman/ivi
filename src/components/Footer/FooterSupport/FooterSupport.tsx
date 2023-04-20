@@ -1,8 +1,8 @@
 import BasicBtn from '@/components/UI/BasicBtn/BasicBtn';
-import styles from './FooterSupport.module.scss';
+import { useState } from 'react';
 import { FiPhone } from 'react-icons/fi';
 import { GoMail } from 'react-icons/go';
-import { useState } from 'react';
+import styles from './FooterSupport.module.scss';
 
 const FooterSupport = () => {
     const [showPopUp, setShowPopUp] = useState(false);
@@ -14,35 +14,23 @@ const FooterSupport = () => {
                 <p>Мы всегда готовы вам помочь.</p>
                 <p>Наши операторы онлайн 24/7</p>
             </div>
-            <BasicBtn btnType={'text'} variant={1}>
-                <a
-                    className={`${styles.link} ${styles.chat}`}
-                    href='https://www.ivi.ru/profile'
-                    target='_blank'
-                    rel='noreferrer'>
-                    Написать в чате
-                </a>
+            <BasicBtn btnType='text' href='https://www.ivi.ru/profile'>
+                Написать в чате
             </BasicBtn>
             <div className={styles.buttons}>
-                <BasicBtn btnType={'icon'} variant={1}>
-                    <a href='mailto:support@ivi.ru' className={styles.link}>
-                        <GoMail className={styles.icon} />
-                    </a>
+                <BasicBtn btnType='icon' href='mailto:support@ivi.ru'>
+                    <GoMail />
                 </BasicBtn>
-                <BasicBtn
-                    btnType={'icon'}
-                    variant={1}
-                    onClick={() => setShowPopUp((prev) => !prev)}
-                    className={styles.phone}>
-                    <FiPhone className={styles.icon} />
+
+                <BasicBtn btnType='icon' onClick={() => setShowPopUp((prev) => !prev)}>
+                    <FiPhone />
                 </BasicBtn>
+
                 <BasicBtn
-                    className={`${styles.popup} ${showPopUp ? styles.popup_active : ''}`}
-                    btnType={'text'}
-                    variant={1}>
-                    <a href='tel:+73472588005' rel='nofollow' className={styles.link}>
-                        +7 347 258-80-05
-                    </a>
+                    className={`${styles.popup} ${showPopUp ? styles.popupActive : ''}`}
+                    href='tel:+78442459825'
+                    btnType='text'>
+                    +7 347 258-80-05
                 </BasicBtn>
             </div>
             <div className={styles.askivi}>

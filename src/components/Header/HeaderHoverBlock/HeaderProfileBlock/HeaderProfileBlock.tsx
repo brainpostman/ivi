@@ -49,7 +49,7 @@ const HeaderProfileBlock = () => {
 				</li>
 			</ul>
 
-			<div className={style.rightSide}>
+			<div className={style.right_side}>
 				<HighlightButton>Войти или зарегистрироваться</HighlightButton>
 
 				<div className={style.labels}>

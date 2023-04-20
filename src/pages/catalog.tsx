@@ -1,5 +1,3 @@
-export default function catalog() {
-  return (
-    <div>catalog</div>
-  )
+export default function Catalog() {
+	return <div>catalog</div>
 }

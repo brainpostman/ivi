@@ -1,5 +1,3 @@
-export default function film() {
-  return (
-    <div>film</div>
-  )
+export default function Film() {
+	return <div>film</div>
 }

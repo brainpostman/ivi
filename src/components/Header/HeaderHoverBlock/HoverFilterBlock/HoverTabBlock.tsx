@@ -36,7 +36,7 @@ const HoverFilterBlock: FC<IProps> = ({ currentBlock }) => {
 				<li key={block.title} className={classNameCurrentBlock(block.title)}>
 					{block.title && <p className={styleParent.title}>{block.title}</p>}
 					<ul
-						className={style.blockList}
+						className={style.block_list}
 						style={blockListStyles(block.rows.length)}
 					>
 						{block.rows.map(el => (
