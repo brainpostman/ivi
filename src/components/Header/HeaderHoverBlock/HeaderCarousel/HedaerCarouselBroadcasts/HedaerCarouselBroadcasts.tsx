@@ -22,7 +22,7 @@ const HedaerCarouselBroadcasts: FC<IProps> = ({ move, blockList }) => {
 					<Image src={broadcast.img} alt='broadcast' width={58} height={38} />
 					<div className={style.info}>
 						<p className={style.title}>{broadcast.title}</p>
-						<p className={style.innterBottomInfo}>
+						<p className={style.info__bottom}>
 							<span>{broadcast.date}</span> • <span>{broadcast.category}</span>
 						</p>
 					</div>

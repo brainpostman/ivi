@@ -18,14 +18,13 @@
 	transition: transform 0.4s ease-out;
 }
 
-.rightShadow {
+.shadow {
 	position: absolute;
 	top: 0;
 
 	width: 100%;
 	height: 100%;
 
-	// TODO: переделать тень
 	background-image: linear-gradient(
 		90deg,
 		rgba(8, 7, 11, 0) 70%,
@@ -34,6 +33,15 @@
 	);
 
 	pointer-events: none;
+
+	&_left {
+		background-image: linear-gradient(
+			-90deg,
+			rgba(8, 7, 11, 0) 80%,
+			$dark 98%,
+			$dark 100%
+		);
+	}
 }
 
 .arrows {

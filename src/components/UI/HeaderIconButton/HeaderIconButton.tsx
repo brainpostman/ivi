@@ -23,7 +23,7 @@ const HeaderIconButton: FC<IProps> = ({
 			case 'search':
 				return <RiSearchLine />
 			case 'notification':
-				return <MdOutlineNotifications />
+				return <MdOutlineNotifications className={style.notif_icon} />
 			default:
 				return customIcon || <></>
 		}
