@@ -7,6 +7,7 @@ import mainCarouselData from '@/data/banner_carousel/bannerCarouselData';
 import { movieCarouselData } from '@/data/movieCarousel.data';
 import PageLayout from '@/layouts/PageLayout';
 import style from './index.module.scss';
+import AuthModal from '@/components/AuthModal/AuthModal';
 
 const title =
     'Онлайн-кинотеатр Иви - фильмы, сериалы и мультфильмы смотреть онлайн бесплатно в хорошем качестве';
