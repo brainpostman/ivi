@@ -7,10 +7,11 @@ import { SlDiamond } from 'react-icons/sl';
 import { TbCertificate } from 'react-icons/tb';
 import style from './HeaderProfileBlock.module.scss';
 import AuthModal from '@/components/AuthModal/AuthModal';
-import { useState } from 'react';
+import { setAuthModal } from '@/store/reducers/authModalReducer';
+import { useTypedDispatch } from '@/hooks/ReduxHooks';
 
 const HeaderProfileBlock = () => {
-    const [showAuth, setShowAuth] = useState(false);
+    const dispatch = useTypedDispatch();
 
     return (
         <div className={style.wrapper}>
@@ -54,7 +55,7 @@ const HeaderProfileBlock = () => {
             </ul>
 
             <div className={style.right_side}>
-                <HighlightButton onClick={() => setShowAuth(true)}>
+                <HighlightButton onClick={() => dispatch(setAuthModal(true))}>
                     Войти или зарегистрироваться
                 </HighlightButton>
 
@@ -63,7 +64,6 @@ const HeaderProfileBlock = () => {
                     <p className='text'>Помощь</p>
                 </div>
             </div>
-            <AuthModal modalShown={showAuth} closeModal={() => setShowAuth(false)} />
         </div>
     );
 };
