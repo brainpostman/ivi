@@ -1,4 +1,4 @@
-export interface IMainCarouselItem {
+export interface IBannerCarouselItem {
     title: string;
     subtitle: string;
     imgUrl: string;

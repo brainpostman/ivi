@@ -1,21 +1,21 @@
 import HighlightButton from '@/components/UI/HighlightButton/HighlightButton';
-import { IMainCarouselItem } from '../../../types/IMainCarouselItem';
-import styles from './MainCarouselItem.module.scss';
+import { IBannerCarouselItem } from '../../../types/IBannerCarouselItem';
+import styles from './BannerCarouselItem.module.scss';
 import Image from 'next/image';
 
-interface IMainCarouselItemProps {
-    item: IMainCarouselItem;
+interface IBannerCarouselItemProps {
+    item: IBannerCarouselItem;
     transition: boolean;
     speed: number;
     active: boolean;
 }
 
-const MainCarouselItem = ({
+const BannerCarouselItem = ({
     item,
     speed = 400,
     active = false,
     transition = true,
-}: IMainCarouselItemProps) => (
+}: IBannerCarouselItemProps) => (
     <article
         className={`${styles.element} ${active ? styles.element_active : ''}`}
         style={{
@@ -53,4 +53,4 @@ const MainCarouselItem = ({
     </article>
 );
 
-export default MainCarouselItem;
+export default BannerCarouselItem;
