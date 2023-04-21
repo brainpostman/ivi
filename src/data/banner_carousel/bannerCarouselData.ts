@@ -1,4 +1,4 @@
-const mainCarouselData = [
+const bannerCarouselData = [
     {
         title: 'Брутально и мужественно',
         subtitle: 'Лучшие боевики последних лет',
@@ -37,4 +37,4 @@ const mainCarouselData = [
     },
 ];
 
-export default mainCarouselData;
+export default bannerCarouselData;
