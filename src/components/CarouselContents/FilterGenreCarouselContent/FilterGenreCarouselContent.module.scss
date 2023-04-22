@@ -1,0 +1,38 @@
+.wrapper {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+
+	gap: 4px;
+
+	font-size: 15px;
+
+	color: #fff;
+
+	border: 1px solid $dark-gray;
+	border-radius: 6px;
+
+	cursor: pointer;
+
+	min-width: 108px;
+	min-height: 88px;
+	max-width: 108px;
+	max-height: 88px;
+
+	transition: background-color 0.08s;
+
+	&:hover {
+		background-color: #7e798f;
+	}
+
+	> svg {
+		width: 32px;
+		height: 32px;
+	}
+
+	p {
+		overflow-x: hidden;
+		text-overflow: ellipsis;
+	}
+}
