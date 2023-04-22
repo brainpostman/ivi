@@ -8,9 +8,10 @@ $active-color: #c10032;
 	background-color: $main-color;
 	border-radius: 8px;
 
-	padding: 9px 15px;
-
 	transition: background-color 0.4s, border-color 0.4s;
+
+	@include ui-padding(ver, 2);
+	@include ui-padding(hor, 4);
 
 	&:active {
 		background-color: $active-color !important;
