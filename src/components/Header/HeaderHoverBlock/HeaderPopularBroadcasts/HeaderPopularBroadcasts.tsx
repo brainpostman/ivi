@@ -10,7 +10,7 @@ const HeaderPopularBroadCasts = () => {
 				blockList={headerPopularBroadcastsData}
 				elementLen={262 + 16}
 				elemntsMove={2}
-				elementsView={2}
+				elementsView={3}
 			/>
 		</div>
 	)

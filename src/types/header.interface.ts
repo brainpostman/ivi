@@ -1,5 +1,5 @@
 export type IHeaderTab =
-	| 'films'
+	| 'movies'
 	| 'series'
 	| 'cartoons'
 	| 'TV+'
