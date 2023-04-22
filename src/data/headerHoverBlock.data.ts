@@ -1,9 +1,8 @@
-import { IHeaderTab } from '@/types/header.interface'
 import { IHeaderHoverBlockContent } from '@/types/hoverblock.interface'
 
 export const headerHoverBlockContent: IHeaderHoverBlockContent[] = [
 	{
-		tab: 'films',
+		tab: 'movies',
 		columns: [
 			{
 				title: 'Жанры',
