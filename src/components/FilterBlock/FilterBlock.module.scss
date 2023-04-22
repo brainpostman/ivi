@@ -1,0 +1,12 @@
+.wrapper {
+	display: grid;
+	grid-template-columns: repeat(5, auto);
+
+	column-gap: 12px;
+	row-gap: 24px;
+
+	background-color: $dark;
+	border-radius: 6px;
+
+	@include ui-padding(default, 4);
+}
