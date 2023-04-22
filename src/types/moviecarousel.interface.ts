@@ -11,3 +11,9 @@ export interface IMovieCarouselElem {
 	genre: string
 	duration: string
 }
+
+export interface ITopTenCarouselElem {
+	id: number
+	title: string
+	img: string
+}
