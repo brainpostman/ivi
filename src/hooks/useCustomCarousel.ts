@@ -21,13 +21,13 @@ export const useCustomCarousel = (
 				? currentIndex + elementsMove
 				: currentIndex + numExtraEls
 
-		console.log(`numExtraEls = ${numExtraEls}`)
+		//console.log(`numExtraEls = ${numExtraEls}`)
 
-		console.log(`leftLand = ${currentIndex + elementsMove}`)
-		console.log(`rightHand = ${cuttedElementLengths.length - numExtraEls}`)
+		//console.log(`leftLand = ${currentIndex + elementsMove}`)
+		//console.log(`rightHand = ${cuttedElementLengths.length - numExtraEls}`)
 
-		console.log(currentIndex)
-		console.log(lastIndex)
+		//console.log(currentIndex)
+		//console.log(lastIndex)
 
 		const oneMove = cuttedElementLengths
 			.slice(currentIndex, lastIndex)
@@ -38,11 +38,35 @@ export const useCustomCarousel = (
 	}
 
 	const onClickLeftArrow = () => {
-		setCurrentIndex(0)
-		setMove(0)
+		if (currentIndex - elementsMove <= 0) {
+			setCurrentIndex(0)
+			setMove(0)
+			return
+		}
+
+		const oneMove = cuttedElementLengths
+			.slice(currentIndex - elementsMove, currentIndex)
+			.reduce((accum, item) => accum + item, 0)
+
+		setCurrentIndex(currentIndex - elementsMove)
+		setMove(prev => prev - oneMove)
 	}
 
-	const viewArrow = (direction: 'left' | 'right') => {}
+	const viewArrow = (direction: 'left' | 'right') => {
+		if (direction === 'left') {
+			if (move <= 0) {
+				return 'hide'
+			}
+
+			return ''
+		}
+
+		if (currentIndex > cuttedElementLengths.length - 1) {
+			return 'hide'
+		}
+
+		return ''
+	}
 
 	return { onClickRightArrow, onClickLeftArrow, viewArrow, move }
 }
