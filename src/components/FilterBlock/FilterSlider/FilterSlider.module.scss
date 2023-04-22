@@ -1,0 +1,38 @@
+.inputs {
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+
+	@include ui-margin(bottom, 4);
+}
+
+.dash {
+	font-size: 15px;
+	color: #fff;
+	font-weight: 600;
+}
+
+.slider {
+	display: flex;
+	align-items: center;
+
+	background-color: #ffffff58;
+	border-radius: 8px;
+
+	height: 5px;
+}
+
+.track {
+	background-color: #000;
+}
+
+.thumb {
+	border-radius: 100%;
+	position: absolute;
+
+	width: 16px;
+	height: 16px;
+	background-color: #d5d5d5;
+
+	cursor: pointer;
+}
