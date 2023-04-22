@@ -17,5 +17,6 @@ $start-gradient-color: #c447ff;
 
 	border-radius: 8px;
 
-	padding: 7px 11px;
+	@include ui-padding(ver, 2);
+	@include ui-padding(hor, 3);
 }
