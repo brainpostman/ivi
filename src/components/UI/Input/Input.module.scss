@@ -1,0 +1,35 @@
+.text {
+	color: #1f1b2e;
+
+	font-size: 16px;
+	line-height: 20px;
+	font-weight: 600;
+
+	background-color: #d9d7e0;
+	border-radius: 8px;
+
+	@include ui-padding(hor, 3);
+	@include ui-padding(ver, 3);
+}
+
+.number {
+	color: #1f1b2e;
+	background-color: #d9d7e0;
+	border-radius: 8px;
+
+	font-weight: 600;
+	width: 60px;
+
+	text-align: center;
+
+	-moz-appearance: textfield;
+
+	&::-webkit-outer-spin-button,
+	&::-webkit-inner-spin-button {
+		-webkit-appearance: none;
+		margin: 0;
+	}
+
+	@include ui-padding(ver, 2);
+	@include ui-padding(hor, 2);
+}
