@@ -1,0 +1,39 @@
+$cross-space: 32px;
+
+.wrapper {
+	position: fixed;
+
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	top: 0;
+	bottom: 0;
+	right: 0;
+	left: 0;
+
+	background-color: rgba(7, 5, 14, 0.96);
+	z-index: 9999;
+}
+
+.close_icon {
+	position: absolute;
+
+	top: $cross-space;
+	right: $cross-space;
+
+	width: 40px;
+	height: 40px;
+
+	cursor: pointer;
+
+	transition: color 0.4s;
+
+	&:hover {
+		color: #a5a1b2;
+	}
+}
+
+.hide {
+	display: none;
+}
