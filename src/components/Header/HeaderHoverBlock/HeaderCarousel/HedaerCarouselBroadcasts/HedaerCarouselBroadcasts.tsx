@@ -11,7 +11,6 @@ interface IProps {
 
 const HedaerCarouselBroadcasts: FC<IProps> = ({ move, blockList }) => {
 	const translate = `translate3d(-${move}px, 0, 0)`
-
 	return (
 		<ul
 			className={`${styleParent.list} ${style.broadcastsList}`}

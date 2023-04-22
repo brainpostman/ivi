@@ -6,6 +6,8 @@ import { Dispatch, SetStateAction } from 'react'
 // @blocksData - данные для блоков карусели
 
 // TODO: переименовать channels
+
+// NOTE: DEPRECATED
 export const getCarouselFunctions = (
 	move: number,
 	setMove: Dispatch<SetStateAction<number>>,

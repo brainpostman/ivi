@@ -22,7 +22,7 @@
 	transition: background-color 0.1s;
 
 	margin: auto;
-	padding: 0 12px;
+	@include ui-padding(hor, 3);
 }
 
 .effect {
