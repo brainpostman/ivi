@@ -1,11 +1,11 @@
+import BannerCarousel from '@/components/BannerCarousel/BannerCarousel'
 import MovieCarouselContent from '@/components/CarouselContents/MovieCarouselContent/MovieCarouselContent'
 import CustomCarousel from '@/components/CustomCarousel/CustomCarousel'
 import ExpandInfo from '@/components/ExpandInfo/ExpandInfo'
 import HomePageInfo from '@/components/HomePageInfo/HomePageInfo'
-import MainCarousel from '@/components/MainCarousel/MainCarousel'
 import TopTenList from '@/components/TopTenList/TopTenList'
 import LongButton from '@/components/UI/LongButton/LongButton'
-import mainCarouselData from '@/data/main_carousel/mainCarouselData'
+import mainCarouselData from '@/data/banner_carousel/bannerCarouselData'
 import { movieCarouselData } from '@/data/movieCarousel.data'
 import PageLayout from '@/layouts/PageLayout'
 import { FC, useLayoutEffect, useRef } from 'react'
@@ -47,34 +47,10 @@ const viewAllBlock: FC<any> = addElementLen => {
 	)
 }
 
-const infoTitle =
-	'Онлайн-кинотеатр Иви: фильмы в хорошем качестве всегда приносят настоящее удовольствие'
-
-const visibleText =
-	'Каждый день миллионы людей ищут фильмы онлайн, и никто не хочет усложнять себе жизнь – и вы наверняка один из них! А раз так, то Иви – это именно тот ресурс, который вам нужен. От лучших кинолент в HD-качестве вас отделяет буквально один клик. Мы не просто освобождаем от необходимости идти в кинотеатр или изучать программу телепередач – у посетителей нашего ресурса гораздо больше возможностей.'
-
-const viewAllBlock: FC<any> = addElementLen => {
-	const wrapperRef = useRef<HTMLDivElement>(null)
-	const isSelectedRef = useRef(false)
-
-	useLayoutEffect(() => {
-		if (!wrapperRef.current || isSelectedRef.current) return
-
-		addElementLen(wrapperRef.current.offsetWidth)
-		isSelectedRef.current = true
-	}, [wrapperRef])
-
-	return (
-		<div className={style.view_all} ref={wrapperRef}>
-			Посмотреть всё
-		</div>
-	)
-}
-
 export default function Home() {
 	return (
 		<PageLayout title={title} description={description}>
-			<MainCarousel items={mainCarouselData} speed={800} />
+			<BannerCarousel items={mainCarouselData} speed={800} />
 			<div className={style.buttons}>
 				<a href='https://www.ivi.ru/subscribe?redirect_url=%2F'>
 					<LongButton variant='secondary' img={imgLongButton_1}>
