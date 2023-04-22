@@ -1,0 +1,18 @@
+.button {
+	background-color: $violet;
+	color: #9b97a9;
+
+	font-size: 16px;
+
+	white-space: nowrap;
+
+	border-radius: 16px;
+	padding: 6px 16px;
+}
+
+.secondary {
+	color: #fff;
+	font-size: 13px;
+
+	border: 1px solid $dark-gray;
+}
