@@ -1,5 +1,8 @@
 .text {
-	color: #1f1b2e;
+	// FIXME: откуда появляется другой стиль при наведении
+	color: #1f1b2e !important;
+	cursor: text;
+	//
 
 	font-size: 16px;
 	line-height: 20px;
