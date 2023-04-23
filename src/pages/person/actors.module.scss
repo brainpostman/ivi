@@ -1,0 +1,179 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  width: $max-width;
+
+  @include ui-padding(top, 4);
+  @include ui-margin(bottom, 5);
+}
+
+.back_button {
+  align-self: flex-start;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  color: #fff;
+  font-size: 15px;
+  line-height: 20px;
+  font-weight: 500;
+
+  cursor: pointer;
+
+  &:hover > svg {
+    transform: scale(1.1);
+  }
+
+  > svg {
+    width: 18px;
+    height: 18px;
+
+    transition: transform 0.2s;
+  }
+}
+
+.container {
+  max-width: 600px;
+}
+
+.img {
+  border-radius: 20px;
+  object-fit: cover;
+}
+
+.info_container {
+  color: #fff;
+  display: block;
+
+  &__title {
+    font-size: 56px;
+    font-weight: 700;
+    padding-top: 2%;
+  }
+
+  &__subtitle {
+    color: #a5a1b2;
+    font-size: 15px;
+    font-weight: 400;
+    padding-top: 2%;
+  }
+}
+
+.info_buttons {
+  display: flex;
+  gap: 12px;
+
+  margin-top: 5%;
+  font-size: 18px;
+  font-weight: 400;
+
+  > a {
+    color: #ffffffe0;
+    &:hover {
+      color: #e2e2e3;
+    }
+  }
+
+  > a:last-child::before {
+    content: '•';
+    @include ui-margin(right, 3);
+  }
+}
+
+.film_info {
+  display: block;
+  color: #fff;
+
+  font-size: 15px;
+  line-height: 22px;
+  font-weight: 600;
+
+  @include ui-margin(top, 5);
+
+  &__title {
+    @include ui-margin(top, 1);
+  }
+
+  &__rating {
+    color: $gray-soft;
+    font-size: 13px;
+  }
+}
+
+.films_header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  @include ui-margin(ver, 4);
+
+  &__title {
+    color: #fff;
+    font-size: 24px;
+    font-weight: 700;
+  }
+
+  &__subtitle {
+    color: $gray-soft;
+    font-size: 15px;
+    font-weight: 400;
+  }
+}
+
+.films_list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+  > li {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &__card {
+    display: flex;
+    gap: 20px;
+
+    img {
+      border-radius: 4px;
+      width: 80px;
+      height: 123px;
+    }
+  }
+}
+
+.more_films {
+  color: $gray-soft;
+  cursor: pointer;
+
+  transition: color 0.4s;
+
+  @include ui-margin(ver, 3);
+
+  &:hover {
+    color: #fff;
+  }
+}
+
+.biografy {
+  h2 {
+    color: #fff;
+    font-size: 24px;
+    font-weight: 700;
+  }
+  h3 {
+    color: #a5a1b2;
+    font-weight: 400;
+    font-size: 15px;
+
+    @include ui-margin(top, 4);
+  }
+}
+
+.button {
+  width: 140px;
+  height: 40px;
+}
