@@ -8,9 +8,6 @@ export const useCustomCarousel = (
 	const cuttedElementLengths = elementLens.slice(elementsView)
 	const numExtraEls = cuttedElementLengths.length % elementsMove
 
-	// DEBUG:
-	console.log(cuttedElementLengths)
-
 	const [move, setMove] = useState(0)
 
 	const [currentIndex, setCurrentIndex] = useState(0)
@@ -20,14 +17,6 @@ export const useCustomCarousel = (
 			currentIndex + elementsMove <= cuttedElementLengths.length - numExtraEls
 				? currentIndex + elementsMove
 				: currentIndex + numExtraEls
-
-		//console.log(`numExtraEls = ${numExtraEls}`)
-
-		//console.log(`leftLand = ${currentIndex + elementsMove}`)
-		//console.log(`rightHand = ${cuttedElementLengths.length - numExtraEls}`)
-
-		//console.log(currentIndex)
-		//console.log(lastIndex)
 
 		const oneMove = cuttedElementLengths
 			.slice(currentIndex, lastIndex)
