@@ -8,6 +8,8 @@
 	line-height: 16px;
 	font-weight: 600;
 
+	z-index: 9999;
+
 	@include ui-margin(top, 1);
 }
 
