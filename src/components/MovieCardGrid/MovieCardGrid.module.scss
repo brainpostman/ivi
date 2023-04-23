@@ -1,0 +1,6 @@
+.wrapper {
+	display: inline-grid;
+	grid-template-columns: repeat(7, auto);
+	column-gap: 28px;
+	row-gap: 28px;
+}
