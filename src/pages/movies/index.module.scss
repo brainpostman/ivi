@@ -23,5 +23,9 @@
 }
 
 .carousel_wrapper {
-	@include ui-margin(ver, 7);
+	@include ui-margin(ver, 4);
+}
+
+.moviegrid_wrapper {
+	@include ui-margin(ver, 6);
 }
