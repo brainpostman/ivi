@@ -1,11 +1,6 @@
+import { useCustomCarouselContent } from '@/hooks/useCustomCarouselContent'
 import { IVarButton } from '@/types/button.interface'
-import {
-	ButtonHTMLAttributes,
-	DetailedHTMLProps,
-	FC,
-	useLayoutEffect,
-	useRef,
-} from 'react'
+import { ButtonHTMLAttributes, DetailedHTMLProps, FC } from 'react'
 import style from './VioletButton.module.scss'
 
 interface IProps
@@ -23,16 +18,7 @@ const VioletButton: FC<IProps> = (
 	const currentClassName = `${style.button} ${
 		variant === 'secondary' ? style.secondary : ''
 	}`
-
-	const wrapperRef = useRef<HTMLButtonElement>(null)
-	const isSelectedRef = useRef(false)
-
-	useLayoutEffect(() => {
-		if (!wrapperRef.current || isSelectedRef.current) return
-
-		addElementLen(wrapperRef.current.offsetWidth)
-		isSelectedRef.current = true
-	}, [wrapperRef])
+	const wrapperRef = useCustomCarouselContent(addElementLen)
 
 	return (
 		<button className={currentClassName} ref={wrapperRef} {...props}>
