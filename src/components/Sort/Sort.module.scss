@@ -1,0 +1,106 @@
+.wrapper {
+  display: flex;
+  position: relative;
+  gap: 24px;
+
+  color: #fff;
+  font-size: 15px;
+  line-height: 20px;
+  font-weight: 600;
+
+  @include ui-margin(bottom, 4);
+}
+
+.title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  cursor: pointer;
+}
+
+.lines {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 2px;
+
+  > div {
+    height: 2px;
+
+    background-color: #fff;
+
+    &:nth-child(1) {
+      width: 12px;
+    }
+
+    &:nth-child(2) {
+      width: 9px;
+    }
+
+    &:nth-child(3) {
+      width: 7px;
+    }
+  }
+}
+
+.arrow {
+  transform: rotate(-90deg);
+
+  &__active {
+    transform: rotate(90deg);
+  }
+}
+
+.wrapper_list {
+  position: absolute;
+  color: #ffffffb8;
+
+  top: 100%;
+
+  background-color: $dark;
+  z-index: 999;
+
+  @include ui-margin(top, 2);
+
+  &__title {
+    color: $gray-soft;
+    font-weight: 500;
+
+    @include ui-padding(ver, 3);
+    @include ui-padding(hor, 4);
+  }
+}
+
+.list {
+  box-shadow: 0 20px 40px rgba(7, 5, 14, 0.4);
+  > li {
+    width: 250px;
+
+    cursor: pointer;
+
+    @include ui-padding(ver, 3);
+    @include ui-padding(hor, 4);
+
+    &:hover {
+      color: #fff;
+      background-color: $violet;
+    }
+  }
+}
+
+.active {
+  position: relative;
+
+  &::before {
+    content: '';
+    position: absolute;
+    display: block;
+
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 4px;
+    background-color: $red;
+  }
+}
