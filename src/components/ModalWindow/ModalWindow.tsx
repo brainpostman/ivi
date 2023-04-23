@@ -1,4 +1,4 @@
-import { DetailedHTMLProps, FC, HTMLAttributes } from 'react'
+import { DetailedHTMLProps, FC, HTMLAttributes, KeyboardEvent } from 'react'
 import { IoCloseOutline } from 'react-icons/io5'
 import style from './ModalWindow.module.scss'
 
@@ -9,6 +9,10 @@ interface IProps
 }
 
 const ModalWindow: FC<IProps> = ({ children, isShow, closeFunc, ...props }) => {
+	const onKeyPressEsc = (event: KeyboardEvent<HTMLElement>) => {
+		if (event.key === 'Escape') closeFunc()
+	}
+
 	return (
 		<section
 			className={`${style.wrapper} ${!isShow ? style.hide : ''}`}
