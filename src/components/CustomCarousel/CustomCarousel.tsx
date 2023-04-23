@@ -1,7 +1,7 @@
 import { useCustomCarousel } from '@/hooks/useCustomCarousel'
 import { Url } from 'next/dist/shared/lib/router/router'
 import Link from 'next/link'
-import React, { FC, memo, useMemo, useState } from 'react'
+import React, { FC, memo, useState } from 'react'
 import { MdArrowBackIosNew } from 'react-icons/md'
 import style from './CustomCarousel.module.scss'
 
