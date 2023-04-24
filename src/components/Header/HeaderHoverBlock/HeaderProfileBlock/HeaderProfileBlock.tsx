@@ -6,14 +6,12 @@ import { RiShareLine } from 'react-icons/ri';
 import { SlDiamond } from 'react-icons/sl';
 import { TbCertificate } from 'react-icons/tb';
 import style from './HeaderProfileBlock.module.scss';
-import AuthModal from '@/components/AuthModal/AuthModal';
-import { setAuthModal } from '@/store/reducers/authModalReducer';
-import { useTypedDispatch } from '@/hooks/ReduxHooks';
+import { useActions } from '@/hooks/ReduxHooks';
 import { signOut, useSession } from 'next-auth/react';
 
 const HeaderProfileBlock = () => {
-    const dispatch = useTypedDispatch();
-    const { data: session, status } = useSession();
+    const { setAuthModal } = useActions();
+    const { status } = useSession();
 
     return (
         <div className={style.wrapper}>
@@ -58,11 +56,11 @@ const HeaderProfileBlock = () => {
 
             <div className={style.right_side}>
                 {status !== 'authenticated' ? (
-                    <HighlightButton onClick={() => dispatch(setAuthModal(true))}>
+                    <HighlightButton onClick={() => setAuthModal(true)}>
                         Войти или зарегистрироваться
                     </HighlightButton>
                 ) : (
-                    <button onClick={() => signOut()}>Sign out</button>
+                    <HighlightButton onClick={() => signOut()}>Выйти</HighlightButton>
                 )}
 
                 <div className={style.labels}>
