@@ -1,12 +1,21 @@
-import { DetailedHTMLProps, FC, InputHTMLAttributes } from 'react'
-import style from './Input.module.scss'
+import { DetailedHTMLProps, FC, InputHTMLAttributes } from 'react';
+import style from './Input.module.scss';
 
-const Input: FC<
-	DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>
-> = ({ type = 'text', ...props }) => {
-	const currentClassName = type === 'number' ? style.number : style.text
+const Input: FC<DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>> = ({
+    type = 'text',
+    placeholder,
+    ...props
+}) => {
+    const currentClassName = type === 'number' ? style.number : style.text;
 
-	return <input type={type} className={currentClassName} {...props} />
-}
+    const handlePlaceholder = () => {};
 
-export default Input
+    return (
+        <label className={style.label}>
+            <input type={type} className={`${style.input} ${currentClassName}`} {...props} />
+            <span className={style.placeholder}>{placeholder ?? ''}</span>
+        </label>
+    );
+};
+
+export default Input;
