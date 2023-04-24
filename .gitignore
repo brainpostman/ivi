@@ -41,6 +41,4 @@ yarn-error.log*
 # linters and formatting
 .eslintrc.cjs
 .prettierrc.cjs
-
-package-lock.json
 .prettierrc.json
