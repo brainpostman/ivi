@@ -21,7 +21,7 @@
 }
 
 .bestIndicator {
-	color: #a5a1b2;
+	color: $gray-soft;
 
 	@include ui-margin(bottom, 1);
 }

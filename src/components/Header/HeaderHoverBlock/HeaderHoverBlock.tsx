@@ -13,10 +13,10 @@ interface IProps {
 }
 
 const HeaderHoverBlock: FC<IProps> = ({ hideHoverBlock, tab }) => {
-	const tabList: IHeaderTab[] = ['films', 'series', 'cartoons']
+	const tabList: IHeaderTab[] = ['movies', 'series', 'cartoons']
 
 	const tabsWithMovieBlock: IHeaderTab[] = [
-		'films',
+		'movies',
 		'series',
 		'cartoons',
 		'TV+',

@@ -1,0 +1,99 @@
+.wrapper {
+	display: inline-flex;
+	flex-direction: column;
+}
+
+.wrapperTitle {
+	display: flex;
+	align-items: center;
+	gap: 4px;
+
+	font-size: 24px;
+	line-height: 28px;
+	font-weight: 700;
+
+	color: #fff;
+
+	cursor: pointer;
+
+	@include ui-padding(bottom, 6);
+
+	> svg {
+		width: 20px;
+		height: 20px;
+
+		transform: rotate(180deg);
+	}
+}
+
+.wrapperCarousel {
+	position: relative;
+}
+
+.container {
+	overflow-x: hidden;
+}
+
+.list {
+	display: flex;
+
+	transition: transform ease-out;
+
+	> li {
+		position: relative;
+		cursor: pointer;
+
+		border-radius: 8px;
+
+		&:hover .hoverBlock {
+			opacity: 1;
+		}
+
+		&:hover .wrapperImg,
+		.hoverBlock {
+			transform: scale(1.05);
+		}
+	}
+}
+
+.arrows {
+	position: absolute;
+	display: flex;
+	align-items: center;
+
+	width: 100%;
+	height: 100%;
+
+	top: 0;
+	left: 0;
+
+	pointer-events: none;
+
+	> div {
+		height: 100%;
+		position: absolute;
+		display: flex;
+		align-items: center;
+
+		cursor: pointer;
+
+		pointer-events: all;
+
+		&:active > svg {
+			transform: scale(0.8);
+		}
+
+		&:hover > svg {
+			color: #fff;
+		}
+
+		&:last-child {
+			transform: rotate(180deg);
+		}
+	}
+
+	svg {
+		color: #ffffffb8;
+		transition: color 0.4s, transform 0.4s;
+	}
+}

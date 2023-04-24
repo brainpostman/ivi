@@ -30,7 +30,7 @@
 			white-space: nowrap;
 			pointer-events: none;
 
-			padding: 8px;
+			@include ui-padding(default, 2);
 		}
 	}
 

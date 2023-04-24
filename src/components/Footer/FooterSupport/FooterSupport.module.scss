@@ -17,7 +17,7 @@
 
 .chat {
 	color: #fff;
-	@include ui-margin("hor", 5);
+	@include ui-margin('hor', 5);
 }
 
 .buttons {
@@ -44,12 +44,12 @@
 	@include center-content;
 	position: absolute;
 
-	top: 100%;
+	top: 90%;
 	left: 0;
 
 	height: 100%;
 
-	margin-top: 6px;
+	//@include ui-margin(top, 1);
 
 	transition: all 0.2s;
 	opacity: 0;
@@ -64,6 +64,6 @@
 }
 
 .popupActive {
-	margin-top: 12px;
+	@include ui-margin(top, 3);
 	opacity: 1;
 }

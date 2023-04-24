@@ -23,7 +23,7 @@ const HeaderLeftSide: FC<IProps> = ({ showHoverBlock }) => {
 				<Link href='/' onMouseEnter={() => showHoverBlock(undefined)}>
 					Что нового
 				</Link>
-				<Link href='/' onMouseEnter={() => showHoverBlock('films')}>
+				<Link href='/movies' onMouseEnter={() => showHoverBlock('movies')}>
 					Фильмы
 				</Link>
 				<Link href='/' onMouseEnter={() => showHoverBlock('series')}>

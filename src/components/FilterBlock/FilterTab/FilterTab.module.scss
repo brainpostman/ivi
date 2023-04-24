@@ -1,0 +1,52 @@
+.wrapper {
+  position: relative;
+}
+
+.title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  background-color: $violet;
+  color: #fff;
+
+  border-radius: 4px;
+
+  font-size: 15px;
+  line-height: 20px;
+
+  width: 227px;
+  height: 56px;
+
+  cursor: pointer;
+
+  @include ui-padding(ver, 2);
+  @include ui-padding(hor, 4);
+
+  &__active {
+    background-color: #7e798f;
+  }
+}
+
+.arrow {
+  width: 16px;
+  height: 16px;
+  transform: rotate(-90deg);
+
+  &__active {
+    transform: rotate(90deg);
+  }
+}
+
+.param {
+  font-size: 13px;
+  line-height: 16px;
+  font-weight: 600;
+  color: $gray-soft;
+
+  max-width: 200px;
+  overflow-x: hidden;
+  text-overflow: ellipsis;
+
+  @include ui-margin(top, 1);
+}

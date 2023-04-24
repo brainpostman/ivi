@@ -12,7 +12,8 @@ $active-color: #0e0c14;
 
 	border-radius: 8px;
 
-	padding: 12px 15px;
+	@include ui-padding(ver, 3);
+	@include ui-padding(hor, 4);
 
 	transition: background-color 0.4s;
 
@@ -43,14 +44,17 @@ $active-color: #0e0c14;
 .icon {
 	@include center-content;
 	height: 40px;
-	padding: 0 12px;
+
+	@include ui-padding(hor, 3);
 }
 
 .iconCircle {
 	@include center-content;
 	height: 40px;
-	padding: 0 12px;
+
 	border-radius: 100%;
+
+	@include ui-padding(hor, 3);
 }
 
 .description {
@@ -84,7 +88,9 @@ $active-color: #0e0c14;
 .textPlusIcon {
 	display: flex;
 	align-items: center;
-	padding: 4px 12px;
+
+	@include ui-padding(ver, 1);
+	@include ui-padding(hor, 3);
 }
 
 .href {

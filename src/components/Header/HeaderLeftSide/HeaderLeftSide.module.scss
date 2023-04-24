@@ -20,6 +20,6 @@
 
 		@extend .text;
 
-		padding: 0 8px;
+		@include ui-padding(hor, 2);
 	}
 }

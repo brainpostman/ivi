@@ -1,16 +1,16 @@
-$main-color: #ea003d;
 $hover-color: #ff0f4d;
 $active-color: #c10032;
 
 .button {
 	line-height: 20px;
 
-	background-color: $main-color;
+	background-color: $red;
 	border-radius: 8px;
 
-	padding: 9px 15px;
-
 	transition: background-color 0.4s, border-color 0.4s;
+
+	@include ui-padding(ver, 2);
+	@include ui-padding(hor, 4);
 
 	&:active {
 		background-color: $active-color !important;

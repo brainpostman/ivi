@@ -94,3 +94,11 @@
 		}
 	}
 }
+
+.channel_list {
+	> img {
+		border-radius: 8px;
+
+		cursor: pointer;
+	}
+}

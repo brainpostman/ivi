@@ -1,0 +1,66 @@
+.container {
+  position: absolute;
+
+  background-color: $violet;
+  border-radius: 4px;
+
+  z-index: 9999;
+
+  @include ui-margin(top, 1);
+  @include ui-padding(hor, 6);
+}
+
+.carousel_wrapper {
+  @include ui-margin(ver, 4);
+}
+
+.list {
+  display: grid;
+  grid-template-columns: repeat(3, auto);
+  row-gap: 12px;
+
+  font-size: 13px;
+  line-height: 16px;
+  font-weight: 600;
+
+  color: #d9d7e0cc;
+
+  border-top: 1px solid $dark-gray;
+  @include ui-padding(ver, 4);
+
+  > li {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    width: 172px;
+
+    cursor: pointer;
+
+    > p {
+      transition: color 0.4s;
+    }
+
+    > svg {
+      opacity: 0;
+      width: 18px;
+      height: 18px;
+
+      transition: opacity 0.4s;
+    }
+
+    &:hover {
+      @extend .active;
+    }
+  }
+}
+
+.active {
+  > p {
+    color: #fff;
+  }
+
+  svg {
+    opacity: 1 !important;
+  }
+}

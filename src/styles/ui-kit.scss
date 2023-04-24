@@ -3,6 +3,10 @@ $ui-space-step: 4px;
 $ui-font-step: 4px;
 
 @mixin ui-margin($direction, $size) {
+	@if ($direction == default) {
+		margin: $ui-space-step * $size;
+	}
+
 	@if ($direction == top) {
 		margin-top: $ui-space-step * $size;
 	}
@@ -26,6 +30,10 @@ $ui-font-step: 4px;
 }
 
 @mixin ui-padding($direction, $size) {
+	@if ($direction == default) {
+		padding: $ui-space-step * $size;
+	}
+
 	@if ($direction == top) {
 		padding-top: $ui-space-step * $size;
 	}
