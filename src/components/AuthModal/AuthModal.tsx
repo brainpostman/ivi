@@ -1,15 +1,14 @@
 import { useEffect, useRef, useState } from 'react';
 import styles from './AuthModal.module.scss';
-import { useTypedDispatch } from '@/hooks/ReduxHooks';
-import { setAuthModal } from '../../store/reducers/authModalReducer';
-import { signIn, signOut, useSession } from 'next-auth/react';
-import axios from 'axios';
+import { useActions, useTypedDispatch } from '@/hooks/ReduxHooks';
+import { signIn } from 'next-auth/react';
 
 interface IAuthModalProps {
     modalShown: boolean;
 }
 
 const AuthModal = ({ modalShown }: IAuthModalProps) => {
+    const { setAuthModal } = useActions();
     const [progressBar, setProgressBar] = useState(5);
     const [emailInput, setEmailInput] = useState('');
     const [passInput, setPassInput] = useState('');
@@ -25,10 +24,6 @@ const AuthModal = ({ modalShown }: IAuthModalProps) => {
             document.body.style.overflow = 'unset';
         };
     }, [modalShown]);
-
-    const getGoogle = async () => {
-        const response = await axios.get('http://localhost:3000/google');
-    };
 
     return (
         <div className={styles.modal} ref={modalRef}>
