@@ -63,6 +63,13 @@ export const authOptions = {
         GoogleProvider({
             clientId: process.env.GOOGLE_CLIENT_ID,
             clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+            authorization: {
+                params: {
+                    prompt: 'consent',
+                    access_type: 'offline',
+                    response_type: 'code',
+                },
+            },
         }),
         VkProvider({
             clientId: process.env.VK_CLIENT_ID,
@@ -75,7 +82,7 @@ export const authOptions = {
                 token.user = user;
                 token.accessToken = user.accessToken;
             }
-            console.log(user);
+            console.log(token.accessToken);
             return token;
         },
         async session({ session, token }) {

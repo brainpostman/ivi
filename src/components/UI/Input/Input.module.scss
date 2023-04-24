@@ -5,7 +5,7 @@
 	//
 
 	font-size: 16px;
-	line-height: 20px;
+	line-height: 1.25;
 	font-weight: 600;
 
 	background-color: #d9d7e0;
@@ -35,4 +35,33 @@
 
 	@include ui-padding(ver, 2);
 	@include ui-padding(hor, 2);
+}
+
+.label {
+	position: relative;
+	input:focus {
+		.placeholder {
+			cursor: text;
+			font-size: 12px;
+			transform: scale(0.4);
+		}
+	}
+}
+
+.input {
+	width: 100%;
+}
+
+.placeholder {
+	cursor: pointer;
+	position: absolute;
+	color: $gray-soft;
+	font-size: 16px;
+	line-height: 1.25;
+	font-weight: 600;
+	width: 100%;
+	left: 0px;
+	top: 0px;
+	@include ui-padding(hor, 3);
+	@include ui-padding(ver, 3);
 }
