@@ -16,4 +16,4 @@ export const authModalSlice = createSlice({
 
 export default authModalSlice.reducer;
 
-export const setAuthModal = authModalSlice.actions.setAuthModal;
+export const authModalActions = authModalSlice.actions;
