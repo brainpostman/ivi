@@ -46,12 +46,19 @@ const AuthModal = ({ modalShown }: IAuthModalProps) => {
                         width: `${progressBar}%`,
                     }}></div>
             </section>
+            <div className={styles.prompt}>
+                <p className={styles.prompt__main}>Войдите или зарегистрируйтесь</p>
+                <p className={styles.prompt__sub}>
+                    чтобы пользоваться сервисом на любом устройстве
+                </p>
+            </div>
             <div className={styles.inputs}>
                 <input
                     type='email'
                     placeholder='Почта'
                     onChange={(e) => setEmailInput(e.target.value)}
                     value={emailInput}
+                    className={styles.input}
                 />
                 <input
                     type='text'
@@ -73,7 +80,7 @@ const AuthModal = ({ modalShown }: IAuthModalProps) => {
                     onClick={() => {
                         signIn('google');
                     }}>
-                    Login with google
+                    Войти с помощью Google
                 </button>
                 <button onClick={() => signIn('vk')}>Login with Vkontakte</button>
             </div>
