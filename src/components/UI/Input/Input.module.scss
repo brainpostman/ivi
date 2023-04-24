@@ -46,6 +46,8 @@
 }
 
 .placeholder {
+	display: flex;
+	justify-content: flex-start;
 	cursor: pointer;
 	position: absolute;
 	color: $gray-soft;
@@ -63,13 +65,17 @@
 		&_active {
 			transition: all 100ms ease-in;
 			cursor: text;
-			font-size: 11px;
-			transform: translateY(-25%);
-			& span {
-				transform: scale(0.9);
-			}
+			transform: translateY(-30%);
 		}
 	}
+	&__span {
+		transform-origin: 0 0;
+		transition: inherit;
+		&_active {
+			transform: scale(0.85);
+		}
+	}
+
 	&__number {
 		display: none;
 	}

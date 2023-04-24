@@ -48,7 +48,12 @@ const Input: FC<DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInp
                 {...props}
             />
             <div className={`${style.placeholder} ${placeholderType} ${placeholderClassName}`}>
-                <span>{type === 'text' ? placeholder : ''}</span>
+                <div
+                    className={`${style.placeholder__span} ${
+                        focus ? style.placeholder__span_active : ''
+                    }`}>
+                    {type === 'text' ? placeholder : ''}
+                </div>
             </div>
         </label>
     );
