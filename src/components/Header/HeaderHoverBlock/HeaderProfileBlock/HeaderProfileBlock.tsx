@@ -9,9 +9,11 @@ import style from './HeaderProfileBlock.module.scss';
 import AuthModal from '@/components/AuthModal/AuthModal';
 import { setAuthModal } from '@/store/reducers/authModalReducer';
 import { useTypedDispatch } from '@/hooks/ReduxHooks';
+import { signOut, useSession } from 'next-auth/react';
 
 const HeaderProfileBlock = () => {
     const dispatch = useTypedDispatch();
+    const { data: session, status } = useSession();
 
     return (
         <div className={style.wrapper}>
@@ -55,9 +57,13 @@ const HeaderProfileBlock = () => {
             </ul>
 
             <div className={style.right_side}>
-                <HighlightButton onClick={() => dispatch(setAuthModal(true))}>
-                    Войти или зарегистрироваться
-                </HighlightButton>
+                {status !== 'authenticated' ? (
+                    <HighlightButton onClick={() => dispatch(setAuthModal(true))}>
+                        Войти или зарегистрироваться
+                    </HighlightButton>
+                ) : (
+                    <button onClick={() => signOut()}>Sign out</button>
+                )}
 
                 <div className={style.labels}>
                     <p className='text'>Настройки</p>

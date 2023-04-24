@@ -2,6 +2,8 @@ import { useEffect, useRef, useState } from 'react';
 import styles from './AuthModal.module.scss';
 import { useTypedDispatch } from '@/hooks/ReduxHooks';
 import { setAuthModal } from '../../store/reducers/authModalReducer';
+import { signIn, signOut, useSession } from 'next-auth/react';
+import axios from 'axios';
 
 interface IAuthModalProps {
     modalShown: boolean;
@@ -9,6 +11,8 @@ interface IAuthModalProps {
 
 const AuthModal = ({ modalShown }: IAuthModalProps) => {
     const [progressBar, setProgressBar] = useState(5);
+    const [emailInput, setEmailInput] = useState('');
+    const [passInput, setPassInput] = useState('');
     const dispatch = useTypedDispatch();
     const modalRef = useRef<HTMLDivElement>(null);
 
@@ -21,6 +25,10 @@ const AuthModal = ({ modalShown }: IAuthModalProps) => {
             document.body.style.overflow = 'unset';
         };
     }, [modalShown]);
+
+    const getGoogle = async () => {
+        const response = await axios.get('http://localhost:3000/google');
+    };
 
     return (
         <div className={styles.modal} ref={modalRef}>
@@ -38,6 +46,37 @@ const AuthModal = ({ modalShown }: IAuthModalProps) => {
                         width: `${progressBar}%`,
                     }}></div>
             </section>
+            <div className={styles.inputs}>
+                <input
+                    type='email'
+                    placeholder='Почта'
+                    onChange={(e) => setEmailInput(e.target.value)}
+                    value={emailInput}
+                />
+                <input
+                    type='text'
+                    placeholder='Пароль'
+                    onChange={(e) => setPassInput(e.target.value)}
+                    value={passInput}
+                />
+                <button
+                    onClick={() =>
+                        signIn('login', {
+                            redirect: false,
+                            email: emailInput,
+                            password: passInput,
+                        })
+                    }>
+                    Login
+                </button>
+                <button
+                    onClick={() => {
+                        signIn('google');
+                    }}>
+                    Login with google
+                </button>
+                <button onClick={() => signIn('vk')}>Login with Vkontakte</button>
+            </div>
         </div>
     );
 };
