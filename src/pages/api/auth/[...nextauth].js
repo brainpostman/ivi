@@ -63,7 +63,6 @@ export const authOptions = {
         GoogleProvider({
             clientId: process.env.GOOGLE_CLIENT_ID,
             clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-            authorization: 'https://accounts.google.com/o/oauth2/auth',
         }),
         VkProvider({
             clientId: process.env.VK_CLIENT_ID,
