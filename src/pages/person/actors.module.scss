@@ -16,7 +16,9 @@
   gap: 8px;
 
   color: #fff;
-  @include font(2, bold);
+  font-size: 15px;
+  line-height: 20px;
+  font-weight: 500;
 
   cursor: pointer;
 
@@ -48,13 +50,14 @@
   &__title {
     font-size: 56px;
     font-weight: 700;
-    @include ui-padding(top, 4);
+    padding-top: 2%;
   }
 
   &__subtitle {
     color: #a5a1b2;
-    @include font(2);
-    @include ui-padding(top, 4);
+    font-size: 15px;
+    font-weight: 400;
+    padding-top: 2%;
   }
 }
 
@@ -83,17 +86,19 @@
   display: block;
   color: #fff;
 
-  @include font(2, bold);
+  font-size: 15px;
+  line-height: 22px;
+  font-weight: 600;
 
   @include ui-margin(top, 5);
 
   &__title {
-    @include ui-margin(ver, 1);
+    @include ui-margin(top, 1);
   }
 
   &__rating {
     color: $gray-soft;
-    @include font(1, bold);
+    font-size: 13px;
   }
 }
 
@@ -112,7 +117,8 @@
 
   &__subtitle {
     color: $gray-soft;
-    @include font(2);
+    font-size: 15px;
+    font-weight: 400;
   }
 }
 
@@ -160,7 +166,8 @@
   }
   h3 {
     color: #a5a1b2;
-    @include font(2);
+    font-weight: 400;
+    font-size: 15px;
 
     @include ui-margin(top, 4);
   }
