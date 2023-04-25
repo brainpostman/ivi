@@ -19,4 +19,7 @@ $active-color: #c10032;
 	&:hover {
 		background-color: $hover-color;
 	}
+	&:disabled {
+		opacity: 0.32;
+	}
 }
