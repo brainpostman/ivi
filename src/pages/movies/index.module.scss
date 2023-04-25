@@ -1,31 +1,29 @@
 .title {
-	color: #fff;
+  color: #fff;
 
-	font-size: 40px;
-	line-height: 44px;
-	font-weight: 700;
+  font-size: 40px;
+  line-height: 44px;
+  font-weight: 700;
 
-	@include ui-margin(bottom, 2);
+  @include ui-margin(bottom, 2);
 }
 
 .info {
-	color: $gray-soft;
+  color: $gray-soft;
 
-	font-size: 15px;
-	line-height: 22px;
-	font-weight: 400;
+  @include font(2);
 
-	width: 75%;
+  width: 75%;
 
-	> p {
-		@include ui-margin(bottom, 2);
-	}
+  > p {
+    @include ui-margin(bottom, 2);
+  }
 }
 
 .carousel_wrapper {
-	@include ui-margin(ver, 4);
+  @include ui-margin(ver, 4);
 }
 
 .moviegrid_wrapper {
-	@include ui-margin(ver, 6);
+  @include ui-margin(ver, 6);
 }

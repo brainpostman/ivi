@@ -16,9 +16,7 @@
   gap: 8px;
 
   color: #fff;
-  font-size: 15px;
-  line-height: 20px;
-  font-weight: 500;
+  @include font(2, bold);
 
   cursor: pointer;
 
@@ -50,14 +48,13 @@
   &__title {
     font-size: 56px;
     font-weight: 700;
-    padding-top: 2%;
+    @include ui-padding(top, 4);
   }
 
   &__subtitle {
     color: #a5a1b2;
-    font-size: 15px;
-    font-weight: 400;
-    padding-top: 2%;
+    @include font(2);
+    @include ui-padding(top, 4);
   }
 }
 
@@ -86,19 +83,17 @@
   display: block;
   color: #fff;
 
-  font-size: 15px;
-  line-height: 22px;
-  font-weight: 600;
+  @include font(2, bold);
 
   @include ui-margin(top, 5);
 
   &__title {
-    @include ui-margin(top, 1);
+    @include ui-margin(ver, 1);
   }
 
   &__rating {
     color: $gray-soft;
-    font-size: 13px;
+    @include font(1, bold);
   }
 }
 
@@ -117,8 +112,7 @@
 
   &__subtitle {
     color: $gray-soft;
-    font-size: 15px;
-    font-weight: 400;
+    @include font(2);
   }
 }
 
@@ -166,8 +160,7 @@
   }
   h3 {
     color: #a5a1b2;
-    font-weight: 400;
-    font-size: 15px;
+    @include font(2);
 
     @include ui-margin(top, 4);
   }
