@@ -1,7 +1,12 @@
 import { useEffect, useRef, useState } from 'react';
 import styles from './AuthModal.module.scss';
-import { useActions, useTypedDispatch } from '@/hooks/ReduxHooks';
+import { useActions } from '@/hooks/ReduxHooks';
 import { signIn } from 'next-auth/react';
+import Input from '../UI/Input/Input';
+import HighlightButton from '../UI/HighlightButton/HighlightButton';
+import BasicBtn from '../UI/BasicBtn/BasicBtn';
+import { FaGoogle, FaVk } from 'react-icons/fa';
+import { TbPencil } from 'react-icons/tb';
 
 interface IAuthModalProps {
     modalShown: boolean;
@@ -12,7 +17,6 @@ const AuthModal = ({ modalShown }: IAuthModalProps) => {
     const [progressBar, setProgressBar] = useState(5);
     const [emailInput, setEmailInput] = useState('');
     const [passInput, setPassInput] = useState('');
-    const dispatch = useTypedDispatch();
     const modalRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
@@ -31,54 +35,82 @@ const AuthModal = ({ modalShown }: IAuthModalProps) => {
                 <div className={styles.header__container}>
                     <div></div>
                     <h2 className={styles.header__title}>Вход или регистрация</h2>
-                    <div
-                        className={styles.close}
-                        onClick={() => dispatch(setAuthModal(false))}></div>
                 </div>
                 <div
                     className={styles.header__progressBar}
                     style={{
                         width: `${progressBar}%`,
                     }}></div>
+                <div className={styles.close} onClick={() => setAuthModal(false)}></div>
             </section>
-            <div className={styles.prompt}>
-                <p className={styles.prompt__main}>Войдите или зарегистрируйтесь</p>
-                <p className={styles.prompt__sub}>
-                    чтобы пользоваться сервисом на любом устройстве
-                </p>
-            </div>
-            <div className={styles.inputs}>
-                <input
-                    type='email'
-                    placeholder='Почта'
-                    onChange={(e) => setEmailInput(e.target.value)}
-                    value={emailInput}
-                    className={styles.input}
-                />
-                <input
-                    type='text'
-                    placeholder='Пароль'
-                    onChange={(e) => setPassInput(e.target.value)}
-                    value={passInput}
-                />
-                <button
-                    onClick={() =>
-                        signIn('login', {
-                            redirect: false,
-                            email: emailInput,
-                            password: passInput,
-                        })
-                    }>
-                    Login
-                </button>
-                <button
-                    onClick={() => {
-                        signIn('google');
-                    }}>
-                    Войти с помощью Google
-                </button>
-                <button onClick={() => signIn('vk')}>Login with Vkontakte</button>
-            </div>
+            <section className={styles.chat}>
+                <div className={styles.chat__container}>
+                    <div className={`${styles.message} ${styles.message__prompt}`}>
+                        Войдите или зарегистрируйтесь
+                    </div>
+                    <div className={styles.inputs}>
+                        <Input
+                            type='text'
+                            placeholder='Введите ваш email'
+                            onChange={(e) => setEmailInput(e.target.value)}
+                            value={emailInput}
+                        />
+                        <HighlightButton
+                            onClick={() =>
+                                signIn('login', {
+                                    redirect: false,
+                                    email: emailInput,
+                                    password: passInput,
+                                })
+                            }>
+                            Продолжить
+                        </HighlightButton>
+                        <BasicBtn
+                            onClick={() => {
+                                signIn('google');
+                            }}
+                            btnType='textPlusIcon'
+                            title='Войти с помощью Google'
+                            className={styles.basicbtn}>
+                            <FaGoogle />
+                        </BasicBtn>
+                        <BasicBtn
+                            onClick={() => signIn('vk')}
+                            btnType='textPlusIcon'
+                            title='Войти с помощью ВКонтакте'
+                            className={styles.basicbtn}>
+                            <FaVk />
+                        </BasicBtn>
+                    </div>
+                    <div className={styles.useremail}>
+                        <div className={styles.useremail_edit}>
+                            <TbPencil />
+                        </div>
+                        <div className={`${styles.useremail_mail} ${styles.message}`}>
+                            test@mail.ru
+                        </div>
+                    </div>
+                    <div className={`${styles.message} ${styles.message__prompt}`}>
+                        Введите пароль, чтобы войти
+                    </div>
+                    <Input
+                        type='password'
+                        placeholder='Введите пароль'
+                        onChange={(e) => setPassInput(e.target.value)}
+                        value={passInput}
+                    />
+                    <HighlightButton
+                        onClick={() =>
+                            signIn('login', {
+                                redirect: false,
+                                email: emailInput,
+                                password: passInput,
+                            })
+                        }>
+                        Войти
+                    </HighlightButton>
+                </div>
+            </section>
         </div>
     );
 };
