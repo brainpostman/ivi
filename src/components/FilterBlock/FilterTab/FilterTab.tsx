@@ -5,14 +5,12 @@ import style from './FilterTab.module.scss'
 
 interface IProps
   extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
-  title: IFilterTitle
   selectFilter: () => void
   filter?: IFilterBlockEl
   paramValue?: string
 }
 
 const FilterTab: FC<IProps> = ({
-  title,
   selectFilter,
   filter,
   paramValue,
@@ -30,7 +28,7 @@ const FilterTab: FC<IProps> = ({
     <article className={style.wrapper}>
       <div className={titleClassName} onClick={selectFilter}>
         <div>
-          <h1>{title}</h1>
+          <h1>{filter?.title}</h1>
           {!!paramValue && <p className={style.param}>{paramValue}</p>}
         </div>
         <MdArrowBackIosNew className={arrowClassName} />
