@@ -6,9 +6,10 @@ import {
 import { filterGenreData, filterGenreListData } from '@/data/filterGenre.data'
 import { filterProducerData } from '@/data/filterProducer.data'
 import { filterYearData } from '@/data/filterYear.data'
+import { useFilter } from '@/hooks/useFilter'
 import { IFilterBlockEl, IFilterTitle } from '@/types/filterBlock.interface'
 import { useRouter } from 'next/router'
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { IoCloseOutline } from 'react-icons/io5'
 import FilterGenreCarouselContent from '../CarouselContents/FilterGenreCarouselContent/FilterGenreCarouselContent'
 import VioletButton from '../UI/VioletButton/VioletButton'
@@ -18,7 +19,7 @@ import FilterListSmall from './FilterListSmall/FilterListSmall'
 import FilterSlider from './FilterSlider/FilterSlider'
 import FilterSuggest from './FilterSuggest/FilterSuggest'
 
-const filterList: IFilterBlockEl[] = [
+const filterList: Omit<IFilterBlockEl, 'isExpand'>[] = [
   { title: 'Жанры' },
   { title: 'Страны' },
   { title: 'Годы' },
@@ -27,41 +28,15 @@ const filterList: IFilterBlockEl[] = [
   { title: 'Актёр' },
 ]
 
-const getFilterFunc = (filters: IFilterBlockEl[]) => (title: IFilterTitle) => {
-  const currentFilter = filters.find(filter => filter.title === title)
-
-  if (!currentFilter) {
-    console.error('Фильтр не найден')
-    return
-  }
-
-  return currentFilter
-}
-
 const FilterBlock = () => {
   const router = useRouter()
-  const [filters, setFilters] = useState(
-    filterList.map(filter => ({ ...filter, isExpand: false }))
-  )
+  const { expandTabFilter, getFilterData } = useFilter(filterList)
 
-  const closeModalByFilterTitle = (title: IFilterTitle) => () =>
-    setFilters(prev =>
-      prev.map(filter => ({
-        ...filter,
-        isExpand: filter.title === title ? false : filter.isExpand,
-      }))
-    )
-
-  const getFilter = getFilterFunc(filters)
-
-  const getSelectFilterFunc = (title: IFilterTitle) => () => {
-    const copy = [...filters].map(filter => ({
-      ...filter,
-      isExpand: filter.title === title ? !filter.isExpand : false,
-    }))
-
-    setFilters(copy)
-  }
+  const genreFilterData = getFilterData('Жанры')
+  const countryFilterData = getFilterData('Страны')
+  const yearFilterData = getFilterData('Годы')
+  const producerFilterData = getFilterData('Режиссёр')
+  const actorFilterData = getFilterData('Актёр')
 
   const clearFilters = () => {
     router.replace({ pathname: router.pathname, query: undefined }, undefined, {
@@ -87,9 +62,7 @@ const FilterBlock = () => {
   return (
     <section className={style.wrapper}>
       <FilterListBig
-        title='Жанры'
-        selectFilter={getSelectFilterFunc('Жанры')}
-        filter={getFilter('Жанры')}
+        filterData={genreFilterData}
         carouselData={filterGenreData}
         carouselContent={FilterGenreCarouselContent}
         list={filterGenreListData}
@@ -98,9 +71,7 @@ const FilterBlock = () => {
       />
 
       <FilterListBig
-        title='Страны'
-        selectFilter={getSelectFilterFunc('Страны')}
-        filter={getFilter('Страны')}
+        filterData={countryFilterData}
         carouselData={filterCountryData}
         carouselContent={VioletButton}
         list={filterCountryListData}
@@ -110,34 +81,33 @@ const FilterBlock = () => {
       />
 
       <FilterListSmall
-        title='Годы'
-        selectFilter={getSelectFilterFunc('Годы')}
-        filter={getFilter('Годы')}
+        filterData={yearFilterData}
         list={filterYearData}
         query='year'
       />
 
       <FilterSuggest
-        title='Режиссёр'
-        selectFilter={getSelectFilterFunc('Режиссёр')}
-        filter={getFilter('Режиссёр')}
-        closeModal={closeModalByFilterTitle('Режиссёр')}
+        filterData={producerFilterData}
+        closeModal={expandTabFilter('Режиссёр')}
         suggestList={filterProducerData}
         placeholder='Введите имя режиссёра'
         query='producer'
       />
 
       <FilterSuggest
-        title='Актёр'
-        selectFilter={getSelectFilterFunc('Актёр')}
-        filter={getFilter('Актёр')}
-        closeModal={closeModalByFilterTitle('Актёр')}
+        filterData={actorFilterData}
+        closeModal={expandTabFilter('Актёр')}
         suggestList={filterActorData}
         placeholder='Введите имя актёра'
         query='actor'
       />
 
-      <FilterSlider />
+      <FilterSlider
+        maxValue={200}
+        minValue={0}
+        query='rating'
+        title='Рейтинг'
+      />
 
       <div className={style.clear_filters} onClick={clearFilters}>
         <IoCloseOutline />
