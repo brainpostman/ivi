@@ -4,7 +4,7 @@ import FilterBlock from '@/components/FilterBlock/FilterBlock'
 import MovieCardGrid from '@/components/MovieCardGrid/MovieCardGrid'
 import Sort from '@/components/Sort/Sort'
 import VioletButton from '@/components/UI/VioletButton/VioletButton'
-import { movieCarouselData } from '@/data/movieCarousel.data'
+import { movieCardGridData } from '@/data/movieCard.data'
 import { moviesPageInfoData } from '@/data/moviesPage.data'
 import { yearCarouselData } from '@/data/yearCarousel.data'
 import PageLayout from '@/layouts/PageLayout'
@@ -48,7 +48,7 @@ const MoviesPage = () => {
       <FilterBlock />
 
       <MovieCardGrid
-        movies={movieCarouselData}
+        movies={movieCardGridData}
         className={style.moviegrid_wrapper}
       />
     </PageLayout>
