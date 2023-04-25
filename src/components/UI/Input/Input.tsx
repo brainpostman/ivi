@@ -7,6 +7,7 @@ const Input: FC<DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInp
     ...props
 }) => {
     const inputRef = useRef<HTMLInputElement>(null);
+    const placeholderRef = useRef<HTMLDivElement>(null);
     const [focus, setFocus] = useState(false);
 
     const inputClassName = type === 'number' ? style.number : style.text;
@@ -14,22 +15,22 @@ const Input: FC<DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInp
     const placeholderClassName = focus ? style.placeholder__text_active : '';
 
     useEffect(() => {
-        if (inputRef) {
-            inputRef.current?.addEventListener('focus', () => {
+        if (inputRef.current) {
+            inputRef.current.addEventListener('focus', () => {
                 setFocus(true);
             });
-            inputRef.current?.addEventListener('blur', () => {
+            inputRef.current.addEventListener('blur', () => {
                 if (inputRef.current?.value === '') {
                     setFocus(false);
                 }
             });
         }
         return () => {
-            if (inputRef) {
-                inputRef.current?.removeEventListener('focus', () => {
+            if (inputRef.current) {
+                inputRef.current.removeEventListener('focus', () => {
                     setFocus(true);
                 });
-                inputRef.current?.removeEventListener('blur', () => {
+                inputRef.current.removeEventListener('blur', () => {
                     if (inputRef.current?.value === '') {
                         setFocus(false);
                     }
@@ -47,7 +48,9 @@ const Input: FC<DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInp
                 placeholder={type === 'number' ? placeholder : ''}
                 {...props}
             />
-            <div className={`${style.placeholder} ${placeholderType} ${placeholderClassName}`}>
+            <div
+                className={`${style.placeholder} ${placeholderType} ${placeholderClassName}`}
+                ref={placeholderRef}>
                 <div
                     className={`${style.placeholder__span} ${
                         focus ? style.placeholder__span_active : ''
