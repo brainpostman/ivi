@@ -1,22 +1,39 @@
 import Input from '@/components/UI/Input/Input'
+import { formatSliderQuery } from '@/formatters/sliderQuery.format'
 import { useSetStringParam } from '@/hooks/useSetStringParam'
-import { ChangeEvent, useState } from 'react'
+import { IFilterSliderProps } from '@/types/filterBlock.interface'
+import { ChangeEvent, FC, useState } from 'react'
 import ReactSlider from 'react-slider'
 import style from './FilterSlider.module.scss'
 
-const FilterSlider = () => {
-  const [minValue, setMinValue] = useState(0)
-  const [maxValue, setMaxValue] = useState(200)
+const FilterSlider: FC<IFilterSliderProps> = ({
+  query,
+  title,
+  minValue: minValueDefault,
+  maxValue: maxValueDefault,
+}) => {
+  const [minValue, setMinValue] = useState(minValueDefault)
+  const [maxValue, setMaxValue] = useState(maxValueDefault)
 
-  const { setUrl: setUrlMin } = useSetStringParam('minRating', 0, {
-    isNumber: true,
-    extraValues: ['0'],
-  })
+  const { minValueStr, maxValueStr } = formatSliderQuery(query)
 
-  const { setUrl: setUrlMax } = useSetStringParam('maxRating', 200, {
-    isNumber: true,
-    extraValues: ['200'],
-  })
+  const { setUrl: setUrlMin } = useSetStringParam(
+    minValueStr,
+    minValueDefault,
+    {
+      isNumber: true,
+      extraValues: [minValueDefault.toString()],
+    }
+  )
+
+  const { setUrl: setUrlMax } = useSetStringParam(
+    maxValueStr,
+    maxValueDefault,
+    {
+      isNumber: true,
+      extraValues: [maxValueDefault.toString()],
+    }
+  )
 
   const onChangeMin = (event: ChangeEvent<HTMLInputElement>) => {
     setMinValue(+event.target.value)
@@ -31,14 +48,14 @@ const FilterSlider = () => {
       <div className={style.inputs}>
         <Input
           type='number'
-          placeholder='0'
+          placeholder={minValueDefault.toString()}
           value={minValue}
           onChange={event => onChangeMin(event)}
         />
-        <span className={style.dash}>Рейтинг</span>
+        <span className={style.dash}>{title}</span>
         <Input
           type='number'
-          placeholder='200'
+          placeholder={maxValueDefault.toString()}
           value={maxValue}
           onChange={event => onChangeMax(event)}
         />
@@ -49,8 +66,8 @@ const FilterSlider = () => {
           if (index === 0) setMinValue(value[0])
           else setMaxValue(value[1])
         }}
-        min={0}
-        max={200}
+        min={minValueDefault}
+        max={maxValueDefault}
         ariaLabel={['Leftmost thumb', 'Rightmost thumb']}
         className={style.slider}
         thumbClassName={style.thumb}
