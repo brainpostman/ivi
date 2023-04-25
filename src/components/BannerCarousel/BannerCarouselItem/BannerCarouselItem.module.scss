@@ -1,83 +1,83 @@
 @import '../BannerCarousel.module.scss';
 
 .element {
-	position: relative;
-	flex-shrink: 0;
-	height: 100%;
-	width: 100%;
-	opacity: 0.24;
-	@include slider-transition;
-	background-color: $dark;
-	border-radius: 20px;
-	cursor: pointer;
-	font-family: Arial, Helvetica, sans-serif;
-	@include ui-margin(right, 3);
-	&_active {
-		opacity: 1;
-		filter: none;
-	}
+  position: relative;
+  flex-shrink: 0;
+  height: 100%;
+  width: 100%;
+  opacity: 0.24;
+  @include slider-transition;
+  background-color: $dark;
+  border-radius: 20px;
+  cursor: pointer;
+  font-family: Arial, Helvetica, sans-serif;
+  @include ui-margin(right, 3);
+  &_active {
+    opacity: 1;
+    filter: none;
+  }
 }
 
 .content {
-	z-index: 5;
-	display: flex;
-	flex-direction: column;
-	gap: 20px;
-	justify-content: space-between;
-	max-width: 50%;
-	position: absolute;
-	bottom: 32px;
-	left: 32px;
-	color: white;
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  justify-content: space-between;
+  max-width: 50%;
+  position: absolute;
+  bottom: 32px;
+  left: 32px;
+  color: white;
 }
 
 .title {
-	font-size: 56px;
+  font-size: 56px;
 }
 
 .subtitle {
-	font-size: 15px;
+  @include font(2, bold);
 }
 
 .background {
-	z-index: 1;
-	height: 100%;
-	width: 100%;
-	border-radius: 20px;
-	position: unset !important;
-	line-height: 0;
+  z-index: 1;
+  height: 100%;
+  width: 100%;
+  border-radius: 20px;
+  position: unset !important;
+  line-height: 0;
 }
 
 .image {
-	object-fit: cover;
-	width: 100% !important;
-	position: relative !important;
-	border-radius: 20px;
-	max-width: 100%;
-	&_mobile {
-		display: none;
-	}
+  object-fit: cover;
+  width: 100% !important;
+  position: relative !important;
+  border-radius: 20px;
+  max-width: 100%;
+  &_mobile {
+    display: none;
+  }
 }
 
 .button {
-	opacity: 0;
-	&_active {
-		opacity: 1;
-	}
+  opacity: 0;
+  &_active {
+    opacity: 1;
+  }
 }
 
 @media (max-width: 919.98px) {
-	.content {
-		bottom: 20px;
-		left: 20px;
-	}
+  .content {
+    bottom: 20px;
+    left: 20px;
+  }
 }
 
 @media (max-width: 599.98px) {
-	.image {
-		display: none;
-		&_mobile {
-			display: unset;
-		}
-	}
+  .image {
+    display: none;
+    &_mobile {
+      display: unset;
+    }
+  }
 }
