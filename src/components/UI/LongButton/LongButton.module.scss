@@ -1,30 +1,29 @@
 $hover-color: #231f34;
 
 .button {
-	display: flex;
-	align-items: center;
-	justify-content: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
-	font-size: 15px;
-	line-height: 20px;
+  @include font(2, bold);
 
-	background-color: $dark;
-	border-radius: 8px;
+  background-color: $dark;
+  border-radius: 8px;
 
-	transition: background-color 0.4s;
+  transition: background-color 0.4s;
 
-	@include ui-padding(ver, 2);
-	@include ui-padding(hor, 4);
+  @include ui-padding(ver, 2);
+  @include ui-padding(hor, 4);
 
-	&:hover {
-		background-color: $hover-color;
-	}
+  &:hover {
+    background-color: $hover-color;
+  }
 
-	> img {
-		@include ui-margin(right, 2);
-	}
+  > img {
+    @include ui-margin(right, 2);
+  }
 }
 
 .secondary {
-	background-image: url(https://solea-parent.dfs.ivi.ru/picture/bypass/teaserTilePattern_a.svg);
+  background-image: url(https://solea-parent.dfs.ivi.ru/picture/bypass/teaserTilePattern_a.svg);
 }
