@@ -1,59 +1,27 @@
 .buttons {
-	display: flex;
-	gap: 16px;
+  display: flex;
+  gap: 16px;
 
-	@include ui-margin(ver, 6);
+  @include ui-margin(ver, 6);
 
-	> a {
-		width: 100%;
-		> button {
-			width: 100%;
-		}
-	}
+  > a {
+    width: 100%;
+    > button {
+      width: 100%;
+    }
+  }
 }
 
 .carousels {
-	display: inline-flex;
-	flex-direction: column;
+  display: inline-flex;
+  flex-direction: column;
 
-	> article {
-		@include ui-margin(bottom, 11);
-	}
-}
-
-.view_all {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-
-	background-color: $dark;
-	min-width: 153px;
-	max-width: 153px;
-	height: 235px;
-
-	color: $gray-soft;
-	border-radius: 8px;
-
-	font-weight: 600;
-	line-height: 20px;
-	font-size: 15px;
-
-	letter-spacing: 0.3px;
-
-	transition: transform 0.4s, color 0.4s, background-color 0.4s;
-
-	z-index: -1;
-
-	cursor: pointer;
-
-	&:hover {
-		transform: scale(1.05);
-		color: #fff;
-		background-color: #231f34;
-	}
+  > article {
+    @include ui-margin(bottom, 11);
+  }
 }
 
 .movies_carousel_wrapper {
-	@include ui-padding(top, 1);
-	@include ui-padding(hor, 1);
+  @include ui-padding(top, 1);
+  @include ui-padding(hor, 1);
 }
