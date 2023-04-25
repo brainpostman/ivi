@@ -1,23 +1,14 @@
 import ModalWindow from '@/components/ModalWindow/ModalWindow'
 import Input from '@/components/UI/Input/Input'
 import { useSetStringParam } from '@/hooks/useSetStringParam'
-import { IFilterBlockEl, IFilterTitle } from '@/types/filterBlock.interface'
+import { IFilterBlockEl, IFilterData } from '@/types/filterBlock.interface'
 import { useRouter } from 'next/router'
-import {
-  ChangeEvent,
-  FC,
-  KeyboardEvent,
-  useEffect,
-  useMemo,
-  useState,
-} from 'react'
+import { ChangeEvent, FC, KeyboardEvent, useMemo, useState } from 'react'
 import FilterTab from '../FilterTab/FilterTab'
 import style from './FilterSuggest.module.scss'
 
 interface IProps {
-  title: IFilterTitle
-  filter?: IFilterBlockEl
-  selectFilter: () => void
+  filterData: IFilterData
   closeModal: () => void
   suggestList: string[]
   placeholder?: string
@@ -25,15 +16,12 @@ interface IProps {
 }
 
 const FilterSuggest: FC<IProps> = ({
-  title,
-  filter,
-  selectFilter,
+  filterData,
   closeModal,
   suggestList: suggsetData,
   placeholder,
   query,
 }) => {
-  const router = useRouter()
   const { param, setUrl, value: valueFromParams } = useSetStringParam(query)
   const [value, setValue] = useState(valueFromParams)
 
@@ -60,16 +48,13 @@ const FilterSuggest: FC<IProps> = ({
     setValue(_param)
   }
 
+  const { filter, selectFilter } = filterData
+
   return (
-    <FilterTab
-      title={title}
-      selectFilter={selectFilter}
-      filter={filter}
-      paramValue={param}
-    >
+    <FilterTab selectFilter={selectFilter} filter={filter} paramValue={param}>
       <ModalWindow isShow={filter?.isExpand} closeFunc={closeModal}>
         <div className={style.wrapper}>
-          <h1 className={style.title}>{title}</h1>
+          <h1 className={style.title}>{filter?.title}</h1>
           <Input
             type='text'
             placeholder={placeholder}
