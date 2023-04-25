@@ -11,9 +11,7 @@
   color: $gray-soft;
   border-radius: 8px;
 
-  font-weight: 600;
-  line-height: 20px;
-  font-size: 15px;
+  @include font(2, bold);
 
   letter-spacing: 0.3px;
 
