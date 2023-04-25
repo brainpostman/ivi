@@ -1,10 +1,10 @@
 import FilterSuggest from '@/components/FilterBlock/FilterSuggest/FilterSuggest'
-import FilterSuggestWrapper from '@/components/FilterBlock/FilterSuggest/FilterSuggestWrapper'
 import {
   IFilterSuggestProps,
   IFilterTitle,
 } from '@/types/filterBlock.interface'
 import { Meta } from '@storybook/react'
+import FilterSuggestWrapper from './FilterSuggestWrapper'
 
 const meta: Meta = {
   title: 'FilterBlock/FilterSuggest',
