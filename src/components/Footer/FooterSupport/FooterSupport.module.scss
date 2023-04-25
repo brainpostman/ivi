@@ -1,69 +1,69 @@
 .container {
-	display: flex;
-	flex-direction: column;
-	justify-content: flex-start;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
 }
 
 .title {
-	@include ui-margin(bottom, 2);
-	font-size: 15px;
+  @include ui-margin(bottom, 2);
+  @include font(2, bold);
 }
 
 .description {
-	color: $gray;
-	font-size: 15px;
-	@include ui-margin(bottom, 5);
+  color: $gray;
+  @include font(2);
+  @include ui-margin(bottom, 5);
 }
 
 .chat {
-	color: #fff;
-	@include ui-margin('hor', 5);
+  color: #fff;
+  @include ui-margin('hor', 5);
 }
 
 .buttons {
-	position: relative;
-	display: flex;
-	gap: 12px;
-	@include ui-margin(top, 3);
+  position: relative;
+  display: flex;
+  gap: 12px;
+  @include ui-margin(top, 3);
 }
 
 .askivi {
-	@include ui-margin(top, 6);
-	& a {
-		color: white;
-		@include ui-font(4);
-	}
+  @include ui-margin(top, 6);
+  & a {
+    color: white;
+    @include ui-font(4);
+  }
 
-	& p {
-		color: $gray;
-		font-size: 15px;
-	}
+  & p {
+    color: $gray;
+    @include font(2);
+  }
 }
 
 .popup {
-	@include center-content;
-	position: absolute;
+  @include center-content;
+  position: absolute;
 
-	top: 90%;
-	left: 0;
+  top: 90%;
+  left: 0;
 
-	height: 100%;
+  height: 100%;
 
-	//@include ui-margin(top, 1);
+  //@include ui-margin(top, 1);
 
-	transition: all 0.2s;
-	opacity: 0;
+  transition: all 0.2s;
+  opacity: 0;
 
-	white-space: nowrap;
+  white-space: nowrap;
 
-	padding: 24px 57px 24px 15px;
+  padding: 24px 57px 24px 15px;
 
-	& a {
-		color: white;
-	}
+  & a {
+    color: white;
+  }
 }
 
 .popupActive {
-	@include ui-margin(top, 3);
-	opacity: 1;
+  @include ui-margin(top, 3);
+  opacity: 1;
 }
