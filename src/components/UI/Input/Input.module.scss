@@ -4,15 +4,16 @@
 	cursor: text;
 	//
 
-	font-size: 16px;
-	line-height: 20px;
+	font-size: 15px;
+	line-height: 1.25;
 	font-weight: 600;
+	height: 40px;
 
 	background-color: #d9d7e0;
 	border-radius: 8px;
 
 	@include ui-padding(hor, 3);
-	@include ui-padding(ver, 3);
+	@include ui-padding(top, 4);
 }
 
 .number {
@@ -35,4 +36,47 @@
 
 	@include ui-padding(ver, 2);
 	@include ui-padding(hor, 2);
+}
+
+.label {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-end;
+}
+
+.placeholder {
+	display: flex;
+	justify-content: flex-start;
+	cursor: pointer;
+	position: absolute;
+	color: $gray-soft;
+	width: 100%;
+	left: 0px;
+	top: 0px;
+	user-select: none;
+	transition: all 300ms ease-out;
+	&__text {
+		@include ui-padding(hor, 3);
+		@include ui-padding(top, 3);
+		font-size: 15px;
+		line-height: 1.25;
+		font-weight: 600;
+		&_active {
+			transition: all 100ms ease-in;
+			cursor: text;
+			transform: translateY(-30%);
+		}
+	}
+	&__span {
+		transform-origin: 0 0;
+		transition: inherit;
+		&_active {
+			transform: scale(0.85);
+		}
+	}
+
+	&__number {
+		display: none;
+	}
 }
