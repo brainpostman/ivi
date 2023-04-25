@@ -1,17 +1,9 @@
-import useIsomorphicLayoutEffect from '@/hooks/useIsomorphicLayoutEffect'
-import { FC, useRef } from 'react'
+import { useCustomCarouselContent } from '@/hooks/useCustomCarouselContent'
+import { FC } from 'react'
 import style from './ViewAllBlock.module.scss'
 
 const ViewAllBlock: FC<any> = addElementLen => {
-  const wrapperRef = useRef<HTMLDivElement>(null)
-  const isSelectedRef = useRef(false)
-
-  useIsomorphicLayoutEffect(() => {
-    if (!wrapperRef.current || isSelectedRef.current) return
-
-    addElementLen(wrapperRef.current.offsetWidth)
-    isSelectedRef.current = true
-  }, [wrapperRef])
+  const wrapperRef = useCustomCarouselContent(addElementLen)
 
   return (
     <div className={style.wrapper} ref={wrapperRef}>
