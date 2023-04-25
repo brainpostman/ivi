@@ -3,31 +3,18 @@ import { useGetParam } from '@/hooks/useGetParam'
 import { useSetListParam } from '@/hooks/useSetListParam'
 import {
   IFilterBlockEl,
+  IFilterData,
+  IFilterListBigProps,
   IFilterListEl,
   IFilterTitle,
 } from '@/types/filterBlock.interface'
-import { useRouter } from 'next/router'
-import { FC, useEffect, useRef, useState } from 'react'
+import { FC } from 'react'
 import { BsCheckLg } from 'react-icons/bs'
 import FilterTab from '../FilterTab/FilterTab'
 import style from './FilterListBig.module.scss'
 
-interface IProps {
-  title: IFilterTitle
-  selectFilter: () => void
-  filter?: IFilterBlockEl
-  carouselData: any[]
-  list: Omit<IFilterListEl, 'isSelect'>[]
-  carouselContent: FC<any>
-  carouselElementsView?: number
-  carouselElementsMove?: number
-  query: string
-}
-
-const FilterListBig: FC<IProps> = ({
-  title,
-  selectFilter,
-  filter,
+const FilterListBig: FC<IFilterListBigProps> = ({
+  filterData,
   carouselData,
   list: listData,
   carouselContent,
@@ -40,13 +27,10 @@ const FilterListBig: FC<IProps> = ({
     query
   )
 
+  const { filter, selectFilter } = filterData
+
   return (
-    <FilterTab
-      title={title}
-      selectFilter={selectFilter}
-      filter={filter}
-      paramValue={param}
-    >
+    <FilterTab selectFilter={selectFilter} filter={filter} paramValue={param}>
       {filter?.isExpand && (
         <div className={style.container}>
           <CustomCarousel

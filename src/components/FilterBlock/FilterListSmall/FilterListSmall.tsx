@@ -1,25 +1,16 @@
 import { useSetListParam } from '@/hooks/useSetListParam'
 import {
   IFilterBlockEl,
+  IFilterData,
   IFilterListEl,
-  IFilterTitle,
+  IFilterListSmallProps,
 } from '@/types/filterBlock.interface'
-import { FC, useState } from 'react'
+import { FC } from 'react'
 import FilterTab from '../FilterTab/FilterTab'
 import style from './FilterListSmall.module.scss'
 
-interface IProps {
-  title: IFilterTitle
-  selectFilter: () => void
-  filter?: IFilterBlockEl
-  list: Omit<IFilterListEl, 'isSelect'>[]
-  query: string
-}
-
-const FilterListSmall: FC<IProps> = ({
-  title,
-  selectFilter,
-  filter,
+const FilterListSmall: FC<IFilterListSmallProps> = ({
+  filterData,
   list: listData,
   query,
 }) => {
@@ -28,14 +19,10 @@ const FilterListSmall: FC<IProps> = ({
     query,
     { filterType: 'radio', extraValues: ['all'] }
   )
+  const { filter, selectFilter } = filterData
 
   return (
-    <FilterTab
-      title={title}
-      selectFilter={selectFilter}
-      filter={filter}
-      paramValue={param}
-    >
+    <FilterTab selectFilter={selectFilter} filter={filter} paramValue={param}>
       {filter?.isExpand && (
         <div className={style.wrapper}>
           <ul className={style.list}>
