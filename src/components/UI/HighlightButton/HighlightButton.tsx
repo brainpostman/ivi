@@ -3,9 +3,9 @@ import style from './HighlightButton.module.scss';
 
 const HighlightButton: FC<
     DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>
-> = ({ children, ...props }) => {
+> = ({ children, className: propsClassName, ...props }) => {
     return (
-        <button className={style.button} {...props}>
+        <button className={`${propsClassName} ${style.button}`} {...props}>
             {children}
         </button>
     );
