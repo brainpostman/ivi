@@ -56,6 +56,7 @@ const AuthModal = ({ modalShown }: IAuthModalProps) => {
                             value={emailInput}
                         />
                         <HighlightButton
+                            className={styles.highlightbtn}
                             onClick={() =>
                                 signIn('login', {
                                     redirect: false,
@@ -71,14 +72,14 @@ const AuthModal = ({ modalShown }: IAuthModalProps) => {
                             }}
                             btnType='textPlusIcon'
                             title='Войти с помощью Google'
-                            className={styles.basicbtn}>
+                            className={`${styles.basicbtn} ${styles.basicbtn_google}`}>
                             <FaGoogle />
                         </BasicBtn>
                         <BasicBtn
                             onClick={() => signIn('vk')}
                             btnType='textPlusIcon'
                             title='Войти с помощью ВКонтакте'
-                            className={styles.basicbtn}>
+                            className={`${styles.basicbtn} ${styles.basicbtn_vk}`}>
                             <FaVk />
                         </BasicBtn>
                     </div>
@@ -101,6 +102,7 @@ const AuthModal = ({ modalShown }: IAuthModalProps) => {
                         value={passInput}
                     />
                     <HighlightButton
+                        className={styles.highlightbtn}
                         onClick={() =>
                             signIn('login', {
                                 redirect: false,
