@@ -115,6 +115,8 @@ const FilterBlock = () => {
         title='Рейтинг'
       />
 
+      <FilterSlider maxValue={200} minValue={0} query='scores' title='Оценки' />
+
       <div className={style.clear_filters} onClick={clearFilters}>
         <IoCloseOutline />
         <p>Сбросить фильтры</p>
