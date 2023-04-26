@@ -15,12 +15,11 @@ import style from './FilterListBig.module.scss'
 
 const FilterListBig: FC<IFilterListBigProps> = ({
   filterData,
-  carouselData,
   list: listData,
-  carouselContent,
   carouselElementsView = 5,
   carouselElementsMove = 2,
   query,
+  children,
 }) => {
   const { list, onClickListEl, param } = useSetListParam(
     listData.map(data => ({ ...data, isSelect: false })),
@@ -33,16 +32,18 @@ const FilterListBig: FC<IFilterListBigProps> = ({
     <FilterTab selectFilter={selectFilter} filter={filter} paramValue={param}>
       {filter?.isExpand && (
         <div className={style.container}>
-          <CustomCarousel
-            children={carouselContent}
-            elementsMove={carouselElementsMove}
-            elementsView={carouselElementsView}
-            arrowSize={18}
-            space={12}
-            data={carouselData}
-            classNameWrapper={style.carousel_wrapper}
-            width='fit'
-          />
+          {children && (
+            <CustomCarousel
+              elementsMove={carouselElementsMove}
+              elementsView={carouselElementsView}
+              arrowSize={18}
+              space={12}
+              classNameWrapper={style.carousel_wrapper}
+              width='fit'
+            >
+              {children}
+            </CustomCarousel>
+          )}
 
           <ul className={style.list}>
             {list.map(el => (

@@ -1,99 +1,125 @@
 .wrapper {
-	display: inline-flex;
-	flex-direction: column;
+  display: inline-flex;
+  flex-direction: column;
 }
 
 .wrapperTitle {
-	display: flex;
-	align-items: center;
-	gap: 4px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
 
-	font-size: 24px;
-	line-height: 28px;
-	font-weight: 700;
+  font-size: 24px;
+  line-height: 28px;
+  font-weight: 700;
 
-	color: #fff;
+  color: #fff;
 
-	cursor: pointer;
+  cursor: pointer;
 
-	@include ui-padding(bottom, 6);
+  @include ui-padding(bottom, 6);
 
-	> svg {
-		width: 20px;
-		height: 20px;
+  > svg {
+    width: 20px;
+    height: 20px;
 
-		transform: rotate(180deg);
-	}
+    transform: rotate(180deg);
+  }
 }
 
 .wrapperCarousel {
-	position: relative;
+  position: relative;
 }
 
 .container {
-	overflow-x: hidden;
+  overflow-x: hidden;
 }
 
 .list {
-	display: flex;
+  display: flex;
 
-	transition: transform ease-out;
+  transition: transform ease-out;
 
-	> li {
-		position: relative;
-		cursor: pointer;
+  > li {
+    position: relative;
+    cursor: pointer;
 
-		border-radius: 8px;
+    border-radius: 8px;
 
-		&:hover .hoverBlock {
-			opacity: 1;
-		}
+    &:hover .hoverBlock {
+      opacity: 1;
+    }
 
-		&:hover .wrapperImg,
-		.hoverBlock {
-			transform: scale(1.05);
-		}
-	}
+    &:hover .wrapperImg,
+    .hoverBlock {
+      transform: scale(1.05);
+    }
+  }
 }
 
 .arrows {
-	position: absolute;
-	display: flex;
-	align-items: center;
+  position: absolute;
+  display: flex;
+  align-items: center;
 
-	width: 100%;
-	height: 100%;
+  width: 100%;
+  height: 100%;
 
-	top: 0;
-	left: 0;
+  top: 0;
+  left: 0;
 
-	pointer-events: none;
+  pointer-events: none;
 
-	> div {
-		height: 100%;
-		position: absolute;
-		display: flex;
-		align-items: center;
+  > div {
+    height: 100%;
+    position: absolute;
+    display: flex;
+    align-items: center;
 
-		cursor: pointer;
+    cursor: pointer;
 
-		pointer-events: all;
+    pointer-events: all;
 
-		&:active > svg {
-			transform: scale(0.8);
-		}
+    &:active > svg {
+      transform: scale(0.8);
+    }
 
-		&:hover > svg {
-			color: #fff;
-		}
+    &:hover > svg {
+      color: #fff;
+    }
 
-		&:last-child {
-			transform: rotate(180deg);
-		}
-	}
+    &:last-child {
+      transform: rotate(180deg);
+    }
+  }
 
-	svg {
-		color: #ffffffb8;
-		transition: color 0.4s, transform 0.4s;
-	}
+  svg {
+    color: #ffffffb8;
+    transition: color 0.4s, transform 0.4s;
+  }
+}
+
+.shadow {
+  position: absolute;
+  top: 0;
+
+  width: 100%;
+  height: 100%;
+
+  background-image: linear-gradient(
+    90deg,
+    rgba(8, 7, 11, 0) 80%,
+    $dark 98%,
+    $dark 100%
+  );
+
+  pointer-events: none;
+
+  &_left {
+    background-image: linear-gradient(
+      -90deg,
+      rgba(8, 7, 11, 0) 80%,
+      $dark 98%,
+      $dark 100%
+    );
+  }
 }
