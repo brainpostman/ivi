@@ -3,6 +3,7 @@ import MovieCarouselContent from '@/components/CarouselContents/MovieCarouselCon
 import CustomCarousel from '@/components/CustomCarousel/CustomCarousel'
 import ExpandInfo from '@/components/ExpandInfo/ExpandInfo'
 import HomePageInfo from '@/components/HomePageInfo/HomePageInfo'
+import MovieCard from '@/components/MovieCard/MovieCard'
 import TopTenList from '@/components/TopTenList/TopTenList'
 import LongButton from '@/components/UI/LongButton/LongButton'
 import ViewAllBlock from '@/components/ViewAllBlock/ViewAllBlock'
@@ -57,23 +58,27 @@ export default function Home() {
       <section className={style.carousels}>
         <CustomCarousel
           title='Добрые мультфильмы'
-          data={movieCardGridData}
           href='/'
           additElem={ViewAllBlock}
-          children={MovieCarouselContent}
           elementsMove={5}
           elementsView={7}
-        />
+        >
+          {movieCardGridData.map(movie => (
+            <MovieCard movie={movie} />
+          ))}
+        </CustomCarousel>
 
         <CustomCarousel
-          title='Поймать преступника'
-          data={movieCardGridData}
+          title='Добрые мультфильмы'
           href='/'
           additElem={ViewAllBlock}
-          children={MovieCarouselContent}
           elementsMove={5}
           elementsView={7}
-        />
+        >
+          {movieCardGridData.map(movie => (
+            <MovieCard movie={movie} />
+          ))}
+        </CustomCarousel>
       </section>
     </PageLayout>
   )
