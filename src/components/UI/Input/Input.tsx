@@ -15,44 +15,19 @@ const Input: FC<ICustomInput> = ({
     className: propsClassName,
     ...props
 }) => {
-    const inputRef = useRef<HTMLInputElement>(null);
     const placeholderRef = useRef<HTMLDivElement>(null);
+    const [active, setActive] = useState(false);
     const [focus, setFocus] = useState(false);
     const [hideChars, setHideChars] = useState(true);
 
     const inputClassName = type === 'number' ? style.number : style.text;
-    const placeholderFocused = focus ? style.placeholder_active : '';
-
-    useEffect(() => {
-        if (inputRef.current) {
-            inputRef.current.addEventListener('focus', () => {
-                setFocus(true);
-            });
-            inputRef.current.addEventListener('blur', () => {
-                if (inputRef.current?.value === '') {
-                    setFocus(false);
-                }
-            });
-        }
-        return () => {
-            if (inputRef.current) {
-                inputRef.current.removeEventListener('focus', () => {
-                    setFocus(true);
-                });
-                inputRef.current.removeEventListener('blur', () => {
-                    if (inputRef.current?.value === '') {
-                        setFocus(false);
-                    }
-                });
-            }
-        };
-    }, []);
+    const placeholderActive = active ? style.placeholder_active : '';
 
     useEffect(() => {
         if (value) {
-            setFocus(true);
-        } else if (!value && inputRef.current !== document.activeElement) {
-            setFocus(false);
+            setActive(true);
+        } else if (!value && !focus) {
+            setActive(false);
         }
     }, [value]);
 
@@ -60,20 +35,29 @@ const Input: FC<ICustomInput> = ({
         <div className={style.wrapper}>
             <label className={style.label}>
                 <input
-                    ref={inputRef}
                     type={hideChars ? type : 'text'}
                     className={`${propsClassName} ${style.input} ${inputClassName}`}
                     placeholder={type === 'number' ? placeholder : ''}
                     value={value}
                     {...props}
+                    onFocus={() => {
+                        setActive(true);
+                        setFocus(true);
+                    }}
+                    onBlur={() => {
+                        if (value === '') {
+                            setActive(false);
+                            setFocus(false);
+                        }
+                    }}
                 />
                 {type !== 'number' && (
                     <div
-                        className={`${style.placeholder} ${placeholderFocused}`}
+                        className={`${style.placeholder} ${placeholderActive}`}
                         ref={placeholderRef}>
                         <span
                             className={`${style.placeholder__text} ${
-                                focus ? style.placeholder__text_active : ''
+                                active ? style.placeholder__text_active : ''
                             }`}>
                             {placeholder}
                         </span>
@@ -86,7 +70,7 @@ const Input: FC<ICustomInput> = ({
                     onClick={() => {
                         setHideChars((prev) => !prev);
                     }}
-                    style={{ color: inputRef.current?.value === '' ? '#a5a1b2' : '#1f1b2e' }}>
+                    style={{ color: value === '' ? '#a5a1b2' : '#1f1b2e' }}>
                     {hideChars ? <FiEyeOff /> : <FiEye />}
                 </span>
             )}
