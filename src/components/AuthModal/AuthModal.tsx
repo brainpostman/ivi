@@ -7,16 +7,29 @@ import HighlightButton from '../UI/HighlightButton/HighlightButton';
 import BasicBtn from '../UI/BasicBtn/BasicBtn';
 import { FaGoogle, FaVk } from 'react-icons/fa';
 import { TbPencil } from 'react-icons/tb';
+import { useForm } from 'react-hook-form';
 
 interface IAuthModalProps {
     modalShown: boolean;
 }
 
+type EmailForm = {
+    inputEmail: string;
+};
+
 const AuthModal = ({ modalShown }: IAuthModalProps) => {
     const { setAuthModal } = useActions();
+    const {
+        register,
+        handleSubmit,
+        watch,
+        formState: { errors },
+    } = useForm<EmailForm>();
+    const onEmailSubmit = handleSubmit((data) => {
+        //console.log(data);
+    });
+    const [validatedEmail, setValidatedEmail] = useState('');
     const [progressBar, setProgressBar] = useState(5);
-    const [emailInput, setEmailInput] = useState('');
-    const [passInput, setPassInput] = useState('');
     const modalRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
@@ -28,6 +41,8 @@ const AuthModal = ({ modalShown }: IAuthModalProps) => {
             document.body.style.overflow = 'unset';
         };
     }, [modalShown]);
+
+    console.log(watch('inputEmail'));
 
     return (
         <div className={styles.modal} ref={modalRef}>
@@ -49,23 +64,17 @@ const AuthModal = ({ modalShown }: IAuthModalProps) => {
                         Войдите или зарегистрируйтесь
                     </div>
                     <div className={styles.inputs}>
-                        <Input
-                            type='text'
-                            placeholder='Введите ваш email'
-                            onChange={(e) => setEmailInput(e.target.value)}
-                            value={emailInput}
-                        />
-                        <HighlightButton
-                            className={styles.highlightbtn}
-                            onClick={() =>
-                                signIn('login', {
-                                    redirect: false,
-                                    email: emailInput,
-                                    password: passInput,
-                                })
-                            }>
+                        <form id='email-input' onSubmit={onEmailSubmit}>
+                            <Input
+                                {...register('inputEmail', { required: true })}
+                                type='email'
+                                placeholder='Введите ваш email'
+                            />
+                        </form>
+                        <HighlightButton className={styles.highlightbtn} form='email-input'>
                             Продолжить
                         </HighlightButton>
+
                         <BasicBtn
                             onClick={() => {
                                 signIn('google');
@@ -94,24 +103,8 @@ const AuthModal = ({ modalShown }: IAuthModalProps) => {
                     <div className={`${styles.message} ${styles.message__prompt}`}>
                         Введите пароль, чтобы войти
                     </div>
-                    <Input
-                        type='password'
-                        charHideBtn
-                        placeholder='Введите пароль'
-                        onChange={(e) => setPassInput(e.target.value)}
-                        value={passInput}
-                    />
-                    <HighlightButton
-                        className={styles.highlightbtn}
-                        onClick={() =>
-                            signIn('login', {
-                                redirect: false,
-                                email: emailInput,
-                                password: passInput,
-                            })
-                        }>
-                        Войти
-                    </HighlightButton>
+                    <Input type='password' charHideBtn placeholder='Введите пароль' />
+                    <HighlightButton className={styles.highlightbtn}>Войти</HighlightButton>
                 </div>
             </section>
         </div>

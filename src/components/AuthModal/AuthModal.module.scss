@@ -175,7 +175,15 @@
         border-radius: 50%;
         border: 2px solid $border-gray;
         @include center-content;
-
+        transition: all 0.4s;
+        &:hover {
+            transition: all 0.2s;
+            border-color: $gray;
+        }
+        &:active {
+            transition: all 0.2s;
+            border-color: white;
+        }
         & svg {
             color: white;
             height: 20px;
