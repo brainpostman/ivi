@@ -37,8 +37,3 @@ yarn-error.log*
 
 # typescript
 *.tsbuildinfo
-
-# linters and formatting
-.eslintrc.cjs
-.prettierrc.cjs
-.prettierrc.json
