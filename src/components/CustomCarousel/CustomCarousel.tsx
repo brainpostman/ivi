@@ -6,14 +6,12 @@ import React, { FC, memo, useRef, useState } from 'react'
 import { MdArrowBackIosNew } from 'react-icons/md'
 import style from './CustomCarousel.module.scss'
 
-// FIXME: УБРАТЬ any
-
 // @elementsView - Количество элементов, которые отображаются в карусели (указываем на 1 элемент меньше)
 // @elemntsMove - Количество элементов, на которое мы двигаем карусель
 // @elementLen - полная длина элемента, включая отступ
 // @blockList - данные для элементов карусели
 
-type IWidth = 'full' | 'fit'
+type IWidth = 'full' | 'fit' | 'fit-shadow'
 
 interface IProps {
   elementsView: number
@@ -37,11 +35,17 @@ const formatWidth = (
   space: number
 ) => {
   if (width === 'full') return 1225
-  return (
+
+  const resultWidth =
     elementLens
       .slice(0, elementsView)
       .reduce((accum, item) => accum + item, 0) - space
-  )
+
+  if (width === 'fit') return resultWidth
+  if (width === 'fit-shadow')
+    return resultWidth + space + elementLens[elementsView] / 2
+
+  return 0
 }
 
 const CustomCarousel: FC<IProps> = ({
@@ -63,6 +67,8 @@ const CustomCarousel: FC<IProps> = ({
 
   const refs = useRef<(HTMLDivElement | null)[]>([])
   const containerWidth = formatWidth(width, elementLens, elementsView, space)
+
+  const arrowPosition = width === 'fit-shadow' ? arrowSize - 4 : arrowSize + 4
 
   const { onClickRightArrow, onClickLeftArrow, viewArrow, move } =
     useCustomCarousel(elementLens, elementsView, elementsMove)
@@ -110,7 +116,7 @@ const CustomCarousel: FC<IProps> = ({
             <div
               onClick={onClickLeftArrow}
               className={viewArrow('left')}
-              style={{ left: `-${arrowSize + 4}px` }}
+              style={{ left: `-${arrowPosition}px` }}
             >
               <MdArrowBackIosNew
                 style={{ width: arrowSize, height: arrowSize }}
@@ -119,13 +125,23 @@ const CustomCarousel: FC<IProps> = ({
             <div
               onClick={onClickRightArrow}
               className={viewArrow('right')}
-              style={{ right: `-${arrowSize + 4}px` }}
+              style={{ right: `-${arrowPosition}px` }}
             >
               <MdArrowBackIosNew
                 style={{ width: arrowSize, height: arrowSize }}
               />
             </div>
           </div>
+          {width === 'fit-shadow' && (
+            <>
+              <div
+                className={`${style.shadow} ${style.shadow_left} ${viewArrow(
+                  'left'
+                )}`}
+              ></div>
+              <div className={`${style.shadow} ${viewArrow('right')}`}></div>
+            </>
+          )}
         </div>
       </div>
     </article>
