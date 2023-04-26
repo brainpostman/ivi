@@ -1,0 +1,20 @@
+.button {
+  width: 100%;
+  background-color: transparent;
+  @include font(1, bold);
+
+  border: 1px solid #ffffff52;
+  border-radius: 8px;
+
+  transition: border-color 0.2s, background-color 0.2s;
+
+  padding: 9px 15px;
+
+  &:hover {
+    border-color: #fff;
+  }
+
+  &:active {
+    background-color: #ffffff14;
+  }
+}
