@@ -20,7 +20,7 @@ const Input: FC<ICustomInput> = ({
     const [hideChars, setHideChars] = useState(true);
 
     const inputClassName = type === 'number' ? style.number : style.text;
-    const placeholderWhenFocused = focus ? style.placeholder_active : '';
+    const placeholderFocused = focus ? style.placeholder_active : '';
 
     useEffect(() => {
         if (inputRef.current) {
@@ -68,7 +68,7 @@ const Input: FC<ICustomInput> = ({
                 />
                 {type !== 'number' && (
                     <div
-                        className={`${style.placeholder} ${placeholderWhenFocused}`}
+                        className={`${style.placeholder} ${placeholderFocused}`}
                         ref={placeholderRef}>
                         <span
                             className={`${style.placeholder__text} ${
