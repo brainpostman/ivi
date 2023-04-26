@@ -7,16 +7,36 @@ import {
   actorFilmsData,
 } from '@/data/person.data'
 import PageLayout from '@/layouts/PageLayout'
+import { getCoordY, scrollMove } from '@/utils/coords.utils'
 import Image from 'next/image'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
+import { RefObject, useRef, useState } from 'react'
 import { MdArrowBackIosNew } from 'react-icons/md'
 import style from './actors.module.scss'
 
 export default function Actor() {
+  const router = useRouter()
+  const biografyRef = useRef<HTMLHeadingElement>(null)
+  const filmographyRef = useRef<HTMLHeadingElement>(null)
+
+  const [isExpand, setIsExpand] = useState(false)
+
+  const defaultMovies = actorFilmsData.slice(0, 7)
+  const allMovies = actorFilmsData
+
+  const onClickExpandButton = () => {
+    setIsExpand(true)
+  }
+
+  const onClickBackButton = () => {
+    router.back()
+  }
+
   return (
     <PageLayout title='Актёр'>
       <section className={style.wrapper}>
-        <div className={style.back_button}>
+        <div className={style.back_button} onClick={onClickBackButton}>
           <MdArrowBackIosNew />
           <p>Назад</p>
         </div>
@@ -38,23 +58,25 @@ export default function Actor() {
                 Коэн «Внутри Льюина Дэвиса».
               </ExpandInfo>
               <div className={style.info_buttons}>
-                <Link href='#films'>47 фильмов</Link>
-                <Link href='#biografy'>Биография</Link>
+                <p onClick={scrollMove(getCoordY(filmographyRef))}>
+                  47 фильмов
+                </p>
+                <p onClick={scrollMove(getCoordY(biografyRef))}>Биография</p>
               </div>
             </div>
           </div>
 
           <div className={style.films_wrapper}>
             <div className={style.films_header}>
-              <p className={style.films_header__title} id='films'>
+              <h1 className={style.films_header__title} ref={filmographyRef}>
                 Полная фильмография
-              </p>
+              </h1>
               <p className={style.films_header__subtitle}>47 фильмов</p>
             </div>
 
             {/*FILM LIST*/}
             <ul className={style.films_list}>
-              {actorFilmsData.slice(0, 7).map(film => (
+              {(isExpand ? allMovies : defaultMovies).map(film => (
                 <li key={film.id}>
                   <div className={style.films_list__card}>
                     <Image
@@ -76,10 +98,14 @@ export default function Actor() {
                 </li>
               ))}
             </ul>
-            <p className={style.more_films}>Eще 39 фильмов</p>
+            {!isExpand && (
+              <p className={style.more_films} onClick={onClickExpandButton}>
+                Eще 39 фильмов
+              </p>
+            )}
           </div>
-          <div className={style.biografy} id='biografy'>
-            <h2>Биография</h2>
+          <div className={style.biografy}>
+            <h2 ref={biografyRef}>Биография</h2>
             <ExpandInfo visibleText={actorBiografyInfoVisibleData} width='100%'>
               {actorBiografyData}
             </ExpandInfo>
