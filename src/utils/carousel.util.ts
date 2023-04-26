@@ -9,79 +9,79 @@ import { Dispatch, SetStateAction } from 'react'
 
 // NOTE: DEPRECATED
 export const getCarouselFunctions = (
-	move: number,
-	setMove: Dispatch<SetStateAction<number>>,
-	elementLen: number,
-	elemntsMove: number,
-	elementsView: number,
-	blocksData:
-		| { channels: { img: string; href: string }[] }
-		| { title: string }[]
+  move: number,
+  setMove: Dispatch<SetStateAction<number>>,
+  elementLen: number,
+  elemntsMove: number,
+  elementsView: number,
+  blocksData:
+    | { channels: { img: string; href: string }[] }
+    | { title: string }[]
 ) => {
-	const oneMove = elemntsMove * elementLen
+  const oneMove = elemntsMove * elementLen
 
-	const __getNumTails = (listLength: number) =>
-		(listLength - Math.abs(elementsView - elemntsMove)) % elemntsMove
+  const __getNumTails = (listLength: number) =>
+    (listLength - elementsView) % elemntsMove
 
-	const __getLastMoves = (listLength: number) => {
-		const numTailElems = __getNumTails(listLength)
+  const __getLastMoves = (listLength: number) => {
+    const numTailElems = __getNumTails(listLength)
 
-		const numMoves = Math.floor(listLength / elementsView)
-		const preLastMove = numMoves * elemntsMove * elementLen
-		const lastMove = preLastMove + elementLen * numTailElems
+    const numMoves = Math.floor(listLength / elementsView)
+    const preLastMove = numMoves * elemntsMove * elementLen
+    const lastMove = preLastMove + elementLen * numTailElems
 
-		return { preLastMove, lastMove }
-	}
+    return { preLastMove, lastMove }
+  }
 
-	const onClickRightArrow = () => {
-		const listLength =
-			'channels' in blocksData ? blocksData.channels.length : blocksData.length
+  const onClickRightArrow = () => {
+    const listLength =
+      'channels' in blocksData ? blocksData.channels.length : blocksData.length
 
-		const { lastMove, preLastMove } = __getLastMoves(listLength)
+    const { lastMove, preLastMove } = __getLastMoves(listLength)
 
-		const numTailElemsMove =
-			__getNumTails(listLength) - Math.abs(elementsView - elemntsMove)
+    const numTailElemsMove =
+      __getNumTails(listLength) - Math.abs(elementsView - elemntsMove)
 
-		if (move + oneMove >= lastMove - elementLen) return
+    if (move + oneMove >= lastMove - elementLen) return
 
-		if (move + oneMove >= preLastMove) {
-			setMove(prev => prev + numTailElemsMove * elementLen + elementLen / 2)
-			return
-		}
+    if (move + oneMove >= preLastMove) {
+      setMove(prev => prev + numTailElemsMove * elementLen + elementLen / 2)
+      return
+    }
 
-		setMove(prev => prev + oneMove)
-	}
+    setMove(prev => prev + oneMove)
+  }
 
-	const onClickLeftArrow = () => {
-		if (move - oneMove <= 0) {
-			setMove(0)
-			return
-		}
+  const onClickLeftArrow = () => {
+    if (move - oneMove <= 0) {
+      setMove(0)
+      return
+    }
 
-		setMove(prev => prev - oneMove)
-	}
+    setMove(prev => prev - oneMove)
+  }
 
-	// Показываем или скрываем стрелку
-	const viewArrow = (direction: 'left' | 'right') => {
-		if (direction === 'left') {
-			if (move <= 0) {
-				return 'hide'
-			}
-			return ''
-		} else if (direction === 'right') {
-			const listLength =
-				'channels' in blocksData
-					? blocksData.channels.length
-					: blocksData.length
+  // Показываем или скрываем стрелку
+  const viewArrow = (direction: 'left' | 'right') => {
+    if (direction === 'left') {
+      if (move <= 0) {
+        return 'hide'
+      }
+      return ''
+    } else if (direction === 'right') {
+      const listLength =
+        'channels' in blocksData
+          ? blocksData.channels.length
+          : blocksData.length
 
-			const { lastMove } = __getLastMoves(listLength)
+      const { lastMove } = __getLastMoves(listLength)
 
-			if (move + oneMove >= lastMove - elementLen) {
-				return 'hide'
-			}
-			return ''
-		}
-	}
+      if (move + oneMove >= lastMove - elementLen) {
+        return 'hide'
+      }
+      return ''
+    }
+  }
 
-	return { onClickRightArrow, onClickLeftArrow, viewArrow }
+  return { onClickRightArrow, onClickLeftArrow, viewArrow }
 }
