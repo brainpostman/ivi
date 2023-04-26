@@ -1,17 +1,27 @@
+.wrapper {
+	display: flex;
+	background-color: #d9d7e0;
+	border-radius: 8px;
+	max-width: 100%;
+}
+
+.label {
+	position: relative;
+	background-color: #d9d7e0;
+	border-radius: 8px;
+	flex: 0 1 100%;
+}
+
 .text {
 	// FIXME: откуда появляется другой стиль при наведении
 	color: #1f1b2e !important;
 	cursor: pointer;
-	//
-	z-index: 5;
 	font-size: 15px;
 	line-height: 1.25;
 	font-weight: 600;
 	height: 40px;
-
 	background-color: transparent;
 	border-radius: 8px;
-
 	@include ui-padding(hor, 3);
 	@include ui-padding(top, 4);
 	&:focus {
@@ -23,35 +33,20 @@
 	color: #1f1b2e;
 	background-color: #d9d7e0;
 	border-radius: 8px;
-
 	font-weight: 600;
 	width: 60px;
-
 	text-align: center;
-
 	-moz-appearance: textfield;
-
 	&::-webkit-outer-spin-button,
 	&::-webkit-inner-spin-button {
 		-webkit-appearance: none;
 		margin: 0;
 	}
-
 	@include ui-padding(ver, 2);
 	@include ui-padding(hor, 2);
 }
 
-.label {
-	position: relative;
-	display: flex;
-	flex-direction: column;
-	justify-content: flex-end;
-	background-color: #d9d7e0;
-	border-radius: 8px;
-}
-
 .placeholder {
-	z-index: 1;
 	display: flex;
 	justify-content: flex-start;
 	cursor: pointer;
@@ -62,27 +57,29 @@
 	top: 0px;
 	user-select: none;
 	transition: all 300ms ease-out;
-	&__text {
-		@include ui-padding(hor, 3);
-		@include ui-padding(top, 3);
-		font-size: 15px;
-		line-height: 1.25;
-		font-weight: 600;
-		&_active {
-			transition: all 100ms ease-in;
-			cursor: text;
-			transform: translateY(-30%);
-		}
+	@include ui-padding(hor, 3);
+	@include ui-padding(top, 3);
+	font-size: 15px;
+	line-height: 1.25;
+	font-weight: 600;
+	&_active {
+		transition: all 100ms ease-in;
+		cursor: text;
+		transform: translateY(-30%);
 	}
-	&__span {
+	&__text {
 		transform-origin: 0 0;
 		transition: inherit;
 		&_active {
 			transform: scale(0.85);
 		}
 	}
+}
 
-	&__number {
-		display: none;
-	}
+.hideicon {
+	position: relative;
+	flex: 0 0 auto;
+	@include ui-padding(hor, 3);
+	@include ui-padding(top, 3);
+	cursor: pointer;
 }

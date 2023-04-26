@@ -95,6 +95,7 @@ const AuthModal = ({ modalShown }: IAuthModalProps) => {
                     </div>
                     <Input
                         type='password'
+                        charHideBtn
                         placeholder='Введите пароль'
                         onChange={(e) => setPassInput(e.target.value)}
                         value={passInput}
