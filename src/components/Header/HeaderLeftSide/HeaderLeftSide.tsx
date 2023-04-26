@@ -10,14 +10,9 @@ const logoSrc =
 interface IProps
   extends DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement> {
   showHoverBlock: (tab: IHeaderTab) => void
-  onTabMouseLeave: () => void
 }
 
-const HeaderLeftSide: FC<IProps> = ({
-  showHoverBlock,
-  onTabMouseLeave,
-  ...props
-}) => {
+const HeaderLeftSide: FC<IProps> = ({ showHoverBlock, ...props }) => {
   return (
     <article className={style.wrapper} {...props}>
       <Link href='/' className={style.logo}>
@@ -38,11 +33,7 @@ const HeaderLeftSide: FC<IProps> = ({
         <Link href='/' onMouseEnter={() => showHoverBlock('cartoons')}>
           Мультфильмы
         </Link>
-        <Link
-          href='/'
-          onMouseEnter={() => showHoverBlock('TV+')}
-          onMouseLeave={onTabMouseLeave}
-        >
+        <Link href='/' onMouseEnter={() => showHoverBlock('TV+')}>
           TV+
         </Link>
       </nav>

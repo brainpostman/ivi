@@ -11,9 +11,10 @@ import HoverTabBlock from './HoverFilterBlock/HoverTabBlock'
 interface IProps
   extends DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement> {
   tab: IHeaderTab
+  hideHoverBlock: () => void
 }
 
-const HeaderHoverBlock: FC<IProps> = ({ tab, ...props }) => {
+const HeaderHoverBlock: FC<IProps> = ({ tab, hideHoverBlock, ...props }) => {
   const tabList: IHeaderTab[] = ['movies', 'series', 'cartoons']
 
   const tabsWithMovieBlock: IHeaderTab[] = [
