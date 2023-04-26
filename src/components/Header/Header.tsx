@@ -1,7 +1,7 @@
 import { useTypedSelector } from '@/hooks/ReduxHooks'
 import { IHeaderBlock, IHeaderTab } from '@/types/header.interface'
 import { useRouter } from 'next/router'
-import { useEffect, useState } from 'react'
+import { MouseEvent, useEffect, useRef, useState } from 'react'
 import AuthModal from '../AuthModal/AuthModal'
 import style from './Header.module.scss'
 import HeaderHoverBlock from './HeaderHoverBlock/HeaderHoverBlock'
@@ -11,25 +11,37 @@ import HeaderRightSide from './HeaderRightSide/HeaderRightSide'
 const Header = () => {
   const { pathname } = useRouter()
   const [classNameHeader, setClassNameHeader] = useState(style.wrapper)
-
-  const [hoverTabs, setHoverTabs] = useState<IHeaderBlock>({
-    isShow: false,
-    tab: undefined,
-  })
-
+  const [hoverTab, setHoverTab] = useState<IHeaderTab>(undefined)
+  const [isOnTab, setIsOnTab] = useState(false)
   const { showAuthModal } = useTypedSelector(state => state.authModal)
 
-  const classNameContainer =
-    hoverTabs.isShow && hoverTabs.tab
-      ? `${style.container} ${style.effect}`
-      : style.container
+  const timer = useRef<any>(undefined)
 
-  const showHoverBlock = (tab: IHeaderTab) => {
-    setHoverTabs({ isShow: true, tab })
+  const onHeaderHoverBlockMouseEnter = () => {
+    setIsOnTab(true)
+    clearTimeout(timer.current)
   }
 
-  const hideHoverBlock = () => {
-    setHoverTabs(prev => ({ ...prev, isShow: false }))
+  const onHeaderHoverBlockMouseLeave = () => {
+    setIsOnTab(false)
+  }
+
+  const onTabMouseLeave = () => {
+    timer.current = setTimeout(() => setIsOnTab(false), 100)
+  }
+
+  const classNameContainer = isOnTab
+    ? `${style.container} ${style.effect}`
+    : style.container
+
+  const showHoverBlock = (tab: IHeaderTab) => {
+    if (tab === undefined) {
+      setIsOnTab(false)
+    } else {
+      setIsOnTab(true)
+    }
+
+    setHoverTab(tab)
   }
 
   useEffect(() => {
@@ -43,13 +55,17 @@ const Header = () => {
 
   return (
     <header className={classNameHeader}>
-      <section className={classNameContainer} onMouseLeave={hideHoverBlock}>
-        <HeaderLeftSide showHoverBlock={showHoverBlock} />
+      <section className={classNameContainer}>
+        <HeaderLeftSide
+          showHoverBlock={showHoverBlock}
+          onTabMouseLeave={onTabMouseLeave}
+        />
         <HeaderRightSide showHoverBlock={showHoverBlock} />
-        {hoverTabs.isShow && hoverTabs.tab && (
+        {isOnTab && (
           <HeaderHoverBlock
-            hideHoverBlock={hideHoverBlock}
-            tab={hoverTabs.tab}
+            tab={hoverTab}
+            onMouseEnter={onHeaderHoverBlockMouseEnter}
+            onMouseLeave={onHeaderHoverBlockMouseLeave}
           />
         )}
       </section>
