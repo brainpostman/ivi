@@ -12,6 +12,7 @@ const Input: FC<ICustomInput> = ({
     charHideBtn = false,
     placeholder,
     value,
+    className: propsClassName,
     ...props
 }) => {
     const inputRef = useRef<HTMLInputElement>(null);
@@ -61,7 +62,7 @@ const Input: FC<ICustomInput> = ({
                 <input
                     ref={inputRef}
                     type={hideChars ? type : 'text'}
-                    className={`${style.input} ${inputClassName}`}
+                    className={`${propsClassName} ${style.input} ${inputClassName}`}
                     placeholder={type === 'number' ? placeholder : ''}
                     value={value}
                     {...props}
