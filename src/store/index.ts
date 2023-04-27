@@ -1,9 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit';
 import authModalSlice from './reducers/authModalReducer';
+import languageSlice from './reducers/languageReducer';
 
 export const store = configureStore({
     reducer: {
         authModal: authModalSlice,
+        language: languageSlice,
     },
 });
 
