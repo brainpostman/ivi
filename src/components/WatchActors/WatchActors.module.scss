@@ -1,0 +1,58 @@
+.conteiner{
+    width:100%;
+    @include ui-margin(top,8);
+}
+
+.content{
+    display: flex;
+    justify-content: space-between;
+}
+
+.content_person{
+    display: block;
+    width: 88px;
+    height: 144px;
+
+    &_img{
+        border-radius: 50%;
+        overflow: hidden;
+        background-color: #1f1b2e;
+        transform: 0.4s;
+    }
+    &_img:hover{
+        transform: scale(1.1);
+    }
+
+    &_name{
+        color:#fff;
+        @include ui-margin(top,2);
+        font-size: 13px;
+        line-height: 16px;
+        font-weight: 500;
+    }
+    &_title{
+        color: #a5a1b2;
+        @include ui-margin(top,1);
+        font-weight: 400;
+        font-size: 13px;
+        line-height: 16px;
+    }
+}
+
+.button{
+    width: 88px;
+    height: 88px;
+    border-radius: 50%;
+    transform: 0.4s;
+    background-color: #1f1b2e;
+
+    &_text{
+        color: #a5a1b2;
+        font-size: 15px;
+        line-height: 20px;
+        font-weight: 500;
+    }
+}
+.button:hover{
+    transform: scale(1);
+}
