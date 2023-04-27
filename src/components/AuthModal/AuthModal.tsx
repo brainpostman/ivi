@@ -14,6 +14,7 @@ import {
     validateEmail,
     validatePassword,
 } from '@/utils/auth.util';
+import { CSSTransition } from 'react-transition-group';
 
 interface IAuthModalProps {
     modalShown: boolean;
@@ -93,52 +94,54 @@ const AuthModal = ({ modalShown }: IAuthModalProps) => {
             </section>
             <section className={styles.chat}>
                 {authFlow.length === 0 && (
-                    <div className={styles.chat__container}>
-                        <div className={`${styles.message} ${styles.message__prompt}`}>
-                            Войдите или зарегистрируйтесь
+                    <CSSTransition>
+                        <div className={styles.chat__container}>
+                            <div className={`${styles.message} ${styles.message__prompt}`}>
+                                Войдите или зарегистрируйтесь
+                            </div>
+                            <div className={styles.inputs}>
+                                <Input
+                                    type='text'
+                                    value={emailInput}
+                                    onChange={(e) => {
+                                        setEmailInput(e.target.value);
+                                        if (errorMessages.length > 0) setErrorMessages([]);
+                                    }}
+                                    placeholder='Введите ваш email'
+                                    autoFocus
+                                />
+                                <HighlightButton
+                                    className={styles.highlightbtn}
+                                    disabled={emailInput ? false : true}
+                                    onClick={() => {
+                                        let emailError = validateEmail(emailInput);
+                                        if (emailError) {
+                                            setErrorMessages([emailError]);
+                                            return;
+                                        }
+                                        handleEmail(emailInput);
+                                    }}>
+                                    Продолжить
+                                </HighlightButton>
+                                <BasicBtn
+                                    onClick={() => {
+                                        signIn('google');
+                                    }}
+                                    btnType='textPlusIcon'
+                                    title='Войти с помощью Google'
+                                    className={`${styles.basicbtn} ${styles.basicbtn_google}`}>
+                                    <FaGoogle />
+                                </BasicBtn>
+                                <BasicBtn
+                                    onClick={() => signIn('vk')}
+                                    btnType='textPlusIcon'
+                                    title='Войти с помощью ВКонтакте'
+                                    className={`${styles.basicbtn} ${styles.basicbtn_vk}`}>
+                                    <FaVk />
+                                </BasicBtn>
+                            </div>
                         </div>
-                        <div className={styles.inputs}>
-                            <Input
-                                type='text'
-                                value={emailInput}
-                                onChange={(e) => {
-                                    setEmailInput(e.target.value);
-                                    if (errorMessages.length > 0) setErrorMessages([]);
-                                }}
-                                placeholder='Введите ваш email'
-                                autoFocus
-                            />
-                            <HighlightButton
-                                className={styles.highlightbtn}
-                                disabled={emailInput ? false : true}
-                                onClick={() => {
-                                    let emailError = validateEmail(emailInput);
-                                    if (emailError) {
-                                        setErrorMessages([emailError]);
-                                        return;
-                                    }
-                                    handleEmail(emailInput);
-                                }}>
-                                Продолжить
-                            </HighlightButton>
-                            <BasicBtn
-                                onClick={() => {
-                                    signIn('google');
-                                }}
-                                btnType='textPlusIcon'
-                                title='Войти с помощью Google'
-                                className={`${styles.basicbtn} ${styles.basicbtn_google}`}>
-                                <FaGoogle />
-                            </BasicBtn>
-                            <BasicBtn
-                                onClick={() => signIn('vk')}
-                                btnType='textPlusIcon'
-                                title='Войти с помощью ВКонтакте'
-                                className={`${styles.basicbtn} ${styles.basicbtn_vk}`}>
-                                <FaVk />
-                            </BasicBtn>
-                        </div>
-                    </div>
+                    </CSSTransition>
                 )}
                 {authFlow.length > 0 && (
                     <div className={styles.chat__container}>
