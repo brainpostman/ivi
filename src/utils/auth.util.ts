@@ -48,7 +48,7 @@ export function validatePassword(password: string): string[] {
         messages.push('Пароль должен иметь как минимум 6 символов');
     }
     const passwordRegex = /^[a-zA-Z0-9!@#$%^&*()_+-=,.<>?;:'"\\/[\]{}|`~]+$/;
-    if (passwordRegex.test(password)) {
+    if (!passwordRegex.test(password)) {
         messages.push(
             'Пароль должен содержать только символы латинского алфавита, цифры и спецсимволы'
         );
@@ -60,6 +60,6 @@ export function validateConfirmedPassword(password: string, confirmation: string
     if (password === confirmation) {
         return '';
     } else {
-        return 'Пароль должны совпадать';
+        return 'Пароли должны совпадать';
     }
 }

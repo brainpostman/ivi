@@ -30,8 +30,13 @@ export const authOptions = {
                         return null;
                     }
                 } catch (err) {
-                    console.log(err.response.data);
-                    throw Error(err);
+                    if (axios.isAxiosError(err)) {
+                        console.error('AxiosError: ', err.message);
+                        throw new Error(err.message);
+                    } else {
+                        console.error('Error: ', err);
+                        throw new Error('Произошла непредвиденная ошибка');
+                    }
                 }
             },
         }),
@@ -55,8 +60,13 @@ export const authOptions = {
                         return null;
                     }
                 } catch (err) {
-                    console.log(err.response.data);
-                    throw Error(err);
+                    if (axios.isAxiosError(err)) {
+                        console.error('AxiosError: ', err.message);
+                        throw new Error(err.message);
+                    } else {
+                        console.error('Error: ', err);
+                        throw new Error('Произошла непредвиденная ошибка');
+                    }
                 }
             },
         }),
@@ -82,7 +92,6 @@ export const authOptions = {
                 token.user = user;
                 token.accessToken = user.accessToken;
             }
-            console.log(token.accessToken);
             return token;
         },
         async session({ session, token }) {
