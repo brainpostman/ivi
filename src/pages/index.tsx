@@ -3,10 +3,13 @@ import MovieCarouselContent from '@/components/CarouselContents/MovieCarouselCon
 import CustomCarousel from '@/components/CustomCarousel/CustomCarousel'
 import ExpandInfo from '@/components/ExpandInfo/ExpandInfo'
 import HomePageInfo from '@/components/HomePageInfo/HomePageInfo'
+import MovieCard from '@/components/MovieCard/MovieCard'
 import TopTenList from '@/components/TopTenList/TopTenList'
 import LongButton from '@/components/UI/LongButton/LongButton'
+import ViewAllBlock from '@/components/ViewAllBlock/ViewAllBlock'
 import mainCarouselData from '@/data/banner_carousel/bannerCarouselData'
-import { movieCarouselData } from '@/data/movieCarousel.data'
+import { movieCardGridData } from '@/data/movieCard.data'
+import useIsomorphicLayoutEffect from '@/hooks/useIsomorphicLayoutEffect'
 import PageLayout from '@/layouts/PageLayout'
 import { FC, useLayoutEffect, useRef } from 'react'
 import style from './index.module.scss'
@@ -28,24 +31,6 @@ const infoTitle =
 
 const visibleText =
   'Каждый день миллионы людей ищут фильмы онлайн, и никто не хочет усложнять себе жизнь – и вы наверняка один из них! А раз так, то Иви – это именно тот ресурс, который вам нужен. От лучших кинолент в HD-качестве вас отделяет буквально один клик. Мы не просто освобождаем от необходимости идти в кинотеатр или изучать программу телепередач – у посетителей нашего ресурса гораздо больше возможностей.'
-
-const viewAllBlock: FC<any> = addElementLen => {
-  const wrapperRef = useRef<HTMLDivElement>(null)
-  const isSelectedRef = useRef(false)
-
-  useLayoutEffect(() => {
-    if (!wrapperRef.current || isSelectedRef.current) return
-
-    addElementLen(wrapperRef.current.offsetWidth)
-    isSelectedRef.current = true
-  }, [wrapperRef])
-
-  return (
-    <div className={style.view_all} ref={wrapperRef}>
-      Посмотреть всё
-    </div>
-  )
-}
 
 export default function Home() {
   return (
@@ -73,23 +58,27 @@ export default function Home() {
       <section className={style.carousels}>
         <CustomCarousel
           title='Добрые мультфильмы'
-          data={movieCarouselData}
           href='/'
-          additElem={viewAllBlock}
-          children={MovieCarouselContent}
+          additElem={ViewAllBlock}
           elementsMove={5}
           elementsView={7}
-        />
+        >
+          {movieCardGridData.map(movie => (
+            <MovieCard movie={movie} />
+          ))}
+        </CustomCarousel>
 
         <CustomCarousel
-          title='Поймать преступника'
-          data={movieCarouselData}
+          title='Добрые мультфильмы'
           href='/'
-          additElem={viewAllBlock}
-          children={MovieCarouselContent}
+          additElem={ViewAllBlock}
           elementsMove={5}
           elementsView={7}
-        />
+        >
+          {movieCardGridData.map(movie => (
+            <MovieCard movie={movie} />
+          ))}
+        </CustomCarousel>
       </section>
     </PageLayout>
   )

@@ -2,69 +2,69 @@ $hover-color: #2e2844;
 $active-color: #0e0c14;
 
 .button {
-	text-align: center;
-	font-size: 15px;
-	font-weight: 600;
-	display: block;
+  display: block;
 
-	background-color: $dark;
-	color: #fff;
+  color: #fff;
+  @include font(2, bold);
+  text-align: center;
 
-	border-radius: 8px;
+  background-color: $dark;
 
-	@include ui-padding(ver, 3);
-	@include ui-padding(hor, 4);
+  border-radius: 8px;
 
-	transition: background-color 0.4s;
+  transition: background-color 0.4s;
 
-	&:hover {
-		background-color: $hover-color;
-		transition: background-color 0.08s;
-	}
+  @include ui-padding(ver, 3);
+  @include ui-padding(hor, 4);
 
-	&:active {
-		background-color: $active-color;
-		transition: background-color 0.08s;
-	}
+  &:hover {
+    background-color: $hover-color;
+    transition: background-color 0.08s;
+  }
 
-	svg {
-		width: 18px;
-		height: 18px;
-	}
+  &:active {
+    background-color: $active-color;
+    transition: background-color 0.08s;
+  }
 
-	> a {
-		color: #fff;
-	}
+  svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  > a {
+    color: #fff;
+  }
 }
 
 .text {
-	width: 196px;
+  width: 196px;
 }
 
 .icon {
-	@include center-content;
-	height: 40px;
+  @include center-content;
+  height: 40px;
 
-	@include ui-padding(hor, 3);
+  @include ui-padding(hor, 3);
 }
 
 .iconCircle {
-	@include center-content;
-	height: 40px;
+  @include center-content;
+  height: 40px;
 
-	border-radius: 100%;
+  border-radius: 100%;
 
-	@include ui-padding(hor, 3);
+  @include ui-padding(hor, 3);
 }
 
 .description {
-	display: flex;
-	flex-direction: column;
-	align-items: flex-start;
-	@include ui-margin(left, 2);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  @include ui-margin(left, 2);
 }
 
-.suptitle {
+.subtitle {
 	font-size: 10px;
 	color: $gray;
 	font-weight: 600;
@@ -76,24 +76,24 @@ $active-color: #0e0c14;
 }
 
 .title {
-	font-size: 15px;
-	font-weight: 600;
-	height: 20px;
-	line-height: 1.33;
-	overflow: hidden;
-	text-overflow: ellipsis;
-	white-space: nowrap;
+  @include font(2, bold);
+
+  height: 20px;
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .textPlusIcon {
-	display: flex;
-	align-items: center;
+  display: flex;
+  align-items: center;
 
-	@include ui-padding(ver, 1);
-	@include ui-padding(hor, 3);
+  @include ui-padding(ver, 1);
+  @include ui-padding(hor, 3);
 }
 
 .href {
-	display: inline;
-	background-color: transparent;
+  display: inline;
+  background-color: transparent;
 }

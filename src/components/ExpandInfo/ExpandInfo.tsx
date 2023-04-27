@@ -7,6 +7,7 @@ interface IProps
   title?: string
   visibleText?: string
   width?: string | number
+  lineClamp?: number
 }
 
 const ExpandInfo: FC<IProps> = ({
@@ -15,6 +16,7 @@ const ExpandInfo: FC<IProps> = ({
   visibleText,
   className,
   width = '75%',
+  lineClamp = 2,
   ...props
 }) => {
   const [isExpand, setIsExpand] = useState(false)
@@ -36,6 +38,7 @@ const ExpandInfo: FC<IProps> = ({
           className={`${style.info__body__top} ${
             isExpand ? style.visible : ''
           }`}
+          style={{ lineClamp, WebkitLineClamp: lineClamp }}
         >
           {visibleText}
         </p>

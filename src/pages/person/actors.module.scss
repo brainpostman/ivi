@@ -69,14 +69,16 @@
   font-size: 18px;
   font-weight: 400;
 
-  > a {
+  > p {
     color: #ffffffe0;
+    cursor: pointer;
+
     &:hover {
       color: #e2e2e3;
     }
   }
 
-  > a:last-child::before {
+  > p:last-child::before {
     content: '•';
     @include ui-margin(right, 3);
   }

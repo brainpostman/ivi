@@ -1,30 +1,34 @@
 .wrapper {
-	background-color: #100e19;
+  background-color: #100e19;
 
-	// NOTE: для StoryBook
-	width: $max-width;
+  // NOTE: для StoryBook
+  width: $max-width;
 
-	margin: auto;
-	@include ui-padding(top, 1);
+  margin: auto;
+  @include ui-padding(top, 1);
 }
 
 .container {
-	position: relative;
-	display: flex;
-	justify-content: space-between;
+  position: relative;
+  display: flex;
+  justify-content: space-between;
 
-	max-width: 1240px;
+  max-width: 1240px;
 
-	border-top-left-radius: 8px;
-	border-top-right-radius: 8px;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
 
-	// TODO: Нужна ли анимация ???
-	transition: background-color 0.1s;
+  // TODO: Нужна ли анимация ???
+  transition: background-color 0.1s;
 
-	margin: auto;
-	@include ui-padding(hor, 3);
+  margin: auto;
+  @include ui-padding(hor, 3);
 }
 
 .effect {
-	background-color: $dark;
+  background-color: $dark;
+}
+
+.border_bottom {
+  border-bottom: 1px solid $border-gray;
 }

@@ -3,65 +3,93 @@ $ui-space-step: 4px;
 $ui-font-step: 4px;
 
 @mixin ui-margin($direction, $size) {
-	@if ($direction == default) {
-		margin: $ui-space-step * $size;
-	}
+  @if ($direction == default) {
+    margin: $ui-space-step * $size;
+  }
 
-	@if ($direction == top) {
-		margin-top: $ui-space-step * $size;
-	}
-	@if ($direction == bottom) {
-		margin-bottom: $ui-space-step * $size;
-	}
-	@if ($direction == right) {
-		margin-right: $ui-space-step * $size;
-	}
-	@if ($direction == left) {
-		margin-left: $ui-space-step * $size;
-	}
-	@if ($direction == 'ver') {
-		margin-top: $ui-space-step * $size;
-		margin-bottom: $ui-space-step * $size;
-	}
-	@if ($direction == 'hor') {
-		margin-left: $ui-space-step * $size;
-		margin-right: $ui-space-step * $size;
-	}
+  @if ($direction == top) {
+    margin-top: $ui-space-step * $size;
+  }
+  @if ($direction == bottom) {
+    margin-bottom: $ui-space-step * $size;
+  }
+  @if ($direction == right) {
+    margin-right: $ui-space-step * $size;
+  }
+  @if ($direction == left) {
+    margin-left: $ui-space-step * $size;
+  }
+  @if ($direction == 'ver') {
+    margin-top: $ui-space-step * $size;
+    margin-bottom: $ui-space-step * $size;
+  }
+  @if ($direction == 'hor') {
+    margin-left: $ui-space-step * $size;
+    margin-right: $ui-space-step * $size;
+  }
 }
 
 @mixin ui-padding($direction, $size) {
-	@if ($direction == default) {
-		padding: $ui-space-step * $size;
-	}
+  @if ($direction == default) {
+    padding: $ui-space-step * $size;
+  }
 
-	@if ($direction == top) {
-		padding-top: $ui-space-step * $size;
-	}
-	@if ($direction == bottom) {
-		padding-bottom: $ui-space-step * $size;
-	}
-	@if ($direction == right) {
-		padding-right: $ui-space-step * $size;
-	}
-	@if ($direction == left) {
-		padding-left: $ui-space-step * $size;
-	}
-	@if ($direction == 'ver') {
-		padding-top: $ui-space-step * $size;
-		padding-bottom: $ui-space-step * $size;
-	}
-	@if ($direction == 'hor') {
-		padding-left: $ui-space-step * $size;
-		padding-right: $ui-space-step * $size;
-	}
+  @if ($direction == top) {
+    padding-top: $ui-space-step * $size;
+  }
+  @if ($direction == bottom) {
+    padding-bottom: $ui-space-step * $size;
+  }
+  @if ($direction == right) {
+    padding-right: $ui-space-step * $size;
+  }
+  @if ($direction == left) {
+    padding-left: $ui-space-step * $size;
+  }
+  @if ($direction == 'ver') {
+    padding-top: $ui-space-step * $size;
+    padding-bottom: $ui-space-step * $size;
+  }
+  @if ($direction == 'hor') {
+    padding-left: $ui-space-step * $size;
+    padding-right: $ui-space-step * $size;
+  }
 }
 
 @mixin ui-font($size) {
-	font-size: $ui-font-step * $size;
+  font-size: $ui-font-step * $size;
 }
 
 @mixin center-content {
-	display: flex;
-	align-items: center;
-	justify-content: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin bold($weight: normal) {
+  @if ($weight == bold) {
+    font-weight: 600;
+  } @else {
+    font-weight: 500;
+  }
+}
+
+@mixin font($size, $weight: normal) {
+  @if ($size == 1) {
+    font-size: 13px;
+    line-height: 1.23;
+    @include bold($weight);
+  }
+
+  @if ($size == 2) {
+    font-size: 15px;
+    line-height: 1.33;
+    @include bold($weight);
+  }
+
+  @if ($size == 3) {
+    font-size: 20px;
+    line-height: 24px;
+    @include bold($weight);
+  }
 }
