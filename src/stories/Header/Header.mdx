@@ -1,0 +1,32 @@
+import {
+	Meta,
+	Title,
+	Description,
+	Controls,
+	ColorPalette,
+	ColorItem,
+	Story,
+} from '@storybook/blocks'
+import * as Header from './Header.stories.tsx'
+
+<Meta of={Header} />
+
+<Title />
+<Description />
+<Story of={Header.Primary} />
+
+<br />
+<br />
+<br />
+
+## Цветовая палитра
+
+<br />
+
+<ColorPalette>
+	<ColorItem
+		title='Цвет шапки'
+		colors={{ Default: '#100e19', onHoverTab: '#1f1b2e' }}
+	/>
+	<ColorItem title='Цвет выпадающего блока' colors={{ Default: '#1f1b2e' }} />
+</ColorPalette>

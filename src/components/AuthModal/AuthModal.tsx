@@ -17,7 +17,7 @@ import {
 import { CSSTransition } from 'react-transition-group';
 
 interface IAuthModalProps {
-    modalShown: boolean;
+  modalShown: boolean
 }
 
 const AuthModal = ({ modalShown }: IAuthModalProps) => {
@@ -268,4 +268,4 @@ const AuthModal = ({ modalShown }: IAuthModalProps) => {
     );
 };
 
-export default AuthModal;
+export default AuthModal

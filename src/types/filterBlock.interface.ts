@@ -26,12 +26,11 @@ export interface IFilterData {
 
 export interface IFilterListBigProps {
   filterData: IFilterData
-  carouselData: any[]
   list: Omit<IFilterListEl, 'isSelect'>[]
-  carouselContent: FC<any>
   carouselElementsView?: number
   carouselElementsMove?: number
   query: string
+  children?: React.ReactNode[]
 }
 
 export interface IFilterListSmallProps {

@@ -2,23 +2,23 @@ $hover-color: #ff0f4d;
 $active-color: #c10032;
 
 .button {
-	line-height: 20px;
+  line-height: 20px;
 
-	background-color: $red;
-	border-radius: 8px;
+  background-color: $red;
+  border-radius: 8px;
 
 	transition: background-color 0.4s, border-color 0.4s;
 	user-select: none;
 	@include ui-padding(ver, 2);
 	@include ui-padding(hor, 4);
 
-	&:active {
-		background-color: $active-color !important;
-	}
+  &:active {
+    background-color: $active-color !important;
+  }
 
-	&:hover {
-		background-color: $hover-color;
-	}
+  &:hover {
+    background-color: $hover-color;
+  }
 }
 
 .button:disabled {

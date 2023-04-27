@@ -1,0 +1,29 @@
+import {
+	Meta,
+	Title,
+	Description,
+	Primary,
+	Controls,
+	ColorPalette,
+	ColorItem,
+} from '@storybook/blocks'
+import * as HightLightButton from './HighlightButton.stories.tsx'
+
+<Meta of={HightLightButton} />
+
+<Title />
+<Description />
+<Primary />
+<Controls />
+
+## Цветовая палитра
+
+<br />
+
+<ColorPalette>
+	<ColorItem
+		title='Цвет кнопки'
+		subtitle='При действиях над ней'
+		colors={{ Default: '#ea003d', Hover: '#ff0f4d', Active: '#c10032' }}
+	/>
+</ColorPalette>

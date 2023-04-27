@@ -109,4 +109,4 @@ const Input: FC<ICustomInput> = ({
     );
 };
 
-export default Input;
+export default Input

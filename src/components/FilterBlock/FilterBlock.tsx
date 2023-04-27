@@ -11,7 +11,7 @@ import { IFilterBlockEl, IFilterTitle } from '@/types/filterBlock.interface'
 import { useRouter } from 'next/router'
 import { useEffect } from 'react'
 import { IoCloseOutline } from 'react-icons/io5'
-import FilterGenreCarouselContent from '../CarouselContents/FilterGenreCarouselContent/FilterGenreCarouselContent'
+import FilterGenreCard from '../FilterGenreCard/FilterGenreCard'
 import VioletButton from '../UI/VioletButton/VioletButton'
 import style from './FilterBlock.module.scss'
 import FilterListBig from './FilterListBig/FilterListBig'
@@ -63,22 +63,28 @@ const FilterBlock = () => {
     <section className={style.wrapper}>
       <FilterListBig
         filterData={genreFilterData}
-        carouselData={filterGenreData}
-        carouselContent={FilterGenreCarouselContent}
         list={filterGenreListData}
         carouselElementsView={5}
         query='genre'
-      />
+      >
+        {filterGenreData.map(genre => (
+          <FilterGenreCard icon={genre.icon} title={genre.title} />
+        ))}
+      </FilterListBig>
 
       <FilterListBig
         filterData={countryFilterData}
-        carouselData={filterCountryData}
-        carouselContent={VioletButton}
         list={filterCountryListData}
         carouselElementsView={6}
         carouselElementsMove={1}
         query='country'
-      />
+      >
+        {filterCountryData.map(country => (
+          <VioletButton variant={country.variant}>
+            {country.children}
+          </VioletButton>
+        ))}
+      </FilterListBig>
 
       <FilterListSmall
         filterData={yearFilterData}
@@ -109,6 +115,8 @@ const FilterBlock = () => {
         title='Рейтинг'
       />
 
+      <FilterSlider maxValue={200} minValue={0} query='scores' title='Оценки' />
+
       <div className={style.clear_filters} onClick={clearFilters}>
         <IoCloseOutline />
         <p>Сбросить фильтры</p>
@@ -118,3 +126,6 @@ const FilterBlock = () => {
 }
 
 export default FilterBlock
+
+//carouselData = { filterGenreData }
+//carouselContent = { FilterGenreCarouselContent }
