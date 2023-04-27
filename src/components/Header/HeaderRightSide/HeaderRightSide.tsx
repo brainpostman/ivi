@@ -1,53 +1,62 @@
-import HeaderIconButton from '@/components/UI/HeaderIconButton/HeaderIconButton'
-import SubscribeButton from '@/components/UI/SubscribeButton/SubscribeButton'
-import { IHeaderTab } from '@/types/header.interface'
-import { FC, useEffect, useState } from 'react'
-import { IoPersonOutline } from 'react-icons/io5'
+import HeaderIconButton from '@/components/UI/HeaderIconButton/HeaderIconButton';
+import SubscribeButton from '@/components/UI/SubscribeButton/SubscribeButton';
+import { IHeaderTab } from '@/types/header.interface';
+import { FC, useEffect, useState } from 'react';
+import { IoPersonOutline } from 'react-icons/io5';
 
-import HighlightButton from '@/components/UI/HighlightButton/HighlightButton'
-import { useRouter } from 'next/router'
-import style from './HeaderRightSide.module.scss'
+import HighlightButton from '@/components/UI/HighlightButton/HighlightButton';
+import { useRouter } from 'next/router';
+import style from './HeaderRightSide.module.scss';
+import Switch from '@/components/UI/Switch/Switch';
+import { useActions } from '@/hooks/ReduxHooks';
 
 interface IProps {
-  showHoverBlock: (tab: IHeaderTab) => void
+    showHoverBlock: (tab: IHeaderTab) => void;
 }
 
 const HeaderRightSide: FC<IProps> = ({ showHoverBlock }) => {
-  const classNamePersonIcon = `text ${style.person_icon}`
+    const classNamePersonIcon = `text ${style.person_icon}`;
 
-  const [isViewSubscribeButton, setIsViewSubscribeButton] = useState(true)
+    const [isViewSubscribeButton, setIsViewSubscribeButton] = useState(true);
 
-  const { pathname } = useRouter()
+    const { pathname } = useRouter();
 
-  useEffect(() => {
-    if (pathname === '/') {
-      setIsViewSubscribeButton(true)
-      return
-    }
+    const { changeLanguage } = useActions();
 
-    setIsViewSubscribeButton(false)
-  }, [pathname])
+    useEffect(() => {
+        if (pathname === '/') {
+            setIsViewSubscribeButton(true);
+            return;
+        }
 
-  return (
-    <article className={style.wrapper}>
-      {isViewSubscribeButton ? (
-        <SubscribeButton>Оплатить подписку</SubscribeButton>
-      ) : (
-        <HighlightButton
-          className={style.highlight_button}
-          onMouseEnter={() => showHoverBlock('watch')}
-        >
-          Смотреть 30 дней за 1 ₽
-        </HighlightButton>
-      )}
-      <HeaderIconButton icon='search'>Поиск</HeaderIconButton>
-      <HeaderIconButton icon='notification' />
-      <IoPersonOutline
-        className={classNamePersonIcon}
-        onMouseEnter={() => showHoverBlock('profile')}
-      />
-    </article>
-  )
-}
+        setIsViewSubscribeButton(false);
+    }, [pathname]);
 
-export default HeaderRightSide
+    return (
+        <article className={style.wrapper}>
+            {isViewSubscribeButton ? (
+                <SubscribeButton>Оплатить подписку</SubscribeButton>
+            ) : (
+                <HighlightButton
+                    className={style.highlight_button}
+                    onMouseEnter={() => showHoverBlock('watch')}>
+                    Смотреть 30 дней за 1 ₽
+                </HighlightButton>
+            )}
+            <HeaderIconButton icon='search'>Поиск</HeaderIconButton>
+            <HeaderIconButton icon='notification' />
+            <IoPersonOutline
+                className={classNamePersonIcon}
+                onMouseEnter={() => showHoverBlock('profile')}
+            />
+            <Switch
+                left={'РУ'}
+                right={'EN'}
+                callbackLeft={() => changeLanguage('ru')}
+                callbackRight={() => changeLanguage('en')}
+            />
+        </article>
+    );
+};
+
+export default HeaderRightSide;
