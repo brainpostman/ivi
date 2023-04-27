@@ -1,10 +1,20 @@
-import { DetailedHTMLProps, FC, InputHTMLAttributes, useEffect, useRef, useState } from 'react';
+import {
+    DetailedHTMLProps,
+    FC,
+    InputHTMLAttributes,
+    MutableRefObject,
+    Ref,
+    useEffect,
+    useRef,
+    useState,
+} from 'react';
 import style from './Input.module.scss';
 import { FiEye, FiEyeOff } from 'react-icons/fi';
 
 interface ICustomInput
     extends DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement> {
     charHideBtn?: boolean;
+    ref?: Ref<HTMLInputElement>;
 }
 
 const Input: FC<ICustomInput> = ({
@@ -12,9 +22,12 @@ const Input: FC<ICustomInput> = ({
     charHideBtn = false,
     placeholder,
     value,
+    ref,
     className: propsClassName,
+    autoFocus,
     ...props
 }) => {
+    const inputRef = useRef<HTMLInputElement>(null);
     const placeholderRef = useRef<HTMLDivElement>(null);
     const [active, setActive] = useState(false);
     const [focus, setFocus] = useState(false);
@@ -24,12 +37,18 @@ const Input: FC<ICustomInput> = ({
     const placeholderActive = active ? style.placeholder_active : '';
 
     useEffect(() => {
-        if (value) {
+        if (inputRef.current?.value) {
             setActive(true);
-        } else if (!value && !focus) {
+        } else if (!inputRef.current?.value && !focus) {
             setActive(false);
         }
     }, [value]);
+
+    useEffect(() => {
+        if (autoFocus) {
+            setActive(true);
+        }
+    }, [autoFocus]);
 
     return (
         <div className={style.wrapper}>
@@ -45,11 +64,23 @@ const Input: FC<ICustomInput> = ({
                         setFocus(true);
                     }}
                     onBlur={() => {
-                        if (value === '') {
+                        if (!inputRef.current?.value) {
                             setActive(false);
                             setFocus(false);
                         }
                     }}
+                    ref={(element) => {
+                        (inputRef as MutableRefObject<HTMLInputElement | null>).current = element;
+                        if (ref) {
+                            if (typeof ref === 'function') {
+                                ref(element);
+                            } else {
+                                (ref as MutableRefObject<HTMLInputElement | null>).current =
+                                    element;
+                            }
+                        }
+                    }}
+                    autoFocus={autoFocus}
                 />
                 {type !== 'number' && (
                     <div
@@ -70,7 +101,7 @@ const Input: FC<ICustomInput> = ({
                     onClick={() => {
                         setHideChars((prev) => !prev);
                     }}
-                    style={{ color: value === '' ? '#a5a1b2' : '#1f1b2e' }}>
+                    style={{ color: inputRef.current?.value ? '#1f1b2e' : '#a5a1b2' }}>
                     {hideChars ? <FiEyeOff /> : <FiEye />}
                 </span>
             )}
