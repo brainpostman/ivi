@@ -8,7 +8,7 @@ $active-color: #c10032;
 	border-radius: 8px;
 
 	transition: background-color 0.4s, border-color 0.4s;
-
+	user-select: none;
 	@include ui-padding(ver, 2);
 	@include ui-padding(hor, 4);
 
@@ -19,7 +19,12 @@ $active-color: #c10032;
 	&:hover {
 		background-color: $hover-color;
 	}
-	&:disabled {
-		opacity: 0.32;
+}
+
+.button:disabled {
+	opacity: 0.32;
+	cursor: unset;
+	&:active, &:hover {
+		background-color: $red !important;
 	}
 }
