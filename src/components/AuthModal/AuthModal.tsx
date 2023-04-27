@@ -1,4 +1,4 @@
-import { ReactNode, useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import styles from './AuthModal.module.scss';
 import { useActions } from '@/hooks/ReduxHooks';
 import { signIn } from 'next-auth/react';
@@ -16,14 +16,19 @@ import {
 } from '@/utils/auth.util';
 import { CSSTransition } from 'react-transition-group-react-18';
 import List from '../UI/List/List';
+import { delay } from '@/utils/delay';
 
 interface IAuthModalProps {
     modalShown: boolean;
 }
-
+//TODO: деструктуризация, деструктуризация, деструктуризация... 
+//TODO: доделать транзишны
 const AuthModal = ({ modalShown }: IAuthModalProps) => {
     //булевый флаг отрисовки окна
     const { setAuthModal } = useActions();
+    const [showAuthInputs, setShowAuthInputs] = useState(true);
+    const [showPassInputs, setShowPassInputs] = useState(false);
+    const transitionDelay = 1000;
     //состояния
     const [emailInput, setEmailInput] = useState('');
     const [validatedEmail, setValidatedEmail] = useState('');
@@ -36,7 +41,6 @@ const AuthModal = ({ modalShown }: IAuthModalProps) => {
 
     const [progressBar, setProgressBar] = useState(5);
     const modalRef = useRef<HTMLDivElement>(null);
-    const emailOauthRef = useRef<HTMLDivElement>(null)
     //фиксирование модалки в окне браузера
     useEffect(() => {
         if (modalRef.current) {
@@ -47,25 +51,32 @@ const AuthModal = ({ modalShown }: IAuthModalProps) => {
             document.body.style.overflow = 'unset';
         };
     }, [modalShown]);
+    useEffect(() => {}, []);
     //алгоритм авторизации/регистрации
     const handleEmail = async (email: string) => {
         let response = await checkEmailVacancy(email);
         if (response === 'login' || response === 'register') {
-            setAuthFlow(response);
-            setValidatedEmail(email);
             setProgressBar(50);
+            setValidatedEmail(email);
             setErrorMessages([]);
+            setShowAuthInputs(false);
+            setAuthFlow(response);
+            await delay(transitionDelay);
+            setShowPassInputs(true);
         } else {
             setErrorMessages([response]);
         }
     };
 
-    const editEmail = () => {
-        setAuthFlow('');
+    const editEmail = async () => {
         setErrorMessages([]);
         setEmailInput(validatedEmail);
         setValidatedEmail('');
         setProgressBar(5);
+        setShowPassInputs(false);
+        setAuthFlow('');
+        await delay(transitionDelay);
+        setShowAuthInputs(true);
     };
 
     const handleSignIn = (provider: string, password: string) => {
@@ -95,17 +106,17 @@ const AuthModal = ({ modalShown }: IAuthModalProps) => {
                 <div className={styles.close} onClick={() => setAuthModal(false)}></div>
             </section>
             <section className={styles.chat}>
-                {authFlow.length === 0 && (
+                {showAuthInputs ? (
                     <CSSTransition
-                        in={modalShown}
-                        timeout={1000}
+                        in={showAuthInputs}
+                        timeout={transitionDelay}
                         classNames={{
-                            enter: styles.emailOuath_enter,
+                            enter: styles.emailOauth_enter,
                             enterActive: styles.emailOauth_enterActive,
                             enterDone: styles.emailOauth_enterDone,
-                            exit: styles.emailOuath_exit,
-                            exitActive: styles.emailOauth_exit,
-                            exitDone: styles.emailOauth_exitActive,
+                            exit: styles.emailOauth_exit,
+                            exitActive: styles.emailOauth_exitActive,
+                            exitDone: styles.emailOauth_exitDone,
                         }}>
                         <div className={styles.chat__container}>
                             <div className={`${styles.message} ${styles.message__prompt}`}>
@@ -113,7 +124,7 @@ const AuthModal = ({ modalShown }: IAuthModalProps) => {
                             </div>
                             <div className={styles.inputs}>
                                 <Input
-                                    type='text'
+                                    type='email'
                                     value={emailInput}
                                     onChange={(e) => {
                                         setEmailInput(e.target.value);
@@ -154,107 +165,138 @@ const AuthModal = ({ modalShown }: IAuthModalProps) => {
                             </div>
                         </div>
                     </CSSTransition>
-                )}
-                {authFlow.length > 0 && (
-                    <div className={styles.chat__container}>
-                        <div className={styles.useremail} onClick={editEmail}>
-                            <div className={styles.useremail_edit}>
-                                <TbPencil />
+                ) : (
+                    <CSSTransition
+                        in={showPassInputs}
+                        timeout={transitionDelay}
+                        classNames={{
+                            enter: styles.editMail_enter,
+                            enterActive: styles.editMail_enterActive,
+                            enterDone: styles.editMail_enterDone,
+                            exit: styles.editMail_exit,
+                            exitActive: styles.editMail_exitActive,
+                            exitDone: styles.editMail_exitDone,
+                        }}>
+                        <div className={styles.chat__container}>
+                            <div className={`${styles.message} ${styles.message__prompt}`}>
+                                Войдите или зарегистрируйтесь
                             </div>
-                            <div className={`${styles.useremail_mail} ${styles.message}`}>
-                                {validatedEmail}
+                            <div className={styles.useremail} onClick={editEmail}>
+                                <div className={styles.useremail_edit}>
+                                    <TbPencil />
+                                </div>
+                                <div className={`${styles.useremail_mail} ${styles.message}`}>
+                                    {validatedEmail}
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    </CSSTransition>
                 )}
-                {authFlow === 'login' && (
-                    <div className={styles.chat__container}>
-                        <div className={`${styles.message} ${styles.message__prompt}`}>
-                            Введите пароль, чтобы войти
-                        </div>
-                        <Input
-                            type='password'
-                            value={passwordInput}
-                            onChange={(e) => {
-                                setErrorMessages([]);
-                                setPasswordInput(e.target.value);
-                            }}
-                            charHideBtn
-                            placeholder='Введите пароль'
-                            autoFocus
-                        />
-                        <HighlightButton
-                            disabled={passwordInput && errorMessages.length === 0 ? false : true}
-                            className={styles.highlightbtn}
-                            onClick={() => {
-                                let passwordError = validatePassword(passwordInput);
-                                if (passwordError.length > 0) {
-                                    setErrorMessages([...passwordError]);
-                                    return;
-                                }
-                                handleSignIn(authFlow, passwordInput);
-                            }}>
-                            Войти
-                        </HighlightButton>
-                    </div>
-                )}
-                {authFlow === 'register' && (
-                    <div className={styles.chat__container}>
-                        <div className={`${styles.message} ${styles.message__prompt}`}>
-                            <p>Придумайте пароль для входа</p>
-                            <p className={styles.submessage}>
-                                минимум 6 символов, допускаются латинские буквы, цифры и спецсимволы
-                            </p>
-                        </div>
-                        <Input
-                            type='password'
-                            value={passwordInput}
-                            onChange={(e) => {
-                                setErrorMessages([]);
-                                setPasswordInput(e.target.value);
-                            }}
-                            charHideBtn
-                            placeholder='Введите пароль'
-                            autoFocus
-                        />
-                        <Input
-                            type='password'
-                            value={confirmedPasswordInput}
-                            onChange={(e) => {
-                                setErrorMessages([]);
-                                setConfirmedPasswordInput(e.target.value);
-                            }}
-                            charHideBtn
-                            placeholder='Подтвердите пароль'
-                        />
-                        <HighlightButton
-                            disabled={
-                                passwordInput &&
-                                    passwordInput.length === confirmedPasswordInput.length &&
-                                    errorMessages.length === 0
-                                    ? false
-                                    : true
-                            }
-                            className={styles.highlightbtn}
-                            onClick={() => {
-                                let passwordErrors: string[] = validatePassword(passwordInput);
-                                if (passwordErrors.length > 0) {
-                                    setErrorMessages([...passwordErrors]);
-                                    return;
-                                }
-                                let passwordError = validateConfirmedPassword(
-                                    passwordInput,
-                                    confirmedPasswordInput
-                                );
-                                if (passwordError.length > 0) {
-                                    setErrorMessages([passwordError]);
-                                    return;
-                                }
-                                handleSignIn(authFlow, confirmedPasswordInput);
-                            }}>
-                            Зарегистрироваться
-                        </HighlightButton>
-                    </div>
+                {showPassInputs && (
+                    <CSSTransition
+                        in={showPassInputs}
+                        timeout={transitionDelay}
+                        classNames={{
+                            enter: styles.passInput_enter,
+                            enterActive: styles.passInput_enterActive,
+                            enterDone: styles.passInput_enterDone,
+                            exit: styles.passInput_exit,
+                            exitActive: styles.passInput_exitActive,
+                            exitDone: styles.passInput_exitDone,
+                        }}>
+                        {authFlow === 'login' ? (
+                            <div className={styles.chat__container}>
+                                <div className={`${styles.message} ${styles.message__prompt}`}>
+                                    Введите пароль, чтобы войти
+                                </div>
+                                <Input
+                                    type='password'
+                                    value={passwordInput}
+                                    onChange={(e) => {
+                                        setErrorMessages([]);
+                                        setPasswordInput(e.target.value);
+                                    }}
+                                    charHideBtn
+                                    placeholder='Введите пароль'
+                                    autoFocus
+                                />
+                                <HighlightButton
+                                    disabled={
+                                        passwordInput && errorMessages.length === 0 ? false : true
+                                    }
+                                    className={styles.highlightbtn}
+                                    onClick={() => {
+                                        let passwordError = validatePassword(passwordInput);
+                                        if (passwordError.length > 0) {
+                                            setErrorMessages([...passwordError]);
+                                            return;
+                                        }
+                                        handleSignIn(authFlow, passwordInput);
+                                    }}>
+                                    Войти
+                                </HighlightButton>
+                            </div>
+                        ) : (
+                            <div className={styles.chat__container}>
+                                <div className={`${styles.message} ${styles.message__prompt}`}>
+                                    <p>Придумайте пароль для входа</p>
+                                    <p className={styles.submessage}>
+                                        минимум 6 символов, допускаются латинские буквы, цифры и
+                                        спецсимволы
+                                    </p>
+                                </div>
+                                <Input
+                                    type='password'
+                                    value={passwordInput}
+                                    onChange={(e) => {
+                                        setErrorMessages([]);
+                                        setPasswordInput(e.target.value);
+                                    }}
+                                    charHideBtn
+                                    placeholder='Введите пароль'
+                                    autoFocus
+                                />
+                                <Input
+                                    type='password'
+                                    value={confirmedPasswordInput}
+                                    onChange={(e) => {
+                                        setErrorMessages([]);
+                                        setConfirmedPasswordInput(e.target.value);
+                                    }}
+                                    charHideBtn
+                                    placeholder='Подтвердите пароль'
+                                />
+                                <HighlightButton
+                                    disabled={
+                                        passwordInput &&
+                                        passwordInput.length === confirmedPasswordInput.length &&
+                                        errorMessages.length === 0
+                                            ? false
+                                            : true
+                                    }
+                                    className={styles.highlightbtn}
+                                    onClick={() => {
+                                        let passwordErrors: string[] =
+                                            validatePassword(passwordInput);
+                                        if (passwordErrors.length > 0) {
+                                            setErrorMessages([...passwordErrors]);
+                                            return;
+                                        }
+                                        let passwordError = validateConfirmedPassword(
+                                            passwordInput,
+                                            confirmedPasswordInput
+                                        );
+                                        if (passwordError.length > 0) {
+                                            setErrorMessages([passwordError]);
+                                            return;
+                                        }
+                                        handleSignIn(authFlow, confirmedPasswordInput);
+                                    }}>
+                                    Зарегистрироваться
+                                </HighlightButton>
+                            </div>
+                        )}
+                    </CSSTransition>
                 )}
                 {errorMessages.length > 0 && (
                     <div className={styles.chat__container}>

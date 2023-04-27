@@ -257,17 +257,66 @@
     }
     &_enterActive {
         opacity: 1;
-        transition: opacity 1000ms;
+        transition: opacity 0.5s;
     }
     &_enterDone {
+        opacity: 1;
     }
     &_exit {
         opacity: 1;
     }
     &_exitActive {
         opacity: 0;
-        transition: opacity 1000ms;
+        transition: opacity 0.5s;
     }
     &_exitDone {
+        opacity: 0;
     }
 }
+
+.editMail {
+    &_enter {
+        opacity: 0;
+    }
+    &_enterActive {
+        opacity: 1;
+        transition: opacity 0.5s;
+    }
+    &_enterDone {
+        opacity: 1;
+    }
+    &_exit {
+        opacity: 1;
+    }
+    &_exitActive {
+        opacity: 0;
+        transition: opacity 0.5s;
+    }
+    &_exitDone {
+        opacity: 0;
+    }
+}
+
+.passInput {
+    &_enter {
+        opacity: 0;
+    }
+    &_enterActive {
+        opacity: 1;
+        transition: opacity 1s;
+    }
+    &_enterDone {
+        opacity: 1;
+    }
+    &_exit {
+        opacity: 1;
+    }
+    &_exitActive {
+        opacity: 0;
+        transition: opacity 1s;
+    }
+    &_exitDone {
+        opacity: 0;
+    }
+}
+
