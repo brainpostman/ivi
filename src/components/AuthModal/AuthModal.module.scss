@@ -250,3 +250,24 @@
         @include ui-margin(top, 0.5);
     }
 }
+
+.emailOauth {
+    &_enter {
+        opacity: 0;
+    }
+    &_enterActive {
+        opacity: 1;
+        transition: opacity 1000ms;
+    }
+    &_enterDone {
+    }
+    &_exit {
+        opacity: 1;
+    }
+    &_exitActive {
+        opacity: 0;
+        transition: opacity 1000ms;
+    }
+    &_exitDone {
+    }
+}

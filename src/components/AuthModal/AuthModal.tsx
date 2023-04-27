@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { ReactNode, useEffect, useRef, useState } from 'react';
 import styles from './AuthModal.module.scss';
 import { useActions } from '@/hooks/ReduxHooks';
 import { signIn } from 'next-auth/react';
@@ -14,10 +14,11 @@ import {
     validateEmail,
     validatePassword,
 } from '@/utils/auth.util';
-import { CSSTransition } from 'react-transition-group';
+import { CSSTransition } from 'react-transition-group-react-18';
+import List from '../UI/List/List';
 
 interface IAuthModalProps {
-  modalShown: boolean
+    modalShown: boolean;
 }
 
 const AuthModal = ({ modalShown }: IAuthModalProps) => {
@@ -35,6 +36,7 @@ const AuthModal = ({ modalShown }: IAuthModalProps) => {
 
     const [progressBar, setProgressBar] = useState(5);
     const modalRef = useRef<HTMLDivElement>(null);
+    const emailOauthRef = useRef<HTMLDivElement>(null)
     //фиксирование модалки в окне браузера
     useEffect(() => {
         if (modalRef.current) {
@@ -94,7 +96,17 @@ const AuthModal = ({ modalShown }: IAuthModalProps) => {
             </section>
             <section className={styles.chat}>
                 {authFlow.length === 0 && (
-                    <CSSTransition>
+                    <CSSTransition
+                        in={modalShown}
+                        timeout={1000}
+                        classNames={{
+                            enter: styles.emailOuath_enter,
+                            enterActive: styles.emailOauth_enterActive,
+                            enterDone: styles.emailOauth_enterDone,
+                            exit: styles.emailOuath_exit,
+                            exitActive: styles.emailOauth_exit,
+                            exitDone: styles.emailOauth_exitActive,
+                        }}>
                         <div className={styles.chat__container}>
                             <div className={`${styles.message} ${styles.message__prompt}`}>
                                 Войдите или зарегистрируйтесь
@@ -218,8 +230,8 @@ const AuthModal = ({ modalShown }: IAuthModalProps) => {
                         <HighlightButton
                             disabled={
                                 passwordInput &&
-                                passwordInput.length === confirmedPasswordInput.length &&
-                                errorMessages.length === 0
+                                    passwordInput.length === confirmedPasswordInput.length &&
+                                    errorMessages.length === 0
                                     ? false
                                     : true
                             }
@@ -250,15 +262,17 @@ const AuthModal = ({ modalShown }: IAuthModalProps) => {
                             <AiOutlineExclamationCircle />
                             <div className={styles.error__content}>
                                 <p className={styles.error__title}>Ошибка</p>
-                                <ul className={styles.error__messages}>
-                                    {errorMessages.map((item) => {
+                                <List
+                                    items={errorMessages}
+                                    className={styles.error__messages}
+                                    renderItem={(item) => {
                                         return (
                                             <li className={styles.error__message} key={item}>
                                                 {item}
                                             </li>
                                         );
-                                    })}
-                                </ul>
+                                    }}
+                                />
                             </div>
                         </div>
                     </div>
@@ -268,4 +282,4 @@ const AuthModal = ({ modalShown }: IAuthModalProps) => {
     );
 };
 
-export default AuthModal
+export default AuthModal;
