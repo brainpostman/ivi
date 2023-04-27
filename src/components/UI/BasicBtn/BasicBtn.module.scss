@@ -64,15 +64,15 @@ $active-color: #0e0c14;
   @include ui-margin(left, 2);
 }
 
-.suptitle {
-  font-size: 10px;
-  color: $gray;
-  font-weight: 600;
-  height: 12px;
-  line-height: 1;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+.subtitle {
+	font-size: 10px;
+	color: $gray;
+	font-weight: 600;
+	height: 12px;
+	line-height: 1;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
 }
 
 .title {

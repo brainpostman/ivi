@@ -1,71 +1,112 @@
 import {
-  DetailedHTMLProps,
-  FC,
-  InputHTMLAttributes,
-  useEffect,
-  useRef,
-  useState,
-} from 'react'
-import style from './Input.module.scss'
+    DetailedHTMLProps,
+    FC,
+    InputHTMLAttributes,
+    MutableRefObject,
+    Ref,
+    useEffect,
+    useRef,
+    useState,
+} from 'react';
+import style from './Input.module.scss';
+import { FiEye, FiEyeOff } from 'react-icons/fi';
 
-const Input: FC<
-  DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>
-> = ({ type = 'text', placeholder, ...props }) => {
-  const inputRef = useRef<HTMLInputElement>(null)
-  const [focus, setFocus] = useState(false)
-
-  const inputClassName = type === 'number' ? style.number : style.text
-  const placeholderType =
-    type === 'number' ? style.placeholder__number : style.placeholder__text
-  const placeholderClassName = focus ? style.placeholder__text_active : ''
-
-  useEffect(() => {
-    if (inputRef) {
-      inputRef.current?.addEventListener('focus', () => {
-        setFocus(true)
-      })
-      inputRef.current?.addEventListener('blur', () => {
-        if (inputRef.current?.value === '') {
-          setFocus(false)
-        }
-      })
-    }
-    return () => {
-      if (inputRef) {
-        inputRef.current?.removeEventListener('focus', () => {
-          setFocus(true)
-        })
-        inputRef.current?.removeEventListener('blur', () => {
-          if (inputRef.current?.value === '') {
-            setFocus(false)
-          }
-        })
-      }
-    }
-  }, [])
-
-  return (
-    <label className={style.label}>
-      <input
-        ref={inputRef}
-        type={type}
-        className={`${style.input} ${inputClassName}`}
-        placeholder={type === 'number' ? placeholder : ''}
-        {...props}
-      />
-      <div
-        className={`${style.placeholder} ${placeholderType} ${placeholderClassName}`}
-      >
-        <div
-          className={`${style.placeholder__span} ${
-            focus ? style.placeholder__span_active : ''
-          }`}
-        >
-          {type === 'text' ? placeholder : ''}
-        </div>
-      </div>
-    </label>
-  )
+interface ICustomInput
+    extends DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement> {
+    charHideBtn?: boolean;
+    ref?: Ref<HTMLInputElement>;
 }
+
+const Input: FC<ICustomInput> = ({
+    type = 'text',
+    charHideBtn = false,
+    placeholder,
+    value,
+    ref,
+    className: propsClassName,
+    autoFocus,
+    ...props
+}) => {
+    const inputRef = useRef<HTMLInputElement>(null);
+    const placeholderRef = useRef<HTMLDivElement>(null);
+    const [active, setActive] = useState(false);
+    const [focus, setFocus] = useState(false);
+    const [hideChars, setHideChars] = useState(true);
+
+    const inputClassName = type === 'number' ? style.number : style.text;
+    const placeholderActive = active ? style.placeholder_active : '';
+
+    useEffect(() => {
+        if (inputRef.current?.value) {
+            setActive(true);
+        } else if (!inputRef.current?.value && !focus) {
+            setActive(false);
+        }
+    }, [value]);
+
+    useEffect(() => {
+        if (autoFocus) {
+            setActive(true);
+        }
+    }, [autoFocus]);
+
+    return (
+        <div className={style.wrapper}>
+            <label className={style.label}>
+                <input
+                    type={hideChars ? type : 'text'}
+                    className={`${propsClassName} ${style.input} ${inputClassName}`}
+                    placeholder={type === 'number' ? placeholder : ''}
+                    value={value}
+                    {...props}
+                    onFocus={() => {
+                        setActive(true);
+                        setFocus(true);
+                    }}
+                    onBlur={() => {
+                        if (!inputRef.current?.value) {
+                            setActive(false);
+                            setFocus(false);
+                        }
+                    }}
+                    ref={(element) => {
+                        (inputRef as MutableRefObject<HTMLInputElement | null>).current = element;
+                        if (ref) {
+                            if (typeof ref === 'function') {
+                                ref(element);
+                            } else {
+                                (ref as MutableRefObject<HTMLInputElement | null>).current =
+                                    element;
+                            }
+                        }
+                    }}
+                    autoFocus={autoFocus}
+                />
+                {type !== 'number' && (
+                    <div
+                        className={`${style.placeholder} ${placeholderActive}`}
+                        ref={placeholderRef}>
+                        <span
+                            className={`${style.placeholder__text} ${
+                                active ? style.placeholder__text_active : ''
+                            }`}>
+                            {placeholder}
+                        </span>
+                    </div>
+                )}
+            </label>
+            {charHideBtn && (
+                <span
+                    className={style.hideicon}
+                    onClick={() => {
+                        setHideChars((prev) => !prev);
+                    }}
+                    style={{ color: inputRef.current?.value ? '#1f1b2e' : '#a5a1b2' }}>
+                    {hideChars ? <FiEyeOff /> : <FiEye />}
+                </span>
+            )}
+        </div>
+    );
+};
 
 export default Input
