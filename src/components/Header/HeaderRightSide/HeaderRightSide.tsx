@@ -8,7 +8,6 @@ import HighlightButton from '@/components/UI/HighlightButton/HighlightButton';
 import { useRouter } from 'next/router';
 import style from './HeaderRightSide.module.scss';
 import Switch from '@/components/UI/Switch/Switch';
-import { useActions } from '@/hooks/ReduxHooks';
 
 interface IProps {
     showHoverBlock: (tab: IHeaderTab) => void;
@@ -20,8 +19,6 @@ const HeaderRightSide: FC<IProps> = ({ showHoverBlock }) => {
     const [isViewSubscribeButton, setIsViewSubscribeButton] = useState(true);
 
     const { pathname } = useRouter();
-
-    const { changeLanguage } = useActions();
 
     useEffect(() => {
         if (pathname === '/') {
@@ -49,12 +46,7 @@ const HeaderRightSide: FC<IProps> = ({ showHoverBlock }) => {
                 className={classNamePersonIcon}
                 onMouseEnter={() => showHoverBlock('profile')}
             />
-            <Switch
-                left={'РУ'}
-                right={'EN'}
-                callbackLeft={() => changeLanguage('ru')}
-                callbackRight={() => changeLanguage('en')}
-            />
+            <Switch left={'РУ'} right={'EN'} />
         </article>
     );
 };
