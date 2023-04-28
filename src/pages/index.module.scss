@@ -1,59 +1,84 @@
 .buttons {
-	display: flex;
-	gap: 16px;
+  display: flex;
+  gap: 16px;
 
-	@include ui-margin(ver, 6);
+  width: 100%;
+  @include ui-margin(ver, 6);
 
-	> a {
-		width: 100%;
-		> button {
-			width: 100%;
-		}
-	}
+  > a {
+    width: 100%;
+    > button {
+      width: 100%;
+    }
+  }
 }
 
 .carousels {
-	display: inline-flex;
-	flex-direction: column;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 
-	> article {
-		@include ui-margin(bottom, 11);
-	}
+  > article {
+    @include ui-margin(bottom, 11);
+  }
 }
 
 .view_all {
-	display: flex;
-	align-items: center;
-	justify-content: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
-	background-color: $dark;
-	min-width: 153px;
-	max-width: 153px;
-	height: 235px;
+  background-color: $dark;
+  min-width: 153px;
+  max-width: 153px;
+  height: 235px;
 
-	color: $gray-soft;
-	border-radius: 8px;
+  color: $gray-soft;
+  border-radius: 8px;
 
-	font-weight: 600;
-	line-height: 20px;
-	font-size: 15px;
+  font-weight: 600;
+  line-height: 20px;
+  font-size: 15px;
 
-	letter-spacing: 0.3px;
+  letter-spacing: 0.3px;
 
-	transition: transform 0.4s, color 0.4s, background-color 0.4s;
+  transition: transform 0.4s, color 0.4s, background-color 0.4s;
 
-	z-index: -1;
+  z-index: -1;
 
-	cursor: pointer;
+  cursor: pointer;
 
-	&:hover {
-		transform: scale(1.05);
-		color: #fff;
-		background-color: #231f34;
-	}
+  &:hover {
+    transform: scale(1.05);
+    color: #fff;
+    background-color: #231f34;
+  }
 }
 
 .movies_carousel_wrapper {
-	@include ui-padding(top, 1);
-	@include ui-padding(hor, 1);
+  @include ui-padding(top, 1);
+  @include ui-padding(hor, 4);
+}
+
+.wrapper_expand {
+  @include ui-padding(hor, 4);
+}
+
+.visible_text {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  line-clamp: 2;
+  -webkit-line-clamp: 2;
+
+  @media (max-width: 1249px) {
+    @include adaptive-size(width, 930, 288);
+  }
+}
+
+.wrapper_buttons {
+  display: flex;
+  justify-content: center;
+
+  @include ui-padding(hor, 4);
 }
