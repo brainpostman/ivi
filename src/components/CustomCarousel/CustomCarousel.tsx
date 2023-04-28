@@ -1,92 +1,98 @@
+import { formatCarouselWidth } from '@/formatters/carouselWidth.format'
 import { useBreakPoints } from '@/hooks/useBreakPoints'
 import { useCustomCarousel } from '@/hooks/useCustomCarousel'
 import { useWindow } from '@/hooks/useWindow'
-import { Url } from 'next/dist/shared/lib/router/router'
+import { ICustomCarouselProps } from '@/types/customCarousel'
+import { adaptiveSize } from '@/utils/adaptive.utils'
 import Link from 'next/link'
-import React, { FC, memo, useEffect, useRef, useState } from 'react'
+import React, { FC, MutableRefObject, memo, useRef, useState } from 'react'
 import { MdArrowBackIosNew } from 'react-icons/md'
 import style from './CustomCarousel.module.scss'
+import CustomCarouselArrows from './CustomCarouselArrows/CustomCarouselArrows'
+import CustomCarouselShadows from './CustomCarouselShadows/CustomCarouselShadows'
 
-// @elementsView - Количество элементов, которые отображаются в карусели (указываем на 1 элемент меньше)
-// @elemntsMove - Количество элементов, на которое мы двигаем карусель
-// @elementLen - полная длина элемента, включая отступ
-// @blockList - данные для элементов карусели
+// ==== PROPS ====
+// @param { * } elementsView - количество элементов, которые отображаются в карусели (указываем на 1 элемент меньше)
+// @param { * } elemntsMove - количество элементов, на которое мы двигаем карусель
+// @param { * } children -
+// @param title - заголовок карусели
+// @param href - ссылка в заголовке
+// @param additElem - допольнительный элемент
+// @param classNameList - класс для списка элементов
+// @param classNameWrapper - класс для обёртки
+// @param arrowSize - размер стрелок
+// @param space - адаптивный отступ между элементами: [начальный отступ, коненчный отступ]
+// @param speed - скорость анимации движения
+// @param width - ширина ограничивающего контейнера
+// 'full' - 1225px; 'fit' - ограничивается по elementsView; 'fit-shadow' - добавляется тень + контейнер увеличивается на половину следующего элемента
+// @param breakpoints - брейкпоинты
+// при достижении брейкпоинта @param elementsView уменьшается на 1
+// @param padding (костыль) - допольнительный отступ
 
-type IWidth = 'full' | 'fit' | 'fit-shadow'
-
-interface IProps {
-  elementsView: number
-  elementsMove: number
-  title?: string
-  href?: Url
-  children: React.ReactNode[]
-  additElem?: () => JSX.Element
-  classNameList?: string
-  classNameWrapper?: string
-  arrowSize?: number
-  space?: number
-  speed?: number
-  width?: IWidth
-  breakpoints?: number[]
-}
-
-const formatWidth = (
-  width: IWidth,
-  elementLens: number[],
-  elementsView: number,
-  space: number
-) => {
-  if (width === 'full') return 1225
-
-  const resultWidth =
-    elementLens
-      .slice(0, elementsView)
-      .reduce((accum, item) => accum + item, 0) - space
-
-  if (width === 'fit') return resultWidth
-  if (width === 'fit-shadow')
-    return resultWidth + space + elementLens[elementsView] / 2
-
-  return 0
-}
-
-const CustomCarousel: FC<IProps> = ({
+const CustomCarousel: FC<ICustomCarouselProps> = ({
   elementsMove,
-  elementsView: incomingElementsView,
+  elementsView: elementsViewIncoming,
   title,
   href,
   children,
   additElem,
   classNameList,
   classNameWrapper,
-  arrowSize = 32,
-  space = 24,
+  arrowSize: arrowSizeIncoming = 32,
+  space = [24, 24],
   speed = 400,
   width = 'full',
   breakpoints,
+  padding,
 }) => {
   const [elementLens, setElementLens] = useState<number[]>([])
   const refs = useRef<(HTMLDivElement | null)[]>([])
-  const [elementsView, setElementsView] = useState(incomingElementsView)
+  const [elementsView, setElementsView] = useState(elementsViewIncoming)
+  const [gap, setGap] = useState(space[0])
+  const [arrowSize, setArrowSize] = useState(arrowSizeIncoming)
 
-  const containerWidth = formatWidth(width, elementLens, elementsView, space)
-  const arrowPosition = width === 'fit-shadow' ? arrowSize - 4 : arrowSize + 4
+  const containerWidth = formatCarouselWidth(
+    width,
+    elementLens,
+    elementsView,
+    gap,
+    padding
+  )
+
+  const arrowPosition =
+    width === 'fit-shadow' ? arrowSizeIncoming - 4 : arrowSizeIncoming + 4
 
   const { onClickRightArrow, onClickLeftArrow, viewArrow, move } =
     useCustomCarousel(elementLens, elementsView, elementsMove)
 
   const translate = `translate3d(-${move}px, 0, 0)`
 
+  const pushRef = (ref: HTMLDivElement | null) => {
+    if (ref === null || refs.current.length >= children.length) return
+
+    refs.current.push(ref)
+  }
+
   const setterElements = () => {
     setElementLens(() => {
       const arrayLen = refs.current.map(ref =>
-        ref ? ref.offsetWidth + space : 0
+        ref ? ref.offsetWidth + gap : 0
       )
       return arrayLen
     })
   }
 
-  useWindow(setterElements, [refs, setElementLens, elementsView])
+  const setterGap = () => {
+    setGap(() => adaptiveSize(space[0], space[1], 600))
+  }
+
+  const setterArrowSize = () => {
+    setArrowSize(() => adaptiveSize(arrowSizeIncoming, 20))
+  }
+
+  useWindow(setterElements, [refs, setElementLens, elementsView, gap])
+  useWindow(setterGap, [setGap])
+  useWindow(setterArrowSize, [setArrowSize])
   useBreakPoints(setElementsView, elementsView, breakpoints)
 
   return (
@@ -107,66 +113,32 @@ const CustomCarousel: FC<IProps> = ({
             className={`${style.list} ${classNameList}`}
             style={{
               transform: translate,
-              gap: `${space}px`,
+              gap: `${gap}px`,
               transitionDuration: `${speed}ms`,
+              padding,
             }}
           >
             {Array.isArray(children) &&
               children.map((element, index) => (
-                <div
-                  key={index}
-                  ref={ref => {
-                    if (ref === null || refs.current.length >= children.length)
-                      return
-
-                    refs.current.push(ref)
-                  }}
-                >
+                <div key={index} ref={ref => pushRef(ref)}>
                   {element}
                 </div>
               ))}
-            {additElem && (
-              <div
-                ref={ref => {
-                  if (ref === null || refs.current.length >= children.length)
-                    return
-
-                  refs.current.push(ref)
-                }}
-              >
-                {additElem()}
-              </div>
-            )}
+            {additElem && <div ref={ref => pushRef(ref)}>{additElem()}</div>}
           </div>
-          <div className={style.arrows}>
-            <div
-              onClick={onClickLeftArrow}
-              className={viewArrow('left')}
-              style={{ left: `-${arrowPosition}px` }}
-            >
-              <MdArrowBackIosNew
-                style={{ width: arrowSize, height: arrowSize }}
-              />
-            </div>
-            <div
-              onClick={onClickRightArrow}
-              className={viewArrow('right')}
-              style={{ right: `-${arrowPosition}px` }}
-            >
-              <MdArrowBackIosNew
-                style={{ width: arrowSize, height: arrowSize }}
-              />
-            </div>
-          </div>
+          <CustomCarouselArrows
+            arrowSize={arrowSize}
+            arrowPosition={arrowPosition}
+            classNameLeftArrow={viewArrow('left')}
+            classNameRightArrow={viewArrow('right')}
+            onClickLeftArrow={onClickLeftArrow}
+            onClickRightArrow={onClickRightArrow}
+          />
           {width === 'fit-shadow' && (
-            <>
-              <div
-                className={`${style.shadow} ${style.shadow_left} ${viewArrow(
-                  'left'
-                )}`}
-              ></div>
-              <div className={`${style.shadow} ${viewArrow('right')}`}></div>
-            </>
+            <CustomCarouselShadows
+              classNameLeftShadow={viewArrow('left')}
+              classNameRightShadow={viewArrow('right')}
+            />
           )}
         </div>
       </div>
