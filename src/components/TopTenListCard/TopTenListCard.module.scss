@@ -1,0 +1,52 @@
+.wrapper {
+  position: relative;
+  display: flex;
+  justify-content: center;
+
+  cursor: pointer;
+
+  transition: transform 0.2s;
+
+  &:hover {
+    transform: scale(1.05);
+  }
+
+  > img {
+    z-index: 3;
+
+    &:first-child {
+      object-fit: cover;
+      border-radius: 8px;
+
+      z-index: 1;
+    }
+  }
+}
+
+.wrapper_img {
+  position: relative;
+  border-radius: 8px;
+
+  width: 224px;
+  height: 457px;
+
+  @media (max-width: 1240px) {
+    @include adaptive-size(width, 224, 162, 599);
+    @include adaptive-size(height, 457, 331, 599);
+  }
+}
+
+.number {
+  position: absolute;
+  bottom: 0;
+}
+
+.shadow {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+
+  z-index: 2;
+
+  background-image: linear-gradient(0deg, #100e19, rgba(16, 14, 25, 0));
+}
