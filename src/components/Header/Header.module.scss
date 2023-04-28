@@ -1,10 +1,11 @@
+$wrapper-bg: #100e19;
+
 .wrapper {
-  background-color: #100e19;
+  background-color: $wrapper-bg;
 
   max-width: $max-width;
   width: 100%;
 
-  margin: auto;
   @include ui-padding(top, 1);
 }
 
