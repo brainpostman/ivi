@@ -12,14 +12,8 @@ interface IProps {
 const MovieCard = forwardRef<HTMLDivElement, IProps>(({ movie }, ref) => {
   return (
     <div key={movie.id} className={style.wrapper} ref={ref}>
-      <div className={style.wrapperImg}>
-        <Image
-          src={movie.img}
-          alt='movie'
-          className={style.img}
-          width={153}
-          height={235}
-        />
+      <div className={style.wrapper_img}>
+        <Image src={movie.img} alt='movie' className={style.img} fill />
       </div>
       <div className={style.hoverBlock}>
         <MovieCardControls />
