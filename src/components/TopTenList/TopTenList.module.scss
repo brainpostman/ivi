@@ -1,25 +1,37 @@
 .wrapper {
-	position: relative;
+  position: relative;
+  display: flex;
+  justify-content: center;
 
-	@include ui-margin(top, 12);
+  @include ui-margin(top, 12);
+
+  @media (max-width: 599px) {
+    display: none;
+  }
+}
+
+.container {
+  max-width: fit-content;
 }
 
 .title {
-	display: flex;
-	align-items: center;
-	gap: 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
 
-	color: #fff;
+  color: #fff;
 
-	font-size: 24px;
-	font-weight: 700;
-	line-height: 28px;
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 28px;
+
+  @include ui-padding(hor, 4);
 }
 
 .carousel_wrapper {
-	@include ui-margin(bottom, 6);
+  @include ui-margin(bottom, 6);
 }
 
 .carousel_list {
-	@include ui-padding(ver, 4);
+  @include ui-padding(ver, 4);
 }
