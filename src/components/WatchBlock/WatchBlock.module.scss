@@ -1,0 +1,97 @@
+.wrapper{
+    display:block;
+    text-align: start;
+    @include ui-margin(top,4);
+    @include ui-margin(bottom,2);
+
+    hr{
+        border:1px;
+        border-color:rgba(150, 155, 160, 0.717); 
+        border-style:outset;
+        box-shadow: 0 1px 0 rgba(255,255,255,.16), inset 0 0 0 rgba(255,255,255,.16);
+        
+    }
+}
+
+.wrapper_content{
+    @include ui-margin(top,8);
+    @include ui-margin(bottom,2);
+    @include ui-padding(bottom,8);
+    text-align: none;
+    font-size: 13px;
+    font-weight: 400;
+
+    h4{
+        color: rgba(255,255,255,.4);
+        font-size: 13px;
+        font-weight: 400;
+    }
+    h3{
+        font-size: 13px;
+        font-weight: 400;
+    }
+}
+
+.content_remark{
+
+    span{
+        color: rgba(255,255,255,.4);
+    }
+}
+
+.content_icons{
+    display: flex;
+    @include ui-margin(top,2);
+    gap:8px;
+}
+
+.icon_text{
+    color:#fff;
+    font-size: 13px;
+    line-height: 16px;
+    font-weight: 500;
+    
+}
+
+.icon_4k{
+    height: 20px;
+    padding: 2px 6px;
+    border-radius: 4px;
+    width: 29px;
+    background-color: rgba(255,255,255,.16);
+}
+.icon_fullhd{
+    height: 20px;
+    padding: 2px 8px;
+    border-radius: 4px;
+    width: 55px;
+    background-color: rgba(255,255,255,.16);
+}
+.icon_hd{
+    height: 20px;
+    padding: 2px 8px;
+    border-radius: 4px;
+    width: 32px;
+    background-color: rgba(255,255,255,.16);
+}
+.icon_1080{
+    height: 20px;
+    padding: 2px 8px;
+    border-radius: 4px;
+    width: 44px;
+    background-color: rgba(255,255,255,.16);
+}
+.icon_720{
+    height: 20px;
+    padding: 2px 8px;
+    border-radius: 4px;
+    width: 36px;
+    background-color: rgba(255,255,255,.16);
+}
+.icon_51{
+    height: 20px;
+    padding: 2px 8px;
+    border-radius: 4px;
+    width: 32px;
+    background-color: rgba(255,255,255,.16);
+}

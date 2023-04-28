@@ -1,7 +1,6 @@
 import BannerCarousel from '@/components/BannerCarousel/BannerCarousel'
-import MovieCarouselContent from '@/components/CarouselContents/MovieCarouselContent/MovieCarouselContent'
 import CustomCarousel from '@/components/CustomCarousel/CustomCarousel'
-import ExpandInfo from '@/components/ExpandInfo/ExpandInfo'
+import ExpandBlock from '@/components/ExpandBlock/ExpandBlock'
 import HomePageInfo from '@/components/HomePageInfo/HomePageInfo'
 import MovieCard from '@/components/MovieCard/MovieCard'
 import TopTenList from '@/components/TopTenList/TopTenList'
@@ -9,9 +8,7 @@ import LongButton from '@/components/UI/LongButton/LongButton'
 import ViewAllBlock from '@/components/ViewAllBlock/ViewAllBlock'
 import mainCarouselData from '@/data/banner_carousel/bannerCarouselData'
 import { movieCardGridData } from '@/data/movieCard.data'
-import useIsomorphicLayoutEffect from '@/hooks/useIsomorphicLayoutEffect'
 import PageLayout from '@/layouts/PageLayout'
-import { FC, useLayoutEffect, useRef } from 'react'
 import style from './index.module.scss'
 
 const title =
@@ -29,13 +26,24 @@ const imgLongButton_2 =
 const infoTitle =
   'Онлайн-кинотеатр Иви: фильмы в хорошем качестве всегда приносят настоящее удовольствие'
 
-const visibleText =
-  'Каждый день миллионы людей ищут фильмы онлайн, и никто не хочет усложнять себе жизнь – и вы наверняка один из них! А раз так, то Иви – это именно тот ресурс, который вам нужен. От лучших кинолент в HD-качестве вас отделяет буквально один клик. Мы не просто освобождаем от необходимости идти в кинотеатр или изучать программу телепередач – у посетителей нашего ресурса гораздо больше возможностей.'
+const VisibleText = () => {
+  return (
+    <p className={style.visible_text}>
+      'Каждый день миллионы людей ищут фильмы онлайн, и никто не хочет усложнять
+      себе жизнь – и вы наверняка один из них! А раз так, то Иви – это именно
+      тот ресурс, который вам нужен. От лучших кинолент в HD-качестве вас
+      отделяет буквально один клик. Мы не просто освобождаем от необходимости
+      идти в кинотеатр или изучать программу телепередач – у посетителей нашего
+      ресурса гораздо больше возможностей.'
+    </p>
+  )
+}
 
 export default function Home() {
   return (
     <PageLayout title={title} description={description}>
       <BannerCarousel items={mainCarouselData} speed={800} />
+
       <div className={style.buttons}>
         <a href='https://www.ivi.ru/subscribe?redirect_url=%2F'>
           <LongButton variant='secondary' img={imgLongButton_1}>
@@ -49,9 +57,11 @@ export default function Home() {
         </a>
       </div>
 
-      <ExpandInfo title={infoTitle} visibleText={visibleText}>
-        <HomePageInfo />
-      </ExpandInfo>
+      <div className={style.wrapper_expand}>
+        <ExpandBlock title={infoTitle} visibleBlock={VisibleText()}>
+          <HomePageInfo />
+        </ExpandBlock>
+      </div>
 
       <TopTenList />
 
@@ -62,6 +72,10 @@ export default function Home() {
           additElem={ViewAllBlock}
           elementsMove={5}
           elementsView={7}
+          breakpoints={[1274, 1078, 900, 767, 550]}
+          space={[24, 4]}
+          padding={6}
+          width='fit'
         >
           {movieCardGridData.map(movie => (
             <MovieCard movie={movie} />
@@ -74,6 +88,10 @@ export default function Home() {
           additElem={ViewAllBlock}
           elementsMove={5}
           elementsView={7}
+          breakpoints={[1274, 1078, 900, 767, 550]}
+          space={[24, 4]}
+          padding={6}
+          width='fit'
         >
           {movieCardGridData.map(movie => (
             <MovieCard movie={movie} />

@@ -21,7 +21,9 @@ type IProps = ITopTenCarouselElem & { index: number }
 const TopTenListCard: FC<IProps> = movie => {
   return (
     <div className={style.wrapper}>
-      <Image src={movie.img} alt={movie.title} width={224} height={457} />
+      <div className={style.wrapper_img}>
+        <Image src={movie.img} alt={movie.title} className={style.img} fill />
+      </div>
 
       <Image
         src={imgNumbers[movie.id - 1]}

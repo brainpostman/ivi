@@ -8,21 +8,27 @@
     opacity: 1;
   }
 
-  &:hover .wrapperImg,
+  &:hover .wrapper_img,
   .hoverBlock {
     transform: scale(1.05);
   }
 }
 
-.wrapperImg {
+.wrapper_img {
   position: relative;
   border-radius: 8px;
 
   transition: transform 0.4s;
 
+  width: 153px;
+  height: 235px;
+
   z-index: -1;
 
-  @include ui-margin(bottom, 2);
+  @media (max-width: 1240px) {
+    @include adaptive-size(width, 153, 132);
+    @include adaptive-size(height, 235, 202);
+  }
 }
 
 .hoverBlock {
@@ -46,24 +52,28 @@
   @include ui-padding(default, 4);
 }
 
-.infoTitle {
-  color: #fff;
+.info {
+  @include ui-margin(top, 1);
 
-  @include font(2, bold);
+  &__title {
+    color: #fff;
 
-  width: 153px;
+    @include font(2, bold);
 
-  white-space: nowrap;
-  overflow-x: hidden;
+    width: 153px;
 
-  text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow-x: hidden;
+
+    text-overflow: ellipsis;
+  }
+
+  &__subtitle {
+    @include font(1);
+  }
 }
 
-.infoSubtitle {
-  @include font(1);
-}
-
-.notFree {
+.not_ree {
   color: $red;
 }
 

@@ -1,4 +1,4 @@
-import ExpandInfo from '@/components/ExpandInfo/ExpandInfo'
+import ExpandBlock from '@/components/ExpandInfo/ExpandBlock'
 import BasicBtn from '@/components/UI/BasicBtn/BasicBtn'
 import {
   acortTopInfoVisibleData,
@@ -54,9 +54,9 @@ export default function Actor() {
             <div className={style.info_container}>
               <h1 className={style.info_container__title}>Оскар Айзек</h1>
               <h2 className={style.info_container__subtitle}>Oscar Isaak</h2>
-              <ExpandInfo visibleText={acortTopInfoVisibleData} width='100%'>
+              <ExpandBlock visibleBlock={acortTopInfoVisibleData} width='100%'>
                 Коэн «Внутри Льюина Дэвиса».
-              </ExpandInfo>
+              </ExpandBlock>
               <div className={style.info_buttons}>
                 <p onClick={scrollMove(getCoordY(filmographyRef))}>
                   47 фильмов
@@ -106,9 +106,12 @@ export default function Actor() {
           </div>
           <div className={style.biografy}>
             <h2 ref={biografyRef}>Биография</h2>
-            <ExpandInfo visibleText={actorBiografyInfoVisibleData} width='100%'>
+            <ExpandBlock
+              visibleBlock={actorBiografyInfoVisibleData}
+              width='100%'
+            >
               {actorBiografyData}
-            </ExpandInfo>
+            </ExpandBlock>
           </div>
         </article>
       </section>
