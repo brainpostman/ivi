@@ -18,5 +18,8 @@
         "confirm-placeholder": "Подтвердите пароль",
         "register": "Зарегистрироваться"
     },
-    "error": "Ошибка"
+    "error": "Ошибка",
+    "error-messages": {
+        
+    }
 }
