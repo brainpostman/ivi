@@ -24,14 +24,9 @@
   font-size: 24px;
   font-weight: 700;
   line-height: 28px;
-
   @include ui-padding(hor, 4);
 }
 
 .carousel_wrapper {
-  @include ui-margin(bottom, 6);
-}
-
-.carousel_list {
-  @include ui-padding(ver, 4);
+  //@include ui-margin(bottom, 6);
 }
