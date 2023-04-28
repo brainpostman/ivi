@@ -25,8 +25,6 @@
 
   z-index: -1;
 
-  @include ui-margin(bottom, 2);
-
   @media (max-width: 1240px) {
     @include adaptive-size(width, 153, 132);
     @include adaptive-size(height, 235, 202);
@@ -54,24 +52,28 @@
   @include ui-padding(default, 4);
 }
 
-.infoTitle {
-  color: #fff;
+.info {
+  @include ui-margin(top, 1);
 
-  @include font(2, bold);
+  &__title {
+    color: #fff;
 
-  width: 153px;
+    @include font(2, bold);
 
-  white-space: nowrap;
-  overflow-x: hidden;
+    width: 153px;
 
-  text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow-x: hidden;
+
+    text-overflow: ellipsis;
+  }
+
+  &__subtitle {
+    @include font(1);
+  }
 }
 
-.infoSubtitle {
-  @include font(1);
-}
-
-.notFree {
+.not_ree {
   color: $red;
 }
 

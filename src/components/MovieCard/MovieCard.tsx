@@ -19,13 +19,13 @@ const MovieCard = forwardRef<HTMLDivElement, IProps>(({ movie }, ref) => {
         <MovieCardControls />
         <MovieCardInfo block={movie} />
       </div>
-      <div>
-        <p className={style.infoTitle}>{movie.title}</p>
+      <div className={style.info}>
+        <p className={style.info__title}>{movie.title}</p>
         <p
           className={
             movie.isFree
-              ? style.infoSubtitle
-              : `${style.infoSubtitle} ${style.notFree}`
+              ? style.info__subtitle
+              : `${style.info__subtitle} ${style.not_free}`
           }
         >
           {movie.isFree ? 'Бесплатно' : 'Подписка'}
