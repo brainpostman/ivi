@@ -1,8 +1,8 @@
 .wrapper {
   background-color: #100e19;
 
-  // NOTE: для StoryBook
-  width: $max-width;
+  max-width: $max-width;
+  width: 100%;
 
   margin: auto;
   @include ui-padding(top, 1);
@@ -12,8 +12,6 @@
   position: relative;
   display: flex;
   justify-content: space-between;
-
-  max-width: 1240px;
 
   border-top-left-radius: 8px;
   border-top-right-radius: 8px;
