@@ -11,7 +11,10 @@
 
   &__title {
     color: #fff;
-    @include font(3, bold);
+
+    @include adaptive-size(font-size, 20, 15);
+    @include adaptive-size(line-height, 24, 22);
+    font-weight: 600;
   }
 
   &__body__top {
