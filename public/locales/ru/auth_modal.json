@@ -1,0 +1,22 @@
+{
+    "unforeseen-error": "Произошла непредвиденная ошибка",
+    "authorization": "Вход или регистрация",
+    "login-or-register": "Войдите или зарегистрируйтесь",
+    "email-placeholder": "Введите ваш email",
+    "continue": "Продолжить",
+    "login": {
+        "signin-google": "Войти с помощью Google",
+        "signin-vk": "Войти с помощью ВКонтакте",
+        "enter-pass-to-login": "Введите пароль, чтобы войти",
+        "enter-pass": "Введите пароль",
+        "login": "Войти"
+    },
+    "register": {
+        "invent-pass": "Придумайте пароль для входа",
+        "pass-requirements": "минимум 6 символов, допускаются латинские буквы, цифры и cпецсимволы",
+        "pass-placeholder": "Введите пароль",
+        "confirm-placeholder": "Подтвердите пароль",
+        "register": "Зарегистрироваться"
+    },
+    "error": "Ошибка"
+}
