@@ -17,6 +17,7 @@
   cursor: pointer;
 
   @include ui-padding(bottom, 6);
+  @include ui-padding(hor, 4);
 
   > svg {
     width: 20px;
@@ -38,22 +39,7 @@
   display: flex;
 
   transition: transform ease-out;
-
-  > li {
-    position: relative;
-    cursor: pointer;
-
-    border-radius: 8px;
-
-    &:hover .hoverBlock {
-      opacity: 1;
-    }
-
-    &:hover .wrapperImg,
-    .hoverBlock {
-      transform: scale(1.05);
-    }
-  }
+  @include ui-padding(hor, 4);
 }
 
 .arrows {

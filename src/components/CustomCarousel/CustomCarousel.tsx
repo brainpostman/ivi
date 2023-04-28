@@ -1,8 +1,9 @@
+import { useBreakPoints } from '@/hooks/useBreakPoints'
 import { useCustomCarousel } from '@/hooks/useCustomCarousel'
-import useIsomorphicLayoutEffect from '@/hooks/useIsomorphicLayoutEffect'
+import { useWindow } from '@/hooks/useWindow'
 import { Url } from 'next/dist/shared/lib/router/router'
 import Link from 'next/link'
-import React, { FC, memo, useRef, useState } from 'react'
+import React, { FC, memo, useEffect, useRef, useState } from 'react'
 import { MdArrowBackIosNew } from 'react-icons/md'
 import style from './CustomCarousel.module.scss'
 
@@ -26,6 +27,7 @@ interface IProps {
   space?: number
   speed?: number
   width?: IWidth
+  breakpoints?: number[]
 }
 
 const formatWidth = (
@@ -50,7 +52,7 @@ const formatWidth = (
 
 const CustomCarousel: FC<IProps> = ({
   elementsMove,
-  elementsView,
+  elementsView: incomingElementsView,
   title,
   href,
   children,
@@ -61,13 +63,13 @@ const CustomCarousel: FC<IProps> = ({
   space = 24,
   speed = 400,
   width = 'full',
+  breakpoints,
 }) => {
-  const time = Date.now()
   const [elementLens, setElementLens] = useState<number[]>([])
-
   const refs = useRef<(HTMLDivElement | null)[]>([])
-  const containerWidth = formatWidth(width, elementLens, elementsView, space)
+  const [elementsView, setElementsView] = useState(incomingElementsView)
 
+  const containerWidth = formatWidth(width, elementLens, elementsView, space)
   const arrowPosition = width === 'fit-shadow' ? arrowSize - 4 : arrowSize + 4
 
   const { onClickRightArrow, onClickLeftArrow, viewArrow, move } =
@@ -75,16 +77,23 @@ const CustomCarousel: FC<IProps> = ({
 
   const translate = `translate3d(-${move}px, 0, 0)`
 
-  useIsomorphicLayoutEffect(() => {
-    const arrayLen = refs.current.map(ref =>
-      ref ? ref.offsetWidth + space : 0
-    )
+  const setterElements = () => {
+    setElementLens(() => {
+      const arrayLen = refs.current.map(ref =>
+        ref ? ref.offsetWidth + space : 0
+      )
+      return arrayLen
+    })
+  }
 
-    setElementLens(arrayLen)
-  }, [refs])
+  useWindow(setterElements, [refs, setElementLens, elementsView])
+  useBreakPoints(setElementsView, elementsView, breakpoints)
 
   return (
-    <article className={`${style.wrapper} ${classNameWrapper}`}>
+    <article
+      className={`${style.wrapper} ${classNameWrapper}`}
+      style={{ width: containerWidth }}
+    >
       {title && href && (
         <Link href={href} className={style.wrapperTitle}>
           <p>{title}</p>
@@ -104,12 +113,29 @@ const CustomCarousel: FC<IProps> = ({
           >
             {Array.isArray(children) &&
               children.map((element, index) => (
-                <div key={time + index} ref={ref => refs.current.push(ref)}>
+                <div
+                  key={index}
+                  ref={ref => {
+                    if (ref === null || refs.current.length >= children.length)
+                      return
+
+                    refs.current.push(ref)
+                  }}
+                >
                   {element}
                 </div>
               ))}
             {additElem && (
-              <div ref={ref => refs.current.push(ref)}>{additElem()}</div>
+              <div
+                ref={ref => {
+                  if (ref === null || refs.current.length >= children.length)
+                    return
+
+                  refs.current.push(ref)
+                }}
+              >
+                {additElem()}
+              </div>
             )}
           </div>
           <div className={style.arrows}>
