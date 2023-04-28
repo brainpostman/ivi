@@ -25,8 +25,8 @@ const TopTenList: React.FC = () => {
           elementsMove={4}
           elementsView={5}
           classNameWrapper={style.carousel_wrapper}
-          classNameList={style.carousel_list}
-          breakpoints={[1292]}
+          breakpoints={[1292, 850]}
+          padding={16}
           width='fit'
         >
           {topTenListData.map((element, index) => (
