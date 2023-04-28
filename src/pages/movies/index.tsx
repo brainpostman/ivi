@@ -1,5 +1,5 @@
 import CustomCarousel from '@/components/CustomCarousel/CustomCarousel'
-import ExpandInfo from '@/components/ExpandInfo/ExpandInfo'
+import ExpandBlock from '@/components/ExpandInfo/ExpandBlock'
 import FilterBlock from '@/components/FilterBlock/FilterBlock'
 import MovieCardGrid from '@/components/MovieCardGrid/MovieCardGrid'
 import Sort from '@/components/Sort/Sort'
@@ -35,13 +35,13 @@ const MoviesPage = () => {
       <section className={style.wrapper}>
         {/*BREAD CRUMBS*/}
         <h1 className={style.title}>Фильмы смотреть онлайн</h1>
-        <ExpandInfo visibleText={visibleText}>
+        <ExpandBlock visibleBlock={visibleText}>
           <div className={style.info}>
             {moviesPageInfoData.slice(1).map((info, index) => (
               <p key={index}>{info}</p>
             ))}
           </div>
-        </ExpandInfo>
+        </ExpandBlock>
         <CustomCarousel
           elementsView={8}
           elementsMove={2}
