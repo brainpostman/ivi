@@ -1,6 +1,6 @@
 import BannerCarousel from '@/components/BannerCarousel/BannerCarousel'
 import CustomCarousel from '@/components/CustomCarousel/CustomCarousel'
-import ExpandBlock from '@/components/ExpandInfo/ExpandBlock'
+import ExpandBlock from '@/components/ExpandBlock/ExpandBlock'
 import HomePageInfo from '@/components/HomePageInfo/HomePageInfo'
 import MovieCard from '@/components/MovieCard/MovieCard'
 import TopTenList from '@/components/TopTenList/TopTenList'
@@ -44,19 +44,17 @@ export default function Home() {
     <PageLayout title={title} description={description}>
       <BannerCarousel items={mainCarouselData} speed={800} />
 
-      <div className={style.wrapper_buttons}>
-        <div className={style.buttons}>
-          <a href='https://www.ivi.ru/subscribe?redirect_url=%2F'>
-            <LongButton variant='secondary' img={imgLongButton_1}>
-              30 дней подписки за 1 ₽
-            </LongButton>
-          </a>
-          <a href='https://www.ivi.ru/login?action=%2Fuser%2Fcertificate&redirect_url=%2F'>
-            <LongButton variant='primary' img={imgLongButton_2}>
-              Активировать сертификат
-            </LongButton>
-          </a>
-        </div>
+      <div className={style.buttons}>
+        <a href='https://www.ivi.ru/subscribe?redirect_url=%2F'>
+          <LongButton variant='secondary' img={imgLongButton_1}>
+            30 дней подписки за 1 ₽
+          </LongButton>
+        </a>
+        <a href='https://www.ivi.ru/login?action=%2Fuser%2Fcertificate&redirect_url=%2F'>
+          <LongButton variant='primary' img={imgLongButton_2}>
+            Активировать сертификат
+          </LongButton>
+        </a>
       </div>
 
       <div className={style.wrapper_expand}>
@@ -74,7 +72,9 @@ export default function Home() {
           additElem={ViewAllBlock}
           elementsMove={5}
           elementsView={7}
-          breakpoints={[1274, 1078, 900]}
+          breakpoints={[1274, 1078, 900, 767, 550]}
+          space={[24, 4]}
+          padding={6}
           width='fit'
         >
           {movieCardGridData.map(movie => (
@@ -88,7 +88,9 @@ export default function Home() {
           additElem={ViewAllBlock}
           elementsMove={5}
           elementsView={7}
-          breakpoints={[1274, 1078, 900]}
+          breakpoints={[1274, 1078, 900, 767, 550]}
+          space={[24, 4]}
+          padding={6}
           width='fit'
         >
           {movieCardGridData.map(movie => (
