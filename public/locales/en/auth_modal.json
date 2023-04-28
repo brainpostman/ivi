@@ -1,0 +1,23 @@
+{
+    "unforeseen-error": "An unexpected error occurred",
+    "authorization": "Authorization",
+    "login-or-register": "Sign in or register",
+    "email-placeholder": "Enter your email",
+    "continue": "Continue",
+    "login": {
+        "sign in-google": "Sign in using Google",
+        "sign in-vk": "Sign in using VKontakte",
+        "enter-pass-to-login": "Enter password to sign in",
+        "enter-pass": "Enter password",
+        "login": "Sign in"
+    },
+    "register": {
+        "invent-pass": "Come up with a password to sign in",
+        "pass-requirements": "at least 6 characters, Latin letters, numbers and special characters are allowed",
+        "pass-placeholder": "Enter password",
+        "confirm-placeholder": "Confirm password",
+        "register": "Register"
+    },
+    "error": "Error",
+    "error-messages": {}
+}
