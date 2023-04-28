@@ -12,7 +12,7 @@ const HeaderPopularBroadCasts = () => {
       <CustomCarousel
         elementsView={2}
         elementsMove={2}
-        space={16}
+        space={[16, 16]}
         arrowSize={16}
         width='fit-shadow'
       >
