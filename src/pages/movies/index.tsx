@@ -1,5 +1,5 @@
 import CustomCarousel from '@/components/CustomCarousel/CustomCarousel'
-import ExpandBlock from '@/components/ExpandInfo/ExpandBlock'
+import ExpandBlock from '@/components/ExpandBlock/ExpandBlock'
 import FilterBlock from '@/components/FilterBlock/FilterBlock'
 import MovieCardGrid from '@/components/MovieCardGrid/MovieCardGrid'
 import Sort from '@/components/Sort/Sort'
