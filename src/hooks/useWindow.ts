@@ -1,9 +1,10 @@
 import { useEffect } from 'react'
+import useIsomorphicLayoutEffect from './useIsomorphicLayoutEffect'
 
 export const useWindow = (callback: () => void, deps?: any[]) => {
   const incomingDeps = deps || []
 
-  useEffect(() => {
+  useIsomorphicLayoutEffect(() => {
     if (typeof window !== 'undefined') {
       window.addEventListener('resize', callback)
     }

@@ -14,7 +14,7 @@ const HeaderChannels = () => {
             elementsView={6}
             elementsMove={4}
             arrowSize={16}
-            space={16}
+            space={[16, 16]}
             width='fit-shadow'
           >
             {channelList.channels.map(channel => (
