@@ -1,0 +1,41 @@
+.arrows {
+  position: absolute;
+  display: flex;
+  align-items: center;
+
+  width: 100%;
+  height: 100%;
+
+  top: 0;
+  left: 0;
+
+  pointer-events: none;
+
+  > div {
+    height: 100%;
+    position: absolute;
+    display: flex;
+    align-items: center;
+
+    cursor: pointer;
+
+    pointer-events: all;
+
+    &:active > svg {
+      transform: scale(0.8);
+    }
+
+    &:hover > svg {
+      color: #fff;
+    }
+
+    &:last-child {
+      transform: rotate(180deg);
+    }
+  }
+
+  svg {
+    color: #ffffffb8;
+    transition: color 0.4s, transform 0.4s;
+  }
+}
