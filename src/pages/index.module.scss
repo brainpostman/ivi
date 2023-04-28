@@ -1,9 +1,16 @@
 .buttons {
-  display: flex;
-  gap: 16px;
+  display: grid;
+  grid-template-columns: repeat(2, auto);
+  column-gap: 16px;
 
   width: 100%;
   @include ui-margin(ver, 6);
+  @include ui-padding(hor, 4);
+
+  @media (max-width: 879px) {
+    grid-template-columns: repeat(1, auto);
+    row-gap: 12px;
+  }
 
   > a {
     width: 100%;
@@ -17,6 +24,8 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  @include ui-margin(top, 5);
 
   > article {
     @include ui-margin(bottom, 11);
@@ -74,11 +83,4 @@
   @media (max-width: 1249px) {
     @include adaptive-size(width, 930, 288);
   }
-}
-
-.wrapper_buttons {
-  display: flex;
-  justify-content: center;
-
-  @include ui-padding(hor, 4);
 }
