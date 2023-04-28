@@ -1,4 +1,4 @@
-import ExpandBlock from '@/components/ExpandInfo/ExpandBlock'
+import ExpandBlock from '@/components/ExpandBlock/ExpandBlock'
 import { Meta, StoryObj } from '@storybook/react'
 
 type Story = StoryObj<typeof ExpandBlock>
