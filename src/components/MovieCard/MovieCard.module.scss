@@ -8,21 +8,29 @@
     opacity: 1;
   }
 
-  &:hover .wrapperImg,
+  &:hover .wrapper_img,
   .hoverBlock {
     transform: scale(1.05);
   }
 }
 
-.wrapperImg {
+.wrapper_img {
   position: relative;
   border-radius: 8px;
 
   transition: transform 0.4s;
 
+  width: 153px;
+  height: 235px;
+
   z-index: -1;
 
   @include ui-margin(bottom, 2);
+
+  @media (max-width: 1240px) {
+    @include adaptive-size(width, 153, 132);
+    @include adaptive-size(height, 235, 202);
+  }
 }
 
 .hoverBlock {
