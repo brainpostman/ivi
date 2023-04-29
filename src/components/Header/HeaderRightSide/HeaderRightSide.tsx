@@ -21,7 +21,7 @@ const HeaderRightSide: FC<IProps> = ({ showHoverBlock }) => {
 
     const { pathname } = useRouter();
 
-    const { t } = useTranslation('header');
+    const { t } = useTranslation('header', { keyPrefix: 'right-side.titles' });
 
     useEffect(() => {
         if (pathname === '/') {
@@ -34,15 +34,15 @@ const HeaderRightSide: FC<IProps> = ({ showHoverBlock }) => {
     return (
         <article className={style.wrapper}>
             {isViewSubscribeButton ? (
-                <SubscribeButton>{t('right-side.titles.buy-sub')}</SubscribeButton>
+                <SubscribeButton>{t('buy-sub')}</SubscribeButton>
             ) : (
                 <HighlightButton
                     className={style.highlight_button}
                     onMouseEnter={() => showHoverBlock('watch')}>
-                    {t('right-side.titles.watch-30-days')}
+                    {t('watch-30-days')}
                 </HighlightButton>
             )}
-            <HeaderIconButton icon='search'>{t('right-side.titles.search')}</HeaderIconButton>
+            <HeaderIconButton icon='search'>{t('search')}</HeaderIconButton>
             <HeaderIconButton icon='notification' />
             <IoPersonOutline
                 className={classNamePersonIcon}
