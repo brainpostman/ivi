@@ -41,7 +41,7 @@
         "actor-placeholder": "Name of the actor"
     },
     "sliders": {
-        "rating": "Ratings",
+        "rating": "Ivi Rating",
         "scores": "User scores"
     },
     "reset-filters": "Reset filters",

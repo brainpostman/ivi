@@ -24,7 +24,6 @@ export const getServerSideProps: GetServerSideProps = async ({ locale }) => {
                 'footer',
                 'movies',
             ])),
-            // Will be passed to the page component as props
         },
     };
 };
