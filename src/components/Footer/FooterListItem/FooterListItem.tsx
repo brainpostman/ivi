@@ -8,7 +8,7 @@ interface IFooterListItemProps {
 
 const FooterListItem = ({ item }: IFooterListItemProps) => {
     return (
-        <p>
+        <li>
             {item.linkType === 'internal' ? (
                 <Link href={item.url} className={styles.text}>
                     {item.text}
@@ -18,7 +18,7 @@ const FooterListItem = ({ item }: IFooterListItemProps) => {
                     {item.text}
                 </a>
             )}
-        </p>
+        </li>
     );
 };
 

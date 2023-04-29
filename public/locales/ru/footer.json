@@ -1,0 +1,116 @@
+{
+    "about-us": {
+        "heading": "О нас",
+        "links": [
+            {
+                "linkType": "external",
+                "url": "https://corp.ivi.ru",
+                "text": "О компании"
+            },
+            {
+                "linkType": "external",
+                "url": "https://corp.ivi.ru/career/#career-vacancy-block",
+                "text": "Вакансии"
+            },
+            {
+                "linkType": "external",
+                "url": "https://www.ivi.ru/pages/beta/",
+                "text": "Программа бета-тестирования"
+            },
+            {
+                "linkType": "external",
+                "url": "https://www.ivi.ru/info/partners",
+                "text": "Информация для партнёров"
+            },
+            {
+                "linkType": "external",
+                "url": "https://corp.ivi.ru/advertisers/",
+                "text": "Размещение рекламы"
+            },
+            {
+                "linkType": "external",
+                "url": "https://www.ivi.ru/info/agreement",
+                "text": "Пользовательское соглашение"
+            },
+            {
+                "linkType": "external",
+                "url": "https://www.ivi.ru/info/confidential",
+                "text": "Политика конфиденциальности"
+            },
+            {
+                "linkType": "external",
+                "url": "https://www.ivi.ru/info/goryachaya-liniya-komplaens",
+                "text": "Комплаенс"
+            }
+        ]
+    },
+    "sections": {
+        "heading": "Разделы",
+        "links": [
+            {
+                "linkType": "internal",
+                "url": "/",
+                "text": "Мой Иви"
+            },
+            {
+                "linkType": "external",
+                "url": "https://www.ivi.ru/new",
+                "text": "Что нового"
+            },
+            {
+                "linkType": "internal",
+                "url": "/movies",
+                "text": "Фильмы"
+            },
+            {
+                "linkType": "external",
+                "url": "https://www.ivi.ru/series",
+                "text": "Сериалы"
+            },
+            {
+                "linkType": "external",
+                "url": "https://www.ivi.ru/animation",
+                "text": "Мультфильмы"
+            },
+            {
+                "linkType": "external",
+                "url": "https://www.ivi.ru/tvplus",
+                "text": "TV+"
+            },
+            {
+                "linkType": "external",
+                "url": "https://www.ivi.ru/goodmovies",
+                "text": "Что посмотреть"
+            }
+        ]
+    },
+    "cert-activation": "Активация сертификата",
+    "copyright-ivi": "© 2023 ООО «Иви.ру»",
+    "copyright-hbo": "HBO ® and related service marks are the property of Home Box Office, Inc",
+    "devices": {
+        "app-store": {
+            "title": "App Store",
+            "subtitle": "Загрузить в"
+        },
+        "google-play": {
+            "title": "Google Play",
+            "subtitle": "Доступно в"
+        },
+        "smart-tv": {
+            "title": "Smart TV",
+            "subtitle": "Смотрите на"
+        },
+        "all-devices": "Все устройства"
+    },
+    "support": {
+        "support-service": "Служба поддержки",
+        "we-ready": "Мы всегда готовы вам помочь.",
+        "online-24-7": "Наши операторы онлайн 24/7",
+        "chat": "Написать в чате",
+        "qna": "Ответы на вопросы"
+    },
+    "ad": {
+        "line-1": "Смотрите фильмы, сериалы и",
+        "line-2": "мультфильмы без рекламы"
+    }
+}

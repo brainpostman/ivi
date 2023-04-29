@@ -4,4 +4,4 @@ export interface IFooterListItem {
     text: string;
 }
 
-export type LinkType = 'internal' | 'external';
+export type LinkType = 'internal' | 'external' | string;

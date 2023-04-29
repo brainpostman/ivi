@@ -3,19 +3,21 @@ import { useState } from 'react';
 import { FiPhone } from 'react-icons/fi';
 import { GoMail } from 'react-icons/go';
 import styles from './FooterSupport.module.scss';
+import { useTranslation } from 'next-i18next';
 
 const FooterSupport = () => {
     const [showPopUp, setShowPopUp] = useState(false);
+    const { t } = useTranslation('footer', { keyPrefix: 'support' });
 
     return (
         <div className={styles.container}>
-            <h3 className={styles.title}>Служба поддержки</h3>
+            <h3 className={styles.title}>{t('support-service')}</h3>
             <div className={styles.description}>
-                <p>Мы всегда готовы вам помочь.</p>
-                <p>Наши операторы онлайн 24/7</p>
+                <p>{t('we-ready')}</p>
+                <p>{t('online-24-7')}</p>
             </div>
             <BasicBtn btnType='text' href='https://www.ivi.ru/profile'>
-                Написать в чате
+                {t('chat')}
             </BasicBtn>
             <div className={styles.buttons}>
                 <BasicBtn btnType='icon' href='mailto:support@ivi.ru'>
@@ -37,7 +39,7 @@ const FooterSupport = () => {
                 <a href='https://ask.ivi.ru/' target='_blank' rel='noreferrer'>
                     ask.ivi.ru
                 </a>
-                <p>Ответы на вопросы</p>
+                <p>{t('qna')}</p>
             </div>
         </div>
     );

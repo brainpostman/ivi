@@ -3,6 +3,7 @@ import header from '../../public/locales/ru/header.json';
 import home from '../../public/locales/ru/home.json';
 import error404 from '../../public/locales/ru/error404.json';
 import common from '../../public/locales/ru/common.json';
+import footer from '../../public/locales/ru/footer.json';
 
 export interface Resources {
     auth_modal: typeof auth_modal;
@@ -10,4 +11,5 @@ export interface Resources {
     home: typeof home;
     error404: typeof error404;
     common: typeof common;
+    footer: typeof footer;
 }
