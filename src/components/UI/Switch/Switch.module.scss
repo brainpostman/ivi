@@ -28,7 +28,6 @@
     width: 26px;
     background-color: $gray-soft;
     top: 3px;
-    transition: all 0.3s ease-in-out;
     &_left {
         left: 3px;
     }
@@ -55,6 +54,6 @@
     font-weight: 600;
     &:hover {
         color: white;
-        transition: border-color 0.2s;
+        transition: color 0.2s;
     }
 }
