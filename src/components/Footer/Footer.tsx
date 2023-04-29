@@ -1,11 +1,11 @@
 import { IFooterListItem } from '@/types/IFooterListItem';
 import styles from './Footer.module.scss';
 import FooterDevices from './FooterDevices/FooterDevices';
-import FooterListItem from './FooterListItem/FooterListItem';
 import FooterSocials from './FooterSocials/FooterSocials';
 import FooterSubscribe from './FooterSubscribe/FooterSubscribe';
 import FooterSupport from './FooterSupport/FooterSupport';
 import { useTranslation } from 'next-i18next';
+import FooterListItem from './FooterListItem/FooterListItem';
 
 const Footer = () => {
     const { t } = useTranslation('footer');

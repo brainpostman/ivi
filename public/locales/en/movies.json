@@ -1,0 +1,49 @@
+{
+    "html-title": "Watch movies online for free in high HD quality and without registration. Convenient viewing of online movies on ivi.ru ",
+    "heading": "Watch movies online",
+    "movie-page-info": [
+        "Do you like to watch movies online and spend a lot of time combing websites in search of something interesting? It is worth lingering on ivi.ru – the films that we have collected will be enough for you for a long time. The collection is constantly updated with both new films and recognized masterpieces of the past years! No matter who you are – a fan of energetic action movies or a fan of youth TV series, the abundance of our catalog will make you forget about all other ways of spending leisure time, and you will watch your favorite movies online again and again!",
+        "The choice of films is very wide and diverse, so everyone will find something interesting for themselves, no matter what their tastes are. Do you prefer paintings exclusively of foreign production? We have plenty of them: these are the golden classics of Hollywood, and soulful French comedies, and temperamental Italian dramas, and noisy Indian musical films. Or maybe you are a patriot and love Russian films? Well, we have a lot of such films. What do you like more – good old classics or new movies? It doesn't matter what your answer will be – we have everything, like the paintings of the era of the birth of cinema, so 2018 and 2017 films.",
+        "In our catalog you will find any genres. These are films about love, and detectives, and action movies, and westerns, and science fiction, and art house, and hilarious comedies, and films about war, and horror, and thrillers, and documentaries... In addition to the «full meter», the site also presents short films, as well as foreign and Russian TV series.",
+        "If you are interested in the most iconic films online in a particular genre, the rubric system will help you easily navigate and find, for example, the best dramas or the best animated film online.",
+        "Do not miss the wonderful opportunity to watch movies online without registration, choosing only what you are really interested in, and when it's convenient for you. After all, it's so simple and pleasant!"
+    ],
+    "filter-categories": [
+        "2022",
+        "2021",
+        "2020",
+        "2019",
+        "2018",
+        "Free",
+        "Russian movies",
+        "Soviet films",
+        "American films",
+        "Indian films",
+        "Comedies",
+        "Horror",
+        "Fantastic",
+        "Melodramas",
+        "Thrillers",
+        "Dramas",
+        "Military",
+        "Documentaries"
+    ],
+    "filters": {
+        "genre": "Genres",
+        "country": "Countries",
+        "year": "Years",
+        "rating": "Ivy Rating",
+        "director": "Directors",
+        "actor": "Actors"
+    },
+    "searches": {
+        "producer-placeholder": "Name of the director",
+        "actor-placeholder": "Name of the actor"
+    },
+    "sliders": {
+        "rating": "Ratings",
+        "scores": "User scores"
+    },
+    "reset-filters": "Reset filters",
+    "show-more": "Show more"
+}

@@ -1,13 +1,6 @@
 import CustomCarousel from '@/components/CustomCarousel/CustomCarousel';
-import { useGetParam } from '@/hooks/useGetParam';
 import { useSetListParam } from '@/hooks/useSetListParam';
-import {
-    IFilterBlockEl,
-    IFilterData,
-    IFilterListBigProps,
-    IFilterListEl,
-    IFilterTitle,
-} from '@/types/filterBlock.interface';
+import { IFilterListBigProps } from '@/types/filterBlock.interface';
 import { FC } from 'react';
 import { BsCheckLg } from 'react-icons/bs';
 import FilterTab from '../FilterTab/FilterTab';
@@ -37,7 +30,7 @@ const FilterListBig: FC<IFilterListBigProps> = ({
                             elementsMove={carouselElementsMove}
                             elementsView={carouselElementsView}
                             arrowSize={18}
-                            space={12}
+                            space={[12, 12]}
                             classNameWrapper={style.carousel_wrapper}
                             width='fit'>
                             {children}
