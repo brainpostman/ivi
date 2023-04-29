@@ -1,6 +1,7 @@
-import formatCssLength from '@/formatters/cssLength.format'
-import { FC, useState } from 'react'
-import style from './ExpandBlock.module.scss'
+import formatCssLength from '@/formatters/cssLength.format';
+import { FC, useState } from 'react';
+import style from './ExpandBlock.module.scss';
+import { useTranslation } from 'next-i18next';
 
 // @param { * } children - элемент, который мы разворачиваем
 // @param className - класс для обёртки блока
@@ -12,59 +13,57 @@ import style from './ExpandBlock.module.scss'
 // @param expandWord - текст для кнопки "Развернуть"
 
 interface IProps {
-  children: React.ReactNode
-  title?: string
-  visibleBlock?: string | React.ReactNode
-  width?: string | number
-  lineClamp?: number
-  expandWord?: string
-  className?: string
+    children: React.ReactNode;
+    title?: string;
+    visibleBlock?: string | React.ReactNode;
+    width?: string | number;
+    lineClamp?: number;
+    expandWord?: string;
+    className?: string;
 }
 
 const ExpandBlock: FC<IProps> = ({
-  children,
-  title,
-  visibleBlock,
-  className,
-  width = '75%',
-  lineClamp = 2,
-  expandWord,
-  ...props
+    children,
+    title,
+    visibleBlock,
+    className,
+    width = '75%',
+    lineClamp = 2,
+    expandWord,
+    ...props
 }) => {
-  const [isExpand, setIsExpand] = useState(false)
+    const { t } = useTranslation('common');
 
-  const onClickToggle = () => setIsExpand(prev => !prev)
+    const [isExpand, setIsExpand] = useState(false);
 
-  const formattedWidth = formatCssLength(width)
+    const onClickToggle = () => setIsExpand((prev) => !prev);
 
-  return (
-    <article
-      className={`${style.info} ${className}`}
-      style={{ width: formattedWidth }}
-      {...props}
-    >
-      {title && <h1 className={style.info__title}>{title}</h1>}
+    const formattedWidth = formatCssLength(width);
 
-      {visibleBlock && typeof visibleBlock === 'string' ? (
-        <p
-          className={`${style.info__body__top} ${
-            isExpand ? style.visible : ''
-          }`}
-          style={{ lineClamp, WebkitLineClamp: lineClamp }}
-        >
-          {visibleBlock}
-        </p>
-      ) : (
-        visibleBlock
-      )}
+    return (
+        <article
+            className={`${style.info} ${className}`}
+            style={{ width: formattedWidth }}
+            {...props}>
+            {title && <h1 className={style.info__title}>{title}</h1>}
 
-      {isExpand && children}
+            {visibleBlock && typeof visibleBlock === 'string' ? (
+                <p
+                    className={`${style.info__body__top} ${isExpand ? style.visible : ''}`}
+                    style={{ lineClamp, WebkitLineClamp: lineClamp }}>
+                    {visibleBlock}
+                </p>
+            ) : (
+                visibleBlock
+            )}
 
-      <p className={style.toggle} onClick={onClickToggle}>
-        {isExpand ? 'Свернуть' : expandWord || 'Развернуть'}
-      </p>
-    </article>
-  )
-}
+            {isExpand && children}
 
-export default ExpandBlock
+            <p className={style.toggle} onClick={onClickToggle}>
+                {isExpand ? t('expand-block.collapse') : expandWord || t('expand-block.expand')}
+            </p>
+        </article>
+    );
+};
+
+export default ExpandBlock;
