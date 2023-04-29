@@ -6,31 +6,31 @@ import Sort from '@/components/Sort/Sort';
 import ViewMoreButton from '@/components/UI/ViewMoreButton/ViewMoreButton';
 import VioletButton from '@/components/UI/VioletButton/VioletButton';
 import { movieCardGridData } from '@/data/movieCard.data';
-import { moviesPageInfoData } from '@/data/moviesPage.data';
-import { yearCarouselData } from '@/data/yearCarousel.data';
 import PageLayout from '@/layouts/PageLayout';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import style from './index.module.scss';
 import { GetServerSideProps } from 'next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
-
-const title =
-    'Смотреть фильмы онлайн бесплатно в хорошем HD качестве и без регистрации. Удобный просмотр онлайн фильмов на ivi.ru';
-
-const visibleText = moviesPageInfoData[0];
+import { useTranslation } from 'next-i18next';
 
 export const getServerSideProps: GetServerSideProps = async ({ locale }) => {
     return {
         props: {
-            ...(await serverSideTranslations(locale ?? 'ru', ['header', 'auth_modal'])),
-            // Will be passed to the page component as props
+            ...(await serverSideTranslations(locale ?? 'ru', [
+                'header',
+                'auth_modal',
+                'common',
+                'footer',
+                'movies',
+            ])),
         },
     };
 };
 
 const MoviesPage = () => {
     const router = useRouter();
+    const { t } = useTranslation('movies');
     const [isClickedViewMode, setIsClickedViewMore] = useState(false);
 
     const onClickViewMore = () => {
@@ -40,15 +40,17 @@ const MoviesPage = () => {
     const currentMovies = isClickedViewMode ? movieCardGridData : movieCardGridData.slice(0, 35);
 
     return (
-        <PageLayout title={title}>
+        <PageLayout title={t('html-title')}>
             <section className={style.wrapper}>
                 {/*BREAD CRUMBS*/}
-                <h1 className={style.title}>Фильмы смотреть онлайн</h1>
-                <ExpandBlock visibleBlock={visibleText}>
+                <h1 className={style.title}>{t('heading')}</h1>
+                <ExpandBlock visibleBlock={t('movie-page-info', { returnObjects: true })[0]}>
                     <div className={style.info}>
-                        {moviesPageInfoData.slice(1).map((info, index) => (
-                            <p key={index}>{info}</p>
-                        ))}
+                        {t('movie-page-info', { returnObjects: true })
+                            .slice(1)
+                            .map((info, index) => (
+                                <p key={index}>{info}</p>
+                            ))}
                     </div>
                 </ExpandBlock>
                 <CustomCarousel
@@ -56,9 +58,9 @@ const MoviesPage = () => {
                     elementsMove={2}
                     arrowSize={16}
                     classNameWrapper={style.carousel_wrapper}
-                    space={12}>
-                    {yearCarouselData.map((year) => (
-                        <VioletButton key={year.children}>{year.children}</VioletButton>
+                    space={[12, 12]}>
+                    {t('filter-categories', { returnObjects: true }).map((filter) => (
+                        <VioletButton key={filter}>{filter}</VioletButton>
                     ))}
                 </CustomCarousel>
                 {!!Object.keys(router.query).length && <Sort />}

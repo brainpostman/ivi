@@ -8,64 +8,66 @@ import { TbCertificate } from 'react-icons/tb';
 import style from './HeaderProfileBlock.module.scss';
 import { useActions } from '@/hooks/ReduxHooks';
 import { signOut, useSession } from 'next-auth/react';
+import { useTranslation } from 'next-i18next';
 
 const HeaderProfileBlock = () => {
     const { setAuthModal } = useActions();
     const { status } = useSession();
+    const { t } = useTranslation('header', { keyPrefix: 'right-side.profile-block' });
 
     return (
         <div className={style.wrapper}>
             <ul className={style.list}>
                 <li>
                     <BiPurchaseTagAlt className={style.icon} />
-                    <p className={style.title}>Покупки</p>
+                    <p className={style.title}>{t('purchases')}</p>
                 </li>
                 <li>
                     <BsFillBookmarkFill className={style.icon} />
-                    <p className={style.title}>Смотреть позже</p>
+                    <p className={style.title}>{t('watch-later')}</p>
                 </li>
                 <li>
                     <FaHistory className={style.icon} />
-                    <p className={style.title}>История просмотров</p>
+                    <p className={style.title}>{t('watch-history')}</p>
                 </li>
                 <li>
                     <div className={style.circle}></div>
                     <SlDiamond className={style.icon} />
                     <div>
-                        <p className={style.title}>Подписки</p>
-                        <p className={style.subtitle}>Подключить</p>
+                        <p className={style.title}>{t('subscriptions')}</p>
+                        <p className={style.subtitle}>{t('connect')}</p>
                     </div>
                 </li>
                 <li>
                     <TbCertificate className={style.icon} />
-                    <p className={style.title}>Активация сертификата</p>
+                    <p className={style.title}>{t('cert-activation')}</p>
                 </li>
                 <li>
                     <BiChalkboard className={style.icon} />
-                    <p className={style.title}>Вход по коду</p>
+                    <p className={style.title}>{t('sign-in-by-code')}</p>
                 </li>
                 <li>
                     <BsFillCreditCardFill className={style.icon} />
-                    <p className={style.title}>Способ оплаты</p>
+                    <p className={style.title}>{t('payment')}</p>
                 </li>
                 <li>
                     <RiShareLine className={style.icon} />
-                    <p className={style.title}>Пригласить друзей</p>
+                    <p className={style.title}>{t('invite-friends')}</p>
                 </li>
             </ul>
 
             <div className={style.right_side}>
                 {status !== 'authenticated' ? (
                     <HighlightButton onClick={() => setAuthModal(true)}>
-                        Войти или зарегистрироваться
+                        {t('sign-in-register')}
                     </HighlightButton>
                 ) : (
-                    <HighlightButton onClick={() => signOut()}>Выйти</HighlightButton>
+                    <HighlightButton onClick={() => signOut()}>{t('sign-out')}</HighlightButton>
                 )}
 
                 <div className={style.labels}>
-                    <p className='text'>Настройки</p>
-                    <p className='text'>Помощь</p>
+                    <p className='text'>{t('settings')}</p>
+                    <p className='text'>{t('support')}</p>
                 </div>
             </div>
         </div>

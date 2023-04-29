@@ -1,23 +1,35 @@
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import style from './index.module.scss';
-import { GetServerSideProps } from 'next';
+import { GetStaticProps } from 'next';
+import { useTranslation } from 'next-i18next';
+import PageLayout from '@/layouts/PageLayout';
 
-export const getServerSideProps: GetServerSideProps = async ({ locale }) => {
+export const getStaticProps: GetStaticProps = async ({ locale }) => {
     return {
         props: {
-            ...(await serverSideTranslations(locale ?? 'ru', ['header', 'auth_modal'])),
+            ...(await serverSideTranslations(locale ?? 'ru', [
+                'error404',
+                'header',
+                'auth_modal',
+                'common',
+                'footer',
+            ])),
             // Will be passed to the page component as props
         },
     };
 };
 
 export default function Error() {
+    const { t } = useTranslation('error404');
+
     return (
-        <div className={style.wrapper}>
-            <div className={style.content}>
-                <h1 className={style.title}>Ошибка</h1>
-                <h2 className={style.subtitle}>Запрашиваемой страницы не существует</h2>
+        <PageLayout title={t('html-title')}>
+            <div className={style.wrapper}>
+                <div className={style.content}>
+                    <h1 className={style.title}>{t('error')}</h1>
+                    <h2 className={style.subtitle}>{t('message')}</h2>
+                </div>
             </div>
-        </div>
+        </PageLayout>
     );
 }

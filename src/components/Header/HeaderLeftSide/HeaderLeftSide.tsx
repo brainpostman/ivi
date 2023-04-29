@@ -13,7 +13,7 @@ interface IProps extends DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElem
 }
 
 const HeaderLeftSide: FC<IProps> = ({ showHoverBlock, ...props }) => {
-    const { t } = useTranslation();
+    const { t } = useTranslation('header', { keyPrefix: 'left-side.titles' });
 
     return (
         <article className={style.wrapper} {...props}>
@@ -22,21 +22,21 @@ const HeaderLeftSide: FC<IProps> = ({ showHoverBlock, ...props }) => {
             </Link>
 
             <nav className={style.nav}>
-                <Link href='/'>Мой Иви</Link>
+                <Link href='/'>{t('my-ivi')}</Link>
                 <Link href='/' onMouseEnter={() => showHoverBlock(undefined)}>
-                    Что нового
+                    {t('new-releases')}
                 </Link>
                 <Link href='/movies' onMouseEnter={() => showHoverBlock('movies')}>
-                    Фильмы
+                    {t('movies')}
                 </Link>
                 <Link href='/' onMouseEnter={() => showHoverBlock('series')}>
-                    Сериалы
+                    {t('series')}
                 </Link>
                 <Link href='/' onMouseEnter={() => showHoverBlock('cartoons')}>
-                    Мультфильмы
+                    {t('animation')}
                 </Link>
                 <Link href='/' onMouseEnter={() => showHoverBlock('TV+')}>
-                    TV+
+                    {t('tv+')}
                 </Link>
             </nav>
         </article>

@@ -17,13 +17,16 @@ import {
 import { CSSTransition } from 'react-transition-group-react-18';
 import List from '../UI/List/List';
 import { delay } from '@/utils/delay';
+import { useTranslation } from 'next-i18next';
 
 interface IAuthModalProps {
     modalShown: boolean;
 }
-//TODO: деструктуризация, деструктуризация, деструктуризация... 
+//TODO: деструктуризация, деструктуризация, деструктуризация...
 //TODO: доделать транзишны
 const AuthModal = ({ modalShown }: IAuthModalProps) => {
+    const { t } = useTranslation('auth_modal');
+
     //булевый флаг отрисовки окна
     const { setAuthModal } = useActions();
     const [showAuthInputs, setShowAuthInputs] = useState(true);
@@ -56,9 +59,9 @@ const AuthModal = ({ modalShown }: IAuthModalProps) => {
     const handleEmail = async (email: string) => {
         let response = await checkEmailVacancy(email);
         if (response === 'login' || response === 'register') {
+            setErrorMessages([]);
             setProgressBar(50);
             setValidatedEmail(email);
-            setErrorMessages([]);
             setShowAuthInputs(false);
             setAuthFlow(response);
             await delay(transitionDelay);
@@ -87,7 +90,7 @@ const AuthModal = ({ modalShown }: IAuthModalProps) => {
             });
             setProgressBar(100);
         } catch (err: any) {
-            setErrorMessages([err.message ?? 'Произошла непредвиденная ошибка']);
+            setErrorMessages([err.message ?? t('error-messages.unforeseen-error')]);
         }
     };
 
@@ -96,7 +99,7 @@ const AuthModal = ({ modalShown }: IAuthModalProps) => {
             <section className={styles.header}>
                 <div className={styles.header__container}>
                     <div></div>
-                    <h2 className={styles.header__title}>Вход или регистрация</h2>
+                    <h2 className={styles.header__title}>{t('authorization')}</h2>
                 </div>
                 <div
                     className={styles.header__progressBar}
@@ -120,7 +123,7 @@ const AuthModal = ({ modalShown }: IAuthModalProps) => {
                         }}>
                         <div className={styles.chat__container}>
                             <div className={`${styles.message} ${styles.message__prompt}`}>
-                                Войдите или зарегистрируйтесь
+                                {t('login-or-register')}
                             </div>
                             <div className={styles.inputs}>
                                 <Input
@@ -130,7 +133,7 @@ const AuthModal = ({ modalShown }: IAuthModalProps) => {
                                         setEmailInput(e.target.value);
                                         if (errorMessages.length > 0) setErrorMessages([]);
                                     }}
-                                    placeholder='Введите ваш email'
+                                    placeholder={t('email-placeholder')}
                                     autoFocus
                                 />
                                 <HighlightButton
@@ -142,23 +145,24 @@ const AuthModal = ({ modalShown }: IAuthModalProps) => {
                                             setErrorMessages([emailError]);
                                             return;
                                         }
+                                        console.log(emailError);
                                         handleEmail(emailInput);
                                     }}>
-                                    Продолжить
+                                    {t('continue')}
                                 </HighlightButton>
                                 <BasicBtn
                                     onClick={() => {
                                         signIn('google');
                                     }}
                                     btnType='textPlusIcon'
-                                    title='Войти с помощью Google'
+                                    title={t('login.signin-google')}
                                     className={`${styles.basicbtn} ${styles.basicbtn_google}`}>
                                     <FaGoogle />
                                 </BasicBtn>
                                 <BasicBtn
                                     onClick={() => signIn('vk')}
                                     btnType='textPlusIcon'
-                                    title='Войти с помощью ВКонтакте'
+                                    title={t('login.signin-vk')}
                                     className={`${styles.basicbtn} ${styles.basicbtn_vk}`}>
                                     <FaVk />
                                 </BasicBtn>
@@ -179,7 +183,7 @@ const AuthModal = ({ modalShown }: IAuthModalProps) => {
                         }}>
                         <div className={styles.chat__container}>
                             <div className={`${styles.message} ${styles.message__prompt}`}>
-                                Войдите или зарегистрируйтесь
+                                {t('login-or-register')}
                             </div>
                             <div className={styles.useremail} onClick={editEmail}>
                                 <div className={styles.useremail_edit}>
@@ -207,7 +211,7 @@ const AuthModal = ({ modalShown }: IAuthModalProps) => {
                         {authFlow === 'login' ? (
                             <div className={styles.chat__container}>
                                 <div className={`${styles.message} ${styles.message__prompt}`}>
-                                    Введите пароль, чтобы войти
+                                    {t('login.enter-pass-to-login')}
                                 </div>
                                 <Input
                                     type='password'
@@ -217,7 +221,7 @@ const AuthModal = ({ modalShown }: IAuthModalProps) => {
                                         setPasswordInput(e.target.value);
                                     }}
                                     charHideBtn
-                                    placeholder='Введите пароль'
+                                    placeholder={t('login.enter-pass')}
                                     autoFocus
                                 />
                                 <HighlightButton
@@ -233,16 +237,15 @@ const AuthModal = ({ modalShown }: IAuthModalProps) => {
                                         }
                                         handleSignIn(authFlow, passwordInput);
                                     }}>
-                                    Войти
+                                    {t('login.login')}
                                 </HighlightButton>
                             </div>
                         ) : (
                             <div className={styles.chat__container}>
                                 <div className={`${styles.message} ${styles.message__prompt}`}>
-                                    <p>Придумайте пароль для входа</p>
+                                    <p>{t('register.invent-pass')}</p>
                                     <p className={styles.submessage}>
-                                        минимум 6 символов, допускаются латинские буквы, цифры и
-                                        спецсимволы
+                                        {t('register.pass-requirements')}
                                     </p>
                                 </div>
                                 <Input
@@ -253,7 +256,7 @@ const AuthModal = ({ modalShown }: IAuthModalProps) => {
                                         setPasswordInput(e.target.value);
                                     }}
                                     charHideBtn
-                                    placeholder='Введите пароль'
+                                    placeholder={t('register.pass-placeholder')}
                                     autoFocus
                                 />
                                 <Input
@@ -264,7 +267,7 @@ const AuthModal = ({ modalShown }: IAuthModalProps) => {
                                         setConfirmedPasswordInput(e.target.value);
                                     }}
                                     charHideBtn
-                                    placeholder='Подтвердите пароль'
+                                    placeholder={t('register.confirm-placeholder')}
                                 />
                                 <HighlightButton
                                     disabled={
@@ -292,7 +295,7 @@ const AuthModal = ({ modalShown }: IAuthModalProps) => {
                                         }
                                         handleSignIn(authFlow, confirmedPasswordInput);
                                     }}>
-                                    Зарегистрироваться
+                                    {t('register.register')}
                                 </HighlightButton>
                             </div>
                         )}
@@ -303,7 +306,7 @@ const AuthModal = ({ modalShown }: IAuthModalProps) => {
                         <div className={styles.error}>
                             <AiOutlineExclamationCircle />
                             <div className={styles.error__content}>
-                                <p className={styles.error__title}>Ошибка</p>
+                                <p className={styles.error__title}>{t('error')}</p>
                                 <List
                                     items={errorMessages}
                                     className={styles.error__messages}

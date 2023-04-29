@@ -4,4 +4,5 @@ module.exports = {
         locales: ['ru', 'en'],
     },
     reloadOnPrerender: true,
+    ns: ['header', 'auth_modal', 'home', 'common', 'footer', 'error404', 'movies'],
 };

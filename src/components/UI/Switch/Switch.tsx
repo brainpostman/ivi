@@ -8,6 +8,7 @@ interface ISwitchProps {
     callbackRight?: () => void;
     className?: string;
     startLeft?: boolean;
+    speedms?: number;
 }
 
 const Switch = ({
@@ -17,6 +18,7 @@ const Switch = ({
     callbackRight = () => {},
     className = '',
     startLeft = true,
+    speedms = 300,
 }: ISwitchProps) => {
     const [positionLeft, setPositionLeft] = useState(startLeft);
     const [transition, setTransition] = useState(false);
@@ -27,7 +29,7 @@ const Switch = ({
         setTimeout(() => {
             setTransition(false);
             setPositionLeft((prev) => !prev);
-        }, 300);
+        }, speedms);
     };
 
     return (
@@ -54,7 +56,10 @@ const Switch = ({
                 style={!positionLeft ? { color: 'white', cursor: 'default' } : {}}>
                 {right}
             </span>
-            <div className={`${styles.knob} ${transition ? knobTransition : knobState}`} />
+            <div
+                className={`${styles.knob} ${transition ? knobTransition : knobState}`}
+                style={{ transition: `all ${speedms}ms ease-in-out` }}
+            />
         </div>
     );
 };

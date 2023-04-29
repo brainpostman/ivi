@@ -6,67 +6,58 @@ import MovieCard from '@/components/MovieCard/MovieCard';
 import TopTenList from '@/components/TopTenList/TopTenList';
 import LongButton from '@/components/UI/LongButton/LongButton';
 import ViewAllBlock from '@/components/ViewAllBlock/ViewAllBlock';
-import mainCarouselData from '@/data/banner_carousel/bannerCarouselData';
 import { movieCardGridData } from '@/data/movieCard.data';
 import PageLayout from '@/layouts/PageLayout';
 import style from './index.module.scss';
-import { GetServerSideProps } from 'next';
+import { GetStaticProps } from 'next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
-
-const title =
-    'Онлайн-кинотеатр Иви - фильмы, сериалы и мультфильмы смотреть онлайн бесплатно в хорошем качестве';
-
-const description =
-    'Устройте кинотеатр у себя дома! Смотрите онлайн фильмы хорошего качества в приятной домашней обстановке и в удобное для вас время. Для вас всегда доступны бесплатные фильмы без регистрации на любой вкус: сериалы, фильмы, мультфильмы и многое другое.';
+import { useTranslation } from 'next-i18next';
 
 const imgLongButton_1 = 'https://solea-parent.dfs.ivi.ru/picture/ffffff,ffffff/lightning.svg';
 
 const imgLongButton_2 = 'https://solea-parent.dfs.ivi.ru/picture/ffffff,ffffff/gift.svg';
 
-const infoTitle =
-    'Онлайн-кинотеатр Иви: фильмы в хорошем качестве всегда приносят настоящее удовольствие';
-
-const VisibleText = () => {
-    return (
-        <p className={style.visible_text}>
-            Каждый день миллионы людей ищут фильмы онлайн, и никто не хочет усложнять себе жизнь – и
-            вы наверняка один из них! А раз так, то Иви – это именно тот ресурс, который вам нужен.
-            От лучших кинолент в HD-качестве вас отделяет буквально один клик. Мы не просто
-            освобождаем от необходимости идти в кинотеатр или изучать программу телепередач – у
-            посетителей нашего ресурса гораздо больше возможностей.
-        </p>
-    );
-};
-
-export const getServerSideProps: GetServerSideProps = async ({ locale }) => {
+export const getStaticProps: GetStaticProps = async ({ locale }) => {
     return {
         props: {
-            ...(await serverSideTranslations(locale ?? 'ru', ['header', 'auth_modal'])),
-            // Will be passed to the page component as props
+            ...(await serverSideTranslations(locale ?? 'ru', [
+                'header',
+                'auth_modal',
+                'home',
+                'common',
+                'footer',
+            ])),
         },
     };
 };
 
-export default function Home() {
-    return (
-        <PageLayout title={title} description={description}>
-            <BannerCarousel items={mainCarouselData} speed={800} />
+const VisibleText = () => {
+    const { t } = useTranslation('home');
 
+    return <p className={style.visible_text}>{t('visible-text')}</p>;
+};
+
+export default function Home() {
+    const { t } = useTranslation('home');
+
+    return (
+        <PageLayout title={t('html-title')} description={t('html-description')}>
+            <BannerCarousel items={t('banner-carousel', { returnObjects: true })} speed={800} />
             <div className={style.buttons}>
                 <a href='https://www.ivi.ru/subscribe?redirect_url=%2F'>
                     <LongButton variant='secondary' img={imgLongButton_1}>
-                        30 дней подписки за 1 ₽
+                        {t('30-day-sub')}
                     </LongButton>
                 </a>
                 <a href='https://www.ivi.ru/login?action=%2Fuser%2Fcertificate&redirect_url=%2F'>
                     <LongButton variant='primary' img={imgLongButton_2}>
-                        Активировать сертификат
+                        {t('activate-cert')}
                     </LongButton>
                 </a>
             </div>
 
             <div className={style.wrapper_expand}>
-                <ExpandBlock title={infoTitle} visibleBlock={VisibleText()}>
+                <ExpandBlock title={t('expand-block-title')} visibleBlock={VisibleText()}>
                     <HomePageInfo />
                 </ExpandBlock>
             </div>
@@ -75,7 +66,7 @@ export default function Home() {
 
             <section className={style.carousels}>
                 <CustomCarousel
-                    title='Добрые мультфильмы'
+                    title={t('carousel-title-1')}
                     href='/'
                     additElem={ViewAllBlock}
                     elementsMove={5}
@@ -90,7 +81,7 @@ export default function Home() {
                 </CustomCarousel>
 
                 <CustomCarousel
-                    title='Добрые мультфильмы'
+                    title={t('carousel-title-2')}
                     href='/'
                     additElem={ViewAllBlock}
                     elementsMove={5}

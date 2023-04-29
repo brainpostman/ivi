@@ -5,5 +5,5 @@ interface ListProps<T> {
 }
 
 export default function List<T>({ items, className, renderItem }: ListProps<T>) {
-    return <div className={className}>{items && items.map(renderItem)}</div>;
+    return <ul className={className}>{items && items.map(renderItem)}</ul>;
 }

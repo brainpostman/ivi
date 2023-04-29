@@ -15,7 +15,12 @@ import { GetServerSideProps } from 'next';
 export const getServerSideProps: GetServerSideProps = async ({ locale }) => {
     return {
         props: {
-            ...(await serverSideTranslations(locale ?? 'ru', ['header', 'auth_modal'])),
+            ...(await serverSideTranslations(locale ?? 'ru', [
+                'header',
+                'auth_modal',
+                'common',
+                'footer',
+            ])),
             // Will be passed to the page component as props
         },
     };

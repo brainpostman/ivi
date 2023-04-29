@@ -4,7 +4,7 @@ import { filterGenreData, filterGenreListData } from '@/data/filterGenre.data';
 import { filterProducerData } from '@/data/filterProducer.data';
 import { filterYearData } from '@/data/filterYear.data';
 import { useFilter } from '@/hooks/useFilter';
-import { IFilterBlockEl, IFilterTitle } from '@/types/filterBlock.interface';
+import { IFilterBlockEl } from '@/types/filterBlock.interface';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import { IoCloseOutline } from 'react-icons/io5';
@@ -15,25 +15,28 @@ import FilterListBig from './FilterListBig/FilterListBig';
 import FilterListSmall from './FilterListSmall/FilterListSmall';
 import FilterSlider from './FilterSlider/FilterSlider';
 import FilterSuggest from './FilterSuggest/FilterSuggest';
+import { useTranslation } from 'next-i18next';
 
 const filterList: Omit<IFilterBlockEl, 'isExpand'>[] = [
-    { title: 'Жанры' },
-    { title: 'Страны' },
-    { title: 'Годы' },
-    { title: 'Рейтинг Иви' },
-    { title: 'Режиссёр' },
-    { title: 'Актёр' },
+    { title: 'genre' },
+    { title: 'country' },
+    { title: 'year' },
+    { title: 'rating' },
+    { title: 'director' },
+    { title: 'actor' },
 ];
 
 const FilterBlock = () => {
     const router = useRouter();
+    const { t } = useTranslation('movies');
+
     const { expandTabFilter, getFilterData } = useFilter(filterList);
 
-    const genreFilterData = getFilterData('Жанры');
-    const countryFilterData = getFilterData('Страны');
-    const yearFilterData = getFilterData('Годы');
-    const producerFilterData = getFilterData('Режиссёр');
-    const actorFilterData = getFilterData('Актёр');
+    const genreFilterData = getFilterData('genre');
+    const countryFilterData = getFilterData('country');
+    const yearFilterData = getFilterData('year');
+    const producerFilterData = getFilterData('director');
+    const actorFilterData = getFilterData('actor');
 
     const clearFilters = () => {
         router.replace({ pathname: router.pathname, query: undefined }, undefined, {
@@ -62,7 +65,7 @@ const FilterBlock = () => {
                 carouselElementsView={5}
                 query='genre'>
                 {filterGenreData.map((genre) => (
-                    <FilterGenreCard icon={genre.icon} title={genre.title} />
+                    <FilterGenreCard key={genre.title} icon={genre.icon} title={genre.title} />
                 ))}
             </FilterListBig>
 
@@ -73,7 +76,9 @@ const FilterBlock = () => {
                 carouselElementsMove={1}
                 query='country'>
                 {filterCountryData.map((country) => (
-                    <VioletButton variant={country.variant}>{country.children}</VioletButton>
+                    <VioletButton key={country.variant} variant={country.variant}>
+                        {country.children}
+                    </VioletButton>
                 ))}
             </FilterListBig>
 
@@ -81,27 +86,27 @@ const FilterBlock = () => {
 
             <FilterSuggest
                 filterData={producerFilterData}
-                closeModal={expandTabFilter('Режиссёр')}
+                closeModal={expandTabFilter('director')}
                 suggestList={filterProducerData}
-                placeholder='Введите имя режиссёра'
+                placeholder={t('searches.producer-placeholder')}
                 query='producer'
             />
 
             <FilterSuggest
                 filterData={actorFilterData}
-                closeModal={expandTabFilter('Актёр')}
+                closeModal={expandTabFilter('actor')}
                 suggestList={filterActorData}
-                placeholder='Введите имя актёра'
+                placeholder={t('searches.actor-placeholder')}
                 query='actor'
             />
 
-            <FilterSlider maxValue={200} minValue={0} query='rating' title='Рейтинг' />
+            <FilterSlider maxValue={200} minValue={0} query='rating' title={t('sliders.rating')} />
 
-            <FilterSlider maxValue={200} minValue={0} query='scores' title='Оценки' />
+            <FilterSlider maxValue={200} minValue={0} query='scores' title={t('sliders.scores')} />
 
             <div className={style.clear_filters} onClick={clearFilters}>
                 <IoCloseOutline />
-                <p>Сбросить фильтры</p>
+                <p>{t('reset-filters')}</p>
             </div>
         </section>
     );

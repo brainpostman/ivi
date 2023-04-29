@@ -1,15 +1,15 @@
-import { formatCarouselWidth } from '@/formatters/carouselWidth.format'
-import { useBreakPoints } from '@/hooks/useBreakPoints'
-import { useCustomCarousel } from '@/hooks/useCustomCarousel'
-import { useWindow } from '@/hooks/useWindow'
-import { ICustomCarouselProps } from '@/types/customCarousel'
-import { adaptiveSize } from '@/utils/adaptive.utils'
-import Link from 'next/link'
-import React, { FC, MutableRefObject, memo, useRef, useState } from 'react'
-import { MdArrowBackIosNew } from 'react-icons/md'
-import style from './CustomCarousel.module.scss'
-import CustomCarouselArrows from './CustomCarouselArrows/CustomCarouselArrows'
-import CustomCarouselShadows from './CustomCarouselShadows/CustomCarouselShadows'
+import { formatCarouselWidth } from '@/formatters/carouselWidth.format';
+import { useBreakPoints } from '@/hooks/useBreakPoints';
+import { useCustomCarousel } from '@/hooks/useCustomCarousel';
+import { useWindow } from '@/hooks/useWindow';
+import { ICustomCarouselProps } from '@/types/customCarousel';
+import { adaptiveSize } from '@/utils/adaptive.utils';
+import Link from 'next/link';
+import React, { FC, MutableRefObject, memo, useRef, useState } from 'react';
+import { MdArrowBackIosNew } from 'react-icons/md';
+import style from './CustomCarousel.module.scss';
+import CustomCarouselArrows from './CustomCarouselArrows/CustomCarouselArrows';
+import CustomCarouselShadows from './CustomCarouselShadows/CustomCarouselShadows';
 
 // ==== PROPS ====
 // @param { * } elementsView - количество элементов, которые отображаются в карусели (указываем на 1 элемент меньше)
@@ -30,120 +30,112 @@ import CustomCarouselShadows from './CustomCarouselShadows/CustomCarouselShadows
 // @param padding (костыль) - допольнительный отступ
 
 const CustomCarousel: FC<ICustomCarouselProps> = ({
-  elementsMove,
-  elementsView: elementsViewIncoming,
-  title,
-  href,
-  children,
-  additElem,
-  classNameList,
-  classNameWrapper,
-  arrowSize: arrowSizeIncoming = 32,
-  space = [24, 24],
-  speed = 400,
-  width = 'full',
-  breakpoints,
-  padding,
+    elementsMove,
+    elementsView: elementsViewIncoming,
+    title,
+    href,
+    children,
+    additElem,
+    classNameList,
+    classNameWrapper,
+    arrowSize: arrowSizeIncoming = 32,
+    space = [24, 24],
+    speed = 400,
+    width = 'full',
+    breakpoints,
+    padding,
 }) => {
-  const [elementLens, setElementLens] = useState<number[]>([])
-  const refs = useRef<(HTMLDivElement | null)[]>([])
-  const [elementsView, setElementsView] = useState(elementsViewIncoming)
-  const [gap, setGap] = useState(space[0])
-  const [arrowSize, setArrowSize] = useState(arrowSizeIncoming)
+    const [elementLens, setElementLens] = useState<number[]>([]);
+    const refs = useRef<(HTMLDivElement | null)[]>([]);
+    const [elementsView, setElementsView] = useState(elementsViewIncoming);
+    const [gap, setGap] = useState(space[0]);
+    const [arrowSize, setArrowSize] = useState(arrowSizeIncoming);
 
-  const containerWidth = formatCarouselWidth(
-    width,
-    elementLens,
-    elementsView,
-    gap,
-    padding
-  )
+    const containerWidth = formatCarouselWidth(width, elementLens, elementsView, gap, padding);
 
-  const arrowPosition =
-    width === 'fit-shadow' ? arrowSizeIncoming - 4 : arrowSizeIncoming + 4
+    const arrowPosition = width === 'fit-shadow' ? arrowSizeIncoming - 4 : arrowSizeIncoming + 4;
 
-  const { onClickRightArrow, onClickLeftArrow, viewArrow, move } =
-    useCustomCarousel(elementLens, elementsView, elementsMove)
+    const { onClickRightArrow, onClickLeftArrow, viewArrow, move } = useCustomCarousel(
+        elementLens,
+        elementsView,
+        elementsMove
+    );
 
-  const translate = `translate3d(-${move}px, 0, 0)`
+    const translate = `translate3d(-${move}px, 0, 0)`;
 
-  const pushRef = (ref: HTMLDivElement | null) => {
-    if (ref === null || refs.current.length >= children.length) return
+    const pushRef = (ref: HTMLDivElement | null) => {
+        if (ref === null || refs.current.length >= children.length) return;
 
-    refs.current.push(ref)
-  }
+        refs.current.push(ref);
+    };
 
-  const setterElements = () => {
-    setElementLens(() => {
-      const arrayLen = refs.current.map(ref =>
-        ref ? ref.offsetWidth + gap : 0
-      )
-      return arrayLen
-    })
-  }
+    const setterElements = () => {
+        setElementLens(() => {
+            const arrayLen = refs.current.map((ref) => (ref ? ref.offsetWidth + gap : 0));
+            return arrayLen;
+        });
+    };
 
-  const setterGap = () => {
-    setGap(() => adaptiveSize(space[0], space[1], 600))
-  }
+    const setterGap = () => {
+        setGap(() => adaptiveSize(space[0], space[1], 600));
+    };
 
-  const setterArrowSize = () => {
-    setArrowSize(() => adaptiveSize(arrowSizeIncoming, 20))
-  }
+    const setterArrowSize = () => {
+        setArrowSize(() => adaptiveSize(arrowSizeIncoming, 20));
+    };
 
-  useWindow(setterElements, [refs, setElementLens, elementsView, gap])
-  useWindow(setterGap, [setGap])
-  useWindow(setterArrowSize, [setArrowSize])
-  useBreakPoints(setElementsView, elementsView, breakpoints)
+    useWindow(setterElements, [refs, setElementLens, elementsView, gap]);
+    useWindow(setterGap, [setGap]);
+    useWindow(setterArrowSize, [setArrowSize]);
+    useBreakPoints(setElementsView, elementsView, breakpoints);
 
-  return (
-    <article
-      className={`${style.wrapper} ${classNameWrapper}`}
-      style={{ width: containerWidth }}
-    >
-      {title && href && (
-        <Link href={href} className={style.wrapperTitle}>
-          <p>{title}</p>
-          <MdArrowBackIosNew />
-        </Link>
-      )}
+    return (
+        <article
+            className={`${style.wrapper} ${classNameWrapper}`}
+            style={{ width: containerWidth }}>
+            {title && href && (
+                <Link href={href} className={style.wrapperTitle}>
+                    <p>{title}</p>
+                    <MdArrowBackIosNew />
+                </Link>
+            )}
 
-      <div className={style.wrapperCarousel}>
-        <div className={style.container} style={{ width: containerWidth }}>
-          <div
-            className={`${style.list} ${classNameList}`}
-            style={{
-              transform: translate,
-              gap: `${gap}px`,
-              transitionDuration: `${speed}ms`,
-              padding,
-            }}
-          >
-            {Array.isArray(children) &&
-              children.map((element, index) => (
-                <div key={index} ref={ref => pushRef(ref)}>
-                  {element}
+            <div className={style.wrapperCarousel}>
+                <div className={style.container} style={{ width: containerWidth }}>
+                    <div
+                        className={`${style.list} ${classNameList}`}
+                        style={{
+                            transform: translate,
+                            gap: `${gap}px`,
+                            transitionDuration: `${speed}ms`,
+                            padding,
+                        }}>
+                        {Array.isArray(children) &&
+                            children.map((element, index) => (
+                                <div key={index} ref={(ref) => pushRef(ref)}>
+                                    {element}
+                                </div>
+                            ))}
+                        {additElem && <div ref={(ref) => pushRef(ref)}>{additElem()}</div>}
+                    </div>
+                    <CustomCarouselArrows
+                        arrowSize={arrowSize}
+                        arrowPosition={arrowPosition}
+                        classNameLeftArrow={viewArrow('left')}
+                        classNameRightArrow={viewArrow('right')}
+                        onClickLeftArrow={onClickLeftArrow}
+                        onClickRightArrow={onClickRightArrow}
+                    />
+                    {width === 'fit-shadow' && (
+                        <CustomCarouselShadows
+                            classNameLeftShadow={viewArrow('left')}
+                            classNameRightShadow={viewArrow('right')}
+                        />
+                    )}
                 </div>
-              ))}
-            {additElem && <div ref={ref => pushRef(ref)}>{additElem()}</div>}
-          </div>
-          <CustomCarouselArrows
-            arrowSize={arrowSize}
-            arrowPosition={arrowPosition}
-            classNameLeftArrow={viewArrow('left')}
-            classNameRightArrow={viewArrow('right')}
-            onClickLeftArrow={onClickLeftArrow}
-            onClickRightArrow={onClickRightArrow}
-          />
-          {width === 'fit-shadow' && (
-            <CustomCarouselShadows
-              classNameLeftShadow={viewArrow('left')}
-              classNameRightShadow={viewArrow('right')}
-            />
-          )}
-        </div>
-      </div>
-    </article>
-  )
-}
+            </div>
+        </article>
+    );
+};
 
-export default memo(CustomCarousel)
+export default memo(CustomCarousel);
