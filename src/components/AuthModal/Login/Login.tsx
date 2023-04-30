@@ -13,7 +13,7 @@ interface ILoginProps {
 }
 
 const Login = ({ errorMessages, setErrorMessages, handleSignIn }: ILoginProps) => {
-    const { t } = useTranslation();
+    const { t } = useTranslation('auth_modal');
 
     const [passwordInput, setPasswordInput] = useState('');
 

@@ -1,48 +1,55 @@
-import { SetStateAction, useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import styles from './AuthModal.module.scss';
 import { useActions } from '@/hooks/ReduxHooks';
 import { signIn } from 'next-auth/react';
-import Input from '../UI/Input/Input';
-import HighlightButton from '../UI/HighlightButton/HighlightButton';
-import BasicBtn from '../UI/BasicBtn/BasicBtn';
-import { FaGoogle, FaVk } from 'react-icons/fa';
 import { TbPencil } from 'react-icons/tb';
-import {
-    checkEmailVacancy,
-    validateConfirmedPassword,
-    validateEmail,
-    validatePassword,
-} from '@/utils/auth.util';
+import { checkEmailVacancy } from '@/utils/auth.util';
 import { CSSTransition } from 'react-transition-group-react-18';
 import { delay } from '@/utils/delay';
 import { useTranslation } from 'next-i18next';
 import ErrorPopup from '../ErrorPopup/ErrorPopup';
-import EmailInput from './EmailInput/EmailInput';
+import AuthOptions from './AuthOptions/AuthOptions';
 import Registration from './Registration/Registration';
 import Login from './Login/Login';
 
 interface IAuthModalProps {
     modalShown: boolean;
 }
-//TODO: деструктуризация, деструктуризация, деструктуризация...
-//TODO: доделать транзишны
+
+interface IEditEmailProps {
+    editEmail: () => void;
+    validatedEmail: string;
+}
+
+const EditEmail = ({ editEmail, validatedEmail }: IEditEmailProps) => {
+    return (
+        <div className={styles.useremail} onClick={editEmail}>
+            <div className={styles.useremail_edit}>
+                <TbPencil />
+            </div>
+            <div className={`${styles.useremail_mail} ${styles.message}`}>{validatedEmail}</div>
+        </div>
+    );
+};
+
 const AuthModal = ({ modalShown }: IAuthModalProps) => {
     const { t } = useTranslation('auth_modal');
 
     //булевый флаг отрисовки окна
     const { setAuthModal } = useActions();
     //состояния переходов
-    const [showAuthInputs, setShowAuthInputs] = useState(true);
-    const [showPassInputs, setShowPassInputs] = useState(false);
-    const transitionDelay = 1000;
+    const [authIn, setAuthIn] = useState(false);
+    const [passIn, setPassIn] = useState(false);
+    const transitionDelay = 2000;
     //состояния
     const [emailInput, setEmailInput] = useState('');
     const [validatedEmail, setValidatedEmail] = useState('');
     const [authFlow, setAuthFlow] = useState('');
     const [errorMessages, setErrorMessages] = useState<string[]>([]);
 
-    const [progressBar, setProgressBar] = useState(5);
+    const [progressBar, setProgressBar] = useState(0);
     const modalRef = useRef<HTMLDivElement>(null);
+
     //фиксирование модалки в окне браузера
     useEffect(() => {
         if (modalRef.current) {
@@ -54,6 +61,11 @@ const AuthModal = ({ modalShown }: IAuthModalProps) => {
         };
     }, [modalShown]);
 
+    useEffect(() => {
+        setAuthIn(true);
+        setProgressBar(5);
+    }, []);
+
     //алгоритм авторизации/регистрации
     const handleEmail = async (email: string) => {
         let response = await checkEmailVacancy(email);
@@ -61,10 +73,10 @@ const AuthModal = ({ modalShown }: IAuthModalProps) => {
             setErrorMessages([]);
             setProgressBar(50);
             setValidatedEmail(email);
-            setShowAuthInputs(false);
+            setAuthIn(false);
             setAuthFlow(response);
             await delay(transitionDelay);
-            setShowPassInputs(true);
+            setPassIn(true);
         } else {
             setErrorMessages([response]);
         }
@@ -75,10 +87,10 @@ const AuthModal = ({ modalShown }: IAuthModalProps) => {
         setEmailInput(validatedEmail);
         setValidatedEmail('');
         setProgressBar(5);
-        setShowPassInputs(false);
         setAuthFlow('');
+        setPassIn(false);
         await delay(transitionDelay);
-        setShowAuthInputs(true);
+        setAuthIn(true);
     };
 
     const handleSignIn = (provider: string, password: string) => {
@@ -108,89 +120,72 @@ const AuthModal = ({ modalShown }: IAuthModalProps) => {
                 <div className={styles.close} onClick={() => setAuthModal(false)}></div>
             </section>
             <section className={styles.chat}>
-                <div className={styles.chat__container}>
-                    <div className={`${styles.message} ${styles.message__prompt}`}>
-                        {t('login-or-register')}
+                <CSSTransition
+                    in={authIn}
+                    timeout={transitionDelay}
+                    classNames={{
+                        enter: styles.emailOauth_enter,
+                        enterActive: styles.emailOauth_enterActive,
+                        enterDone: styles.emailOauth_enterDone,
+                        exit: styles.emailOauth_exit,
+                        exitActive: styles.emailOauth_exitActive,
+                        exitDone: styles.emailOauth_exitDone,
+                    }}
+                    mountOnEnter
+                    unmountOnExit>
+                    <div className={styles.chat__container}>
+                        <div className={`${styles.message} ${styles.message__prompt}`}>
+                            {t('login-or-register')}
+                        </div>
+                        <AuthOptions
+                            emailInput={emailInput}
+                            setEmailInput={setEmailInput}
+                            errorMessages={errorMessages}
+                            setErrorMessages={setErrorMessages}
+                            handleEmail={handleEmail}
+                        />
                     </div>
-                </div>
-                {showAuthInputs ? (
-                    <CSSTransition
-                        in={showAuthInputs}
-                        timeout={transitionDelay}
-                        classNames={{
-                            enter: styles.emailOauth_enter,
-                            enterActive: styles.emailOauth_enterActive,
-                            enterDone: styles.emailOauth_enterDone,
-                            exit: styles.emailOauth_exit,
-                            exitActive: styles.emailOauth_exitActive,
-                            exitDone: styles.emailOauth_exitDone,
-                        }}>
-                        <div className={styles.chat__container}>
-                            <EmailInput
-                                errorMessages={errorMessages}
-                                setErrorMessages={setErrorMessages}
-                                handleEmail={handleEmail}
-                            />
-                        </div>
-                    </CSSTransition>
-                ) : (
-                    <CSSTransition
-                        in={showPassInputs}
-                        timeout={transitionDelay}
-                        classNames={{
-                            enter: styles.editMail_enter,
-                            enterActive: styles.editMail_enterActive,
-                            enterDone: styles.editMail_enterDone,
-                            exit: styles.editMail_exit,
-                            exitActive: styles.editMail_exitActive,
-                            exitDone: styles.editMail_exitDone,
-                        }}>
-                        <div className={styles.chat__container}>
-                            <div className={styles.useremail} onClick={editEmail}>
-                                <div className={styles.useremail_edit}>
-                                    <TbPencil />
-                                </div>
-                                <div className={`${styles.useremail_mail} ${styles.message}`}>
-                                    {validatedEmail}
-                                </div>
-                            </div>
-                        </div>
-                    </CSSTransition>
-                )}
-                {showPassInputs && (
-                    <CSSTransition
-                        in={showPassInputs}
-                        timeout={transitionDelay}
-                        classNames={{
-                            enter: styles.passInput_enter,
-                            enterActive: styles.passInput_enterActive,
-                            enterDone: styles.passInput_enterDone,
-                            exit: styles.passInput_exit,
-                            exitActive: styles.passInput_exitActive,
-                            exitDone: styles.passInput_exitDone,
-                        }}>
+                </CSSTransition>
+                <CSSTransition
+                    in={passIn}
+                    timeout={transitionDelay}
+                    classNames={{
+                        enter: styles.passInput_enter,
+                        enterActive: styles.passInput_enterActive,
+                        enterDone: styles.passInput_enterDone,
+                        exit: styles.passInput_exit,
+                        exitActive: styles.passInput_exitActive,
+                        exitDone: styles.passInput_exitDone,
+                    }}
+                    mountOnEnter
+                    unmountOnExit>
+                    <div>
                         {authFlow === 'login' ? (
                             <div className={styles.chat__container}>
+                                <EditEmail editEmail={editEmail} validatedEmail={validatedEmail} />
                                 <Login
                                     errorMessages={errorMessages}
                                     setErrorMessages={setErrorMessages}
                                     handleSignIn={handleSignIn}
                                 />
                             </div>
-                        ) : (
+                        ) : authFlow === 'register' ? (
                             <div className={styles.chat__container}>
+                                <EditEmail editEmail={editEmail} validatedEmail={validatedEmail} />
                                 <Registration
                                     errorMessages={errorMessages}
                                     setErrorMessages={setErrorMessages}
                                     handleSignIn={handleSignIn}
                                 />
                             </div>
+                        ) : (
+                            <div></div>
                         )}
-                    </CSSTransition>
-                )}
+                    </div>
+                </CSSTransition>
                 {errorMessages.length > 0 && (
                     <div className={`${styles.chat__container}`}>
-                        <ErrorPopup messages={errorMessages} className={styles.error} />{' '}
+                        <ErrorPopup messages={errorMessages} className={styles.error} />
                     </div>
                 )}
             </section>

@@ -35,7 +35,7 @@
         height: 2px;
         background-color: $red;
         width: 5%;
-        transition: width 500ms;
+        transition: width 2s;
     }
 }
 
@@ -205,7 +205,7 @@
     }
     &_enterActive {
         opacity: 1;
-        transition: opacity 0.5s;
+        transition: opacity 2s;
     }
     &_enterDone {
         opacity: 1;
@@ -215,30 +215,7 @@
     }
     &_exitActive {
         opacity: 0;
-        transition: opacity 0.5s;
-    }
-    &_exitDone {
-        opacity: 0;
-    }
-}
-
-.editMail {
-    &_enter {
-        opacity: 0;
-    }
-    &_enterActive {
-        opacity: 1;
-        transition: opacity 0.5s;
-    }
-    &_enterDone {
-        opacity: 1;
-    }
-    &_exit {
-        opacity: 1;
-    }
-    &_exitActive {
-        opacity: 0;
-        transition: opacity 0.5s;
+        transition: opacity 2s;
     }
     &_exitDone {
         opacity: 0;
@@ -251,7 +228,7 @@
     }
     &_enterActive {
         opacity: 1;
-        transition: opacity 1s;
+        transition: opacity 2s;
     }
     &_enterDone {
         opacity: 1;
@@ -261,7 +238,7 @@
     }
     &_exitActive {
         opacity: 0;
-        transition: opacity 1s;
+        transition: opacity 2s;
     }
     &_exitDone {
         opacity: 0;

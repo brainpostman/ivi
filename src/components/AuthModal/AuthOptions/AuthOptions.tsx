@@ -1,5 +1,5 @@
 import Input from '@/components/UI/Input/Input';
-import styles from './EmailInput.module.scss';
+import styles from './AuthOptions.module.scss';
 import parentStyles from '../AuthModal.module.scss';
 import HighlightButton from '@/components/UI/HighlightButton/HighlightButton';
 import BasicBtn from '@/components/UI/BasicBtn/BasicBtn';
@@ -10,17 +10,26 @@ import { Dispatch, SetStateAction, useState } from 'react';
 import { useTranslation } from 'next-i18next';
 
 interface IEmailInputProps {
+    emailInput: string;
+    setEmailInput: Dispatch<SetStateAction<string>>;
     errorMessages: string[];
     setErrorMessages: Dispatch<SetStateAction<string[]>>;
     handleEmail: (email: string) => void;
+    className?: string;
 }
 
-const EmailInput = ({ errorMessages, setErrorMessages, handleEmail }: IEmailInputProps) => {
-    const [emailInput, setEmailInput] = useState('');
+const EmailInput = ({
+    emailInput,
+    setEmailInput,
+    errorMessages,
+    setErrorMessages,
+    handleEmail,
+    className = '',
+}: IEmailInputProps) => {
     const { t } = useTranslation('auth_modal');
 
     return (
-        <div className={styles.container}>
+        <div className={`${styles.container} ${className}`}>
             <div className={styles.inputs}>
                 <Input
                     type='email'
