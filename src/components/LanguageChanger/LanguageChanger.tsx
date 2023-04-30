@@ -1,7 +1,7 @@
-import { useRouter } from 'next/router';
-import Router from 'next/router';
+import Router, { useRouter } from 'next/router';
 import Switch from '../UI/Switch/Switch';
 import { delay } from '@/utils/delay';
+import setLocaleCookie from '@/utils/localization.utils';
 
 const switchSpeed = 200;
 
@@ -9,6 +9,7 @@ const LanguageChanger = () => {
     const router = useRouter();
     const { pathname, asPath, query } = router;
     const onToggleLanguageClick = async (newLocale: string) => {
+        setLocaleCookie(newLocale);
         await router.push({ pathname, query }, asPath, { locale: newLocale });
         await delay(switchSpeed * 1.25);
         Router.reload();
