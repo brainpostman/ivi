@@ -1,0 +1,75 @@
+.wrapper {
+  position: absolute;
+  background-color: $main-bg;
+
+  width: 100%;
+  height: 100vh;
+
+  overflow: auto;
+
+  z-index: -1;
+
+  @include ui-padding(bottom, 30);
+
+  a,
+  p {
+    color: #fff;
+    font-weight: 600;
+  }
+
+  svg {
+    width: 22px;
+    height: 22px;
+  }
+}
+
+.container {
+  @include ui-padding(hor, 9);
+}
+
+.top_buttons {
+  display: grid;
+  grid-template-columns: repeat(2, auto);
+  column-gap: 24px;
+
+  border-top: 1px solid $border-gray;
+  border-bottom: 1px solid $border-gray;
+
+  @include ui-padding(ver, 8);
+
+  >button {
+    flex-grow: 1;
+    gap: 4px;
+
+    @include ui-padding(hor, 4);
+    @include ui-padding(ver, 3);
+
+    svg {
+      color: #7e798f;
+    }
+  }
+
+  @media (max-width: 879px) {
+    grid-template-columns: repeat(1, auto);
+    row-gap: 12px;
+  }
+}
+
+.ivi {
+  border-bottom: 1px solid $border-gray;
+  @include ui-padding(ver, 8);
+
+  >p:first-child {
+    @include ui-margin(bottom, 6);
+  }
+}
+
+.arrow {
+  transform: rotate(-90deg);
+  width: 18px !important;
+  height: 18px !important;
+}
+
+.arrow_active {
+  transform: rotate(90deg);
+}
