@@ -13,7 +13,7 @@ const FooterDevices = () => {
         btnType='textPlusIcon'
         href='https://apps.apple.com/RU/app/id455705533'
         title={t('app-store.title')}
-        subtitle={t('app-store.subtitle')}
+        suptitle={t('app-store.subtitle')}
       >
         <FaApple />
       </BasicBtn>
@@ -21,7 +21,7 @@ const FooterDevices = () => {
         btnType='textPlusIcon'
         href='https://play.google.com/store/apps/details?id=ru.ivi.client'
         title={t('google-play.title')}
-        subtitle={t('google-play.subtitle')}
+        suptitle={t('google-play.subtitle')}
       >
         <FaGooglePlay />
       </BasicBtn>
@@ -29,7 +29,7 @@ const FooterDevices = () => {
         btnType='textPlusIcon'
         href='https://www.ivi.ru/pages/tvsmart/'
         title={t('smart-tv.title')}
-        subtitle={t('smart-tv.subtitle')}
+        suptitle={t('smart-tv.subtitle')}
       >
         <FaTv />
       </BasicBtn>
