@@ -1,25 +1,29 @@
 .wrapper {
-	display: flex;
-	gap: 28px;
+  display: flex;
+  gap: 28px;
 }
 
 .logo {
-	width: 66px;
-	height: 72px;
+  width: 66px;
+  height: 72px;
 }
 
 .nav {
-	display: flex;
+  display: flex;
 
-	color: $gray;
-	font-weight: 500;
+  color: $gray;
+  font-weight: 500;
 
-	> a {
-		display: flex;
-		align-items: center;
+  > a {
+    display: flex;
+    align-items: center;
 
-		@extend .text;
+    @extend .text;
 
-		@include ui-padding(hor, 2);
-	}
+    @include ui-padding(hor, 2);
+  }
+
+  @media (max-width: 1160px) {
+    display: none;
+  }
 }

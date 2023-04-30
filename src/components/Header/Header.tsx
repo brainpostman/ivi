@@ -3,6 +3,7 @@ import { IHeaderBlock, IHeaderTab } from '@/types/header.interface'
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 import AuthModal from '../AuthModal/AuthModal'
+import HeaderMobile from '../Mobile/HeaderMobile/HeaderMobile'
 import style from './Header.module.scss'
 import HeaderHoverBlock from './HeaderHoverBlock/HeaderHoverBlock'
 import HeaderLeftSide from './HeaderLeftSide/HeaderLeftSide'
@@ -27,7 +28,7 @@ const Header = () => {
   }
 
   const hideHoverBlock = () => {
-    setHoverTabs(prev => ({ ...prev, isShow: false }))
+    setHoverTabs({ tab: undefined, isShow: false })
   }
 
   useEffect(() => {
@@ -52,6 +53,7 @@ const Header = () => {
         )}
       </section>
       {showAuthModal && <AuthModal modalShown={showAuthModal} />}
+      <HeaderMobile />
     </header>
   )
 }

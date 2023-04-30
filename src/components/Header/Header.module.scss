@@ -7,6 +7,8 @@ $wrapper-bg: #100e19;
   width: 100%;
 
   @include ui-padding(top, 1);
+
+
 }
 
 .container {
@@ -22,6 +24,10 @@ $wrapper-bg: #100e19;
 
   margin: auto;
   @include ui-padding(hor, 3);
+
+  @media (max-width: 1161px) {
+    @include ui-padding(hor, 8);
+  }
 }
 
 .effect {
