@@ -46,7 +46,7 @@ export function validateEmail(email: string): string {
     }
 }
 
-export function validatePassword(password: string): string[] {
+export function validatePassword(password: string, email = ''): string[] {
     let messages: string[] = [];
     if (password.length === 0) {
         messages.push(
@@ -65,6 +65,12 @@ export function validatePassword(password: string): string[] {
         messages.push(
             i18n?.t('auth_modal:error-messages.no-pattern-match') ??
                 'Пароль должен содержать только символы латинского алфавита, цифры и спецсимволы'
+        );
+    }
+    if (email !== '' && email === password) {
+        messages.push(
+            i18n?.t('auth_modal:error-messages.no-email-match') ??
+                'Пароль не должен совпадать с вашей почтой'
         );
     }
     return messages;

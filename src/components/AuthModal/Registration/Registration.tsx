@@ -2,17 +2,25 @@ import Input from '@/components/UI/Input/Input';
 import parentStyles from '../AuthModal.module.scss';
 import styles from './Registration.module.scss';
 import { useTranslation } from 'next-i18next';
-import { Dispatch, SetStateAction, useState } from 'react';
+import { useState } from 'react';
 import HighlightButton from '@/components/UI/HighlightButton/HighlightButton';
 import { validateConfirmedPassword, validatePassword } from '@/utils/auth.util';
 
 interface IRegistrationProps {
     errorMessages: string[];
-    setErrorMessages: Dispatch<SetStateAction<string[]>>;
+    setError: (error: string[]) => void;
+    resetError: () => void;
     handleSignIn: (provider: string, email: string) => void;
+    validatedEmail: string;
 }
 
-const Registration = ({ errorMessages, setErrorMessages, handleSignIn }: IRegistrationProps) => {
+const Registration = ({
+    errorMessages,
+    setError,
+    handleSignIn,
+    resetError,
+    validatedEmail,
+}: IRegistrationProps) => {
     const { t } = useTranslation('auth_modal');
     const [passwordInput, setPasswordInput] = useState('');
     const [confirmedPasswordInput, setConfirmedPasswordInput] = useState('');
@@ -27,7 +35,7 @@ const Registration = ({ errorMessages, setErrorMessages, handleSignIn }: IRegist
                 type='password'
                 value={passwordInput}
                 onChange={(e) => {
-                    setErrorMessages([]);
+                    if (errorMessages.length > 0) resetError();
                     setPasswordInput(e.target.value);
                 }}
                 charHideBtn
@@ -38,7 +46,7 @@ const Registration = ({ errorMessages, setErrorMessages, handleSignIn }: IRegist
                 type='password'
                 value={confirmedPasswordInput}
                 onChange={(e) => {
-                    setErrorMessages([]);
+                    if (errorMessages.length > 0) resetError();
                     setConfirmedPasswordInput(e.target.value);
                 }}
                 charHideBtn
@@ -46,17 +54,15 @@ const Registration = ({ errorMessages, setErrorMessages, handleSignIn }: IRegist
             />
             <HighlightButton
                 disabled={
-                    passwordInput &&
-                    passwordInput.length === confirmedPasswordInput.length &&
-                    errorMessages.length === 0
+                    passwordInput && passwordInput.length === confirmedPasswordInput.length
                         ? false
                         : true
                 }
                 className={parentStyles.highlightbtn}
                 onClick={() => {
-                    let passwordErrors: string[] = validatePassword(passwordInput);
+                    let passwordErrors: string[] = validatePassword(passwordInput, validatedEmail);
                     if (passwordErrors.length > 0) {
-                        setErrorMessages([...passwordErrors]);
+                        setError([...passwordErrors]);
                         return;
                     }
                     let passwordError = validateConfirmedPassword(
@@ -64,7 +70,7 @@ const Registration = ({ errorMessages, setErrorMessages, handleSignIn }: IRegist
                         confirmedPasswordInput
                     );
                     if (passwordError.length > 0) {
-                        setErrorMessages([passwordError]);
+                        setError([passwordError]);
                         return;
                     }
                     handleSignIn('register', confirmedPasswordInput);

@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import styles from './AuthModal.module.scss';
 import { useActions } from '@/hooks/ReduxHooks';
-import { signIn } from 'next-auth/react';
+import { signIn, useSession } from 'next-auth/react';
 import { TbPencil } from 'react-icons/tb';
 import { checkEmailVacancy } from '@/utils/auth.util';
 import { CSSTransition } from 'react-transition-group-react-18';
@@ -11,6 +11,7 @@ import ErrorPopup from '../ErrorPopup/ErrorPopup';
 import AuthOptions from './AuthOptions/AuthOptions';
 import Registration from './Registration/Registration';
 import Login from './Login/Login';
+import { useRouter } from 'next/router';
 
 interface IAuthModalProps {
     modalShown: boolean;
@@ -32,23 +33,35 @@ const EditEmail = ({ editEmail, validatedEmail }: IEditEmailProps) => {
     );
 };
 
+const transitionStyles = {
+    enter: styles.transition_enter,
+    enterActive: styles.transition_enterActive,
+    enterDone: styles.transition_enterDone,
+    exit: styles.transition_exit,
+    exitActive: styles.transition_exitActive,
+    exitDone: styles.transition_exitDone,
+};
+
+//TODO: login fail flow
 const AuthModal = ({ modalShown }: IAuthModalProps) => {
     const { t } = useTranslation('auth_modal');
+    const router = useRouter();
 
     //булевый флаг отрисовки окна
     const { setAuthModal } = useActions();
+    const [progressBar, setProgressBar] = useState(0);
+    const modalRef = useRef<HTMLDivElement>(null);
     //состояния переходов
     const [authIn, setAuthIn] = useState(false);
-    const [passIn, setPassIn] = useState(false);
-    const transitionDelay = 2000;
+    const [errorIn, setErrorIn] = useState(false);
+    const errorTimeout = useRef<number>(0);
+    const transitionDelay = 400;
     //состояния
     const [emailInput, setEmailInput] = useState('');
     const [validatedEmail, setValidatedEmail] = useState('');
     const [authFlow, setAuthFlow] = useState('');
-    const [errorMessages, setErrorMessages] = useState<string[]>([]);
 
-    const [progressBar, setProgressBar] = useState(0);
-    const modalRef = useRef<HTMLDivElement>(null);
+    const [errorMessages, setErrorMessages] = useState<string[]>([]);
 
     //фиксирование модалки в окне браузера
     useEffect(() => {
@@ -74,9 +87,8 @@ const AuthModal = ({ modalShown }: IAuthModalProps) => {
             setProgressBar(50);
             setValidatedEmail(email);
             setAuthIn(false);
-            setAuthFlow(response);
             await delay(transitionDelay);
-            setPassIn(true);
+            setAuthFlow(response);
         } else {
             setErrorMessages([response]);
         }
@@ -88,7 +100,6 @@ const AuthModal = ({ modalShown }: IAuthModalProps) => {
         setValidatedEmail('');
         setProgressBar(5);
         setAuthFlow('');
-        setPassIn(false);
         await delay(transitionDelay);
         setAuthIn(true);
     };
@@ -96,13 +107,26 @@ const AuthModal = ({ modalShown }: IAuthModalProps) => {
     const handleSignIn = (provider: string, password: string) => {
         try {
             signIn(provider, {
+                redirect: false,
                 email: validatedEmail,
                 password: password,
             });
             setProgressBar(100);
+            router.reload();
         } catch (err: any) {
             setErrorMessages([err.message ?? t('error-messages.unforeseen-error')]);
         }
+    };
+
+    const setError = (errors: string[]) => {
+        window.clearTimeout(errorTimeout.current);
+        setErrorMessages(errors);
+        setErrorIn(true);
+    };
+
+    const resetError = () => {
+        setErrorIn(false);
+        setErrorMessages(['']);
     };
 
     return (
@@ -123,14 +147,7 @@ const AuthModal = ({ modalShown }: IAuthModalProps) => {
                 <CSSTransition
                     in={authIn}
                     timeout={transitionDelay}
-                    classNames={{
-                        enter: styles.emailOauth_enter,
-                        enterActive: styles.emailOauth_enterActive,
-                        enterDone: styles.emailOauth_enterDone,
-                        exit: styles.emailOauth_exit,
-                        exitActive: styles.emailOauth_exitActive,
-                        exitDone: styles.emailOauth_exitDone,
-                    }}
+                    classNames={transitionStyles}
                     mountOnEnter
                     unmountOnExit>
                     <div className={styles.chat__container}>
@@ -141,53 +158,65 @@ const AuthModal = ({ modalShown }: IAuthModalProps) => {
                             emailInput={emailInput}
                             setEmailInput={setEmailInput}
                             errorMessages={errorMessages}
-                            setErrorMessages={setErrorMessages}
+                            setError={setError}
+                            resetError={resetError}
                             handleEmail={handleEmail}
                         />
                     </div>
                 </CSSTransition>
                 <CSSTransition
-                    in={passIn}
+                    in={authFlow === 'login'}
                     timeout={transitionDelay}
-                    classNames={{
-                        enter: styles.passInput_enter,
-                        enterActive: styles.passInput_enterActive,
-                        enterDone: styles.passInput_enterDone,
-                        exit: styles.passInput_exit,
-                        exitActive: styles.passInput_exitActive,
-                        exitDone: styles.passInput_exitDone,
-                    }}
+                    classNames={transitionStyles}
                     mountOnEnter
                     unmountOnExit>
-                    <div>
-                        {authFlow === 'login' ? (
-                            <div className={styles.chat__container}>
-                                <EditEmail editEmail={editEmail} validatedEmail={validatedEmail} />
-                                <Login
-                                    errorMessages={errorMessages}
-                                    setErrorMessages={setErrorMessages}
-                                    handleSignIn={handleSignIn}
-                                />
-                            </div>
-                        ) : authFlow === 'register' ? (
-                            <div className={styles.chat__container}>
-                                <EditEmail editEmail={editEmail} validatedEmail={validatedEmail} />
-                                <Registration
-                                    errorMessages={errorMessages}
-                                    setErrorMessages={setErrorMessages}
-                                    handleSignIn={handleSignIn}
-                                />
-                            </div>
-                        ) : (
-                            <div></div>
-                        )}
+                    <div className={styles.chat__container}>
+                        <EditEmail editEmail={editEmail} validatedEmail={validatedEmail} />
+                        <Login
+                            errorMessages={errorMessages}
+                            setError={setError}
+                            resetError={resetError}
+                            handleSignIn={handleSignIn}
+                        />
                     </div>
                 </CSSTransition>
-                {errorMessages.length > 0 && (
-                    <div className={`${styles.chat__container}`}>
-                        <ErrorPopup messages={errorMessages} className={styles.error} />
+                <CSSTransition
+                    in={authFlow === 'register'}
+                    timeout={transitionDelay}
+                    classNames={transitionStyles}
+                    mountOnEnter
+                    unmountOnExit>
+                    <div className={styles.chat__container}>
+                        <EditEmail editEmail={editEmail} validatedEmail={validatedEmail} />
+                        <Registration
+                            errorMessages={errorMessages}
+                            setError={setError}
+                            resetError={resetError}
+                            handleSignIn={handleSignIn}
+                            validatedEmail={validatedEmail}
+                        />
                     </div>
-                )}
+                </CSSTransition>
+                <CSSTransition
+                    in={progressBar === 100}
+                    timeout={transitionDelay}
+                    classNames={transitionStyles}
+                    mountOnEnter
+                    unmountOnExit>
+                    <div className={styles.chat__container}>
+                        <div className={`${styles.message} ${styles.message__prompt}`}>
+                            {t('success')}
+                        </div>
+                    </div>
+                </CSSTransition>
+                <CSSTransition
+                    in={errorIn}
+                    timeout={transitionDelay}
+                    classNames={transitionStyles}
+                    mountOnEnter
+                    unmountOnExit>
+                    <ErrorPopup messages={errorMessages} className={styles.error} />
+                </CSSTransition>
             </section>
         </div>
     );

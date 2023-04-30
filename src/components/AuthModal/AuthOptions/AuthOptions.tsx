@@ -13,7 +13,8 @@ interface IEmailInputProps {
     emailInput: string;
     setEmailInput: Dispatch<SetStateAction<string>>;
     errorMessages: string[];
-    setErrorMessages: Dispatch<SetStateAction<string[]>>;
+    setError: (error: string[]) => void;
+    resetError: () => void;
     handleEmail: (email: string) => void;
     className?: string;
 }
@@ -22,7 +23,8 @@ const EmailInput = ({
     emailInput,
     setEmailInput,
     errorMessages,
-    setErrorMessages,
+    setError,
+    resetError,
     handleEmail,
     className = '',
 }: IEmailInputProps) => {
@@ -35,8 +37,8 @@ const EmailInput = ({
                     type='email'
                     value={emailInput}
                     onChange={(e) => {
+                        if (errorMessages.length > 0) resetError();
                         setEmailInput(e.target.value);
-                        if (errorMessages.length > 0) setErrorMessages([]);
                     }}
                     placeholder={t('email-placeholder')}
                     autoFocus
@@ -47,10 +49,9 @@ const EmailInput = ({
                     onClick={() => {
                         let emailError = validateEmail(emailInput);
                         if (emailError) {
-                            setErrorMessages([emailError]);
+                            setError([emailError]);
                             return;
                         }
-                        console.log(emailError);
                         handleEmail(emailInput);
                     }}>
                     {t('continue')}

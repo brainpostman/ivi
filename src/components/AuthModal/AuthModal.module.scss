@@ -35,7 +35,7 @@
         height: 2px;
         background-color: $red;
         width: 5%;
-        transition: width 2s;
+        transition: width 0.6s;
     }
 }
 
@@ -194,53 +194,36 @@
 }
 
 .error {
-    padding: 12px 12px 12px 12px;
-    margin-left: -12px;
-    margin-right: -12px;
+    width: 314px;
+    margin: 0 auto;
+    @include ui-margin(top, 4);
 }
 
-.emailOauth {
+.transition {
     &_enter {
         opacity: 0;
+        transform: translateY(50%);
     }
     &_enterActive {
         opacity: 1;
-        transition: opacity 2s;
+        transform: translateY(0);
+        transition: opacity 0.4s, transform 0.4s;
     }
     &_enterDone {
         opacity: 1;
+        transform: translateY(0);
     }
     &_exit {
         opacity: 1;
+        transform: translateX(0);
     }
     &_exitActive {
         opacity: 0;
-        transition: opacity 2s;
+        transition: opacity 0.4s, transform 0.4s;
+        transform: translateX(-50%);
     }
     &_exitDone {
         opacity: 0;
-    }
-}
-
-.passInput {
-    &_enter {
-        opacity: 0;
-    }
-    &_enterActive {
-        opacity: 1;
-        transition: opacity 2s;
-    }
-    &_enterDone {
-        opacity: 1;
-    }
-    &_exit {
-        opacity: 1;
-    }
-    &_exitActive {
-        opacity: 0;
-        transition: opacity 2s;
-    }
-    &_exitDone {
-        opacity: 0;
+        transform: translateX(-50%);
     }
 }

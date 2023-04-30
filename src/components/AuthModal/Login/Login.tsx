@@ -2,17 +2,18 @@ import styles from './Login.module.scss';
 import parentStyles from '../AuthModal.module.scss';
 import { useTranslation } from 'next-i18next';
 import Input from '@/components/UI/Input/Input';
-import { Dispatch, SetStateAction, useState } from 'react';
+import { useState } from 'react';
 import HighlightButton from '@/components/UI/HighlightButton/HighlightButton';
 import { validatePassword } from '@/utils/auth.util';
 
 interface ILoginProps {
     errorMessages: string[];
-    setErrorMessages: Dispatch<SetStateAction<string[]>>;
+    setError: (error: string[]) => void;
     handleSignIn: (provider: string, email: string) => void;
+    resetError: () => void;
 }
 
-const Login = ({ errorMessages, setErrorMessages, handleSignIn }: ILoginProps) => {
+const Login = ({ errorMessages, setError, resetError, handleSignIn }: ILoginProps) => {
     const { t } = useTranslation('auth_modal');
 
     const [passwordInput, setPasswordInput] = useState('');
@@ -26,7 +27,7 @@ const Login = ({ errorMessages, setErrorMessages, handleSignIn }: ILoginProps) =
                 type='password'
                 value={passwordInput}
                 onChange={(e) => {
-                    setErrorMessages([]);
+                    if (errorMessages.length > 0) resetError();
                     setPasswordInput(e.target.value);
                 }}
                 charHideBtn
@@ -34,12 +35,12 @@ const Login = ({ errorMessages, setErrorMessages, handleSignIn }: ILoginProps) =
                 autoFocus
             />
             <HighlightButton
-                disabled={passwordInput && errorMessages.length === 0 ? false : true}
+                disabled={passwordInput ? false : true}
                 className={parentStyles.highlightbtn}
                 onClick={() => {
                     let passwordError = validatePassword(passwordInput);
                     if (passwordError.length > 0) {
-                        setErrorMessages([...passwordError]);
+                        setError([...passwordError]);
                         return;
                     }
                     handleSignIn('login', passwordInput);
