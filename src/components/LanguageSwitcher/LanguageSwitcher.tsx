@@ -5,7 +5,7 @@ import { delay } from '@/utils/delay';
 
 const switchSpeed = 200;
 
-const LanguageChanger = () => {
+const LanguageSwitcher = () => {
     const router = useRouter();
     const navigator = useNavigator();
     const { pathname, asPath, query } = router;
@@ -30,4 +30,4 @@ const LanguageChanger = () => {
     );
 };
 
-export default LanguageChanger;
+export default LanguageSwitcher;

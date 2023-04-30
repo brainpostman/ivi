@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { SetStateAction, useEffect, useRef, useState } from 'react';
 import styles from './AuthModal.module.scss';
 import { useActions } from '@/hooks/ReduxHooks';
 import { signIn } from 'next-auth/react';
@@ -7,7 +7,6 @@ import HighlightButton from '../UI/HighlightButton/HighlightButton';
 import BasicBtn from '../UI/BasicBtn/BasicBtn';
 import { FaGoogle, FaVk } from 'react-icons/fa';
 import { TbPencil } from 'react-icons/tb';
-import { AiOutlineExclamationCircle } from 'react-icons/ai';
 import {
     checkEmailVacancy,
     validateConfirmedPassword,
@@ -15,9 +14,12 @@ import {
     validatePassword,
 } from '@/utils/auth.util';
 import { CSSTransition } from 'react-transition-group-react-18';
-import List from '../UI/List/List';
 import { delay } from '@/utils/delay';
 import { useTranslation } from 'next-i18next';
+import ErrorPopup from '../ErrorPopup/ErrorPopup';
+import EmailInput from './EmailInput/EmailInput';
+import Registration from './Registration/Registration';
+import Login from './Login/Login';
 
 interface IAuthModalProps {
     modalShown: boolean;
@@ -29,16 +31,13 @@ const AuthModal = ({ modalShown }: IAuthModalProps) => {
 
     //булевый флаг отрисовки окна
     const { setAuthModal } = useActions();
+    //состояния переходов
     const [showAuthInputs, setShowAuthInputs] = useState(true);
     const [showPassInputs, setShowPassInputs] = useState(false);
     const transitionDelay = 1000;
     //состояния
     const [emailInput, setEmailInput] = useState('');
     const [validatedEmail, setValidatedEmail] = useState('');
-
-    const [passwordInput, setPasswordInput] = useState('');
-    const [confirmedPasswordInput, setConfirmedPasswordInput] = useState('');
-
     const [authFlow, setAuthFlow] = useState('');
     const [errorMessages, setErrorMessages] = useState<string[]>([]);
 
@@ -54,7 +53,7 @@ const AuthModal = ({ modalShown }: IAuthModalProps) => {
             document.body.style.overflow = 'unset';
         };
     }, [modalShown]);
-    useEffect(() => {}, []);
+
     //алгоритм авторизации/регистрации
     const handleEmail = async (email: string) => {
         let response = await checkEmailVacancy(email);
@@ -109,6 +108,11 @@ const AuthModal = ({ modalShown }: IAuthModalProps) => {
                 <div className={styles.close} onClick={() => setAuthModal(false)}></div>
             </section>
             <section className={styles.chat}>
+                <div className={styles.chat__container}>
+                    <div className={`${styles.message} ${styles.message__prompt}`}>
+                        {t('login-or-register')}
+                    </div>
+                </div>
                 {showAuthInputs ? (
                     <CSSTransition
                         in={showAuthInputs}
@@ -122,51 +126,11 @@ const AuthModal = ({ modalShown }: IAuthModalProps) => {
                             exitDone: styles.emailOauth_exitDone,
                         }}>
                         <div className={styles.chat__container}>
-                            <div className={`${styles.message} ${styles.message__prompt}`}>
-                                {t('login-or-register')}
-                            </div>
-                            <div className={styles.inputs}>
-                                <Input
-                                    type='email'
-                                    value={emailInput}
-                                    onChange={(e) => {
-                                        setEmailInput(e.target.value);
-                                        if (errorMessages.length > 0) setErrorMessages([]);
-                                    }}
-                                    placeholder={t('email-placeholder')}
-                                    autoFocus
-                                />
-                                <HighlightButton
-                                    className={styles.highlightbtn}
-                                    disabled={emailInput ? false : true}
-                                    onClick={() => {
-                                        let emailError = validateEmail(emailInput);
-                                        if (emailError) {
-                                            setErrorMessages([emailError]);
-                                            return;
-                                        }
-                                        console.log(emailError);
-                                        handleEmail(emailInput);
-                                    }}>
-                                    {t('continue')}
-                                </HighlightButton>
-                                <BasicBtn
-                                    onClick={() => {
-                                        signIn('google');
-                                    }}
-                                    btnType='textPlusIcon'
-                                    title={t('login.signin-google')}
-                                    className={`${styles.basicbtn} ${styles.basicbtn_google}`}>
-                                    <FaGoogle />
-                                </BasicBtn>
-                                <BasicBtn
-                                    onClick={() => signIn('vk')}
-                                    btnType='textPlusIcon'
-                                    title={t('login.signin-vk')}
-                                    className={`${styles.basicbtn} ${styles.basicbtn_vk}`}>
-                                    <FaVk />
-                                </BasicBtn>
-                            </div>
+                            <EmailInput
+                                errorMessages={errorMessages}
+                                setErrorMessages={setErrorMessages}
+                                handleEmail={handleEmail}
+                            />
                         </div>
                     </CSSTransition>
                 ) : (
@@ -182,9 +146,6 @@ const AuthModal = ({ modalShown }: IAuthModalProps) => {
                             exitDone: styles.editMail_exitDone,
                         }}>
                         <div className={styles.chat__container}>
-                            <div className={`${styles.message} ${styles.message__prompt}`}>
-                                {t('login-or-register')}
-                            </div>
                             <div className={styles.useremail} onClick={editEmail}>
                                 <div className={styles.useremail_edit}>
                                     <TbPencil />
@@ -210,116 +171,26 @@ const AuthModal = ({ modalShown }: IAuthModalProps) => {
                         }}>
                         {authFlow === 'login' ? (
                             <div className={styles.chat__container}>
-                                <div className={`${styles.message} ${styles.message__prompt}`}>
-                                    {t('login.enter-pass-to-login')}
-                                </div>
-                                <Input
-                                    type='password'
-                                    value={passwordInput}
-                                    onChange={(e) => {
-                                        setErrorMessages([]);
-                                        setPasswordInput(e.target.value);
-                                    }}
-                                    charHideBtn
-                                    placeholder={t('login.enter-pass')}
-                                    autoFocus
+                                <Login
+                                    errorMessages={errorMessages}
+                                    setErrorMessages={setErrorMessages}
+                                    handleSignIn={handleSignIn}
                                 />
-                                <HighlightButton
-                                    disabled={
-                                        passwordInput && errorMessages.length === 0 ? false : true
-                                    }
-                                    className={styles.highlightbtn}
-                                    onClick={() => {
-                                        let passwordError = validatePassword(passwordInput);
-                                        if (passwordError.length > 0) {
-                                            setErrorMessages([...passwordError]);
-                                            return;
-                                        }
-                                        handleSignIn(authFlow, passwordInput);
-                                    }}>
-                                    {t('login.login')}
-                                </HighlightButton>
                             </div>
                         ) : (
                             <div className={styles.chat__container}>
-                                <div className={`${styles.message} ${styles.message__prompt}`}>
-                                    <p>{t('register.invent-pass')}</p>
-                                    <p className={styles.submessage}>
-                                        {t('register.pass-requirements')}
-                                    </p>
-                                </div>
-                                <Input
-                                    type='password'
-                                    value={passwordInput}
-                                    onChange={(e) => {
-                                        setErrorMessages([]);
-                                        setPasswordInput(e.target.value);
-                                    }}
-                                    charHideBtn
-                                    placeholder={t('register.pass-placeholder')}
-                                    autoFocus
+                                <Registration
+                                    errorMessages={errorMessages}
+                                    setErrorMessages={setErrorMessages}
+                                    handleSignIn={handleSignIn}
                                 />
-                                <Input
-                                    type='password'
-                                    value={confirmedPasswordInput}
-                                    onChange={(e) => {
-                                        setErrorMessages([]);
-                                        setConfirmedPasswordInput(e.target.value);
-                                    }}
-                                    charHideBtn
-                                    placeholder={t('register.confirm-placeholder')}
-                                />
-                                <HighlightButton
-                                    disabled={
-                                        passwordInput &&
-                                        passwordInput.length === confirmedPasswordInput.length &&
-                                        errorMessages.length === 0
-                                            ? false
-                                            : true
-                                    }
-                                    className={styles.highlightbtn}
-                                    onClick={() => {
-                                        let passwordErrors: string[] =
-                                            validatePassword(passwordInput);
-                                        if (passwordErrors.length > 0) {
-                                            setErrorMessages([...passwordErrors]);
-                                            return;
-                                        }
-                                        let passwordError = validateConfirmedPassword(
-                                            passwordInput,
-                                            confirmedPasswordInput
-                                        );
-                                        if (passwordError.length > 0) {
-                                            setErrorMessages([passwordError]);
-                                            return;
-                                        }
-                                        handleSignIn(authFlow, confirmedPasswordInput);
-                                    }}>
-                                    {t('register.register')}
-                                </HighlightButton>
                             </div>
                         )}
                     </CSSTransition>
                 )}
                 {errorMessages.length > 0 && (
-                    <div className={styles.chat__container}>
-                        <div className={styles.error}>
-                            <AiOutlineExclamationCircle />
-                            <div className={styles.error__content}>
-                                <p className={styles.error__title}>{t('error')}</p>
-                                <List
-                                    items={errorMessages}
-                                    className={styles.error__messages}
-                                    renderItem={(item) => {
-                                        return (
-                                            <li className={styles.error__message} key={item}>
-                                                {item}
-                                            </li>
-                                        );
-                                    }}
-                                />
-                            </div>
-                        </div>
+                    <div className={`${styles.chat__container}`}>
+                        <ErrorPopup messages={errorMessages} className={styles.error} />{' '}
                     </div>
                 )}
             </section>

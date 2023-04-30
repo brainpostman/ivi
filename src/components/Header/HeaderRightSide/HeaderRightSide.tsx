@@ -8,7 +8,7 @@ import HighlightButton from '@/components/UI/HighlightButton/HighlightButton';
 import { useRouter } from 'next/router';
 import style from './HeaderRightSide.module.scss';
 import { useTranslation } from 'next-i18next';
-import LanguageChanger from '@/components/LanguageChanger/LanguageChanger';
+import LanguageSwitcher from '@/components/LanguageSwitcher/LanguageSwitcher';
 
 interface IProps {
     showHoverBlock: (tab: IHeaderTab) => void;
@@ -48,7 +48,7 @@ const HeaderRightSide: FC<IProps> = ({ showHoverBlock }) => {
                 className={classNamePersonIcon}
                 onMouseEnter={() => showHoverBlock('profile')}
             />
-            <LanguageChanger />
+            <LanguageSwitcher />
         </article>
     );
 };

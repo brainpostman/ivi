@@ -111,13 +111,6 @@
     }
 }
 
-.inputs {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-}
-
 .message {
     color: white;
     @include ui-padding(default, 4);
@@ -150,19 +143,6 @@
 .basicbtn {
     @include ui-padding(hor, 4);
     @include ui-padding(ver, 2.5);
-    &_google {
-        & svg {
-            height: 16px;
-            width: 16px;
-            margin-right: 4px;
-        }
-    }
-    &_vk {
-        & svg {
-            height: 20px;
-            width: 20px;
-        }
-    }
 }
 
 .useremail {
@@ -213,42 +193,10 @@
     height: 40px;
 }
 
-.submessage {
-    color: $gray-soft;
-    @include ui-margin(top, 1);
-    @include font(1);
-}
-
 .error {
-    position: relative;
+    padding: 12px 12px 12px 12px;
     margin-left: -12px;
     margin-right: -12px;
-    background-color: #ff542e;
-    padding: 12px 12px 12px 12px;
-    border-radius: 16px;
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    & svg {
-        flex-shrink: 0;
-        width: 32px;
-        height: 32px;
-        color: white;
-    }
-    &__content {
-        @include ui-margin(left, 2);
-        color: white;
-    }
-    &__title {
-        @include ui-font(4);
-    }
-    &__messages {
-        @include font(1);
-        @include ui-margin(top, 1);
-    }
-    &__message {
-        @include ui-margin(top, 0.5);
-    }
 }
 
 .emailOauth {
@@ -319,4 +267,3 @@
         opacity: 0;
     }
 }
-

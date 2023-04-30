@@ -1,0 +1,13 @@
+.container {
+    max-width: 290px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 20px;
+}
+
+.submessage {
+    color: $gray-soft;
+    @include ui-margin(top, 1);
+    @include font(1);
+}

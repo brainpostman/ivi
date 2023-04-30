@@ -1,0 +1,30 @@
+.error {
+    background-color: #ff542e;
+    border-radius: 16px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 12px 12px 12px 12px;
+    max-width: 320px;
+    & svg {
+        flex-shrink: 0;
+        width: 32px;
+        height: 32px;
+        color: white;
+    }
+    &__content {
+        @include ui-margin(left, 2);
+        flex: 1 0 auto;
+        color: white;
+    }
+    &__title {
+        @include ui-font(4);
+    }
+    &__messages {
+        @include font(1);
+        @include ui-margin(top, 1);
+    }
+    &__message {
+        @include ui-margin(top, 0.5);
+    }
+}
