@@ -1,0 +1,130 @@
+.wrapper {
+  border-bottom: 1px solid $border-gray;
+
+  @include ui-padding(ver, 8);
+
+  color: #fff;
+  @include font(2, bold);
+}
+
+.nav {
+  >p {
+    @include ui-margin(bottom, 6);
+  }
+}
+
+.tab {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  @include ui-margin(bottom, 6);
+}
+
+.lists {
+  @include ui-margin(bottom, 6);
+
+  &__title {
+    color: #ffffffb8 !important;
+    @include ui-margin(bottom, 6);
+  }
+}
+
+.inner_lists {
+  display: grid;
+  grid-template-areas: 'a b d' 'a c d' 'a c d' 'a c d' 'a c d';
+  row-gap: 16px;
+
+  &__title {
+    @include ui-margin(bottom, 3);
+  }
+
+  >li {
+    &:nth-child(1) {
+      grid-area: a;
+    }
+
+    &:nth-child(2) {
+      grid-area: b;
+    }
+
+    &:nth-child(3) {
+      grid-area: c;
+    }
+
+    &:nth-child(4) {
+      grid-area: d;
+    }
+  }
+}
+
+.filter_list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+
+  color: #ffffffb8;
+}
+
+
+.tv_list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+  @include ui-margin(top, 2);
+
+  color: #ffffffb8;
+}
+
+.tv_program_button {
+  background-color: #3a3352;
+
+  width: 100%;
+  @include ui-margin(ver, 5);
+}
+
+.channel_list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  @include ui-margin(bottom, 4);
+}
+
+.inner_channel_list {
+  display: grid;
+  grid-template-columns: repeat(4, auto);
+  column-gap: 24px;
+  row-gap: 8px;
+
+  @include ui-margin(top, 4);
+
+  li,
+  img {
+    border-radius: 8px;
+  }
+}
+
+.broadcast_list {
+  display: grid;
+  grid-template-columns: repeat(2, auto);
+  row-gap: 12px;
+
+  @include ui-margin(ver, 4);
+}
+
+.broadcast {
+  display: flex;
+  gap: 12px;
+
+  >img {
+    border-radius: 8px;
+  }
+
+  &__subtitle {
+    color: #ffffff7a !important;
+    @include font(1);
+    font-weight: 500 !important;
+  }
+}

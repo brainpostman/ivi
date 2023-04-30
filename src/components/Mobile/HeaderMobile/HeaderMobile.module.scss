@@ -1,0 +1,71 @@
+.wrapper {
+  position: fixed;
+
+  width: 100%;
+  height: 100vh;
+
+  z-index: 999;
+
+  @media (min-width: 1161px) {
+    display: none;
+  }
+}
+
+.container {
+  position: fixed;
+  display: flex;
+  justify-content: center;
+
+  bottom: 0;
+
+  backdrop-filter: blur(8px);
+  background-color: rgba(31, 27, 46, 0.88);
+
+  box-shadow: 0 -20px 40px rgba(7, 5, 14, 0.626);
+
+  width: 100%;
+}
+
+.nav {
+  display: flex;
+
+  font-size: 10px;
+  line-height: 12px;
+  font-weight: 600;
+
+  z-index: 1000;
+
+  svg {
+    width: 22px;
+    height: 22px;
+  }
+
+  >li {
+    @include ui-padding(ver, 1);
+    //@include ui-padding(hor, 10);
+
+    @include adaptive-size(padding-left, 75, 15);
+    @include adaptive-size(padding-right, 75, 15);
+
+    >* {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      gap: 2px;
+    }
+  }
+}
+
+.active {
+  position: relative;
+  color: #fff;
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+
+    box-shadow: 0 15px 35px 10px #fff;
+  }
+}

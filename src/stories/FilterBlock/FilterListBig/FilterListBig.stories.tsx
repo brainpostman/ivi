@@ -1,5 +1,5 @@
-import FilterGenreCarouselContent from '@/components/CarouselContents/FilterGenreCarouselContent/FilterGenreCarouselContent'
 import FilterListBig from '@/components/FilterBlock/FilterListBig/FilterListBig'
+import FilterGenreCard from '@/components/FilterGenreCard/FilterGenreCard'
 import VioletButton from '@/components/UI/VioletButton/VioletButton'
 import { filterCountryData } from '@/data/filterCountry.data'
 import { filterGenreData } from '@/data/filterGenre.data'
@@ -65,12 +65,11 @@ export const Genre = ({
   }))
 
   return (
-    <FilterListBigWrapper
-      list={list}
-      carouselContent={FilterGenreCarouselContent}
-      carouselData={filterGenreData}
-      {...props}
-    />
+    <FilterListBigWrapper list={list} {...props}>
+      {filterGenreData.map(genre => (
+        <FilterGenreCard icon={genre.icon} title={genre.title} />
+      ))}
+    </FilterListBigWrapper>
   )
 }
 
@@ -96,12 +95,13 @@ export const Country = ({
   }))
 
   return (
-    <FilterListBigWrapper
-      list={list}
-      carouselContent={VioletButton}
-      carouselData={filterCountryData}
-      {...props}
-    />
+    <FilterListBigWrapper list={list} {...props}>
+      {filterCountryData.map(country => (
+        <VioletButton variant={country.variant}>
+          {country.children}
+        </VioletButton>
+      ))}
+    </FilterListBigWrapper>
   )
 }
 

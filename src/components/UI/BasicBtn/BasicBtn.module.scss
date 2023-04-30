@@ -2,6 +2,7 @@ $hover-color: #2e2844;
 $active-color: #0e0c14;
 
 .button {
+  position: relative;
   display: block;
 
   color: #fff;
@@ -64,15 +65,15 @@ $active-color: #0e0c14;
   @include ui-margin(left, 2);
 }
 
-.subtitle {
-	font-size: 10px;
-	color: $gray;
-	font-weight: 600;
-	height: 12px;
-	line-height: 1;
-	overflow: hidden;
-	text-overflow: ellipsis;
-	white-space: nowrap;
+.suptitle {
+  font-size: 10px;
+  color: $gray;
+  font-weight: 600;
+  height: 12px;
+  line-height: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .title {
@@ -96,4 +97,18 @@ $active-color: #0e0c14;
 .href {
   display: inline;
   background-color: transparent;
+}
+
+.circle {
+  position: absolute;
+  background-color: $red;
+
+  top: 8px;
+  right: 8px;
+
+  border-radius: 100%;
+  box-shadow: 0 2px 8px #ea003dcc;
+
+  width: 10px;
+  height: 10px;
 }
