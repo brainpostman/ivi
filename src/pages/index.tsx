@@ -7,7 +7,7 @@ import TopTenList from '@/components/TopTenList/TopTenList';
 import LongButton from '@/components/UI/LongButton/LongButton';
 import ViewAllBlock from '@/components/ViewAllBlock/ViewAllBlock';
 import { movieCardGridData } from '@/data/movieCard.data';
-import PageLayout from '@/layouts/PageLayout';
+import PageLayout from '@/layouts/PageLayout/PageLayout';
 import style from './index.module.scss';
 import { GetStaticProps } from 'next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';

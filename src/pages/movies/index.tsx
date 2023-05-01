@@ -6,7 +6,7 @@ import Sort from '@/components/Sort/Sort';
 import ViewMoreButton from '@/components/UI/ViewMoreButton/ViewMoreButton';
 import VioletButton from '@/components/UI/VioletButton/VioletButton';
 import { movieCardGridData } from '@/data/movieCard.data';
-import PageLayout from '@/layouts/PageLayout';
+import PageLayout from '@/layouts/PageLayout/PageLayout';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import style from './index.module.scss';

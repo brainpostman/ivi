@@ -6,7 +6,7 @@ import {
     actorBiografyInfoVisibleData,
     actorFilmsData,
 } from '@/data/person.data';
-import PageLayout from '@/layouts/PageLayout';
+import PageLayout from '@/layouts/PageLayout/PageLayout';
 import { getCoordY, scrollMove } from '@/utils/coords.utils';
 import Image from 'next/image';
 import Link from 'next/link';

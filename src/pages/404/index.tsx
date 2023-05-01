@@ -2,7 +2,7 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import style from './index.module.scss';
 import { GetStaticProps } from 'next';
 import { useTranslation } from 'next-i18next';
-import PageLayout from '@/layouts/PageLayout';
+import PageLayout from '@/layouts/PageLayout/PageLayout';
 
 export const getStaticProps: GetStaticProps = async ({ locale }) => {
     return {
