@@ -1,42 +1,32 @@
-import axios from 'axios'
-import NextAuth from 'next-auth'
-import CredentialsProvider from 'next-auth/providers/credentials'
-import GoogleProvider from 'next-auth/providers/google'
-import VkProvider from 'next-auth/providers/vk'
+import axios from 'axios';
+import NextAuth from 'next-auth';
+import CredentialsProvider from 'next-auth/providers/credentials';
+import GoogleProvider from 'next-auth/providers/google';
+import VkProvider from 'next-auth/providers/vk';
 
 export const authOptions = {
-  session: {
-    jwt: true,
-    maxAge: 86400,
-  },
-  providers: [
-    CredentialsProvider({
-      id: 'login',
-      name: 'login',
-      async authorize(credentials) {
-        try {
-          const response = await axios.post(process.env.LOGIN, {
-            email: credentials.email,
-            password: credentials.password,
-          })
+    session: {
+        jwt: true,
+        maxAge: 86400,
+    },
+    providers: [
+        CredentialsProvider({
+            id: 'login',
+            name: 'login',
+            async authorize(credentials) {
+                const response = await axios.post(process.env.LOGIN, {
+                    email: credentials.email,
+                    password: credentials.password,
+                });
 
-                    if (response.status === 201 && response.data.token) {
-                        const user = {
-                            email: credentials.email,
-                            accessToken: response.data.token,
-                        };
-                        return user;
-                    } else {
-                        return null;
-                    }
-                } catch (err) {
-                    if (axios.isAxiosError(err)) {
-                        console.error('AxiosError: ', err.message);
-                        throw new Error(err.message);
-                    } else {
-                        console.error('Error: ', err);
-                        throw new Error('Произошла непредвиденная ошибка');
-                    }
+                if (response.status === 201 && response.data.token) {
+                    const user = {
+                        email: credentials.email,
+                        accessToken: response.data.token,
+                    };
+                    return user;
+                } else {
+                    return null;
                 }
             },
         }),
@@ -44,29 +34,19 @@ export const authOptions = {
             id: 'register',
             name: 'register',
             async authorize(credentials) {
-                try {
-                    const response = await axios.post(process.env.REGISTRATION, {
-                        email: credentials.email,
-                        password: credentials.password,
-                    });
+                const response = await axios.post(process.env.REGISTRATION, {
+                    email: credentials.email,
+                    password: credentials.password,
+                });
 
-                    if (response.status === 201 && response.data.token) {
-                        const user = {
-                            email: credentials.email,
-                            accessToken: response.data.token,
-                        };
-                        return user;
-                    } else {
-                        return null;
-                    }
-                } catch (err) {
-                    if (axios.isAxiosError(err)) {
-                        console.error('AxiosError: ', err.message);
-                        throw new Error(err.message);
-                    } else {
-                        console.error('Error: ', err);
-                        throw new Error('Произошла непредвиденная ошибка');
-                    }
+                if (response.status === 201 && response.data.token) {
+                    const user = {
+                        email: credentials.email,
+                        accessToken: response.data.token,
+                    };
+                    return user;
+                } else {
+                    return null;
                 }
             },
         }),

@@ -5,7 +5,7 @@ import setLocaleCookie from '@/utils/localization.utils';
 
 const switchSpeed = 200;
 
-const LanguageChanger = () => {
+const LanguageSwitcher = () => {
     const router = useRouter();
     const { pathname, asPath, query } = router;
     const onToggleLanguageClick = async (newLocale: string) => {
@@ -30,4 +30,4 @@ const LanguageChanger = () => {
     );
 };
 
-export default LanguageChanger;
+export default LanguageSwitcher;

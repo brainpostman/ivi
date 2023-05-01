@@ -1,0 +1,30 @@
+.error {
+    background-color: $orange;
+    border-radius: 16px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    @include ui-padding(default, 3);
+    max-width: 320px;
+    & svg {
+        flex-shrink: 0;
+        width: 32px;
+        height: 32px;
+        color: white;
+    }
+    &__content {
+        @include ui-margin(left, 2);
+        flex: 0 1 auto;
+        color: white;
+    }
+    &__title {
+        @include ui-font(4);
+    }
+    &__messages {
+        @include font(1);
+        @include ui-margin(top, 1);
+    }
+    &__message {
+        @include ui-margin(top, 0.5);
+    }
+}

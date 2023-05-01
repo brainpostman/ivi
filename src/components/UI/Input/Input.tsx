@@ -25,6 +25,7 @@ const Input: FC<ICustomInput> = ({
     ref,
     className: propsClassName,
     autoFocus,
+    style: propsStyle,
     ...props
 }) => {
     const inputRef = useRef<HTMLInputElement>(null);
@@ -51,11 +52,11 @@ const Input: FC<ICustomInput> = ({
     }, [autoFocus]);
 
     return (
-        <div className={style.wrapper}>
+        <div className={`${style.wrapper} ${propsClassName}`} style={propsStyle}>
             <label className={style.label}>
                 <input
                     type={hideChars ? type : 'text'}
-                    className={`${propsClassName} ${style.input} ${inputClassName}`}
+                    className={`${style.input} ${inputClassName}`}
                     placeholder={type === 'number' ? placeholder : ''}
                     value={value}
                     {...props}
@@ -109,4 +110,4 @@ const Input: FC<ICustomInput> = ({
     );
 };
 
-export default Input
+export default Input;

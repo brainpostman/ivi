@@ -49,7 +49,7 @@ export function useBannerCarousel(
     };
 
     const stop = () => {
-        clearInterval(autoscrollIntervalRef.current);
+        window.clearInterval(autoscrollIntervalRef.current);
     };
 
     useEffect(() => {
@@ -67,7 +67,7 @@ export function useBannerCarousel(
                 stop();
                 restart();
             }
-            clearTimeout(controlsTimeoutRef.current);
+            window.clearTimeout(controlsTimeoutRef.current);
             setControlsEnabled(false);
             setCurrentIndex((prevIndex) => prevIndex + indexChange);
             controlsTimeoutRef.current = window.setTimeout(() => {
@@ -86,7 +86,7 @@ export function useBannerCarousel(
 
     //обработка перемотки в начало/конец
     function handleCarouselLoop(indexToLoop: number) {
-        clearTimeout(controlsTimeoutRef.current);
+        window.clearTimeout(controlsTimeoutRef.current);
         setControlsEnabled(false);
         window.setTimeout(() => {
             setTransitionEnabled(false);

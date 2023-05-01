@@ -35,7 +35,7 @@
         height: 2px;
         background-color: $red;
         width: 5%;
-        transition: width 500ms;
+        transition: width 0.6s;
     }
 }
 
@@ -111,13 +111,6 @@
     }
 }
 
-.inputs {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-}
-
 .message {
     color: white;
     @include ui-padding(default, 4);
@@ -125,6 +118,15 @@
     font-weight: bold;
     &__prompt {
         background-color: $violet;
+        margin-left: -50%;
+        width: 150%;
+        border-top-left-radius: 16px;
+        border-top-right-radius: 16px;
+        border-bottom-right-radius: 16px;
+        border-bottom-left-radius: 0;
+    }
+    &__success {
+        background-color: $green;
         margin-left: -50%;
         width: 150%;
         border-top-left-radius: 16px;
@@ -150,19 +152,6 @@
 .basicbtn {
     @include ui-padding(hor, 4);
     @include ui-padding(ver, 2.5);
-    &_google {
-        & svg {
-            height: 16px;
-            width: 16px;
-            margin-right: 4px;
-        }
-    }
-    &_vk {
-        & svg {
-            height: 20px;
-            width: 20px;
-        }
-    }
 }
 
 .useremail {
@@ -213,110 +202,38 @@
     height: 40px;
 }
 
-.submessage {
-    color: $gray-soft;
-    @include ui-margin(top, 1);
-    @include font(1);
-}
-
 .error {
-    position: relative;
-    margin-left: -12px;
-    margin-right: -12px;
-    background-color: #ff542e;
-    padding: 12px 12px 12px 12px;
-    border-radius: 16px;
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    & svg {
-        flex-shrink: 0;
-        width: 32px;
-        height: 32px;
-        color: white;
-    }
-    &__content {
-        @include ui-margin(left, 2);
-        color: white;
-    }
-    &__title {
-        @include ui-font(4);
-    }
-    &__messages {
-        @include font(1);
-        @include ui-margin(top, 1);
-    }
-    &__message {
-        @include ui-margin(top, 0.5);
-    }
+    width: 314px;
+    margin: 0 auto;
+    @include ui-margin(top, 4);
 }
 
-.emailOauth {
+.transition {
     &_enter {
         opacity: 0;
+        transform: translateY(50%);
     }
     &_enterActive {
         opacity: 1;
-        transition: opacity 0.5s;
+        transform: translateY(0);
+        transition: opacity 0.4s, transform 0.4s;
     }
     &_enterDone {
         opacity: 1;
+        transform: translateY(0);
     }
     &_exit {
         opacity: 1;
+        transform: translateX(0);
     }
     &_exitActive {
         opacity: 0;
-        transition: opacity 0.5s;
+        transition: opacity 0.4s, transform 0.4s;
+        transform: translateX(-50%);
     }
     &_exitDone {
         opacity: 0;
-    }
-}
-
-.editMail {
-    &_enter {
-        opacity: 0;
-    }
-    &_enterActive {
-        opacity: 1;
-        transition: opacity 0.5s;
-    }
-    &_enterDone {
-        opacity: 1;
-    }
-    &_exit {
-        opacity: 1;
-    }
-    &_exitActive {
-        opacity: 0;
-        transition: opacity 0.5s;
-    }
-    &_exitDone {
-        opacity: 0;
-    }
-}
-
-.passInput {
-    &_enter {
-        opacity: 0;
-    }
-    &_enterActive {
-        opacity: 1;
-        transition: opacity 1s;
-    }
-    &_enterDone {
-        opacity: 1;
-    }
-    &_exit {
-        opacity: 1;
-    }
-    &_exitActive {
-        opacity: 0;
-        transition: opacity 1s;
-    }
-    &_exitDone {
-        opacity: 0;
+        transform: translateX(-50%);
     }
 }
 
