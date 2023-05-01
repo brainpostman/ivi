@@ -1,35 +1,36 @@
-import HeaderIconButton from '@/components/UI/HeaderIconButton/HeaderIconButton';
-import SubscribeButton from '@/components/UI/SubscribeButton/SubscribeButton';
-import { IHeaderTab } from '@/types/header.interface';
-import { FC, useEffect, useState } from 'react';
-import { IoPersonOutline } from 'react-icons/io5';
+import HeaderIconButton from '@/components/UI/HeaderIconButton/HeaderIconButton'
+import SubscribeButton from '@/components/UI/SubscribeButton/SubscribeButton'
+import { IHeaderTab } from '@/types/header.interface'
+import { FC, useEffect, useState } from 'react'
+import { IoPersonOutline } from 'react-icons/io5'
 
-import HighlightButton from '@/components/UI/HighlightButton/HighlightButton';
-import { useRouter } from 'next/router';
-import style from './HeaderRightSide.module.scss';
-import { useTranslation } from 'next-i18next';
-import LanguageSwitcher from '@/components/LanguageSwitcher/LanguageSwitcher';
+import HighlightButton from '@/components/UI/HighlightButton/HighlightButton'
+import { useRouter } from 'next/router'
+import style from './HeaderRightSide.module.scss'
+import { useTranslation } from 'next-i18next'
+import LanguageSwitcher from '@/components/LanguageSwitcher/LanguageSwitcher'
+import LanguageChanger from '@/components/LanguageSwitcher/LanguageSwitcher'
 
 interface IProps {
-  showHoverBlock: (tab: IHeaderTab) => void;
+  showHoverBlock: (tab: IHeaderTab) => void
 }
 
 const HeaderRightSide: FC<IProps> = ({ showHoverBlock }) => {
-  const classNamePersonIcon = `text ${style.person_icon}`;
+  const classNamePersonIcon = `text ${style.person_icon}`
 
-  const [isViewSubscribeButton, setIsViewSubscribeButton] = useState(true);
+  const [isViewSubscribeButton, setIsViewSubscribeButton] = useState(true)
 
-  const { pathname } = useRouter();
+  const { pathname } = useRouter()
 
-  const { t } = useTranslation('header', { keyPrefix: 'right-side.titles' });
+  const { t } = useTranslation('header', { keyPrefix: 'right-side.titles' })
 
   useEffect(() => {
     if (pathname === '/') {
-      setIsViewSubscribeButton(true);
-      return;
+      setIsViewSubscribeButton(true)
+      return
     }
-    setIsViewSubscribeButton(false);
-  }, [pathname]);
+    setIsViewSubscribeButton(false)
+  }, [pathname])
 
   return (
     <article className={style.wrapper}>
@@ -38,19 +39,22 @@ const HeaderRightSide: FC<IProps> = ({ showHoverBlock }) => {
       ) : (
         <HighlightButton
           className={style.highlight_button}
-          onMouseEnter={() => showHoverBlock('watch')}>
+          onMouseEnter={() => showHoverBlock('watch')}
+        >
           {t('watch-30-days')}
         </HighlightButton>
       )}
-      <HeaderIconButton icon='search'>{t('search')}</HeaderIconButton>
-      <HeaderIconButton icon='notification' />
+      <HeaderIconButton icon='search' className={style.icon}>
+        {t('search')}
+      </HeaderIconButton>
+      <HeaderIconButton icon='notification' className={style.icon} />
       <IoPersonOutline
         className={classNamePersonIcon}
         onMouseEnter={() => showHoverBlock('profile')}
       />
-      <LanguageSwitcher />
+      <LanguageChanger />
     </article>
-  );
-};
+  )
+}
 
-export default HeaderRightSide;
+export default HeaderRightSide
