@@ -43,8 +43,10 @@ const HeaderRightSide: FC<IProps> = ({ showHoverBlock }) => {
           {t('watch-30-days')}
         </HighlightButton>
       )}
-      <HeaderIconButton icon='search'>{t('search')}</HeaderIconButton>
-      <HeaderIconButton icon='notification' />
+      <HeaderIconButton icon='search' className={style.icon}>
+        {t('search')}
+      </HeaderIconButton>
+      <HeaderIconButton icon='notification' className={style.icon} />
       <IoPersonOutline
         className={classNamePersonIcon}
         onMouseEnter={() => showHoverBlock('profile')}
