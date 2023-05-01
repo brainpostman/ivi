@@ -4,17 +4,14 @@ import { useRouter } from 'next/router'
 import { IoCloseOutline } from 'react-icons/io5'
 import HeaderMoreBlock from '../HeaderMoreBlock/HeaderMoreBlock'
 import style from './HeaderMobile.module.scss'
+import { useState } from 'react'
 
 const HeaderMobile = () => {
   const router = useRouter()
 
-  const onClickMore = () => {
-    router.push({ query: { navigation: '' } }, undefined, { shallow: true })
-  }
+  const [isSelectMore, setIsSelectMore] = useState(false)
 
-  const isSelectMore = Object.keys(router.query).some(
-    query => query === 'navigation'
-  )
+  const onClickMore = () => setIsSelectMore(prev => !prev)
 
   return (
     <section className={style.wrapper}>
