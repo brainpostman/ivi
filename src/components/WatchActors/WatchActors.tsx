@@ -3,6 +3,8 @@ import React,{useState} from 'react'
 import {Actors} from './Actors'
 import WatchModal from '../WatchModal/WatchModal'
 import { MdArrowBackIosNew } from 'react-icons/md'
+import Image from 'next/image';
+
 interface Actors{
     id:number,
     img:string,
@@ -19,7 +21,7 @@ const WatchActors: React.FC = () =>{
             <div className={style.content}>
                 {Actors.map((actor,index)=>
                     <div key={index} className={style.content_person}>
-                        <div className={style.content_person_img}><img src={actor.img} width={88} height={88} alt={actor.name}/></div>
+                        <div className={style.content_person_img}><Image src={actor.img} width={88} height={88} alt={actor.name}/></div>
                         <div className={style.content_person_name}>{actor.name}</div>
                         <div className={style.content_person_title}>{actor.title}</div>
                     </div>
@@ -43,7 +45,7 @@ const WatchActors: React.FC = () =>{
                             <ul className={style.persons_conteiner}>
                             {Actors.map((actor,index)=>
                                 <li key={index} className={style.modal_person}>
-                                    <div className={style.modal_person_img}><img src={actor.img} alt={actor.name}/></div>
+                                    <div className={style.modal_person_img}><Image src={actor.img} width={128} height={128} alt={actor.name}/></div>
                                     <div className={style.modal_person_name}>{actor.name}</div>
                                     <div className={style.content_person_films}>{actor.films>4? `${actor.films} фильмов`:`${actor.films} фильма`}</div>
                                 </li>
@@ -61,10 +63,10 @@ const WatchActors: React.FC = () =>{
                         </div>
 
                         <div className={style.modal_poster}>
-                            <div className={style.modal_poster_img}><img src='https://thumbs.dfs.ivi.ru/storage2/contents/6/1/0ceca03c51c3d38f34bdf3fd0dd2c8.jpg/128x196/?q=60'/></div>
+                            <div className={style.modal_poster_img}><Image src='https://thumbs.dfs.ivi.ru/storage2/contents/6/1/0ceca03c51c3d38f34bdf3fd0dd2c8.jpg/128x196/?q=60'width={128} height={196} alt='постер'/></div>
                             <div className={style.modal_poster_rating}>8,9</div>
                             <div className={style.modal_poster_genres}>2011, Франция, Драммы</div>
-                            <div className={style.modal_poster_duratin}><img src='/film/clockIcon.png'/>112 минут</div>
+                            <div className={style.modal_poster_duratin}><Image src='/film/clockIcon.png' width={16} height={16} alt='иконка'/>112 минут</div>
                         </div>
                     </div>
                 </div>

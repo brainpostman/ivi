@@ -153,6 +153,7 @@
     }
 
     &_details{
+        display: block;
         @include ui-margin(left,16);
         font-size: 15px;
         font-weight: 400;
