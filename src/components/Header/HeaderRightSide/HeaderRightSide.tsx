@@ -4,11 +4,12 @@ import { IHeaderTab } from '@/types/header.interface'
 import { FC, useEffect, useState } from 'react'
 import { IoPersonOutline } from 'react-icons/io5'
 
-import HighlightButton from '@/components/UI/HighlightButton/HighlightButton';
-import { useRouter } from 'next/router';
-import style from './HeaderRightSide.module.scss';
-import { useTranslation } from 'next-i18next';
-import LanguageSwitcher from '@/components/LanguageSwitcher/LanguageSwitcher';
+import HighlightButton from '@/components/UI/HighlightButton/HighlightButton'
+import { useRouter } from 'next/router'
+import style from './HeaderRightSide.module.scss'
+import { useTranslation } from 'next-i18next'
+import LanguageSwitcher from '@/components/LanguageSwitcher/LanguageSwitcher'
+import LanguageChanger from '@/components/LanguageSwitcher/LanguageSwitcher'
 
 interface IProps {
   showHoverBlock: (tab: IHeaderTab) => void
@@ -31,26 +32,29 @@ const HeaderRightSide: FC<IProps> = ({ showHoverBlock }) => {
     setIsViewSubscribeButton(false)
   }, [pathname])
 
-    return (
-        <article className={style.wrapper}>
-            {isViewSubscribeButton ? (
-                <SubscribeButton>{t('buy-sub')}</SubscribeButton>
-            ) : (
-                <HighlightButton
-                    className={style.highlight_button}
-                    onMouseEnter={() => showHoverBlock('watch')}>
-                    {t('watch-30-days')}
-                </HighlightButton>
-            )}
-            <HeaderIconButton icon='search'>{t('search')}</HeaderIconButton>
-            <HeaderIconButton icon='notification' />
-            <IoPersonOutline
-                className={classNamePersonIcon}
-                onMouseEnter={() => showHoverBlock('profile')}
-            />
-            <LanguageSwitcher />
-        </article>
-    );
-};
+  return (
+    <article className={style.wrapper}>
+      {isViewSubscribeButton ? (
+        <SubscribeButton>{t('buy-sub')}</SubscribeButton>
+      ) : (
+        <HighlightButton
+          className={style.highlight_button}
+          onMouseEnter={() => showHoverBlock('watch')}
+        >
+          {t('watch-30-days')}
+        </HighlightButton>
+      )}
+      <HeaderIconButton icon='search' className={style.icon}>
+        {t('search')}
+      </HeaderIconButton>
+      <HeaderIconButton icon='notification' className={style.icon} />
+      <IoPersonOutline
+        className={classNamePersonIcon}
+        onMouseEnter={() => showHoverBlock('profile')}
+      />
+      <LanguageChanger />
+    </article>
+  )
+}
 
 export default HeaderRightSide
