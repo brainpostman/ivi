@@ -68,7 +68,13 @@ const CustomCarousel: FC<ICustomCarouselProps> = ({
   const translate = `translate3d(-${move}px, 0, 0)`
 
   const pushRef = (ref: HTMLDivElement | null) => {
-    if (ref === null || refs.current.length >= children.length) return
+    if (
+      ref === null ||
+      !refs.current ||
+      !children ||
+      refs.current.length >= children.length
+    )
+      return
 
     refs.current.push(ref)
   }
@@ -120,11 +126,26 @@ const CustomCarousel: FC<ICustomCarouselProps> = ({
           >
             {Array.isArray(children) &&
               children.map((element, index) => (
-                <div key={index} ref={ref => pushRef(ref)}>
+                <div
+                  key={index}
+                  ref={ref => {
+                    if (!ref) return
+                    pushRef(ref)
+                  }}
+                >
                   {element}
                 </div>
               ))}
-            {additElem && <div ref={ref => pushRef(ref)}>{additElem()}</div>}
+            {additElem && (
+              <div
+                ref={ref => {
+                  if (!ref) return
+                  pushRef(ref)
+                }}
+              >
+                {additElem()}
+              </div>
+            )}
           </div>
           <CustomCarouselArrows
             arrowSize={arrowSize}
