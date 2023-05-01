@@ -5,12 +5,13 @@ import WatchActors from '@/components/WatchActors/WatchActors'
 import WatchBlock from '@/components/WatchBlock/WatchBlock'
 import WatchFooter from '@/components/WatchFooter/WatchFooter'
 import { filmDetails, filmDetailsVisible } from '@/data/watch.data'
-import PageLayout from '@/layouts/PageLayout/PageLayout'
+import PageLayout from '@/layouts/PageLayout'
 import React from 'react'
 import { MdArrowBackIosNew } from 'react-icons/md'
 import style from './watch.module.scss'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { GetServerSideProps } from 'next'
+import Image from 'next/image'
 
 export const getServerSideProps: GetServerSideProps = async ({ locale }) => {
   return {
@@ -18,7 +19,7 @@ export const getServerSideProps: GetServerSideProps = async ({ locale }) => {
       ...(await serverSideTranslations(locale ?? 'ru', [
         'header',
         'auth_modal',
-                'error',
+        'error',
         'common',
         'footer',
       ])),
@@ -39,14 +40,16 @@ export default function Film() {
         <div className={style.conteiner}>
           <div className={style.conteiner_film}>
             <div className={style.conteiner_film_area}>
-              <img
+              <Image
                 src='https://thumbs.dfs.ivi.ru/storage30/contents/c/c/e934645a5e1cc379ebd22e1a3bd3fa.jpg/858x483/?q=60'
                 width={719}
+                height={404}
+                alt='трейлер'
               />
             </div>
             <div className={style.conteiner_film_buttons}>
               <button className={style.conteiner_film_buttons_play}>
-                <img
+                <Image
                   src='/film/playIcon.png'
                   alt='играть'
                   width={16}
@@ -55,7 +58,7 @@ export default function Film() {
                 Трейлер
               </button>
               <button className={style.conteiner_film_buttons_favourite}>
-                <img
+                <Image
                   src='/film/favouritIcon.png'
                   alt='любимый'
                   width={16}
@@ -63,7 +66,7 @@ export default function Film() {
                 />
               </button>
               <button className={style.conteiner_film_buttons_share}>
-                <img
+                <Image
                   src='/film/shareIcon.png'
                   alt='поделиться'
                   width={16}
@@ -71,7 +74,7 @@ export default function Film() {
                 />
               </button>
               <div className={style.conteiner_film_buttons_catalog}>
-                <img
+                <Image
                   src='/film/catalogIcon.png'
                   alt='каталог'
                   width={16}
@@ -100,14 +103,14 @@ export default function Film() {
               <div className={style.icon_fullhd}>
                 <div className={style.icon_text}> FullHD </div>
               </div>
-              <img
+              <Image
                 src='/film/soundIcon.png'
                 width={15}
                 height={15}
                 alt='звук рус'
               />
               <h4>Рус</h4>
-              <img
+              <Image
                 src='/film/subtitleIcon.png'
                 width={15}
                 height={15}
@@ -124,41 +127,50 @@ export default function Film() {
                 <h5>Рейтинг Иви</h5>
               </div>
               <div className={style.conteiner_info_persons_img}>
-                <img
+                <Image
                   src='https://thumbs.dfs.ivi.ru/storage33/contents/f/f/06672be611ab9b9e54579c4f645460.jpg/44x44/?q=60'
                   width={44}
                   height={44}
+                  alt='актер'
                 />
                 <h5>Франсуа Клюзе</h5>
               </div>
               <div className={style.conteiner_info_persons_img}>
-                <img
+                <Image
                   src='https://thumbs.dfs.ivi.ru/storage28/contents/5/4/5b9430c9601da3b2b00770fb7e08f0.jpeg/44x44/?q=60'
                   width={44}
                   height={44}
+                  alt='актер'
                 />
                 <h5>Омар Си</h5>
               </div>
               <div className={style.conteiner_info_persons_img}>
-                <img
+                <Image
                   src='https://thumbs.dfs.ivi.ru/storage29/contents/4/6/15390a4eb071847bb4a5ea1b0aa6ac.jpg/44x44/?q=60'
                   width={44}
                   height={44}
+                  alt='актер'
                 />
                 <h5>Анн Ле Ни</h5>
               </div>
               <div className={style.conteiner_info_persons_img}>
-                <img
+                <Image
                   src='https://thumbs.dfs.ivi.ru/storage8/contents/9/d/caa2b5168da75bbd8d8f1daab5a3ff.jpg/44x44/?q=60'
                   width={44}
                   height={44}
+                  alt='актер'
                 />
                 <h5>Одри Флеро</h5>
               </div>
             </div>
 
             <div className={style.conteiner_info_details}>
-              <ExpandBlock visibleBlock={filmDetailsVisible} width='450'>
+              <ExpandBlock
+                visibleBlock={filmDetailsVisible}
+                width={'450px'}
+                lineClamp={5}
+                expandWord={'Детали о фильме'}
+              >
                 {filmDetails}
                 <WatchBlock />
               </ExpandBlock>

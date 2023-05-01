@@ -1,4 +1,4 @@
-import ExpandBlock from '@/components/ExpandInfo/ExpandBlock';
+import ExpandBlock from '@/components/ExpandBlock/ExpandBlock';
 import BasicBtn from '@/components/UI/BasicBtn/BasicBtn';
 import {
     acortTopInfoVisibleData,
@@ -31,6 +31,8 @@ export const getServerSideProps: GetServerSideProps = async ({ locale }) => {
         },
     };
 };
+
+
 
 export default function Actor() {
     const router = useRouter();
