@@ -1,4 +1,4 @@
-import { IMovieCard } from '@/types/movieCard.interface'
+import { IMovie } from '@/types/films.api.interface'
 import { FC } from 'react'
 import style from './MovieCardInfo.module.scss'
 
@@ -8,23 +8,24 @@ const formatRating = (rating: string) => {
 }
 
 interface IProps {
-  block: IMovieCard
+  movie: IMovie
 }
 
-const MovieCardInfo: FC<IProps> = ({ block }) => {
+const MovieCardInfo: FC<IProps> = ({ movie }) => {
   return (
     <div className={style.wrapper}>
       <p className={style.rating}>
-        {formatRating(block.rating.toFixed(1)).map(el => (
+        {formatRating('8.3').map(el => (
           <span key={el}>{el}</span>
         ))}
       </p>
-      <p className={style.bestIndicator}>{block.bestIndicator}</p>
-      <p className={style.infoSmall}>
-        <span>{block.date}</span>, <span>{block.country}</span>,{' '}
-        <span className={style.genre}>{block.genre}</span>
-      </p>
-      <p>{block.duration}</p>
+      {/*<p className={style.best_indicator}>bestIndicator</p>*/}
+      <div className={style.info_small}>
+        <p>{movie.year}</p>
+        <p>{movie.countries}</p>
+        <p className={style.genre}>{movie.genres}</p>
+      </div>
+      <p>{movie.time}</p>
     </div>
   )
 }
