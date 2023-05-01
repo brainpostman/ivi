@@ -26,6 +26,7 @@
         "min-length": "Password must have at least 6 characters",
         "no-pattern-match": "Password can contain only latin characters, numbers and special symbols",
         "no-confirmation-match": "Passwords must match",
-        "no-email-match": "Password can't match your email"
+        "no-email-match": "Password can't match your email",
+        "incorrect-pass": "Incorrect password"
     }
 }

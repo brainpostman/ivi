@@ -22,6 +22,7 @@
 	height: 40px;
 	background-color: transparent;
 	border-radius: 8px;
+	width: 100%;
 	@include ui-padding(hor, 3);
 	@include ui-padding(top, 4);
 	&:focus {

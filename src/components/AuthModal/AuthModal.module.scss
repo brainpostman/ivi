@@ -125,6 +125,15 @@
         border-bottom-right-radius: 16px;
         border-bottom-left-radius: 0;
     }
+    &__success {
+        background-color: $green;
+        margin-left: -50%;
+        width: 150%;
+        border-top-left-radius: 16px;
+        border-top-right-radius: 16px;
+        border-bottom-right-radius: 16px;
+        border-bottom-left-radius: 0;
+    }
     &__reply {
         background-color: $dark;
         margin-right: 50%;
@@ -227,3 +236,4 @@
         transform: translateX(-50%);
     }
 }
+
