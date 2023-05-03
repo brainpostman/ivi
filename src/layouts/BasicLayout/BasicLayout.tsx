@@ -1,9 +1,9 @@
 import HeadModif from '@/components/HeadModif/HeadModif';
 import { IHead } from '@/types/head.interface';
 import { FC, PropsWithChildren } from 'react';
-import style from './PageLayout.module.scss';
+import style from './BasicLayout.module.scss';
 
-const PageLayout: FC<PropsWithChildren<IHead>> = ({
+const BasicLayout: FC<PropsWithChildren<IHead>> = ({
     title,
     description,
     keywords,
@@ -25,4 +25,4 @@ const PageLayout: FC<PropsWithChildren<IHead>> = ({
     );
 };
 
-export default PageLayout;
+export default BasicLayout;
