@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { i18n } from 'next-i18next';
+import jwt from 'jsonwebtoken';
 
 type CheckEmailResponse = {
     status: number;
@@ -50,14 +51,14 @@ export function validatePassword(password: string, email = ''): string[] {
     let messages: string[] = [];
     if (password.length === 0) {
         messages.push(
-            i18n?.t('auth_modal:error-messages.min-length') ?? 'Пожалуйста, введите пароль'
+            i18n?.t('auth_modal:error-messages.no-empty-pass') ?? 'Пожалуйста, введите пароль'
         );
         return messages;
     }
-    if (password.length < 6) {
+    if (password.length < 6 || password.length > 24) {
         messages.push(
-            i18n?.t('auth_modal:error-messages.min-length') ??
-                'Пароль должен иметь как минимум 6 символов'
+            i18n?.t('auth_modal:error-messages.length') ??
+                'Длина пароля должна быть не меньше 6 и не больше 24 символов'
         );
     }
     const passwordRegex = /^[a-zA-Z0-9!@#$%^&*()_+-=,.<>?;:'"\\/[\]{}|`~]+$/;
@@ -84,4 +85,14 @@ export function validateConfirmedPassword(password: string, confirmation: string
             i18n?.t('auth_modal:error-messages.no-confirmation-match') ?? 'Пароли должны совпадать'
         );
     }
+}
+
+export function GenDBPasswordMock(email: string) {
+    const password = jwt
+        .sign({ email: email }, process.env.JWT_SECRET as string, {
+            noTimestamp: true,
+        })
+        .split('.')[2]
+        .substring(0, 24);
+    return password;
 }

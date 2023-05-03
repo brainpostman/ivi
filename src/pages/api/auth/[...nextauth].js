@@ -3,6 +3,7 @@ import NextAuth from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import GoogleProvider from 'next-auth/providers/google';
 import VkProvider from 'next-auth/providers/vk';
+import { GenDBPasswordMock } from '../../../utils/auth.util';
 
 export const authOptions = {
     session: {
@@ -18,9 +19,9 @@ export const authOptions = {
                     email: credentials.email,
                     password: credentials.password,
                 });
-
                 if (response.status === 201 && response.data.token) {
                     const user = {
+                        provider: 'database',
                         email: credentials.email,
                         accessToken: response.data.token,
                     };
@@ -35,6 +36,7 @@ export const authOptions = {
             name: 'register',
             async authorize(credentials) {
                 const response = await axios.post(process.env.REGISTRATION, {
+                    provider: 'database',
                     email: credentials.email,
                     password: credentials.password,
                 });
@@ -67,15 +69,62 @@ export const authOptions = {
         }),
     ],
     callbacks: {
+        async signIn({ user, account, profile }) {
+            if (account.provider === 'google') {
+                user.provider = 'google';
+                try {
+                    const checkResponse = await axios.get(
+                        `${process.env.CHECK_EMAIL_VACANCY}/${encodeURIComponent(
+                            profile.email
+                        )}.oauth`
+                    );
+                    if (checkResponse.status === 200) {
+                        const data = {
+                            email: `${profile.email}.oauth`,
+                            password: GenDBPasswordMock(user.email),
+                        };
+                        const response = await axios.post(process.env.REGISTRATION, data);
+                        user.accessToken = response.data.token;
+                        return true;
+                    }
+                } catch (err) {
+                    if (err.response.status === 400) {
+                        const data = {
+                            email: `${profile.email}.oauth`,
+                            password: GenDBPasswordMock(profile.email),
+                        };
+                        const response = await axios.post(process.env.LOGIN, data);
+                        user.accessToken = response.data.token;
+                        return true;
+                    } else {
+                        throw err;
+                    }
+                }
+            }
+            if (account.provider === 'vk') {
+                user.provider = 'vk';
+                const data = {
+                    access_token: account.access_token,
+                    expires_in: 86400,
+                    user_id: account.user_id,
+                };
+                const response = await axios.post(process.env.VK, data);
+                user.accessToken = response.data.token;
+
+                return true;
+            }
+
+            return true;
+        },
         async jwt({ token, user }) {
             if (user) {
-                token.user = user;
+                token.provider = user.provider;
                 token.accessToken = user.accessToken;
             }
             return token;
         },
         async session({ session, token }) {
-            session.user = token.user;
+            session.provider = token.provider;
             session.accessToken = token.accessToken;
             return session;
         },

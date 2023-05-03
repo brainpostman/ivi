@@ -87,19 +87,19 @@ const AuthModal = ({ modalShown }: IAuthModalProps) => {
     const handleEmail = async (email: string) => {
         let response = await checkEmailVacancy(email);
         if (response === 'login' || response === 'register') {
-            setErrorMessages([]);
+            resetError();
             setProgressBar(50);
             setValidatedEmail(email);
             setAuthIn(false);
             await delay(transitionDelay);
             setAuthFlow(response);
         } else {
-            setErrorMessages([response]);
+            setError([response]);
         }
     };
 
     const editEmail = async () => {
-        setErrorMessages([]);
+        resetError();
         setEmailInput(validatedEmail);
         setValidatedEmail('');
         setProgressBar(5);
@@ -123,7 +123,7 @@ const AuthModal = ({ modalShown }: IAuthModalProps) => {
                     if (signInResponse?.status == 401) {
                         setError([t('error-messages.incorrect-pass')]);
                     } else {
-                        setError([t('error-messages.unforeseen-error')]);
+                        throw new Error(t('error-messages.unforeseen-error'));
                     }
                 }
             });

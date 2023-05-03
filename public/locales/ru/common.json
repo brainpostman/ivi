@@ -2,5 +2,6 @@
     "expand-block": {
         "expand": "Развернуть",
         "collapse": "Свернуть"
-    }
+    },
+    "error": "Ошибка"
 }
