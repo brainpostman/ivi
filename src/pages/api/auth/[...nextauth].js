@@ -6,7 +6,6 @@ import VkProvider from 'next-auth/providers/vk';
 import { GenDBPasswordMock } from '../../../utils/auth.util';
 import jwtLib from 'jsonwebtoken';
 
-//TODO: error page redirect
 export const authOptions = {
     session: {
         jwt: true,
@@ -72,6 +71,7 @@ export const authOptions = {
     ],
     pages: {
         error: 'auth/error',
+        signin: 'auth/signin',
     },
     callbacks: {
         async signIn({ user, account, profile }) {
