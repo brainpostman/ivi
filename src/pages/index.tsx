@@ -24,6 +24,7 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
                 'header',
                 'auth_modal',
                 'home',
+                'error',
                 'common',
                 'footer',
             ])),

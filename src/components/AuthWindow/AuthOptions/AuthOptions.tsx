@@ -1,12 +1,12 @@
 import Input from '@/components/UI/Input/Input';
 import styles from './AuthOptions.module.scss';
-import parentStyles from '../AuthModal.module.scss';
+import parentStyles from '../AuthWindow.module.scss';
 import HighlightButton from '@/components/UI/HighlightButton/HighlightButton';
 import BasicBtn from '@/components/UI/BasicBtn/BasicBtn';
 import { validateEmail } from '@/utils/auth.util';
 import { signIn } from 'next-auth/react';
 import { FaGoogle, FaVk } from 'react-icons/fa';
-import { Dispatch, SetStateAction, useState } from 'react';
+import { Dispatch, SetStateAction } from 'react';
 import { useTranslation } from 'next-i18next';
 
 interface IEmailInputProps {

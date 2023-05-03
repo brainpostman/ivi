@@ -1,7 +1,6 @@
 import AuthModal from '@/components/AuthModal/AuthModal';
 import { useActions, useTypedSelector } from '@/hooks/ReduxHooks';
-import AdminLayout from '@/layouts/BasicLayout/BasicLayout';
-import SignToken, { GenDBPasswordMock } from '@/utils/auth.util';
+import BasicLayout from '@/layouts/BasicLayout/BasicLayout';
 import axios from 'axios';
 import { GetServerSideProps } from 'next';
 import { signOut, useSession } from 'next-auth/react';
@@ -29,7 +28,7 @@ export default function Admin() {
     }, []);
 
     return (
-        <AdminLayout title={t('html-title')}>
+        <BasicLayout title={t('html-title')}>
             <div>
                 {status === 'authenticated' ? (
                     <button onClick={() => signOut()}>Sign out</button>
@@ -40,6 +39,6 @@ export default function Admin() {
                 <button onClick={() => {}}>data</button>
             </div>
             {showAuthModal && <AuthModal modalShown={showAuthModal} />}
-        </AdminLayout>
+        </BasicLayout>
     );
 }

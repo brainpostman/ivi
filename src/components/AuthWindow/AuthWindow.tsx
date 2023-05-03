@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
-import styles from './AuthModal.module.scss';
+import styles from './AuthWindow.module.scss';
 import { useActions } from '@/hooks/ReduxHooks';
-import { signIn, useSession } from 'next-auth/react';
+import { signIn } from 'next-auth/react';
 import { TbPencil } from 'react-icons/tb';
 import { checkEmailVacancy } from '@/utils/auth.util';
 import { CSSTransition } from 'react-transition-group-react-18';
@@ -13,8 +13,9 @@ import Registration from './Registration/Registration';
 import Login from './Login/Login';
 import { useRouter } from 'next/router';
 
-interface IAuthModalProps {
-    modalShown: boolean;
+interface IAuthWindowProps {
+    modalShown?: boolean;
+    isModal?: boolean;
 }
 
 interface IEditEmailProps {
@@ -42,7 +43,7 @@ const transitionStyles = {
     exitDone: styles.transition_exitDone,
 };
 
-const AuthModal = ({ modalShown }: IAuthModalProps) => {
+const AuthWindow = ({ modalShown = true, isModal = false }: IAuthWindowProps) => {
     const { t } = useTranslation('auth_modal');
     const router = useRouter();
 
@@ -154,7 +155,9 @@ const AuthModal = ({ modalShown }: IAuthModalProps) => {
                     style={{
                         width: `${progressBar}%`,
                     }}></div>
-                <div className={styles.close} onClick={() => setAuthModal(false)}></div>
+                {isModal && (
+                    <div className={styles.close} onClick={() => setAuthModal(false)}></div>
+                )}
             </section>
             <section className={styles.chat}>
                 <CSSTransition
@@ -240,4 +243,4 @@ const AuthModal = ({ modalShown }: IAuthModalProps) => {
     );
 };
 
-export default AuthModal;
+export default AuthWindow;

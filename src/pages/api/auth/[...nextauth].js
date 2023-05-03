@@ -4,7 +4,9 @@ import CredentialsProvider from 'next-auth/providers/credentials';
 import GoogleProvider from 'next-auth/providers/google';
 import VkProvider from 'next-auth/providers/vk';
 import { GenDBPasswordMock } from '../../../utils/auth.util';
+import jwtLib from 'jsonwebtoken';
 
+//TODO: error page redirect
 export const authOptions = {
     session: {
         jwt: true,
@@ -68,6 +70,9 @@ export const authOptions = {
             clientSecret: process.env.VK_CLIENT_SECRET,
         }),
     ],
+    pages: {
+        error: 'auth/error',
+    },
     callbacks: {
         async signIn({ user, account, profile }) {
             if (account.provider === 'google') {
@@ -110,22 +115,27 @@ export const authOptions = {
                 };
                 const response = await axios.post(process.env.VK, data);
                 user.accessToken = response.data.token;
-
                 return true;
             }
-
             return true;
         },
         async jwt({ token, user }) {
             if (user) {
+                const payload = jwtLib.decode(user.accessToken);
                 token.provider = user.provider;
                 token.accessToken = user.accessToken;
+                token.id = payload.id;
+                token.roles = payload.roles.map((item) => {
+                    return { id: item.id, value: item.value };
+                });
             }
             return token;
         },
         async session({ session, token }) {
             session.provider = token.provider;
             session.accessToken = token.accessToken;
+            session.user.id = token.id;
+            session.user.roles = token.roles;
             return session;
         },
     },

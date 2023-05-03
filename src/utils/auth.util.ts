@@ -89,7 +89,7 @@ export function validateConfirmedPassword(password: string, confirmation: string
 
 export function GenDBPasswordMock(email: string) {
     const password = jwt
-        .sign({ email: email }, process.env.JWT_SECRET as string, {
+        .sign({ email: email }, process.env.PASS_MOCK_SECRET as string, {
             noTimestamp: true,
         })
         .split('.')[2]

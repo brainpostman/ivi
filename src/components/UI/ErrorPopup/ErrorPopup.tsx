@@ -10,7 +10,7 @@ interface IErrorPopupProps {
 
 const ErrorPopup = forwardRef(
     ({ className, messages }: IErrorPopupProps, ref: Ref<HTMLDivElement>) => {
-        const { t } = useTranslation('common');
+        const { t } = useTranslation('error');
         return (
             <div ref={ref} className={`${styles.error} ${className}`}>
                 <AiOutlineExclamationCircle />

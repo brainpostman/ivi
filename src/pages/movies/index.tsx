@@ -20,6 +20,7 @@ export const getServerSideProps: GetServerSideProps = async ({ locale }) => {
             ...(await serverSideTranslations(locale ?? 'ru', [
                 'header',
                 'auth_modal',
+                'error',
                 'common',
                 'footer',
                 'movies',
