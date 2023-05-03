@@ -8,22 +8,30 @@ import { toast } from 'react-toastify'
 
 export const getFilms = async (
   params?: IFilmsGetRequest
-): Promise<IMovie[]> => {
-  console.log('REQUEST: GET FILMS')
-  const films = await axios
-    .get<IFilmsgGetResponse[]>('http://188.120.248.77:3000/films', { params })
-    .then(resp =>
-      resp.data.map(resp => ({
+): Promise<{ films: IMovie[]; totalCount: number }> => {
+  toast.info('REQUEST')
+  const data = await axios
+    .get<IFilmsgGetResponse[]>(
+      `${process.env.NEXT_PUBLIC_SERVER_ADDRESS}/films`,
+      {
+        params,
+      }
+    )
+    .then(resp => {
+      const totalCount = Number(resp.headers['X-Total-count'])
+      const films = resp.data.map(resp => ({
         ...resp,
         countries: resp.countries.map(country => country.name).join(','),
         genres: resp.genres.map(genre => genre.name).join(','),
         directors: resp.directors.map(genre => genre.name).join(','),
       }))
-    )
+
+      return { films, totalCount }
+    })
     .catch(() => {
-      toast.error('Ошибка!')
-      return []
+      toast.error('Ошибка при получении фильмов!')
+      return { films: [], totalCount: 0 }
     })
 
-  return films
+  return data
 }
