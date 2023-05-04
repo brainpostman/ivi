@@ -92,7 +92,7 @@ const Home: NextPage<IProps> = ({ filmsData }) => {
           padding={6}
           width='fit'
         >
-          {filmsData?.map(movie => (
+          {filmsData.map(movie => (
             <MovieCard key={movie.id} movie={movie} />
           ))}
         </CustomCarousel>
@@ -108,7 +108,7 @@ const Home: NextPage<IProps> = ({ filmsData }) => {
           padding={6}
           width='fit'
         >
-          {filmsData?.map(movie => (
+          {filmsData.map(movie => (
             <MovieCard key={movie.id} movie={movie} />
           ))}
         </CustomCarousel>
