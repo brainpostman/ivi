@@ -49,6 +49,7 @@ export const getStaticProps: GetStaticProps = async ({ locale, params }) => {
       countries,
       directors,
       actors,
+      totalCount,
     },
   }
 }
@@ -91,7 +92,7 @@ const MoviesPage: NextPage<IProps> = ({
     }
 
     getFilms(currentParams)
-      .then(({ films }) => {
+      .then(({ films, totalCount }) => {
         setFilms(prev => [...prev, ...films])
       })
       .catch(() => toast.error('Ошибка при получении новых фильмов!'))
@@ -109,7 +110,8 @@ const MoviesPage: NextPage<IProps> = ({
     const docElement = document.documentElement
     if (
       docElement.scrollHeight - (docElement.scrollTop + window.innerHeight) <
-      800
+        800 &&
+      films.length < totalCount
     ) {
       setIsLoading(true)
     }
