@@ -3,7 +3,7 @@ import NextAuth from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import GoogleProvider from 'next-auth/providers/google';
 import VkProvider from 'next-auth/providers/vk';
-import { GenDBPasswordMock } from '../../../utils/auth.util';
+import { genDBPasswordMock } from '../../../utils/auth.util';
 import jwtLib from 'jsonwebtoken';
 
 export const authOptions = {
@@ -86,7 +86,7 @@ export const authOptions = {
                     if (checkResponse.status === 200) {
                         const data = {
                             email: `${profile.email}.oauth`,
-                            password: GenDBPasswordMock(user.email),
+                            password: genDBPasswordMock(user.email),
                         };
                         const response = await axios.post(process.env.REGISTRATION, data);
                         user.accessToken = response.data.token;
@@ -96,7 +96,7 @@ export const authOptions = {
                     if (err.response.status === 400) {
                         const data = {
                             email: `${profile.email}.oauth`,
-                            password: GenDBPasswordMock(profile.email),
+                            password: genDBPasswordMock(profile.email),
                         };
                         const response = await axios.post(process.env.LOGIN, data);
                         user.accessToken = response.data.token;

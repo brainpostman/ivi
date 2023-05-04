@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { i18n } from 'next-i18next';
 import jwt from 'jsonwebtoken';
+import { Session } from 'next-auth';
 
 type CheckEmailResponse = {
     status: number;
@@ -8,10 +9,12 @@ type CheckEmailResponse = {
 
 i18n?.loadNamespaces(['auth_modal']);
 
+const domain = 'http://localhost:3000';
+
 export async function checkEmailVacancy(email: string): Promise<string> {
     try {
         const response = await axios.get<CheckEmailResponse>(
-            `http://localhost:3000/check-email/${encodeURIComponent(email)}`
+            `${domain}/check-email/${encodeURIComponent(email)}`
         );
         if (response.status === 200) {
             return 'register';
@@ -87,7 +90,7 @@ export function validateConfirmedPassword(password: string, confirmation: string
     }
 }
 
-export function GenDBPasswordMock(email: string) {
+export function genDBPasswordMock(email: string) {
     const password = jwt
         .sign({ email: email }, process.env.PASS_MOCK_SECRET as string, {
             noTimestamp: true,
@@ -95,4 +98,27 @@ export function GenDBPasswordMock(email: string) {
         .split('.')[2]
         .substring(0, 24);
     return password;
+}
+
+export function getSerializableSession(inputSession: Session): Session | null {
+    if (!inputSession) {
+        return null;
+    }
+    for (let key in inputSession.user) {
+        if (!inputSession.user[key]) {
+            inputSession.user[key] = null;
+        }
+    }
+    return inputSession;
+}
+
+export async function checkAdminRole(accessToken: string | null): Promise<boolean> {
+    try {
+        const checkAdmin = await axios.get(`${domain}/check-admin`, {
+            headers: { Authorization: `Bearer ${accessToken}` },
+        });
+        return true;
+    } catch (err) {
+        return false;
+    }
 }

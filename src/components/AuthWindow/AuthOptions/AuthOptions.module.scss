@@ -14,17 +14,22 @@
 }
 
 .basicbtn {
+    //баг при компиляции scss, не могу вытащить стили из родительского scss в правильном порядке
     &_google {
         & svg {
             height: 16px;
             width: 16px;
             margin-right: 4px;
         }
+        @include ui-padding(hor, 4);
+        @include ui-padding(ver, 2.5);
     }
     &_vk {
         & svg {
             height: 20px;
             width: 20px;
         }
+        @include ui-padding(hor, 4);
+        @include ui-padding(ver, 2.5);
     }
 }
