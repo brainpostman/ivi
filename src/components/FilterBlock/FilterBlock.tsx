@@ -1,16 +1,11 @@
-import { filterActorData } from '@/data/filterActor.data'
-import {
-  filterCountryData,
-  filterCountryListData,
-} from '@/data/filterCountry.data'
-import { filterGenreData, filterGenreListData } from '@/data/filterGenre.data'
-import { filterProducerData } from '@/data/filterProducer.data'
+import { filterCountryData } from '@/data/filterCountry.data'
+import { filterGenreData } from '@/data/filterGenre.data'
 import { filterYearData } from '@/data/filterYear.data'
 import { useFilter } from '@/hooks/useFilter'
 import { IFilterBlockEl } from '@/types/filterBlock.interface'
 import { useTranslation } from 'next-i18next'
 import { useRouter } from 'next/router'
-import { useEffect } from 'react'
+import { FC, useEffect } from 'react'
 import { IoCloseOutline } from 'react-icons/io5'
 import FilterGenreCard from '../FilterGenreCard/FilterGenreCard'
 import VioletButton from '../UI/VioletButton/VioletButton'
@@ -19,9 +14,10 @@ import FilterListBig from './FilterListBig/FilterListBig'
 import FilterListSmall from './FilterListSmall/FilterListSmall'
 import FilterSlider from './FilterSlider/FilterSlider'
 import FilterSuggest from './FilterSuggest/FilterSuggest'
+import { IFilterGetResponse } from '@/types/filters.api.interface'
 
 const filterList: Omit<IFilterBlockEl, 'isExpand'>[] = [
-  { title: 'genre' },
+  { title: 'genres' },
   { title: 'country' },
   { title: 'year' },
   { title: 'rating' },
@@ -29,13 +25,20 @@ const filterList: Omit<IFilterBlockEl, 'isExpand'>[] = [
   { title: 'actor' },
 ]
 
-const FilterBlock = () => {
+interface IProps {
+  genres: IFilterGetResponse[]
+  countries: IFilterGetResponse[]
+  directors: IFilterGetResponse[]
+  actors: IFilterGetResponse[]
+}
+
+const FilterBlock: FC<IProps> = ({ genres, countries, directors, actors }) => {
   const router = useRouter()
   const { t } = useTranslation('movies')
 
   const { expandTabFilter, getFilterData } = useFilter(filterList)
 
-  const genreFilterData = getFilterData('genre')
+  const genreFilterData = getFilterData('genres')
   const countryFilterData = getFilterData('country')
   const yearFilterData = getFilterData('year')
   const producerFilterData = getFilterData('director')
@@ -54,7 +57,7 @@ const FilterBlock = () => {
     if (!paramKeys.length) return
 
     const filteredParamKeys = paramKeys.filter(
-      el => !['sort', 'direct'].includes(el)
+      el => !['orderBy', 'order'].includes(el)
     )
 
     if (!filteredParamKeys.length) {
@@ -66,9 +69,9 @@ const FilterBlock = () => {
     <section className={style.wrapper}>
       <FilterListBig
         filterData={genreFilterData}
-        list={filterGenreListData}
+        list={genres}
         carouselElementsView={5}
-        query='genre'
+        query='genres'
       >
         {filterGenreData.map(genre => (
           <FilterGenreCard
@@ -81,7 +84,7 @@ const FilterBlock = () => {
 
       <FilterListBig
         filterData={countryFilterData}
-        list={filterCountryListData}
+        list={countries}
         carouselElementsView={6}
         carouselElementsMove={1}
         query='country'
@@ -102,32 +105,22 @@ const FilterBlock = () => {
       <FilterSuggest
         filterData={producerFilterData}
         closeModal={expandTabFilter('director')}
-        suggestList={filterProducerData}
-        placeholder={t('searches.producer-placeholder')}
-        query='producer'
+        suggestList={directors}
+        placeholder={t('searches.director-placeholder')}
+        query='director'
       />
 
       <FilterSuggest
         filterData={actorFilterData}
         closeModal={expandTabFilter('actor')}
-        suggestList={filterActorData}
+        suggestList={actors}
         placeholder={t('searches.actor-placeholder')}
         query='actor'
       />
 
-      <FilterSlider
-        maxValue={200}
-        minValue={0}
-        query='rating'
-        title={t('sliders.rating')}
-      />
+      <FilterSlider query='rating' title={t('sliders.rating')} />
 
-      <FilterSlider
-        maxValue={200}
-        minValue={0}
-        query='scores'
-        title={t('sliders.scores')}
-      />
+      <FilterSlider query='scoreAVG' title={t('sliders.scores')} />
 
       <div className={style.clear_filters} onClick={clearFilters}>
         <IoCloseOutline />
@@ -138,6 +131,3 @@ const FilterBlock = () => {
 }
 
 export default FilterBlock
-
-//carouselData = { filterGenreData }
-//carouselContent = { FilterGenreCarouselContent }
