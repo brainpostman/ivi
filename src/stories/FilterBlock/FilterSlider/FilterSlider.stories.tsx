@@ -16,11 +16,18 @@ const meta: Meta = {
   },
   component: FilterSlider,
   argTypes: {
+    range: { table: { disable: true } },
+    typeSlider: {
+      description: 'Одиночный или парный ползунок',
+      options: ['single', 'paired'],
+      control: 'select',
+    },
     maxValue: {
       description: 'Максимальное значение',
     },
     minValue: {
       description: 'Минимальное значение',
+      if: { arg: 'typeSlider', eq: 'paired' },
     },
     query: {
       description: 'Название параметра',
@@ -31,17 +38,55 @@ const meta: Meta = {
   },
 }
 
-export const Primary = {
-  render: ({ ...props }: IFilterSliderProps) => (
-    <div style={{ width: 250 }}>
-      <FilterSlider {...props} />
-    </div>
-  ),
+export const Paired = {
+  render: ({
+    maxValue,
+    minValue,
+    range,
+    typeSlider,
+    ...props
+  }: IFilterSliderProps & {
+    minValue: number
+    maxValue: number
+    typeSlider: 'single' | 'paired'
+  }) => {
+    const currentRange =
+      typeSlider === 'paired' ? { min: minValue, max: maxValue } : undefined
+
+    const singleMaxValue = maxValue
+
+    return (
+      <div style={{ width: 250 }}>
+        <FilterSlider
+          maxValue={singleMaxValue}
+          range={currentRange}
+          {...props}
+        />
+      </div>
+    )
+  },
   args: {
-    maxValue: 200,
     minValue: 0,
+    maxValue: 200,
     query: 'rating',
     title: 'Рейтинг',
+    typeSlider: 'paired',
+  },
+}
+
+export const Single = {
+  render: ({ range, ...props }: IFilterSliderProps) => {
+    return (
+      <div style={{ width: 250 }}>
+        <FilterSlider {...props} />
+      </div>
+    )
+  },
+  args: {
+    query: 'scoreAVG',
+    title: 'Оценки',
+    maxValue: 100,
+    typeSlider: 'single',
   },
 }
 
