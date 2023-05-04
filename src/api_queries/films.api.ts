@@ -1,3 +1,4 @@
+import { formatCapitalize } from '@/formatters/capitalize.format'
 import {
   IFilmsGetRequest,
   IFilmsgGetResponse,
@@ -17,7 +18,9 @@ export const getFilms = (
       }
     )
     .then(resp => {
-      const totalCount = Number(resp.headers['X-Total-count'])
+      const totalCount = Number(resp.headers['x-total-count'])
+      // FIXME: не получает хедеры
+      console.log(resp.headers)
       const films = resp.data.map(resp => ({
         ...resp,
         countries: resp.countries.map(country => country.name).join(','),
