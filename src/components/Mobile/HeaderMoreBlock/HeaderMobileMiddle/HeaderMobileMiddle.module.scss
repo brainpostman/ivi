@@ -123,7 +123,7 @@
   }
 
   &__subtitle {
-    color: #ffffff7a !important;
+    color: $gray !important;
     @include font(1);
     font-weight: 500 !important;
   }
