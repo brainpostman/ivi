@@ -15,6 +15,16 @@ const config: StorybookConfig = {
         '@': path.resolve(__dirname, '../src/'),
       }
 
+    config.resolve = {
+      ...config.resolve,
+      fallback: {
+        ...(config.resolve || {}).fallback,
+        fs: false,
+        stream: false,
+        os: false,
+      },
+    }
+
     return config
   },
   typescript: {
@@ -28,6 +38,7 @@ const config: StorybookConfig = {
         prop.parent ? !/node_modules/.test(prop.parent.fileName) : true,
     },
   },
+
   framework: {
     name: '@storybook/nextjs',
     options: {},
