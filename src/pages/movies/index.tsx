@@ -7,17 +7,33 @@ import Sort from '@/components/Sort/Sort'
 import ViewMoreButton from '@/components/UI/ViewMoreButton/ViewMoreButton'
 import VioletButton from '@/components/UI/VioletButton/VioletButton'
 import PageLayout from '@/layouts/PageLayout'
-import { IMovie } from '@/types/films.api.interface'
-import { GetServerSideProps, NextPage } from 'next'
+import { IFilmsGetRequest, IMovie } from '@/types/films.api.interface'
+import { GetStaticProps, NextPage } from 'next'
 import { useTranslation } from 'next-i18next'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 import style from './index.module.scss'
 import Loader from '@/components/Loader/Loader'
+import {
+  getActors,
+  getCountries,
+  getDirectors,
+  getGenres,
+} from '@/api_queries/filters.api'
+import { IFilterGetResponse } from '@/types/filters.api.interface'
+import { formatFilmsParams } from '@/formatters/filmsParams.format'
+import { toast } from 'react-toastify'
 
-export const getServerSideProps: GetServerSideProps = async ({ locale }) => {
-  const defaultFilmsData = await getFilms({ page: 1, take: 21 })
+export const getStaticProps: GetStaticProps = async ({ locale, params }) => {
+  const defaultParams: IFilmsGetRequest = { take: 14, page: 1 }
+  const currentParams = { ...formatFilmsParams(params), ...defaultParams }
+
+  const { films, totalCount } = await getFilms(currentParams)
+  const genres = await getGenres()
+  const countries = await getCountries()
+  const directors = await getDirectors()
+  const actors = await getActors()
 
   return {
     props: {
@@ -28,72 +44,105 @@ export const getServerSideProps: GetServerSideProps = async ({ locale }) => {
         'footer',
         'movies',
       ])),
-      defaultFilmsData,
+      defaultFilms: films,
+      genres,
+      countries,
+      directors,
+      actors,
     },
   }
 }
 
 interface IProps {
-  defaultFilmsData: IMovie[]
+  defaultFilms: IMovie[] | undefined
+  genres: IFilterGetResponse[]
+  countries: IFilterGetResponse[]
+  directors: IFilterGetResponse[]
+  actors: IFilterGetResponse[]
+  totalCount: number
 }
 
-const MoviesPage: NextPage<IProps> = ({ defaultFilmsData }) => {
+const MoviesPage: NextPage<IProps> = ({
+  defaultFilms,
+  countries,
+  genres,
+  directors,
+  actors,
+  totalCount,
+}) => {
   const router = useRouter()
   const { t } = useTranslation('movies')
-  const [isClickedViewMode, setIsClickedViewMore] = useState(false)
-  const [films, setFilms] = useState(defaultFilmsData)
-  const [page, setPage] = useState(1)
 
-  // Лоадер при первой загрузке
-  const [isLoadingDefault, setIsLoadingDefault] = useState(true)
-  // Лоадер при последующих запросах
-  const [isLoading, setIsLoading] = useState(false)
+  const [isLoadedFirstFilms, setIsLoadedFirstFilms] = useState(false)
+  const [isClickedViewMore, setIsClickedViewMore] = useState(false)
+  const [page, setPage] = useState(2)
+  const [films, setFilms] = useState<IMovie[]>(defaultFilms || [])
 
-  const getFilmsWithParams = async () => {
-    setPage(prev => prev++)
+  const [isLoading, setIsLoading] = useState(true)
 
-    await getFilms({ page, take: 14 })
-      .then(films => {
+  const getFilmsWithParams = () => {
+    // Не работает через prev => prev++
+    setPage(page + 1)
+
+    const defaultParams: IFilmsGetRequest = { take: 14, page }
+    const currentParams = {
+      ...formatFilmsParams(router.query),
+      ...defaultParams,
+    }
+
+    getFilms(currentParams)
+      .then(({ films }) => {
         setFilms(prev => [...prev, ...films])
       })
-      .finally(() => setIsLoading(false))
+      .catch(() => toast.error('Ошибка при получении новых фильмов!'))
+      .finally(() => {
+        setIsLoading(false)
+      })
   }
 
   const onClickViewMore = () => {
     setIsClickedViewMore(true)
     setIsLoading(true)
-    getFilmsWithParams()
   }
 
   const onScroll = () => {
-    if (!isClickedViewMode) return
-
     const docElement = document.documentElement
     if (
       docElement.scrollHeight - (docElement.scrollTop + window.innerHeight) <
-      400
+      800
     ) {
-      console.log('WORK!')
       setIsLoading(true)
     }
   }
 
   useEffect(() => {
-    if (!films) return
+    if (!defaultFilms || isLoadedFirstFilms) return
 
-    if (isLoadingDefault) setIsLoadingDefault(false)
-  }, [films])
+    setIsLoadedFirstFilms(true)
+    setIsLoading(false)
+  }, [defaultFilms])
 
   useEffect(() => {
-    if (!isLoading) return
+    if (!isLoading || !isLoadedFirstFilms) return
+
     getFilmsWithParams()
   }, [isLoading])
 
+  // Запрос при изменении фильтров
   useEffect(() => {
+    if (!router.query || !isLoadedFirstFilms || isLoading) return
+
+    setPage(1)
+    setFilms([])
+    setIsLoading(true)
+  }, [router.query])
+
+  useEffect(() => {
+    if (!isClickedViewMore) return
     document.addEventListener('scroll', onScroll)
 
     return () => document.removeEventListener('scroll', onScroll)
-  }, [])
+  }, [isClickedViewMore])
 
   return (
     <PageLayout title={t('html-title')}>
@@ -123,18 +172,19 @@ const MoviesPage: NextPage<IProps> = ({ defaultFilmsData }) => {
           ))}
         </CustomCarousel>
         {!!Object.keys(router.query).length && <Sort />}
-        <FilterBlock />
+        <FilterBlock
+          countries={countries}
+          genres={genres}
+          directors={directors}
+          actors={actors}
+        />
         <div className={style.moviegrid_wrapper}>
-          {isLoadingDefault ? (
-            <Loader />
-          ) : (
-            <MovieCardGrid
-              movies={films || []}
-              className={style.moviegrid_container}
-            />
-          )}
+          <MovieCardGrid
+            movies={films || []}
+            className={style.moviegrid_container}
+          />
           {isLoading && <Loader />}
-          {!isClickedViewMode && <ViewMoreButton onClick={onClickViewMore} />}
+          {!isClickedViewMore && <ViewMoreButton onClick={onClickViewMore} />}
         </div>
       </section>
     </PageLayout>
