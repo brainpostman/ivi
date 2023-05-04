@@ -1,3 +1,4 @@
+import { formatCapitalize } from '@/formatters/capitalize.format'
 import { IFilterGetResponse } from '@/types/filters.api.interface'
 import axios from 'axios'
 import { toast } from 'react-toastify'
@@ -10,7 +11,7 @@ export const getGenres = (): Promise<IFilterGetResponse[]> => {
     .then(resp =>
       resp.data.map(genre => ({
         id: genre.id,
-        name: genre.name,
+        name: formatCapitalize(genre.name),
       }))
     )
     .catch(() => {

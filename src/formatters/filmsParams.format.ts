@@ -25,7 +25,10 @@ export const formatFilmsParams = (queryParams: ParsedUrlQuery | undefined) => {
           typeof currentParams,
           'take' | 'page' | 'order' | 'orderBy'
         >
-      ] = paramValue
+      ] =
+        param === 'genres'
+          ? paramValue.map(genre => formatCapitalize(genre, { reverse: true }))
+          : paramValue
     } else {
       currentParams[
         param as keyof Pick<typeof currentParams, 'order' | 'orderBy'>
