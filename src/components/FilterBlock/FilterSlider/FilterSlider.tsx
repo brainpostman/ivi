@@ -1,84 +1,32 @@
-import Input from '@/components/UI/Input/Input'
-import { formatSliderQuery } from '@/formatters/sliderQuery.format'
-import { useSetStringParam } from '@/hooks/useSetStringParam'
 import { IFilterSliderProps } from '@/types/filterBlock.interface'
-import { ChangeEvent, FC, useState } from 'react'
-import ReactSlider from 'react-slider'
-import style from './FilterSlider.module.scss'
+import { FC } from 'react'
+import FilterSliderPaired from './FilterSliderPaired/FilterSliderPaired'
+import FilterSliderSingle from './FilterSliderSingle/FilterSliderSingle'
 
 const FilterSlider: FC<IFilterSliderProps> = ({
   query,
   title,
-  minValue: minValueDefault,
-  maxValue: maxValueDefault,
+  range,
+  maxValue = 100,
 }) => {
-  const [minValue, setMinValue] = useState(minValueDefault)
-  const [maxValue, setMaxValue] = useState(maxValueDefault)
-
-  const { minValueStr, maxValueStr } = formatSliderQuery(query)
-
-  const { setUrl: setUrlMin } = useSetStringParam(
-    minValueStr,
-    minValueDefault,
-    {
-      isNumber: true,
-      extraValues: [minValueDefault.toString()],
-    }
-  )
-
-  const { setUrl: setUrlMax } = useSetStringParam(
-    maxValueStr,
-    maxValueDefault,
-    {
-      isNumber: true,
-      extraValues: [maxValueDefault.toString()],
-    }
-  )
-
-  const onChangeMin = (event: ChangeEvent<HTMLInputElement>) => {
-    setMinValue(+event.target.value)
-  }
-
-  const onChangeMax = (event: ChangeEvent<HTMLInputElement>) => {
-    setMaxValue(+event.target.value)
+  const currentRange = {
+    min: range ? range.min : 0,
+    max: range ? range.max : 0,
   }
 
   return (
-    <div>
-      <div className={style.inputs}>
-        <Input
-          type='number'
-          placeholder={minValueDefault.toString()}
-          value={minValue}
-          onChange={event => onChangeMin(event)}
+    <>
+      {range ? (
+        <FilterSliderPaired
+          min={currentRange.min}
+          max={currentRange.max}
+          query={query}
+          title={title}
         />
-        <span className={style.dash}>{title}</span>
-        <Input
-          type='number'
-          placeholder={maxValueDefault.toString()}
-          value={maxValue}
-          onChange={event => onChangeMax(event)}
-        />
-      </div>
-      <ReactSlider
-        value={[minValue, maxValue]}
-        onChange={(value, index) => {
-          if (index === 0) setMinValue(value[0])
-          else setMaxValue(value[1])
-        }}
-        min={minValueDefault}
-        max={maxValueDefault}
-        ariaLabel={['Leftmost thumb', 'Rightmost thumb']}
-        className={style.slider}
-        thumbClassName={style.thumb}
-        trackClassName={style.track}
-        onAfterChange={(value, index) => {
-          if (index === 0) setUrlMin(value[0])
-          else setUrlMax(value[1])
-        }}
-        pearling
-      />
-    </div>
+      ) : (
+        <FilterSliderSingle query={query} title={title} maxValue={maxValue} />
+      )}
+    </>
   )
 }
 
