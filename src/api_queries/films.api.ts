@@ -6,11 +6,10 @@ import {
 import axios from 'axios'
 import { toast } from 'react-toastify'
 
-export const getFilms = async (
+export const getFilms = (
   params?: IFilmsGetRequest
 ): Promise<{ films: IMovie[]; totalCount: number }> => {
-  toast.info('REQUEST')
-  const data = await axios
+  const data = axios
     .get<IFilmsgGetResponse[]>(
       `${process.env.NEXT_PUBLIC_SERVER_ADDRESS}/films`,
       {
