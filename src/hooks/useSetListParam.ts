@@ -11,7 +11,7 @@ interface IOptions {
 }
 
 export const useSetListParam = (
-  defaultValue: (IFilterGetResponse & { isSelect: boolean })[],
+  defaultValue: (IFilterGetResponse & { isSelect: boolean; view: string })[],
   query: string,
   options?: IOptions
 ) => {
@@ -19,7 +19,9 @@ export const useSetListParam = (
   const router = useRouter()
 
   const [list, setList] =
-    useState<(IFilterGetResponse & { isSelect: boolean })[]>(defaultValue)
+    useState<(IFilterGetResponse & { isSelect: boolean; view: string })[]>(
+      defaultValue
+    )
 
   const onClickListEl = (_param: string) => () => {
     let resultParams: string | undefined = ''

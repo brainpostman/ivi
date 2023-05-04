@@ -36,7 +36,7 @@ export interface IFilterListBigProps {
 
 export interface IFilterListSmallProps {
   filterData: IFilterData
-  list: IFilterGetResponse[]
+  list: (IFilterGetResponse & { view: string })[]
   query: string
 }
 
