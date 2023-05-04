@@ -5,10 +5,10 @@ import style from './Sort.module.scss'
 import SortDirection from './SortDirection/SortDirection'
 
 const listData = [
-  { title: 'По популярности', param: 'popular' },
-  { title: 'По оценкам', param: 'grade' },
-  { title: 'По рейтингу', param: 'rating' },
-  { title: 'По алфавиту', param: 'alphabet' },
+  { id: 1, name: 'premiere', view: 'По популярности' },
+  { id: 2, name: 'scoreAVG', view: 'По оценкам' },
+  { id: 3, name: 'ratingAVG', view: 'По рейтингу' },
+  { id: 4, name: 'name', view: 'По алфавиту' },
 ]
 
 const Sort = () => {
@@ -19,7 +19,7 @@ const Sort = () => {
       ...data,
       isSelect: false,
     })),
-    'sort',
+    'orderBy',
     { filterType: 'radio' }
   )
 
@@ -31,7 +31,7 @@ const Sort = () => {
   }
 
   useEffect(() => {
-    onClickListEl('popular')()
+    onClickListEl('premiere')()
   }, [])
 
   if (!currentSort) return <></>
@@ -44,7 +44,7 @@ const Sort = () => {
           <div></div>
           <div></div>
         </div>
-        <p>{currentSort.title}</p>
+        <p>{currentSort.view}</p>
         <MdArrowBackIosNew
           className={`${style.arrow} ${isExpand ? style.arrow__active : ''}`}
         />
@@ -56,11 +56,11 @@ const Sort = () => {
           <ul className={style.list}>
             {sorts.map(sort => (
               <li
-                key={sort.title}
+                key={sort.id}
                 className={sort.isSelect ? style.active : ''}
-                onClick={onClickListElModif(sort.param)}
+                onClick={onClickListElModif(sort.name)}
               >
-                {sort.title}
+                {sort.view}
               </li>
             ))}
           </ul>

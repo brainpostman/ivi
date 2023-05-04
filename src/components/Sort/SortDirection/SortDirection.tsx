@@ -4,14 +4,14 @@ import { GoArrowLeft } from 'react-icons/go'
 import style from './SortDirection.module.scss'
 
 const defaultDirections = [
-  { title: 'Вверх', param: 'asc', isSelect: false },
-  { title: 'Вниз', param: 'desc', isSelect: false },
+  { id: 1, name: 'ASC', view: 'Вверх', isSelect: false },
+  { id: 2, name: 'DESC', view: 'Вниз', isSelect: false },
 ]
 
 const SortDirection = () => {
   const { list: directions, onClickListEl } = useSetListParam(
     defaultDirections,
-    'direct',
+    'order',
     {
       filterType: 'radio',
     }
@@ -25,7 +25,7 @@ const SortDirection = () => {
   }
 
   useEffect(() => {
-    onClickListEl('asc')()
+    onClickListEl('ASC')()
   }, [])
 
   if (!currentDicrection) return <></>
@@ -33,12 +33,12 @@ const SortDirection = () => {
   return (
     <div
       className={style.wrapper}
-      onClick={onClickDirect(nextDirection?.param || '')}
+      onClick={onClickDirect(nextDirection?.name || '')}
     >
       <GoArrowLeft
-        className={currentDicrection?.param === 'desc' ? style.down : ''}
+        className={currentDicrection?.name === 'DESC' ? style.down : ''}
       />
-      <p>{currentDicrection?.title}</p>
+      <p>{currentDicrection.view}</p>
     </div>
   )
 }
