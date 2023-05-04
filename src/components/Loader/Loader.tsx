@@ -1,7 +1,11 @@
 import style from './Loader.module.scss'
 
 const Loader = () => {
-  return <p className={style.loader}></p>
+  return (
+    <div className={style.wrapper}>
+      <p className={style.loader}></p>
+    </div>
+  )
 }
 
 export default Loader
