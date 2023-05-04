@@ -19,9 +19,10 @@ const Header = () => {
     tab: undefined,
   })
 
-  const classNameContainer = hoverTabs.isShow
-    ? `${style.container} ${style.effect}`
-    : style.container
+  const classNameContainer =
+    hoverTabs.isShow && hoverTabs.tab
+      ? `${style.container} ${style.effect}`
+      : style.container
 
   const showHoverBlock = (tab: IHeaderTab) => {
     setHoverTabs({ isShow: true, tab })
