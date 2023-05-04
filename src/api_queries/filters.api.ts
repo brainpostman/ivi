@@ -1,17 +1,16 @@
-import { formatCapitalize } from '@/formatters/capitalize.format'
 import { IFilterGetResponse } from '@/types/filters.api.interface'
 import axios from 'axios'
 import { toast } from 'react-toastify'
 
-export const getGenres = async (): Promise<IFilterGetResponse[]> => {
-  const genres = await axios
+export const getGenres = (): Promise<IFilterGetResponse[]> => {
+  const genres = axios
     .get<IFilterGetResponse[]>(
       `${process.env.NEXT_PUBLIC_SERVER_ADDRESS}/genres`
     )
     .then(resp =>
       resp.data.map(genre => ({
         id: genre.id,
-        name: formatCapitalize(genre.name),
+        name: genre.name,
       }))
     )
     .catch(() => {
@@ -22,8 +21,8 @@ export const getGenres = async (): Promise<IFilterGetResponse[]> => {
   return genres
 }
 
-export const getCountries = async (): Promise<IFilterGetResponse[]> => {
-  const countries = await axios
+export const getCountries = (): Promise<IFilterGetResponse[]> => {
+  const countries = axios
     .get<IFilterGetResponse[]>(
       `${process.env.NEXT_PUBLIC_SERVER_ADDRESS}/countries`
     )
@@ -38,8 +37,8 @@ export const getCountries = async (): Promise<IFilterGetResponse[]> => {
   return countries
 }
 
-export const getDirectors = async (): Promise<IFilterGetResponse[]> => {
-  const directors = await axios
+export const getDirectors = (): Promise<IFilterGetResponse[]> => {
+  const directors = axios
     .get<IFilterGetResponse[]>(
       `${process.env.NEXT_PUBLIC_SERVER_ADDRESS}/staffs?type=director`
     )
@@ -52,4 +51,18 @@ export const getDirectors = async (): Promise<IFilterGetResponse[]> => {
     })
 
   return directors
+}
+
+export const getActors = (): Promise<IFilterGetResponse[]> => {
+  const actors = axios
+    .get<IFilterGetResponse[]>(
+      `${process.env.NEXT_PUBLIC_SERVER_ADDRESS}/staffs?type=actor`
+    )
+    .then(resp => resp.data.map(actor => ({ id: actor.id, name: actor.name })))
+    .catch(() => {
+      toast.error('Ошибка получения режиссёров!')
+      return []
+    })
+
+  return actors
 }
