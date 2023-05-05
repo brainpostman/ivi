@@ -23,7 +23,6 @@ import {
 } from '@/api_queries/filters.api'
 import { IFilterGetResponse } from '@/types/filters.api.interface'
 import { formatFilmsParams } from '@/formatters/filmsParams.format'
-import { toast } from 'react-toastify'
 
 export const getStaticProps: GetStaticProps = async ({ locale, params }) => {
   const defaultParams: IFilmsGetRequest = { take: 14, page: 1 }
@@ -95,7 +94,6 @@ const MoviesPage: NextPage<IProps> = ({
       .then(({ films, totalCount }) => {
         setFilms(prev => [...prev, ...films])
       })
-      .catch(() => toast.error('Ошибка при получении новых фильмов!'))
       .finally(() => {
         setIsLoading(false)
       })
@@ -132,6 +130,7 @@ const MoviesPage: NextPage<IProps> = ({
 
   // Запрос при изменении фильтров
   useEffect(() => {
+    // TODO: нужно ли условие !router.query ?
     if (!router.query || !isLoadedFirstFilms || isLoading) return
 
     setPage(1)
@@ -162,17 +161,20 @@ const MoviesPage: NextPage<IProps> = ({
               ))}
           </div>
         </ExpandBlock>
-        <CustomCarousel
-          elementsView={8}
-          elementsMove={2}
-          arrowSize={16}
-          classNameWrapper={style.carousel_wrapper}
-          space={[12, 12]}
-        >
-          {t('filter-categories', { returnObjects: true }).map(filter => (
-            <VioletButton key={filter}>{filter}</VioletButton>
-          ))}
-        </CustomCarousel>
+        <div className={style.top_carousel_wrapper}>
+          <CustomCarousel
+            elementsView={12}
+            elementsMove={2}
+            arrowSize={16}
+            classNameWrapper={style.carousel_wrapper}
+            space={[12, 12]}
+            width='fit'
+          >
+            {countries?.slice(0, 20).map(country => (
+              <VioletButton key={country.id}>{country.name}</VioletButton>
+            ))}
+          </CustomCarousel>
+        </div>
         {!!Object.keys(router.query).length && <Sort />}
         <FilterBlock
           countries={countries}

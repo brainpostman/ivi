@@ -12,8 +12,8 @@
   &__title {
     color: #fff;
 
-    @include adaptive-size(font-size, 20, 15);
-    @include adaptive-size(line-height, 24, 22);
+    @include adaptive-size(font-size, 20, 15, 320);
+    @include adaptive-size(line-height, 24, 22, 320);
     font-weight: 600;
   }
 

@@ -7,16 +7,17 @@
   @include ui-margin(ver, 6);
   @include ui-padding(hor, 4);
 
+  >a {
+    width: 100%;
+
+    >button {
+      width: 100%;
+    }
+  }
+
   @media (max-width: 879px) {
     grid-template-columns: repeat(1, auto);
     row-gap: 12px;
-  }
-
-  > a {
-    width: 100%;
-    > button {
-      width: 100%;
-    }
   }
 }
 
@@ -27,7 +28,7 @@
 
   @include ui-margin(top, 5);
 
-  > article {
+  >article {
     @include ui-margin(bottom, 11);
   }
 }
@@ -64,11 +65,6 @@
   }
 }
 
-.movies_carousel_wrapper {
-  @include ui-padding(top, 1);
-  @include ui-padding(hor, 4);
-}
-
 .wrapper_expand {
   @include ui-padding(hor, 4);
 }
@@ -81,6 +77,48 @@
   -webkit-line-clamp: 2;
 
   @media (max-width: 1249px) {
-    @include adaptive-size(width, 930, 288);
+    @include adaptive-size(width, 930, 288, 320);
+  }
+}
+
+.movie_carousel_list {
+
+  >div>div {
+
+    //border: 1px solid orange;
+    @media (max-width: 1272px) {
+      @include adaptive-size(width, 172, 145, 1096, 1272);
+      @include adaptive-size(height, 260, 242, 1096, 1272);
+    }
+
+    @media (max-width: 1096px) {
+      @include adaptive-size(width, 178, 145, 921, 1096);
+      @include adaptive-size(height, 297, 242, 921, 1096);
+    }
+
+    @media (max-width: 920px) {
+      @include adaptive-size(width, 187, 145, 745, 920);
+      @include adaptive-size(height, 260, 242, 745, 920);
+    }
+
+    @media (max-width: 744px) {
+      @include adaptive-size(width, 200, 155, 600, 744);
+      @include adaptive-size(height, 334, 259, 600, 744);
+    }
+
+    @media (max-width: 599px) {
+      @include adaptive-size(width, 110, 97, 512, 599);
+      @include adaptive-size(height, 185, 161, 512, 599);
+    }
+
+    @media (max-width: 512px) {
+      @include adaptive-size(width, 144, 99, 393, 512);
+      @include adaptive-size(height, 260, 165, 393, 512);
+    }
+
+    @media (max-width: 392px) {
+      @include adaptive-size(width, 160, 126, 320, 392);
+      @include adaptive-size(height, 266, 209, 320, 392);
+    }
   }
 }

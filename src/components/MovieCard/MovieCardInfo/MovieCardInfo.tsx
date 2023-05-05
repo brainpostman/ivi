@@ -19,7 +19,6 @@ const MovieCardInfo: FC<IProps> = ({ movie }) => {
           <span key={el}>{el}</span>
         ))}
       </p>
-      {/*<p className={style.best_indicator}>bestIndicator</p>*/}
       <div className={style.info_small}>
         <p>{movie.year}</p>
         <p>{movie.countries}</p>
