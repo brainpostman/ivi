@@ -13,6 +13,7 @@ import { GetStaticProps, NextPage } from 'next'
 import { useTranslation } from 'next-i18next'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import style from './index.module.scss'
+import Loader from '@/components/Loader/Loader'
 
 const imgLongButton_1 =
   'https://solea-parent.dfs.ivi.ru/picture/ffffff,ffffff/lightning.svg'
@@ -21,8 +22,7 @@ const imgLongButton_2 =
   'https://solea-parent.dfs.ivi.ru/picture/ffffff,ffffff/gift.svg'
 
 export const getStaticProps: GetStaticProps = async ({ locale }) => {
-  const filmsData = await getFilms()
-
+  const { films } = await getFilms()
   return {
     props: {
       ...(await serverSideTranslations(locale ?? 'ru', [
@@ -32,7 +32,7 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
         'common',
         'footer',
       ])),
-      filmsData,
+      filmsData: films,
     },
   }
 }
@@ -44,8 +44,18 @@ const VisibleText = () => {
 }
 
 interface IProps {
-  filmsData: IMovie[]
+  filmsData: IMovie[] | undefined
 }
+
+const breakpoints = [
+  { point: 1272, view: 6 },
+  { point: 1096, view: 5 },
+  { point: 920, view: 4 },
+  { point: 744, view: 3 },
+  { point: 599, view: 4 },
+  { point: 512, view: 3 },
+  { point: 392, view: 2 },
+]
 
 const Home: NextPage<IProps> = ({ filmsData }) => {
   const { t } = useTranslation('home')
@@ -81,37 +91,47 @@ const Home: NextPage<IProps> = ({ filmsData }) => {
       <TopTenList />
 
       <section className={style.carousels}>
-        <CustomCarousel
-          title={t('carousel-title-1')}
-          href='/'
-          additElem={ViewAllBlock}
-          elementsMove={5}
-          elementsView={7}
-          breakpoints={[1274, 1078, 900, 767, 550]}
-          space={[24, 4]}
-          padding={6}
-          width='fit'
-        >
-          {filmsData.map(movie => (
-            <MovieCard key={movie.id} movie={movie} />
-          ))}
-        </CustomCarousel>
+        {filmsData ? (
+          <CustomCarousel
+            title={t('carousel-title-1')}
+            href='/'
+            additElem={ViewAllBlock}
+            elementsMove={5}
+            elementsView={7}
+            space={[24, 24]}
+            breakpoints={breakpoints}
+            classNameList={style.movie_carousel_list}
+            padding={6}
+            width='fit'
+          >
+            {filmsData.map(movie => (
+              <MovieCard key={movie.id} movie={movie} />
+            ))}
+          </CustomCarousel>
+        ) : (
+          <Loader />
+        )}
 
-        <CustomCarousel
-          title={t('carousel-title-2')}
-          href='/'
-          additElem={ViewAllBlock}
-          elementsMove={5}
-          elementsView={7}
-          breakpoints={[1274, 1078, 900, 767, 550]}
-          space={[24, 4]}
-          padding={6}
-          width='fit'
-        >
-          {filmsData.map(movie => (
-            <MovieCard key={movie.id} movie={movie} />
-          ))}
-        </CustomCarousel>
+        {filmsData ? (
+          <CustomCarousel
+            title={t('carousel-title-2')}
+            href='/'
+            additElem={ViewAllBlock}
+            elementsMove={5}
+            elementsView={7}
+            space={[24, 24]}
+            breakpoints={breakpoints}
+            classNameList={style.movie_carousel_list}
+            padding={6}
+            width='fit'
+          >
+            {filmsData.map(movie => (
+              <MovieCard key={movie.id} movie={movie} />
+            ))}
+          </CustomCarousel>
+        ) : (
+          <Loader />
+        )}
       </section>
     </PageLayout>
   )
