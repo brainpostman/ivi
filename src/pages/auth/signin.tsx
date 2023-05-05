@@ -52,7 +52,7 @@ export default function AuthError() {
         </PageLayout>
     ) : (
         <BasicLayout title={t('auth_modal:html-title')}>
-            <AuthWindow isModal={false} />
+            <AuthWindow />
         </BasicLayout>
     );
 }
