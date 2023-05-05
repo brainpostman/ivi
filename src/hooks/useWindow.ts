@@ -1,4 +1,3 @@
-import { useEffect } from 'react'
 import useIsomorphicLayoutEffect from './useIsomorphicLayoutEffect'
 
 export const useWindow = (callback: () => void, deps?: any[]) => {
