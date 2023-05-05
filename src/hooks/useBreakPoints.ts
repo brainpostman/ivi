@@ -1,34 +1,31 @@
-import { Dispatch, SetStateAction, useEffect } from 'react'
+import { Dispatch, SetStateAction, useEffect, useRef, useState } from 'react'
 
 export const useBreakPoints = (
   setter: Dispatch<SetStateAction<number>>,
-  defaultValue: number,
-  breakpoints?: number[]
+  defaultElementsView: number,
+  breakpoints?: { point: number; view: number }[]
 ) => {
   if (!breakpoints?.length) return
+  const currentElementsView = useRef(defaultElementsView)
 
   const callback = () => {
-    const _breakpoints = [...breakpoints]
+    const _breakpoints = [...breakpoints].sort((a, b) => b.point - a.point)
     const nearestBreakpoints = _breakpoints.filter(
-      bp => bp >= window.innerWidth
-    ).length
+      bp => bp.point >= window.innerWidth
+    )
 
-    if (!nearestBreakpoints) {
-      setter(prev => {
-        if (prev < defaultValue) {
-          return defaultValue
-        }
-        return prev
-      })
-
+    if (!nearestBreakpoints?.length) {
+      setter(defaultElementsView)
+      currentElementsView.current = defaultElementsView
       return
     }
 
-    setter(prev => {
-      const applitedBreakpoints = defaultValue - prev
-      const minus = nearestBreakpoints - applitedBreakpoints
-      return prev - minus
-    })
+    const currentBreakPoint = nearestBreakpoints.at(-1)!
+
+    if (currentElementsView.current === currentBreakPoint.view) return
+
+    currentElementsView.current = currentBreakPoint.view
+    setter(currentBreakPoint.view)
   }
 
   useEffect(() => {
