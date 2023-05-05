@@ -15,6 +15,6 @@ export interface ICustomCarouselProps {
   space?: number[]
   speed?: number
   width?: ICustomCarouselWidth
-  breakpoints?: number[]
+  breakpoints?: { point: number; view: number }[]
   padding?: number
 }
