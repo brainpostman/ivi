@@ -1,14 +1,14 @@
-import { IMovieCard } from '@/types/moviecarousel.interface'
 import { DetailedHTMLProps, FC, HTMLAttributes } from 'react'
 import MovieCard from '../MovieCard/MovieCard'
 import style from './MovieCardGrid.module.scss'
+import { IMovie } from '@/types/films.api.interface'
 
 interface IProps
   extends DetailedHTMLProps<
     HTMLAttributes<HTMLUListElement>,
     HTMLUListElement
   > {
-  movies: IMovieCard[]
+  movies: IMovie[]
 }
 
 const MovieCardGrid: FC<IProps> = ({ movies, className, ...props }) => {

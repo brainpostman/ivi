@@ -7,14 +7,14 @@
   right: 16px;
   top: 16px;
 
-  > li {
+  >li {
     position: relative;
 
-    &:hover > p {
+    &:hover>p {
       opacity: 1;
     }
 
-    > p {
+    >p {
       position: absolute;
       top: -35px;
 

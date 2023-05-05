@@ -1,5 +1,6 @@
 .wrapper {
   @include ui-margin(top, 4);
+  @include ui-padding(hor, 4);
 }
 
 .title {
@@ -21,7 +22,7 @@
 
   width: 75%;
 
-  > p {
+  >p {
     @include ui-margin(bottom, 2);
   }
 }
@@ -36,4 +37,77 @@
 
 .moviegrid_container {
   @include ui-margin(ver, 6);
+
+
+  column-gap: 28px;
+
+  @media (max-width: 1272px) {
+    grid-template-columns: repeat(6, auto);
+    row-gap: 40px;
+  }
+
+  @media (max-width: 1095px) {
+    grid-template-columns: repeat(5, auto);
+  }
+
+  @media (max-width: 919px) {
+    grid-template-columns: repeat(4, auto);
+  }
+
+  @media (max-width: 743px) {
+    grid-template-columns: repeat(3, auto);
+  }
+
+  @media (max-width: 599px) {
+    grid-template-columns: repeat(4, auto);
+  }
+
+  @media (max-width: 511px) {
+    grid-template-columns: repeat(3, auto);
+  }
+
+  @media (max-width: 391px) {
+    grid-template-columns: repeat(2, auto);
+  }
+
+  >li>div,
+  >li>div>div {
+    @media (max-width: 1272px) {
+      @include adaptive-size(width, 180, 152, 1096, 1272);
+      @include adaptive-size(height, 278, 233, 1096, 1272);
+    }
+
+    @media (max-width: 1095px) {
+      @include adaptive-size(width, 187, 152, 920, 1095);
+      @include adaptive-size(height, 278, 233, 920, 1095);
+    }
+
+    @media (max-width: 919px) {
+      @include adaptive-size(width, 195, 152, 744, 919);
+      @include adaptive-size(height, 300, 233, 744, 919);
+    }
+
+    @media (max-width: 743px) {
+      @include adaptive-size(width, 210, 152, 600, 743);
+      @include adaptive-size(height, 322, 233, 600, 743);
+    }
+
+    @media (max-width: 599px) {
+      @include adaptive-size(width, 125, 104, 512, 599);
+      @include adaptive-size(height, 193, 159, 512, 599);
+    }
+
+    @media (max-width: 511px) {
+      @include adaptive-size(width, 143, 104, 392, 511);
+      @include adaptive-size(height, 220, 159, 392, 511);
+    }
+
+    @media (max-width: 391px) {
+      @include adaptive-size(width, 163, 128, 320, 391);
+      @include adaptive-size(height, 250, 196, 320, 391);
+    }
+  }
 }
+
+
+.top_carousel_wrapper {}

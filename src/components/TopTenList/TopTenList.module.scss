@@ -4,10 +4,6 @@
   justify-content: center;
 
   @include ui-margin(top, 12);
-
-  @media (max-width: 599px) {
-    display: none;
-  }
 }
 
 .container {
@@ -27,6 +23,28 @@
   @include ui-padding(hor, 4);
 }
 
-.carousel_wrapper {
-  //@include ui-margin(bottom, 6);
+.carousel_list {
+
+  >div,
+  >div>div {
+    @media (max-width: 1270px) {
+      @include adaptive-size(width, 224, 200, 1161, 1270);
+      @include adaptive-size(height, 492, 439, 1161, 1270)
+    }
+
+    @media (max-width: 1161px) {
+      @include adaptive-size(width, 256, 186, 881, 1161);
+      @include adaptive-size(height, 562, 409, 881, 1161)
+    }
+
+    @media (max-width: 881px) {
+      @include adaptive-size(width, 256, 178, 599, 881);
+      @include adaptive-size(height, 562, 391, 599, 881)
+    }
+
+    @media (max-width: 599px) {
+      @include adaptive-size(width, 275, 136, 320, 599);
+      @include adaptive-size(height, 604, 298, 320, 599)
+    }
+  }
 }
