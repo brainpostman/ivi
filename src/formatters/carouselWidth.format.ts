@@ -10,9 +10,10 @@ export const formatCarouselWidth = (
   if (width === 'full') return 1225
 
   const resultWidth =
-    elementLens
-      .slice(0, elementsView)
-      .reduce((accum, item) => accum + item, 0) -
+    elementLens.slice(0, elementsView).reduce((accum, item) => {
+      if (accum < 1225) accum += item
+      return accum
+    }, 0) -
     space +
     padding
 
