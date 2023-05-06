@@ -68,13 +68,8 @@ const CustomCarousel: FC<ICustomCarouselProps> = ({
   const translate = `translate3d(-${move}px, 0, 0)`
 
   const pushRef = (ref: HTMLDivElement | null) => {
-    if (
-      ref === null ||
-      !refs.current ||
-      !children ||
-      refs.current.length >= children.length
-    )
-      return
+    const maxLen = additElem ? children.length + 1 : children.length
+    if (ref === null || !children || refs.current.length >= maxLen) return
 
     refs.current.push(ref)
   }
@@ -143,7 +138,7 @@ const CustomCarousel: FC<ICustomCarouselProps> = ({
                   pushRef(ref)
                 }}
               >
-                {additElem()}
+                {additElem}
               </div>
             )}
           </div>
