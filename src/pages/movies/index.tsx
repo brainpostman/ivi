@@ -1,4 +1,4 @@
-import { getFilms } from '@/api_queries/films.api'
+import { filmsAPI } from '@/api/queries/films.api'
 import CustomCarousel from '@/components/CustomCarousel/CustomCarousel'
 import ExpandBlock from '@/components/ExpandBlock/ExpandBlock'
 import FilterBlock from '@/components/FilterBlock/FilterBlock'
@@ -15,24 +15,19 @@ import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 import style from './index.module.scss'
 import Loader from '@/components/Loader/Loader'
-import {
-  getActors,
-  getCountries,
-  getDirectors,
-  getGenres,
-} from '@/api_queries/filters.api'
 import { IFilterGetResponse } from '@/types/filters.api.interface'
 import { formatFilmsParams } from '@/formatters/filmsParams.format'
+import { filtersAPI } from '@/api/queries/filters.api'
 
 export const getStaticProps: GetStaticProps = async ({ locale, params }) => {
   const defaultParams: IFilmsGetRequest = { take: 14, page: 1 }
   const currentParams = { ...formatFilmsParams(params), ...defaultParams }
 
-  const { films, totalCount } = await getFilms(currentParams)
-  const genres = await getGenres()
-  const countries = await getCountries()
-  const directors = await getDirectors()
-  const actors = await getActors()
+  const { films, totalCount } = await filmsAPI.getFilms(currentParams)
+  const genres = await filtersAPI.getGenres()
+  const countries = await filtersAPI.getCountries()
+  const directors = await filtersAPI.getDirectors()
+  const actors = await filtersAPI.getActors()
 
   return {
     props: {
@@ -90,7 +85,8 @@ const MoviesPage: NextPage<IProps> = ({
       ...defaultParams,
     }
 
-    getFilms(currentParams)
+    filmsAPI
+      .getFilms(currentParams)
       .then(({ films, totalCount }) => {
         setFilms(prev => [...prev, ...films])
       })

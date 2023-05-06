@@ -1,4 +1,3 @@
-import { getFilms } from '@/api_queries/films.api'
 import BannerCarousel from '@/components/BannerCarousel/BannerCarousel'
 import CustomCarousel from '@/components/CustomCarousel/CustomCarousel'
 import ExpandBlock from '@/components/ExpandBlock/ExpandBlock'
@@ -14,6 +13,7 @@ import { useTranslation } from 'next-i18next'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import style from './index.module.scss'
 import Loader from '@/components/Loader/Loader'
+import { filmsAPI } from '@/api/queries/films.api'
 
 const imgLongButton_1 =
   'https://solea-parent.dfs.ivi.ru/picture/ffffff,ffffff/lightning.svg'
@@ -22,7 +22,11 @@ const imgLongButton_2 =
   'https://solea-parent.dfs.ivi.ru/picture/ffffff,ffffff/gift.svg'
 
 export const getStaticProps: GetStaticProps = async ({ locale }) => {
-  const { films } = await getFilms()
+  const { films: firstCarouselFilms } = await filmsAPI.getFilmsHomePage()
+  const { films: secondCarouselFilms } = await filmsAPI.getFilmsHomePage({
+    page: 2,
+  })
+
   return {
     props: {
       ...(await serverSideTranslations(locale ?? 'ru', [
@@ -32,7 +36,8 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
         'common',
         'footer',
       ])),
-      filmsData: films,
+      firstCarouselFilms,
+      secondCarouselFilms,
     },
   }
 }
@@ -44,7 +49,8 @@ const VisibleText = () => {
 }
 
 interface IProps {
-  filmsData: IMovie[] | undefined
+  firstCarouselFilms: IMovie[] | undefined
+  secondCarouselFilms: IMovie[] | undefined
 }
 
 const breakpoints = [
@@ -57,8 +63,13 @@ const breakpoints = [
   { point: 392, view: 2 },
 ]
 
-const Home: NextPage<IProps> = ({ filmsData }) => {
+const Home: NextPage<IProps> = ({
+  firstCarouselFilms,
+  secondCarouselFilms,
+}) => {
   const { t } = useTranslation('home')
+
+  console.log(firstCarouselFilms)
 
   return (
     <PageLayout title={t('html-title')} description={t('html-description')}>
@@ -91,11 +102,11 @@ const Home: NextPage<IProps> = ({ filmsData }) => {
       <TopTenList />
 
       <section className={style.carousels}>
-        {filmsData ? (
+        {firstCarouselFilms ? (
           <CustomCarousel
             title={t('carousel-title-1')}
             href='/'
-            additElem={ViewAllBlock}
+            additElem={<ViewAllBlock />}
             elementsMove={5}
             elementsView={7}
             space={[24, 24]}
@@ -104,7 +115,7 @@ const Home: NextPage<IProps> = ({ filmsData }) => {
             padding={6}
             width='fit'
           >
-            {filmsData.map(movie => (
+            {firstCarouselFilms.map(movie => (
               <MovieCard key={movie.id} movie={movie} />
             ))}
           </CustomCarousel>
@@ -112,11 +123,11 @@ const Home: NextPage<IProps> = ({ filmsData }) => {
           <Loader />
         )}
 
-        {filmsData ? (
+        {secondCarouselFilms ? (
           <CustomCarousel
             title={t('carousel-title-2')}
             href='/'
-            additElem={ViewAllBlock}
+            additElem={<ViewAllBlock />}
             elementsMove={5}
             elementsView={7}
             space={[24, 24]}
@@ -125,7 +136,7 @@ const Home: NextPage<IProps> = ({ filmsData }) => {
             padding={6}
             width='fit'
           >
-            {filmsData.map(movie => (
+            {secondCarouselFilms.map(movie => (
               <MovieCard key={movie.id} movie={movie} />
             ))}
           </CustomCarousel>
