@@ -8,7 +8,7 @@ const nextConfig = {
         additionalData: `@import "./src/styles/vars.scss"; @import "./src/styles/index.scss"; @import "./src/styles/ui-kit.scss"; @import "./src/styles/adaptive.scss"; `,
     },
     images: {
-        domains: ['thumbs.dfs.ivi.ru'],
+        domains: ['thumbs.dfs.ivi.ru', 'avatars.mds.yandex.net'],
     },
     i18n,
 };

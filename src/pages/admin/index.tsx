@@ -10,6 +10,10 @@ import styles from './index.module.scss';
 import { checkAdminRole, getSerializableSession } from '@/utils/auth.util';
 import { Session } from 'next-auth';
 import { useRouter } from 'next/router';
+import AdminMovie from '@/components/AdminMovie/AdminMovie';
+import movie from '../../data/movie.json';
+import { Movie } from '@/types/ICrudMovie';
+import Link from 'next/link';
 
 interface IAdminProps {
     authSession: Session;
@@ -59,10 +63,26 @@ export default function Admin({ authSession }: IAdminProps) {
                                     </h2>
                                     <h2 className={styles.header__page}>Genres</h2>
                                 </div>
-                                <h2 className={styles.header__page}>Home</h2>
+                                <Link href={'/'}>
+                                    <h2 className={styles.header__page}>Home</h2>
+                                </Link>
                             </div>
                         </div>
-                        <div className={styles.database}>Content</div>
+                        <div className={styles.database}>
+                            <AdminMovie movie={new Movie(movie)} />
+                            <button
+                                onClick={async () => {
+                                    await axios
+                                        .get(
+                                            'http://188.120.248.77/films?order=ASC&take=20&orderBy=name&genres=%D0%B1%D0%BE%D0%B5%D0%B2%D0%B8%D0%BA'
+                                        )
+                                        .then((resp) => {
+                                            console.log(resp);
+                                        });
+                                }}>
+                                here
+                            </button>
+                        </div>
                     </section>
                 </div>
             </div>
