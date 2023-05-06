@@ -59,6 +59,14 @@
     max-height: 404px;
     position: sticky;
 
+    &_area {
+        background-color: rgba(255, 255, 255, .08);
+
+        img {
+            object-fit: contain;
+        }
+    }
+
     &_buttons {
         width: 100%;
         display: flex;
@@ -71,8 +79,13 @@
             width: 109px;
             padding: 10px 12px;
             border-radius: 8px;
-            background-color: #ffffff14;
-            border-color: #ffffff14;
+            background-color: rgba(255, 255, 255, .08);
+            border-color: rgba(255, 255, 255, .08);
+            display: flex;
+
+            h4 {
+                @include ui-margin(left, 2);
+            }
         }
 
         &_favourite {
@@ -97,15 +110,19 @@
 
         &_catalog {
             height: 40px;
-            width: 200px;
+            width: 210px;
             padding: 10px 12px;
             border-radius: 10px;
             background-color: #ffffff14;
             border-color: #ffffff14;
             margin-left: auto;
             margin-right: 0;
-            display: block;
+            display: flex;
             transform: .4s;
+
+            h4 {
+                @include ui-margin(left, 2);
+            }
         }
 
         &_catalog:hover {
@@ -142,7 +159,6 @@
         color: rgba(255, 255, 255, .8);
         display: flex;
         @include ui-padding(left, 24);
-        gap: 4px;
         @include ui-margin(top, 1);
     }
 
@@ -176,8 +192,9 @@
         border-radius: 12px;
         @include ui-padding(top, 1);
 
-        img {
+        Image {
             border-radius: 10px;
+            justify-content: space-around;
         }
 
         h5 {
@@ -186,6 +203,7 @@
             font-weight: 400;
             @include ui-padding(top, 1);
         }
+
     }
 
     &_img:hover {
@@ -253,6 +271,7 @@
     &_subtitle {
         @include ui-margin(top, 4);
         color: #a5a1b2;
+        position: absolute;
         font-size: 15px;
         line-height: 20px;
         font-weight: 400;
@@ -262,7 +281,8 @@
         background-color: transparent;
         border: 1px solid;
         height: 32px;
-        border-color: $dark-gray;
+        width: 204px;
+        border-color: rgba(255, 255, 255, .32);
         border-radius: 8px;
         padding: 7px 11px;
         @include ui-margin(left, 249);

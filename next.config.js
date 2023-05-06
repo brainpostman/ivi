@@ -8,7 +8,24 @@ const nextConfig = {
     additionalData: `@import "./src/styles/vars.scss"; @import "./src/styles/index.scss"; @import "./src/styles/ui-kit.scss"; @import "./src/styles/adaptive.scss"; `,
   },
   images: {
-    domains: ['thumbs.dfs.ivi.ru', 'avatars.mds.yandex.net'],
+    domains: ['thumbs.dfs.ivi.ru'],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'avatars.mds.yandex.net',
+        port: '',
+      },
+      {
+        protocol: 'https',
+        hostname: 'www.images.ru',
+        port: '',
+      },
+      {
+        protocol: 'https',
+        hostname: 'www.ivi.ru',
+        port: '',
+      },
+    ],
   },
   i18n,
 }
