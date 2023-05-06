@@ -1,4 +1,4 @@
-import ExpandBlock from '@/components/ExpandInfo/ExpandBlock';
+import ExpandBlock from '@/components/ExpandBlock/ExpandBlock';
 import BasicBtn from '@/components/UI/BasicBtn/BasicBtn';
 import {
     acortTopInfoVisibleData,
@@ -30,6 +30,8 @@ export const getServerSideProps: GetServerSideProps = async ({ locale }) => {
         },
     };
 };
+
+
 
 export default function Actor() {
     const router = useRouter();
@@ -120,7 +122,7 @@ export default function Actor() {
                     </div>
                     <div className={style.biografy}>
                         <h2 ref={biografyRef}>Биография</h2>
-                        <ExpandBlock visibleBlock={actorBiografyInfoVisibleData} width='100%'>
+                        <ExpandBlock visibleBlock={actorBiografyInfoVisibleData} width='100%' lineClamp={4} expandWord={'Читать дальше'}>
                             {actorBiografyData}
                         </ExpandBlock>
                     </div>

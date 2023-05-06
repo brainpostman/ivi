@@ -7,7 +7,7 @@ export default function watchBlock() {
         <div className={style.wrapper_content}>
             <div className={style.content_tongth}>
                 <h3>Языки</h3>
-                <h4>Русский, Французский</h4>
+                <h4>Русский, Английский</h4>
             </div>
 
             <div className={style.content_sub}>

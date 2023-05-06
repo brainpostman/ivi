@@ -9,6 +9,23 @@ const nextConfig = {
     },
     images: {
         domains: ['thumbs.dfs.ivi.ru'],
+        remotePatterns:[
+            {
+                protocol:'https',
+                hostname:'avatars.mds.yandex.net',
+                port:'',
+            },
+            {
+                protocol:'https',
+                hostname:'www.images.ru',
+                port:'',
+            },
+            {
+                protocol:'https',
+                hostname:'www.ivi.ru',
+                port:'',
+            }
+        ]
     },
     i18n,
 };
