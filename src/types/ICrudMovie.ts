@@ -69,7 +69,7 @@ interface IMovieJsonGenre {
     name_en: string | null;
     createdAt: string | null;
     updatedAt: string | null;
-    FilmGenres: {
+    FilmGenres?: {
         id: number;
         filmId: number;
         genreId: number;
@@ -131,8 +131,6 @@ export interface IMovieCountry {
     id: number;
     name: string | null;
     fk_countryid: number | null;
-    createdAt: Date | null;
-    updatedAt: Date | null;
 }
 
 export class MovieCountry implements IMovieCountry {
@@ -140,14 +138,10 @@ export class MovieCountry implements IMovieCountry {
         this.id = country.id;
         this.name = country.name;
         this.fk_countryid = country.fk_countryid;
-        this.createdAt = country.createdAt ? new Date(country.createdAt) : null;
-        this.updatedAt = country.updatedAt ? new Date(country.updatedAt) : null;
     }
     id: number;
     name: string | null;
     fk_countryid: number | null;
-    createdAt: Date | null;
-    updatedAt: Date | null;
 }
 
 export interface IMovieGenre {
@@ -176,21 +170,15 @@ export class MovieGenre implements IMovieGenre {
 export interface IMovieStaffer {
     id: number;
     name: string | null;
-    createdAt: Date | null;
-    updatedAt: Date | null;
 }
 
 export class MovieStaffer implements IMovieStaffer {
     constructor(staffer: IMovieJsonStaffer) {
         this.id = staffer.id;
         this.name = staffer.name;
-        this.createdAt = staffer.createdAt ? new Date(staffer.createdAt) : null;
-        this.updatedAt = staffer.updatedAt ? new Date(staffer.updatedAt) : null;
     }
     id: number;
     name: string | null;
-    createdAt: Date | null;
-    updatedAt: Date | null;
 }
 
 export class Movie implements IMovie {

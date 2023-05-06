@@ -4,7 +4,7 @@ import { GetServerSidePropsContext } from 'next';
 import { getServerSession } from 'next-auth/next';
 import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { authOptions } from '../api/auth/[...nextauth]';
 import styles from './index.module.scss';
 import { checkAdminRole, getSerializableSession } from '@/utils/auth.util';
@@ -12,8 +12,10 @@ import { Session } from 'next-auth';
 import { useRouter } from 'next/router';
 import AdminMovie from '@/components/AdminMovie/AdminMovie';
 import movie from '../../data/movie.json';
-import { Movie } from '@/types/ICrudMovie';
+import { Movie, MovieGenre } from '@/types/ICrudMovie';
 import Link from 'next/link';
+import AdminGenres from '@/components/AdminGenres/AdminGenres';
+import genres from '../../data/genres.json';
 
 interface IAdminProps {
     authSession: Session;
@@ -37,6 +39,7 @@ export const getServerSideProps = async ({ locale, req, res }: GetServerSideProp
 export default function Admin({ authSession }: IAdminProps) {
     const { t } = useTranslation('admin');
     const router = useRouter();
+    const [chosenTable, setChosenTable] = useState('movies');
 
     useEffect(() => {
         if (!authSession) {
@@ -58,10 +61,27 @@ export default function Admin({ authSession }: IAdminProps) {
                             <div className={styles.header__container}>
                                 <div className={styles.header__pages}>
                                     <h2
-                                        className={`${styles.header__page} ${styles.header__page_active}`}>
+                                        className={`${styles.header__page} ${
+                                            chosenTable === 'movies'
+                                                ? styles.header__page_active
+                                                : ''
+                                        }`}
+                                        onClick={() => {
+                                            setChosenTable('movies');
+                                        }}>
                                         Movies
                                     </h2>
-                                    <h2 className={styles.header__page}>Genres</h2>
+                                    <h2
+                                        className={`${styles.header__page} ${
+                                            chosenTable === 'genres'
+                                                ? styles.header__page_active
+                                                : ''
+                                        }`}
+                                        onClick={() => {
+                                            setChosenTable('genres');
+                                        }}>
+                                        Genres
+                                    </h2>
                                 </div>
                                 <Link href={'/'}>
                                     <h2 className={styles.header__page}>Home</h2>
@@ -69,19 +89,14 @@ export default function Admin({ authSession }: IAdminProps) {
                             </div>
                         </div>
                         <div className={styles.database}>
-                            <AdminMovie movie={new Movie(movie)} />
-                            <button
-                                onClick={async () => {
-                                    await axios
-                                        .get(
-                                            'http://188.120.248.77/films?order=ASC&take=20&orderBy=name&genres=%D0%B1%D0%BE%D0%B5%D0%B2%D0%B8%D0%BA'
-                                        )
-                                        .then((resp) => {
-                                            console.log(resp);
-                                        });
-                                }}>
-                                here
-                            </button>
+                            {chosenTable === 'movies' && <AdminMovie movie={new Movie(movie)} />}
+                            {chosenTable === 'genres' && (
+                                <AdminGenres
+                                    genres={genres.map((genre) => {
+                                        return new MovieGenre(genre);
+                                    })}
+                                />
+                            )}
                         </div>
                     </section>
                 </div>

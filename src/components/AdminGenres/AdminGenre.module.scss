@@ -1,0 +1,21 @@
+.table {
+    border-collapse: collapse;
+}
+
+.table,
+.header,
+.cell {
+    border: 2px solid $dark-gray;
+}
+
+.header, .cell {
+    @include ui-padding(hor, 1);
+    @include ui-padding(ver, 0.5);
+}
+.cell {
+    text-align: center;
+    &_name {
+        text-align: left;
+    }
+
+}
