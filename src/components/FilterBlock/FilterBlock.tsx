@@ -73,12 +73,8 @@ const FilterBlock: FC<IProps> = ({ genres, countries, directors, actors }) => {
         carouselElementsView={5}
         query='genres'
       >
-        {filterGenreData.map(genre => (
-          <FilterGenreCard
-            key={genre.title}
-            icon={genre.icon}
-            title={genre.title}
-          />
+        {genres.slice(0, 10).map(genre => (
+          <FilterGenreCard key={genre.id} title={genre.name} />
         ))}
       </FilterListBig>
 
@@ -89,9 +85,9 @@ const FilterBlock: FC<IProps> = ({ genres, countries, directors, actors }) => {
         carouselElementsMove={1}
         query='country'
       >
-        {filterCountryData.map(country => (
-          <VioletButton key={country.variant} variant={country.variant}>
-            {country.children}
+        {countries.slice(0, 10).map(country => (
+          <VioletButton key={country.id} variant='secondary'>
+            {country.name}
           </VioletButton>
         ))}
       </FilterListBig>
