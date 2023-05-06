@@ -122,7 +122,7 @@ export default function Actor() {
                     </div>
                     <div className={style.biografy}>
                         <h2 ref={biografyRef}>Биография</h2>
-                        <ExpandBlock visibleBlock={actorBiografyInfoVisibleData} width='100%'>
+                        <ExpandBlock visibleBlock={actorBiografyInfoVisibleData} width='100%' lineClamp={4} expandWord={'Читать дальше'}>
                             {actorBiografyData}
                         </ExpandBlock>
                     </div>
