@@ -1,8 +1,11 @@
 .wrapper {
   position: relative;
-  cursor: pointer;
 
   border-radius: 8px;
+
+  width: 153px;
+  height: 259px;
+  cursor: pointer;
 
   &:hover .hoverBlock {
     opacity: 1;
@@ -14,26 +17,26 @@
   }
 }
 
+
 .wrapper_img {
   position: relative;
   border-radius: 8px;
 
   transition: transform 0.4s;
 
-  width: 153px;
-  height: 235px;
+  //height: 100%;
+  height: 92%;
 
   z-index: -1;
-
-  @media (max-width: 1240px) {
-    @include adaptive-size(width, 153, 132);
-    @include adaptive-size(height, 235, 202);
-  }
 }
 
-.hoverBlock {
-  opacity: 0;
 
+.img {
+  border-radius: 8px;
+}
+
+
+.hoverBlock {
   position: absolute;
   display: flex;
   align-items: flex-end;
@@ -41,10 +44,12 @@
   top: 0;
   left: 0;
 
+  opacity: 0;
+
   transition: opacity 0.4s;
 
   width: 100%;
-  height: 235px;
+  height: 92%;
 
   background-color: rgba(7, 5, 14, 0.8);
   border-radius: 8px;
@@ -52,31 +57,21 @@
   @include ui-padding(default, 4);
 }
 
-.info {
+
+.info__title {
+  // Чтобы перекрыть hoverBlock
+  position: relative;
+  color: #fff;
+
+  @include font(2, bold);
+
+  width: 100%;
+
+  white-space: nowrap;
+  overflow-x: hidden;
+
+  text-overflow: ellipsis;
+
   @include ui-margin(top, 1);
 
-  &__title {
-    color: #fff;
-
-    @include font(2, bold);
-
-    width: 153px;
-
-    white-space: nowrap;
-    overflow-x: hidden;
-
-    text-overflow: ellipsis;
-  }
-
-  &__subtitle {
-    @include font(1);
-  }
-}
-
-.not_ree {
-  color: $red;
-}
-
-.img {
-  border-radius: 8px;
 }

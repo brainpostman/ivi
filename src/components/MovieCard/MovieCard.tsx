@@ -1,40 +1,32 @@
-import { IMovieCard } from '@/types/movieCard.interface'
+import { IMovie } from '@/types/films.api.interface'
 import Image from 'next/image'
-import React, { FC, forwardRef } from 'react'
+import React, { FC } from 'react'
 import style from './MovieCard.module.scss'
 import MovieCardControls from './MovieCardControls/MovieCardControls'
 import MovieCardInfo from './MovieCardInfo/MovieCardInfo'
 
 interface IProps {
-  movie: IMovieCard
+  movie: IMovie
 }
 
-const MovieCard = forwardRef<HTMLDivElement, IProps>(({ movie }, ref) => {
+const MovieCard: FC<IProps> = ({ movie }) => {
   return (
-    <div key={movie.id} className={style.wrapper} ref={ref}>
+    <div key={movie.id} className={style.wrapper}>
       <div className={style.wrapper_img}>
-        <Image src={movie.img} alt='movie' className={style.img} fill />
+        <Image
+          src={`http://${movie.mainImg}`}
+          alt='movie'
+          className={style.img}
+          fill
+        />
       </div>
       <div className={style.hoverBlock}>
         <MovieCardControls />
-        <MovieCardInfo block={movie} />
+        <MovieCardInfo movie={movie} />
       </div>
-      <div className={style.info}>
-        <p className={style.info__title}>{movie.title}</p>
-        <p
-          className={
-            movie.isFree
-              ? style.info__subtitle
-              : `${style.info__subtitle} ${style.not_free}`
-          }
-        >
-          {movie.isFree ? 'Бесплатно' : 'Подписка'}
-        </p>
-      </div>
+      <p className={style.info__title}>{movie.name}</p>
     </div>
   )
-})
-
-MovieCard.displayName = 'MovieCard'
+}
 
 export default MovieCard

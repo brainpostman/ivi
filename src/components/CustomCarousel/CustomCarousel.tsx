@@ -5,7 +5,7 @@ import { useWindow } from '@/hooks/useWindow'
 import { ICustomCarouselProps } from '@/types/customCarousel'
 import { adaptiveSize } from '@/utils/adaptive.utils'
 import Link from 'next/link'
-import React, { FC, MutableRefObject, memo, useRef, useState } from 'react'
+import React, { FC, memo, useRef, useState } from 'react'
 import { MdArrowBackIosNew } from 'react-icons/md'
 import style from './CustomCarousel.module.scss'
 import CustomCarouselArrows from './CustomCarouselArrows/CustomCarouselArrows'
@@ -68,7 +68,8 @@ const CustomCarousel: FC<ICustomCarouselProps> = ({
   const translate = `translate3d(-${move}px, 0, 0)`
 
   const pushRef = (ref: HTMLDivElement | null) => {
-    if (ref === null || refs.current.length >= children.length) return
+    const maxLen = additElem ? children.length + 1 : children.length
+    if (ref === null || !children || refs.current.length >= maxLen) return
 
     refs.current.push(ref)
   }
@@ -120,11 +121,26 @@ const CustomCarousel: FC<ICustomCarouselProps> = ({
           >
             {Array.isArray(children) &&
               children.map((element, index) => (
-                <div key={index} ref={ref => pushRef(ref)}>
+                <div
+                  key={index}
+                  ref={ref => {
+                    if (!ref) return
+                    pushRef(ref)
+                  }}
+                >
                   {element}
                 </div>
               ))}
-            {additElem && <div ref={ref => pushRef(ref)}>{additElem()}</div>}
+            {additElem && (
+              <div
+                ref={ref => {
+                  if (!ref) return
+                  pushRef(ref)
+                }}
+              >
+                {additElem}
+              </div>
+            )}
           </div>
           <CustomCarouselArrows
             arrowSize={arrowSize}

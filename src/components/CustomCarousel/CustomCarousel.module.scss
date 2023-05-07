@@ -17,9 +17,8 @@
   cursor: pointer;
 
   @include ui-padding(bottom, 6);
-  //@include ui-padding(hor, 4);
 
-  > svg {
+  >svg {
     width: 20px;
     height: 20px;
 

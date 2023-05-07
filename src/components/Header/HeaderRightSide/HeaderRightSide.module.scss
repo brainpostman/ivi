@@ -26,7 +26,7 @@
     box-shadow: 0 0 20px 5px rgba($color: #fff, $alpha: 0.15);
   }
 
-  @media (max-width: 600px) {
+  @media (max-width: 627px) {
     display: none;
   }
 }
@@ -34,22 +34,14 @@
 .highlight_button {
   align-self: center;
   @include font(1, bold);
-}
 
-.search_icon {
-  display: flex;
-  align-items: center;
-
-  @media (max-width: 1160px) {
+  @media (max-width: 411px) {
     display: none;
   }
 }
 
-.notif_icon {
-  display: flex;
-  align-items: center;
-
-  @media (max-width: 600px) {
+.icon {
+  @media (max-width: 556px) {
     display: none;
   }
 }

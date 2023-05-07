@@ -21,7 +21,9 @@ const FilterSuggestWrapper: FC<
   const { expandTabFilter, getFilterData } = useFilter(filterList)
   const filterData = getFilterData(title)
 
-  const suggestList = stringedSuggestList.split(',')
+  const suggestList = stringedSuggestList
+    .split(',')
+    .map((el, index) => ({ id: index, name: el }))
 
   return (
     <FilterSuggest

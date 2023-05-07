@@ -15,7 +15,7 @@ const FilterListBig: FC<IFilterListBigProps> = ({
   children,
 }) => {
   const { list, onClickListEl, param } = useSetListParam(
-    listData.map(data => ({ ...data, isSelect: false })),
+    listData ? listData.map(data => ({ ...data, isSelect: false })) : [],
     query
   )
 
@@ -41,11 +41,11 @@ const FilterListBig: FC<IFilterListBigProps> = ({
           <ul className={style.list}>
             {list.map(el => (
               <li
-                key={el.title}
-                onClick={onClickListEl(el.param)}
+                key={el.id}
+                onClick={onClickListEl(el.name)}
                 className={el.isSelect ? style.active : ''}
               >
-                <p>{el.title}</p>
+                <p>{el.name}</p>
                 <BsCheckLg />
               </li>
             ))}

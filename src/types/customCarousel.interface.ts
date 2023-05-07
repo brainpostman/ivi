@@ -8,13 +8,13 @@ export interface ICustomCarouselProps {
   title?: string
   href?: Url
   children: React.ReactNode[]
-  additElem?: () => JSX.Element
+  additElem?: JSX.Element
   classNameList?: string
   classNameWrapper?: string
   arrowSize?: number
   space?: number[]
   speed?: number
   width?: ICustomCarouselWidth
-  breakpoints?: number[]
+  breakpoints?: { point: number; view: number }[]
   padding?: number
 }

@@ -7,11 +7,14 @@
 
   transition: transform 0.2s;
 
+  width: 224px;
+  height: 492px;
+
   &:hover {
     transform: scale(1.05);
   }
 
-  > img {
+  >img {
     z-index: 3;
 
     &:first-child {
@@ -27,13 +30,8 @@
   position: relative;
   border-radius: 8px;
 
-  width: 224px;
-  height: 457px;
-
-  @media (max-width: 1240px) {
-    @include adaptive-size(width, 224, 162, 599);
-    @include adaptive-size(height, 457, 331, 599);
-  }
+  width: 100%;
+  height: 100%;
 }
 
 .number {

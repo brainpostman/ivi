@@ -4,12 +4,12 @@ import VioletButton from '@/components/UI/VioletButton/VioletButton'
 import { filterCountryData } from '@/data/filterCountry.data'
 import { filterGenreData } from '@/data/filterGenre.data'
 import {
-  IFilterBlockEl,
   IFilterListBigProps,
   IFilterTitle,
 } from '@/types/filterBlock.interface'
 import { Meta } from '@storybook/react'
 import FilterListBigWrapper from './FilterListBigWrapper'
+import { useTranslation } from 'react-i18next'
 
 const meta: Meta = {
   title: 'FilterBlock/FilterListBig',
@@ -60,8 +60,9 @@ export const Genre = ({
   unformattedStringedList: string
 }) => {
   const list = unformattedStringedList?.split(',').map((el, index) => ({
-    title: el,
-    param: `test${index + 1}`,
+    id: index,
+    name: el,
+    view: el,
   }))
 
   return (
@@ -89,9 +90,11 @@ export const Country = ({
   title: IFilterTitle
   unformattedStringedList: string
 }) => {
+  const { t } = useTranslation('movies')
   const list = unformattedStringedList?.split(',').map((el, index) => ({
-    title: el,
-    param: `country${index + 1}`,
+    id: index,
+    name: el,
+    view: el,
   }))
 
   return (
@@ -107,7 +110,7 @@ export const Country = ({
 
 Country.args = {
   query: 'country',
-  title: 'Страны',
+  title: `Страны`,
   unformattedStringedList:
     'Австралия, Беларусь, Великобритания, Гонконг, Ирландия, Казахстан, Колумбия, Новая Зеландия, Россия, Таиланд, Франция, ЮАР, Аргентина, Бельгия, Венгрия, Дания, Испания, Канада, Мексика, Норвегия, СССР, Турция, Швейцария, Южная Корея, Армения, Бразилия, Германия, Индия, Италия, Китай, Нидерланды, Польша, США, Финляндия, Швеция, Япония',
   carouselElementsView: 6,

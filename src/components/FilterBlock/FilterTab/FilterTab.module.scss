@@ -14,7 +14,6 @@
 
   @include font(2, bold);
 
-  width: 227px;
   height: 56px;
 
   cursor: pointer;
@@ -25,6 +24,7 @@
   &__active {
     background-color: #7e798f;
   }
+
 }
 
 .arrow {

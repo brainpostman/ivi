@@ -1,8 +1,5 @@
-@mixin adaptive-size($property, $pcSize, $mobSize, $customSize: 320) {
+@mixin adaptive-size($property, $pcSize, $mobSize, $customSize: 320, $fullSize: 1920) {
   $addSize: $pcSize - $mobSize;
-  $maxWidth: 1920 - $customSize;
-  #{$property}: calc(
-    #{$mobSize + px} + #{$addSize} *
-      ((100vw - #{$customSize + px}) / #{$maxWidth})
-  );
+  $maxWidth: $fullSize - $customSize;
+  #{$property}: calc(#{$mobSize + px} + #{$addSize} * ((100vw - #{$customSize + px}) / #{$maxWidth}));
 }

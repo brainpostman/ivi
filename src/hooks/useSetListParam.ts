@@ -1,7 +1,7 @@
-import { IFilterListEl } from '@/types/filterBlock.interface'
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 import { useGetParam } from './useGetParam'
+import { IFilterGetResponse } from '@/types/filters.api.interface'
 
 type IFilterType = 'radio'
 
@@ -11,14 +11,17 @@ interface IOptions {
 }
 
 export const useSetListParam = (
-  defaultValue: IFilterListEl[],
+  defaultValue: (IFilterGetResponse & { isSelect: boolean; view?: string })[],
   query: string,
   options?: IOptions
 ) => {
   const param = useGetParam(query)
   const router = useRouter()
 
-  const [list, setList] = useState<IFilterListEl[]>(defaultValue)
+  const [list, setList] =
+    useState<(IFilterGetResponse & { isSelect: boolean; view?: string })[]>(
+      defaultValue
+    )
 
   const onClickListEl = (_param: string) => () => {
     let resultParams: string | undefined = ''
@@ -48,7 +51,7 @@ export const useSetListParam = (
         }
       )
     } else {
-      // Если @resultParams пустой, то удаляем соответствующий параметр @query
+      // Если @param resultParams пустой, то удаляем соответствующий параметр query
       delete router.query[query]
       router.push({ query: router.query }, undefined, {
         shallow: true,
@@ -63,7 +66,7 @@ export const useSetListParam = (
       const copy = [...prev]
       const modifiedList = copy.map(el => ({
         ...el,
-        isSelect: splittedParams.includes(el.param),
+        isSelect: splittedParams.includes(el.name),
       }))
 
       return modifiedList

@@ -1,14 +1,29 @@
 .wrapper {
-	display: grid;
-	grid-template-columns: repeat(5, auto);
+	display: inline-grid;
+	grid-template-columns: repeat(5, minmax(147px, 227px));
 
 	column-gap: 12px;
 	row-gap: 24px;
+
+	width: $max-width;
 
 	background-color: $dark;
 	border-radius: 6px;
 
 	@include ui-padding(default, 4);
+
+	@media (max-width: 1260px) {
+		@include adaptive-size(width, 1240, 870, 881, 1260);
+	}
+
+	@media (max-width: 879px) {
+		grid-template-columns: repeat(2, auto);
+		row-gap: 12px;
+	}
+
+	@media (max-width: 599px) {
+		grid-template-columns: repeat(1, auto);
+	}
 }
 
 .clear_filters {
@@ -20,12 +35,18 @@
 
 	transition: color 0.4s;
 
-	> svg {
+	white-space: nowrap;
+
+	>svg {
 		width: 32px;
 		height: 32px;
 	}
 
 	&:hover {
 		color: $red;
+	}
+
+	@media (max-width: 879px) {
+		justify-content: center;
 	}
 }
