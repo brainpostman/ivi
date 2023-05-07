@@ -1,4 +1,3 @@
-import { useCustomCarouselContent } from '@/hooks/useCustomCarouselContent'
 import { FC } from 'react'
 import style from './ViewAllBlock.module.scss'
 

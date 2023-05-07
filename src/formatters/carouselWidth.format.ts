@@ -1,4 +1,4 @@
-import { ICustomCarouselWidth } from '@/types/customCarousel'
+import { ICustomCarouselWidth } from '@/types/customCarousel.interface'
 
 export const formatCarouselWidth = (
   width: ICustomCarouselWidth,
