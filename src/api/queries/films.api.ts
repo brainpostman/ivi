@@ -1,7 +1,6 @@
 import {
   IFilmsGetRequest,
   IFilmsgGetResponse,
-  IMovie,
 } from '@/types/films.api.interface'
 import { toast } from 'react-toastify'
 import { transformFilms } from '../transforms/films.transform'
@@ -16,22 +15,18 @@ export const filmsAPI = {
   },
 }
 
-const getFilms = async (
-  params?: IFilmsGetRequest
-): Promise<{ films: IMovie[]; totalCount: number }> => {
+export const getFilms = async (params?: IFilmsGetRequest) => {
   try {
     const filmsData = await customAxios.get<IFilmsgGetResponse[]>('/films', {
       params,
     })
 
     const films = filmsData.data.map(film => transformFilms(film))
-    const totalCount = filmsData.headers['x-total-count']
-
-    console.log(films)
+    const totalCount = await filmsData.headers['x-total-count']
 
     return { films, totalCount }
   } catch (error) {
-    toast.error('Ошибка при получении фильмов!')
+    toast.error('Ошибка при получении фильмов')
     return { films: [], totalCount: 0 }
   }
 }
