@@ -1,6 +1,7 @@
 import {
   IFilmsGetRequest,
   IFilmsgGetResponse,
+  IMovie,
 } from '@/types/films.api.interface'
 import { toast } from 'react-toastify'
 import { transformFilms } from '../transforms/films.transform'
@@ -15,7 +16,9 @@ export const filmsAPI = {
   },
 }
 
-export const getFilms = async (params?: IFilmsGetRequest) => {
+const getFilms = async (
+  params?: IFilmsGetRequest
+): Promise<{ films: IMovie[]; totalCount: number }> => {
   try {
     const filmsData = await customAxios.get<IFilmsgGetResponse[]>('/films', {
       params,

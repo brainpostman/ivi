@@ -49,7 +49,7 @@ export const getStaticProps: GetStaticProps = async ({ locale, params }) => {
 }
 
 interface IProps {
-  defaultFilms: IMovie[] | undefined
+  defaultFilms: IMovie[]
   genres: IFilterGetResponse[]
   countries: IFilterGetResponse[]
   directors: IFilterGetResponse[]
@@ -71,7 +71,7 @@ const MoviesPage: NextPage<IProps> = ({
   const [isLoadedFirstFilms, setIsLoadedFirstFilms] = useState(false)
   const [isClickedViewMore, setIsClickedViewMore] = useState(false)
   const [page, setPage] = useState(2)
-  const [films, setFilms] = useState<IMovie[]>(defaultFilms || [])
+  const [films, setFilms] = useState<IMovie[]>(defaultFilms)
 
   const [isLoading, setIsLoading] = useState(true)
 

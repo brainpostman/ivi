@@ -1,6 +1,6 @@
 import { IFilmsgGetResponse } from '@/types/films.api.interface'
 
-export const transformFilms = (filmsData: Partial<IFilmsgGetResponse>) => {
+export const transformFilms = (filmsData: IFilmsgGetResponse) => {
   const result = {
     ...filmsData,
     countries:
