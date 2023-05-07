@@ -15,6 +15,7 @@ import FilterListSmall from './FilterListSmall/FilterListSmall'
 import FilterSlider from './FilterSlider/FilterSlider'
 import FilterSuggest from './FilterSuggest/FilterSuggest'
 import { IFilterGetResponse } from '@/types/filters.api.interface'
+import { useSetListParam } from '@/hooks/useSetListParam'
 
 const filterList: Omit<IFilterBlockEl, 'isExpand'>[] = [
   { title: 'genres' },
@@ -43,6 +44,19 @@ const FilterBlock: FC<IProps> = ({ genres, countries, directors, actors }) => {
   const yearFilterData = getFilterData('year')
   const producerFilterData = getFilterData('director')
   const actorFilterData = getFilterData('actor')
+
+  const isAppliedFilters = Object.keys(router.query).length
+  console.log(!!isAppliedFilters)
+
+  const { onClickListEl: onClickGenreCard } = useSetListParam(
+    genres.slice(0, 10).map(genre => ({ ...genre, isSelect: false })),
+    'genres'
+  )
+
+  const { onClickListEl: onClickCountry } = useSetListParam(
+    countries.slice(0, 10).map(genre => ({ ...genre, isSelect: false })),
+    'country'
+  )
 
   const clearFilters = () => {
     router.replace({ pathname: router.pathname, query: undefined }, undefined, {
@@ -74,7 +88,11 @@ const FilterBlock: FC<IProps> = ({ genres, countries, directors, actors }) => {
         query='genres'
       >
         {genres.slice(0, 10).map(genre => (
-          <FilterGenreCard key={genre.id} title={genre.name} />
+          <FilterGenreCard
+            key={genre.id}
+            onClick={onClickGenreCard(genre.name)}
+            title={genre.name}
+          />
         ))}
       </FilterListBig>
 
@@ -86,7 +104,11 @@ const FilterBlock: FC<IProps> = ({ genres, countries, directors, actors }) => {
         query='country'
       >
         {countries.slice(0, 10).map(country => (
-          <VioletButton key={country.id} variant='secondary'>
+          <VioletButton
+            key={country.id}
+            onClick={onClickCountry(country.name)}
+            variant='secondary'
+          >
             {country.name}
           </VioletButton>
         ))}
@@ -118,7 +140,14 @@ const FilterBlock: FC<IProps> = ({ genres, countries, directors, actors }) => {
 
       <FilterSlider query='scoreAVG' title={t('sliders.scores')} />
 
-      <div className={style.clear_filters} onClick={clearFilters}>
+      <div
+        className={`${
+          !isAppliedFilters
+            ? style.clear_filters__deactive
+            : style.clear_filters
+        }`}
+        onClick={isAppliedFilters ? clearFilters : () => {}}
+      >
         <IoCloseOutline />
         <p>{t('reset-filters')}</p>
       </div>
