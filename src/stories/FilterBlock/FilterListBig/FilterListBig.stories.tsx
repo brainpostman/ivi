@@ -68,7 +68,7 @@ export const Genre = ({
   return (
     <FilterListBigWrapper list={list} {...props}>
       {filterGenreData.map(genre => (
-        <FilterGenreCard icon={genre.icon} title={genre.title} />
+        <FilterGenreCard title={genre.title} />
       ))}
     </FilterListBigWrapper>
   )
