@@ -83,9 +83,8 @@
 
 .movie_carousel_list {
 
-  >div>div {
+  >div>a>div {
 
-    //border: 1px solid orange;
     @media (max-width: 1272px) {
       @include adaptive-size(width, 172, 145, 1096, 1272);
       @include adaptive-size(height, 260, 242, 1096, 1272);

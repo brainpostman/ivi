@@ -38,7 +38,6 @@
 .moviegrid_container {
   @include ui-margin(ver, 6);
 
-
   column-gap: 28px;
 
   @media (max-width: 1272px) {
@@ -70,8 +69,8 @@
     grid-template-columns: repeat(2, auto);
   }
 
-  >li>div,
-  >li>div>div {
+  >li>a>div,
+  >li>a>div>div {
     @media (max-width: 1272px) {
       @include adaptive-size(width, 180, 152, 1096, 1272);
       @include adaptive-size(height, 278, 233, 1096, 1272);
