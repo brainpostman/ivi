@@ -1,0 +1,16 @@
+.wrapper {
+  @include ui-padding(left, 3);
+  @include ui-padding(right, 3);
+}
+
+.img {
+  height: 128px;
+  width: 128px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.name {
+  color: #d9d7e0;
+  @include font(2);
+}

@@ -1,0 +1,27 @@
+.wrapper {
+  display: flex;
+  gap: 6px;
+  @include ui-padding(left, 37);
+  @include ui-margin(top, 1);
+}
+
+.icon_fullhd {
+  height: 20px;
+  padding: 2px 8px;
+  border-radius: 4px;
+  width: 55px;
+  background-color: rgba(255, 255, 255, .16);
+}
+
+.icon_text {
+  color: #fff;
+  font-size: 13px;
+  line-height: 16px;
+  font-weight: 500;
+}
+
+.control {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}

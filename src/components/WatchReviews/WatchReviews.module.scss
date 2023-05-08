@@ -1,0 +1,45 @@
+.wrapper {
+  @include ui-margin(ver, 16);
+}
+
+.container {
+  display: flex;
+  justify-content: space-between;
+  color: #fff;
+
+  @include ui-margin(bottom, 6);
+}
+
+.title {
+  position: relative;
+  font-size: 24px;
+  line-height: 28px;
+  font-weight: 700;
+}
+
+.quantity {
+  position: absolute;
+
+  top: 0;
+  right: -40px;
+
+  width: 40px;
+
+  color: #a5a1b2;
+  @include font(1);
+  overflow: hidden;
+
+  @include ui-padding(left, 1);
+}
+
+.subtitle {
+  position: absolute;
+
+  color: #a5a1b2;
+  font-size: 15px;
+  line-height: 20px;
+  font-weight: 400;
+
+  white-space: nowrap;
+  @include ui-margin(top, 4);
+}
