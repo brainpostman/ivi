@@ -1,0 +1,58 @@
+.wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  background-color: rgba(255, 255, 255, .08);
+
+  border-radius: 12px;
+  text-align: start;
+
+  min-width: 258px;
+
+  cursor: pointer;
+
+  @include ui-padding(default, 3);
+  @include ui-margin(ver, 8);
+}
+
+.wrapper_rating {
+  display: flex;
+  gap: 12px;
+}
+
+.raiting {
+  width: 64px;
+  height: 64px;
+  background-color: #73a32f;
+  text-align: center;
+  border-radius: 12px;
+
+  color: #fff;
+  font-size: 24px;
+  font-weight: 700;
+
+  @include ui-padding(top, 5);
+}
+
+
+.raiting_info {
+  display: block;
+  @include ui-margin(top, 1);
+
+  &__title {
+    font-size: 15px;
+    line-height: 20px;
+    font-weight: 500;
+    color: #fff;
+  }
+
+  &__subtitle {
+    font-size: 15px;
+    line-height: 20px;
+    font-weight: 400;
+    color: #ffffffb8;
+  }
+}
+
+.raiting_button {}
