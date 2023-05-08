@@ -1,0 +1,122 @@
+.wrapper {
+  height: 100%;
+  max-width: 100%;
+
+  @include ui-padding(top, 4);
+  @include ui-margin(bottom, 5);
+}
+
+.back_button {
+  position: absolute;
+  align-self: flex-start;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  @include ui-margin(left, 2);
+  @include ui-margin(top, 8);
+
+  color: #fff;
+  font-size: 15px;
+  line-height: 20px;
+  font-weight: 500;
+
+  cursor: pointer;
+
+  &:hover>svg {
+    transform: scale(1);
+  }
+
+  >svg {
+    width: 18px;
+    height: 18px;
+    transition: transform 0.2s;
+  }
+}
+
+.modal_conteiner {
+  margin-left: auto;
+  margin-right: auto;
+  width: 1216px;
+  display: flex;
+  @include ui-padding(bottom, 6);
+  @include ui-padding(top, 25);
+}
+
+.modal_info {
+  display: block;
+  width: 58%;
+  margin-left: 12.5%;
+  @include ui-padding(left, 3);
+  @include ui-padding(right, 3);
+  color: #fff;
+
+  &_title {
+    @include ui-margin(bottom, 5);
+    font-size: 40px;
+    line-height: 44px;
+    font-weight: 900;
+    width: 90%;
+  }
+
+  &_subtitle {
+    font-size: 20px;
+    line-height: 24px;
+    font-weight: 700;
+  }
+}
+
+.persons_conteiner {
+  display: flex;
+  @include ui-margin(bottom, 4);
+  margin-right: -12px;
+  margin-left: -12px;
+  flex-wrap: wrap;
+}
+
+.modal_poster {
+  width: 12.5%;
+  box-sizing: border-box;
+  padding-left: 12px;
+  padding-right: 12px;
+  color: #fff;
+
+  &_img {
+    border-radius: 8px 8px 8px 8px;
+    @include ui-margin(bottom, 3);
+  }
+
+  &_rating {
+    font-size: 24px;
+    line-height: 28px;
+    font-weight: 700;
+    @include ui-margin(bottom, 2);
+  }
+
+  &_genres {
+    @include ui-margin(bottom, 2);
+    font-size: 13px;
+    line-height: 16px;
+    font-weight: 400;
+    color: #a5a1b2;
+  }
+
+  &_duratin {
+    display: flex;
+    gap: 6px;
+    font-size: 13px;
+    line-height: 16px;
+    font-weight: 400;
+    color: #a5a1b2;
+  }
+}
+
+.staff_grid_outer {
+  display: flex;
+  flex-direction: column;
+  gap: 36px;
+}
+
+.staff_grid {
+  display: grid;
+  grid-template-columns: repeat(4, auto);
+}

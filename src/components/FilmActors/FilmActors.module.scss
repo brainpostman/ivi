@@ -1,0 +1,62 @@
+.wrapper {
+  display: flex;
+  color: rgba(255, 255, 255, .8);
+  justify-content: space-around;
+  @include ui-margin(top, 4);
+}
+
+.card {
+  width: 56px;
+  height: 56px;
+  background-color: #ffffff29;
+  border-radius: 12px;
+
+  transition: color 0.2s;
+
+  cursor: pointer;
+
+  &:hover {
+    >.wrapper_img {
+      background-color: #4b4b52;
+    }
+
+    >p {
+      color: #fff;
+    }
+  }
+}
+
+.iviRaiting {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background-color: #73a32f;
+  width: 44px;
+  height: 44px;
+
+  border-radius: 10px;
+}
+
+.wrapper_img {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  border-radius: 10px;
+
+  transition: background-color 0.2s;
+
+  height: 100%;
+}
+
+.img {
+  border-radius: 10px;
+  justify-content: space-around;
+}
+
+.title {
+  color: $gray;
+  @include font(1);
+  @include ui-margin(top, 1);
+}

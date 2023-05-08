@@ -1,202 +1,58 @@
-.conteiner{
-    width:100%;
-    @include ui-margin(top,8);
-}
-
-.content{
-    display: flex;
-    justify-content: space-between;
-}
-
-.content_person{
-    display: block;
-    width: 88px;
-    height: 144px;
-
-    &_img{
-        border-radius: 50%;
-        overflow: hidden;
-        background-color: #1f1b2e;
-        transform: 0.4s;
-    }
-    &_img:hover{
-        transform: scale(1.1);
-    }
-
-    &_name{
-        color:#fff;
-        @include ui-margin(top,2);
-        font-size: 13px;
-        line-height: 16px;
-        font-weight: 500;
-    }
-    &_title{
-        color: #a5a1b2;
-        @include ui-margin(top,1);
-        font-weight: 400;
-        font-size: 13px;
-        line-height: 16px;
-    }
-}
-
-.button{
-    width: 88px;
-    height: 88px;
-    border-radius: 50%;
-    transform: 0.4s;
-    background-color: #1f1b2e;
-
-    &_text{
-        color: #a5a1b2;
-        font-size: 15px;
-        line-height: 20px;
-        font-weight: 500;
-    }
-}
-.button:hover{
-    transform: scale(1);
-}
-
-
-//все что внутри модального окна 
 .wrapper {
-    display: block;
-    
-    height: 100%;
-    max-width: 100%;
-  
-    @include ui-padding(top, 4);
-    @include ui-margin(bottom, 5);
+  @include ui-margin(top, 8);
 }
 
-.back_button {
-    position: absolute;
-    align-self: flex-start;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    @include ui-margin(left,2);
-    @include ui-margin(top,8);
-  
+.container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.card {
+  cursor: pointer;
+
+  &:hover {
+
+    // Применяется к первому тэгу p
+    >p:nth-child(2) {
+      color: #fff;
+    }
+  }
+
+  &__img {
+    border-radius: 50%;
+    overflow: hidden;
+    background-color: #1f1b2e;
+  }
+
+  &__name {
+    color: #d9d7e0;
+    @include font(1);
+
+    max-width: 88px;
+
+    transition: color 0.2s;
+    @include ui-margin(top, 2);
+  }
+
+  &__title {
+    color: #a5a1b2;
+    @include font(1);
+    @include ui-margin(top, 1);
+  }
+}
+
+.more_button {
+  width: 88px;
+  height: 88px;
+  border-radius: 50%;
+  background-color: #1f1b2e;
+
+  color: $gray-soft;
+
+  transition: color 0.2s, background-color 0.2s;
+
+  &:hover {
     color: #fff;
-    font-size: 15px;
-    line-height: 20px;
-    font-weight: 500;
-  
-    cursor: pointer;
-  
-    &:hover > svg {
-      transform: scale(1);
-    }
-
-    > svg {
-        width: 18px;
-        height: 18px;
-        transition: transform 0.2s;
-      }
-}
-
-.modal_conteiner{
-    margin-left: auto;
-    margin-right: auto;
-    width: 1216px;
-    display: flex;
-    @include ui-padding(bottom,6);
-    @include ui-padding(top,25);
-}
-
-.modal_info{
-    display: block;
-    width: 58%;
-    margin-left: 12.5%;
-    @include ui-padding(left,3);
-    @include ui-padding(right,3);
-    color: #fff;
-
-    &_title{
-        @include ui-margin(bottom,5);
-        font-size: 40px;
-        line-height: 44px;
-        font-weight: 900;
-        width: 90%;
-    }
-
-    &_subtitle{
-        font-size: 20px;
-        line-height: 24px;
-        font-weight: 700;
-    }
-}
-
-.persons_conteiner{
-    display:flex;
-    @include ui-margin(bottom,4);
-    margin-right: -12px;
-    margin-left: -12px;
-    flex-wrap: wrap;
-}
-
-.modal_person{
-    display: block;
-    @include ui-padding(left,3);
-    @include ui-padding(right,3);
-
-    &_img{
-        height: 128px;
-        width: 128px;
-        border-radius: 50%;
-        overflow: hidden;
-        background-color: #1f1b2e;
-    }
-
-    &_name{
-        color: #d9d7e0;
-        font-size: 15px;
-        line-height: 20px;
-        font-weight: 500;
-    }
-
-    &_films{
-        color: #a5a1b2;
-        font-size: 13px;
-        line-height: 16px;
-        font-weight: 400;
-    }
-}
-
-.modal_poster{
-    width: 12.5%;
-    box-sizing: border-box;
-    padding-left: 12px;
-    padding-right: 12px;
-    color:#fff;
-
-    &_img{
-        border-radius: 8px 8px 8px 8px;
-        @include ui-margin(bottom,3);
-    }
-
-    &_rating{
-        font-size: 24px;
-        line-height: 28px;
-        font-weight: 700;
-        @include ui-margin(bottom,2);
-    }
-
-    &_genres{
-        @include ui-margin(bottom,2);
-        font-size: 13px;
-        line-height: 16px;
-        font-weight: 400;
-        color: #a5a1b2;
-    }
-
-    &_duratin{
-        display: flex;
-        gap:6px;
-        font-size: 13px;
-        line-height: 16px;
-        font-weight: 400;
-        color: #a5a1b2;
-    }
+    background-color: #231f34;
+  }
 }

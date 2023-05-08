@@ -1,7 +1,5 @@
 import React from 'react'
 import style from './WatchModal.module.scss'
-import WatchActors from '../WatchActors/WatchActors'
-import { FilmID } from '@/pages/watch/[id]'
 
 interface WatchProps {
   active: boolean

@@ -1,0 +1,42 @@
+.wrapper {
+  max-width: 719px;
+  max-height: 404px;
+
+  // FIXME: не работает
+  position: sticky;
+}
+
+.wrapper_img {
+  background-color: rgba(255, 255, 255, .08);
+
+  img {
+    // TODO: надо что-то менять
+    object-fit: cover;
+  }
+}
+
+.buttons {
+  display: flex;
+  justify-content: space-between;
+
+  @include ui-margin(top, 6);
+
+  &__left_side {
+    display: flex;
+    gap: 12px;
+  }
+
+  button {
+    background-color: #ffffff14;
+    color: #ffffffb8;
+
+    &:hover {
+      background-color: #ffffff29;
+    }
+  }
+}
+
+.trailer_icon {
+  width: 24px !important;
+  height: 24px !important;
+}
