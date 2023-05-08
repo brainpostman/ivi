@@ -55,8 +55,15 @@
   justify-content: space-around;
 }
 
-.title {
+.name {
   color: $gray;
   @include font(1);
+
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  line-clamp: 2;
+  -webkit-line-clamp: 2;
+
   @include ui-margin(top, 1);
 }
