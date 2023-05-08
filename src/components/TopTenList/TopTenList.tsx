@@ -23,9 +23,9 @@ const TopTenList: React.FC = () => {
               height={28}
             />
           ) : (
-            <span>{t('top-10')}</span>
+            <p>{t('top-10')}</p>
           )}
-          <span>{t('this-week')}</span>
+          <p>{t('this-week')}</p>
         </div>
         <CustomCarousel
           href='/'
