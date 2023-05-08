@@ -23,6 +23,9 @@ export const filmsAPI = {
   getCrudFilms(params?: IFilmsGetRequest) {
     return getCrudFilms(params)
   },
+  getFilmsById(param: number) {
+    return getFilmsById(param)
+  },
 }
 
 const getFilms = async (
@@ -36,6 +39,8 @@ const getFilms = async (
     const totalCount = filmsData.headers['x-total-count']
 
     console.log(films)
+
+    console.log(filmsData.data)
 
     return { films, totalCount }
   } catch (error) {
@@ -59,5 +64,18 @@ const getCrudFilms = async (
   } catch (error: any) {
     toast.error(error)
     return { films: [], totalCount: 0 }
+  }
+}
+
+const getFilmsById = async (id: number): Promise<IMovie | undefined> => {
+  try {
+    const filmData = await customAxios.get<IFilmsgGetResponse>(`/films/${id}`)
+
+    const film = transformFilms(filmData.data)
+
+    return film
+  } catch (error) {
+    toast.error('Ошибка при получении фильма')
+    return undefined
   }
 }
