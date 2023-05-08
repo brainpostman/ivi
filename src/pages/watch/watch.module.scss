@@ -1,8 +1,8 @@
 .wrapper {
     display: block;
-  
+
     width: $max-width;
-  
+
     @include ui-padding(top, 4);
     @include ui-margin(bottom, 5);
 }
@@ -12,279 +12,277 @@
     display: flex;
     align-items: center;
     gap: 8px;
-  
+
     color: #fff;
     font-size: 15px;
     line-height: 20px;
     font-weight: 500;
-  
-    cursor: pointer;
-  
-    &:hover > svg {
-      transform: scale(1);
-    }
-  
-    > svg {
-      width: 18px;
-      height: 18px;
-  
-      transition: transform 0.2s;
-    }
-}  
 
-.icon_text{
-    color:#fff;
+    cursor: pointer;
+
+    &:hover>svg {
+        transform: scale(1);
+    }
+
+    >svg {
+        width: 18px;
+        height: 18px;
+
+        transition: transform 0.2s;
+    }
+}
+
+.icon_text {
+    color: #fff;
     font-size: 13px;
     line-height: 16px;
     font-weight: 500;
-    
+
 }
 
-.icon_fullhd{
+.icon_fullhd {
     height: 20px;
     padding: 2px 8px;
     border-radius: 4px;
     width: 55px;
-    background-color: rgba(255,255,255,.16);
+    background-color: rgba(255, 255, 255, .16);
 }
 
-.conteiner{
+.conteiner {
     max-width: 1240px;
-    display:flex;
-    @include ui-margin(top,8);
+    display: flex;
+    @include ui-margin(top, 8);
 }
 
-.conteiner_film{
+.conteiner_film {
     max-width: 719px;
     max-height: 404px;
     position: sticky;
 
-    &_area{
-        background-color:rgba(255,255,255,.08);
-        img{
-        object-fit: contain;
+    &_area {
+        background-color: rgba(255, 255, 255, .08);
+
+        img {
+            object-fit: contain;
         }
     }
 
-    &_buttons{
+    &_buttons {
         width: 100%;
         display: flex;
-        @include ui-margin(top,6);
-        color:#fff;
+        @include ui-margin(top, 6);
+        color: #fff;
         font-size: 15px;
 
-        &_play{
+        &_play {
             height: 40px;
             width: 109px;
             padding: 10px 12px;
             border-radius: 8px;
-            background-color: rgba(255,255,255,.08);
-            border-color: rgba(255,255,255,.08);
-            display: flex;
-
-            h4{
-                @include ui-margin(left,2);
-            }
+            background-color: rgba(255, 255, 255, .08);
+            border-color: rgba(255, 255, 255, .08);
         }
 
-        &_favourite{
+        &_favourite {
             height: 40px;
             width: 40px;
             padding: 12px 12px;
             border-radius: 10px;
-            background-color: rgba(255,255,255,.08);
-            border-color: rgba(255,255,255,.08);
-            @include ui-margin(left,4);
+            background-color: #ffffff14;
+            border-color: #ffffff14;
+            @include ui-margin(left, 4);
         }
 
-        &_share{
+        &_share {
             height: 40px;
             width: 40px;
             padding: 12px 12px;
             border-radius: 10px;
-            background-color: rgba(255,255,255,.08);
-            border-color: rgba(255,255,255,.08);
-            @include ui-margin(left,4);
+            background-color: #ffffff14;
+            border-color: #ffffff14;
+            @include ui-margin(left, 4);
         }
 
-        &_catalog{
+        &_catalog {
             height: 40px;
             width: 210px;
             padding: 10px 12px;
             border-radius: 10px;
-            background-color: rgba(255,255,255,.08);
-            border-color: rgba(255,255,255,.08);
+            background-color: #ffffff14;
+            border-color: #ffffff14;
             margin-left: auto;
             margin-right: 0;
             display: flex;
             transform: .4s;
-            h4{
-                @include ui-margin(left,2);
+
+            h4 {
+                @include ui-margin(left, 2);
             }
         }
-        &_catalog:hover{
+
+        &_catalog:hover {
             transform: scale(1);
         }
     }
 }
 
-.content_film_area{
+.content_film_area {
     max-width: 719px;
 }
 
-.conteiner_info{
-    color:#fff;
+.conteiner_info {
+    color: #fff;
     display: inline-block;
     width: 37.5%;
     text-align: center;
-    @include ui-margin(left,15);
+    @include ui-margin(left, 15);
 
-    &_title{
+    &_title {
         font-size: 56px;
         line-height: 56px;
         font-weight: 700;
     }
 
-    &_subtitle{
+    &_subtitle {
         font-size: 15px;
-        color: rgba(255,255,255,.8);
-        @include ui-margin(top,1);
+        color: rgba(255, 255, 255, .8);
+        @include ui-margin(top, 1);
     }
 
-    &_genres{
+    &_genres {
         font-size: 15px;
-        color: rgba(255,255,255,.8);
+        color: rgba(255, 255, 255, .8);
         display: flex;
-        @include ui-padding(left,24);
-        @include ui-margin(top,1);
+        @include ui-padding(left, 24);
+        gap: 4px;
+        @include ui-margin(top, 1);
     }
 
-    &_feature{
-        display:flex;
-        gap:4px;
-        @include ui-padding(left,37);
-        @include ui-margin(top,1);
+    &_feature {
+        display: flex;
+        gap: 4px;
+        @include ui-padding(left, 37);
+        @include ui-margin(top, 1);
     }
 
-    &_details{
-        display: block;
-        @include ui-margin(left,16);
+    &_details {
+        @include ui-margin(left, 16);
         font-size: 15px;
         font-weight: 400;
-        color:rgba(255,255,255,.72);
+        color: #ffffffb8;
     }
 }
 
-.conteiner_info_persons{
+.conteiner_info_persons {
     display: flex;
-    color: rgba(255,255,255,.8);
+    color: rgba(255, 255, 255, .8);
     justify-content: space-around;
-    @include ui-margin(top,4);
+    @include ui-margin(top, 4);
 
-    &_img{
+    &_img {
         width: 56px;
         height: 56px;
-        background-color: rgba(255,255,255,.16);
+        background-color: #ffffff29;
         transition-duration: 0.4s;
         border-radius: 12px;
-        @include ui-padding(top,1);
+        @include ui-padding(top, 1);
 
-        Image{
+        img {
             border-radius: 10px;
             justify-content: space-around;
         }
 
-        h5{
-            color: rgba(255,255,255,.48);
+        h5 {
+            color: $gray;
             font-size: 13px;
             font-weight: 400;
-            @include ui-padding(top,1);
+            @include ui-padding(top, 1);
         }
 
     }
 
-    &_img:hover{
+    &_img:hover {
         transform: scale(1.05);
     }
 }
 
-.iviRaiting{
+.iviRaiting {
     background-color: #73a32f;
-    width:44px;
+    width: 44px;
     height: 44px;
-    margin-left:6px;
-    margin-top:3px;
-    border-radius:10px ;
+    margin-left: 6px;
+    margin-top: 3px;
+    border-radius: 10px;
     text-align: center;
 
-    h4{
-        @include ui-padding(top,4);
+    h4 {
+        @include ui-padding(top, 4);
     }
 }
 
-.conteiner_info_details{
-    @include ui-margin(left,4);
-    @include ui-padding(top,5);
+.conteiner_info_details {
+    @include ui-margin(left, 4);
+    @include ui-padding(top, 5);
 }
 
-.actors_wrapper{
-    @include ui-margin(top,12);
-    h1{
-        width:246px ;
-        color:#fff;
-        box-shadow: 0 1px 0 rgba(255,255,255,.16), inset 0 0 0 rgba(255,255,255,.16);
+.actors_wrapper {
+    @include ui-margin(top, 12);
+
+    h1 {
+        width: 246px;
+        color: #fff;
+        box-shadow: 0 1px 0 #ffffff29, inset 0 0 0 #ffffff29;
     }
 }
 
-.wrapper_reviews{
+.wrapper_reviews {
     width: 100%;
     display: block;
-    @include ui-margin(top,16);
-    @include ui-margin(bottom,8);
+    @include ui-margin(top, 16);
+    @include ui-margin(bottom, 8);
 }
 
-.reviews_info{
-    @include ui-margin(bottom,6);
+.reviews_info {
+    @include ui-margin(bottom, 6);
     display: flex;
     color: #fff;
-    
-    &_title{
+
+    &_title {
         font-size: 24px;
         line-height: 28px;
         font-weight: 700;
     }
 
-    &_quantity{
+    &_quantity {
         color: #a5a1b2;
         font-weight: 400;
         font-size: 13px;
         line-height: 16px;
         font-style: normal;
         overflow: hidden;
-        @include ui-padding(left,1);
+        @include ui-padding(left, 1);
     }
 
-    &_subtitle{
-        @include ui-margin(top,4);
+    &_subtitle {
+        @include ui-margin(top, 4);
         color: #a5a1b2;
-        position:absolute;
+        position: absolute;
         font-size: 15px;
         line-height: 20px;
         font-weight: 400;
     }
 
-    &_button{
+    &_button {
         background-color: transparent;
         border: 1px solid;
         height: 32px;
-        width: 204px;
-        border-color: rgba(255,255,255,.32);
+        border-color: rgba(255, 255, 255, .32);
         border-radius: 8px;
-        padding:7px 11px;
-        @include ui-margin(left,249);
-        @include ui-margin(top,3);
+        padding: 7px 11px;
+        @include ui-margin(left, 249);
+        @include ui-margin(top, 3);
 
-        &_text{
+        &_text {
             font-size: 13px;
             line-height: 16px;
             font-weight: 500;
