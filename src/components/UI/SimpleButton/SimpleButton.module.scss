@@ -1,0 +1,15 @@
+.button {
+  background-color: transparent;
+  border: 1px solid #ffffff52;
+  border-radius: 6px;
+  @include font(1, bold);
+
+  transition: border-color 0.2s;
+
+  @include ui-padding(ver, 1);
+  @include ui-padding(hor, 2);
+
+  &:hover {
+    border-color: #fff;
+  }
+}
