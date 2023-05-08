@@ -1,3 +1,8 @@
+export interface IStaff {
+  id: number
+  name: string
+}
+
 export interface IFilmsGetRequest {
   order?: string
   page?: number
@@ -18,8 +23,13 @@ export interface IFilmsgGetResponse {
   countries: { name: string }[]
   genres: { name: string; name_en: string }[]
   tagline: string
-  directors: { name: string }[]
-  artists: { name: string }[]
+  directors: IStaff[]
+  artists: IStaff[]
+  actors: IStaff[]
+  montages: IStaff[]
+  compositors: IStaff[]
+  scenario: IStaff[]
+  operators: IStaff[]
   age: string
   description: string
   mainImg: string
@@ -29,8 +39,7 @@ export interface IFilmsgGetResponse {
 }
 
 export interface IMovie
-  extends Omit<IFilmsgGetResponse, 'countries' | 'genres' | 'directors'> {
+  extends Omit<IFilmsgGetResponse, 'countries' | 'genres'> {
   countries: string
   genres: string
-  directors: string
 }
