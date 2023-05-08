@@ -16,7 +16,7 @@ const FilmActors: FC<IProps> = ({ actors }) => {
             <h4>8,9</h4>
           </div>
         </div>
-        <p className={style.title}>Рейтинг Иви</p>
+        <p className={style.name}>Рейтинг Иви</p>
       </div>
       {actors.map(actor => (
         <div key={actor.id} className={style.card}>
@@ -29,7 +29,7 @@ const FilmActors: FC<IProps> = ({ actors }) => {
               className={style.img}
             />
           </div>
-          <p className={style.title}>{actor.name}</p>
+          <p className={style.name}>{actor.name}</p>
         </div>
       ))}
     </div>
