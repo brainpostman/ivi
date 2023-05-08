@@ -11,8 +11,8 @@ const nextConfig = {
     domains: [
       'thumbs.dfs.ivi.ru',
       'avatars.mds.yandex.net',
-      'images.ru',
-      'ivi.ru',
+      'www.images.ru',
+      'www.ivi.ru',
     ],
   },
   i18n,
