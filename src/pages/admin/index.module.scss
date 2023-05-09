@@ -2,15 +2,19 @@
     display: flex;
     flex-direction: column;
     min-height: 100%;
-    height: 100vh;
     @include ui-padding(top, 2);
     @include ui-padding(bottom, 2);
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    @include ui-padding(ver, 2);
 }
 
 .title {
     @include ui-font(5);
     text-align: center;
-    @include ui-padding(ver, 2);
 }
 
 .db {
@@ -21,16 +25,20 @@
     border-radius: 8px;
     gap: 8px;
     &__input {
-        flex: 0 0 20%;
+        z-index: 999;
+        position: sticky;
+        top: 40px;
+        flex: 0 1 25%;
         display: flex;
         flex-direction: column;
-        height: 100%;
+        height: fit-content;
         align-items: center;
         border-radius: 8px;
         background-color: $dark;
+        @include ui-padding(bottom, 4);
     }
     &__output {
-        flex: 0 0 80%;
+        flex: 1 0 75%;
         display: flex;
         flex-direction: column;
         height: 100%;
@@ -39,7 +47,13 @@
     }
 }
 
-.header {
+.filters {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.heading {
     width: 100%;
     &__container {
         display: flex;
@@ -75,4 +89,11 @@
     background-color: $violet;
     border-bottom-left-radius: 8px;
     border-bottom-right-radius: 8px;
+    &__movie {
+        @include ui-margin(top, 4);
+    }
+    &__movie:first-of-type {
+        margin-top: 0;
+    }
 }
+
