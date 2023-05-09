@@ -1,74 +1,9 @@
-interface IMovieJsonResponse {
+export interface IGenreJson {
     id: number;
-    name: string | null;
-    name_en: string | null;
-    type: string | null;
-    mainImg: string | null;
-    year: number | null;
-    tagline: string | null;
-    budget: string | null;
-    fees: string | null;
-    feesUS: string | null;
-    feesRU: string | null;
-    premiere: string | null;
-    premiereRU: string | null;
-    releaseDVD: string | null;
-    releaseBluRay: string | null;
-    age: string | null;
-    ratingMPAA: string | null;
-    time: string | null;
-    description: string | null;
-    scoreAVG: number | null;
-    createdAt: string | null;
-    updatedAt: string | null;
-    countries: IMovieJsonCountry[];
-    genres: IMovieJsonGenre[];
-    operators: ({
-        FilmOperators: IFilmStaffTableJoin;
-    } & IMovieJsonStaffer)[];
-    compositors: ({
-        FilmCompositors: IFilmStaffTableJoin;
-    } & IMovieJsonStaffer)[];
-    actors: ({
-        FilmActors: IFilmStaffTableJoin;
-    } & IMovieJsonStaffer)[];
-    artists: ({
-        FilmArtists: IFilmStaffTableJoin;
-    } & IMovieJsonStaffer)[];
-    directors: ({
-        FilmDirectors: IFilmStaffTableJoin;
-    } & IMovieJsonStaffer)[];
-    montages: ({
-        FilmMontages: IFilmStaffTableJoin;
-    } & IMovieJsonStaffer)[];
-    scenario: ({
-        FilmScenario: IFilmStaffTableJoin;
-    } & IMovieJsonStaffer)[];
-    spectators: {
-        country: string | null;
-        count: string | null;
-    }[];
-}
-
-interface IMovieJsonCountry {
-    id: number;
-    name: string | null;
-    fk_countryid: number | null;
-    createdAt: string | null;
-    updatedAt: string | null;
-    FilmCountries: {
-        id: number;
-        filmId: number;
-        countryId: number;
-    };
-}
-
-interface IMovieJsonGenre {
-    id: number;
-    name: string | null;
-    name_en: string | null;
-    createdAt: string | null;
-    updatedAt: string | null;
+    name: string;
+    name_en: string;
+    createdAt: string;
+    updatedAt: string;
     FilmGenres?: {
         id: number;
         filmId: number;
@@ -76,23 +11,37 @@ interface IMovieJsonGenre {
     };
 }
 
-interface IMovieJsonStaffer {
+interface ICountryJson {
     id: number;
-    name: string | null;
-    createdAt: string | null;
-    updatedAt: string | null;
+    name: string;
+    fk_countryid: number | null;
+    createdAt: string;
+    updatedAt: string;
+    FilmCountries: {
+        id: number;
+        filmId: number;
+        countryId: number;
+    };
 }
 
-interface IFilmStaffTableJoin {
+interface IStafferJson {
+    id: number;
+    name: string;
+    biography: string;
+    createdAt: string;
+    updatedAt: string;
+}
+
+interface IStafferInMovieJson {
     id: number;
     filmId: number;
     staffId: number;
 }
 
-export interface IMovie {
+export interface IFilmJson {
     id: number;
-    name: string | null;
-    name_en: string | null;
+    name: string;
+    name_en: string;
     type: string | null;
     mainImg: string | null;
     year: number | null;
@@ -110,79 +59,93 @@ export interface IMovie {
     time: string | null;
     description: string | null;
     scoreAVG: number | null;
-    createdAt: Date | null;
-    updatedAt: Date | null;
-    countries: IMovieCountry[];
-    genres: IMovieGenre[];
-    operators: IMovieStaffer[];
-    compositors: IMovieStaffer[];
-    actors: IMovieStaffer[];
-    artists: IMovieStaffer[];
-    directors: IMovieStaffer[];
-    montages: IMovieStaffer[];
-    scenario: IMovieStaffer[];
+    createdAt: string;
+    updatedAt: string;
+    countries: ICountryJson[];
+    genres: IGenreJson[];
+}
+
+export interface IDetailedFilmJson extends IFilmJson {
+    actors: ({
+        FilmActors: IStafferInMovieJson;
+    } & IStafferJson)[];
+    directors: ({
+        FilmDirectors: IStafferInMovieJson;
+    } & IStafferJson)[];
+    operators: ({
+        FilmOperators: IStafferInMovieJson;
+    } & IStafferJson)[];
+    compositors: ({
+        FilmCompositors: IStafferInMovieJson;
+    } & IStafferJson)[];
+    artists: ({
+        FilmArtists: IStafferInMovieJson;
+    } & IStafferJson)[];
+    montages: ({
+        FilmMontages: IStafferInMovieJson;
+    } & IStafferJson)[];
+    scenario: ({
+        FilmScenario: IStafferInMovieJson;
+    } & IStafferJson)[];
     spectators: {
-        country: string | null;
-        count: string | null;
+        country: string;
+        count: string;
     }[];
 }
 
-export interface IMovieCountry {
+export interface ICrudGenre {
     id: number;
-    name: string | null;
-    fk_countryid: number | null;
+    name: string;
+    name_en: string;
+    createdAt: string;
+    updatedAt: string;
 }
 
-export class MovieCountry implements IMovieCountry {
-    constructor(country: IMovieJsonCountry) {
-        this.id = country.id;
-        this.name = country.name;
-        this.fk_countryid = country.fk_countryid;
-    }
-    id: number;
-    name: string | null;
-    fk_countryid: number | null;
-}
-
-export interface IMovieGenre {
-    id: number;
-    name: string | null;
-    name_en: string | null;
-    createdAt: Date | null;
-    updatedAt: Date | null;
-}
-
-export class MovieGenre implements IMovieGenre {
-    constructor(genre: IMovieJsonGenre) {
+export class CrudGenre implements ICrudGenre {
+    constructor(genre: IGenreJson) {
         this.id = genre.id;
         this.name = genre.name;
         this.name_en = genre.name_en;
-        this.createdAt = genre.createdAt ? new Date(genre.createdAt) : null;
-        this.updatedAt = genre.updatedAt ? new Date(genre.updatedAt) : null;
+        this.createdAt = genre.createdAt;
+        this.updatedAt = genre.updatedAt;
     }
     id: number;
-    name: string | null;
-    name_en: string | null;
-    createdAt: Date | null;
-    updatedAt: Date | null;
+    name: string;
+    name_en: string;
+    createdAt: string;
+    updatedAt: string;
 }
 
-export interface IMovieStaffer {
+export interface ICrudFilm {
     id: number;
-    name: string | null;
+    name: string;
+    name_en: string;
+    type: string | null;
+    mainImg: string | null;
+    year: number | null;
+    tagline: string | null;
+    budget: string | null;
+    fees: string | null;
+    feesUS: string | null;
+    feesRU: string | null;
+    premiere: string | null;
+    premiereRU: string | null;
+    releaseDVD: string | null;
+    releaseBluRay: string | null;
+    age: string | null;
+    ratingMPAA: string | null;
+    time: string | null;
+    description: string | null;
+    scoreAVG: number | null;
+    createdAt: string;
+    updatedAt: string;
+    countries: string[];
+    genres: string[];
+    genres_en: string[];
 }
 
-export class MovieStaffer implements IMovieStaffer {
-    constructor(staffer: IMovieJsonStaffer) {
-        this.id = staffer.id;
-        this.name = staffer.name;
-    }
-    id: number;
-    name: string | null;
-}
-
-export class Movie implements IMovie {
-    constructor(movie: IMovieJsonResponse) {
+export class CrudFilm implements ICrudFilm {
+    constructor(movie: IFilmJson) {
         this.id = movie.id;
         this.name = movie.name;
         this.name_en = movie.name_en;
@@ -203,40 +166,24 @@ export class Movie implements IMovie {
         this.time = movie.time;
         this.description = movie.description;
         this.scoreAVG = movie.scoreAVG;
-        this.createdAt = movie.createdAt ? new Date(movie.createdAt) : null;
-        this.updatedAt = movie.updatedAt ? new Date(movie.updatedAt) : null;
+        this.createdAt = movie.createdAt;
+        this.updatedAt = movie.updatedAt;
         this.countries = movie.countries.map((country) => {
-            return new MovieCountry(country);
+            return country.name;
         });
         this.genres = movie.genres.map((genre) => {
-            return new MovieGenre(genre);
+            return genre.name;
         });
-        this.operators = movie.operators.map((operator) => {
-            return new MovieStaffer(operator);
+        this.genres_en = movie.genres.map((genre) => {
+            return genre.name_en;
         });
-        this.compositors = movie.compositors.map((compositor) => {
-            return new MovieStaffer(compositor);
-        });
-        this.actors = movie.actors.map((actor) => {
-            return new MovieStaffer(actor);
-        });
-        this.artists = movie.artists.map((artist) => {
-            return new MovieStaffer(artist);
-        });
-        this.directors = movie.directors.map((director) => {
-            return new MovieStaffer(director);
-        });
-        this.montages = movie.montages.map((montager) => {
-            return new MovieStaffer(montager);
-        });
-        this.scenario = movie.scenario.map((scenarist) => {
-            return new MovieStaffer(scenarist);
-        });
-        this.spectators = movie.spectators;
     }
+    countries: string[];
+    genres: string[];
+    genres_en: string[];
     id: number;
-    name: string | null;
-    name_en: string | null;
+    name: string;
+    name_en: string;
     type: string | null;
     mainImg: string | null;
     year: number | null;
@@ -254,16 +201,56 @@ export class Movie implements IMovie {
     time: string | null;
     description: string | null;
     scoreAVG: number | null;
-    createdAt: Date | null;
-    updatedAt: Date | null;
-    countries: IMovieCountry[];
-    genres: IMovieGenre[];
-    operators: IMovieStaffer[];
-    compositors: IMovieStaffer[];
-    actors: IMovieStaffer[];
-    artists: IMovieStaffer[];
-    directors: IMovieStaffer[];
-    montages: IMovieStaffer[];
-    scenario: IMovieStaffer[];
-    spectators: { country: string | null; count: string | null }[];
+    createdAt: string;
+    updatedAt: string;
+}
+
+export interface ICrudDetailedFilm extends ICrudFilm {
+    actors: string[];
+    directors: string[];
+    operators: string[];
+    compositors: string[];
+    artists: string[];
+    montages: string[];
+    scenario: string[];
+    spectators: {
+        country: string;
+        count: string;
+    }[];
+}
+
+export class CrudDetailedFilm extends CrudFilm implements ICrudDetailedFilm {
+    constructor(movie: IDetailedFilmJson) {
+        super(movie);
+        this.actors = movie.actors.map((actor) => {
+            return actor.name;
+        });
+        this.directors = movie.directors.map((director) => {
+            return director.name;
+        });
+        this.operators = movie.operators.map((operator) => {
+            return operator.name;
+        });
+        this.compositors = movie.compositors.map((compositor) => {
+            return compositor.name;
+        });
+        this.artists = movie.artists.map((artist) => {
+            return artist.name;
+        });
+        this.montages = movie.montages.map((montager) => {
+            return montager.name;
+        });
+        this.scenario = movie.scenario.map((scenarist) => {
+            return scenarist.name;
+        });
+        this.spectators = movie.spectators;
+    }
+    actors: string[];
+    directors: string[];
+    operators: string[];
+    compositors: string[];
+    artists: string[];
+    montages: string[];
+    scenario: string[];
+    spectators: { country: string; count: string }[];
 }
