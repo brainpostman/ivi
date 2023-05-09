@@ -2,6 +2,7 @@ import axios from 'axios';
 import { i18n } from 'next-i18next';
 import jwt from 'jsonwebtoken';
 import { Session } from 'next-auth';
+import { signOut } from 'next-auth/react';
 
 type CheckEmailResponse = {
     status: number;
@@ -120,5 +121,11 @@ export async function checkAdminRole(accessToken: string | null): Promise<boolea
         return true;
     } catch (err) {
         return false;
+    }
+}
+
+export async function checkAdminSession(accessToken: string | null) {
+    if (!(await checkAdminRole(accessToken))) {
+        signOut();
     }
 }
