@@ -1,41 +1,24 @@
-import { IMovieGenre } from '@/types/ICrudMovie';
-import styles from './AdminGenre.module.scss';
+import { ICrudGenre } from '@/types/ICrudMovie';
+import styles from './AdminGenres.module.scss';
+import AdminGenre from './AdminGenre/AdminGenre';
+import { Dispatch, SetStateAction } from 'react';
 
 interface IAdminGenres {
-    genres: IMovieGenre[];
+    genres: ICrudGenre[];
+    setLoading: Dispatch<SetStateAction<boolean>>;
 }
 
-const AdminGenres = ({ genres }: IAdminGenres) => {
+const AdminGenres = ({ genres, setLoading }: IAdminGenres) => {
     return (
         <table className={styles.table}>
-            <thead className={styles.head}>
-                <th className={styles.header}>ID</th>
-                <th className={styles.header}>Название</th>
-                <th className={styles.header}>Название (eng)</th>
-                <th className={styles.header}>Запись создана</th>
-                <th className={styles.header}>Последнее обновление</th>
-            </thead>
+            <th className={styles.header}>ID</th>
+            <th className={styles.header}>Название</th>
+            <th className={styles.header}>Название (eng)</th>
+            <th className={styles.header}>Запись создана</th>
+            <th className={styles.header}>Последнее обновление</th>
             <tbody className={styles.body}>
                 {genres.map((genre) => {
-                    return (
-                        <tr key={genre.id} className={styles.row}>
-                            <td className={styles.cell}>{genre.id}</td>
-                            <td className={`${styles.cell} ${styles.cell_name}`}>
-                                {genre.name || '-'}
-                            </td>
-                            <td className={`${styles.cell} ${styles.cell_name}`}>
-                                {genre.name_en || '-'}
-                            </td>
-                            <td
-                                className={
-                                    styles.cell
-                                }>{`${genre.createdAt?.toLocaleDateString()}, ${genre.createdAt?.toLocaleTimeString()}`}</td>
-                            <td
-                                className={
-                                    styles.cell
-                                }>{`${genre.updatedAt?.toLocaleDateString()}, ${genre.updatedAt?.toLocaleTimeString()}`}</td>
-                        </tr>
-                    );
+                    return <AdminGenre key={genre.id} genre={genre} setLoading={setLoading} />;
                 })}
             </tbody>
         </table>
