@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction, useEffect, useRef, useState } from 'react'
+import { Dispatch, SetStateAction, useEffect, useRef } from 'react'
 
 export const useBreakPoints = (
   setter: Dispatch<SetStateAction<number>>,
