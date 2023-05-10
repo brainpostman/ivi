@@ -1,5 +1,5 @@
 import HighlightButton from '@/components/UI/HighlightButton/HighlightButton'
-import { Meta, StoryObj } from '@storybook/react'
+import { Meta } from '@storybook/react'
 import { CSSProperties } from 'react'
 
 const meta: Meta = {

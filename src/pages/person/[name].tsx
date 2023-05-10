@@ -6,11 +6,12 @@ import {
   actorBiografyInfoVisibleData,
   actorFilmsData,
 } from '@/data/person.data'
-import PageLayout from '@/layouts/PageLayout'
+import PageLayout from '@/layouts/PageLayout/PageLayout'
 import { getCoordY, scrollMove } from '@/utils/coords.utils'
 import Image from 'next/image'
+import Link from 'next/link'
 import { useRouter } from 'next/router'
-import { useRef, useState } from 'react'
+import { RefObject, useRef, useState } from 'react'
 import { MdArrowBackIosNew } from 'react-icons/md'
 import style from './actors.module.scss'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'

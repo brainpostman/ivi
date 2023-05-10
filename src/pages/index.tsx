@@ -6,7 +6,7 @@ import MovieCard from '@/components/MovieCard/MovieCard'
 import TopTenList from '@/components/TopTenList/TopTenList'
 import LongButton from '@/components/UI/LongButton/LongButton'
 import ViewAllBlock from '@/components/ViewAllBlock/ViewAllBlock'
-import PageLayout from '@/layouts/PageLayout'
+import PageLayout from '@/layouts/PageLayout/PageLayout'
 import { IMovie } from '@/types/films.api.interface'
 import { GetStaticProps, NextPage } from 'next'
 import { useTranslation } from 'next-i18next'
@@ -33,6 +33,7 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
         'header',
         'auth_modal',
         'home',
+        'error',
         'common',
         'footer',
       ])),

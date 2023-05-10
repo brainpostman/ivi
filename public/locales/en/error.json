@@ -1,0 +1,26 @@
+{
+    "error": "Error",
+    "html-title": "Error",
+    "html-errors": {
+        "404": "Requested page doesn't exist"
+    },
+    "auth-errors": {
+        "Configuration": "There is a problem with the server configuration. Please contact our support",
+        "AccessDenied": "You don't have permission for this action",
+        "Verification": "Access token has expired or has already been used",
+        "Default": "An unforeseen authentication error has occured. Please contact our support"
+    },
+    "signin-errors": {
+        "OAuthSignin": "Error in constructing an authorization URL",
+        "OAuthCallback": "Error in handling the response from an OAuth provider",
+        "OAuthCreateAccount": "Could not create OAuth provider user in the database.",
+        "EmailCreateAccount": "Could not create email provider user in the database.",
+        "Callback": "Error in the OAuth callback handler route",
+        "OAuthAccountNotLinked": "Email on the account is already linked, but not with this OAuth account",
+        "EmailSignin": "Sending the e-mail with the verification token failed",
+        "CredentialsSignin": "Incorrect credentials provided",
+        "SessionRequired": "The content of this page requires you to be signed in at all times",
+        "Default": "An unforeseen authorization error has occured. Please contact our support"
+    }
+    
+}

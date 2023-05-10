@@ -1,0 +1,99 @@
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+    @include ui-padding(top, 2);
+    @include ui-padding(bottom, 2);
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    @include ui-padding(ver, 2);
+}
+
+.title {
+    @include ui-font(5);
+    text-align: center;
+}
+
+.db {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex: 1 0 auto;
+    border-radius: 8px;
+    gap: 8px;
+    &__input {
+        z-index: 999;
+        position: sticky;
+        top: 40px;
+        flex: 0 1 25%;
+        display: flex;
+        flex-direction: column;
+        height: fit-content;
+        align-items: center;
+        border-radius: 8px;
+        background-color: $dark;
+        @include ui-padding(bottom, 4);
+    }
+    &__output {
+        flex: 1 0 75%;
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        background-color: $dark;
+        border-radius: 8px;
+    }
+}
+
+.filters {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.heading {
+    width: 100%;
+    &__container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+    }
+    &__pages {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+    }
+    &__page {
+        @include ui-padding(default, 2);
+        color: #fff;
+        @include ui-font(4);
+        line-height: 1.33;
+        font-weight: 800;
+        background-color: $dark;
+        border-top-left-radius: 8px;
+        border-top-right-radius: 8px;
+        cursor: pointer;
+        &_active {
+            background-color: $violet;
+            cursor: unset;
+        }
+    }
+}
+
+.database {
+    @include ui-padding(default, 2);
+    flex: 1 0 auto;
+    background-color: $violet;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+    &__movie {
+        @include ui-margin(top, 4);
+    }
+    &__movie:first-of-type {
+        margin-top: 0;
+    }
+}
+

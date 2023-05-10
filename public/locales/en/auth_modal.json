@@ -1,4 +1,5 @@
 {
+    "html-title": "Authorization",
     "authorization": "Authorization",
     "login-or-register": "Sign in or register",
     "email-placeholder": "Enter your email",
@@ -23,8 +24,8 @@
         "unforeseen-error": "An unexpected error occurred",
         "incorrect-email": "Incorrect email",
         "no-empty-pass": "Please, enter your password",
-        "min-length": "Password must have at least 6 characters",
-        "no-pattern-match": "Password can contain only latin characters, numbers and special symbols",
+        "length": "Password must be between 6 and 24 characters in length",
+        "no-pattern-match": "Password can contain only Latin characters, numbers and special symbols",
         "no-confirmation-match": "Passwords must match",
         "no-email-match": "Password can't match your email",
         "incorrect-pass": "Incorrect password"

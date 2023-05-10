@@ -2,7 +2,7 @@ import { useTypedSelector } from '@/hooks/ReduxHooks'
 import { IHeaderBlock, IHeaderTab } from '@/types/header.interface'
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
-import AuthModal from '../AuthModal/AuthModal'
+import AuthWindow from '../AuthWindow/AuthWindow'
 import HeaderMobile from '../Mobile/HeaderMobile/HeaderMobile'
 import style from './Header.module.scss'
 import HeaderHoverBlock from './HeaderHoverBlock/HeaderHoverBlock'
@@ -53,7 +53,7 @@ const Header = () => {
           />
         )}
       </section>
-      {showAuthModal && <AuthModal modalShown={showAuthModal} />}
+      {showAuthModal && <AuthWindow modalShown={showAuthModal} />}
       <HeaderMobile />
     </header>
   )
