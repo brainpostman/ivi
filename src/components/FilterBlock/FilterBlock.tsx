@@ -31,9 +31,16 @@ interface IProps {
   countries: IFilterGetResponse[]
   directors: IFilterGetResponse[]
   actors: IFilterGetResponse[]
+  className?: string
 }
 
-const FilterBlock: FC<IProps> = ({ genres, countries, directors, actors }) => {
+const FilterBlock: FC<IProps> = ({
+  genres,
+  countries,
+  directors,
+  actors,
+  className: propsClassName,
+}) => {
   const router = useRouter()
   const { t } = useTranslation('movies')
 

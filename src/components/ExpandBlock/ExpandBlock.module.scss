@@ -1,14 +1,9 @@
 .info {
   display: flex;
   flex-direction: column;
-  gap: 12px;
-
   color: $gray-soft;
-
   @include font(2);
-
-  @include ui-margin(top, 6);
-
+  
   &__title {
     color: #fff;
 

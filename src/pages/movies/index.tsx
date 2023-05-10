@@ -6,7 +6,7 @@ import MovieCardGrid from '@/components/MovieCardGrid/MovieCardGrid'
 import Sort from '@/components/Sort/Sort'
 import ViewMoreButton from '@/components/UI/ViewMoreButton/ViewMoreButton'
 import VioletButton from '@/components/UI/VioletButton/VioletButton'
-import PageLayout from '@/layouts/PageLayout'
+import PageLayout from '@/layouts/PageLayout/PageLayout'
 import { IFilmsGetRequest, IMovie } from '@/types/films.api.interface'
 import { GetStaticProps, NextPage } from 'next'
 import { useTranslation } from 'next-i18next'
@@ -34,6 +34,7 @@ export const getStaticProps: GetStaticProps = async ({ locale, params }) => {
       ...(await serverSideTranslations(locale ?? 'ru', [
         'header',
         'auth_modal',
+        'error',
         'common',
         'footer',
         'movies',

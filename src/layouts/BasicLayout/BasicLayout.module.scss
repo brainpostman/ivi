@@ -1,0 +1,12 @@
+.container {
+    max-width: $max-width;
+    width: 100%;
+    min-height: 100%;
+    margin: 0 auto;
+}
+
+.wrapper {
+    overflow-y: auto;
+    overflow-x: hidden;
+    height: 100vh;
+}

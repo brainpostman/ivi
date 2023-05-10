@@ -15,14 +15,7 @@ export interface IFilmsGetRequest {
   directors?: string[]
 }
 
-export interface IFilmsgGetResponse {
-  id: number
-  name: string
-  name_en: string
-  year: number
-  countries: { name: string }[]
-  genres: { name: string; name_en: string }[]
-  tagline: string
+export interface IFilmByIdGetResponse extends IFilmsgGetResponse {
   directors: IStaff[]
   artists: IStaff[]
   actors: IStaff[]
@@ -30,6 +23,17 @@ export interface IFilmsgGetResponse {
   compositors: IStaff[]
   scenario: IStaff[]
   operators: IStaff[]
+}
+
+export interface IFilmsgGetResponse {
+  id: number
+  name: string
+  name_en: string
+  year: number
+  countries: { id: number; name: string }[]
+  genres: { id: number; name: string; name_en: string | null }[]
+  tagline: string
+  scoreAVG: number | null
   age: string
   description: string
   mainImg: string

@@ -1,0 +1,334 @@
+{
+    "id": 2,
+    "name": "Джентльмены (2019)",
+    "name_en": "The Gentlemen",
+    "type": "фильм",
+    "mainImg": "//avatars.mds.yandex.net/get-kinopoisk-image/1599028/637271d5-61b4-4e46-ac83-6d07494c7645/300x450",
+    "year": 2019,
+    "tagline": "«Criminal. Class»",
+    "budget": "$22&nbsp;000&nbsp;000",
+    "fees": "+ $78&nbsp;700&nbsp;000 = $115&nbsp;171&nbsp;795",
+    "feesUS": "$36&nbsp;471&nbsp;795",
+    "feesRU": "$18&nbsp;003&nbsp;343",
+    "premiere": "3 декабря 2019",
+    "premiereRU": "13 февраля 2020",
+    "releaseDVD": "",
+    "releaseBluRay": "",
+    "age": "18+",
+    "ratingMPAA": "R",
+    "time": "113 мин. / 01:53",
+    "description": "Один ушлый американец ещё со студенческих лет приторговывал наркотиками, а теперь придумал схему нелегального обогащения с использованием поместий обедневшей английской аристократии и очень неплохо на этом разбогател. Другой пронырливый журналист приходит к Рэю, правой руке американца, и предлагает тому купить киносценарий, в котором подробно описаны преступления его босса при участии других представителей лондонского криминального мира — партнёра-еврея, китайской диаспоры, чернокожих спортсменов и даже русского олигарха.",
+    "scoreAVG": null,
+    "createdAt": "2023-05-04T21:32:07.214Z",
+    "updatedAt": "2023-05-04T21:32:07.214Z",
+    "countries": [
+        {
+            "id": 5,
+            "name": "США",
+            "fk_countryid": null,
+            "createdAt": "2023-05-04T21:32:07.167Z",
+            "updatedAt": "2023-05-04T21:32:07.167Z",
+            "FilmCountries": {
+                "id": 27,
+                "filmId": 2,
+                "countryId": 5
+            }
+        },
+        {
+            "id": 4,
+            "name": "Великобритания",
+            "fk_countryid": null,
+            "createdAt": "2023-05-04T21:32:07.167Z",
+            "updatedAt": "2023-05-04T21:32:07.167Z",
+            "FilmCountries": {
+                "id": 26,
+                "filmId": 2,
+                "countryId": 4
+            }
+        }
+    ],
+    "genres": [
+        {
+            "id": 5,
+            "name": "боевик",
+            "name_en": null,
+            "createdAt": "2023-05-04T21:32:07.196Z",
+            "updatedAt": "2023-05-04T21:32:07.196Z",
+            "FilmGenres": {
+                "id": 25,
+                "filmId": 2,
+                "genreId": 5
+            }
+        },
+        {
+            "id": 4,
+            "name": "криминал",
+            "name_en": null,
+            "createdAt": "2023-05-04T21:32:07.196Z",
+            "updatedAt": "2023-05-04T21:32:07.196Z",
+            "FilmGenres": {
+                "id": 24,
+                "filmId": 2,
+                "genreId": 4
+            }
+        },
+        {
+            "id": 2,
+            "name": "комедия",
+            "name_en": null,
+            "createdAt": "2023-05-04T21:32:07.196Z",
+            "updatedAt": "2023-05-04T21:32:07.196Z",
+            "FilmGenres": {
+                "id": 22,
+                "filmId": 2,
+                "genreId": 2
+            }
+        }
+    ],
+    "operators": [
+        {
+            "id": 27,
+            "name": "Алан Стюарт",
+            "createdAt": "2023-05-04T21:32:03.617Z",
+            "updatedAt": "2023-05-04T21:32:03.617Z",
+            "FilmOperators": {
+                "id": 924,
+                "filmId": 2,
+                "staffId": 27
+            }
+        }
+    ],
+    "compositors": [
+        {
+            "id": 28,
+            "name": "Кристофер Бенстед",
+            "createdAt": "2023-05-04T21:32:03.627Z",
+            "updatedAt": "2023-05-04T21:32:03.627Z",
+            "FilmCompositors": {
+                "id": 925,
+                "filmId": 2,
+                "staffId": 28
+            }
+        }
+    ],
+    "actors": [
+        {
+            "id": 43,
+            "name": "Лин Рене",
+            "createdAt": "2023-05-04T21:32:03.688Z",
+            "updatedAt": "2023-05-04T21:32:03.688Z",
+            "FilmActors": {
+                "id": 940,
+                "filmId": 2,
+                "staffId": 43
+            }
+        },
+        {
+            "id": 42,
+            "name": "Колин Фаррелл",
+            "createdAt": "2023-05-04T21:32:03.683Z",
+            "updatedAt": "2023-05-04T21:32:03.683Z",
+            "FilmActors": {
+                "id": 939,
+                "filmId": 2,
+                "staffId": 42
+            }
+        },
+        {
+            "id": 41,
+            "name": "Джейсон Вонг",
+            "createdAt": "2023-05-04T21:32:03.680Z",
+            "updatedAt": "2023-05-04T21:32:03.680Z",
+            "FilmActors": {
+                "id": 938,
+                "filmId": 2,
+                "staffId": 41
+            }
+        },
+        {
+            "id": 40,
+            "name": "Эдди Марсан",
+            "createdAt": "2023-05-04T21:32:03.675Z",
+            "updatedAt": "2023-05-04T21:32:03.675Z",
+            "FilmActors": {
+                "id": 937,
+                "filmId": 2,
+                "staffId": 40
+            }
+        },
+        {
+            "id": 39,
+            "name": "Джереми Стронг",
+            "createdAt": "2023-05-04T21:32:03.671Z",
+            "updatedAt": "2023-05-04T21:32:03.671Z",
+            "FilmActors": {
+                "id": 936,
+                "filmId": 2,
+                "staffId": 39
+            }
+        },
+        {
+            "id": 38,
+            "name": "Мишель Докери",
+            "createdAt": "2023-05-04T21:32:03.667Z",
+            "updatedAt": "2023-05-04T21:32:03.667Z",
+            "FilmActors": {
+                "id": 935,
+                "filmId": 2,
+                "staffId": 38
+            }
+        },
+        {
+            "id": 37,
+            "name": "Хью Грант",
+            "createdAt": "2023-05-04T21:32:03.663Z",
+            "updatedAt": "2023-05-04T21:32:03.663Z",
+            "FilmActors": {
+                "id": 934,
+                "filmId": 2,
+                "staffId": 37
+            }
+        },
+        {
+            "id": 36,
+            "name": "Генри Голдинг",
+            "createdAt": "2023-05-04T21:32:03.659Z",
+            "updatedAt": "2023-05-04T21:32:03.659Z",
+            "FilmActors": {
+                "id": 933,
+                "filmId": 2,
+                "staffId": 36
+            }
+        },
+        {
+            "id": 35,
+            "name": "Чарли Ханнэм",
+            "createdAt": "2023-05-04T21:32:03.655Z",
+            "updatedAt": "2023-05-04T21:32:03.655Z",
+            "FilmActors": {
+                "id": 932,
+                "filmId": 2,
+                "staffId": 35
+            }
+        },
+        {
+            "id": 34,
+            "name": "Мэттью МакКонахи",
+            "createdAt": "2023-05-04T21:32:03.651Z",
+            "updatedAt": "2023-05-04T21:32:03.651Z",
+            "FilmActors": {
+                "id": 931,
+                "filmId": 2,
+                "staffId": 34
+            }
+        }
+    ],
+    "artists": [
+        {
+            "id": 31,
+            "name": "Оливер Кэрролл",
+            "createdAt": "2023-05-04T21:32:03.639Z",
+            "updatedAt": "2023-05-04T21:32:03.639Z",
+            "FilmArtists": {
+                "id": 928,
+                "filmId": 2,
+                "staffId": 31
+            }
+        },
+        {
+            "id": 30,
+            "name": "Рэйчел Олтон",
+            "createdAt": "2023-05-04T21:32:03.635Z",
+            "updatedAt": "2023-05-04T21:32:03.635Z",
+            "FilmArtists": {
+                "id": 927,
+                "filmId": 2,
+                "staffId": 30
+            }
+        },
+        {
+            "id": 29,
+            "name": "Джемма Джексон",
+            "createdAt": "2023-05-04T21:32:03.631Z",
+            "updatedAt": "2023-05-04T21:32:03.631Z",
+            "FilmArtists": {
+                "id": 926,
+                "filmId": 2,
+                "staffId": 29
+            }
+        }
+    ],
+    "directors": [
+        {
+            "id": 22,
+            "name": "Гай Ричи",
+            "createdAt": "2023-05-04T21:32:03.596Z",
+            "updatedAt": "2023-05-04T21:32:03.596Z",
+            "FilmDirectors": {
+                "id": 919,
+                "filmId": 2,
+                "staffId": 22
+            }
+        }
+    ],
+    "montages": [
+        {
+            "id": 33,
+            "name": "Пол Мачлисс",
+            "createdAt": "2023-05-04T21:32:03.647Z",
+            "updatedAt": "2023-05-04T21:32:03.647Z",
+            "FilmMontages": {
+                "id": 930,
+                "filmId": 2,
+                "staffId": 33
+            }
+        },
+        {
+            "id": 32,
+            "name": "Джеймс Херберт",
+            "createdAt": "2023-05-04T21:32:03.643Z",
+            "updatedAt": "2023-05-04T21:32:03.643Z",
+            "FilmMontages": {
+                "id": 929,
+                "filmId": 2,
+                "staffId": 32
+            }
+        }
+    ],
+    "scenario": [
+        {
+            "id": 24,
+            "name": "Марн Дэвис",
+            "createdAt": "2023-05-04T21:32:03.604Z",
+            "updatedAt": "2023-05-04T21:32:03.604Z",
+            "FilmScenario": {
+                "id": 921,
+                "filmId": 2,
+                "staffId": 24
+            }
+        },
+        {
+            "id": 23,
+            "name": "Айван Эткинсон",
+            "createdAt": "2023-05-04T21:32:03.600Z",
+            "updatedAt": "2023-05-04T21:32:03.600Z",
+            "FilmScenario": {
+                "id": 920,
+                "filmId": 2,
+                "staffId": 23
+            }
+        },
+        {
+            "id": 22,
+            "name": "Гай Ричи",
+            "createdAt": "2023-05-04T21:32:03.596Z",
+            "updatedAt": "2023-05-04T21:32:03.596Z",
+            "FilmScenario": {
+                "id": 919,
+                "filmId": 2,
+                "staffId": 22
+            }
+        }
+    ],
+    "spectators": []
+}

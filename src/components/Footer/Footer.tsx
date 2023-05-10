@@ -6,9 +6,29 @@ import FooterSubscribe from './FooterSubscribe/FooterSubscribe';
 import FooterSupport from './FooterSupport/FooterSupport';
 import { useTranslation } from 'next-i18next';
 import FooterListItem from './FooterListItem/FooterListItem';
+import Link from 'next/link';
+import { useEffect, useState } from 'react';
+import { useSession } from 'next-auth/react';
+import { checkAdminRole } from '@/utils/auth.util';
 
 const Footer = () => {
     const { t } = useTranslation('footer');
+
+    const [showLink, setShowLink] = useState(false);
+
+    const { status, data } = useSession();
+
+    useEffect(() => {
+        if (status === 'authenticated') {
+            checkAdminRole(data.accessToken)
+                .then((result) => setShowLink(result))
+                .catch((err) => {
+                    console.error(err);
+                });
+            console.log('auth');
+        }
+        console.log(showLink);
+    }, [status]);
 
     return (
         <footer className={styles.footer}>
@@ -34,7 +54,11 @@ const Footer = () => {
                             )}
                         </ul>
                         <p className={styles.activecert}>
-                            <a href={'https://www.ivi.ru/cert'}>{t('cert-activation')}</a>
+                            {showLink ? (
+                                <Link href={'/admin'}>{t('administration')}</Link>
+                            ) : (
+                                <a href={'https://www.ivi.ru/cert'}>{t('cert-activation')}</a>
+                            )}
                         </p>
                     </div>
                     <FooterSupport />

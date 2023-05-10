@@ -1,5 +1,5 @@
 import styles from './Login.module.scss';
-import parentStyles from '../AuthModal.module.scss';
+import parentStyles from '../AuthWindow.module.scss';
 import { useTranslation } from 'next-i18next';
 import Input from '@/components/UI/Input/Input';
 import { useState } from 'react';
