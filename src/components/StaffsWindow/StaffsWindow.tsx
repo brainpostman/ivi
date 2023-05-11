@@ -1,11 +1,11 @@
 import Image from 'next/image'
 import style from './StaffsWindow.module.scss'
-import { IMovie } from '@/types/films.api.interface'
+import { IMovieById } from '@/types/films.api.interface'
 import { FC } from 'react'
 import StaffCard from '../StaffCard/StaffCard'
 
 interface IProps {
-  film: IMovie
+  film: IMovieById
 }
 
 const StaffsWindow: FC<IProps> = ({ film }) => {
@@ -43,7 +43,7 @@ const StaffsWindow: FC<IProps> = ({ film }) => {
 
         <div className={style.modal_poster}>
           <div className={style.modal_poster_img}>
-            <Image src={film.mainImg} width={128} height={196} alt='постер' />
+            <Image src={film.mainImg} alt='постер' fill />
           </div>
           <div className={style.modal_poster_rating}>8,9</div>
           <div className={style.modal_poster_genres}>

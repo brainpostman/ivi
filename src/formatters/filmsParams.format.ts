@@ -2,6 +2,9 @@ import { IFilmsGetRequest } from '@/types/films.api.interface'
 import { formatCapitalize } from './capitalize.format'
 import { ParsedUrlQuery } from 'querystring'
 
+// === PROPS ===
+// @param { * } queryParams - параметры в адресной строке
+
 export const formatFilmsParams = (queryParams: ParsedUrlQuery | undefined) => {
   if (!queryParams) return {}
 

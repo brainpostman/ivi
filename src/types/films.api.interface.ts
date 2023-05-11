@@ -47,3 +47,9 @@ export interface IMovie
   countries: string
   genres: string
 }
+
+export interface IMovieById
+  extends Omit<IFilmByIdGetResponse, 'countries' | 'genres'> {
+  countries: string
+  genres: string
+}

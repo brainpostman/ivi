@@ -1,7 +1,7 @@
 import { formatImgUrl } from '@/formatters/imgUrl.format'
 import { IFilmsgGetResponse } from '@/types/films.api.interface'
 
-export const transformFilms = (filmsData: IFilmsgGetResponse) => {
+export const transformFilms = <T extends IFilmsgGetResponse>(filmsData: T) => {
   const result = {
     ...filmsData,
     mainImg: formatImgUrl(filmsData.mainImg),

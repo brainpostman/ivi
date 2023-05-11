@@ -1,3 +1,8 @@
+// === PROPS ===
+// @param value { * } - значение для капитализации певрого символа (toUpperCase)
+// @param options - параметры
+// @param options -> reverse - обратная капитализация первого символа (toLowerCase)
+
 export const formatCapitalize = (
   value: string,
   options?: { reverse?: boolean }

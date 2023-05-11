@@ -1,6 +1,5 @@
 .wrapper {
   height: 100%;
-  max-width: 100%;
 
   @include ui-padding(top, 4);
   @include ui-margin(bottom, 5);
@@ -8,6 +7,7 @@
 
 .back_button {
   position: absolute;
+
   align-self: flex-start;
   display: flex;
   align-items: center;
@@ -34,9 +34,6 @@
 }
 
 .modal_conteiner {
-  margin-left: auto;
-  margin-right: auto;
-  width: 1216px;
   display: flex;
   @include ui-padding(bottom, 6);
   @include ui-padding(top, 25);
@@ -44,11 +41,10 @@
 
 .modal_info {
   display: block;
-  width: 58%;
-  margin-left: 12.5%;
+  color: #fff;
+
   @include ui-padding(left, 3);
   @include ui-padding(right, 3);
-  color: #fff;
 
   &_title {
     @include ui-margin(bottom, 5);
@@ -68,20 +64,20 @@
 .persons_conteiner {
   display: flex;
   @include ui-margin(bottom, 4);
-  margin-right: -12px;
-  margin-left: -12px;
-  flex-wrap: wrap;
+
+  >img {
+    object-fit: cover;
+  }
 }
 
 .modal_poster {
-  width: 12.5%;
+  max-width: 200px;
+
   box-sizing: border-box;
-  padding-left: 12px;
-  padding-right: 12px;
   color: #fff;
 
   &_img {
-    border-radius: 8px 8px 8px 8px;
+    border-radius: 8px;
     @include ui-margin(bottom, 3);
   }
 
@@ -108,6 +104,10 @@
     font-weight: 400;
     color: #a5a1b2;
   }
+
+  @media (max-width: 880px) {
+    display: none;
+  }
 }
 
 .staff_grid_outer {
@@ -119,4 +119,20 @@
 .staff_grid {
   display: grid;
   grid-template-columns: repeat(4, auto);
+}
+
+.modal_poster_img {
+  position: relative;
+  width: 128px;
+  height: 196px;
+
+  @media (max-width: 1280px) {
+    @include adaptive-size(width, 128, 116, 1160, 1280);
+    @include adaptive-size(height, 196, 178, 1160, 1280);
+  }
+
+  @media (max-width: 1160px) {
+    @include adaptive-size(width, 162, 116, 880, 1160);
+    @include adaptive-size(height, 249, 178, 880, 1160);
+  }
 }

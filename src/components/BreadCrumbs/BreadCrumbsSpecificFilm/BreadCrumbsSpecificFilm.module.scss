@@ -1,0 +1,29 @@
+.list {
+  display: flex;
+  gap: 4px;
+
+  @include ui-margin(ver, 5);
+
+  >* {
+    color: #c3c3c6;
+
+    cursor: pointer;
+
+    transition: color 0.2s;
+
+    &:hover {
+      color: #fff;
+    }
+
+    &:not(:last-child) {
+      &::after {
+        content: '•';
+        display: inline-block;
+
+        color: #c3c3c6;
+
+        @include ui-margin(left, 1);
+      }
+    }
+  }
+}

@@ -1,29 +1,33 @@
 import ExpandBlock from '@/components/ExpandBlock/ExpandBlock'
-import TopTenList from '@/components/TopTenList/TopTenList'
+import React, { FC } from 'react'
 import IviRaiting from '@/components/IviRaiting/IviRaiting'
 import WatchActors from '@/components/WatchActors/WatchActors'
 import WatchBlock from '@/components/WatchBlock/WatchBlock'
 import WatchFooter from '@/components/WatchFooter/WatchFooter'
-import { filmDetails, filmDetailsVisible } from '@/data/watch.data'
 import PageLayout from '@/layouts/PageLayout/PageLayout'
-import React, { useState } from 'react'
 import { MdArrowBackIosNew } from 'react-icons/md'
-import style from './watch.module.scss'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { GetServerSideProps } from 'next'
 import { filmsAPI } from '@/api/queries/films.api'
-import { IMovie } from '@/types/films.api.interface'
+import { IMovie, IMovieById } from '@/types/films.api.interface'
 import TrailerBlock from '@/components/TrailerBlock/TrailerBlock'
 import FilmFields from '@/components/FilmFields/FilmFields'
 import FilmFeatures from '@/components/FilmFeatures/FilmFeatures'
 import FilmActors from '@/components/FilmActors/FilmActors'
 import WatchReviews from '@/components/WatchReviews/WatchReviews'
+import BreadCrumbsSpecificFilm from '@/components/BreadCrumbs/BreadCrumbsSpecificFilm/BreadCrumbsSpecificFilm'
+import Loader from '@/components/Loader/Loader'
+import MovieCarousel from '@/components/MovieCarousel/MovieCarousel'
+import style from './watch.module.scss'
+import styleMobile from './watch-mobile.module.scss'
 
 export const getServerSideProps: GetServerSideProps = async ({
   locale,
   params,
 }) => {
   const film = await filmsAPI.getFilmsById(Number(params!.id))
+  const { films } = await filmsAPI.getFilmsHomePage()
+
   return {
     props: {
       ...(await serverSideTranslations(locale ?? 'ru', [
@@ -33,15 +37,17 @@ export const getServerSideProps: GetServerSideProps = async ({
         'footer',
       ])),
       film,
+      films,
     },
   }
 }
 
 interface IProps {
-  film: IMovie
+  film: IMovieById
+  films: IMovie[]
 }
 
-const Film: React.FC<IProps> = ({ film }) => {
+const Film: FC<IProps> = ({ film, films }) => {
   return (
     <PageLayout title='Фильм'>
       <section className={style.wrapper}>
@@ -50,21 +56,37 @@ const Film: React.FC<IProps> = ({ film }) => {
           <p>Назад</p>
         </div>
 
-        <div className={style.conteiner}>
-          <TrailerBlock mainImg={film.mainImg} />
+        {/*MOBILE FILM TITLE*/}
+        <h1 className={styleMobile.film_title_mobile}>{film.name}</h1>
 
-          <div className={style.conteiner_info}>
-            <h1 className={style.conteiner_info__title}>{film.name}</h1>
+        {/*MOBILE FILM FIELDS*/}
+        <FilmFields film={film} className={styleMobile.film_fields_mobile} />
+        <FilmFeatures className={styleMobile.film_features_mobile} />
 
-            <FilmFields film={film} />
-            <FilmFeatures />
-            <FilmActors actors={film.actors.slice(0, 4)} />
+        <BreadCrumbsSpecificFilm genre={film.genres.split(',')[0]} />
 
-            <div className={style.wrapper_details}>
+        <div className={style.container}>
+          <TrailerBlock
+            mainImg={film.mainImg}
+            actors={film.actors.slice(0, 4)}
+          />
+
+          <div className={style.container_info}>
+            <h1 className={style.container_info__title}>{film.name}</h1>
+
+            <FilmFields film={film} className={style.film_fields} />
+            <FilmFeatures className={style.film_features} />
+
+            <div className={style.films_actors_wrapper}>
+              <FilmActors
+                actors={film.actors.slice(0, 4)}
+                className={styleMobile.film_actors_mobile}
+              />
+            </div>
+
+            <div className={style.expand_block_wrapper}>
               <ExpandBlock
                 visibleBlock={film.description}
-                width={450}
-                lineClamp={5}
                 expandWord='Детали о фильме'
               >
                 <WatchBlock />
@@ -74,7 +96,7 @@ const Film: React.FC<IProps> = ({ film }) => {
             <IviRaiting />
           </div>
         </div>
-        <TopTenList />
+        {films ? <MovieCarousel films={films} /> : <Loader />}
 
         <div className={style.actors_wrapper}>
           <h1>Актеры и создатели</h1>

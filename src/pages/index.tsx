@@ -14,6 +14,7 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import style from './index.module.scss'
 import Loader from '@/components/Loader/Loader'
 import { filmsAPI } from '@/api/queries/films.api'
+import MovieCarousel from '@/components/MovieCarousel/MovieCarousel'
 
 const imgLongButton_1 =
   'https://solea-parent.dfs.ivi.ru/picture/ffffff,ffffff/lightning.svg'
@@ -53,16 +54,6 @@ interface IProps {
   firstCarouselFilms: IMovie[] | undefined
   secondCarouselFilms: IMovie[] | undefined
 }
-
-const breakpoints = [
-  { point: 1272, view: 6 },
-  { point: 1096, view: 5 },
-  { point: 920, view: 4 },
-  { point: 744, view: 3 },
-  { point: 599, view: 4 },
-  { point: 512, view: 3 },
-  { point: 392, view: 2 },
-]
 
 const Home: NextPage<IProps> = ({
   firstCarouselFilms,
@@ -104,43 +95,13 @@ const Home: NextPage<IProps> = ({
 
       <section className={style.carousels}>
         {firstCarouselFilms ? (
-          <CustomCarousel
-            title={t('carousel-title-1')}
-            href='/'
-            additElem={<ViewAllBlock />}
-            elementsMove={5}
-            elementsView={7}
-            space={[24, 24]}
-            breakpoints={breakpoints}
-            classNameList={style.movie_carousel_list}
-            padding={6}
-            width='fit'
-          >
-            {firstCarouselFilms.map(movie => (
-              <MovieCard key={movie.id} movie={movie} />
-            ))}
-          </CustomCarousel>
+          <MovieCarousel films={firstCarouselFilms} />
         ) : (
           <Loader />
         )}
 
         {secondCarouselFilms ? (
-          <CustomCarousel
-            title={t('carousel-title-2')}
-            href='/'
-            additElem={<ViewAllBlock />}
-            elementsMove={5}
-            elementsView={7}
-            space={[24, 24]}
-            breakpoints={breakpoints}
-            classNameList={style.movie_carousel_list}
-            padding={6}
-            width='fit'
-          >
-            {secondCarouselFilms.map(movie => (
-              <MovieCard key={movie.id} movie={movie} />
-            ))}
-          </CustomCarousel>
+          <MovieCarousel films={secondCarouselFilms} />
         ) : (
           <Loader />
         )}

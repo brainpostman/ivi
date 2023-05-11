@@ -4,7 +4,25 @@
 
 .container {
   display: flex;
-  justify-content: space-between;
+  gap: 12px;
+
+  >button {
+    @media (max-width: 599px) {
+      width: 72px;
+      height: 72px;
+    }
+  }
+}
+
+.person_img_wrapper {
+  position: relative;
+  width: 88px;
+  height: 88px;
+
+  @media (max-width: 599px) {
+    width: 72px;
+    height: 72px;
+  }
 }
 
 .card {

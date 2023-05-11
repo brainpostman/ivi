@@ -1,9 +1,14 @@
 import Image from 'next/image'
 import style from './FilmFeatures.module.scss'
+import { FC } from 'react'
 
-const FilmFeatures = () => {
+interface IProps {
+  className?: string
+}
+
+const FilmFeatures: FC<IProps> = ({ className = '' }) => {
   return (
-    <div className={style.wrapper}>
+    <div className={`${style.wrapper} ${className}`}>
       <div className={style.icon_fullhd}>
         <div className={style.icon_text}> FullHD </div>
       </div>

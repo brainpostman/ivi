@@ -18,13 +18,14 @@ import Loader from '@/components/Loader/Loader'
 import { IFilterGetResponse } from '@/types/filters.api.interface'
 import { formatFilmsParams } from '@/formatters/filmsParams.format'
 import { filtersAPI } from '@/api/queries/filters.api'
+import BreadCrumbsFilms from '@/components/BreadCrumbs/BreadCrumbsFilms/BreadCrumbsFilms'
 
 export const getStaticProps: GetStaticProps = async ({ locale, params }) => {
   const defaultParams: IFilmsGetRequest = { take: 14, page: 1 }
   const currentParams = { ...formatFilmsParams(params), ...defaultParams }
 
   const { films, totalCount } = await filmsAPI.getFilms(currentParams)
-  const genres = await filtersAPI.getGenres()
+  const genres = await filtersAPI.getGenres(locale ?? 'ru')
   const countries = await filtersAPI.getCountries()
   const directors = await filtersAPI.getDirectors()
   const actors = await filtersAPI.getActors()
@@ -73,6 +74,8 @@ const MoviesPage: NextPage<IProps> = ({
   const [isClickedViewMore, setIsClickedViewMore] = useState(false)
   const [page, setPage] = useState(2)
   const [films, setFilms] = useState<IMovie[]>(defaultFilms)
+
+  const urlGenres = (router.query.genres as string) || ''
 
   const [isLoading, setIsLoading] = useState(true)
 
@@ -145,7 +148,7 @@ const MoviesPage: NextPage<IProps> = ({
   return (
     <PageLayout title={t('html-title')}>
       <section className={style.wrapper}>
-        {/*BREAD CRUMBS*/}
+        <BreadCrumbsFilms genres={urlGenres} />
         <h1 className={style.title}>{t('heading')}</h1>
         <ExpandBlock
           visibleBlock={t('movie-page-info', { returnObjects: true })[0]}

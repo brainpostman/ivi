@@ -1,9 +1,12 @@
 .info {
   display: flex;
   flex-direction: column;
+
+  width: 100% !important;
+
   color: $gray-soft;
   @include font(2);
-  
+
   &__title {
     color: #fff;
 

@@ -1,4 +1,7 @@
-export const formatSliderQuery = (query: string) => {
+// === PROPS ===
+// @param { * } query - название параметра в url
+
+export const formatPairSliderQuery = (query: string) => {
   if (query?.length < 1) {
     console.error('ERROR QUERY LENGTH')
     return { minValueStr: 'min', maxValueStr: 'max' }

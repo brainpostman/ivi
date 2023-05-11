@@ -5,16 +5,17 @@ import { formatCapitalize } from '@/formatters/capitalize.format'
 
 interface IProps {
   film: IMovie
+  className?: string
 }
 
-const FilmFields: FC<IProps> = ({ film }) => {
+const FilmFields: FC<IProps> = ({ film, className = '' }) => {
   const specificCountry = film.countries.split(',')[0]
   const formattedGenres = film.genres
     .split(',')
     .map(genre => formatCapitalize(genre))
 
   return (
-    <div className={style.wrapper}>
+    <div className={`${style.wrapper} ${className}`}>
       <p>
         <span className={style.filter}>{film.year}</span> {film.time} {film.age}
       </p>

@@ -3,10 +3,14 @@ import { IFilterGetResponse } from '@/types/filters.api.interface'
 import { toast } from 'react-toastify'
 import { transformFilter } from '../transforms/filter.transform'
 import { customAxios } from './customAxios'
+import { ICrudGenre } from '@/types/ICrudMovie'
 
 export const filtersAPI = {
-  getGenres() {
-    return getGenres()
+  getGenres(locale: string) {
+    return getGenres(locale)
+  },
+  getCrudGenres() {
+    return getCrudGenres()
   },
   getCountries() {
     return getCountries()
@@ -19,14 +23,25 @@ export const filtersAPI = {
   },
 }
 
-const getGenres = async (): Promise<IFilterGetResponse[]> => {
+const getGenres = async (locale: string): Promise<IFilterGetResponse[]> => {
   try {
     const genresData = await customAxios.get<IFilterGetResponse[]>('/genres')
 
-    const genres = genresData.data.map(genre =>
-      transformFilter(genre, formatCapitalize)
-    )
+    const genres = genresData.data.map(genre => {
+      const name = genre.name_en && locale !== 'ru' ? genre.name_en : genre.name
+      return transformFilter({ id: genre.id, name }, formatCapitalize)
+    })
     return genres
+  } catch (error) {
+    toast.error('Ошибка при получении жанров!')
+    return []
+  }
+}
+
+const getCrudGenres = async (): Promise<ICrudGenre[]> => {
+  try {
+    const response = await customAxios.get<ICrudGenre[]>('/genres')
+    return response.data
   } catch (error) {
     toast.error('Ошибка при получении жанров!')
     return []
