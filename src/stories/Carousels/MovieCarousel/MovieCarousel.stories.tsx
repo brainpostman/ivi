@@ -1,5 +1,4 @@
 import { transformFilms } from '@/api/transforms/films.transform'
-import CustomCarousel from '@/components/CustomCarousel/CustomCarousel'
 import MovieCarousel from '@/components/MovieCarousel/MovieCarousel'
 import { tmpFilms } from '@/data/films.data'
 import { Meta, StoryObj } from '@storybook/react'
@@ -83,7 +82,19 @@ const meta: Meta = {
 
 export const Primary = ({ films: filmsIncoming, ...props }: IProps) => {
   const films = filmsIncoming.map(film => transformFilms(film))
-  return <MovieCarousel films={films} {...props} />
+  return (
+    <div
+      style={{
+        backgroundColor: '#000',
+        width: '1300px',
+        paddingLeft: '12px',
+        paddingTop: '12px',
+        paddingBottom: '12px',
+      }}
+    >
+      <MovieCarousel films={films} {...props} />
+    </div>
+  )
 }
 
 Primary.args = {
@@ -93,7 +104,7 @@ Primary.args = {
   elementsMove: 5,
   elementsView: 7,
   arrowSize: 24,
-  space: 24,
+  space: [24, 24],
   speed: 400,
   padding: 6,
   viewMoreBlock: true,
