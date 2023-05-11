@@ -33,7 +33,7 @@ $active-color: #0e0c14;
     height: 18px;
   }
 
-  > a {
+  >a {
     color: #fff;
   }
 }
@@ -111,4 +111,14 @@ $active-color: #0e0c14;
 
   width: 10px;
   height: 10px;
+}
+
+
+.dark {
+  background-color: #ffffff14;
+  color: #ffffffb8;
+
+  &:hover {
+    background-color: #ffffff29;
+  }
 }

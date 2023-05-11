@@ -26,4 +26,5 @@ export interface IBasicBtnProps
   title?: string
   target?: HTMLAttributeAnchorTarget
   circle?: boolean
+  dark?: boolean
 }
