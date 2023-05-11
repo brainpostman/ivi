@@ -1,20 +1,21 @@
 import { transformFilms } from '@/api/transforms/films.transform'
 import CustomCarousel from '@/components/CustomCarousel/CustomCarousel'
-import MovieCard from '@/components/MovieCard/MovieCard'
-import ViewAllBlock from '@/components/ViewAllBlock/ViewAllBlock'
+import MovieCarousel from '@/components/MovieCarousel/MovieCarousel'
 import { tmpFilms } from '@/data/films.data'
+import { Meta, StoryObj } from '@storybook/react'
+import { IFilmsgGetResponse } from '@/types/films.api.interface'
 import { ICustomCarouselProps } from '@/types/customCarousel.interface'
-import { Meta } from '@storybook/react'
 
-const breakpoints = [
-  { point: 1272, view: 6 },
-  { point: 1096, view: 5 },
-  { point: 920, view: 4 },
-  { point: 744, view: 3 },
-  { point: 599, view: 4 },
-  { point: 512, view: 3 },
-  { point: 392, view: 2 },
-]
+type Story = StoryObj<typeof MovieCarousel>
+
+type IProps = Omit<
+  ICustomCarouselProps,
+  'elementsMove' | 'elementsView' | 'children'
+> & {
+  elementsMove?: number
+  elementsView?: number
+  films: IFilmsgGetResponse[]
+}
 
 const meta: Meta = {
   title: 'Carousels/MovieCarousel',
@@ -25,8 +26,9 @@ const meta: Meta = {
       },
     },
   },
-  component: CustomCarousel,
+  component: MovieCarousel,
   argTypes: {
+    films: { table: { disable: true } },
     classNameWrapper: { table: { disable: true } },
     classNameList: { table: { disable: true } },
     // TODO: сделать активными
@@ -79,51 +81,23 @@ const meta: Meta = {
   },
 }
 
-export const Primary = ({
-  space: spaceIncoming,
-  additElem: additElemIncoming,
-  viewMoreBlock = true,
-  ...props
-}: Omit<ICustomCarouselProps, 'space'> & {
-  space: number
-  viewMoreBlock?: boolean
-}) => {
-  const space = [spaceIncoming, spaceIncoming]
-  const additElem = viewMoreBlock ? additElemIncoming : <></>
-  return (
-    <div
-      style={{
-        backgroundColor: '#000',
-        width: '1300px',
-        paddingLeft: '32px',
-        paddingTop: '12px',
-        paddingBottom: '12px',
-      }}
-    >
-      <CustomCarousel space={space} additElem={additElem} {...props}>
-        {tmpFilms
-          .map(movie => transformFilms(movie))
-          .map((movie, index) => (
-            <MovieCard key={index} movie={movie} />
-          ))}
-      </CustomCarousel>
-    </div>
-  )
+export const Primary = ({ films: filmsIncoming, ...props }: IProps) => {
+  const films = filmsIncoming.map(film => transformFilms(film))
+  return <MovieCarousel films={films} {...props} />
 }
 
 Primary.args = {
-  title: 'Карусель',
+  title: 'Название карусели',
   href: '/',
-  additElem: <ViewAllBlock />,
+  films: tmpFilms,
   elementsMove: 5,
   elementsView: 7,
-  space: 24,
   arrowSize: 24,
-  breakpoints,
-  padding: 6,
+  space: 24,
   speed: 400,
-  width: 'fit',
+  padding: 6,
   viewMoreBlock: true,
+  width: 'fit',
 }
 
 export default meta
