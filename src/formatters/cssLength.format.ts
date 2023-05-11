@@ -1,3 +1,6 @@
+// === PROPS ===
+// @param length - длина в пикселях или процентах
+
 const formatCssLength = (length: string | number) => {
   const stringedLen = length.toString()
 
