@@ -1,0 +1,31 @@
+.film_title_mobile {
+  color: #fff;
+
+  font-size: 32px;
+  line-height: 36px;
+  font-weight: 700;
+
+  @include ui-margin(bottom, 5);
+
+  @media (min-width: 1160px) {
+    display: none;
+  }
+}
+
+.film_fields_mobile {
+  @media (min-width: 1160px) {
+    display: none;
+  }
+}
+
+.film_features_mobile {
+  @media (min-width: 1160px) {
+    display: none !important;
+  }
+}
+
+.film_actors_mobile {
+  @media (max-width: 1159px) {
+    display: none !important;
+  }
+}

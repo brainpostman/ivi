@@ -87,7 +87,7 @@ const FilterBlock: FC<IProps> = ({
   }, [router.query])
 
   return (
-    <section className={style.wrapper}>
+    <section className={`${style.wrapper} ${propsClassName}`}>
       <FilterListBig
         filterData={genreFilterData}
         list={genres}

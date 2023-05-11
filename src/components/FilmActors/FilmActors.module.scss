@@ -1,7 +1,10 @@
 .wrapper {
   display: flex;
+  justify-content: space-between;
+
+  width: 100%;
+
   color: rgba(255, 255, 255, .8);
-  justify-content: space-around;
   @include ui-margin(top, 4);
 }
 
@@ -23,6 +26,11 @@
     >p {
       color: #fff;
     }
+  }
+
+  @media (max-width: 880px) {
+    @include adaptive-size(width, 56, 44, 320, 880);
+    @include adaptive-size(height, 56, 44, 320, 880);
   }
 }
 

@@ -1,7 +1,7 @@
 .wrapper {
   display: flex;
   gap: 6px;
-  @include ui-padding(left, 37);
+
   @include ui-margin(top, 1);
 }
 

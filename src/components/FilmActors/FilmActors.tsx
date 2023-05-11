@@ -5,11 +5,12 @@ import { FC } from 'react'
 
 interface IProps {
   actors: IStaff[]
+  className?: string
 }
 
-const FilmActors: FC<IProps> = ({ actors }) => {
+const FilmActors: FC<IProps> = ({ actors, className }) => {
   return (
-    <div className={style.wrapper}>
+    <div className={`${style.wrapper} ${className}`}>
       <div className={style.card}>
         <div className={style.wrapper_img}>
           <div className={style.iviRaiting}>

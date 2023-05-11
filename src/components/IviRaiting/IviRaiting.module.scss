@@ -14,6 +14,10 @@
 
   @include ui-padding(default, 3);
   @include ui-margin(ver, 8);
+
+  @media (max-width: 1159px) {
+    max-width: 684px;
+  }
 }
 
 .wrapper_rating {

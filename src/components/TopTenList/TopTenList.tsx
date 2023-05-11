@@ -6,13 +6,18 @@ import TopTenListCard from '../TopTenListCard/TopTenListCard'
 import style from './TopTenList.module.scss'
 import { useTranslation } from 'next-i18next'
 import { useRouter } from 'next/router'
+import { FC } from 'react'
 
-const TopTenList: React.FC = () => {
+interface IProps {
+  className?: string
+}
+
+const TopTenList: FC<IProps> = ({ className = '' }) => {
   const { t } = useTranslation('home')
   const { locale } = useRouter()
 
   return (
-    <div className={style.wrapper}>
+    <div className={`${style.wrapper} ${className}`}>
       <div className={style.container}>
         <div className={style.title}>
           {locale === 'ru' ? (

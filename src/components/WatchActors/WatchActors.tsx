@@ -1,33 +1,49 @@
 import style from './WatchActors.module.scss'
 import React, { useState } from 'react'
-import WatchModal from '../WatchModal/WatchModal'
-import { MdArrowBackIosNew } from 'react-icons/md'
 import Image from 'next/image'
-import { IMovie } from '@/types/films.api.interface'
+import { IMovieById } from '@/types/films.api.interface'
 import ModalWindow from '../ModalWindow/ModalWindow'
 import StaffsWindow from '../StaffsWindow/StaffsWindow'
+import { useBreakPoints } from '@/hooks/useBreakPoints'
+
+const breakpoints = [
+  { point: 1160, view: 8 },
+  { point: 1060, view: 7 },
+  { point: 948, view: 6 },
+  { point: 835, view: 5 },
+  { point: 724, view: 4 },
+  { point: 612, view: 3 },
+  { point: 599, view: 5 },
+  { point: 580, view: 4 },
+  { point: 472, view: 3 },
+  { point: 385, view: 2 },
+]
 
 interface IProps {
-  film: IMovie
+  film: IMovieById
 }
 
 const WatchActors: React.FC<IProps> = ({ film }) => {
   const [isShowModal, setIsShowModal] = useState(false)
+  const [staffsView, setStaffsView] = useState(10)
 
   const closeModal = () => setIsShowModal(false)
+
+  useBreakPoints(setStaffsView, 10, breakpoints)
 
   return (
     <div className={style.wrapper}>
       <div className={style.container}>
-        {film.actors.map(actor => (
+        {film.actors.slice(0, staffsView).map(actor => (
           <div key={actor.id} className={style.card}>
-            <Image
-              src='/film/noPhotoIcon60x60.png'
-              width={88}
-              height={88}
-              alt={actor.name}
-              className={style.card__img}
-            />
+            <div className={style.person_img_wrapper}>
+              <Image
+                src='/film/noPhotoIcon60x60.png'
+                alt={actor.name}
+                className={style.card__img}
+                fill
+              />
+            </div>
             <p className={style.card__name}>{actor.name}</p>
             <p className={style.card__title}>актер</p>
           </div>

@@ -10,13 +10,14 @@ interface IProps {
 const StaffCard: FC<IProps> = ({ staff }) => {
   return (
     <div className={style.container}>
-      <Image
-        src='/film/noPhotoIcon60x60.png'
-        width={128}
-        height={128}
-        alt={staff.name}
-        className={style.img}
-      />
+      <div className={style.wrapper_img}>
+        <Image
+          src='/film/noPhotoIcon60x60.png'
+          alt={staff.name}
+          className={style.img}
+          fill
+        />
+      </div>
       <p className={style.name}>{staff.name}</p>
     </div>
   )
