@@ -1,17 +1,14 @@
 import {
+  IFilmByIdGetResponse,
   IFilmsGetRequest,
   IFilmsgGetResponse,
   IMovie,
+  IMovieById,
 } from '@/types/films.api.interface'
 import { toast } from 'react-toastify'
 import { transformFilms } from '../transforms/films.transform'
 import { customAxios } from './customAxios'
-import {
-  CrudFilm,
-  ICrudDetailedFilm,
-  ICrudFilm,
-  IFilmJson,
-} from '@/types/ICrudMovie'
+import { CrudFilm, ICrudFilm, IFilmJson } from '@/types/ICrudMovie'
 
 export const filmsAPI = {
   getFilms(params?: IFilmsGetRequest) {
@@ -38,13 +35,9 @@ const getFilms = async (
     const films = filmsData.data.map(film => transformFilms(film))
     const totalCount = filmsData.headers['x-total-count']
 
-    console.log(films)
-
-    console.log(filmsData.data)
-
     return { films, totalCount }
-  } catch (error) {
-    toast.error('Ошибка при получении фильмов!')
+  } catch (error: any) {
+    toast.error(error)
     return { films: [], totalCount: 0 }
   }
 }
@@ -67,15 +60,15 @@ const getCrudFilms = async (
   }
 }
 
-const getFilmsById = async (id: number): Promise<IMovie | undefined> => {
+const getFilmsById = async (id: number): Promise<IMovieById | undefined> => {
   try {
-    const filmData = await customAxios.get<IFilmsgGetResponse>(`/films/${id}`)
+    const filmData = await customAxios.get<IFilmByIdGetResponse>(`/films/${id}`)
 
     const film = transformFilms(filmData.data)
 
     return film
-  } catch (error) {
-    toast.error('Ошибка при получении фильма')
+  } catch (error: any) {
+    toast.error(error)
     return undefined
   }
 }
