@@ -32,6 +32,7 @@ const getFilms = async (
     const filmsData = await customAxios.get<IFilmsgGetResponse[]>('/films', {
       params,
     })
+
     const films = filmsData.data.map(film => transformFilms(film))
     const totalCount = filmsData.headers['x-total-count']
 
