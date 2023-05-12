@@ -6,8 +6,8 @@ describe('carouselWidth formatter', () => {
   // with = full
   it('Check width full', () => {
     const carouselWidth = formatCarouselWidth('full', 12)
-    const checkCarouselWidth = carouselWidth === 1225
-    expect(checkCarouselWidth).toBeTruthy()
+    const correctWidth = 1225
+    expect(carouselWidth).toBe(correctWidth)
   })
 
   // width = fit
@@ -15,9 +15,7 @@ describe('carouselWidth formatter', () => {
     const carouselWidth = formatCarouselWidth('fit', 12, 0, elementLens, 3)
     const correctWidth = 888
 
-    const checkCarouselWidth = carouselWidth === correctWidth
-
-    expect(checkCarouselWidth).toBeTruthy()
+    expect(carouselWidth).toBe(correctWidth)
   })
 
   it('Check width fit-shadow', () => {
@@ -29,17 +27,15 @@ describe('carouselWidth formatter', () => {
       3
     )
     const correctWidth = 1050
-    const checkCarouselWidth = carouselWidth === correctWidth
 
-    expect(checkCarouselWidth).toBeTruthy()
+    expect(carouselWidth).toBe(correctWidth)
   })
 })
 
 describe('carouselWidth formatter error', () => {
   it('Wrong props', () => {
     const carouselWidth = formatCarouselWidth('fit', 12)
-    const checkCarouselWidth = carouselWidth === 0
 
-    expect(checkCarouselWidth).toBeTruthy()
+    expect(carouselWidth).toBe(0)
   })
 })

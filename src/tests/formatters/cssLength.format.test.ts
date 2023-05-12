@@ -41,8 +41,7 @@ describe('cssLength formatter ERROR', () => {
   // Проверяем некорректную строку
   it('Check wrong value', () => {
     const formtattedValue = formatCssLength(testError)
-    const result = formtattedValue === '0px'
 
-    expect(result).toBeTruthy()
+    expect(formtattedValue).toBe('0px')
   })
 })

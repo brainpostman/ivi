@@ -9,21 +9,15 @@ describe('PAIR SLIDER QUERY', () => {
     const { maxValueStr, minValueStr } = formatPairSliderQuery(testQueryParam)
     const formattedQueryParam = formatCapitalize(testQueryParam)
 
-    const checkMaxValueStr = `max${formattedQueryParam}` === maxValueStr
-    const checkMinValueStr = `min${formattedQueryParam}` === minValueStr
-
-    expect(checkMaxValueStr).toBeTruthy()
-    expect(checkMinValueStr).toBeTruthy()
+    expect(maxValueStr).toBe(`max${formattedQueryParam}`)
+    expect(minValueStr).toBe(`min${formattedQueryParam}`)
   })
 
   it('Check error query param', () => {
     const { maxValueStr, minValueStr } =
       formatPairSliderQuery(errorTestQueryParam)
 
-    const checkMaxValueStr = maxValueStr === 'max'
-    const checkMinValueStr = minValueStr === 'min'
-
-    expect(checkMaxValueStr).toBeTruthy()
-    expect(checkMinValueStr).toBeTruthy()
+    expect(maxValueStr).toBe('max')
+    expect(minValueStr).toBe('')
   })
 })
