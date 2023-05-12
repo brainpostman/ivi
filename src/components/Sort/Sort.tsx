@@ -3,19 +3,20 @@ import { useEffect, useState } from 'react';
 import { MdArrowBackIosNew } from 'react-icons/md';
 import style from './Sort.module.scss';
 import SortDirection from './SortDirection/SortDirection';
+import { ISortType } from '@/types/filterBlock.interface';
+import { useTranslation } from 'next-i18next';
 
-const listData = [
-    { id: 1, name: 'premiere', view: 'По популярности' },
-    { id: 2, name: 'scoreAVG', view: 'По оценкам' },
-    { id: 3, name: 'ratingAVG', view: 'По рейтингу' },
-    { id: 4, name: 'name', view: 'По алфавиту' },
-];
+interface ISortProps {
+    sortTypes: ISortType[];
+    defaultType: string;
+}
 
-const Sort = () => {
+const Sort = ({ sortTypes, defaultType }: ISortProps) => {
     const [isExpand, setIsExpand] = useState(false);
+    const { t } = useTranslation('movies');
 
     const { list: sorts, onClickListEl } = useSetListParam(
-        listData.map((data) => ({
+        sortTypes.map((data) => ({
             ...data,
             isSelect: false,
         })),
@@ -31,10 +32,10 @@ const Sort = () => {
     };
 
     useEffect(() => {
-        onClickListEl('premiere')();
+        onClickListEl(defaultType)();
     }, []);
 
-    if (!currentSort) return <></>;
+    //if (!currentSort) return <></>;
 
     return (
         <div className={style.wrapper}>
@@ -44,7 +45,7 @@ const Sort = () => {
                     <div></div>
                     <div></div>
                 </div>
-                <p>{currentSort.view}</p>
+                <p>{currentSort ? currentSort.view : t('sort')}</p>
                 <MdArrowBackIosNew
                     className={`${style.arrow} ${isExpand ? style.arrow__active : ''}`}
                 />
@@ -52,7 +53,7 @@ const Sort = () => {
 
             {!!isExpand && (
                 <div className={style.wrapper_list}>
-                    <p className={style.wrapper_list__title}>Сортировать</p>
+                    <p className={style.wrapper_list__title}>{t('sort')}</p>
                     <ul className={style.list}>
                         {sorts.map((sort) => (
                             <li

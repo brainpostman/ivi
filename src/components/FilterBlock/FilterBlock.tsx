@@ -1,6 +1,3 @@
-import { filterCountryData } from '@/data/filterCountry.data';
-import { filterGenreData } from '@/data/filterGenre.data';
-import { filterYearData } from '@/data/filterYear.data';
 import { useFilter } from '@/hooks/useFilter';
 import { IFilterBlockEl } from '@/types/filterBlock.interface';
 import { useTranslation } from 'next-i18next';
@@ -31,6 +28,7 @@ interface IProps {
     directors: IFilterGetResponse[];
     actors: IFilterGetResponse[];
     className?: string;
+    clearSort?: boolean;
 }
 
 const FilterBlock: FC<IProps> = ({
@@ -39,6 +37,7 @@ const FilterBlock: FC<IProps> = ({
     directors,
     actors,
     className: propsClassName,
+    clearSort = true,
 }) => {
     const router = useRouter();
     const { t } = useTranslation('movies');
@@ -65,7 +64,7 @@ const FilterBlock: FC<IProps> = ({
 
         const filteredParamKeys = paramKeys.filter((el) => !['orderBy', 'order'].includes(el));
 
-        if (!filteredParamKeys.length) {
+        if (!filteredParamKeys.length && clearSort) {
             clearFilters();
         }
     }, [router.query]);
@@ -95,7 +94,11 @@ const FilterBlock: FC<IProps> = ({
                 ))}
             </FilterListBig>
 
-            <FilterListSmall filterData={yearFilterData} list={filterYearData} query='year' />
+            <FilterListSmall
+                filterData={yearFilterData}
+                list={t('years', { returnObjects: true })}
+                query='year'
+            />
 
             <FilterSuggest
                 filterData={producerFilterData}

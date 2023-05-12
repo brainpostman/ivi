@@ -1,46 +1,37 @@
-import { useSetListParam } from '@/hooks/useSetListParam'
-import { useEffect } from 'react'
-import { GoArrowLeft } from 'react-icons/go'
-import style from './SortDirection.module.scss'
+import { useSetListParam } from '@/hooks/useSetListParam';
+import { useEffect } from 'react';
+import { GoArrowLeft } from 'react-icons/go';
+import style from './SortDirection.module.scss';
 
 const defaultDirections = [
-  { id: 1, name: 'ASC', view: 'Вверх', isSelect: false },
-  { id: 2, name: 'DESC', view: 'Вниз', isSelect: false },
-]
+    { id: 1, name: 'ASC', view: 'Вверх', isSelect: false },
+    { id: 2, name: 'DESC', view: 'Вниз', isSelect: false },
+];
 
 const SortDirection = () => {
-  const { list: directions, onClickListEl } = useSetListParam(
-    defaultDirections,
-    'order',
-    {
-      filterType: 'radio',
-    }
-  )
+    const { list: directions, onClickListEl } = useSetListParam(defaultDirections, 'order', {
+        filterType: 'radio',
+    });
 
-  const currentDicrection = directions.find(el => el.isSelect)
-  const nextDirection = directions.find(el => !el.isSelect)
+    const currentDicrection = directions.find((el) => el.isSelect);
+    const nextDirection = directions.find((el) => !el.isSelect);
 
-  const onClickDirect = (_param: string) => () => {
-    onClickListEl(_param)()
-  }
+    const onClickDirect = (_param: string) => () => {
+        onClickListEl(_param)();
+    };
 
-  useEffect(() => {
-    onClickListEl('ASC')()
-  }, [])
+    useEffect(() => {
+        onClickListEl('ASC')();
+    }, []);
 
-  if (!currentDicrection) return <></>
+    //if (!currentDicrection) return <></>;
 
-  return (
-    <div
-      className={style.wrapper}
-      onClick={onClickDirect(nextDirection?.name || '')}
-    >
-      <GoArrowLeft
-        className={currentDicrection?.name === 'DESC' ? style.down : ''}
-      />
-      <p>{currentDicrection.view}</p>
-    </div>
-  )
-}
+    return (
+        <div className={style.wrapper} onClick={onClickDirect(nextDirection?.name || '')}>
+            <GoArrowLeft className={currentDicrection?.name === 'DESC' ? style.down : ''} />
+            <p>{currentDicrection?.view}</p>
+        </div>
+    );
+};
 
-export default SortDirection
+export default SortDirection;

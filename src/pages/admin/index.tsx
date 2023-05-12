@@ -6,12 +6,11 @@ import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { useEffect, useRef, useState } from 'react';
 import { authOptions } from '../api/auth/[...nextauth]';
-import styles from './index.module.scss';
 import { checkAdminRole, checkAdminSession, getSerializableSession } from '@/utils/auth.util';
 import { Session } from 'next-auth';
 import { useRouter } from 'next/router';
 import AdminMovie from '@/components/AdminMovie/AdminMovie';
-import { ICrudGenre, CrudGenre, ICrudFilm } from '@/types/ICrudMovie';
+import { ICrudGenre, ICrudFilm } from '@/types/ICrudMovie';
 import Link from 'next/link';
 import AdminGenres from '@/components/AdminGenres/AdminGenres';
 import { IFilmsGetRequest } from '@/types/films.api.interface';
@@ -23,6 +22,7 @@ import { useSession } from 'next-auth/react';
 import LanguageSwitcher from '@/components/LanguageSwitcher/LanguageSwitcher';
 import Loader from '@/components/Loader/Loader';
 import Sort from '@/components/Sort/Sort';
+import styles from './index.module.scss';
 
 interface IAdminProps {
     authSession: Session;
@@ -85,7 +85,7 @@ export default function Admin({
     actors,
     totalCount,
 }: IAdminProps) {
-    const { t } = useTranslation('admin');
+    const { t } = useTranslation();
     const router = useRouter();
     const [chosenTable, setChosenTable] = useState('movies');
     const { status } = useSession();
@@ -150,19 +150,15 @@ export default function Admin({
 
     useEffect(() => {
         if (!defaultFilms || isLoadedFirstFilms) return;
-
         setIsLoadedFirstFilms(true);
         setIsLoading(false);
     }, [defaultFilms]);
 
     useEffect(() => {
+        if (!isLoading || !isLoadedFirstFilms) return;
         if (chosenTable === 'movies') {
-            if (!isLoading || !isLoadedFirstFilms) return;
-
             getFilmsWithParams();
         } else {
-            if (!isLoading) return;
-
             filtersAPI
                 .getCrudGenres()
                 .then((genres) => {
@@ -187,7 +183,7 @@ export default function Admin({
     }, [router.query]);
 
     return (
-        <BasicLayout title={t('html-title')}>
+        <BasicLayout title={t('admin:html-title')}>
             <div className={styles.wrapper}>
                 <div className={styles.header}>
                     <div></div>
@@ -200,14 +196,19 @@ export default function Admin({
                         <article>
                             {chosenTable === 'movies' && (
                                 <>
-                                    {' '}
-                                    {!!Object.keys(router.query).length && <Sort />}
+                                    <Sort
+                                        sortTypes={t('movies:sortTypes', {
+                                            returnObjects: true,
+                                        })}
+                                        defaultType={'name'}
+                                    />
                                     <FilterBlock
                                         countries={countries}
                                         genres={filterGenres}
                                         directors={directors}
                                         actors={actors}
                                         className={styles.filters}
+                                        clearSort={false}
                                     />
                                 </>
                             )}
