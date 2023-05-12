@@ -15,9 +15,9 @@ import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 import style from './index.module.scss'
 import Loader from '@/components/Loader/Loader'
-import { IFilterGetResponse } from '@/types/filters.api.interface'
+import { IStaffGetResponse } from '@/types/filters.api.interface'
 import { formatFilmsParams } from '@/formatters/filmsParams.format'
-import { filtersAPI } from '@/api/queries/filters.api'
+import { staffsAPI } from '@/api/queries/staffs.api'
 import BreadCrumbsFilms from '@/components/BreadCrumbs/BreadCrumbsFilms/BreadCrumbsFilms'
 
 export const getStaticProps: GetStaticProps = async ({ locale, params }) => {
@@ -25,10 +25,10 @@ export const getStaticProps: GetStaticProps = async ({ locale, params }) => {
   const currentParams = { ...formatFilmsParams(params), ...defaultParams }
 
   const { films, totalCount } = await filmsAPI.getFilms(currentParams)
-  const genres = await filtersAPI.getGenres(locale ?? 'ru')
-  const countries = await filtersAPI.getCountries()
-  const directors = await filtersAPI.getDirectors()
-  const actors = await filtersAPI.getActors()
+  const genres = await staffsAPI.getGenres(locale ?? 'ru')
+  const countries = await staffsAPI.getCountries()
+  const directors = await staffsAPI.getDirectors()
+  const actors = await staffsAPI.getActors()
 
   return {
     props: {
@@ -52,10 +52,10 @@ export const getStaticProps: GetStaticProps = async ({ locale, params }) => {
 
 interface IProps {
   defaultFilms: IMovie[]
-  genres: IFilterGetResponse[]
-  countries: IFilterGetResponse[]
-  directors: IFilterGetResponse[]
-  actors: IFilterGetResponse[]
+  genres: IStaffGetResponse[]
+  countries: IStaffGetResponse[]
+  directors: IStaffGetResponse[]
+  actors: IStaffGetResponse[]
   totalCount: number
 }
 

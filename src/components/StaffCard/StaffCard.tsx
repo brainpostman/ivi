@@ -1,10 +1,10 @@
 import Image from 'next/image'
 import style from './StaffCard.module.scss'
-import { IStaff } from '@/types/films.api.interface'
+import { IStaffGetResponse } from '@/types/staffs.interface'
 import { FC } from 'react'
 
 interface IProps {
-  staff: IStaff
+  staff: IStaffGetResponse
 }
 
 const StaffCard: FC<IProps> = ({ staff }) => {

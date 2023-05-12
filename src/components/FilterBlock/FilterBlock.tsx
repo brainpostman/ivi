@@ -14,7 +14,7 @@ import FilterListBig from './FilterListBig/FilterListBig'
 import FilterListSmall from './FilterListSmall/FilterListSmall'
 import FilterSlider from './FilterSlider/FilterSlider'
 import FilterSuggest from './FilterSuggest/FilterSuggest'
-import { IFilterGetResponse } from '@/types/filters.api.interface'
+import { IStaffGetResponse } from '@/types/staffs.interface'
 import { useSetListParam } from '@/hooks/useSetListParam'
 
 const filterList: Omit<IFilterBlockEl, 'isExpand'>[] = [
@@ -27,10 +27,10 @@ const filterList: Omit<IFilterBlockEl, 'isExpand'>[] = [
 ]
 
 interface IProps {
-  genres: IFilterGetResponse[]
-  countries: IFilterGetResponse[]
-  directors: IFilterGetResponse[]
-  actors: IFilterGetResponse[]
+  genres: IStaffGetResponse[]
+  countries: IStaffGetResponse[]
+  directors: IStaffGetResponse[]
+  actors: IStaffGetResponse[]
   className?: string
 }
 

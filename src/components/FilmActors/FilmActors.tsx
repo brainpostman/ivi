@@ -1,10 +1,10 @@
 import Image from 'next/image'
 import style from './FilmActors.module.scss'
-import { IStaff } from '@/types/films.api.interface'
+import { IStaffGetResponse } from '@/types/staffs.interface'
 import { FC } from 'react'
 
 interface IProps {
-  actors: IStaff[]
+  actors: IStaffGetResponse[]
   className?: string
 }
 

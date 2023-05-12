@@ -1,7 +1,4 @@
-export interface IStaff {
-  id: number
-  name: string
-}
+import { IStaffGetResponse } from './staffs.interface'
 
 export interface IFilmsGetRequest {
   order?: string
@@ -16,13 +13,13 @@ export interface IFilmsGetRequest {
 }
 
 export interface IFilmByIdGetResponse extends IFilmsgGetResponse {
-  directors: IStaff[]
-  artists: IStaff[]
-  actors: IStaff[]
-  montages: IStaff[]
-  compositors: IStaff[]
-  scenario: IStaff[]
-  operators: IStaff[]
+  directors: IStaffGetResponse[]
+  artists: IStaffGetResponse[]
+  actors: IStaffGetResponse[]
+  montages: IStaffGetResponse[]
+  compositors: IStaffGetResponse[]
+  scenario: IStaffGetResponse[]
+  operators: IStaffGetResponse[]
 }
 
 export interface IFilmsgGetResponse {

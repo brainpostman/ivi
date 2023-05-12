@@ -21,8 +21,8 @@ import AdminGenres from '@/components/AdminGenres/AdminGenres'
 import { IFilmsGetRequest } from '@/types/films.api.interface'
 import { formatFilmsParams } from '@/formatters/filmsParams.format'
 import { filmsAPI } from '@/api/queries/films.api'
-import { filtersAPI } from '@/api/queries/filters.api'
-import { IFilterGetResponse } from '@/types/filters.api.interface'
+import { staffsAPI } from '@/api/queries/staffs.api'
+import { IStaffGetResponse } from '@/types/staffs.interface'
 import { useSession } from 'next-auth/react'
 import LanguageSwitcher from '@/components/LanguageSwitcher/LanguageSwitcher'
 import Loader from '@/components/Loader/Loader'
@@ -33,10 +33,10 @@ interface IAdminProps {
   authSession: Session
   defaultFilms: string
   genres: string
-  filterGenres: IFilterGetResponse[]
-  countries: IFilterGetResponse[]
-  directors: IFilterGetResponse[]
-  actors: IFilterGetResponse[]
+  filterGenres: IStaffGetResponse[]
+  countries: IStaffGetResponse[]
+  directors: IStaffGetResponse[]
+  actors: IStaffGetResponse[]
   totalCount: number
 }
 
@@ -58,12 +58,12 @@ export const getServerSideProps = async ({
   const currentParams = { ...formatFilmsParams(params), ...defaultParams }
 
   const { films, totalCount } = await filmsAPI.getCrudFilms(currentParams)
-  const genres = JSON.stringify(await filtersAPI.getCrudGenres())
+  const genres = JSON.stringify(await staffsAPI.getCrudGenres())
   const serializedFilms = JSON.stringify(films)
-  const filterGenres = await filtersAPI.getGenres(locale ?? 'ru')
-  const countries = await filtersAPI.getCountries()
-  const directors = await filtersAPI.getDirectors()
-  const actors = await filtersAPI.getActors()
+  const filterGenres = await staffsAPI.getGenres(locale ?? 'ru')
+  const countries = await staffsAPI.getCountries()
+  const directors = await staffsAPI.getDirectors()
+  const actors = await staffsAPI.getActors()
 
   return {
     props: {
@@ -179,7 +179,7 @@ export default function Admin({
     } else {
       if (!isLoading) return
 
-      filtersAPI
+      staffsAPI
         .getCrudGenres()
         .then(genres => {
           if (genres.length > 0) {
