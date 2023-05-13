@@ -148,6 +148,27 @@ export default function Admin({
             });
     };
 
+    const getSortedGenres = () => {
+        const requestParams = formatFilmsParams(router.query);
+        requestParams.take = undefined;
+        requestParams.page = undefined;
+        filtersAPI
+            .getCrudGenres(requestParams)
+            .then((resp) => {
+                setCrudGenres(resp);
+            })
+            .finally(() => setIsLoading(false));
+    };
+
+    const changeTab = async (tabName: string) => {
+        if (chosenTable !== tabName) {
+            await router.push({ pathname: undefined, query: undefined }, undefined, {
+                shallow: true,
+            });
+            setChosenTable(tabName);
+        }
+    };
+
     useEffect(() => {
         if (!defaultFilms || isLoadedFirstFilms) return;
         setIsLoadedFirstFilms(true);
@@ -159,24 +180,12 @@ export default function Admin({
         if (chosenTable === 'movies') {
             getFilmsWithParams();
         } else {
-            filtersAPI
-                .getCrudGenres()
-                .then((genres) => {
-                    if (genres.length > 0) {
-                        setCrudGenres(genres);
-                    }
-                })
-                .finally(() => setIsLoading(false));
+            getSortedGenres();
         }
     }, [isLoading]);
 
     useEffect(() => {
-        router.push('/admin', undefined, { shallow: true });
-    }, [chosenTable]);
-
-    useEffect(() => {
         if (!router.query || !isLoadedFirstFilms || isLoading) return;
-
         setPage(1);
         setFilms([]);
         setIsLoading(true);
@@ -200,7 +209,7 @@ export default function Admin({
                                         sortTypes={t('movies:sortTypes', {
                                             returnObjects: true,
                                         })}
-                                        defaultType={'name'}
+                                        defaultType={''}
                                     />
                                     <FilterBlock
                                         countries={countries}
@@ -211,6 +220,14 @@ export default function Admin({
                                         clearSort={false}
                                     />
                                 </>
+                            )}
+                            {chosenTable === 'genres' && (
+                                <Sort
+                                    sortTypes={t('admin:sortTypes', {
+                                        returnObjects: true,
+                                    })}
+                                    defaultType={''}
+                                />
                             )}
                         </article>
                     </section>
@@ -224,9 +241,7 @@ export default function Admin({
                                                 ? styles.heading__page_active
                                                 : ''
                                         }`}
-                                        onClick={() => {
-                                            setChosenTable('movies');
-                                        }}>
+                                        onClick={() => changeTab('movies')}>
                                         Movies
                                     </h2>
                                     <h2
@@ -235,9 +250,7 @@ export default function Admin({
                                                 ? styles.heading__page_active
                                                 : ''
                                         }`}
-                                        onClick={() => {
-                                            setChosenTable('genres');
-                                        }}>
+                                        onClick={() => changeTab('genres')}>
                                         Genres
                                     </h2>
                                 </div>

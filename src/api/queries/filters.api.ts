@@ -3,14 +3,15 @@ import { IFilterGetResponse } from '@/types/filters.api.interface';
 import { toast } from 'react-toastify';
 import { transformFilter } from '../transforms/filter.transform';
 import { customAxios } from './customAxios';
-import { CrudGenre, ICrudGenre, IGenreJson } from '@/types/ICrudMovie';
+import { ICrudGenre } from '@/types/ICrudMovie';
+import { IFilmsGetRequest } from '@/types/films.api.interface';
 
 export const filtersAPI = {
     getGenres(locale: string) {
         return getGenres(locale);
     },
-    getCrudGenres() {
-        return getCrudGenres();
+    getCrudGenres(params?: IFilmsGetRequest) {
+        return getCrudGenres(params);
     },
     getCountries() {
         return getCountries();
@@ -38,11 +39,13 @@ const getGenres = async (locale: string): Promise<IFilterGetResponse[]> => {
     }
 };
 
-const getCrudGenres = async (): Promise<ICrudGenre[]> => {
+const getCrudGenres = async (params?: IFilmsGetRequest): Promise<ICrudGenre[]> => {
     try {
-        const response = await customAxios.get<ICrudGenre[]>('/genres');
+        const response = await customAxios.get<ICrudGenre[]>('/genres', {
+            params,
+        });
         return response.data;
-    } catch (error) {
+    } catch (error: any) {
         toast.error('Ошибка при получении жанров!');
         return [];
     }

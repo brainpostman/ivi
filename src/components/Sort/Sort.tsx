@@ -5,6 +5,7 @@ import style from './Sort.module.scss';
 import SortDirection from './SortDirection/SortDirection';
 import { ISortType } from '@/types/filterBlock.interface';
 import { useTranslation } from 'next-i18next';
+import { useRouter } from 'next/router';
 
 interface ISortProps {
     sortTypes: ISortType[];
@@ -14,6 +15,7 @@ interface ISortProps {
 const Sort = ({ sortTypes, defaultType }: ISortProps) => {
     const [isExpand, setIsExpand] = useState(false);
     const { t } = useTranslation('movies');
+    const router = useRouter();
 
     const { list: sorts, onClickListEl } = useSetListParam(
         sortTypes.map((data) => ({
@@ -67,7 +69,7 @@ const Sort = ({ sortTypes, defaultType }: ISortProps) => {
                 </div>
             )}
 
-            <SortDirection />
+            {Object.keys(router.query).includes('orderBy') && <SortDirection />}
         </div>
     );
 };
