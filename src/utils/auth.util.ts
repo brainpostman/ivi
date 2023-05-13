@@ -10,7 +10,7 @@ type CheckEmailResponse = {
 
 i18n?.loadNamespaces(['auth_modal']);
 
-const domain = 'http://localhost:3000';
+const domain = process.env.NEXT_PUBLIC_API_PATH;
 
 export async function checkEmailVacancy(email: string): Promise<string> {
     try {
