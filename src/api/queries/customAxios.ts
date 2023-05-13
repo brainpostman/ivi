@@ -1,5 +1,5 @@
-import axios from 'axios';
+import axios from 'axios'
 
 export const customAxios = axios.create({
-    baseURL: process.env.NEXT_PUBLIC_SERVER_ADDRESS,
-});
+  baseURL: process.env.NEXT_PUBLIC_SERVER_ADDRESS,
+})

@@ -1,6 +1,6 @@
 import { useWindow } from '@/hooks/useWindow'
 import { adaptiveSize } from '@/utils/adaptive.utils'
-import { FC, useState } from 'react'
+import { FC, useEffect, useState } from 'react'
 import { MdArrowBackIosNew } from 'react-icons/md'
 import style from './CustomCarouselArrows.module.scss'
 
@@ -32,11 +32,12 @@ const CustomCarouselArrows: FC<IProps> = ({
   const [arrowPosition, setArrowPosition] = useState(arrowPositionIncoming)
 
   const setterArrowPosition = () => {
-    setArrowPosition(() => adaptiveSize(arrowPositionIncoming, 8))
+    setArrowPosition(() =>
+      adaptiveSize(arrowPositionIncoming, arrowPositionIncoming, 320, 1270)
+    )
   }
 
   useWindow(setterArrowPosition, [setArrowPosition])
-
   return (
     <div className={style.arrows}>
       <div

@@ -1,0 +1,16 @@
+.buttons {
+  display: flex;
+  justify-content: space-between;
+
+  @include ui-margin(top, 6);
+
+  &__left_side {
+    display: flex;
+    gap: 12px;
+  }
+}
+
+.trailer_icon {
+  width: 24px !important;
+  height: 24px !important;
+}

@@ -1,0 +1,77 @@
+.wrapper {
+  display: flex;
+  justify-content: space-between;
+
+  width: 100%;
+
+  color: rgba(255, 255, 255, .8);
+  @include ui-margin(top, 4);
+}
+
+.card {
+  width: 56px;
+  height: 56px;
+  background-color: #ffffff29;
+  border-radius: 12px;
+
+  transition: color 0.2s;
+
+  cursor: pointer;
+
+  &:hover {
+    >.wrapper_img {
+      background-color: #4b4b52;
+    }
+
+    >p {
+      color: #fff;
+    }
+  }
+
+  @media (max-width: 880px) {
+    @include adaptive-size(width, 56, 44, 320, 880);
+    @include adaptive-size(height, 56, 44, 320, 880);
+  }
+}
+
+.iviRaiting {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background-color: #73a32f;
+  width: 44px;
+  height: 44px;
+
+  border-radius: 10px;
+}
+
+.wrapper_img {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  border-radius: 10px;
+
+  transition: background-color 0.2s;
+
+  height: 100%;
+}
+
+.img {
+  border-radius: 10px;
+  justify-content: space-around;
+}
+
+.name {
+  color: $gray;
+  @include font(1);
+
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  line-clamp: 2;
+  -webkit-line-clamp: 2;
+
+  @include ui-margin(top, 1);
+}

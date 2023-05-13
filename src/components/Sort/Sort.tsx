@@ -26,12 +26,12 @@ const Sort = ({ sortTypes, defaultType }: ISortProps) => {
         { filterType: 'radio' }
     );
 
-    const currentSort = sorts.find((el) => el.isSelect);
+  const currentSort = sorts.find(el => el.isSelect)
 
-    const onClickListElModif = (_param: string) => () => {
-        onClickListEl(_param)();
-        setIsExpand(false);
-    };
+  const onClickListElModif = (_param: string) => () => {
+    onClickListEl(_param)()
+    setIsExpand(false)
+  }
 
     useEffect(() => {
         onClickListEl(defaultType)();
@@ -74,4 +74,4 @@ const Sort = ({ sortTypes, defaultType }: ISortProps) => {
     );
 };
 
-export default Sort;
+export default Sort

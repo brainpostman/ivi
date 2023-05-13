@@ -46,6 +46,18 @@
 		color: $red;
 	}
 
+	&__deactive {
+		display: flex;
+		align-items: center;
+		cursor: default;
+		opacity: .32 !important;
+
+		>svg {
+			width: 32px;
+			height: 32px;
+		}
+	}
+
 	@media (max-width: 879px) {
 		justify-content: center;
 	}

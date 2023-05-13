@@ -1,7 +1,17 @@
-export const formatCapitalize = (value: string, options?: { reverse?: boolean }) => {
-    const firstLetter = options?.reverse ? value[0].toLowerCase() : value[0].toUpperCase();
+// === PROPS ===
+// @param value { * } - значение для капитализации певрого символа (toUpperCase)
+// @param options - параметры
+// @param options -> reverse - обратная капитализация первого символа (toLowerCase)
 
-    const otherLetters = value.slice(1);
+export const formatCapitalize = (
+  value: string,
+  options?: { reverse?: boolean }
+) => {
+  const firstLetter = options?.reverse
+    ? value[0].toLowerCase()
+    : value[0].toUpperCase()
 
-    return `${firstLetter}${otherLetters}`;
-};
+  const otherLetters = value.slice(1)
+
+  return `${firstLetter}${otherLetters}`
+}

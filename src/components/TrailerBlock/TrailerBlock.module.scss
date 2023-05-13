@@ -1,0 +1,107 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+
+  width: fit-content;
+}
+
+.wrapper_img {
+  position: relative;
+
+  width: 719px;
+  height: 404px;
+
+  @media (max-width: 1275px) {
+    @include adaptive-size(width, 719, 644, 1159, 1275);
+    @include adaptive-size(height, 404, 362, 1159, 1275);
+  }
+
+  @media (max-width: 1159px) {
+    @include adaptive-size(width, 1095, 320, 320, 1159);
+    @include adaptive-size(height, 616, 180, 320, 1159);
+  }
+}
+
+.trailer_buttons_pc {
+  @media (max-width: 1159px) {
+    display: none !important;
+  }
+}
+
+.under_trailer_mobile {
+  display: flex;
+  justify-content: center;
+  gap: 84px;
+
+  >div:first-child {
+
+    // ACTORS
+    @media (max-width: 1159px) {
+      @include adaptive-size(width, 678, 533, 880, 1159);
+    }
+
+    @media (max-width: 880px) {
+      @include adaptive-size(width, 815, 288, 320, 880);
+    }
+  }
+}
+
+.film_actors_mobile {
+  @media (min-width: 1160px) {
+    display: none !important;
+  }
+}
+
+.button_free_films {
+  justify-content: center;
+
+  width: 100%;
+  height: 40px;
+
+  @include ui-margin(top, 14);
+
+  @media (min-width: 1160px) {
+    display: none;
+  }
+}
+
+.trailer_buttons_mobile {
+  >button {
+    display: none;
+  }
+
+  >div {
+    display: grid;
+    grid-template-areas: 'a a' 'b c';
+    height: fit-content;
+
+    >button {
+      &:nth-child(1) {
+        justify-content: center;
+
+        width: 330px;
+        height: 40px;
+
+        @include adaptive-size(width, 330, 243, 880, 1160);
+
+        grid-area: a;
+      }
+
+      &:nth-child(2) {
+        grid-area: b;
+      }
+
+      &:nth-child(3) {
+        grid-area: c;
+      }
+    }
+  }
+
+  @media (min-width: 1160px) {
+    display: none !important;
+  }
+
+  @media (max-width: 880px) {
+    display: none;
+  }
+}

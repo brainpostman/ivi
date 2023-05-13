@@ -1,0 +1,30 @@
+.list {
+  display: flex;
+  gap: 4px;
+
+  color: #96959a;
+  @include font(1, bold);
+
+  @include ui-margin(top, 15);
+  @include ui-margin(bottom, 6);
+
+  >*:not(:last-child) {
+    color: #fff;
+
+    cursor: pointer;
+
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    text-decoration-color: #7e798f;
+  }
+
+  >*:not(:first-child) {
+    &::before {
+      content: '/';
+      display: inline-block;
+      font-weight: 700;
+
+      @include ui-margin(right, 1);
+    }
+  }
+}

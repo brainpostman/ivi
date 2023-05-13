@@ -24,6 +24,7 @@
     flex: 1 0 auto;
     border-radius: 8px;
     gap: 8px;
+
     &__input {
         z-index: 999;
         position: sticky;
@@ -37,6 +38,7 @@
         background-color: $dark;
         @include ui-padding(bottom, 4);
     }
+
     &__output {
         flex: 1 0 75%;
         display: flex;
@@ -55,17 +57,20 @@
 
 .heading {
     width: 100%;
+
     &__container {
         display: flex;
         align-items: center;
         justify-content: space-between;
         width: 100%;
     }
+
     &__pages {
         display: flex;
         align-items: center;
         justify-content: flex-start;
     }
+
     &__page {
         @include ui-padding(default, 2);
         color: #fff;
@@ -76,6 +81,7 @@
         border-top-left-radius: 8px;
         border-top-right-radius: 8px;
         cursor: pointer;
+
         &_active {
             background-color: $violet;
             cursor: unset;
@@ -89,11 +95,12 @@
     background-color: $violet;
     border-bottom-left-radius: 8px;
     border-bottom-right-radius: 8px;
+
     &__movie {
         @include ui-margin(top, 4);
     }
+
     &__movie:first-of-type {
         margin-top: 0;
     }
 }
-

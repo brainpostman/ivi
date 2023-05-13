@@ -143,6 +143,10 @@ const meta: Meta = {
     circle: {
       description: 'Красный кружок',
     },
+
+    dark: {
+      description: 'В оттенках чёрного',
+    },
   },
 }
 
@@ -172,6 +176,7 @@ Primary.args = {
   title: '',
   suptitle: '',
   circle: false,
+  dark: false,
 }
 
 export default meta

@@ -1,0 +1,47 @@
+.wrapper {
+  @include ui-padding(left, 3);
+  @include ui-padding(right, 3);
+}
+
+.wrapper_img {
+  position: relative;
+  width: 128px;
+  height: 153px;
+
+  @media (max-width: 1280px) {
+    @include adaptive-size(width, 128, 116, 1160, 1280);
+    @include adaptive-size(height, 153, 139, 1160, 1280);
+  }
+
+  @media (max-width: 1160px) {
+    @include adaptive-size(width, 162, 116, 880, 1160);
+    @include adaptive-size(height, 194, 139, 880, 1160);
+  }
+
+  @media (max-width: 880px) {
+    @include adaptive-size(width, 186, 116, 600, 880);
+    @include adaptive-size(height, 222, 139, 600, 880);
+  }
+
+  @media (max-width: 600px) {
+    width: 72px;
+    height: 86px;
+  }
+}
+
+.img {
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.name {
+  display: -webkit-box;
+
+  color: #d9d7e0;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+
+  @include font(2);
+}

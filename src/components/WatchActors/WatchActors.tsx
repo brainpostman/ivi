@@ -1,76 +1,66 @@
 import style from './WatchActors.module.scss'
-import React,{useState} from 'react'
-import {Actors} from './Actors'
-import WatchModal from '../WatchModal/WatchModal'
-import { MdArrowBackIosNew } from 'react-icons/md'
-interface Actors{
-    id:number,
-    img:string,
-    name:string,
-    title:string,
-    films:number
+import React, { useState } from 'react'
+import Image from 'next/image'
+import { IMovieById } from '@/types/films.api.interface'
+import ModalWindow from '../ModalWindow/ModalWindow'
+import StaffsWindow from '../StaffsWindow/StaffsWindow'
+import { useBreakPoints } from '@/hooks/useBreakPoints'
+
+const breakpoints = [
+  { point: 1160, view: 8 },
+  { point: 1060, view: 7 },
+  { point: 948, view: 6 },
+  { point: 835, view: 5 },
+  { point: 724, view: 4 },
+  { point: 612, view: 3 },
+  { point: 599, view: 5 },
+  { point: 580, view: 4 },
+  { point: 472, view: 3 },
+  { point: 385, view: 2 },
+]
+
+interface IProps {
+  film: IMovieById
 }
 
-const WatchActors: React.FC = () =>{
-    const [modalActive,setModalActive]=useState(false);
+const WatchActors: React.FC<IProps> = ({ film }) => {
+  const [isShowModal, setIsShowModal] = useState(false)
+  const [staffsView, setStaffsView] = useState(10)
 
-    return(
-        <div className={style.conteiner}>
-            <div className={style.content}>
-                {Actors.map((actor,index)=>
-                    <div key={index} className={style.content_person}>
-                        <div className={style.content_person_img}><img src={actor.img} width={88} height={88} alt={actor.name}/></div>
-                        <div className={style.content_person_name}>{actor.name}</div>
-                        <div className={style.content_person_title}>{actor.title}</div>
-                    </div>
-                )}
-                <button className={style.button} onClick={()=>setModalActive(true)}>
-                    <div className={style.button_text}>Ещё</div>
-                </button>
+  const closeModal = () => setIsShowModal(false)
+
+  useBreakPoints(setStaffsView, 10, breakpoints)
+
+  return (
+    <div className={style.wrapper}>
+      <div className={style.container}>
+        {film.actors.slice(0, staffsView).map(actor => (
+          <div key={actor.id} className={style.card}>
+            <div className={style.person_img_wrapper}>
+              <Image
+                src='/film/noPhotoIcon60x60.png'
+                alt={actor.name}
+                className={style.card__img}
+                fill
+              />
             </div>
-            <WatchModal active={modalActive} setActive={setModalActive}>
-                <div className={style.wrapper} onClick={e=>e.stopPropagation()}>
-                    <div className={style.back_button} onClick={()=>setModalActive(false)}>
-                        <MdArrowBackIosNew />
-                        <p>К фильму</p>
-                    </div>
-                    
-                    <div className={style.modal_conteiner}>
-                        <div className={style.modal_info}>
-                            <div className={style.modal_info_title}>1+1: актеры и создатели фильма</div>
-                            <h3 className={style.modal_info_subtitle}>Режиссёры</h3>
+            <p className={style.card__name}>{actor.name}</p>
+            <p className={style.card__title}>актер</p>
+          </div>
+        ))}
+        <button
+          className={style.more_button}
+          onClick={() => setIsShowModal(true)}
+        >
+          Ещё
+        </button>
+      </div>
 
-                            <ul className={style.persons_conteiner}>
-                            {Actors.map((actor,index)=>
-                                <li key={index} className={style.modal_person}>
-                                    <div className={style.modal_person_img}><img src={actor.img} alt={actor.name}/></div>
-                                    <div className={style.modal_person_name}>{actor.name}</div>
-                                    <div className={style.content_person_films}>{actor.films>4? `${actor.films} фильмов`:`${actor.films} фильма`}</div>
-                                </li>
-                            )}
-                            </ul>
-                            <h3 className={style.modal_info_subtitle}>Актёры</h3>
-                            <h3 className={style.modal_info_subtitle}>Продюссеры</h3>
-                            <h3 className={style.modal_info_subtitle}>Операторы</h3>
-                            <h3 className={style.modal_info_subtitle}>Художники</h3>
-                            <h3 className={style.modal_info_subtitle}>Сценаристы</h3>
-                            <h3 className={style.modal_info_subtitle}>Композиторы</h3>
-                            <h3 className={style.modal_info_subtitle}>Монтаж</h3>
-                            <h3 className={style.modal_info_subtitle}>Режиссёры дубляжа</h3>
-                            <h3 className={style.modal_info_subtitle}>Переводчик</h3>
-                        </div>
-
-                        <div className={style.modal_poster}>
-                            <div className={style.modal_poster_img}><img src='https://thumbs.dfs.ivi.ru/storage2/contents/6/1/0ceca03c51c3d38f34bdf3fd0dd2c8.jpg/128x196/?q=60'/></div>
-                            <div className={style.modal_poster_rating}>8,9</div>
-                            <div className={style.modal_poster_genres}>2011, Франция, Драммы</div>
-                            <div className={style.modal_poster_duratin}><img src='/film/clockIcon.png'/>112 минут</div>
-                        </div>
-                    </div>
-                </div>
-            </WatchModal>
-        </div>
-    )
+      <ModalWindow closeFunc={closeModal} isShow={isShowModal}>
+        <StaffsWindow film={film} />
+      </ModalWindow>
+    </div>
+  )
 }
 
-export default WatchActors;
+export default WatchActors

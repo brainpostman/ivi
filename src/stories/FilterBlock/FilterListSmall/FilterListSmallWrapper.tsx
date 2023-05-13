@@ -17,8 +17,9 @@ const FilterListSmallWrapper: FC<
   const filterData = getFilterData('Годы')
 
   const list = unformattedStringedList?.split(',').map((el, index) => ({
-    title: el,
-    param: index === 0 ? 'all' : `year${index + 1}`,
+    id: index,
+    name: el,
+    view: el,
   }))
 
   return (
