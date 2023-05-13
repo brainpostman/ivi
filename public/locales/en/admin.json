@@ -1,3 +1,20 @@
 {
-    "html-title": "Website administration page"
+    "html-title": "Website administration page",
+    "sortTypes": [
+        {
+            "id": 1,
+            "name": "id",
+            "view": "ID"
+        },
+        {
+            "id": 2,
+            "name": "name",
+            "view": "Name"
+        },
+        {
+            "id": 3,
+            "name": "name_en",
+            "view": "Name (eng)"
+        }
+    ]
 }

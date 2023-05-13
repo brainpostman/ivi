@@ -143,6 +143,20 @@
       "view": "По алфавиту"
     }
   ],
+  "sortDirections": [
+    {
+      "id": 1,
+      "name": "ASC",
+      "view": "Вверх",
+      "isSelect": false
+    },
+    {
+      "id": 2,
+      "name": "DESC",
+      "view": "Вниз",
+      "isSelect": false
+    }
+  ],
   "filters": {
     "genres": "Жанры",
     "country": "Страны",

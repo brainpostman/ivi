@@ -143,6 +143,20 @@
       "view": "Title"
     }
   ],
+  "sortDirections": [
+    {
+      "id": 1,
+      "name": "ASC",
+      "view": "Ascending",
+      "isSelect": false
+    },
+    {
+      "id": 2,
+      "name": "DESC",
+      "view": "Descending",
+      "isSelect": false
+    }
+  ],
   "filters": {
     "genres": "Genres",
     "country": "Countries",
