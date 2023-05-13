@@ -25,69 +25,65 @@ import Sort from '@/components/Sort/Sort';
 import styles from './index.module.scss';
 
 interface IAdminProps {
-  authSession: Session
-  defaultFilms: string
-  genres: string
-  filterGenres: IFilterGetResponse[]
-  countries: IFilterGetResponse[]
-  directors: IFilterGetResponse[]
-  actors: IFilterGetResponse[]
-  totalCount: number
+    authSession: Session;
+    defaultFilms: string;
+    genres: string;
+    filterGenres: IFilterGetResponse[];
+    countries: IFilterGetResponse[];
+    directors: IFilterGetResponse[];
+    actors: IFilterGetResponse[];
+    totalCount: number;
 }
 
 export const getServerSideProps = async ({
-  locale,
-  params,
-  req,
-  res,
+    locale,
+    params,
+    req,
+    res,
 }: GetServerSidePropsContext) => {
-  const serverSession = await getServerSession(req, res, authOptions)
-  const authSession = getSerializableSession(serverSession)
-  if (!authSession) {
-    return { redirect: { destination: '/auth/signin' } }
-  } else if (!(await checkAdminRole(authSession.accessToken))) {
-    return { redirect: { destination: '/' } }
-  }
+    const serverSession = await getServerSession(req, res, authOptions);
+    const authSession = getSerializableSession(serverSession);
+    if (!authSession) {
+        return { redirect: { destination: '/auth/signin' } };
+    } else if (!(await checkAdminRole(authSession.accessToken))) {
+        return { redirect: { destination: '/' } };
+    }
 
-  const defaultParams: IFilmsGetRequest = { take: 14, page: 1 }
-  const currentParams = { ...formatFilmsParams(params), ...defaultParams }
+    const defaultParams: IFilmsGetRequest = { take: 14, page: 1 };
+    const currentParams = { ...formatFilmsParams(params), ...defaultParams };
 
-  const { films, totalCount } = await filmsAPI.getCrudFilms(currentParams)
-  const genres = JSON.stringify(await filtersAPI.getCrudGenres())
-  const serializedFilms = JSON.stringify(films)
-  const filterGenres = await filtersAPI.getGenres(locale ?? 'ru')
-  const countries = await filtersAPI.getCountries()
-  const directors = await filtersAPI.getDirectors()
-  const actors = await filtersAPI.getActors()
+    const { films, totalCount } = await filmsAPI.getCrudFilms(currentParams);
+    const genres = JSON.stringify(await filtersAPI.getCrudGenres());
+    const serializedFilms = JSON.stringify(films);
+    const filterGenres = await filtersAPI.getGenres(locale ?? 'ru');
+    const countries = await filtersAPI.getCountries();
+    const directors = await filtersAPI.getDirectors();
+    const actors = await filtersAPI.getActors();
 
-  return {
-    props: {
-      authSession,
-      ...(await serverSideTranslations(locale ?? 'ru', [
-        'common',
-        'admin',
-        'movies',
-      ])),
-      defaultFilms: serializedFilms,
-      genres,
-      filterGenres,
-      countries,
-      directors,
-      actors,
-      totalCount,
-    },
-  }
-}
+    return {
+        props: {
+            authSession,
+            ...(await serverSideTranslations(locale ?? 'ru', ['common', 'admin', 'movies'])),
+            defaultFilms: serializedFilms,
+            genres,
+            filterGenres,
+            countries,
+            directors,
+            actors,
+            totalCount,
+        },
+    };
+};
 
 export default function Admin({
-  defaultFilms,
-  authSession,
-  genres,
-  filterGenres,
-  countries,
-  directors,
-  actors,
-  totalCount,
+    defaultFilms,
+    authSession,
+    genres,
+    filterGenres,
+    countries,
+    directors,
+    actors,
+    totalCount,
 }: IAdminProps) {
     const { t } = useTranslation();
     const router = useRouter();
@@ -107,53 +103,39 @@ export default function Admin({
         }
     }, [status]);
 
-  useEffect(() => {
-    const interval = window.setInterval(() => {
-      if (status === 'authenticated') {
-        checkAdminSession(authSession.accessToken)
-      }
-    }, 300000)
-    return () => {
-      window.clearInterval(interval)
-    }
-  }, [])
+    useEffect(() => {
+        if (isLoading || !isLoadedFirstFilms || chosenTable !== 'movies') return;
+        if (observer.current) {
+            observer.current.disconnect();
+        }
+        const callback = (entries: IntersectionObserverEntry[], observer: IntersectionObserver) => {
+            if (entries[0].isIntersecting && films.length < totalCount) {
+                setIsLoading(true);
+            }
+        };
+        observer.current = new IntersectionObserver(callback);
+        observer.current.observe(scrollFetchTrigger.current!);
+    }, [isLoading]);
 
-  useEffect(() => {
-    if (isLoading || !isLoadedFirstFilms || chosenTable !== 'movies') return
-    if (observer.current) {
-      observer.current.disconnect()
-    }
-    const callback = (
-      entries: IntersectionObserverEntry[],
-      observer: IntersectionObserver
-    ) => {
-      if (entries[0].isIntersecting && films.length < totalCount) {
-        setIsLoading(true)
-      }
-    }
-    observer.current = new IntersectionObserver(callback)
-    observer.current.observe(scrollFetchTrigger.current!)
-  }, [isLoading])
+    const getFilmsWithParams = () => {
+        setPage(page + 1);
 
-  const getFilmsWithParams = () => {
-    setPage(page + 1)
+        const defaultParams: IFilmsGetRequest = { take: 14, page };
+        const currentParams = {
+            ...formatFilmsParams(router.query, router.locale ?? 'ru'),
+            ...defaultParams,
+        };
 
-    const defaultParams: IFilmsGetRequest = { take: 14, page }
-    const currentParams = {
-      ...formatFilmsParams(router.query),
-      ...defaultParams,
-    }
-
-    filmsAPI
-      .getCrudFilms(currentParams)
-      .then(({ films, totalCount }) => {
-        setFilms(prev => [...prev, ...films])
-        setTotalItems(totalCount)
-      })
-      .finally(() => {
-        setIsLoading(false)
-      })
-  }
+        filmsAPI
+            .getCrudFilms(currentParams)
+            .then(({ films, totalCount }) => {
+                setFilms((prev) => [...prev, ...films]);
+                setTotalItems(totalCount);
+            })
+            .finally(() => {
+                setIsLoading(false);
+            });
+    };
 
     const getSortedGenres = () => {
         const requestParams = formatFilmsParams(router.query);
