@@ -11,11 +11,15 @@ interface IAdminGenres {
 const AdminGenres = ({ genres, setLoading }: IAdminGenres) => {
     return (
         <table className={styles.table}>
-            <th className={styles.header}>ID</th>
-            <th className={styles.header}>Название</th>
-            <th className={styles.header}>Название (eng)</th>
-            <th className={styles.header}>Запись создана</th>
-            <th className={styles.header}>Последнее обновление</th>
+            <thead className={styles.header}>
+                <tr>
+                    <th className={styles.cell}>ID</th>
+                    <th className={styles.cell}>Название</th>
+                    <th className={styles.cell}>Название (eng)</th>
+                    <th className={styles.cell}>Запись создана</th>
+                    <th className={styles.cell}>Последнее обновление</th>
+                </tr>
+            </thead>
             <tbody className={styles.body}>
                 {genres.map((genre) => {
                     return <AdminGenre key={genre.id} genre={genre} setLoading={setLoading} />;

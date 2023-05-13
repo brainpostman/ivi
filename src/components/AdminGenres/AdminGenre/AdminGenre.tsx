@@ -49,7 +49,7 @@ const AdminGenres = ({ genre, setLoading }: IAdminGenreProps) => {
             <td className={`${parentStyles.cell} ${parentStyles.cell_name}`}>
                 <input
                     type='text'
-                    value={name}
+                    value={name ?? ''}
                     onChange={(e) => setName(e.target.value)}
                     className={styles.input}
                 />
@@ -57,7 +57,7 @@ const AdminGenres = ({ genre, setLoading }: IAdminGenreProps) => {
             <td className={`${parentStyles.cell} ${parentStyles.cell_name}`}>
                 <input
                     type='text'
-                    value={engName}
+                    value={engName ?? ''}
                     onChange={(e) => setEngName(e.target.value)}
                     className={styles.input}
                 />
