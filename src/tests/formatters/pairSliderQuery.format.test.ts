@@ -18,6 +18,6 @@ describe('PAIR SLIDER QUERY', () => {
       formatPairSliderQuery(errorTestQueryParam)
 
     expect(maxValueStr).toBe('max')
-    expect(minValueStr).toBe('')
+    expect(minValueStr).toBe('min')
   })
 })

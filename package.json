@@ -9,7 +9,8 @@
     "lint": "next lint",
     "sb": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "test": "jest"
+    "test": "jest",
+    "coverage": "jest --coverage"
   },
   "dependencies": {
     "@babel/runtime": "^7.21.0",
