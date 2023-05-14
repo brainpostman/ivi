@@ -1,4 +1,8 @@
-import { IFilterGetResponse, IStaffGetResponse } from '@/types/staffs.interface'
+import {
+  IFilterGetResponse,
+  IStaff,
+  IStaffGetResponse,
+} from '@/types/staffs.interface'
 import { staffsAPI } from '@/api/queries/staffs.api'
 import { checkObjHaveProperties } from '@/utils/checkObjHaveProperties.utils'
 import { ICrudGenre } from '@/types/ICrudMovie'
@@ -14,10 +18,10 @@ const crudGenreRequiredProperties = [
 ]
 
 describe('STAFFS API', () => {
-  let genres: IStaffGetResponse[]
+  let genres: IFilterGetResponse[]
   let countries: IFilterGetResponse[]
-  let directors: IStaffGetResponse[]
-  let actors: IStaffGetResponse[]
+  let directors: IStaff[]
+  let actors: IStaff[]
 
   let crudGenres: ICrudGenre[]
 
@@ -62,10 +66,10 @@ describe('STAFFS API', () => {
 })
 
 describe('STAFFS API ERRORS', () => {
-  let errorGenres: IStaffGetResponse[]
+  let errorGenres: IFilterGetResponse[]
   //let errorCountries: IFilterGetResponse[]
-  let errorDirectors: IStaffGetResponse[]
-  let errorActors: IStaffGetResponse[]
+  let errorDirectors: IStaff[]
+  let errorActors: IStaff[]
   let errorCrudGenres: ICrudGenre[]
 
   beforeAll(async () => {
@@ -104,7 +108,7 @@ describe('STAFFS API ERRORS', () => {
   })
 
   // Проверяем ошибку круда жанров
-  it('Check actors error', () => {
+  it('Check crud genres error', () => {
     expect(Array.isArray(errorCrudGenres))
 
     if (Array.isArray(errorCrudGenres)) {
