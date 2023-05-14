@@ -11,7 +11,12 @@ interface IOptions {
 }
 
 export const useSetListParam = (
-  defaultValue: (IStaffGetResponse & { isSelect: boolean; view?: string })[],
+  defaultValue: {
+    id: number
+    name: string
+    isSelect: boolean
+    view?: string
+  }[],
   query: string,
   options?: IOptions
 ) => {
@@ -19,7 +24,7 @@ export const useSetListParam = (
   const router = useRouter()
 
   const [list, setList] =
-    useState<(IStaffGetResponse & { isSelect: boolean; view?: string })[]>(
+    useState<{ id: number; name: string; isSelect: boolean; view?: string }[]>(
       defaultValue
     )
 
