@@ -8,23 +8,28 @@ import ViewMoreButton from '@/components/UI/ViewMoreButton/ViewMoreButton'
 import VioletButton from '@/components/UI/VioletButton/VioletButton'
 import PageLayout from '@/layouts/PageLayout/PageLayout'
 import { IFilmsGetRequest, IMovie } from '@/types/films.api.interface'
-import { GetStaticProps, NextPage } from 'next'
+import { GetServerSideProps, NextPage } from 'next'
 import { useTranslation } from 'next-i18next'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 import style from './index.module.scss'
 import Loader from '@/components/Loader/Loader'
-import { IStaffGetResponse } from '@/types/filters.api.interface'
+import { IStaffGetResponse } from '@/types/staffs.interface'
 import { formatFilmsParams } from '@/formatters/filmsParams.format'
 import { staffsAPI } from '@/api/queries/staffs.api'
 import BreadCrumbsFilms from '@/components/BreadCrumbs/BreadCrumbsFilms/BreadCrumbsFilms'
 
-export const getStaticProps: GetStaticProps = async ({ locale, params }) => {
+export const getServerSideProps: GetServerSideProps = async ({
+  locale,
+  query,
+}) => {
   const defaultParams: IFilmsGetRequest = { take: 14, page: 1 }
-  const currentParams = { ...formatFilmsParams(params), ...defaultParams }
+
+  const currentParams = { ...formatFilmsParams(query), ...defaultParams }
 
   const { films, totalCount } = await filmsAPI.getFilms(currentParams)
+
   const genres = await staffsAPI.getGenres(locale ?? 'ru')
   const countries = await staffsAPI.getCountries()
   const directors = await staffsAPI.getDirectors()
@@ -130,8 +135,15 @@ const MoviesPage: NextPage<IProps> = ({
 
   // Запрос при изменении фильтров
   useEffect(() => {
-    // TODO: нужно ли условие !router.query ?
-    if (!router.query || !isLoadedFirstFilms || isLoading) return
+    const queries = router.query
+    const orderBy = queries.orderBy
+    const order = queries.order
+
+    const isEmptyQueries = Object.keys(queries).length
+
+    if ((!orderBy || !order) && isEmptyQueries) return
+
+    if (!isLoadedFirstFilms || isLoading) return
 
     setPage(1)
     setFilms([])
@@ -143,7 +155,7 @@ const MoviesPage: NextPage<IProps> = ({
     document.addEventListener('scroll', onScroll)
 
     return () => document.removeEventListener('scroll', onScroll)
-  }, [isClickedViewMore])
+  }, [isClickedViewMore, films])
 
   return (
     <PageLayout title={t('html-title')}>
