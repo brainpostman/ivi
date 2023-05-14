@@ -184,6 +184,9 @@ const Actor: React.FC<IProps> = ({
                           <p className={style.film_info__rating}>
                             Рейтинг Иви: 8,9
                           </p>
+                          <BasicBtn className={style.button_mobile}>
+                            Подробнее
+                          </BasicBtn>
                         </div>
                       </div>
                       <BasicBtn className={style.button}>Подробнее</BasicBtn>

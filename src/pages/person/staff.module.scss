@@ -1,12 +1,16 @@
 .wrapper {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-
   width: $max-width;
 
   @include ui-padding(top, 4);
-  @include ui-margin(bottom, 5);
+  @include ui-margin(bottom, 14);
+
+  @media (max-width: 1240px) {
+    @include adaptive-size(width, 1240, 600, 600, 1240);
+  }
+
+  @media (max-width: 880px) {
+    @include ui-padding(hor, 6);
+  }
 }
 
 .back_button {
@@ -22,11 +26,13 @@
 
   cursor: pointer;
 
-  &:hover>svg {
+  @include ui-margin(bottom, 2);
+
+  &:hover > svg {
     transform: scale(1.1);
   }
 
-  >svg {
+  > svg {
     width: 18px;
     height: 18px;
 
@@ -36,6 +42,12 @@
 
 .container {
   max-width: 600px;
+
+  margin: auto;
+
+  @media (max-width: 880px) {
+    max-width: 100%;
+  }
 }
 
 .img {
@@ -52,6 +64,10 @@
   &__title {
     font-size: 56px;
     font-weight: 700;
+
+    @media (max-width: 600px) {
+      font-size: 40px;
+    }
   }
 
   &__subtitle {
@@ -71,7 +87,7 @@
   font-size: 18px;
   font-weight: 400;
 
-  >p {
+  > p {
     color: #ffffffe0;
     cursor: pointer;
 
@@ -80,19 +96,20 @@
     }
   }
 
-  >p:last-child::before {
+  > p:last-child::before {
     content: '•';
     @include ui-margin(right, 3);
   }
 }
 
 .film_info {
-  display: block;
   color: #fff;
 
   font-size: 15px;
   line-height: 22px;
   font-weight: 600;
+
+  width: 100%;
 
   @include ui-margin(top, 5);
 
@@ -135,15 +152,21 @@
   flex-direction: column;
   gap: 8px;
 
-  >li>a {
+  > li > a {
     display: flex;
     align-items: center;
     justify-content: space-between;
+
+    @media (max-width: 600px) {
+      justify-content: flex-start;
+    }
   }
 
   &__card {
     display: flex;
     gap: 20px;
+
+    width: 100%;
 
     img {
       border-radius: 4px;
@@ -187,4 +210,17 @@
 .button {
   width: 140px;
   height: 40px;
+
+  @media (max-width: 600px) {
+    display: none;
+  }
+}
+
+.button_mobile {
+  width: 100%;
+  height: 40px;
+
+  @media (min-width: 601px) {
+    display: none;
+  }
 }
