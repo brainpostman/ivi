@@ -5,7 +5,7 @@ import style from './Sort.module.scss'
 import SortDirection from './SortDirection/SortDirection'
 
 const listData = [
-  { id: 1, name: 'premiere', view: 'По популярности' },
+  { id: 1, name: 'year', view: 'По годам' },
   { id: 2, name: 'scoreAVG', view: 'По оценкам' },
   { id: 3, name: 'ratingAVG', view: 'По рейтингу' },
   { id: 4, name: 'name', view: 'По алфавиту' },
@@ -31,7 +31,7 @@ const Sort = () => {
   }
 
   useEffect(() => {
-    onClickListEl('premiere')()
+    onClickListEl('year')()
   }, [])
 
   if (!currentSort) return <></>
