@@ -1,5 +1,3 @@
-import { filterCountryData } from '@/data/filterCountry.data'
-import { filterGenreData } from '@/data/filterGenre.data'
 import { filterYearData } from '@/data/filterYear.data'
 import { useFilter } from '@/hooks/useFilter'
 import { IFilterBlockEl } from '@/types/filterBlock.interface'
@@ -14,7 +12,7 @@ import FilterListBig from './FilterListBig/FilterListBig'
 import FilterListSmall from './FilterListSmall/FilterListSmall'
 import FilterSlider from './FilterSlider/FilterSlider'
 import FilterSuggest from './FilterSuggest/FilterSuggest'
-import { IStaffGetResponse } from '@/types/staffs.interface'
+import { IFilterGetResponse, IStaffGetResponse } from '@/types/staffs.interface'
 import { useSetListParam } from '@/hooks/useSetListParam'
 
 const filterList: Omit<IFilterBlockEl, 'isExpand'>[] = [
@@ -28,7 +26,7 @@ const filterList: Omit<IFilterBlockEl, 'isExpand'>[] = [
 
 interface IProps {
   genres: IStaffGetResponse[]
-  countries: IStaffGetResponse[]
+  countries: IFilterGetResponse[]
   directors: IStaffGetResponse[]
   actors: IStaffGetResponse[]
   className?: string
@@ -53,7 +51,6 @@ const FilterBlock: FC<IProps> = ({
   const actorFilterData = getFilterData('actor')
 
   const isAppliedFilters = Object.keys(router.query).length
-  console.log(!!isAppliedFilters)
 
   const { onClickListEl: onClickGenreCard } = useSetListParam(
     genres.slice(0, 10).map(genre => ({ ...genre, isSelect: false })),
@@ -61,7 +58,7 @@ const FilterBlock: FC<IProps> = ({
   )
 
   const { onClickListEl: onClickCountry } = useSetListParam(
-    countries.slice(0, 10).map(genre => ({ ...genre, isSelect: false })),
+    countries.slice(0, 10).map(country => ({ ...country, isSelect: false })),
     'country'
   )
 
@@ -108,7 +105,7 @@ const FilterBlock: FC<IProps> = ({
         list={countries}
         carouselElementsView={6}
         carouselElementsMove={1}
-        query='country'
+        query='countries'
       >
         {countries.slice(0, 10).map(country => (
           <VioletButton
@@ -123,7 +120,10 @@ const FilterBlock: FC<IProps> = ({
 
       <FilterListSmall
         filterData={yearFilterData}
-        list={filterYearData}
+        list={filterYearData.map(year => ({
+          ...year,
+          view: year.name,
+        }))}
         query='year'
       />
 
