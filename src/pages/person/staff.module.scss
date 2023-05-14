@@ -41,6 +41,8 @@
 .img {
   border-radius: 20px;
   object-fit: cover;
+
+  @include ui-margin(bottom, 2);
 }
 
 .info_container {
@@ -50,14 +52,14 @@
   &__title {
     font-size: 56px;
     font-weight: 700;
-    padding-top: 2%;
   }
 
   &__subtitle {
     color: #a5a1b2;
     font-size: 15px;
     font-weight: 400;
-    padding-top: 2%;
+
+    @include ui-margin(ver, 3);
   }
 }
 
@@ -124,12 +126,16 @@
   }
 }
 
+.wrapper_film_list {
+  @include ui-margin(bottom, 3);
+}
+
 .films_list {
   display: flex;
   flex-direction: column;
   gap: 8px;
 
-  >li {
+  >li>a {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -153,7 +159,7 @@
 
   transition: color 0.4s;
 
-  @include ui-margin(ver, 3);
+  @include ui-margin(top, 3);
 
   &:hover {
     color: #fff;
@@ -165,6 +171,8 @@
     color: #fff;
     font-size: 24px;
     font-weight: 700;
+
+    @include ui-margin(bottom, 1);
   }
 
   h3 {
