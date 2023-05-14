@@ -4,22 +4,24 @@ import { useSetStringParam } from '@/hooks/useSetStringParam'
 import { IFilterData } from '@/types/filterBlock.interface'
 import { ChangeEvent, FC, KeyboardEvent, useMemo, useState } from 'react'
 import FilterTab from '../FilterTab/FilterTab'
-import style from './FilterSuggest.module.scss'
 import { useTranslation } from 'next-i18next'
 import { normalizeKey } from '@/utils/normalize.utils'
+import style from './FilterSuggest.module.scss'
+import { staffsAPI } from '@/api/queries/staffs.api'
+import { IQuerySuggest } from '@/types/staffs.interface'
 
 interface IProps {
   filterData: IFilterData
   closeModal: () => void
   suggestList: { id: number; name: string }[]
   placeholder?: string
-  query: string
+  query: IQuerySuggest
 }
 
 const FilterSuggest: FC<IProps> = ({
   filterData,
   closeModal,
-  suggestList: suggsetData,
+  suggestList: suggsetDataIncoming,
   placeholder,
   query,
 }) => {
@@ -27,7 +29,9 @@ const FilterSuggest: FC<IProps> = ({
   const { param, setUrl, value: valueFromParams } = useSetStringParam(query)
   const [value, setValue] = useState(valueFromParams)
 
-  const onChange = (event: ChangeEvent<HTMLInputElement>) => {
+  const [suggestData, setSuggestData] = useState(suggsetDataIncoming)
+
+  const onChange = async (event: ChangeEvent<HTMLInputElement>) => {
     setValue(event.target.value)
   }
 
@@ -39,9 +43,9 @@ const FilterSuggest: FC<IProps> = ({
   }
 
   const suggestList = useMemo(() => {
-    if (!value) return suggsetData?.slice(0, 10)
+    if (!value) return suggestData?.slice(0, 10)
 
-    return suggsetData.filter(producer =>
+    return suggestData.filter(producer =>
       producer.name.toLowerCase().includes(value.toString().toLowerCase())
     )
   }, [value])
@@ -54,7 +58,7 @@ const FilterSuggest: FC<IProps> = ({
 
   return (
     <FilterTab selectFilter={selectFilter} filter={filter} paramValue={param}>
-      <ModalWindow isShow={filter?.isExpand} closeFunc={closeModal}>
+      <ModalWindow isShow={!!filter?.isExpand} closeFunc={closeModal}>
         <div className={style.wrapper}>
           <h1 className={style.title}>
             {t(normalizeKey(filter?.title ?? ''))}
