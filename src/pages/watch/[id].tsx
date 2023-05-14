@@ -25,7 +25,16 @@ export const getServerSideProps: GetServerSideProps = async ({
   locale,
   params,
 }) => {
-  const film = await filmsAPI.getFilmsById(Number(params!.id))
+  if (!params || !parseInt(params.id as string)) {
+    return {
+      redirect: {
+        destination: '/error',
+        permanent: false,
+      },
+    }
+  }
+
+  const film = await filmsAPI.getFilmsById(Number(params.id))
   const { films } = await filmsAPI.getFilmsHomePage()
 
   return {
@@ -49,7 +58,7 @@ interface IProps {
 
 const Film: FC<IProps> = ({ film, films }) => {
   return (
-    <PageLayout title='Фильм'>
+    <PageLayout title={film.name}>
       <section className={style.wrapper}>
         <div className={style.back_button}>
           <MdArrowBackIosNew />
