@@ -27,32 +27,44 @@ export const filmsAPI = {
 const getFilms = async (
   params?: IFilmsGetRequest
 ): Promise<{ films: IMovie[]; totalCount: number }> => {
-  const filmsData = await customAxios.get<IFilmsgGetResponse[]>('/films', {
-    params,
-  })
+  try {
+    const filmsData = await customAxios.get<IFilmsgGetResponse[]>('/films', {
+      params,
+    })
 
-  const films = filmsData.data.map(film => transformFilms(film))
+    const films = filmsData.data.map(film => transformFilms(film))
 
-  const totalCount = filmsData.headers['x-total-count']
-  return { films, totalCount: totalCount || 0 }
+    const totalCount = filmsData.headers['x-total-count']
+    return { films, totalCount: totalCount || 0 }
+  } catch (_) {
+    return { films: [], totalCount: 0 }
+  }
 }
 
 const getCrudFilms = async (
   params?: IFilmsGetRequest
 ): Promise<{ films: ICrudFilm[]; totalCount: number }> => {
-  const response = await customAxios.get<IFilmJson[]>('/films', {
-    params,
-  })
-  const films = response.data.map(film => {
-    return new CrudFilm(film)
-  })
-  const totalCount = response.headers['x-total-count']
-  return { films, totalCount: totalCount || 0 }
+  try {
+    const response = await customAxios.get<IFilmJson[]>('/films', {
+      params,
+    })
+    const films = response.data.map(film => {
+      return new CrudFilm(film)
+    })
+    const totalCount = response.headers['x-total-count']
+    return { films, totalCount: totalCount || 0 }
+  } catch (_) {
+    return { films: [], totalCount: 0 }
+  }
 }
 
 const getFilmsById = async (id: number): Promise<IMovieById | undefined> => {
-  const filmData = await customAxios.get<IFilmByIdGetResponse>(`/films/${id}`)
-  const film = transformFilms(filmData.data)
+  try {
+    const filmData = await customAxios.get<IFilmByIdGetResponse>(`/films/${id}`)
+    const film = transformFilms(filmData.data)
 
-  return film
+    return film
+  } catch (_) {
+    return undefined
+  }
 }
