@@ -1,4 +1,4 @@
-import { IStaffGetResponse } from './filters.api.interface'
+import { IStaffGetResponse } from './staffs.interface'
 
 export type IFilterTitle =
   | 'genres'
@@ -27,7 +27,7 @@ export interface IFilterData {
 
 export interface IFilterListBigProps {
   filterData: IFilterData
-  list: IStaffGetResponse[]
+  list: { id: number; name: string }[]
   carouselElementsView?: number
   carouselElementsMove?: number
   query: string
@@ -36,7 +36,7 @@ export interface IFilterListBigProps {
 
 export interface IFilterListSmallProps {
   filterData: IFilterData
-  list: (IStaffGetResponse & { view: string })[]
+  list: { id: number; name: string; view: string }[]
   query: string
 }
 
