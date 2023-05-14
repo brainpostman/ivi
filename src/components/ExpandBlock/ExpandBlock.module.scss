@@ -27,6 +27,18 @@
   font-weight: 600;
 
   cursor: pointer;
+
+  @include ui-margin(top, 1);
+}
+
+.toggle_gray {
+  color: $gray-soft;
+
+  transition: color 0.4s;
+
+  &:hover {
+    color: #fff;
+  }
 }
 
 .visible {
