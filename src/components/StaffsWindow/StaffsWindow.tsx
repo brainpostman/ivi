@@ -3,6 +3,7 @@ import style from './StaffsWindow.module.scss'
 import { IMovieById } from '@/types/films.api.interface'
 import { FC } from 'react'
 import StaffCard from '../StaffCard/StaffCard'
+import Link from 'next/link'
 
 interface IProps {
   film: IMovieById
@@ -26,18 +27,25 @@ const StaffsWindow: FC<IProps> = ({ film }) => {
             {film.name}: актеры и создатели фильма
           </div>
           <ul className={style.staff_grid_outer}>
-            {staffs.map((staffCard, index) => (
-              <li key={index}>
-                <h3 className={style.modal_info_subtitle}>{staffCard.title}</h3>
-                <ul className={style.staff_grid}>
-                  {staffCard.list.map(staff => (
-                    <li key={staff.id}>
-                      <StaffCard staff={staff} />
-                    </li>
-                  ))}
-                </ul>
-              </li>
-            ))}
+            {staffs.map(
+              (staffCard, index) =>
+                !!staffCard.list.length && (
+                  <li key={index}>
+                    <h3 className={style.modal_info_subtitle}>
+                      {staffCard.title}
+                    </h3>
+                    <ul className={style.staff_grid}>
+                      {staffCard.list.map(staff => (
+                        <li key={staff.id}>
+                          <Link href={`/person/${staff.id}`}>
+                            <StaffCard staff={staff} />
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
+                  </li>
+                )
+            )}
           </ul>
         </div>
 

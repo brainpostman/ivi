@@ -5,6 +5,7 @@ import { IMovieById } from '@/types/films.api.interface'
 import ModalWindow from '../ModalWindow/ModalWindow'
 import StaffsWindow from '../StaffsWindow/StaffsWindow'
 import { useBreakPoints } from '@/hooks/useBreakPoints'
+import Link from 'next/link'
 
 const breakpoints = [
   { point: 1160, view: 8 },
@@ -35,18 +36,20 @@ const WatchActors: React.FC<IProps> = ({ film }) => {
     <div className={style.wrapper}>
       <div className={style.container}>
         {film.actors.slice(0, staffsView).map(actor => (
-          <div key={actor.id} className={style.card}>
-            <div className={style.person_img_wrapper}>
-              <Image
-                src='/film/noPhotoIcon60x60.png'
-                alt={actor.name}
-                className={style.card__img}
-                fill
-              />
+          <Link href={`/person/${actor.id}`}>
+            <div key={actor.id} className={style.card}>
+              <div className={style.person_img_wrapper}>
+                <Image
+                  src='/film/noPhotoIcon60x60.png'
+                  alt={actor.name}
+                  className={style.card__img}
+                  fill
+                />
+              </div>
+              <p className={style.card__name}>{actor.name}</p>
+              <p className={style.card__title}>актер</p>
             </div>
-            <p className={style.card__name}>{actor.name}</p>
-            <p className={style.card__title}>актер</p>
-          </div>
+          </Link>
         ))}
         <button
           className={style.more_button}
