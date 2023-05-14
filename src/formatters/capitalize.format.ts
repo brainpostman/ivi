@@ -4,9 +4,11 @@
 // @param options -> reverse - обратная капитализация первого символа (toLowerCase)
 
 export const formatCapitalize = (
-  value: string,
+  value?: string,
   options?: { reverse?: boolean }
 ) => {
+  if (!value) return ''
+
   const firstLetter = options?.reverse
     ? value[0].toLowerCase()
     : value[0].toUpperCase()
