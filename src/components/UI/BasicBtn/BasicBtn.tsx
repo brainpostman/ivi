@@ -24,10 +24,12 @@ const BasicBtn: FC<IBasicBtnProps> = ({
       {btnType !== 'text' ? (
         <>
           {children}
-          <div className={style.description}>
-            {suptitle && <p className={style.suptitle}>{suptitle}</p>}
-            <p className={style.title}>{title}</p>
-          </div>
+          {(title || suptitle) && (
+            <div className={style.description}>
+              {suptitle && <p className={style.suptitle}>{suptitle}</p>}
+              {title && <p className={style.title}>{title}</p>}
+            </div>
+          )}
         </>
       ) : (
         children
