@@ -1,4 +1,4 @@
-import { ICrudDetailedFilm, ICRUDDetailedMovie } from '@/types/ICrudMovie';
+import { CRUDDetailedMovieRequest, ICRUDDetailedMovie, ICRUDDetailedMovieRequest } from '@/types/ICrudMovie';
 import Image from 'next/image';
 import { escapeHtmlNbsp } from '@/utils/escapeHtml';
 import parentStyles from '../AdminMovie.module.scss';
@@ -28,7 +28,11 @@ const AdminDetailedMovie = ({ movie, className: propsClassName }: IAdminDetailed
 
     const handleFieldChanges = async () => {
         if (name !== movie.name || engName !== movie.name_en) {
-            const newMovie: ICRUDDetailedMovie = { ...movie, name: name, name_en: engName };
+            const newMovie: ICRUDDetailedMovieRequest = {
+                ...new CRUDDetailedMovieRequest(movie),
+                name: name,
+                name_en: engName,
+            };
             try {
                 const response = await customAxios.put('/film-update', newMovie, {
                     headers: {
@@ -38,6 +42,7 @@ const AdminDetailedMovie = ({ movie, className: propsClassName }: IAdminDetailed
                 toast.info(`${response.status}: ${response.statusText}`);
                 router.replace(router.asPath);
             } catch (error: any) {
+                console.log(error);
                 toast.error(error.message);
             }
         } else {
