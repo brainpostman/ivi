@@ -1,4 +1,4 @@
-import { IFilterGetResponse } from './filters.api.interface';
+import { IStaffGetResponse } from './staffs.interface'
 
 export type IFilterTitle = 'genres' | 'country' | 'year' | 'rating' | 'director' | 'actor' | string;
 
@@ -19,18 +19,18 @@ export interface IFilterData {
 }
 
 export interface IFilterListBigProps {
-    filterData: IFilterData;
-    list: IFilterGetResponse[];
-    carouselElementsView?: number;
-    carouselElementsMove?: number;
-    query: string;
-    children?: React.ReactNode[];
+  filterData: IFilterData
+  list: { id: number; name: string }[]
+  carouselElementsView?: number
+  carouselElementsMove?: number
+  query: string
+  children?: React.ReactNode[]
 }
 
 export interface IFilterListSmallProps {
-    filterData: IFilterData;
-    list: (IFilterGetResponse & { view: string })[];
-    query: string;
+  filterData: IFilterData
+  list: { id: number; name: string; view: string }[]
+  query: string
 }
 
 export interface IFilterSuggestProps {

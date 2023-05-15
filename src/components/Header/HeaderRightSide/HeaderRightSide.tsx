@@ -3,12 +3,10 @@ import SubscribeButton from '@/components/UI/SubscribeButton/SubscribeButton'
 import { IHeaderTab } from '@/types/header.interface'
 import { FC, useEffect, useState } from 'react'
 import { IoPersonOutline } from 'react-icons/io5'
-
 import HighlightButton from '@/components/UI/HighlightButton/HighlightButton'
 import { useRouter } from 'next/router'
 import style from './HeaderRightSide.module.scss'
 import { useTranslation } from 'next-i18next'
-import LanguageSwitcher from '@/components/LanguageSwitcher/LanguageSwitcher'
 import LanguageChanger from '@/components/LanguageSwitcher/LanguageSwitcher'
 
 interface IProps {

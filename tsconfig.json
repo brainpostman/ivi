@@ -14,10 +14,11 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "incremental": true,
+    "types": ["jest", "cypress"],
     "paths": {
       "@/*": ["./src/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "custom.d.ts"],
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules", "cypress.config.ts", "cypress/**/*.ts"]
 }

@@ -4,24 +4,23 @@
 const formatCssLength = (length: string | number) => {
   const stringedLen = length.toString()
 
-  if (length.toString().length < 2) {
-    console.error('UNCORRECT CSS LENGTH')
-    return `0px`
-  }
-
   const lastElem = stringedLen.at(-1)
   if (lastElem === '%') {
-    return length
+    return length.toString()
   }
 
-  const twoLastElems = stringedLen.at(-2)
-  if (twoLastElems === 'px') {
-    return length
+  if (stringedLen.length > 2) {
+    const twoLastElems = stringedLen.at(-2)! + stringedLen.at(-1)!
+    if (twoLastElems === 'px') {
+      return length.toString()
+    }
   }
 
   if (+length) {
     return `${length}px`
   }
+
+  return `0px`
 }
 
 export default formatCssLength

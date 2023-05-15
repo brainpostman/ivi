@@ -114,11 +114,13 @@
   display: flex;
   flex-direction: column;
   gap: 36px;
+  width: fit-content;
 }
 
 .staff_grid {
   display: grid;
   grid-template-columns: repeat(4, auto);
+  column-gap: 84px;
 }
 
 .modal_poster_img {

@@ -53,10 +53,10 @@ const CustomCarousel: FC<ICustomCarouselProps> = ({
 
   const containerWidth = formatCarouselWidth(
     width,
-    elementLens,
-    elementsView,
     gap,
-    padding
+    padding,
+    elementLens,
+    elementsView
   )
 
   const arrowPosition =

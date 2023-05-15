@@ -1,7 +1,7 @@
-import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
-import { useGetParam } from './useGetParam';
-import { IFilterGetResponse } from '@/types/filters.api.interface';
+import { useRouter } from 'next/router'
+import { useEffect, useState } from 'react'
+import { useGetParam } from './useGetParam'
+import { IStaffGetResponse } from '@/types/staffs.interface'
 
 type IFilterType = 'radio';
 
@@ -11,15 +11,22 @@ interface IOptions {
 }
 
 export const useSetListParam = (
-    defaultValue: (IFilterGetResponse & { isSelect: boolean; view?: string })[],
-    query: string,
-    options?: IOptions
+  defaultValue: {
+    id: number
+    name: string
+    isSelect: boolean
+    view?: string
+  }[],
+  query: string,
+  options?: IOptions
 ) => {
     const param = useGetParam(query);
     const router = useRouter();
 
-    const [list, setList] =
-        useState<(IFilterGetResponse & { isSelect: boolean; view?: string })[]>(defaultValue);
+  const [list, setList] =
+    useState<{ id: number; name: string; isSelect: boolean; view?: string }[]>(
+      defaultValue
+    )
 
     const onClickListEl = (_param: string) => () => {
         let resultParams: string | undefined = '';

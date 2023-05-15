@@ -1,18 +1,19 @@
-import { useFilter } from '@/hooks/useFilter';
-import { IFilterBlockEl } from '@/types/filterBlock.interface';
-import { useTranslation } from 'next-i18next';
-import { useRouter } from 'next/router';
-import { FC, useEffect } from 'react';
-import { IoCloseOutline } from 'react-icons/io5';
-import FilterGenreCard from '../FilterGenreCard/FilterGenreCard';
-import VioletButton from '../UI/VioletButton/VioletButton';
-import style from './FilterBlock.module.scss';
-import FilterListBig from './FilterListBig/FilterListBig';
-import FilterListSmall from './FilterListSmall/FilterListSmall';
-import FilterSlider from './FilterSlider/FilterSlider';
-import FilterSuggest from './FilterSuggest/FilterSuggest';
-import { IFilterGetResponse } from '@/types/filters.api.interface';
-import { useSetListParam } from '@/hooks/useSetListParam';
+import { filterYearData } from '@/data/filterYear.data'
+import { useFilter } from '@/hooks/useFilter'
+import { IFilterBlockEl } from '@/types/filterBlock.interface'
+import { useTranslation } from 'next-i18next'
+import { useRouter } from 'next/router'
+import { FC, useEffect } from 'react'
+import { IoCloseOutline } from 'react-icons/io5'
+import FilterGenreCard from '../FilterGenreCard/FilterGenreCard'
+import VioletButton from '../UI/VioletButton/VioletButton'
+import style from './FilterBlock.module.scss'
+import FilterListBig from './FilterListBig/FilterListBig'
+import FilterListSmall from './FilterListSmall/FilterListSmall'
+import FilterSlider from './FilterSlider/FilterSlider'
+import FilterSuggest from './FilterSuggest/FilterSuggest'
+import { IFilterGetResponse, IStaffGetResponse } from '@/types/staffs.interface'
+import { useSetListParam } from '@/hooks/useSetListParam'
 
 const filterList: Omit<IFilterBlockEl, 'isExpand'>[] = [
     { title: 'genres' },
@@ -24,10 +25,10 @@ const filterList: Omit<IFilterBlockEl, 'isExpand'>[] = [
 ];
 
 interface IProps {
-    genres: IFilterGetResponse[];
+    genres: IStaffGetResponse[];
     countries: IFilterGetResponse[];
-    directors: IFilterGetResponse[];
-    actors: IFilterGetResponse[];
+    directors: IStaffGetResponse[];
+    actors: IStaffGetResponse[];
     className?: string;
     clearSort?: boolean;
 }
@@ -51,8 +52,7 @@ const FilterBlock: FC<IProps> = ({
     const producerFilterData = getFilterData('director');
     const actorFilterData = getFilterData('actor');
 
-    const isAppliedFilters = Object.keys(router.query).length;
-    console.log(!!isAppliedFilters);
+  const isAppliedFilters = Object.keys(router.query).length
 
     const { onClickListEl: onClickGenreCard } = useSetListParam(
         genres.slice(0, 10).map((genre) => ({ ...genre, isSelect: false })),
@@ -60,7 +60,7 @@ const FilterBlock: FC<IProps> = ({
     );
 
     const { onClickListEl: onClickCountry } = useSetListParam(
-        countries.slice(0, 10).map((genre) => ({ ...genre, isSelect: false })),
+        countries.slice(0, 10).map((country) => ({ ...country, isSelect: false })),
         'countries'
     );
 

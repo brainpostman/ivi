@@ -20,6 +20,7 @@ interface IProps {
   lineClamp?: number
   expandWord?: string
   className?: string
+  expandWordGray?: boolean
 }
 
 const ExpandBlock: FC<IProps> = ({
@@ -30,6 +31,7 @@ const ExpandBlock: FC<IProps> = ({
   width = '75%',
   lineClamp = 2,
   expandWord,
+  expandWordGray: isExpandWordGray = false,
   ...props
 }) => {
   const { t } = useTranslation('common')
@@ -63,7 +65,12 @@ const ExpandBlock: FC<IProps> = ({
 
       {isExpand && children}
 
-      <p className={style.toggle} onClick={onClickToggle}>
+      <p
+        className={`${style.toggle} ${
+          isExpandWordGray ? style.toggle_gray : ''
+        }`}
+        onClick={onClickToggle}
+      >
         {isExpand
           ? t('expand-block.collapse')
           : expandWord || t('expand-block.expand')}
