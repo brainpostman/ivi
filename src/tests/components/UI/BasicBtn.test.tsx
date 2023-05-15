@@ -48,7 +48,7 @@ describe('<BasicBtn />', () => {
       </BasicBtn>
     )
 
-    checkButton(container)
+    checkButton(container, 'textPlusIcon', true)
 
     const title = container.getElementsByClassName('title')[0]
     const suptitle = container.getElementsByClassName('suptitle')[0]
