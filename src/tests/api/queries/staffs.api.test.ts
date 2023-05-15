@@ -1,8 +1,4 @@
-import {
-  IFilterGetResponse,
-  IStaff,
-  IStaffGetResponse,
-} from '@/types/staffs.interface'
+import { IFilterGetResponse, IStaff } from '@/types/staffs.interface'
 import { staffsAPI } from '@/api/queries/staffs.api'
 import { checkObjHaveProperties } from '@/utils/checkObjHaveProperties.utils'
 import { ICrudGenre } from '@/types/ICrudMovie'
@@ -22,6 +18,7 @@ describe('STAFFS API', () => {
   let countries: IFilterGetResponse[]
   let directors: IStaff[]
   let actors: IStaff[]
+  let staffById: IStaff | undefined
 
   let crudGenres: ICrudGenre[]
 
@@ -31,6 +28,7 @@ describe('STAFFS API', () => {
     directors = await staffsAPI.getDirectors()
     actors = await staffsAPI.getActors()
     crudGenres = await staffsAPI.getCrudGenres()
+    staffById = await staffsAPI.getStaffById(12)
   })
 
   // Проверка полей жанров
@@ -63,6 +61,13 @@ describe('STAFFS API', () => {
       checkObjHaveProperties(actor, crudGenreRequiredProperties)
     )
   })
+
+  it('Check staffs by id', () => {
+    expect(staffById).toBeTruthy()
+    if (staffById) {
+      checkObjHaveProperties(staffById, staffRequiredProperties)
+    }
+  })
 })
 
 describe('STAFFS API ERRORS', () => {
@@ -71,6 +76,7 @@ describe('STAFFS API ERRORS', () => {
   let errorDirectors: IStaff[]
   let errorActors: IStaff[]
   let errorCrudGenres: ICrudGenre[]
+  let errorStaffById: IStaff | undefined
 
   beforeAll(async () => {
     errorGenres = await staffsAPI.getGenres('ru', { page: -1 })
@@ -78,6 +84,7 @@ describe('STAFFS API ERRORS', () => {
     errorActors = await staffsAPI.getActors({ page: -1 })
 
     errorCrudGenres = await staffsAPI.getCrudGenres({ page: -1 })
+    errorStaffById = await staffsAPI.getStaffById(-1)
   })
 
   // Проверяем ошибку жанров
@@ -114,5 +121,10 @@ describe('STAFFS API ERRORS', () => {
     if (Array.isArray(errorCrudGenres)) {
       expect(!errorCrudGenres.length).toBeTruthy()
     }
+  })
+
+  // Проверяем ошибку участника по id
+  it('Check staff by id error', () => {
+    expect(!errorStaffById).toBeTruthy()
   })
 })
