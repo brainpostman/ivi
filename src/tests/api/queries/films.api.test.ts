@@ -1,4 +1,5 @@
 import { filmsAPI } from '@/api/queries/films.api'
+import { ICRUDMovie } from '@/types/ICrudMovie'
 import { IMovieById } from '@/types/films.api.interface'
 import { IMovie } from '@/types/films.api.interface'
 import { checkObjHaveProperties } from '@/utils/checkObjHaveProperties.utils'
@@ -20,6 +21,33 @@ const filmsRequiredProperites = [
   'premiere',
 ]
 
+const crudFilmsRequiredProperties = [
+  'id',
+  'name',
+  'name_en',
+  'type',
+  'mainImg',
+  'year',
+  'tagline',
+  'budget',
+  'fees',
+  'feesUS',
+  'feesRU',
+  'premiere',
+  'premiereRU',
+  'releaseDVD',
+  'releaseBluRay',
+  'age',
+  'ratingMPAA',
+  'time',
+  'description',
+  'scoreAVG',
+  'createdAt',
+  'updatedAt',
+  'countries',
+  'genres',
+]
+
 const specificFilmRequiredProperites = [
   ...filmsRequiredProperites,
   'directors',
@@ -38,6 +66,8 @@ describe('API-FILMS', () => {
   let filmById: IMovieById | undefined
   let homePageFilms: IMovie[]
 
+  let crudFilms: ICRUDMovie[]
+
   beforeAll(async () => {
     const filmsData = await filmsAPI.getFilms()
     films = filmsData.films
@@ -45,6 +75,7 @@ describe('API-FILMS', () => {
     filmById = await filmsAPI.getFilmsById(1)
 
     homePageFilms = (await filmsAPI.getFilmsHomePage()).films
+    crudFilms = (await filmsAPI.getCrudFilms()).films
   })
 
   // Проверяем поля пришедших фильмов
@@ -75,34 +106,41 @@ describe('API-FILMS', () => {
 
     expect(homePageFilms.length === 19).toBeTruthy()
   })
+
+  // Проверяем круд фильмов
+  it('Check crud films', () => {
+    expect(crudFilms).toBeTruthy()
+
+    crudFilms.forEach(crudFilm =>
+      checkObjHaveProperties(crudFilm, crudFilmsRequiredProperties)
+    )
+  })
 })
 
 describe('FILMS API ERRORS', () => {
-  let errorFilms: IMovie[]
-  let errorFilmsTotalCount: number
+  let errorFilmsData: { films: IMovie[]; totalCount: number }
 
   let errorFilmById: IMovieById | undefined
+  let errorCrudFilmsData: { films: ICRUDMovie[]; totalCount: number }
 
   beforeAll(async () => {
-    const errorFilmsData = await filmsAPI.getFilms({ page: -1 })
-    errorFilms = errorFilmsData.films
-    errorFilmsTotalCount = errorFilmsData.totalCount
-
+    errorFilmsData = await filmsAPI.getFilms({ page: -1 })
     errorFilmById = await filmsAPI.getFilmsById(-1)
+    errorCrudFilmsData = await filmsAPI.getCrudFilms({ page: -1 })
   })
 
   // Проверяем ошибку при получении фильмов
   it('Check films error', () => {
-    expect(Array.isArray(errorFilms))
-    if (Array.isArray(errorFilms)) {
-      expect(!errorFilms.length).toBeTruthy()
-    }
-
-    expect(!errorFilmsTotalCount).toBeTruthy()
+    expect(errorFilmsData).toStrictEqual({ films: [], totalCount: 0 })
   })
 
   // Проверяем ошибку при получении фильма по id
-  it('Check filmy by id error', () => {
+  it('Check film by id error', () => {
     expect(!errorFilmById).toBeTruthy()
+  })
+
+  // Проверяем ошибку при получении круда фильмов
+  it('Check crud films error', () => {
+    expect(errorCrudFilmsData).toStrictEqual({ films: [], totalCount: 0 })
   })
 })

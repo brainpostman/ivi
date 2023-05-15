@@ -1,7 +1,7 @@
 import { IFilterGetResponse, IStaff } from '@/types/staffs.interface'
 import { staffsAPI } from '@/api/queries/staffs.api'
 import { checkObjHaveProperties } from '@/utils/checkObjHaveProperties.utils'
-import { ICrudGenre } from '@/types/ICrudMovie'
+import { ICRUDGenre } from '@/types/ICrudMovie'
 
 const staffRequiredProperties = ['id', 'name']
 
@@ -20,7 +20,7 @@ describe('STAFFS API', () => {
   let actors: IStaff[]
   let staffById: IStaff | undefined
 
-  let crudGenres: ICrudGenre[]
+  let crudGenres: ICRUDGenre[]
 
   beforeAll(async () => {
     genres = await staffsAPI.getGenres('ru')
@@ -75,7 +75,7 @@ describe('STAFFS API ERRORS', () => {
   //let errorCountries: IFilterGetResponse[]
   let errorDirectors: IStaff[]
   let errorActors: IStaff[]
-  let errorCrudGenres: ICrudGenre[]
+  let errorCrudGenres: ICRUDGenre[]
   let errorStaffById: IStaff | undefined
 
   beforeAll(async () => {
@@ -89,38 +89,23 @@ describe('STAFFS API ERRORS', () => {
 
   // Проверяем ошибку жанров
   it('Check genres error', () => {
-    expect(Array.isArray(errorGenres))
-
-    if (Array.isArray(errorGenres)) {
-      expect(!errorGenres.length).toBeTruthy()
-    }
+    expect(errorGenres).toStrictEqual([])
   })
 
   // Проверяем ошибку режиссёров
   it('Check directors error', () => {
-    expect(Array.isArray(errorDirectors))
-
-    if (Array.isArray(errorDirectors)) {
-      expect(!errorDirectors.length).toBeTruthy()
-    }
+    expect(errorDirectors).toStrictEqual([])
   })
 
   // Проверяем ошибку актёров
   it('Check actors error', () => {
-    expect(Array.isArray(errorActors))
-
-    if (Array.isArray(errorActors)) {
-      expect(!errorActors.length).toBeTruthy()
-    }
+    expect(errorActors).toStrictEqual([])
   })
 
   // Проверяем ошибку круда жанров
   it('Check crud genres error', () => {
-    expect(Array.isArray(errorCrudGenres))
-
-    if (Array.isArray(errorCrudGenres)) {
-      expect(!errorCrudGenres.length).toBeTruthy()
-    }
+    // FIXME: Не считает page=-1 за ошибку
+    expect(errorCrudGenres).toStrictEqual([])
   })
 
   // Проверяем ошибку участника по id
