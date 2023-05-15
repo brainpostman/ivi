@@ -16,7 +16,7 @@ import {
 import { FiPhone } from 'react-icons/fi'
 import { GoMail } from 'react-icons/go'
 
-const iconsforTypeIconCircle = {
+const icons = {
   empty: <></>,
   linkedin: <FaLinkedinIn />,
   OK: <FaOdnoklassniki />,
@@ -26,15 +26,18 @@ const iconsforTypeIconCircle = {
   VK: <FaVk />,
 }
 
-const iconsForTypeTextPlusIcon = {
+const iconsforTypeIconCircle = {
   empty: <></>,
+  linkedin: <FaLinkedinIn />,
+  OK: <FaOdnoklassniki />,
+  Telegram: <FaTelegramPlane />,
+  Twitter: <FaTwitter />,
+  Viber: <FaViber />,
+  VK: <FaVk />,
   Apple: <FaApple />,
   GooglePlay: <FaGooglePlay />,
   TV: <FaTv />,
   'Все устройства': <BiDevices />,
-}
-
-const iconsForTypeIcon = {
   email: <GoMail />,
   phone: <FiPhone />,
 }
@@ -91,7 +94,7 @@ const meta: Meta = {
       defaultValue: '',
       if: {
         arg: 'btnType',
-        eq: 'textPlusIcon',
+        neq: 'text',
       },
     },
 
@@ -100,46 +103,21 @@ const meta: Meta = {
       defaultValue: '',
       if: {
         arg: 'btnType',
-        eq: 'textPlusIcon',
+        neq: 'text',
       },
     },
 
-    iconsforTypeIcon: {
+    icons: {
       name: 'icon',
       description: 'Иконка',
-      options: Object.keys(iconsforTypeIconCircle),
-      mapping: iconsforTypeIconCircle,
+      options: Object.keys(icons),
+      mapping: icons,
       control: 'select',
       if: {
         arg: 'btnType',
-        eq: 'iconCircle',
+        neq: 'text',
       },
     },
-
-    iconsForTypeTextPlusIcon: {
-      name: 'icon',
-      description: 'Иконка',
-      options: Object.keys(iconsForTypeTextPlusIcon),
-      mapping: iconsForTypeTextPlusIcon,
-      control: 'select',
-      if: {
-        arg: 'btnType',
-        eq: 'textPlusIcon',
-      },
-    },
-
-    iconsForTypeIcon: {
-      name: 'icon',
-      description: 'Иконка',
-      options: Object.keys(iconsForTypeIcon),
-      mapping: iconsForTypeIcon,
-      control: 'select',
-      if: {
-        arg: 'btnType',
-        eq: 'icon',
-      },
-    },
-
     circle: {
       description: 'Красный кружок',
     },
@@ -152,18 +130,14 @@ const meta: Meta = {
 
 export const Primary = ({
   children,
-  iconsforTypeIcon,
-  iconsForTypeTextPlusIcon,
-  iconsForTypeIcon,
+  icons,
   ...props
 }: {
   children: string
-  iconsforTypeIcon?: React.ReactElement
-  iconsForTypeTextPlusIcon?: React.ReactElement
-  iconsForTypeIcon?: React.ReactElement
+  icons?: React.ReactElement
 } & typeof BasicBtn) => (
   <BasicBtn {...props}>
-    {iconsForTypeIcon || iconsForTypeTextPlusIcon || iconsforTypeIcon}
+    {icons}
     {children}
   </BasicBtn>
 )
