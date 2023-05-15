@@ -6,6 +6,6 @@ const testGridColumnLines = 4
 describe('GRID UTIL', () => {
   it('Check working', () => {
     const result = getNumGridColumns(testRowsLength, testGridColumnLines)
-    expect(result).toBe(3)
+    expect(result).toBe(testRowsLength / testGridColumnLines)
   })
 })
