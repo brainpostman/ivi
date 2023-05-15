@@ -16,7 +16,7 @@ import { useSetListParam } from '@/hooks/useSetListParam';
 
 const filterList: Omit<IFilterBlockEl, 'isExpand'>[] = [
     { title: 'genres' },
-    { title: 'country' },
+    { title: 'countries' },
     { title: 'year' },
     { title: 'rating' },
     { title: 'director' },
@@ -46,7 +46,7 @@ const FilterBlock: FC<IProps> = ({
     const { expandTabFilter, getFilterData } = useFilter(filterList);
 
     const genreFilterData = getFilterData('genres');
-    const countryFilterData = getFilterData('country');
+    const countryFilterData = getFilterData('countries');
     const yearFilterData = getFilterData('year');
     const producerFilterData = getFilterData('director');
     const actorFilterData = getFilterData('actor');
@@ -104,7 +104,7 @@ const FilterBlock: FC<IProps> = ({
                 list={countries}
                 carouselElementsView={6}
                 carouselElementsMove={1}
-                query='country'>
+                query='countries'>
                 {countries.slice(0, 10).map((country) => (
                     <VioletButton
                         key={country.id}

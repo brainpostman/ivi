@@ -159,7 +159,7 @@
   ],
   "filters": {
     "genres": "Genres",
-    "country": "Countries",
+    "countries": "Countries",
     "year": "Years",
     "rating": "Ivy Rating",
     "director": "Directors",

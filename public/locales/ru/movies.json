@@ -159,7 +159,7 @@
   ],
   "filters": {
     "genres": "Жанры",
-    "country": "Страны",
+    "countries": "Страны",
     "year": "Годы",
     "rating": "Рейтинг Иви",
     "director": "Режиссёры",

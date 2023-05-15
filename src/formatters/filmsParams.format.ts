@@ -20,7 +20,7 @@ export const formatFilmsParams = (queryParams: ParsedUrlQuery | undefined, local
         let paramValue = queryParams[param];
         if (!paramValue) continue;
 
-        if ([genres, 'country', 'director', 'actor', 'scoreAVG'].includes(param)) {
+        if ([genres, 'countries', 'director', 'actor', 'scoreAVG'].includes(param)) {
             paramValue = (paramValue as string).split(',');
 
             currentParams[
