@@ -12,9 +12,9 @@ export const getClassNameBtnType = (
     resultStyle = style.icon
   } else if (btnType === 'iconCircle') {
     resultStyle = style.iconCircle
-    if (title || suptitle) {
-      resultStyle = style.textPlusIcon
-    }
+  }
+  if (title || suptitle) {
+    resultStyle = style.textPlusIcon
   }
 
   return resultStyle
