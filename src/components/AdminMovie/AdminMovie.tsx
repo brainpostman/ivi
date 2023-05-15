@@ -2,7 +2,8 @@ import {
     CrudDetailedFilm,
     ICrudDetailedFilm,
     ICrudFilm,
-    IDetailedFilmJson,
+    ICRUDDetailedMovie,
+    ICRUDMovie,
 } from '@/types/ICrudMovie';
 import ExpandBlock from '../ExpandBlock/ExpandBlock';
 import Image from 'next/image';
@@ -15,26 +16,27 @@ import { toast } from 'react-toastify';
 import AdminDetailedMovie from './AdminDetailedMovie/AdminDetailedMovie';
 import Loader from '../Loader/Loader';
 import { useRouter } from 'next/router';
+import { useTranslation } from 'next-i18next';
 
 interface IAdminMovieProps {
-    movie: ICrudFilm;
+    movie: ICRUDMovie;
     className?: string;
 }
 
 const AdminMovie = ({ movie, className: propsClassName }: IAdminMovieProps) => {
     const createdAt = new Date(movie.createdAt);
     const updatedAt = new Date(movie.updatedAt);
-
+    const { t } = useTranslation('admin', { keyPrefix: 'admin-movie' });
     const { locale } = useRouter();
     const [showModal, setShowModal] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
-    const [detailedMovie, setDetailedMovie] = useState<ICrudDetailedFilm | null>(null);
+    const [detailedMovie, setDetailedMovie] = useState<ICRUDDetailedMovie | null>(null);
 
     const handleShowDetails = async () => {
         setIsLoading(true);
         try {
-            const response = await customAxios.get<IDetailedFilmJson>(`/films/${movie.id}`);
-            const film = new CrudDetailedFilm(response.data);
+            const response = await customAxios.get<ICRUDDetailedMovie>(`/films/${movie.id}`);
+            const film = response.data;
             setIsLoading(false);
             setDetailedMovie(film);
             setShowModal(true);
@@ -51,13 +53,13 @@ const AdminMovie = ({ movie, className: propsClassName }: IAdminMovieProps) => {
                     ID: <span className={styles.info__item__value}>{movie.id}</span>
                 </span>
                 <span>
-                    Запись создана:{' '}
+                    {t('created-at')}:{' '}
                     <span className={styles.info__item__value}>
                         {`${createdAt?.toLocaleDateString()}, ${createdAt?.toLocaleTimeString()}`}
                     </span>
                 </span>
                 <span>
-                    Последнее обновление:{' '}
+                    {t('updated-at')}:{' '}
                     <span className={styles.info__item__value}>
                         {`${updatedAt?.toLocaleDateString()}, ${updatedAt?.toLocaleTimeString()}`}
                     </span>
@@ -81,40 +83,49 @@ const AdminMovie = ({ movie, className: propsClassName }: IAdminMovieProps) => {
                         onClick={() => {
                             handleShowDetails();
                         }}>
-                        Подробнее
+                        {t('show-more')}
                     </div>
                 )}
             </div>
             <div className={styles.info}>
                 <div className={`${styles.info__row} ${styles.info__row_1}`}>
                     <p className={styles.info__item}>
-                        Название:{' '}
+                        {t('title')}:{' '}
                         <span className={styles.info__item__value}>{movie.name || '-'}</span>
                     </p>
                     <p className={styles.info__item}>
-                        Название (eng):{' '}
+                        {t('title-eng')}:{' '}
                         <span className={styles.info__item__value}> {movie.name_en || '-'}</span>
                     </p>
                 </div>
                 <div className={`${styles.info__row} ${styles.info__row_2}`}>
                     <p className={styles.info__item}>
-                        Год: <span className={styles.info__item__value}>{movie.year || '-'}</span>
+                        {t('year')}:{' '}
+                        <span className={styles.info__item__value}>{movie.year || '-'}</span>
                     </p>
                     <p className={styles.info__item}>
-                        Тип: <span className={styles.info__item__value}>{movie.type || '-'}</span>
+                        {t('type')}:{' '}
+                        <span className={styles.info__item__value}>{movie.type || '-'}</span>
                     </p>
                     <p className={styles.info__item}>
-                        Страны:{' '}
+                        {t('countries')}:{' '}
                         <span className={styles.info__item__value}>
-                            {movie.countries.join(', ') || '-'}
+                            {movie.countries
+                                .map((country) => {
+                                    return country.name;
+                                })
+                                .join(', ') || '-'}
                         </span>
                     </p>
                     <p className={styles.info__item}>
-                        Жанры:{' '}
+                        {t('genres')}:{' '}
                         <span className={styles.info__item__value}>
-                            {(locale === 'ru' ? movie.genres : movie.genres_en)
-                                .filter((genre) => {
-                                    return genre;
+                            {movie.genres
+                                .map((genre) => {
+                                    return locale === 'ru' ? genre.name : genre.name_en;
+                                })
+                                .filter((str) => {
+                                    return str;
                                 })
                                 .join(', ') || '-'}
                         </span>
@@ -122,39 +133,39 @@ const AdminMovie = ({ movie, className: propsClassName }: IAdminMovieProps) => {
                 </div>
                 <div className={`${styles.info__row} ${styles.info__row_3}`}>
                     <p className={styles.info__item}>
-                        Оценка:{' '}
+                        {t('score')}:{' '}
                         <span className={styles.info__item__value}>{movie.scoreAVG || '-'}</span>
                     </p>
                     <p className={styles.info__item}>
-                        Бюджет:{' '}
+                        {t('budget')}:{' '}
                         <span className={styles.info__item__value}>
                             {escapeHtmlNbsp(movie.budget || '-')}
                         </span>
                     </p>
                     <p className={styles.info__item}>
-                        Премьера:{' '}
+                        {t('premiere')}:{' '}
                         <span className={styles.info__item__value}>{movie.premiere || '-'}</span>
                     </p>
                     <p className={styles.info__item}>
-                        Премьера в России:{' '}
+                        {t('premiere-ru')}:{' '}
                         <span className={styles.info__item__value}>{movie.premiereRU || '-'}</span>
                     </p>
                 </div>
                 <div className={`${styles.info__row} ${styles.info__row_4}`}>
                     <p className={styles.info__item}>
-                        Сборы в России:{' '}
+                        {t('fees-ru')}:{' '}
                         <span className={styles.info__item__value}>
                             {escapeHtmlNbsp(movie.feesRU || '-')}
                         </span>
                     </p>
                     <p className={styles.info__item}>
-                        Сборы в США:{' '}
+                        {t('fees-usa')}:{' '}
                         <span className={styles.info__item__value}>
                             {escapeHtmlNbsp(movie.feesUS || '-')}
                         </span>
                     </p>
                     <p className={styles.info__item}>
-                        Сборы:{' '}
+                        {t('fees-world')}:{' '}
                         <span className={styles.info__item__value}>
                             {escapeHtmlNbsp(movie.fees || '-')}
                         </span>
@@ -163,37 +174,38 @@ const AdminMovie = ({ movie, className: propsClassName }: IAdminMovieProps) => {
 
                 <div className={`${styles.info__row} ${styles.info__row_5}`}>
                     <p className={styles.info__item}>
-                        Возрастное ограничение:{' '}
+                        {t('age')}:{' '}
                         <span className={styles.info__item__value}>{movie.age || '-'}</span>
                     </p>
                     <p className={styles.info__item}>
-                        Рейтинг MPAA:{' '}
+                        {t('mpaa')}:{' '}
                         <span className={styles.info__item__value}>{movie.ratingMPAA || '-'}</span>
                     </p>
                     <p className={styles.info__item}>
-                        Время: <span className={styles.info__item__value}>{movie.time || '-'}</span>
+                        {t('runtime')}:{' '}
+                        <span className={styles.info__item__value}>{movie.time || '-'}</span>
                     </p>
                 </div>
                 <div className={`${styles.info__row} ${styles.info__row_6}`}>
                     <p className={styles.info__item}>
-                        Слоган:{' '}
+                        {t('tagline')}:{' '}
                         <span className={styles.info__item__value}>{movie.tagline || '-'}</span>
                     </p>
                 </div>
 
                 <div className={`${styles.info__row} ${styles.info__row_7}`}>
                     <p className={styles.info__item}>
-                        Описание:{' '}
+                        {t('description')}:{' '}
                         <span className={styles.info__item__value}>{movie.description || '-'}</span>
                     </p>
                 </div>
                 <div className={`${styles.info__row} ${styles.info__row_8}`}>
                     <p className={styles.info__item}>
-                        Выход на DVD:{' '}
+                        {t('release-dvd')}:{' '}
                         <span className={styles.info__item__value}>{movie.releaseDVD || '-'}</span>
                     </p>
                     <p className={styles.info__item}>
-                        Выход на BluRay:{' '}
+                        {t('release-bluray')}:{' '}
                         <span className={styles.info__item__value}>
                             {movie.releaseBluRay || '-'}
                         </span>

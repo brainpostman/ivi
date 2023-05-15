@@ -1,23 +1,25 @@
-import { ICrudGenre } from '@/types/ICrudMovie';
+import { ICRUDGenre } from '@/types/ICrudMovie';
 import styles from './AdminGenres.module.scss';
 import AdminGenre from './AdminGenre/AdminGenre';
 import { Dispatch, SetStateAction } from 'react';
+import { useTranslation } from 'next-i18next';
 
 interface IAdminGenres {
-    genres: ICrudGenre[];
+    genres: ICRUDGenre[];
     setLoading: Dispatch<SetStateAction<boolean>>;
 }
 
 const AdminGenres = ({ genres, setLoading }: IAdminGenres) => {
+    const { t } = useTranslation('admin', { keyPrefix: 'admin-genre' });
     return (
         <table className={styles.table}>
             <thead className={styles.header}>
                 <tr>
                     <th className={styles.cell}>ID</th>
-                    <th className={styles.cell}>Название</th>
-                    <th className={styles.cell}>Название (eng)</th>
-                    <th className={styles.cell}>Запись создана</th>
-                    <th className={styles.cell}>Последнее обновление</th>
+                    <th className={styles.cell}>{t('name')}</th>
+                    <th className={styles.cell}>{t('name-eng')}</th>
+                    <th className={styles.cell}>{t('created-at')}</th>
+                    <th className={styles.cell}>{t('updated-at')}</th>
                 </tr>
             </thead>
             <tbody className={styles.body}>

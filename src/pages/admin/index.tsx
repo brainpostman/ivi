@@ -10,7 +10,7 @@ import { checkAdminRole, checkAdminSession, getSerializableSession } from '@/uti
 import { Session } from 'next-auth';
 import { useRouter } from 'next/router';
 import AdminMovie from '@/components/AdminMovie/AdminMovie';
-import { ICrudGenre, ICrudFilm } from '@/types/ICrudMovie';
+import { ICRUDMovie, ICRUDGenre } from '@/types/ICrudMovie';
 import Link from 'next/link';
 import AdminGenres from '@/components/AdminGenres/AdminGenres';
 import { IFilmsGetRequest } from '@/types/films.api.interface';
@@ -96,8 +96,8 @@ export default function Admin({
     const [isLoading, setIsLoading] = useState(true);
     const [totalItems, setTotalItems] = useState(totalCount);
     const [page, setPage] = useState(2);
-    const [films, setFilms] = useState<ICrudFilm[]>(JSON.parse(defaultFilms) || []);
-    const [crudGenres, setCrudGenres] = useState<ICrudGenre[]>(JSON.parse(genres) || []);
+    const [films, setFilms] = useState<ICRUDMovie[]>(JSON.parse(defaultFilms) || []);
+    const [crudGenres, setCrudGenres] = useState<ICRUDGenre[]>(JSON.parse(genres) || []);
     const scrollFetchTrigger = useRef<HTMLDivElement>(null);
     const observer = useRef<IntersectionObserver>();
     useEffect(() => {
@@ -112,7 +112,7 @@ export default function Admin({
             observer.current.disconnect();
         }
         const callback = (entries: IntersectionObserverEntry[], observer: IntersectionObserver) => {
-            if (entries[0].isIntersecting && films.length < totalCount) {
+            if (entries[0].isIntersecting && films.length < (totalItems || totalCount)) {
                 setIsLoading(true);
             }
         };
@@ -188,7 +188,9 @@ export default function Admin({
             <div className={styles.wrapper}>
                 <div className={styles.header}>
                     <div></div>
-                    <h1 className={styles.title}>{t('admin:page-title')}</h1>
+                    <Link href={'/admin'}>
+                        <h1 className={styles.title}>{t('admin:page-title')}</h1>
+                    </Link>
                     <LanguageSwitcher />
                 </div>
                 <div className={styles.db}>
@@ -231,11 +233,10 @@ export default function Admin({
                                         return (
                                             <h2
                                                 key={str}
-                                                className={`${styles.heading__page} ${
-                                                    chosenTab === str
-                                                        ? styles.heading__page_active
-                                                        : ''
-                                                }`}
+                                                className={`${styles.heading__page} ${chosenTab === str
+                                                    ? styles.heading__page_active
+                                                    : ''
+                                                    }`}
                                                 onClick={() => changeTab(str)}>
                                                 {t(normalizeKey(`admin:${str}`))}
                                             </h2>
@@ -244,7 +245,9 @@ export default function Admin({
                                 </div>
                                 <div>
                                     <Link href={'/'} className={styles.sitepages}>
-                                        <h2 className={styles.heading__page}>{t('admin:home')}</h2>
+                                        <h2 className={styles.heading__page}>
+                                            {t('admin:home-page')}
+                                        </h2>
                                     </Link>
                                     <Link href={'/movies'} className={styles.sitepages}>
                                         <h2 className={styles.heading__page}>

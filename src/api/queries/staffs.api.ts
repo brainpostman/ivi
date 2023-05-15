@@ -7,7 +7,7 @@ import {
 } from '@/types/staffs.interface';
 import { transformStaff } from '../transforms/staff.transform';
 import { customAxios } from './customAxios';
-import { ICrudGenre } from '@/types/ICrudMovie';
+import { ICRUDGenre } from '@/types/ICrudMovie';
 import { IFilmsGetRequest } from '@/types/films.api.interface';
 
 export const staffsAPI = {
@@ -42,15 +42,15 @@ const getGenres = async (
         const genres =
             locale === 'ru'
                 ? genresData.data.map((genre) => {
-                      return { ...genre, name: formatCapitalize(genre.name) };
-                  })
+                    return { ...genre, name: formatCapitalize(genre.name) };
+                })
                 : genresData.data
-                      .filter((genre) => {
-                          return genre.name_en;
-                      })
-                      .map((genre) => {
-                          return { ...genre, name: formatCapitalize(genre.name_en ?? '') };
-                      });
+                    .filter((genre) => {
+                        return genre.name_en;
+                    })
+                    .map((genre) => {
+                        return { ...genre, name: formatCapitalize(genre.name_en ?? '') };
+                    });
 
         return genres;
     } catch (_) {
@@ -58,9 +58,9 @@ const getGenres = async (
     }
 };
 
-const getCrudGenres = async (params?: IFilmsGetRequest): Promise<ICrudGenre[]> => {
+const getCrudGenres = async (params?: IFilmsGetRequest): Promise<ICRUDGenre[]> => {
     try {
-        const response = await customAxios.get<ICrudGenre[]>('/genres', {
+        const response = await customAxios.get<ICRUDGenre[]>('/genres', {
             params,
         });
         return response.data;

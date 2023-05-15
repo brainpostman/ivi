@@ -1,4 +1,4 @@
-import { ICrudDetailedFilm } from '@/types/ICrudMovie';
+import { ICrudDetailedFilm, ICRUDDetailedMovie } from '@/types/ICrudMovie';
 import Image from 'next/image';
 import { escapeHtmlNbsp } from '@/utils/escapeHtml';
 import parentStyles from '../AdminMovie.module.scss';
@@ -10,13 +10,15 @@ import { GiCancel } from 'react-icons/gi';
 import { toast } from 'react-toastify';
 import { customAxios } from '@/api/queries/customAxios';
 import { useRouter } from 'next/router';
+import { useTranslation } from 'next-i18next';
 
 interface IAdminDetailedMovieProps {
-    movie: ICrudDetailedFilm;
+    movie: ICRUDDetailedMovie;
     className?: string;
 }
 
 const AdminDetailedMovie = ({ movie, className: propsClassName }: IAdminDetailedMovieProps) => {
+    const { t } = useTranslation('admin', { keyPrefix: 'admin-movie' });
     const createdAt = new Date(movie.createdAt);
     const updatedAt = new Date(movie.updatedAt);
     const { data } = useSession();
@@ -26,7 +28,7 @@ const AdminDetailedMovie = ({ movie, className: propsClassName }: IAdminDetailed
 
     const handleFieldChanges = async () => {
         if (name !== movie.name || engName !== movie.name_en) {
-            const newMovie: ICrudDetailedFilm = { ...movie, name: name, name_en: engName };
+            const newMovie: ICRUDDetailedMovie = { ...movie, name: name, name_en: engName };
             try {
                 const response = await customAxios.put('/film-update', newMovie, {
                     headers: {
@@ -39,7 +41,7 @@ const AdminDetailedMovie = ({ movie, className: propsClassName }: IAdminDetailed
                 toast.error(error.message);
             }
         } else {
-            toast.info('Нет изменений');
+            toast.info(t('no-changes'));
         }
     };
 
@@ -50,13 +52,13 @@ const AdminDetailedMovie = ({ movie, className: propsClassName }: IAdminDetailed
                     ID: <span className={parentStyles.info__item__value}>{movie.id}</span>
                 </span>
                 <span>
-                    Запись создана:{' '}
+                    {t('created-at')}:{' '}
                     <span className={parentStyles.info__item__value}>
                         {`${createdAt?.toLocaleDateString()}, ${createdAt?.toLocaleTimeString()}`}
                     </span>
                 </span>
                 <span>
-                    Последнее обновление:{' '}
+                    {t('updated-at')}:{' '}
                     <span className={parentStyles.info__item__value}>
                         {`${updatedAt?.toLocaleDateString()}, ${updatedAt?.toLocaleTimeString()}`}
                     </span>
@@ -77,7 +79,7 @@ const AdminDetailedMovie = ({ movie, className: propsClassName }: IAdminDetailed
                 <div
                     className={`${parentStyles.info__row} ${parentStyles.info__row_1} ${styles.input__wrapper}`}>
                     <p className={`${parentStyles.info__item} ${styles.input__item}`}>
-                        <label className={styles.input__title}>Название:</label>
+                        <label className={styles.input__title}>{t('title')}:</label>
                         <input
                             className={styles.input}
                             value={name}
@@ -86,7 +88,7 @@ const AdminDetailedMovie = ({ movie, className: propsClassName }: IAdminDetailed
                         />
                     </p>
                     <p className={`${parentStyles.info__item} ${styles.input__item}`}>
-                        <label className={styles.input__title}>Название (eng):</label>
+                        <label className={styles.input__title}>{t('title-eng')}:</label>
                         <input
                             className={styles.input}
                             value={engName}
@@ -97,7 +99,7 @@ const AdminDetailedMovie = ({ movie, className: propsClassName }: IAdminDetailed
                     <AiFillCheckCircle
                         className={`${styles.icon} ${styles.check}`}
                         onClick={() => handleFieldChanges()}
-                        title='Сохранить изменения'
+                        title={t('save-changes')}
                     />
                     <GiCancel
                         className={`${styles.icon} ${styles.cancel}`}
@@ -105,52 +107,63 @@ const AdminDetailedMovie = ({ movie, className: propsClassName }: IAdminDetailed
                             setName(movie.name);
                             setEngName(movie.name_en);
                         }}
-                        title='Отменить изменения'
+                        title={t('undo-changes')}
                     />
                 </div>
                 <div className={`${parentStyles.info__row} ${parentStyles.info__row_2}`}>
                     <p className={parentStyles.info__item}>
-                        Год:{' '}
+                        {t('year')}:{' '}
                         <span className={parentStyles.info__item__value}>{movie.year || '-'}</span>
                     </p>
                     <p className={parentStyles.info__item}>
-                        Тип:{' '}
+                        {t('type')}:{' '}
                         <span className={parentStyles.info__item__value}>{movie.type || '-'}</span>
                     </p>
                     <p className={parentStyles.info__item}>
-                        Страны:{' '}
+                        {t('countries')}:{' '}
                         <span className={parentStyles.info__item__value}>
-                            {movie.countries.join(', ') || '-'}
+                            {movie.countries
+                                .map((country) => {
+                                    return country.name;
+                                })
+                                .join(', ') || '-'}
                         </span>
                     </p>
                     <p className={parentStyles.info__item}>
-                        Жанры:{' '}
+                        {t('genres')}:{' '}
                         <span className={parentStyles.info__item__value}>
-                            {movie.genres.join(', ') || '-'}
+                            {movie.genres
+                                .map((genre) => {
+                                    return router.locale === 'ru' ? genre.name : genre.name_en;
+                                })
+                                .filter((str) => {
+                                    return str;
+                                })
+                                .join(', ') || '-'}
                         </span>
                     </p>
                 </div>
                 <div className={`${parentStyles.info__row} ${parentStyles.info__row_3}`}>
                     <p className={parentStyles.info__item}>
-                        Оценка:{' '}
+                        {t('score')}:{' '}
                         <span className={parentStyles.info__item__value}>
                             {movie.scoreAVG || '-'}
                         </span>
                     </p>
                     <p className={parentStyles.info__item}>
-                        Бюджет:{' '}
+                        {t('budget')}:{' '}
                         <span className={parentStyles.info__item__value}>
                             {escapeHtmlNbsp(movie.budget || '-')}
                         </span>
                     </p>
                     <p className={parentStyles.info__item}>
-                        Премьера:{' '}
+                        {t('premiere')}:{' '}
                         <span className={parentStyles.info__item__value}>
                             {movie.premiere || '-'}
                         </span>
                     </p>
                     <p className={parentStyles.info__item}>
-                        Премьера в России:{' '}
+                        {t('premiere-ru')}:{' '}
                         <span className={parentStyles.info__item__value}>
                             {movie.premiereRU || '-'}
                         </span>
@@ -158,19 +171,19 @@ const AdminDetailedMovie = ({ movie, className: propsClassName }: IAdminDetailed
                 </div>
                 <div className={`${parentStyles.info__row} ${parentStyles.info__row_4}`}>
                     <p className={parentStyles.info__item}>
-                        Сборы в России:{' '}
+                        {t('fees-ru')}:{' '}
                         <span className={parentStyles.info__item__value}>
                             {escapeHtmlNbsp(movie.feesRU || '-')}
                         </span>
                     </p>
                     <p className={parentStyles.info__item}>
-                        Сборы в США:{' '}
+                        {t('fees-usa')}:{' '}
                         <span className={parentStyles.info__item__value}>
                             {escapeHtmlNbsp(movie.feesUS || '-')}
                         </span>
                     </p>
                     <p className={parentStyles.info__item}>
-                        Сборы:{' '}
+                        {t('fees-world')}:{' '}
                         <span className={parentStyles.info__item__value}>
                             {escapeHtmlNbsp(movie.fees || '-')}
                         </span>
@@ -179,23 +192,23 @@ const AdminDetailedMovie = ({ movie, className: propsClassName }: IAdminDetailed
 
                 <div className={`${parentStyles.info__row} ${parentStyles.info__row_5}`}>
                     <p className={parentStyles.info__item}>
-                        Возрастное ограничение:{' '}
+                        {t('age')}:{' '}
                         <span className={parentStyles.info__item__value}>{movie.age || '-'}</span>
                     </p>
                     <p className={parentStyles.info__item}>
-                        Рейтинг MPAA:{' '}
+                        {t('mpaa')}:{' '}
                         <span className={parentStyles.info__item__value}>
                             {movie.ratingMPAA || '-'}
                         </span>
                     </p>
                     <p className={parentStyles.info__item}>
-                        Время:{' '}
+                        {t('runtime')}:{' '}
                         <span className={parentStyles.info__item__value}>{movie.time || '-'}</span>
                     </p>
                 </div>
                 <div className={`${parentStyles.info__row} ${parentStyles.info__row_6}`}>
                     <p className={parentStyles.info__item}>
-                        Слоган:{' '}
+                        {t('tagline')}:{' '}
                         <span className={parentStyles.info__item__value}>
                             {movie.tagline || '-'}
                         </span>
@@ -203,24 +216,32 @@ const AdminDetailedMovie = ({ movie, className: propsClassName }: IAdminDetailed
                 </div>
                 <div className={`${parentStyles.info__row} ${parentStyles.info__row_7}`}>
                     <p className={parentStyles.info__item}>
-                        Актеры:{' '}
+                        {t('actors')}:{' '}
                         <span className={parentStyles.info__item__value}>
-                            {movie.actors.join(', ') || '-'}
+                            {movie.actors
+                                .map((actor) => {
+                                    return actor.name;
+                                })
+                                .join(', ') || '-'}
                         </span>
                     </p>
                 </div>
                 <div className={`${parentStyles.info__row} ${parentStyles.info__row_8}`}>
                     <p className={parentStyles.info__item}>
-                        Режиссёры:{' '}
+                        {t('directors')}:{' '}
                         <span className={parentStyles.info__item__value}>
-                            {movie.directors.join(', ') || '-'}
+                            {movie.directors
+                                .map((director) => {
+                                    return director.name;
+                                })
+                                .join(', ') || '-'}
                         </span>
                     </p>
                 </div>
 
                 <div className={`${parentStyles.info__row} ${parentStyles.info__row_9}`}>
                     <p className={parentStyles.info__item}>
-                        Описание:{' '}
+                        {t('description')}:{' '}
                         <span className={parentStyles.info__item__value}>
                             {movie.description || '-'}
                         </span>
@@ -228,47 +249,67 @@ const AdminDetailedMovie = ({ movie, className: propsClassName }: IAdminDetailed
                 </div>
                 <div className={`${parentStyles.info__row} ${parentStyles.info__row_10}`}>
                     <p className={parentStyles.info__item}>
-                        Сценаристы:{' '}
+                        {t('writers')}:{' '}
                         <span className={parentStyles.info__item__value}>
-                            {movie.scenario.join(', ') || '-'}
+                            {movie.scenario
+                                .map((writer) => {
+                                    return writer.name;
+                                })
+                                .join(', ') || '-'}
                         </span>
                     </p>
                 </div>
                 <div className={`${parentStyles.info__row} ${parentStyles.info__row_11}`}>
                     <p className={parentStyles.info__item}>
-                        Монтажёры:{' '}
+                        {t('editors')}:{' '}
                         <span className={parentStyles.info__item__value}>
-                            {movie.montages.join(', ') || '-'}
+                            {movie.montages
+                                .map((editor) => {
+                                    return editor.name;
+                                })
+                                .join(', ') || '-'}
                         </span>
                     </p>
                 </div>
                 <div className={`${parentStyles.info__row} ${parentStyles.info__row_12}`}>
                     <p className={parentStyles.info__item}>
-                        Художники:{' '}
+                        {t('artists')}:{' '}
                         <span className={parentStyles.info__item__value}>
-                            {movie.artists.join(', ') || '-'}
+                            {movie.artists
+                                .map((artist) => {
+                                    return artist.name;
+                                })
+                                .join(', ') || '-'}
                         </span>
                     </p>
                 </div>
                 <div className={`${parentStyles.info__row} ${parentStyles.info__row_13}`}>
                     <p className={parentStyles.info__item}>
-                        Операторы:{' '}
+                        {t('operators')}:{' '}
                         <span className={parentStyles.info__item__value}>
-                            {movie.operators.join(', ') || '-'}
+                            {movie.operators
+                                .map((operator) => {
+                                    return operator.name;
+                                })
+                                .join(', ') || '-'}
                         </span>
                     </p>
                 </div>
                 <div className={`${parentStyles.info__row} ${parentStyles.info__row_14}`}>
                     <p className={parentStyles.info__item}>
-                        Композиторы:{' '}
+                        {t('composers')}:{' '}
                         <span className={parentStyles.info__item__value}>
-                            {movie.compositors.join(', ') || '-'}
+                            {movie.compositors
+                                .map((composer) => {
+                                    return composer.name;
+                                })
+                                .join(', ') || '-'}
                         </span>
                     </p>
                 </div>
                 <div className={`${parentStyles.info__row} ${parentStyles.info__row_15}`}>
                     <p className={parentStyles.info__item}>
-                        Зрители:
+                        {t('spectators')}:
                         <span className={parentStyles.info__item__value}>
                             {movie.spectators
                                 .map((item) => {
@@ -278,13 +319,13 @@ const AdminDetailedMovie = ({ movie, className: propsClassName }: IAdminDetailed
                         </span>
                     </p>
                     <p className={parentStyles.info__item}>
-                        Выход на DVD:{' '}
+                        {t('release-dvd')}:{' '}
                         <span className={parentStyles.info__item__value}>
                             {movie.releaseDVD || '-'}
                         </span>
                     </p>
                     <p className={parentStyles.info__item}>
-                        Выход на BluRay:{' '}
+                        {t('release-bluray')}:{' '}
                         <span className={parentStyles.info__item__value}>
                             {movie.releaseBluRay || '-'}
                         </span>

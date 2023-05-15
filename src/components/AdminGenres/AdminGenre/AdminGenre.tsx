@@ -1,4 +1,4 @@
-import { ICrudGenre } from '@/types/ICrudMovie';
+import { ICRUDGenre } from '@/types/ICrudMovie';
 import parentStyles from '../AdminGenres.module.scss';
 import { AiFillCheckCircle } from 'react-icons/ai';
 import { GiCancel } from 'react-icons/gi';
@@ -8,15 +8,17 @@ import { customAxios } from '@/api/queries/customAxios';
 import { useSession } from 'next-auth/react';
 import { toast } from 'react-toastify';
 import { useRouter } from 'next/router';
+import { useTranslation } from 'next-i18next';
 
 interface IAdminGenreProps {
-    genre: ICrudGenre;
+    genre: ICRUDGenre;
     setLoading: Dispatch<SetStateAction<boolean>>;
 }
 
 const AdminGenres = ({ genre, setLoading }: IAdminGenreProps) => {
     const createdAt = new Date(genre.createdAt);
     const updatedAt = new Date(genre.updatedAt);
+    const { t } = useTranslation('admin', { keyPrefix: 'admin-genre' });
     const { data } = useSession();
     const router = useRouter();
     const [name, setName] = useState(genre.name);
@@ -39,7 +41,7 @@ const AdminGenres = ({ genre, setLoading }: IAdminGenreProps) => {
                 toast.error(error.message);
             }
         } else {
-            toast.info('Нет изменений');
+            toast.info(t('no-changes'));
         }
     };
 
@@ -74,7 +76,7 @@ const AdminGenres = ({ genre, setLoading }: IAdminGenreProps) => {
                 <AiFillCheckCircle
                     className={`${styles.icon} ${styles.check}`}
                     onClick={() => handleFieldChanges()}
-                    title='Сохранить изменения'
+                    title={t('save-changes')}
                 />
             </td>
             <td className={parentStyles.cell}>
@@ -84,7 +86,7 @@ const AdminGenres = ({ genre, setLoading }: IAdminGenreProps) => {
                         setName(genre.name);
                         setEngName(genre.name_en);
                     }}
-                    title='Отменить изменения'
+                    title={t('undo-changes')}
                 />
             </td>
         </tr>
