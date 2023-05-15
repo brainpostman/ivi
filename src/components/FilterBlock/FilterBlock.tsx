@@ -61,7 +61,7 @@ const FilterBlock: FC<IProps> = ({
 
     const { onClickListEl: onClickCountry } = useSetListParam(
         countries.slice(0, 10).map((genre) => ({ ...genre, isSelect: false })),
-        'country'
+        'countries'
     );
 
     const clearFilters = () => {

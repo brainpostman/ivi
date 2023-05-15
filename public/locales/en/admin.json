@@ -16,5 +16,11 @@
             "name": "name_en",
             "view": "Name (eng)"
         }
-    ]
+    ],
+    "page-title": "Administration",
+    "controls": "Sorting and filters",
+    "movies": "Movies",
+    "genres": "Genres",
+    "home-page": "Home",
+    "catalog": "Catalog"
 }

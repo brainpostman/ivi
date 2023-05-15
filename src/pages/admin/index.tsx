@@ -23,6 +23,7 @@ import LanguageSwitcher from '@/components/LanguageSwitcher/LanguageSwitcher';
 import Loader from '@/components/Loader/Loader';
 import Sort from '@/components/Sort/Sort';
 import styles from './index.module.scss';
+import { normalizeKey } from '@/utils/normalize.utils';
 
 interface IAdminProps {
     authSession: Session;
@@ -85,9 +86,11 @@ export default function Admin({
     actors,
     totalCount,
 }: IAdminProps) {
+    const tabs = ['movies', 'genres'];
+
     const { t } = useTranslation();
     const router = useRouter();
-    const [chosenTable, setChosenTable] = useState('movies');
+    const [chosenTab, setChosenTab] = useState('movies');
     const { status } = useSession();
     const [isLoadedFirstFilms, setIsLoadedFirstFilms] = useState(false);
     const [isLoading, setIsLoading] = useState(true);
@@ -104,7 +107,7 @@ export default function Admin({
     }, [status]);
 
     useEffect(() => {
-        if (isLoading || !isLoadedFirstFilms || chosenTable !== 'movies') return;
+        if (isLoading || !isLoadedFirstFilms || chosenTab !== 'movies') return;
         if (observer.current) {
             observer.current.disconnect();
         }
@@ -150,11 +153,11 @@ export default function Admin({
     };
 
     const changeTab = async (tabName: string) => {
-        if (chosenTable !== tabName) {
+        if (chosenTab !== tabName) {
             await router.push({ pathname: undefined, query: undefined }, undefined, {
                 shallow: true,
             });
-            setChosenTable(tabName);
+            setChosenTab(tabName);
         }
     };
 
@@ -166,7 +169,7 @@ export default function Admin({
 
     useEffect(() => {
         if (!isLoading || !isLoadedFirstFilms) return;
-        if (chosenTable === 'movies') {
+        if (chosenTab === 'movies') {
             getFilmsWithParams();
         } else {
             getSortedGenres();
@@ -185,71 +188,74 @@ export default function Admin({
             <div className={styles.wrapper}>
                 <div className={styles.header}>
                     <div></div>
-                    <h1 className={styles.title}>Administration</h1>
+                    <h1 className={styles.title}>{t('admin:page-title')}</h1>
                     <LanguageSwitcher />
                 </div>
                 <div className={styles.db}>
                     <section className={styles.db__input}>
-                        <h2 className={styles.heading__page}>Controls</h2>
-                        <article>
-                            {chosenTable === 'movies' && (
-                                <>
-                                    <Sort
-                                        sortTypes={t('movies:sortTypes', {
-                                            returnObjects: true,
-                                        })}
-                                        defaultType={''}
-                                    />
-                                    <FilterBlock
-                                        countries={countries}
-                                        genres={filterGenres}
-                                        directors={directors}
-                                        actors={actors}
-                                        className={styles.filters}
-                                        clearSort={false}
-                                    />
-                                </>
-                            )}
-                            {chosenTable === 'genres' && (
+                        <h2 className={styles.heading__page}>{t('admin:controls')}</h2>
+                        {chosenTab === 'movies' && (
+                            <article className={styles.controls}>
+                                <Sort
+                                    sortTypes={t('movies:sortTypes', {
+                                        returnObjects: true,
+                                    })}
+                                    defaultType={''}
+                                />
+                                <FilterBlock
+                                    countries={countries}
+                                    genres={filterGenres}
+                                    directors={directors}
+                                    actors={actors}
+                                    className={styles.filters}
+                                    clearSort={false}
+                                />
+                            </article>
+                        )}
+                        {chosenTab === 'genres' && (
+                            <article className={styles.controls}>
                                 <Sort
                                     sortTypes={t('admin:sortTypes', {
                                         returnObjects: true,
                                     })}
                                     defaultType={''}
                                 />
-                            )}
-                        </article>
+                            </article>
+                        )}
                     </section>
                     <section className={styles.db__output}>
                         <div className={styles.heading}>
                             <div className={styles.heading__container}>
                                 <div className={styles.heading__pages}>
-                                    <h2
-                                        className={`${styles.heading__page} ${
-                                            chosenTable === 'movies'
-                                                ? styles.heading__page_active
-                                                : ''
-                                        }`}
-                                        onClick={() => changeTab('movies')}>
-                                        Movies
-                                    </h2>
-                                    <h2
-                                        className={`${styles.heading__page} ${
-                                            chosenTable === 'genres'
-                                                ? styles.heading__page_active
-                                                : ''
-                                        }`}
-                                        onClick={() => changeTab('genres')}>
-                                        Genres
-                                    </h2>
+                                    {tabs.map((str) => {
+                                        return (
+                                            <h2
+                                                key={str}
+                                                className={`${styles.heading__page} ${
+                                                    chosenTab === str
+                                                        ? styles.heading__page_active
+                                                        : ''
+                                                }`}
+                                                onClick={() => changeTab(str)}>
+                                                {t(normalizeKey(`admin:${str}`))}
+                                            </h2>
+                                        );
+                                    })}
                                 </div>
-                                <Link href={'/'}>
-                                    <h2 className={styles.heading__page}>Home</h2>
-                                </Link>
+                                <div>
+                                    <Link href={'/'} className={styles.sitepages}>
+                                        <h2 className={styles.heading__page}>{t('admin:home')}</h2>
+                                    </Link>
+                                    <Link href={'/movies'} className={styles.sitepages}>
+                                        <h2 className={styles.heading__page}>
+                                            {t('admin:catalog')}
+                                        </h2>
+                                    </Link>
+                                </div>
                             </div>
                         </div>
                         <div className={styles.database}>
-                            {chosenTable === 'movies' && (
+                            {chosenTab === 'movies' && (
                                 <div className={styles.database__movies}>
                                     {films.map((film) => {
                                         return (
@@ -266,7 +272,7 @@ export default function Admin({
                                     {isLoading && <Loader />}
                                 </div>
                             )}
-                            {chosenTable === 'genres' &&
+                            {chosenTab === 'genres' &&
                                 (isLoading ? (
                                     <Loader />
                                 ) : (

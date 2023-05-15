@@ -53,6 +53,16 @@
     display: flex;
     flex-direction: column;
     width: 100%;
+    padding-top: 0;
+}
+
+.controls {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    @include ui-padding(hor, 2);
+    @include ui-padding(top, 2);
+    width: 100%;
 }
 
 .heading {
@@ -103,4 +113,8 @@
     &__movie:first-of-type {
         margin-top: 0;
     }
+}
+
+.sitepages {
+    display: inline-block;
 }
