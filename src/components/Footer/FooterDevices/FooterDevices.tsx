@@ -10,7 +10,7 @@ const FooterDevices = () => {
   return (
     <div className={styles.container}>
       <BasicBtn
-        btnType='textPlusIcon'
+        btnType='icon'
         href='https://apps.apple.com/RU/app/id455705533'
         title={t('app-store.title')}
         suptitle={t('app-store.subtitle')}
@@ -18,7 +18,7 @@ const FooterDevices = () => {
         <FaApple />
       </BasicBtn>
       <BasicBtn
-        btnType='textPlusIcon'
+        btnType='icon'
         href='https://play.google.com/store/apps/details?id=ru.ivi.client'
         title={t('google-play.title')}
         suptitle={t('google-play.subtitle')}
@@ -26,7 +26,7 @@ const FooterDevices = () => {
         <FaGooglePlay />
       </BasicBtn>
       <BasicBtn
-        btnType='textPlusIcon'
+        btnType='icon'
         href='https://www.ivi.ru/pages/tvsmart/'
         title={t('smart-tv.title')}
         suptitle={t('smart-tv.subtitle')}
@@ -34,7 +34,7 @@ const FooterDevices = () => {
         <FaTv />
       </BasicBtn>
       <BasicBtn
-        btnType='textPlusIcon'
+        btnType='icon'
         href='https://www.ivi.ru/devices'
         title={t('all-devices')}
       >

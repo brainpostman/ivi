@@ -12,7 +12,7 @@ const TrailerButtons: FC<IProps> = ({ className = '' }) => {
   return (
     <div className={`${style.buttons} ${className}`}>
       <div className={style.buttons__left_side}>
-        <BasicBtn btnType='textPlusIcon' title='Трейлер' dark>
+        <BasicBtn btnType='icon' title='Трейлер' dark>
           <BsPlay className={style.trailer_icon} />
         </BasicBtn>
         <BasicBtn btnType='icon' dark>
@@ -22,7 +22,7 @@ const TrailerButtons: FC<IProps> = ({ className = '' }) => {
           <RiShareForwardLine />
         </BasicBtn>
       </div>
-      <BasicBtn btnType='textPlusIcon' title='Бесплатные фильмы' dark>
+      <BasicBtn btnType='icon' title='Бесплатные фильмы' dark>
         <BsCollectionPlay />
       </BasicBtn>
     </div>

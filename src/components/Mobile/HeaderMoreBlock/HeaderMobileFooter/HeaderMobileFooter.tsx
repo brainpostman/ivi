@@ -50,14 +50,10 @@ const HeaderMobileFooter = () => {
       </ul>
 
       <div className={style.buttons}>
-        <BasicBtn
-          btnType='textPlusIcon'
-          title='Smart TV'
-          suptitle='Смотрите на'
-        >
+        <BasicBtn btnType='icon' title='Smart TV' suptitle='Смотрите на'>
           <FaTv />
         </BasicBtn>
-        <BasicBtn btnType='textPlusIcon' title='Все устройства'>
+        <BasicBtn btnType='icon' title='Все устройства'>
           <BiDevices />
         </BasicBtn>
       </div>

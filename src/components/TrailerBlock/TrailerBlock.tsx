@@ -25,7 +25,7 @@ const TrailerBlock: FC<IProps> = ({ mainImg, actors }) => {
           <FilmActors actors={actors} className={style.film_actors_mobile} />
           {/*MOBILE FREE FILMS BUTTON*/}
           <BasicBtn
-            btnType='textPlusIcon'
+            btnType='icon'
             title='Бесплатные фильмы'
             className={style.button_free_films}
             dark
