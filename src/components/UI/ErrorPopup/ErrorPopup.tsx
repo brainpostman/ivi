@@ -5,7 +5,6 @@ import { DetailedHTMLProps, HTMLAttributes, Ref, forwardRef } from 'react'
 
 interface IErrorPopupProps
   extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
-  className?: string
   messages: string | string[]
 }
 
