@@ -22,10 +22,7 @@ export const getServerSideProps: GetServerSideProps = async ({
 }) => {
   if (!params || !parseInt(params.id as string)) {
     return {
-      redirect: {
-        destination: '/error',
-        permanent: false,
-      },
+      notFound: true,
     }
   }
 
@@ -35,10 +32,7 @@ export const getServerSideProps: GetServerSideProps = async ({
 
   if (!staff) {
     return {
-      redirect: {
-        destination: '/error',
-        permanent: false,
-      },
+      notFound: true,
     }
   }
 
