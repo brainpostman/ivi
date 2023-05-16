@@ -29,6 +29,9 @@ export const staffsAPI = {
   getStaffById(id: number) {
     return getStaffById(id)
   },
+  getStaffByParams(params: IStaffGetRequest) {
+    return getStaffByParams(params)
+  },
 }
 
 const getGenres = async (
@@ -127,11 +130,28 @@ const getActors = async (params?: IStaffGetRequest): Promise<IStaff[]> => {
 
 const getStaffById = async (id: number): Promise<IStaff | undefined> => {
   try {
-    const staff = (await customAxios.get(`/staffs/${id}`)).data
+    const staff = (await customAxios.get<IStaffGetResponse>(`/staffs/${id}`))
+      .data
     const formattedStaff = transformStaff(staff)
 
     return formattedStaff
   } catch (_) {
     return undefined
+  }
+}
+
+const getStaffByParams = async (
+  params: IStaffGetRequest
+): Promise<IStaff[]> => {
+  try {
+    const staffs = (
+      await customAxios.get<IStaffGetResponse[]>('/staffs', { params })
+    ).data
+
+    const formattedStaffs = staffs.map(staff => transformStaff(staff))
+
+    return formattedStaffs
+  } catch (_) {
+    return []
   }
 }
