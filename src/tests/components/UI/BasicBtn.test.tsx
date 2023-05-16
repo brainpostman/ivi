@@ -9,6 +9,8 @@ const testChildren = 'test'
 const testTitle = 'testTitle'
 const testSuptitle = 'testSuptitle'
 
+const testHref = 'www.ivi.ru'
+
 describe('<BasicBtn />', () => {
   // Проверяем стандартный вид кнопки
   it('Default BasicBtn', () => {
@@ -75,5 +77,15 @@ describe('<BasicBtn />', () => {
   it('Check dark style', () => {
     const { container } = renderModif(<BasicBtn dark>{testChildren}</BasicBtn>)
     checkButton(container, 'dark')
+  })
+
+  // Проверяем ссылку
+  it('Check href', () => {
+    const { container } = renderModif(
+      <BasicBtn href={testHref}>{testChildren}</BasicBtn>
+    )
+
+    const href = container.querySelector(`a[href*="${testHref}"]`)
+    expect(href).toBeInTheDocument()
   })
 })

@@ -1,6 +1,6 @@
 import Header from '@/components/Header/Header'
 import { createMockRouter } from '@/utils/test-utils/createMockRouter.util'
-import { renderModif } from '@/utils/test-utils/renderModif'
+import { renderModif } from '@/utils/test-utils/renderModif.util'
 import { screen } from '@testing-library/react'
 import { RouterContext } from 'next/dist/shared/lib/router-context'
 import { useTranslation } from 'next-i18next'

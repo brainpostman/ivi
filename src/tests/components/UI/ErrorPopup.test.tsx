@@ -1,5 +1,5 @@
 import ErrorPopup from '@/components/UI/ErrorPopup/ErrorPopup'
-import { renderModif } from '@/utils/test-utils/renderModif'
+import { renderModif } from '@/utils/test-utils/renderModif.util'
 import '@testing-library/jest-dom'
 
 const testMessages = ['Error #1', 'Error #2', 'Error #3', 'Error #4']
