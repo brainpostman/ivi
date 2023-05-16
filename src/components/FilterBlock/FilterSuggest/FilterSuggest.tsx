@@ -2,7 +2,14 @@ import ModalWindow from '@/components/ModalWindow/ModalWindow'
 import Input from '@/components/UI/Input/Input'
 import { useSetStringParam } from '@/hooks/useSetStringParam'
 import { IFilterData } from '@/types/filterBlock.interface'
-import { ChangeEvent, FC, KeyboardEvent, useMemo, useState } from 'react'
+import {
+  ChangeEvent,
+  FC,
+  KeyboardEvent,
+  useEffect,
+  useMemo,
+  useState,
+} from 'react'
 import FilterTab from '../FilterTab/FilterTab'
 import { useTranslation } from 'next-i18next'
 import { normalizeKey } from '@/utils/normalize.utils'
@@ -27,7 +34,7 @@ const FilterSuggest: FC<IProps> = ({
 }) => {
   const { t } = useTranslation('movies', { keyPrefix: 'filters' })
   const { param, setUrl, value: valueFromParams } = useSetStringParam(query)
-  const [value, setValue] = useState(valueFromParams)
+  const [value, setValue] = useState(valueFromParams?.toString())
 
   const [suggestData, setSuggestData] = useState(suggsetDataIncoming)
 
@@ -42,19 +49,24 @@ const FilterSuggest: FC<IProps> = ({
     }
   }
 
-  const suggestList = useMemo(() => {
-    if (!value) return suggestData?.slice(0, 10)
-
-    return suggestData.filter(producer =>
-      producer.name.toLowerCase().includes(value.toString().toLowerCase())
-    )
-  }, [value])
-
   const onClickListEl = (_param: string) => () => {
     setValue(_param)
   }
 
   const { filter, selectFilter } = filterData
+
+  const setterSuggestList = async () => {
+    const staffs = await staffsAPI.getStaffByParams({
+      search: value,
+      type: query,
+    })
+    setSuggestData(staffs)
+  }
+
+  // Делаем запрос при изменении текста в инпуте
+  useEffect(() => {
+    setterSuggestList()
+  }, [value])
 
   return (
     <FilterTab selectFilter={selectFilter} filter={filter} paramValue={param}>
@@ -72,7 +84,7 @@ const FilterSuggest: FC<IProps> = ({
             autoFocus
           />
           <ul className={style.list}>
-            {suggestList?.map(suggest => (
+            {suggestData?.map(suggest => (
               <li key={suggest.id} onClick={onClickListEl(suggest.name)}>
                 {suggest.name}
               </li>
