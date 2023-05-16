@@ -30,6 +30,7 @@ export interface IStaffGetRequest {
     | 'producer'
     | 'compositor'
     | 'montage'
+  search?: string
 }
 
 export interface IActorGetResponse {
