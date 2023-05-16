@@ -48,8 +48,8 @@ const VisibleText = () => {
 }
 
 interface IProps {
-  firstCarouselFilms: IMovie[] | undefined
-  secondCarouselFilms: IMovie[] | undefined
+  firstCarouselFilms: IMovie[]
+  secondCarouselFilms: IMovie[]
 }
 
 const Home: NextPage<IProps> = ({
@@ -57,8 +57,6 @@ const Home: NextPage<IProps> = ({
   secondCarouselFilms,
 }) => {
   const { t } = useTranslation('home')
-
-  console.log(firstCarouselFilms)
 
   return (
     <PageLayout title={t('html-title')} description={t('html-description')}>
