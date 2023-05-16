@@ -16,6 +16,7 @@ import { normalizeKey } from '@/utils/normalize.utils'
 import style from './FilterSuggest.module.scss'
 import { staffsAPI } from '@/api/queries/staffs.api'
 import { IQuerySuggest } from '@/types/staffs.interface'
+import { useDebounce } from '@/hooks/useDebounce'
 
 interface IProps {
   filterData: IFilterData
@@ -64,9 +65,7 @@ const FilterSuggest: FC<IProps> = ({
   }
 
   // Делаем запрос при изменении текста в инпуте
-  useEffect(() => {
-    setterSuggestList()
-  }, [value])
+  useDebounce(setterSuggestList, [value])
 
   return (
     <FilterTab selectFilter={selectFilter} filter={filter} paramValue={param}>
