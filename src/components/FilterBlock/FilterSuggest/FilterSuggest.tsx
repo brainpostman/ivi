@@ -15,13 +15,13 @@ import { useTranslation } from 'next-i18next'
 import { normalizeKey } from '@/utils/normalize.utils'
 import style from './FilterSuggest.module.scss'
 import { staffsAPI } from '@/api/queries/staffs.api'
-import { IQuerySuggest } from '@/types/staffs.interface'
+import { IFilterGetResponse, IQuerySuggest } from '@/types/staffs.interface'
 import { useDebounce } from '@/hooks/useDebounce'
 
 interface IProps {
   filterData: IFilterData
   closeModal: () => void
-  suggestList: { id: number; name: string }[]
+  suggestList: IFilterGetResponse[]
   placeholder?: string
   query: IQuerySuggest
 }
