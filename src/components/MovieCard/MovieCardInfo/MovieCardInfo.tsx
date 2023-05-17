@@ -1,13 +1,7 @@
 import { IMovie } from '@/types/films.api.interface'
 import { FC } from 'react'
 import style from './MovieCardInfo.module.scss'
-
-const formatRating = (rating: string) => {
-  const splittedRating = rating.split('.')
-
-  if (rating.length < 3) return ['0', ',0']
-  return [splittedRating[0], `,${splittedRating[1]}`]
-}
+import { formatScores } from '@/formatters/scores.format'
 
 interface IProps {
   movie: IMovie
@@ -16,8 +10,8 @@ interface IProps {
 const MovieCardInfo: FC<IProps> = ({ movie }) => {
   return (
     <div className={style.wrapper}>
-      <p className={style.rating}>
-        {formatRating(movie.countScore.toString()).map(el => (
+      <p className={style.scores}>
+        {formatScores(movie.countScore.toString()).map(el => (
           <span key={el}>{el}</span>
         ))}
       </p>
