@@ -36,12 +36,6 @@ const meta: Meta = {
     name: {
       description: 'Название фильма',
     },
-    rating: {
-      description: 'Рейтинг Иви',
-      control: {
-        step: 0.1,
-      },
-    },
     year: {
       description: 'Год выпуска',
     },
@@ -57,8 +51,12 @@ const meta: Meta = {
         'В случае полнометражки - длительность, в случае сериала - кол-во сезонов / серий',
     },
     countScore: {
-      name: 'rating',
-      description: 'Рейтинг',
+      name: 'score',
+      description: 'Оценка',
+      control: {
+        type: 'number',
+        step: 0.1,
+      },
     },
   },
 }
