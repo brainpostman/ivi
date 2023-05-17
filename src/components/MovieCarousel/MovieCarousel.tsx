@@ -28,8 +28,6 @@ const breakpoints = [
 const MovieCarousel: FC<IProps> = ({ films, ...props }) => {
   return (
     <CustomCarousel
-      title={''}
-      href='/'
       additElem={<ViewAllBlock />}
       elementsMove={5}
       elementsView={7}
