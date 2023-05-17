@@ -12,11 +12,6 @@ export interface IStaff extends Omit<IStaffGetResponse, 'types'> {
   type: string
 }
 
-export interface IFilterGetResponse {
-  id: number
-  name: string
-}
-
 export interface IStaffGetRequest {
   order?: 'ASC' | 'DESC'
   page?: number
