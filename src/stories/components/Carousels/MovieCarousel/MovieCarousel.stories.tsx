@@ -1,11 +1,9 @@
 import { transformFilms } from '@/api/transforms/films.transform'
 import MovieCarousel from '@/components/MovieCarousel/MovieCarousel'
 import { tmpFilms } from '@/data/films.data'
-import { Meta, StoryObj } from '@storybook/react'
+import { Meta } from '@storybook/react'
 import { IFilmsgGetResponse } from '@/types/films.api.interface'
 import { ICustomCarouselProps } from '@/types/customCarousel.interface'
-
-type Story = StoryObj<typeof MovieCarousel>
 
 type IProps = Omit<
   ICustomCarouselProps,
