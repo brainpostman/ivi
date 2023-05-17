@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 import { useGetParam } from './useGetParam'
-import { IFilterGetResponse, IStaffGetResponse } from '@/types/staffs.interface'
+import { IFilterGetResponse } from '@/types/filters.interface'
 
 type IFilterType = 'radio'
 
