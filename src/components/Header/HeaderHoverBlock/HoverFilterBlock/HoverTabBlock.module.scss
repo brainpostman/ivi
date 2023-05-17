@@ -1,10 +1,10 @@
 .filterList {
 	display: grid;
-	grid-template-areas: 'a a b d' 'a a c d';
+	grid-template-areas: 'a a b c' 'a a b c';
 	column-gap: 88px;
 	row-gap: 24px;
 
-	> li {
+	>li {
 		&:nth-child(1) {
 			grid-area: a;
 		}
@@ -12,22 +12,18 @@
 		&:nth-child(2) {
 			grid-area: b;
 		}
-
-		&:nth-child(3) {
-			grid-area: c;
-		}
 	}
 }
 
 .novetly {
-	grid-area: d;
+	grid-area: c;
 
 	border-left: 1px solid $border-gray;
 	@include ui-padding(left, 4);
 	line-height: 20px;
 
 	.block_list {
-		> li {
+		>li>a {
 			position: relative;
 			transition: border-color 0.4s, color 0.4s;
 
@@ -39,7 +35,7 @@
 				left: -17px;
 
 				height: 100%;
-				width: 1px;
+				width: 2px;
 
 				background-color: transparent;
 
