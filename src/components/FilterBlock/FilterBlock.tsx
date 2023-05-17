@@ -9,10 +9,10 @@ import FilterGenreCard from '../FilterGenreCard/FilterGenreCard'
 import VioletButton from '../UI/VioletButton/VioletButton'
 import style from './FilterBlock.module.scss'
 import FilterListBig from './FilterListBig/FilterListBig'
-import FilterListSmall from './FilterListSmall/FilterListSmall'
 import FilterSlider from './FilterSlider/FilterSlider'
 import FilterSuggest from './FilterSuggest/FilterSuggest'
-import { IFilterGetResponse, IStaffGetResponse } from '@/types/staffs.interface'
+import { IStaffGetResponse } from '@/types/staffs.interface'
+import { IFilterGetResponse } from '@/types/filters.interface'
 import { useSetListParam } from '@/hooks/useSetListParam'
 
 const filterList: Omit<IFilterBlockEl, 'isExpand'>[] = [
@@ -24,7 +24,7 @@ const filterList: Omit<IFilterBlockEl, 'isExpand'>[] = [
 ]
 
 interface IProps {
-  genres: IStaffGetResponse[]
+  genres: IFilterGetResponse[]
   countries: IFilterGetResponse[]
   directors: IStaffGetResponse[]
   actors: IStaffGetResponse[]
