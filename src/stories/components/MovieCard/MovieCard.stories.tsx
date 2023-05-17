@@ -1,19 +1,12 @@
 import MovieCard from '@/components/MovieCard/MovieCard'
-import { Meta } from '@storybook/react'
+import { Meta, StoryObj } from '@storybook/react'
 import style from './MovieCard.stories.module.scss'
 import { IMovie } from '@/types/films.api.interface'
+import { tmpFilms } from '@/data/films.data'
+import { FC } from 'react'
+import { transformFilms } from '@/api/transforms/films.transform'
 
-const data = {
-  id: 1,
-  mainImg:
-    'https://thumbs.dfs.ivi.ru/storage28/contents/0/c/ee49b7f16535f8ca2467904800da81.jpg/234x360//?q=85',
-  name: 'Шоу Патрика Стара',
-  year: '2021',
-  countries: 'США',
-  genres: 'Сериалы',
-  time: '1 сезон',
-  countScore: 5.3,
-}
+type Story = StoryObj<typeof MovieCard>
 
 const meta: Meta = {
   title: 'MovieCard',
@@ -61,19 +54,15 @@ const meta: Meta = {
   },
 }
 
-export const Primary = ({ ...props }: Omit<IMovie, 'id'>) => {
-  return (
+export const Primary: Story = {
+  render: ({ movie }) => (
     <div className={style.wrapper}>
-      <MovieCard
-        movie={{
-          id: data.id,
-          ...props,
-        }}
-      />
+      <MovieCard movie={movie} />
     </div>
-  )
+  ),
+  args: {
+    movie: transformFilms(tmpFilms[0]),
+  },
 }
-
-Primary.args = data
 
 export default meta
