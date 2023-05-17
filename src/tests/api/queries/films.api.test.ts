@@ -79,7 +79,7 @@ describe('API-FILMS', () => {
   })
 
   // Проверяем поля пришедших фильмов
-  it('Check films properties', () => {
+  it('Films properties', () => {
     films.forEach(film => checkObjHaveProperties(film, filmsRequiredProperites))
   })
 
@@ -92,7 +92,7 @@ describe('API-FILMS', () => {
   //})
 
   // Проверяем поля фильма, полученного по id
-  it('Check film by id properites', () => {
+  it('Film by id properites', () => {
     expect(filmById).toBeTruthy()
 
     if (filmById) {
@@ -101,14 +101,14 @@ describe('API-FILMS', () => {
   })
 
   // Проверяем фильмы на главной странице
-  it('Check films on home page', () => {
+  it('Films on home page', () => {
     expect(homePageFilms).toBeTruthy()
 
     expect(homePageFilms.length === 19).toBeTruthy()
   })
 
   // Проверяем круд фильмов
-  it('Check crud films', () => {
+  it('Crud films', () => {
     expect(crudFilms).toBeTruthy()
 
     crudFilms.forEach(crudFilm =>

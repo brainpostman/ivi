@@ -4,16 +4,18 @@ import { formatPairSliderQuery } from '@/formatters/pairSliderQuery.format'
 const testQueryParam = 'rating'
 const errorTestQueryParam = ''
 
-describe('PAIR SLIDER QUERY', () => {
-  it('Check query param', () => {
+describe('FORMAT pair slider query', () => {
+  it('Query param', () => {
     const { maxValueStr, minValueStr } = formatPairSliderQuery(testQueryParam)
     const formattedQueryParam = formatCapitalize(testQueryParam)
 
     expect(maxValueStr).toBe(`max${formattedQueryParam}`)
     expect(minValueStr).toBe(`min${formattedQueryParam}`)
   })
+})
 
-  it('Check error query param', () => {
+describe('FORMAT ERROR pair slider query', () => {
+  it('ERROR query param', () => {
     const { maxValueStr, minValueStr } =
       formatPairSliderQuery(errorTestQueryParam)
 

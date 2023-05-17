@@ -7,7 +7,7 @@ const testChildren = 'test'
 
 describe('<VioletButton />', () => {
   // Проверяем стандартную кнопку
-  it('Check default', () => {
+  it('Default', () => {
     const { getByText } = renderModif(
       <VioletButton>{testChildren}</VioletButton>
     )
@@ -17,7 +17,7 @@ describe('<VioletButton />', () => {
   })
 
   // Проверяем "variant = secondary"
-  it('Check secondary', () => {
+  it('Variant secondary', () => {
     const { container } = renderModif(
       <VioletButton variant='secondary'>{testChildren}</VioletButton>
     )

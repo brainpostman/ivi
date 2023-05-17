@@ -2,23 +2,23 @@ import { formatCarouselWidth } from '@/formatters/carouselWidth.format'
 
 const elementLens = [300, 300, 300, 300, 300, 300]
 
-describe('carouselWidth formatter', () => {
+describe('FORMAT carouselWidth', () => {
   // with = full
-  it('Check width full', () => {
+  it('Width full', () => {
     const carouselWidth = formatCarouselWidth('full', 12)
     const correctWidth = 1225
     expect(carouselWidth).toBe(correctWidth)
   })
 
   // width = fit
-  it('Check width fit', () => {
+  it('Width fit', () => {
     const carouselWidth = formatCarouselWidth('fit', 12, 0, elementLens, 3)
     const correctWidth = 888
 
     expect(carouselWidth).toBe(correctWidth)
   })
 
-  it('Check width fit-shadow', () => {
+  it('Width fit-shadow', () => {
     const carouselWidth = formatCarouselWidth(
       'fit-shadow',
       12,
@@ -32,7 +32,7 @@ describe('carouselWidth formatter', () => {
   })
 })
 
-describe('carouselWidth formatter error', () => {
+describe('FORMAT ERROR carouselWidth', () => {
   it('Wrong props', () => {
     const carouselWidth = formatCarouselWidth('fit', 12)
 

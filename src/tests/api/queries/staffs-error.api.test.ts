@@ -3,7 +3,7 @@ import { ICRUDGenre } from '@/types/ICrudMovie'
 import { IFilterGetResponse } from '@/types/filters.interface'
 import { IStaff } from '@/types/staffs.interface'
 
-describe('STAFFS API ERRORS', () => {
+describe('API-STAFFS ERRORS', () => {
   let errorGenres: IFilterGetResponse[]
   //let errorCountries: IFilterGetResponse[]
   let errorDirectors: IStaff[]
@@ -23,17 +23,17 @@ describe('STAFFS API ERRORS', () => {
   })
 
   // Проверяем ошибку жанров
-  it('Check genres error', () => {
+  it('Genres error', () => {
     expect(errorGenres).toStrictEqual([])
   })
 
   // Проверяем ошибку режиссёров
-  it('Check directors error', () => {
+  it('Directors error', () => {
     expect(errorDirectors).toStrictEqual([])
   })
 
   // Проверяем ошибку актёров
-  it('Check actors error', () => {
+  it('Actors error', () => {
     expect(errorActors).toStrictEqual([])
   })
 
@@ -44,12 +44,12 @@ describe('STAFFS API ERRORS', () => {
   //})
 
   // Проверяем ошибку участника по id
-  it('Check staff by id error', () => {
+  it('Staff by id error', () => {
     expect(errorStaffById).toBeFalsy()
   })
 
   // Проверяем ошибку участника по параметрам
-  it('Check staffs by params error', () => {
+  it('Staffs by params error', () => {
     expect(errorStaffsByParams).toStrictEqual([])
   })
 })

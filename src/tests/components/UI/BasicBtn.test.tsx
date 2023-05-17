@@ -22,7 +22,7 @@ describe('<BasicBtn />', () => {
 
   // Проверяем пропс "btnType = icon"
   // Проверяем наличие иконки и отсутствие текста в кнопке
-  it('Check "btnType = icon"', () => {
+  it('btnType = icon', () => {
     const { container } = renderModif(
       <BasicBtn btnType='icon'>
         <FaViber />
@@ -33,7 +33,7 @@ describe('<BasicBtn />', () => {
   })
 
   // Проверяем пропс "btnType = iconCircle"
-  it('Check "btnType = iconCircle"', () => {
+  it('BtnType = iconCircle', () => {
     const { container } = renderModif(
       <BasicBtn btnType='iconCircle'>
         <FaViber />
@@ -43,7 +43,7 @@ describe('<BasicBtn />', () => {
   })
 
   // Проверяем заголовок и надзаголовок
-  it('Check title & suptitle ', () => {
+  it('title & suptitle ', () => {
     const { container } = renderModif(
       <BasicBtn btnType='icon' title={testTitle} suptitle={testSuptitle}>
         <FaViber />
@@ -63,7 +63,7 @@ describe('<BasicBtn />', () => {
   })
 
   // Проверяем красный кружок в углу кнопки
-  it('Check red circle', () => {
+  it('Red circle', () => {
     const { container } = renderModif(
       <BasicBtn circle>{testChildren}</BasicBtn>
     )
@@ -74,13 +74,13 @@ describe('<BasicBtn />', () => {
   })
 
   // Проверяем стиль dark
-  it('Check dark style', () => {
+  it('Dark style', () => {
     const { container } = renderModif(<BasicBtn dark>{testChildren}</BasicBtn>)
     checkButton(container, 'dark')
   })
 
   // Проверяем ссылку
-  it('Check href', () => {
+  it('Href', () => {
     const { container } = renderModif(
       <BasicBtn href={testHref}>{testChildren}</BasicBtn>
     )

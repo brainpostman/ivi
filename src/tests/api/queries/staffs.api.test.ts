@@ -17,7 +17,7 @@ const crudGenreRequiredProperties = [
   'updatedAt',
 ]
 
-describe('STAFFS API', () => {
+describe('API-STAFFS', () => {
   let genres: IFilterGetResponse[]
   let countries: IFilterGetResponse[]
   let directors: IStaff[]
@@ -41,38 +41,38 @@ describe('STAFFS API', () => {
   })
 
   // Проверка полей жанров
-  it('Check genres properties', () => {
+  it('Genres properties', () => {
     genres.map(genre => checkObjHaveProperties(genre, staffRequiredProperties))
   })
 
   // Проверка полей стран
-  it('Check countries properties', () => {
+  it('Countries properties', () => {
     countries.map(country =>
       checkObjHaveProperties(country, staffRequiredProperties)
     )
   })
 
   // Проверка полей режиссёров
-  it('Check directors properties', () => {
+  it('Directors properties', () => {
     directors.map(director =>
       checkObjHaveProperties(director, staffRequiredProperties)
     )
   })
 
   // Проверка полей актёров
-  it('Check actors properties', () => {
+  it('Actors properties', () => {
     actors.map(actor => checkObjHaveProperties(actor, staffRequiredProperties))
   })
 
   // Проверка полей круда жанров
-  it('Check crud genre properties', () => {
+  it('Crud genre properties', () => {
     crudGenres.map(actor =>
       checkObjHaveProperties(actor, crudGenreRequiredProperties)
     )
   })
 
   // Проверяем участника по id
-  it('Check staff by id', () => {
+  it('Staff by id', () => {
     expect(staffById).toBeTruthy()
     if (staffById) {
       checkObjHaveProperties(staffById, staffRequiredProperties)
@@ -80,7 +80,7 @@ describe('STAFFS API', () => {
   })
 
   // Проверяем участника по подстроке и типу
-  it('Check staffs by params', () => {
+  it('Staffs by params', () => {
     staffsByParams.forEach(staff =>
       checkObjHaveProperties(staff, staffRequiredProperties)
     )

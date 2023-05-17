@@ -9,7 +9,7 @@ const testImage =
 
 describe('<LongButton />', () => {
   // Проверяем обычную кнопку
-  it('Check default', () => {
+  it('Default', () => {
     const { getByText } = renderModif(<LongButton>{testChildren}</LongButton>)
 
     const button = getByText(testChildren)
@@ -17,7 +17,7 @@ describe('<LongButton />', () => {
   })
 
   // Проверяем "variant = secondary"
-  it('Check variant secondary', () => {
+  it('Variant secondary', () => {
     const { container } = renderModif(
       <LongButton variant='secondary'>{testChildren}</LongButton>
     )
@@ -26,7 +26,7 @@ describe('<LongButton />', () => {
   })
 
   // Проверяем картинку
-  it('Check img is exist', () => {
+  it('Img is exist', () => {
     const { container } = renderModif(
       <LongButton img={testImage}>{testChildren}</LongButton>
     )

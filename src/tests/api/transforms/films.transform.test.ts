@@ -3,7 +3,7 @@ import { transformFilms } from '@/api/transforms/films.transform'
 import { IFilmsgGetResponse } from '@/types/films.api.interface'
 import { checkObjHaveProperties } from '@/utils/checkObjHaveProperties.utils'
 
-describe('FILMS TRANSFORM', () => {
+describe('TRANSFORM films', () => {
   let films: IFilmsgGetResponse[]
 
   beforeAll(async () => {
@@ -13,11 +13,11 @@ describe('FILMS TRANSFORM', () => {
     films = transormedFilms
   })
 
-  it('Check fields are exist', () => {
+  it('Fields are exist', () => {
     films.forEach(film => checkObjHaveProperties(film, []))
   })
 
-  it("Check field's types", () => {
+  it("Field's types", () => {
     films.forEach(film => {
       expect(typeof film.countries).toBe('string')
       expect(typeof film.genres).toBe('string')

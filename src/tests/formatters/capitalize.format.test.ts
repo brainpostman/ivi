@@ -3,7 +3,7 @@ import { formatCapitalize } from '@/formatters/capitalize.format'
 const testStringForCap = 'word'
 const testStringForCapReverse = 'Word'
 
-describe('capitalize formatter', () => {
+describe('FORMAT capitalize', () => {
   // Проверка первой заглавной буквы
   it('Capitalize first element', () => {
     const result = formatCapitalize(testStringForCap)

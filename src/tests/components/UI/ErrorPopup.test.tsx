@@ -18,7 +18,7 @@ jest.mock('react-i18next', () => ({
 
 describe('<ErrorPopup />', () => {
   // Проверяем список ошибок
-  it('Check display message list', () => {
+  it('Display message list', () => {
     const { getByText } = renderModif(<ErrorPopup messages={testMessages} />)
     const listElements = testMessages.map(message => getByText(message))
 
@@ -26,7 +26,7 @@ describe('<ErrorPopup />', () => {
   })
 
   // Проверяем одну ошибку
-  it('Check display specific message', () => {
+  it('Display specific message', () => {
     const { getByText } = renderModif(<ErrorPopup messages={testOneMessage} />)
 
     const element = getByText(testOneMessage)
