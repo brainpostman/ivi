@@ -118,7 +118,7 @@ export const authOptions = {
                     return { id: item.id, value: item.value };
                 });
                 return token;
-            } else if (Date.now() < (token.expires_at - 30) * 1000) {
+            } else if (Date.now() < token.expires_at * 1000) {
                 console.log('still logged in');
                 return token;
             } else {
