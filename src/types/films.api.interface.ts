@@ -1,4 +1,5 @@
-import { IFilterGetResponse, IStaffGetResponse } from './staffs.interface'
+import { IStaffGetResponse } from './staffs.interface'
+import { IFilterGetResponse } from './filters.interface'
 
 export interface IFilmsGetRequest {
   order?: string
