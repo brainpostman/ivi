@@ -1,4 +1,3 @@
-import { useTypedSelector } from '@/hooks/ReduxHooks'
 import { authModalSlice } from '@/store/slices/authModal.slice'
 
 interface IState {
