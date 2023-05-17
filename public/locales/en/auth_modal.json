@@ -21,13 +21,14 @@
     "success": "Success!",
     "error": "Error",
     "error-messages": {
-        "unforeseen-error": "An unexpected error occurred",
+        "unforeseen-error": "An unexpected error has occurred",
         "incorrect-email": "Incorrect email",
         "no-empty-pass": "Please, enter your password",
         "length": "Password must be between 6 and 24 characters in length",
         "no-pattern-match": "Password can contain only Latin characters, numbers and special symbols",
         "no-confirmation-match": "Passwords must match",
         "no-email-match": "Password can't match your email",
-        "incorrect-pass": "Incorrect password"
+        "incorrect-pass": "Incorrect password",
+        "refresh-token-error": "An unexpected authorization error has occurred. Please, sign out and authorize again"
     }
 }

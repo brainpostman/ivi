@@ -7,7 +7,7 @@ import {
 } from '@/types/films.api.interface';
 import { transformFilms } from '../transforms/films.transform';
 import { customAxios } from './customAxios';
-import { CrudFilm, ICrudFilm, ICRUDMovie } from '@/types/ICrudMovie';
+import { ICRUDMovie } from '@/types/ICrudMovie';
 
 export const filmsAPI = {
     getFilms(params?: IFilmsGetRequest) {

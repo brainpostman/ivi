@@ -27,7 +27,7 @@ export async function checkEmailVacancy(email: string): Promise<string> {
             if (err.response?.status === 400) {
                 return 'login';
             }
-            console.error('AxiosError: ', err.message);
+            console.error('Error: ', err.message);
             return err.message;
         } else {
             console.error('Error: ', err);
@@ -121,11 +121,5 @@ export async function checkAdminRole(accessToken: string | null): Promise<boolea
         return true;
     } catch (err) {
         return false;
-    }
-}
-
-export async function checkAdminSession(accessToken: string | null) {
-    if (!(await checkAdminRole(accessToken))) {
-        signOut();
     }
 }
