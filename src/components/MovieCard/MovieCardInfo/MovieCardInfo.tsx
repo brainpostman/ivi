@@ -4,6 +4,8 @@ import style from './MovieCardInfo.module.scss'
 
 const formatRating = (rating: string) => {
   const splittedRating = rating.split('.')
+
+  if (rating.length < 3) return ['0', ',0']
   return [splittedRating[0], `,${splittedRating[1]}`]
 }
 
@@ -15,7 +17,7 @@ const MovieCardInfo: FC<IProps> = ({ movie }) => {
   return (
     <div className={style.wrapper}>
       <p className={style.rating}>
-        {formatRating('8.3').map(el => (
+        {formatRating(movie.countScore.toString()).map(el => (
           <span key={el}>{el}</span>
         ))}
       </p>

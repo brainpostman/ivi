@@ -36,6 +36,7 @@ export interface IFilmsgGetResponse {
   description: string
   mainImg: string
   time: string
+  countScore: number
   premiereRU: string
   premiere: string
 }
