@@ -40,16 +40,28 @@ export const yearsFilterData = [
 ]
 
 export const novetlyFilterData = [
-  { title: 'Новинки' },
-  { title: 'Подборки' },
-  { title: 'Иви.Рейтинг' },
-  { title: 'Скоро на Иви' },
-  { title: 'Трейлеры' },
-  { title: 'Что посмотреть' },
-  { title: 'Фильмы в HD' },
-  { title: 'Выбор Иви' },
-  { title: 'Новинки подписки' },
-  { title: 'Фильмы Amediateka' },
-  { title: 'Популярные фильмы' },
-  { title: 'Фильмы Иви' },
-]
+  { name: 'Новинки', href: 'https://www.ivi.ru/new/animation-new' },
+  { name: 'Подборки', href: 'https://www.ivi.ru/collections' },
+  {
+    name: 'Иви.Рейтинг',
+    href: 'https://www.ivi.ru/series/all?ivi_rating_10_gte=7&sort=ivi&rating_part=main&rating_model=ready',
+  },
+  { name: 'Скоро на Иви', href: 'https://www.ivi.ru/new/soon-ivi' },
+  { name: 'Трейлеры', href: 'https://www.ivi.ru/trailers' },
+  { name: 'Что посмотреть', href: 'https://www.ivi.ru/goodmovies' },
+  { name: 'Фильмы в HD', href: 'https://www.ivi.ru/collections/movies-hd' },
+  { name: 'Выбор Иви', href: 'https://www.ivi.ru/collections/vyibor-ivi' },
+  {
+    name: 'Новинки подписки',
+    href: 'https://www.ivi.ru/collections/very-new-svod?sort=priority_in_collection',
+  },
+  {
+    name: 'Фильмы Amediateka',
+    href: 'https://www.ivi.ru/collections/filmyi-amediateka',
+  },
+  {
+    name: 'Популярные фильмы',
+    href: 'https://www.ivi.ru/collections/best-movies',
+  },
+  { name: 'Фильмы Иви', href: 'https://www.ivi.ru/collections/ivi-originals' },
+].map((novetly, index) => ({ ...novetly, id: index + 1 }))
