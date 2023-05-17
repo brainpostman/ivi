@@ -1,10 +1,10 @@
 import { formatCapitalize } from '@/formatters/capitalize.format'
 import {
-  IFilterGetResponse,
   IStaff,
   IStaffGetRequest,
   IStaffGetResponse,
 } from '@/types/staffs.interface'
+import { IFilterGetResponse } from '@/types/filters.interface'
 import { transformStaff } from '../transforms/staff.transform'
 import { customAxios } from './customAxios'
 import { ICRUDGenre } from '@/types/ICrudMovie'
@@ -44,16 +44,16 @@ const getGenres = async (
     })
     const genres =
       locale === 'ru'
-        ? genresData.data.map(genre => {
-            return { ...genre, name: formatCapitalize(genre.name) }
-          })
+        ? genresData.data.map(genre => ({
+            ...genre,
+            name: formatCapitalize(genre.name),
+          }))
         : genresData.data
-            .filter(genre => {
-              return genre.name_en
-            })
-            .map(genre => {
-              return { ...genre, name: formatCapitalize(genre.name_en ?? '') }
-            })
+            .filter(genre => genre.name_en)
+            .map(genre => ({
+              ...genre,
+              name: formatCapitalize(genre.name_en ?? ''),
+            }))
 
     return genres
   } catch (_) {
