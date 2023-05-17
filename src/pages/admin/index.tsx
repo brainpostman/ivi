@@ -196,14 +196,13 @@ export default function Admin({
                 </div>
                 <div className={styles.db}>
                     <section className={styles.db__input}>
-                        <h2 className={styles.heading__page}>{t('admin:controls')}</h2>
                         {chosenTab === 'movies' && (
                             <article className={styles.controls}>
                                 <Sort
                                     sortTypes={t('movies:sortTypes', {
                                         returnObjects: true,
                                     })}
-                                    defaultType={''}
+                                    defaultSort={''}
                                 />
                                 <FilterBlock
                                     countries={countries}
@@ -221,7 +220,7 @@ export default function Admin({
                                     sortTypes={t('admin:sortTypes', {
                                         returnObjects: true,
                                     })}
-                                    defaultType={''}
+                                    defaultSort={''}
                                 />
                             </article>
                         )}
