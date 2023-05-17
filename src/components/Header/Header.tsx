@@ -8,11 +8,16 @@ import style from './Header.module.scss'
 import HeaderHoverBlock from './HeaderHoverBlock/HeaderHoverBlock'
 import HeaderLeftSide from './HeaderLeftSide/HeaderLeftSide'
 import HeaderRightSide from './HeaderRightSide/HeaderRightSide'
+import { staffsAPI } from '@/api/queries/staffs.api'
+import { IFilterGetResponse } from '@/types/filters.interface'
 
 const Header = () => {
-  const { pathname } = useRouter()
+  const { pathname, locale } = useRouter()
   const [classNameHeader, setClassNameHeader] = useState(style.wrapper)
   const { showAuthModal } = useTypedSelector(state => state.authModal)
+
+  const [genres, setGenres] = useState<IFilterGetResponse[]>([])
+  const [countries, setCountries] = useState<IFilterGetResponse[]>([])
 
   const [hoverTabs, setHoverTabs] = useState<IHeaderBlock>({
     isShow: false,
@@ -32,6 +37,18 @@ const Header = () => {
     setHoverTabs({ tab: undefined, isShow: false })
   }
 
+  const getAndSetFilters = async () => {
+    const genres = await staffsAPI.getGenres(locale ?? 'ru')
+    const countries = await staffsAPI.getCountries()
+
+    setGenres(genres)
+    setCountries(countries)
+  }
+
+  useEffect(() => {
+    getAndSetFilters()
+  }, [])
+
   useEffect(() => {
     if (pathname === '/') {
       setClassNameHeader(style.wrapper)
@@ -50,6 +67,8 @@ const Header = () => {
           <HeaderHoverBlock
             hideHoverBlock={hideHoverBlock}
             tab={hoverTabs.tab}
+            genres={genres}
+            countries={countries}
           />
         )}
       </section>

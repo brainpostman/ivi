@@ -8,19 +8,25 @@ import HeaderMovieBlock from './HeaderMovieBlock/HeaderMovieBlock'
 import HoverTabBlock from './HoverFilterBlock/HoverTabBlock'
 import { useTranslation } from 'next-i18next'
 import { IHeaderHoverBlockContent } from '@/types/hoverblock.interface'
-import { useTypedSelector } from '@/hooks/ReduxHooks'
 import { novetlyFilterData } from '@/data/filters.data'
+import { IFilterGetResponse } from '@/types/filters.interface'
 
 interface IProps
   extends DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement> {
   tab: IHeaderTab
   hideHoverBlock: () => void
+  genres: IFilterGetResponse[]
+  countries: IFilterGetResponse[]
 }
 
-const HeaderHoverBlock: FC<IProps> = ({ tab, hideHoverBlock, ...props }) => {
+const HeaderHoverBlock: FC<IProps> = ({
+  tab,
+  hideHoverBlock,
+  genres,
+  countries,
+  ...props
+}) => {
   const { t } = useTranslation('header', { keyPrefix: 'left-side' })
-
-  const { genres, countries } = useTypedSelector(state => state.filters)
 
   const tabList: IHeaderTab[] = ['movies', 'series', 'cartoons']
 

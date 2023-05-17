@@ -19,7 +19,7 @@ import { IStaffGetResponse } from '@/types/staffs.interface'
 import { formatFilmsParams } from '@/formatters/filmsParams.format'
 import { staffsAPI } from '@/api/queries/staffs.api'
 import BreadCrumbsFilms from '@/components/BreadCrumbs/BreadCrumbsFilms/BreadCrumbsFilms'
-import { useTypedSelector } from '@/hooks/ReduxHooks'
+import { IFilterGetResponse } from '@/types/filters.interface'
 
 export const getServerSideProps: GetServerSideProps = async ({
   locale,
@@ -30,6 +30,8 @@ export const getServerSideProps: GetServerSideProps = async ({
   const currentParams = { ...formatFilmsParams(query), ...defaultParams }
 
   const { films, totalCount } = await filmsAPI.getFilms(currentParams)
+  const genres = await staffsAPI.getGenres(locale ?? 'ru')
+  const countries = await staffsAPI.getCountries()
 
   const directors = await staffsAPI.getDirectors()
   const actors = await staffsAPI.getActors()
@@ -48,6 +50,8 @@ export const getServerSideProps: GetServerSideProps = async ({
       directors,
       actors,
       totalCount,
+      genres,
+      countries,
     },
   }
 }
@@ -57,6 +61,8 @@ interface IProps {
   directors: IStaffGetResponse[]
   actors: IStaffGetResponse[]
   totalCount: number
+  genres: IFilterGetResponse[]
+  countries: IFilterGetResponse[]
 }
 
 const MoviesPage: NextPage<IProps> = ({
@@ -64,11 +70,11 @@ const MoviesPage: NextPage<IProps> = ({
   directors,
   actors,
   totalCount,
+  genres,
+  countries,
 }) => {
   const router = useRouter()
   const { t } = useTranslation('movies')
-
-  const { countries, genres } = useTypedSelector(state => state.filters)
 
   const [isLoadedFirstFilms, setIsLoadedFirstFilms] = useState(false)
   const [isClickedViewMore, setIsClickedViewMore] = useState(false)
