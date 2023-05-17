@@ -11,6 +11,7 @@ import { i18n } from 'next-i18next';
 i18n?.loadNamespaces(['auth_modal']);
 
 export const authOptions = {
+    debug: true,
     session: {
         jwt: true,
         maxAge: 7 * 24 * 60 * 60,
@@ -97,7 +98,6 @@ export const authOptions = {
                         };
                         const response = await axios.post(process.env.REGISTRATION, data);
                         user.accessToken = response.data.token;
-                        user.refreshToken = response.data.refreshToken;
                         return true;
                     }
                 } catch (err) {
@@ -108,13 +108,22 @@ export const authOptions = {
                         };
                         const response = await axios.post(process.env.LOGIN, data);
                         user.accessToken = response.data.token;
-                        user.refreshToken = response.data.refreshToken;
                         return true;
                     } else {
                         throw err;
                     }
                 }
             }
+            // if (account.provider === 'google') {
+            //     user.provider = 'google';
+            //     const data = {
+            //         email: `${profile.email}.oauth`,
+            //     };
+            //     const response = await axios.post(process.env.GOOGLE, data);
+            //     user.accessToken = response.data.token;
+            //     user.refreshToken = response.data.refreshToken;
+            //     return true;
+            // }
             if (account.provider === 'vk') {
                 user.provider = 'vk';
                 const data = {

@@ -4,6 +4,7 @@ import Header from '@/components/Header/Header';
 import { IHead } from '@/types/head.interface';
 import { FC, PropsWithChildren } from 'react';
 import style from './PageLayout.module.scss';
+import { useSessionRefresh } from '@/hooks/useSessionRefresh';
 
 const PageLayout: FC<PropsWithChildren<IHead>> = ({
     title,
@@ -12,6 +13,8 @@ const PageLayout: FC<PropsWithChildren<IHead>> = ({
     noIndex,
     children,
 }) => {
+    useSessionRefresh();
+
     return (
         <>
             <HeadModif

@@ -91,16 +91,6 @@ export function validateConfirmedPassword(password: string, confirmation: string
     }
 }
 
-export function genDBPasswordMock(email: string) {
-    const password = jwt
-        .sign({ email: email }, process.env.PASS_MOCK_SECRET as string, {
-            noTimestamp: true,
-        })
-        .split('.')[2]
-        .substring(0, 24);
-    return password;
-}
-
 export function getSerializableSession(inputSession: Session): Session | null {
     if (!inputSession) {
         return null;
