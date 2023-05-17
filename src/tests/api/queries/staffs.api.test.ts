@@ -1,8 +1,5 @@
-import {
-  IFilterGetResponse,
-  IQuerySuggest,
-  IStaff,
-} from '@/types/staffs.interface'
+import { IQuerySuggest, IStaff } from '@/types/staffs.interface'
+import { IFilterGetResponse } from '@/types/filters.interface'
 import { staffsAPI } from '@/api/queries/staffs.api'
 import { checkObjHaveProperties } from '@/utils/checkObjHaveProperties.utils'
 import { ICRUDGenre } from '@/types/ICrudMovie'

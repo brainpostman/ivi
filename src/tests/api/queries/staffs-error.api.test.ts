@@ -1,6 +1,7 @@
 import { staffsAPI } from '@/api/queries/staffs.api'
 import { ICRUDGenre } from '@/types/ICrudMovie'
-import { IFilterGetResponse, IStaff } from '@/types/staffs.interface'
+import { IFilterGetResponse } from '@/types/filters.interface'
+import { IStaff } from '@/types/staffs.interface'
 
 describe('STAFFS API ERRORS', () => {
   let errorGenres: IFilterGetResponse[]
