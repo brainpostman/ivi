@@ -27,7 +27,7 @@ import CustomCarouselShadows from './CustomCarouselShadows/CustomCarouselShadows
 // 'full' - 1225px; 'fit' - ограничивается по elementsView; 'fit-shadow' - добавляется тень + контейнер увеличивается на половину следующего элемента
 // @param breakpoints - брейкпоинты
 // при достижении брейкпоинта @param elementsView уменьшается на 1
-// @param padding (костыль) - допольнительный отступ
+// @param padding - допольнительный отступ
 
 const CustomCarousel: FC<ICustomCarouselProps> = ({
   elementsMove,
@@ -58,6 +58,8 @@ const CustomCarousel: FC<ICustomCarouselProps> = ({
     elementLens,
     elementsView
   )
+
+  console.log(containerWidth)
 
   const arrowPosition =
     width === 'fit-shadow' ? arrowSizeIncoming - 4 : arrowSizeIncoming + 4
