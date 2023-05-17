@@ -6,7 +6,7 @@ import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { useEffect, useRef, useState } from 'react';
 import { authOptions } from '../api/auth/[...nextauth]';
-import { checkAdminRole, checkAdminSession, getSerializableSession } from '@/utils/auth.util';
+import { checkAdminRole, getSerializableSession } from '@/utils/auth.util';
 import { Session } from 'next-auth';
 import { useRouter } from 'next/router';
 import AdminMovie from '@/components/AdminMovie/AdminMovie';
@@ -100,6 +100,7 @@ export default function Admin({
     const [crudGenres, setCrudGenres] = useState<ICRUDGenre[]>(JSON.parse(genres) || []);
     const scrollFetchTrigger = useRef<HTMLDivElement>(null);
     const observer = useRef<IntersectionObserver>();
+
     useEffect(() => {
         if (status === 'unauthenticated') {
             router.push('/auth/signin');
@@ -233,10 +234,11 @@ export default function Admin({
                                         return (
                                             <h2
                                                 key={str}
-                                                className={`${styles.heading__page} ${chosenTab === str
-                                                    ? styles.heading__page_active
-                                                    : ''
-                                                    }`}
+                                                className={`${styles.heading__page} ${
+                                                    chosenTab === str
+                                                        ? styles.heading__page_active
+                                                        : ''
+                                                }`}
                                                 onClick={() => changeTab(str)}>
                                                 {t(normalizeKey(`admin:${str}`))}
                                             </h2>

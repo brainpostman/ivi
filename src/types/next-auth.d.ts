@@ -8,6 +8,8 @@ declare module 'next-auth' {
         user: User;
         provider: string | null;
         accessToken: string | null;
+        refreshToken: string | null;
+        expires_at: number;
     }
 
     interface User {
@@ -18,4 +20,9 @@ declare module 'next-auth' {
         roles: IRole[];
         [key: string]: any;
     }
+}
+
+interface IRole {
+    id: number;
+    value: string;
 }

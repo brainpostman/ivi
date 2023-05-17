@@ -27,7 +27,7 @@ export async function checkEmailVacancy(email: string): Promise<string> {
             if (err.response?.status === 400) {
                 return 'login';
             }
-            console.error('AxiosError: ', err.message);
+            console.error('Error: ', err.message);
             return err.message;
         } else {
             console.error('Error: ', err);
@@ -91,16 +91,6 @@ export function validateConfirmedPassword(password: string, confirmation: string
     }
 }
 
-export function genDBPasswordMock(email: string) {
-    const password = jwt
-        .sign({ email: email }, process.env.PASS_MOCK_SECRET as string, {
-            noTimestamp: true,
-        })
-        .split('.')[2]
-        .substring(0, 24);
-    return password;
-}
-
 export function getSerializableSession(inputSession: Session): Session | null {
     if (!inputSession) {
         return null;
@@ -121,11 +111,5 @@ export async function checkAdminRole(accessToken: string | null): Promise<boolea
         return true;
     } catch (err) {
         return false;
-    }
-}
-
-export async function checkAdminSession(accessToken: string | null) {
-    if (!(await checkAdminRole(accessToken))) {
-        signOut();
     }
 }
