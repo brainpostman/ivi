@@ -10,10 +10,10 @@ const HeaderMoreBlock = () => {
     <article className={style.wrapper}>
       <div className={style.container}>
         <div className={style.top_buttons}>
-          <BasicBtn btnType='textPlusIcon' title='Подключить подписку' circle>
+          <BasicBtn btnType='icon' title='Подключить подписку' circle>
             <SlDiamond />
           </BasicBtn>
-          <BasicBtn btnType='textPlusIcon' title='Активация сертификата'>
+          <BasicBtn btnType='icon' title='Активация сертификата'>
             <TbCertificate />
           </BasicBtn>
         </div>

@@ -3,8 +3,7 @@ import { HTMLAttributeAnchorTarget } from 'react'
 
 // ==== PROPS ====
 // @param btnType - тип внешнего вида кнопки
-// @param href - обычная ссылка
-// @param navlink - ссылка для навигации
+// @param href - ссылка
 // Испольузем либо href, либо navlink
 // @param suptitle - текст над текстом кнопки
 // Работает при btnType = 'textPlusIcon'

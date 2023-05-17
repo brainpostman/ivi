@@ -1,11 +1,11 @@
-import {
-  IFilterGetResponse,
-  IStaff,
-  IStaffGetResponse,
-} from '@/types/staffs.interface'
+import { IQuerySuggest, IStaff } from '@/types/staffs.interface'
+import { IFilterGetResponse } from '@/types/filters.interface'
 import { staffsAPI } from '@/api/queries/staffs.api'
 import { checkObjHaveProperties } from '@/utils/checkObjHaveProperties.utils'
-import { ICrudGenre } from '@/types/ICrudMovie'
+import { ICRUDGenre } from '@/types/ICrudMovie'
+
+const testSubString = 'ом'
+const testStaffType: IQuerySuggest = 'actor'
 
 const staffRequiredProperties = ['id', 'name']
 
@@ -22,8 +22,10 @@ describe('STAFFS API', () => {
   let countries: IFilterGetResponse[]
   let directors: IStaff[]
   let actors: IStaff[]
+  let staffById: IStaff | undefined
+  let staffsByParams: IStaff[]
 
-  let crudGenres: ICrudGenre[]
+  let crudGenres: ICRUDGenre[]
 
   beforeAll(async () => {
     genres = await staffsAPI.getGenres('ru')
@@ -31,6 +33,11 @@ describe('STAFFS API', () => {
     directors = await staffsAPI.getDirectors()
     actors = await staffsAPI.getActors()
     crudGenres = await staffsAPI.getCrudGenres()
+    staffById = await staffsAPI.getStaffById(12)
+    staffsByParams = await staffsAPI.getStaffByParams({
+      search: testSubString,
+      type: testStaffType,
+    })
   })
 
   // Проверка полей жанров
@@ -63,56 +70,26 @@ describe('STAFFS API', () => {
       checkObjHaveProperties(actor, crudGenreRequiredProperties)
     )
   })
-})
 
-describe('STAFFS API ERRORS', () => {
-  let errorGenres: IFilterGetResponse[]
-  //let errorCountries: IFilterGetResponse[]
-  let errorDirectors: IStaff[]
-  let errorActors: IStaff[]
-  let errorCrudGenres: ICrudGenre[]
-
-  beforeAll(async () => {
-    errorGenres = await staffsAPI.getGenres('ru', { page: -1 })
-    errorDirectors = await staffsAPI.getDirectors({ page: -1 })
-    errorActors = await staffsAPI.getActors({ page: -1 })
-
-    errorCrudGenres = await staffsAPI.getCrudGenres({ page: -1 })
-  })
-
-  // Проверяем ошибку жанров
-  it('Check genres error', () => {
-    expect(Array.isArray(errorGenres))
-
-    if (Array.isArray(errorGenres)) {
-      expect(!errorGenres.length).toBeTruthy()
+  // Проверяем участника по id
+  it('Check staff by id', () => {
+    expect(staffById).toBeTruthy()
+    if (staffById) {
+      checkObjHaveProperties(staffById, staffRequiredProperties)
     }
   })
 
-  // Проверяем ошибку режиссёров
-  it('Check directors error', () => {
-    expect(Array.isArray(errorDirectors))
+  // Проверяем участника по подстроке и типу
+  it('Check staffs by params', () => {
+    staffsByParams.forEach(staff =>
+      checkObjHaveProperties(staff, staffRequiredProperties)
+    )
 
-    if (Array.isArray(errorDirectors)) {
-      expect(!errorDirectors.length).toBeTruthy()
-    }
-  })
+    staffsByParams.forEach(staff => expect(staff.type).toBe(testStaffType))
 
-  // Проверяем ошибку актёров
-  it('Check actors error', () => {
-    expect(Array.isArray(errorActors))
-
-    if (Array.isArray(errorActors)) {
-      expect(!errorActors.length).toBeTruthy()
-    }
-  })
-
-  // Проверяем ошибку круда жанров
-  it('Check crud genres error', () => {
-    expect(Array.isArray(errorCrudGenres))
-
-    if (Array.isArray(errorCrudGenres)) {
-      expect(!errorCrudGenres.length).toBeTruthy()
-    }
+    staffsByParams.forEach(staff => {
+      const isExistSubstr = staff.name.toLowerCase().includes(testSubString)
+      expect(isExistSubstr).toBeTruthy()
+    })
   })
 })

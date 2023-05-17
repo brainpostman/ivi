@@ -1,59 +1,75 @@
 .switch {
-    position: relative;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border: 2px solid $gray;
-    height: fit-content;
-    @include ui-padding(hor, 1.75);
-    @include ui-padding(ver, 2);
-    height: 36px;
-    min-width: 64px;
-    @include font(1);
-    user-select: none;
-    border-radius: 9999px;
-    transition: border-color 0.4s;
-    &:hover {
-        border-color: white;
-        transition: border-color 0.2s, box-shadow 0.2s;
-        box-shadow: 0 0 20px 5px rgba($color: #fff, $alpha: 0.15);
-    }
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  @include font(1);
+
+  border: 2px solid $gray;
+  border-radius: 9999px;
+
+  transition: border-color 0.4s;
+  user-select: none;
+
+  min-width: 64px;
+  height: 36px;
+
+  @include ui-padding(hor, 1.75);
+  @include ui-padding(ver, 2);
+
+  &:hover {
+    border-color: white;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    box-shadow: 0 0 20px 5px rgba($color: #fff, $alpha: 0.15);
+  }
 }
 
 .knob {
-    z-index: 1;
-    position: absolute;
-    border-radius: 9999px;
-    height: 26px;
-    width: 26px;
-    background-color: $gray-soft;
-    top: 3px;
-    &_left {
-        left: 3px;
-    }
-    &_transition_left {
-        left: 3px;
-        width: calc(100% - 6px);
-    }
-    &_transition_right {
-        right: 3px;
-        width: calc(100% - 6px);
-    }
-    &_right {
-        right: 3px;
-    }
+  position: absolute;
+  top: 3px;
+
+  border-radius: 9999px;
+  background-color: $gray-soft;
+
+  height: 26px;
+  width: 26px;
+
+  z-index: 1;
+
+  &_left {
+    left: 3px;
+  }
+
+  &_transition_left {
+    left: 3px;
+    width: calc(100% - 6px);
+  }
+
+  &_transition_right {
+    right: 3px;
+    width: calc(100% - 6px);
+  }
+
+  &_right {
+    right: 3px;
+  }
 }
 
 .option {
-    min-height: 16px;
-    min-width: 16px;
-    border-radius: 9999px;
-    z-index: 5;
-    cursor: pointer;
-    transition: color 0.4s;
-    font-weight: 600;
-    &:hover {
-        color: white;
-        transition: color 0.2s;
-    }
+  font-weight: 600;
+  border-radius: 9999px;
+
+  cursor: pointer;
+  transition: color 0.4s;
+
+  min-width: 16px;
+  min-height: 16px;
+
+  z-index: 5;
+
+  &:hover {
+    color: white;
+    transition: color 0.2s;
+  }
 }

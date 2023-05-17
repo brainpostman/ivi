@@ -14,20 +14,22 @@ const BasicBtn: FC<IBasicBtnProps> = ({
   dark: isDark = false,
   ...props
 }) => {
-  const classNameBtnType = getClassNameBtnType(btnType)
+  const classNameBtnType = getClassNameBtnType(btnType, title, suptitle)
   const darkClassName = isDark ? style.dark : ''
   const currentClassName = `${style.button} ${classNameBtnType} ${darkClassName} ${className}`
 
   return (
     <BasicBtnWrapper className={currentClassName} {...props}>
       {isViewCircle && <div className={style.circle}></div>}
-      {btnType === 'textPlusIcon' ? (
+      {btnType !== 'text' ? (
         <>
           {children}
-          <div className={style.description}>
-            {suptitle && <p className={style.suptitle}>{suptitle}</p>}
-            <p className={style.title}>{title}</p>
-          </div>
+          {(title || suptitle) && (
+            <div className={style.description}>
+              {suptitle && <p className={style.suptitle}>{suptitle}</p>}
+              {title && <p className={style.title}>{title}</p>}
+            </div>
+          )}
         </>
       ) : (
         children

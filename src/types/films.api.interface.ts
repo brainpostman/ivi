@@ -1,4 +1,5 @@
 import { IStaffGetResponse } from './staffs.interface'
+import { IFilterGetResponse } from './filters.interface'
 
 export interface IFilmsGetRequest {
   order?: string
@@ -27,7 +28,7 @@ export interface IFilmsgGetResponse {
   name: string
   name_en: string
   year: number
-  countries: { id: number; name: string }[]
+  countries: IFilterGetResponse[]
   genres: { id: number; name: string; name_en: string | null }[]
   tagline: string
   scoreAVG: number | null

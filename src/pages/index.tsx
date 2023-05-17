@@ -46,8 +46,8 @@ const VisibleText = () => {
 };
 
 interface IProps {
-    firstCarouselFilms: IMovie[] | undefined;
-    secondCarouselFilms: IMovie[] | undefined;
+    firstCarouselFilms: IMovie[];
+    secondCarouselFilms: IMovie[];
 }
 
 const Home: NextPage<IProps> = ({ firstCarouselFilms, secondCarouselFilms }) => {
