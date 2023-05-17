@@ -11,7 +11,6 @@ import { i18n } from 'next-i18next';
 i18n?.loadNamespaces(['auth_modal']);
 
 export const authOptions = {
-    debug: true,
     session: {
         jwt: true,
         maxAge: 7 * 24 * 60 * 60,
@@ -77,53 +76,21 @@ export const authOptions = {
         }),
     ],
     pages: {
-        error: 'auth/error',
-        signin: 'auth/signin',
+        error: '/auth/error',
+        signin: '/auth/signin',
     },
     callbacks: {
-        //ошибки не перехватываются специально, перехват должен происходить при использовании signIn() на клиенте
+        //ошибки не перехватываются специально, перехват должен происходить при использовании signIn() на клиенте, либо произойдет редирект на /pages/auth/error
         async signIn({ user, account, profile }) {
             if (account.provider === 'google') {
                 user.provider = 'google';
-                try {
-                    const checkResponse = await axios.get(
-                        `${process.env.CHECK_EMAIL_VACANCY}/${encodeURIComponent(
-                            profile.email
-                        )}.oauth`
-                    );
-                    if (checkResponse.status === 200) {
-                        const data = {
-                            email: `${profile.email}.oauth`,
-                            password: genDBPasswordMock(user.email),
-                        };
-                        const response = await axios.post(process.env.REGISTRATION, data);
-                        user.accessToken = response.data.token;
-                        return true;
-                    }
-                } catch (err) {
-                    if (err.response.status === 400) {
-                        const data = {
-                            email: `${profile.email}.oauth`,
-                            password: genDBPasswordMock(profile.email),
-                        };
-                        const response = await axios.post(process.env.LOGIN, data);
-                        user.accessToken = response.data.token;
-                        return true;
-                    } else {
-                        throw err;
-                    }
-                }
+                const response = await axios.post(
+                    `${process.env.GOOGLE}/${encodeURIComponent(`${profile.email}.oauth`)}`
+                );
+                user.accessToken = response.data.token;
+                user.refreshToken = response.data.refreshToken;
+                return true;
             }
-            // if (account.provider === 'google') {
-            //     user.provider = 'google';
-            //     const data = {
-            //         email: `${profile.email}.oauth`,
-            //     };
-            //     const response = await axios.post(process.env.GOOGLE, data);
-            //     user.accessToken = response.data.token;
-            //     user.refreshToken = response.data.refreshToken;
-            //     return true;
-            // }
             if (account.provider === 'vk') {
                 user.provider = 'vk';
                 const data = {
@@ -180,6 +147,7 @@ export const authOptions = {
                     );
                 }
             }
+            return token;
         },
         async session({ session, token }) {
             session.provider = token.provider;
