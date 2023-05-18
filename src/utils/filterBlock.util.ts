@@ -1,7 +1,17 @@
 import { IFilterBlockEl, IFilterTitle } from '@/types/filterBlock.interface'
 import { Dispatch, SetStateAction } from 'react'
 
-const getFilter = (filters: IFilterBlockEl[], title: IFilterTitle) => {
+/*
+  * @param {IFilterBlockEl[]} filters - фильтры
+  * @param {IFilterTitle} title - название фильтра
+  * @returns IFilterBlockEl | undefined
+
+*/
+
+const getFilter = (
+  filters: IFilterBlockEl[],
+  title: IFilterTitle
+): IFilterBlockEl | undefined => {
   const currentFilter = filters.find(filter => filter.title === title)
 
   if (!currentFilter) {
@@ -11,6 +21,13 @@ const getFilter = (filters: IFilterBlockEl[], title: IFilterTitle) => {
 
   return currentFilter
 }
+
+/*
+  * @param {Dispatch<SetStateAction<IFilterBlockEl[]>>} setFilters - функция 
+    для изменения фильтра
+  * @param {IFilterTitle} title - название фильтра
+
+*/
 
 const getSelectFilterFunc =
   (
@@ -28,12 +45,25 @@ const getSelectFilterFunc =
     })
   }
 
+/*
+  * @param {IFilterBlockEl[]} filters - фильтры
+  * @param {Dispatch<SetStateAction<IFilterBlockEl[]>>} setFilters - функция 
+    для изменения фильтра
+  * @returns (title: IFilterTitle) => () => IGetFilterFuncs
+
+*/
+
+interface IGetFilterFuncs {
+  filter: IFilterBlockEl | undefined
+  selectFilter: () => void
+}
+
 export const getFilterFuncs =
   (
     filters: IFilterBlockEl[],
     setFilters: Dispatch<SetStateAction<IFilterBlockEl[]>>
   ) =>
-  (title: IFilterTitle) => {
+  (title: IFilterTitle): IGetFilterFuncs => {
     const filter = getFilter(filters, title)
     const selectFilter = getSelectFilterFunc(setFilters, title)
 

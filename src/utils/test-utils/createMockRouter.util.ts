@@ -1,5 +1,11 @@
 import { NextRouter } from 'next/router'
 
+/*
+  * @param {Partial<NextRouter>} router - роутер
+  * @returns NextRouter
+
+*/
+
 export function createMockRouter(router: Partial<NextRouter>): NextRouter {
   return {
     basePath: '',

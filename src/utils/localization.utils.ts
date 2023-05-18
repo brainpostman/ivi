@@ -1,5 +1,7 @@
-const setLocaleCookie = (locale: string) => {
-    document.cookie = `NEXT_LOCALE=${locale}; max-age=31536000; path=/`;
-};
+// @param {string} locale - локаль
 
-export default setLocaleCookie;
+const setLocaleCookie = (locale: string) => {
+  document.cookie = `NEXT_LOCALE=${locale}; max-age=31536000; path=/`
+}
+
+export default setLocaleCookie
