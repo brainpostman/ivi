@@ -10,6 +10,7 @@ import HeaderLeftSide from './HeaderLeftSide/HeaderLeftSide'
 import HeaderRightSide from './HeaderRightSide/HeaderRightSide'
 import { staffsAPI } from '@/api/queries/staffs.api'
 import { IFilterGetResponse } from '@/types/filters.interface'
+import { FiltersContext } from '@/contexts/filters.context'
 
 const Header = () => {
   const { pathname, locale } = useRouter()
@@ -41,8 +42,8 @@ const Header = () => {
     const genres = await staffsAPI.getGenres(locale ?? 'ru')
     const countries = await staffsAPI.getCountries()
 
-    setGenres(genres)
-    setCountries(countries)
+    setGenres(genres.slice(0, 11))
+    setCountries(countries.slice(0, 11))
   }
 
   useEffect(() => {
@@ -73,7 +74,9 @@ const Header = () => {
         )}
       </section>
       {showAuthModal && <AuthWindow modalShown={showAuthModal} />}
-      <HeaderMobile />
+      <FiltersContext.Provider value={{ genres, countries }}>
+        <HeaderMobile />
+      </FiltersContext.Provider>
     </header>
   )
 }
