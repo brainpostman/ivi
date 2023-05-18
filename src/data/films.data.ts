@@ -41,6 +41,6 @@ const tmpFilmOne: IFilmsgGetResponse = {
   ],
 }
 
-export const tmpFilms: IFilmsgGetResponse[] = new Array(19)
+export const filmsListData: IFilmsgGetResponse[] = new Array(19)
   .fill(tmpFilmOne)
   .map((film, index) => ({ ...film, id: index + 1 }))
