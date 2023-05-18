@@ -5,12 +5,8 @@ import { GiSteamLocomotive } from 'react-icons/gi'
 import { HiDotsHorizontal } from 'react-icons/hi'
 import { HiOutlineFolderArrowDown } from 'react-icons/hi2'
 import { RiHome6Line, RiSearchLine } from 'react-icons/ri'
-import {
-  countryFilterData,
-  genreFilterData,
-  novetlyFilterData,
-  yearsFilterData,
-} from './filters.data'
+import { novetlyFilterData } from './filters.data'
+import { IFilterGetResponse } from '@/types/filters.interface'
 
 export const headerMobileTabs = [
   { icon: <RiHome6Line />, title: 'Мой иви', href: '/', isSelect: false },
@@ -36,7 +32,15 @@ export const headerMobileTabs = [
   },
 ]
 
-export const headerMobileMiddleContent = [
+interface IFilters {
+  genres: IFilterGetResponse[]
+  countries: IFilterGetResponse[]
+}
+
+export const getHeaderMobileMiddleContent = ({
+  genres,
+  countries,
+}: IFilters) => [
   {
     icon: <BiCameraMovie />,
     title: 'Фильмы',
@@ -45,15 +49,11 @@ export const headerMobileMiddleContent = [
     lists: [
       {
         query: 'Жанры',
-        specificList: genreFilterData,
+        specificList: genres,
       },
       {
         query: 'Страны',
-        specificList: countryFilterData,
-      },
-      {
-        query: 'Годы',
-        specificList: yearsFilterData,
+        specificList: countries,
       },
       {
         specificList: novetlyFilterData,
@@ -68,15 +68,11 @@ export const headerMobileMiddleContent = [
     lists: [
       {
         query: 'Жанры',
-        specificList: genreFilterData,
+        specificList: genres,
       },
       {
         query: 'Страны',
-        specificList: countryFilterData.slice(3),
-      },
-      {
-        query: 'Годы',
-        specificList: yearsFilterData,
+        specificList: countries.slice(3),
       },
       {
         specificList: novetlyFilterData,
@@ -91,15 +87,11 @@ export const headerMobileMiddleContent = [
     lists: [
       {
         query: 'Жанры',
-        specificList: genreFilterData,
+        specificList: genres,
       },
       {
         query: 'Страны',
-        specificList: countryFilterData.slice(3),
-      },
-      {
-        query: 'Годы',
-        specificList: yearsFilterData,
+        specificList: countries.slice(3),
       },
       {
         specificList: novetlyFilterData,
@@ -114,15 +106,11 @@ export const headerMobileMiddleContent = [
     lists: [
       {
         query: 'Жанры',
-        specificList: genreFilterData,
+        specificList: genres,
       },
       {
         query: 'Страны',
-        specificList: countryFilterData.slice(3),
-      },
-      {
-        query: 'Годы',
-        specificList: yearsFilterData,
+        specificList: countries.slice(3),
       },
       {
         specificList: novetlyFilterData,
