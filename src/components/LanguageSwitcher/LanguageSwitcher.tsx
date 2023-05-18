@@ -2,10 +2,15 @@ import { delay } from '@/utils/delay'
 import setLocaleCookie from '@/utils/localization.utils'
 import Router, { useRouter } from 'next/router'
 import Switch from '../UI/Switch/Switch'
+import { FC } from 'react'
 
 const switchSpeed = 200
 
-const LanguageChanger = () => {
+interface IProps {
+  className?: string
+}
+
+const LanguageChanger: FC<IProps> = ({ className = '' }) => {
   const router = useRouter()
   const { pathname, asPath, query } = router
   const onToggleLanguageClick = async (newLocale: string) => {
@@ -26,6 +31,7 @@ const LanguageChanger = () => {
         onToggleLanguageClick('en')
       }}
       speedms={switchSpeed}
+      className={className}
     />
   )
 }
