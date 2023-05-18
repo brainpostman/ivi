@@ -1,11 +1,10 @@
 import FilterBlock from '@/components/FilterBlock/FilterBlock'
 import { Meta } from '@storybook/react'
 import style from './FilterBlock.stories.module.scss'
-
-const actors = [{ id: 1, name: 'actor1' }]
-const genres = [{ id: 1, name: 'genre1' }]
-const countries = [{ id: 1, name: 'country1' }]
-const directors = [{ id: 1, name: 'director1' }]
+import { filterActorData } from '@/data/filterActor.data'
+import { filterGenreListData } from '@/data/filterGenre.data'
+import { filterCountryListData } from '@/data/filterCountry.data'
+import { filterDirectorData } from '@/data/filterDirectordata'
 
 const meta: Meta = {
   title: 'FilterBlock',
@@ -24,10 +23,10 @@ const meta: Meta = {
 export const Primary = () => (
   <div className={style.wrapper}>
     <FilterBlock
-      actors={actors}
-      genres={genres}
-      countries={countries}
-      directors={directors}
+      actors={filterActorData}
+      genres={filterGenreListData}
+      countries={filterCountryListData}
+      directors={filterDirectorData}
     />
   </div>
 )

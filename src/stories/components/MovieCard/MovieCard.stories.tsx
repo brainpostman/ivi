@@ -2,7 +2,7 @@ import MovieCard from '@/components/MovieCard/MovieCard'
 import { Meta, StoryObj } from '@storybook/react'
 import style from './MovieCard.stories.module.scss'
 import { IMovie } from '@/types/films.api.interface'
-import { tmpFilms } from '@/data/films.data'
+import { filmsListData } from '@/data/films.data'
 import { FC } from 'react'
 import { transformFilms } from '@/api/transforms/films.transform'
 
@@ -61,7 +61,7 @@ export const Primary: Story = {
     </div>
   ),
   args: {
-    movie: transformFilms(tmpFilms[0]),
+    movie: transformFilms(filmsListData[0]),
   },
 }
 

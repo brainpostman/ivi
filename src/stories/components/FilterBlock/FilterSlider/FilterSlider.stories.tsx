@@ -83,7 +83,7 @@ export const Single = {
     )
   },
   args: {
-    query: 'scoreAVG',
+    query: 'minCountScore',
     title: 'Оценки',
     maxValue: 100,
     typeSlider: 'single',

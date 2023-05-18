@@ -1,6 +1,6 @@
 import { transformFilms } from '@/api/transforms/films.transform'
 import MovieCarousel from '@/components/MovieCarousel/MovieCarousel'
-import { tmpFilms } from '@/data/films.data'
+import { filmsListData } from '@/data/films.data'
 import { Meta } from '@storybook/react'
 import { IFilmsgGetResponse } from '@/types/films.api.interface'
 import { ICustomCarouselProps } from '@/types/customCarousel.interface'
@@ -98,7 +98,7 @@ export const Primary = ({ films: filmsIncoming, ...props }: IProps) => {
 Primary.args = {
   title: 'Название карусели',
   href: '/',
-  films: tmpFilms,
+  films: filmsListData,
   elementsMove: 5,
   elementsView: 7,
   arrowSize: 24,
