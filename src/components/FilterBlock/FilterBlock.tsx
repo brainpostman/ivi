@@ -133,9 +133,8 @@ const FilterBlock: FC<IProps> = ({
         query='actor'
       />
 
+      <FilterSlider query='minCountScore' title={t('sliders.scores')} />
       <FilterSlider query='rating' title={t('sliders.rating')} />
-
-      <FilterSlider query='scoreAVG' title={t('sliders.scores')} />
 
       <div
         className={`${
