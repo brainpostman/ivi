@@ -1,12 +1,19 @@
-// === PROPS ===
-// @param value { * } - значение для капитализации певрого символа (toUpperCase)
-// @param options - параметры
-// @param options -> reverse - обратная капитализация первого символа (toLowerCase)
+/*
+  * @param {string} value - значение для капитализации певрого символа 
+  (toUpperCase)
+  * @param {IFormatCapitalizeOptions} options - параметры
+    options -> reverse - обратная капитализация первого символа (toLowerCase)
+  * @returns string - строка с обработанным первым символом
+*/
+
+interface IFormatCapitalizeOptions {
+  reverse?: boolean
+}
 
 export const formatCapitalize = (
   value?: string,
-  options?: { reverse?: boolean }
-) => {
+  options?: IFormatCapitalizeOptions
+): string => {
   if (!value) return ''
 
   const firstLetter = options?.reverse

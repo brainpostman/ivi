@@ -1,10 +1,12 @@
 import { useEffect } from 'react'
 
-// === PROPS ===
-// @param { * } callback - исполняемая функция
-// @param { * } deps - массив зависимостей, которые триггерят выполнение функции
-// @param delay - задержка в мс
+/*
+  * @param {() => void} callback - исполняемая функция
+  * @param {any[]} deps - массив зависимостей, которые триггерят выполнение 
+    функции
+  * @param {number} delay - задержка в мс
 
+*/
 export const useDebounce = (
   callback: () => void,
   deps: any[] = [],

@@ -11,24 +11,6 @@ import style from './CustomCarousel.module.scss'
 import CustomCarouselArrows from './CustomCarouselArrows/CustomCarouselArrows'
 import CustomCarouselShadows from './CustomCarouselShadows/CustomCarouselShadows'
 
-// ==== PROPS ====
-// @param { * } elementsView - количество элементов, которые отображаются в карусели (указываем на 1 элемент меньше)
-// @param { * } elemntsMove - количество элементов, на которое мы двигаем карусель
-// @param { * } children -
-// @param title - заголовок карусели
-// @param href - ссылка в заголовке
-// @param additElem - допольнительный элемент
-// @param classNameList - класс для списка элементов
-// @param classNameWrapper - класс для обёртки
-// @param arrowSize - размер стрелок
-// @param space - адаптивный отступ между элементами: [начальный отступ, коненчный отступ]
-// @param speed - скорость анимации движения
-// @param width - ширина ограничивающего контейнера
-// 'full' - 1225px; 'fit' - ограничивается по elementsView; 'fit-shadow' - добавляется тень + контейнер увеличивается на половину следующего элемента
-// @param breakpoints - брейкпоинты
-// при достижении брейкпоинта @param elementsView уменьшается на 1
-// @param padding - допольнительный отступ
-
 const CustomCarousel: FC<ICustomCarouselProps> = ({
   elementsMove,
   elementsView: elementsViewIncoming,
@@ -58,8 +40,6 @@ const CustomCarousel: FC<ICustomCarouselProps> = ({
     elementLens,
     elementsView
   )
-
-  console.log(containerWidth)
 
   const arrowPosition =
     width === 'fit-shadow' ? arrowSizeIncoming - 4 : arrowSizeIncoming + 4

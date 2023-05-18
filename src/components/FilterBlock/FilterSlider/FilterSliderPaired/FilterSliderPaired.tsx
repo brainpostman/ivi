@@ -1,5 +1,5 @@
 import Input from '@/components/UI/Input/Input'
-import { formatPairSliderQuery } from '@/formatters/pairSliderQuery.format'
+import { formatMinMaxQuery } from '@/formatters/minMaxQuery.format'
 import { useSetStringParam } from '@/hooks/useSetStringParam'
 import { ChangeEvent, FC, useState } from 'react'
 import ReactSlider from 'react-slider'
@@ -21,7 +21,7 @@ const FilterSliderPaired: FC<IProps> = ({
   const [minValue, setMinValue] = useState(minValueDefault)
   const [maxValue, setMaxValue] = useState(maxValueDefault)
 
-  const { minValueStr, maxValueStr } = formatPairSliderQuery(query)
+  const { minValueStr, maxValueStr } = formatMinMaxQuery(query)
 
   const { setUrl: setUrlMin } = useSetStringParam(
     minValueStr,

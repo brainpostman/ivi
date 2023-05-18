@@ -1,4 +1,10 @@
-export const formatScores = (scores: number) => {
+/*
+  * @param {number} scores - оценка
+  * @returns [string, string] - обработанная оценка
+
+*/
+
+export const formatScores = (scores: number): [string, string] => {
   const stringedScores = scores.toString()
   const splittedRating = stringedScores.split('.')
 

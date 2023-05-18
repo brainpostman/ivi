@@ -2,11 +2,23 @@ import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 import { useGetParam } from './useGetParam'
 
+/*
+  * @param {boolean} isNumber - является ли числом
+  * @param {string[]} extraValues - экстра значения, при которых фильтр удаляет 
+    из url
+
+*/
 interface IOptions {
   isNumber?: boolean
   extraValues?: string[]
 }
 
+/*
+  * @param {string} query - параметр
+  * @param {string | number} defaultValue - значение по умолчанию
+  * @param {IOptions} options - опции
+
+*/
 export const useSetStringParam = (
   query: string,
   defaultValue: string | number = '',
