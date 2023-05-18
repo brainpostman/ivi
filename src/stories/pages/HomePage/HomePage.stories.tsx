@@ -16,16 +16,17 @@ const meta: Meta = {
     },
   },
   component: Home,
-  argTypes: {},
+  argTypes: {
+    firstCarouselFilms: { table: { disable: true } },
+    secondCarouselFilms: { table: { disable: true } },
+  },
 }
 
 export const Primary: Story = {
   render: props => (
     <SessionProvider>
       <Provider store={store}>
-        <div style={{ backgroundColor: '#100e19', width: 1400 }}>
-          <Home {...props} />
-        </div>
+        <Home {...props} />
       </Provider>
     </SessionProvider>
   ),
