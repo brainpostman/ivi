@@ -1,21 +1,23 @@
 import BasicBtn from '@/components/UI/BasicBtn/BasicBtn'
-import { headerMobileMiddleContent } from '@/data/headerMobile.data'
+import { getHeaderMobileMiddleContent } from '@/data/headerMobile.data'
 import {
   headerPopularBroadcastsData,
   headerTvBlockData,
 } from '@/data/headerTVBlock.data'
 import Image from 'next/image'
 import Link from 'next/link'
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import { MdArrowBackIosNew } from 'react-icons/md'
 import styleParent from '../HeaderMoreBlock.module.scss'
 import style from './HeaderMobileMiddle.module.scss'
-
-// FIXME: починить key prop
+import { FiltersContext } from '@/contexts/filters.context'
+import LanguageChanger from '@/components/LanguageSwitcher/LanguageSwitcher'
 
 const HeaderMobileMiddle = () => {
+  const { countries, genres } = useContext(FiltersContext)
+
   const [contentLists, setContentLists] = useState(
-    headerMobileMiddleContent.map(el => ({
+    getHeaderMobileMiddleContent({ genres, countries }).map(el => ({
       ...el,
       isSelect: false,
     }))
@@ -32,6 +34,7 @@ const HeaderMobileMiddle = () => {
 
   return (
     <div className={style.wrapper}>
+      <LanguageChanger className={style.language_changer} />
       <nav className={style.nav}>
         <p>
           <Link href='/'>Мой иви</Link>
@@ -63,11 +66,15 @@ const HeaderMobileMiddle = () => {
                   <p className={style.lists__title}>{element.listTitle}</p>
                   <ul className={style.inner_lists}>
                     {element.lists.map(list => (
-                      <li key={element.listTitle}>
-                        <p className={style.inner_lists__title}>{list.query}</p>
+                      <li key={list.query}>
+                        {list.query && (
+                          <p className={style.inner_lists__title}>
+                            {list.query}
+                          </p>
+                        )}
                         <ul className={style.filter_list}>
                           {list.specificList.map(element => (
-                            <li>{element.title}</li>
+                            <li>{element.name}</li>
                           ))}
                         </ul>
                       </li>
@@ -97,12 +104,7 @@ const HeaderMobileMiddle = () => {
                           <ul className={style.inner_channel_list}>
                             {data.channels.slice(0, 8).map(channel => (
                               <li key={channel.href}>
-                                <Image
-                                  src={channel.img}
-                                  alt='channel'
-                                  width={146}
-                                  height={96}
-                                />
+                                <Image src={channel.img} alt='channel' fill />
                               </li>
                             ))}
                           </ul>
@@ -123,7 +125,7 @@ const HeaderMobileMiddle = () => {
                               height={38}
                             />
 
-                            <div>
+                            <div className={style.broadcast__info}>
                               <p>{broadcast.title}</p>
                               <p className={style.broadcast__subtitle}>
                                 <span>{broadcast.date}</span> •{' '}

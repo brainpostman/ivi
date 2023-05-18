@@ -6,6 +6,10 @@
 .logo {
   width: 66px;
   height: 72px;
+
+  @media (max-width: 599px) {
+    display: none;
+  }
 }
 
 .nav {
@@ -14,7 +18,7 @@
   color: $gray;
   font-weight: 500;
 
-  > a {
+  >a {
     display: flex;
     align-items: center;
 

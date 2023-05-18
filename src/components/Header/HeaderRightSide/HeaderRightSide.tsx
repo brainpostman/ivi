@@ -33,7 +33,9 @@ const HeaderRightSide: FC<IProps> = ({ showHoverBlock }) => {
   return (
     <article className={style.wrapper}>
       {isViewSubscribeButton ? (
-        <SubscribeButton>{t('buy-sub')}</SubscribeButton>
+        <SubscribeButton className={style.subscribe_button}>
+          {t('buy-sub')}
+        </SubscribeButton>
       ) : (
         <HighlightButton
           className={style.highlight_button}
@@ -42,7 +44,7 @@ const HeaderRightSide: FC<IProps> = ({ showHoverBlock }) => {
           {t('watch-30-days')}
         </HighlightButton>
       )}
-      <HeaderIconButton icon='search' className={style.icon}>
+      <HeaderIconButton icon='search' className={style.icon_search}>
         {t('search')}
       </HeaderIconButton>
       <HeaderIconButton icon='notification' className={style.icon} />
@@ -50,7 +52,7 @@ const HeaderRightSide: FC<IProps> = ({ showHoverBlock }) => {
         className={classNamePersonIcon}
         onMouseEnter={() => showHoverBlock('profile')}
       />
-      <LanguageChanger />
+      <LanguageChanger className={style.language_switcher} />
     </article>
   )
 }
