@@ -1,7 +1,7 @@
 import { customAxios } from '@/api/queries/customAxios'
 import { transformFilms } from '@/api/transforms/films.transform'
 import { IFilmsgGetResponse } from '@/types/films.api.interface'
-import { checkObjHaveProperties } from '@/utils/checkObjHaveProperties.utils'
+import { checkObjHaveProperties } from '@/utils/test-utils/checkObjHaveProperties.utils'
 
 describe('TRANSFORM films', () => {
   let films: IFilmsgGetResponse[]

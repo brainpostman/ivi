@@ -2,7 +2,7 @@ import { filmsAPI } from '@/api/queries/films.api'
 import { ICRUDMovie } from '@/types/ICrudMovie'
 import { IMovieById } from '@/types/films.api.interface'
 import { IMovie } from '@/types/films.api.interface'
-import { checkObjHaveProperties } from '@/utils/checkObjHaveProperties.utils'
+import { checkObjHaveProperties } from '@/utils/test-utils/checkObjHaveProperties.utils'
 
 const filmsRequiredProperites = [
   'id',
