@@ -3,6 +3,8 @@ import Home from '@/pages/index'
 import { Provider } from 'react-redux'
 import { store } from '@/store'
 import { SessionProvider } from 'next-auth/react'
+import { filmsListData } from '@/data/films.data'
+import { transformFilms } from '@/api/transforms/films.transform'
 
 type Story = StoryObj<typeof Home>
 
@@ -17,8 +19,12 @@ const meta: Meta = {
   },
   component: Home,
   argTypes: {
-    firstCarouselFilms: { table: { disable: true } },
-    secondCarouselFilms: { table: { disable: true } },
+    firstCarouselFilms: {
+      description: 'Фильмы для первой карусели',
+    },
+    secondCarouselFilms: {
+      description: 'Фильмы для второй карусели',
+    },
   },
 }
 
@@ -26,13 +32,15 @@ export const Primary: Story = {
   render: props => (
     <SessionProvider>
       <Provider store={store}>
-        <Home {...props} />
+        <div style={{ backgroundColor: '#100e19' }}>
+          <Home {...props} />
+        </div>
       </Provider>
     </SessionProvider>
   ),
   args: {
-    firstCarouselFilms: [],
-    secondCarouselFilms: [],
+    firstCarouselFilms: filmsListData.map(film => transformFilms(film)),
+    secondCarouselFilms: filmsListData.map(film => transformFilms(film)),
   },
 }
 
