@@ -4,13 +4,18 @@
 
 */
 
-export const formatStaffType = (staffType?: string): string => {
+import { IFilmsGetRequest } from '@/types/films.api.interface'
+import { IStaffType } from '@/types/staffs.interface'
+
+export const formatStaffType = (
+  staffType: IStaffType
+): 'actors' | 'directors' | undefined => {
   switch (staffType) {
     case 'actor':
       return 'actors'
     case 'director':
       return 'directors'
     default:
-      return ''
+      return undefined
   }
 }
