@@ -16,12 +16,13 @@ const formatFilterToNames = (
   }
 
   const filteredValue = filter.filter(fi => {
-    if (!fi.name) {
+    const isExistName = !!fi.name
+    if (!isExistName) {
       console.error(`Wrong filter.name value {undefined}; ID = ${fi.id}`)
       return
     }
 
-    return !!fi.name
+    return isExistName
   })
 
   const formattedValue = filteredValue.map(fi => fi.name)
