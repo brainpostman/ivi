@@ -16,7 +16,8 @@ export type ICustomCarouselWidth = 'full' | 'fit' | 'fit-shadow'
 /*
   * @param {number} elementsView - количество элементов, которые отображаются в 
     карусели (указываем на 1 элемент меньше)
-  * @param {number} elemntsMove - количество элементов, на которое мы двигаем карусель
+  * @param {number} elemntsMove - количество элементов, на которое мы двигаем 
+    карусель
   * @param {ReactNode[]} hildren - элементв карусели
   * @param {string} title - заголовок карусели
   * @param {Url} href - ссылка в заголовке
