@@ -1,14 +1,14 @@
 import Input from '@/components/UI/Input/Input'
-import { formatMinMaxQuery } from '@/formatters/minMaxQuery.format'
 import { useSetStringParam } from '@/hooks/useSetStringParam'
 import { ChangeEvent, FC, useState } from 'react'
 import ReactSlider from 'react-slider'
 import styleParent from '../FilterSlider.module.scss'
+import { IQueryMinMax } from '@/types/staffs.interface'
 
 interface IProps {
   min: number
   max: number
-  query: string
+  query: IQueryMinMax
   title: string
 }
 
@@ -21,25 +21,15 @@ const FilterSliderPaired: FC<IProps> = ({
   const [minValue, setMinValue] = useState(minValueDefault)
   const [maxValue, setMaxValue] = useState(maxValueDefault)
 
-  const { minValueStr, maxValueStr } = formatMinMaxQuery(query)
+  const { setUrl: setUrlMin } = useSetStringParam(query.min, minValueDefault, {
+    isNumber: true,
+    extraValues: [minValueDefault.toString()],
+  })
 
-  const { setUrl: setUrlMin } = useSetStringParam(
-    minValueStr,
-    minValueDefault,
-    {
-      isNumber: true,
-      extraValues: [minValueDefault.toString()],
-    }
-  )
-
-  const { setUrl: setUrlMax } = useSetStringParam(
-    maxValueStr,
-    maxValueDefault,
-    {
-      isNumber: true,
-      extraValues: [maxValueDefault.toString()],
-    }
-  )
+  const { setUrl: setUrlMax } = useSetStringParam(query.max, maxValueDefault, {
+    isNumber: true,
+    extraValues: [maxValueDefault.toString()],
+  })
 
   const onChangeMin = (event: ChangeEvent<HTMLInputElement>) => {
     setMinValue(+event.target.value)

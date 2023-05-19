@@ -3,28 +3,27 @@ import { FC } from 'react'
 import FilterSliderPaired from './FilterSliderPaired/FilterSliderPaired'
 import FilterSliderSingle from './FilterSliderSingle/FilterSliderSingle'
 
-const FilterSlider: FC<IFilterSliderProps> = ({
-  query,
-  title,
-  range,
-  maxValue = 100,
-}) => {
-  const currentRange = {
-    min: range ? range.min : 0,
-    max: range ? range.max : 0,
-  }
-
+const FilterSlider: FC<IFilterSliderProps> = ({ query, title, range }) => {
   return (
     <>
-      {range ? (
+      {'max' in range && typeof query === 'string' ? (
+        <FilterSliderSingle
+          query={query as string}
+          title={title}
+          max={range.max}
+          min={range.min}
+        />
+      ) : typeof query !== 'string' &&
+        'minQuery' in query &&
+        'maxQuery' in query ? (
         <FilterSliderPaired
-          min={currentRange.min}
-          max={currentRange.max}
+          min={range.min || 0}
+          max={range.max}
           query={query}
           title={title}
         />
       ) : (
-        <FilterSliderSingle query={query} title={title} maxValue={maxValue} />
+        <></>
       )}
     </>
   )
