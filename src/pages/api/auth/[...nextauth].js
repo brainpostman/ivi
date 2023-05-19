@@ -3,12 +3,7 @@ import NextAuth from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import GoogleProvider from 'next-auth/providers/google';
 import VkProvider from 'next-auth/providers/vk';
-import { genDBPasswordMock } from '../../../utils/auth.util';
 import jwtLib from 'jsonwebtoken';
-import { toast } from 'react-toastify';
-import { i18n } from 'next-i18next';
-
-i18n?.loadNamespaces(['auth_modal']);
 
 export const authOptions = {
     session: {
@@ -137,14 +132,10 @@ export const authOptions = {
                     token.expires_at = payload.exp;
                     token.accessToken = response.data.token;
                     token.refreshToken = response.data.refreshToken ?? token.refreshToken;
-                    console.log('refreshed token');
+                    console.log('refreshed token', new Date());
                     return token;
                 } catch (err) {
                     console.error(err.message);
-                    toast.error(
-                        i18n?.t('error-messages.refresh-token-error') ??
-                            'Произошла непредвиденная ошибка авторизации.\n Пожалуйста выйдите из своего аккаунта и повторите авторизацию'
-                    );
                 }
             }
             return token;
