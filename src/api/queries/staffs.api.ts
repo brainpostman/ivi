@@ -9,7 +9,7 @@ import { transformStaff } from '../transforms/staff.transform'
 import { customAxios } from './customAxios'
 import { ICRUDGenre } from '@/types/ICrudMovie'
 import { IFilmsGetRequest } from '@/types/films.api.interface'
-import formatStaffTypestoType from '@/formatters/staffTypestoType.format'
+import formatStaffTypestoType from '@/formatters/staffTypesToType.format'
 
 export const staffsAPI = {
   getGenres(locale: string, params?: IStaffGetRequest) {
