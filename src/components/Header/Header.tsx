@@ -42,8 +42,8 @@ const Header = () => {
     const genres = await staffsAPI.getGenres(locale ?? 'ru')
     const countries = await staffsAPI.getCountries()
 
-    setGenres(genres.slice(0, 11))
-    setCountries(countries.slice(0, 11))
+    setGenres(genres.slice(0, 22))
+    setCountries(countries.slice(0, 22))
   }
 
   useEffect(() => {
