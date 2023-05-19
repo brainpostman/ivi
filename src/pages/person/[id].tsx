@@ -39,7 +39,9 @@ export const getServerSideProps: GetServerSideProps = async ({
   let films: IMovie[] = []
   let currentTotalCount = 0
   const currentParams: IFilmsGetRequest = { take: 17 }
-  const formattedStaffType = formatStaffType(staff?.type)
+
+  const formattedStaffType = formatStaffType(staff.type)
+
   if (formattedStaffType) {
     currentParams[formattedStaffType] = [staff.name]
 
@@ -75,7 +77,7 @@ interface IProps {
   error?: string | string[]
 }
 
-const Actor: React.FC<IProps> = ({
+const StaffPage: React.FC<IProps> = ({
   staff,
   films: filmsIncoming,
   totalCount,
@@ -213,4 +215,4 @@ const Actor: React.FC<IProps> = ({
   )
 }
 
-export default Actor
+export default StaffPage
