@@ -29,7 +29,9 @@ export const getServerSideProps: GetServerSideProps = async ({
 
   const currentParams = { ...formatFilmsParams(query), ...defaultParams }
 
-  const { films, totalCount } = await filmsAPI.getFilms(currentParams)
+  const { films, totalCount, maxYear, minYear, maxCountScore, minCountScore } =
+    await filmsAPI.getFilms(currentParams)
+
   const genres = await staffsAPI.getGenres(locale ?? 'ru')
   const countries = await staffsAPI.getCountries()
 
@@ -52,6 +54,10 @@ export const getServerSideProps: GetServerSideProps = async ({
       totalCount,
       genres,
       countries,
+      minYear,
+      maxYear,
+      minCountScore,
+      maxCountScore,
     },
   }
 }
@@ -61,6 +67,10 @@ interface IProps {
   directors: IStaffGetResponse[]
   actors: IStaffGetResponse[]
   totalCount: number
+  maxYear: number
+  minYear: number
+  minCountScore: number
+  maxCountScore: number
   genres: IFilterGetResponse[]
   countries: IFilterGetResponse[]
 }
@@ -70,8 +80,12 @@ const MoviesPage: NextPage<IProps> = ({
   directors,
   actors,
   totalCount,
+  maxYear,
+  minYear,
   genres,
   countries,
+  minCountScore,
+  maxCountScore,
 }) => {
   const router = useRouter()
   const { t } = useTranslation('movies')
@@ -100,6 +114,7 @@ const MoviesPage: NextPage<IProps> = ({
     filmsAPI
       .getFilms(currentParams)
       .then(({ films, totalCount }) => {
+        console.log(films)
         setFilms(prev => [...prev, ...films])
       })
       .finally(() => {
@@ -142,13 +157,9 @@ const MoviesPage: NextPage<IProps> = ({
     const orderBy = queries.orderBy
     const order = queries.order
 
-    const isEmptyQueries = Object.keys(queries).length
+    const queriesLength = Object.keys(queries).length
 
-    console.log(!orderBy)
-    console.log(!order)
-    console.log(!isEmptyQueries)
-
-    if ((!orderBy || !order) && isEmptyQueries) {
+    if ((!orderBy || !order) && queriesLength) {
       router.push(
         {
           query: { ...router.query, orderBy: defaultSort, order: 'ASC' },
@@ -156,9 +167,9 @@ const MoviesPage: NextPage<IProps> = ({
         undefined,
         { shallow: true }
       )
-    }
 
-    if ((orderBy || order) && isEmptyQueries) return
+      return
+    }
 
     if (!isLoadedFirstFilms || isLoading) return
 
@@ -215,6 +226,10 @@ const MoviesPage: NextPage<IProps> = ({
           genres={genres}
           directors={directors}
           actors={actors}
+          minYear={minYear}
+          maxYear={maxYear}
+          minCountScore={minCountScore}
+          maxCountScore={maxCountScore}
         />
         <div className={style.moviegrid_wrapper}>
           <MovieCardGrid
