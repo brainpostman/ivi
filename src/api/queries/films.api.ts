@@ -8,6 +8,20 @@ import {
 import { transformFilms } from '../transforms/films.transform'
 import { customAxios } from './customAxios'
 import { ICRUDMovie } from '@/types/ICrudMovie'
+import formatStrToNum from '@/formatters/strToNum.format'
+
+interface IGetFilms {
+  films: IMovie[]
+  totalCount: number
+  minYear: number
+  maxYear: number
+  minCountScore: number
+  maxCountScore: number
+}
+
+interface IGetCrudFilms extends Omit<IGetFilms, 'films'> {
+  films: ICRUDMovie[]
+}
 
 export const filmsAPI = {
   getFilms(params?: IFilmsGetRequest) {
@@ -24,9 +38,7 @@ export const filmsAPI = {
   },
 }
 
-const getFilms = async (
-  params?: IFilmsGetRequest
-): Promise<{ films: IMovie[]; totalCount: number }> => {
+const getFilms = async (params?: IFilmsGetRequest): Promise<IGetFilms> => {
   try {
     const filmsData = await customAxios.get<IFilmsgGetResponse[]>('/films', {
       params,
@@ -34,24 +46,67 @@ const getFilms = async (
 
     const films = filmsData.data.map(film => transformFilms(film))
 
-    const totalCount = filmsData.headers['x-total-count']
-    return { films, totalCount: totalCount || 0 }
+    const totalCount = formatStrToNum(filmsData.headers['x-total-count'])
+
+    const minYear = formatStrToNum(filmsData.headers['x-min-year'])
+    const maxYear = formatStrToNum(filmsData.headers['x-max-year'])
+
+    const minCountScore = formatStrToNum(filmsData.headers['x-min-count-score'])
+    const maxCountScore = formatStrToNum(filmsData.headers['x-max-count-score'])
+
+    return {
+      films,
+      totalCount: totalCount,
+      minYear,
+      maxYear,
+      minCountScore,
+      maxCountScore,
+    }
   } catch (_) {
-    return { films: [], totalCount: 0 }
+    return {
+      films: [],
+      totalCount: 0,
+      minYear: 0,
+      maxYear: 0,
+      minCountScore: 0,
+      maxCountScore: 0,
+    }
   }
 }
 
 const getCrudFilms = async (
   params?: IFilmsGetRequest
-): Promise<{ films: ICRUDMovie[]; totalCount: number }> => {
+): Promise<IGetCrudFilms> => {
   try {
     const response = await customAxios.get<ICRUDMovie[]>('/films', {
       params,
     })
-    const totalCount = response.headers['x-total-count']
-    return { films: response.data, totalCount: totalCount || 0 }
+
+    const totalCount = formatStrToNum(response.headers['x-total-count'])
+
+    const minYear = formatStrToNum(response.headers['x-min-year'])
+    const maxYear = formatStrToNum(response.headers['x-max-year'])
+
+    const minCountScore = formatStrToNum(response.headers['x-min-count-score'])
+    const maxCountScore = formatStrToNum(response.headers['x-max-count-score'])
+
+    return {
+      films: response.data,
+      totalCount,
+      maxCountScore,
+      maxYear,
+      minCountScore,
+      minYear,
+    }
   } catch (_) {
-    return { films: [], totalCount: 0 }
+    return {
+      films: [],
+      totalCount: 0,
+      maxCountScore: 0,
+      maxYear: 0,
+      minCountScore: 0,
+      minYear: 0,
+    }
   }
 }
 

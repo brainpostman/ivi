@@ -1,13 +1,26 @@
+import formatFilterToNames from '@/formatters/filterToNames.format'
 import { formatImgUrl } from '@/formatters/imgUrl.format'
-import { IFilmsgGetResponse } from '@/types/films.api.interface'
+import formatScoreAVG from '@/formatters/scoreAVG.format'
+import { IFilmsgGetResponse, IMovie } from '@/types/films.api.interface'
 
-export const transformFilms = <T extends IFilmsgGetResponse>(filmsData: T) => {
+/*
+  * Преобразует данные о фильме
+  * @param {extends IFilmsgGetResponse} filmsData - данные о фильме
+  * @returns ITransformFilms - преобразованные данные о фильме
+
+*/
+
+type ITransformFilms<T> = T & IMovie
+
+export const transformFilms = <T extends IFilmsgGetResponse>(
+  filmsData: T
+): ITransformFilms<T> => {
   const result = {
     ...filmsData,
     mainImg: formatImgUrl(filmsData.mainImg),
-    countries:
-      filmsData.countries?.map(country => country.name).join(',') || '',
-    genres: filmsData.genres?.map(genre => genre.name).join(',') || '',
+    countries: formatFilterToNames(filmsData.countries),
+    genres: formatFilterToNames(filmsData.genres),
+    scoreAVG: formatScoreAVG(filmsData.scoreAVG),
   }
 
   return result
