@@ -56,7 +56,7 @@ interface IProps {
   films: IMovie[]
 }
 
-const Film: FC<IProps> = ({ film, films }) => {
+const FilmPage: FC<IProps> = ({ film, films }) => {
   return (
     <PageLayout title={film.name}>
       <section className={style.wrapper}>
@@ -119,4 +119,4 @@ const Film: FC<IProps> = ({ film, films }) => {
   )
 }
 
-export default Film
+export default FilmPage
