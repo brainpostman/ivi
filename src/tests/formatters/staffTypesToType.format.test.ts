@@ -1,6 +1,6 @@
 import { staffData } from '@/data/staff.data'
 import { staffDataResponse } from '@/data/staff.data'
-import formatStaffTypestoType from '@/formatters/staffTypestoType.format'
+import formatStaffTypestoType from '@/formatters/staffTypesToType.format'
 
 const testValidValue = staffDataResponse
 const expectedValidValue = staffData
