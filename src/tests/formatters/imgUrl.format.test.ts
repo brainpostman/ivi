@@ -3,7 +3,7 @@ import { formatImgUrl } from '@/formatters/imgUrl.format'
 const dataWithHttp = 'http://example.com'
 const dataWithoutHttp = '//exameple.com'
 
-describe('FORMAT imgUrl', () => {
+describe('FORMAT formatImgUrl', () => {
   it('Url with http', () => {
     const resultUrl = formatImgUrl(dataWithHttp)
 

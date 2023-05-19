@@ -10,7 +10,7 @@ const testNumber = 100
 
 const testError = 'some string'
 
-describe('FORMAT cssLength', () => {
+describe('FORMAT formatCssLength', () => {
   // Проверяем строку с пикселями
   it('String with px', () => {
     const formtattedValue = formatCssLength(testStringPx)
@@ -37,7 +37,7 @@ describe('FORMAT cssLength', () => {
 })
 
 // Проверяем ошибки
-describe('FORMAT ERROR cssLength', () => {
+describe('FORMAT ERROR formatCssLength', () => {
   // Проверяем некорректную строку
   it('Wrong value', () => {
     const formtattedValue = formatCssLength(testError)

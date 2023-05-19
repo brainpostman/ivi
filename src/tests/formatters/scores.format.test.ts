@@ -3,7 +3,7 @@ import { formatScores } from '@/formatters/scores.format'
 const testInteger = 5
 const testFloatNumber = 4.3
 
-describe('FORMAT scores', () => {
+describe('FORMAT formatScores', () => {
   // Проверяем целое число
   it('Integer', () => {
     const formattedValue = formatScores(testInteger)

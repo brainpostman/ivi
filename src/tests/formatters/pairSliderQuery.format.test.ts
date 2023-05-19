@@ -4,7 +4,7 @@ import { formatMinMaxQuery } from '@/formatters/minMaxQuery.format'
 const testQueryParam = 'rating'
 const errorTestQueryParam = ''
 
-describe('FORMAT pair slider query', () => {
+describe('FORMAT formatMinMaxQuery', () => {
   it('Query param', () => {
     const { maxValueStr, minValueStr } = formatMinMaxQuery(testQueryParam)
     const formattedQueryParam = formatCapitalize(testQueryParam)
@@ -14,7 +14,7 @@ describe('FORMAT pair slider query', () => {
   })
 })
 
-describe('FORMAT ERROR pair slider query', () => {
+describe('FORMAT ERROR formatMinMaxQuery', () => {
   it('ERROR query param', () => {
     const { maxValueStr, minValueStr } = formatMinMaxQuery(errorTestQueryParam)
 

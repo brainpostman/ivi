@@ -2,7 +2,7 @@ import { formatCarouselWidth } from '@/formatters/carouselWidth.format'
 
 const elementLens = [300, 300, 300, 300, 300, 300]
 
-describe('FORMAT carouselWidth', () => {
+describe('FORMAT formatCarouselWidth', () => {
   // with = full
   it('Width full', () => {
     const carouselWidth = formatCarouselWidth('full', 12)
@@ -32,7 +32,7 @@ describe('FORMAT carouselWidth', () => {
   })
 })
 
-describe('FORMAT ERROR carouselWidth', () => {
+describe('FORMAT ERROR formatCarouselWidth', () => {
   it('Wrong props', () => {
     const carouselWidth = formatCarouselWidth('fit', 12)
 
