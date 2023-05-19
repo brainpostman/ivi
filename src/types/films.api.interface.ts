@@ -31,7 +31,7 @@ export interface IFilmsgGetResponse {
   countries: IFilterGetResponse[]
   genres: { id: number; name: string; name_en: string | null }[]
   tagline: string
-  scoreAVG: number | null
+  scoreAVG: number
   age: string
   description: string
   mainImg: string
