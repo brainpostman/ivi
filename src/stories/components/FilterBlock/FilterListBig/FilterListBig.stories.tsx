@@ -7,7 +7,6 @@ import {
 } from '@/types/filterBlock.interface'
 import { Meta } from '@storybook/react'
 import FilterListBigWrapper from './FilterListBigWrapper'
-import { useTranslation } from 'react-i18next'
 import { filterGenreListData } from '@/data/filterGenre.data'
 import { filterCountryListData } from '@/data/filterCountry.data'
 
@@ -90,7 +89,6 @@ export const Country = ({
   title: IFilterTitle
   unformattedStringedList: string
 }) => {
-  const { t } = useTranslation('movies')
   const list = unformattedStringedList?.split(',').map((el, index) => ({
     id: index,
     name: el,
