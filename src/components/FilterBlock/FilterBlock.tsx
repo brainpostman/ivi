@@ -29,6 +29,10 @@ interface IProps {
   actors: IStaffGetResponse[]
   className?: string
   clearSort?: boolean
+  minYear: number
+  maxYear: number
+  minCountScore: number
+  maxCountScore: number
 }
 
 const FilterBlock: FC<IProps> = ({
@@ -38,6 +42,10 @@ const FilterBlock: FC<IProps> = ({
   actors,
   className: propsClassName,
   clearSort = true,
+  minYear,
+  maxYear,
+  minCountScore,
+  maxCountScore,
 }) => {
   const router = useRouter()
   const { t } = useTranslation('movies')
@@ -133,8 +141,21 @@ const FilterBlock: FC<IProps> = ({
         query='actor'
       />
 
-      <FilterSlider query='minCountScore' title={t('sliders.scores')} />
-      <FilterSlider query='rating' title={t('sliders.rating')} />
+      <FilterSlider
+        query={{ min: 'yearStart', max: 'yearEnd' }}
+        range={{ min: minYear, max: maxYear }}
+        title='Годы'
+      />
+      <FilterSlider
+        query='minCountScore'
+        title={t('sliders.scores')}
+        range={{ min: minCountScore, max: maxCountScore }}
+      />
+      <FilterSlider
+        query='scoreAVG'
+        range={{ max: 10 }}
+        title={t('sliders.rating')}
+      />
 
       <div
         className={`${
