@@ -11,7 +11,7 @@ const MovieCardInfo: FC<IProps> = ({ movie }) => {
   return (
     <div className={style.wrapper}>
       <p className={style.scores}>
-        {formatScores(movie.countScore).map(el => (
+        {formatScores(movie.scoreAVG).map(el => (
           <span key={el}>{el}</span>
         ))}
       </p>
