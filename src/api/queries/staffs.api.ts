@@ -9,6 +9,7 @@ import { transformStaff } from '../transforms/staff.transform'
 import { customAxios } from './customAxios'
 import { ICRUDGenre } from '@/types/ICrudMovie'
 import { IFilmsGetRequest } from '@/types/films.api.interface'
+import formatStaffTypestoType from '@/formatters/staffTypestoType.format'
 
 export const staffsAPI = {
   getGenres(locale: string, params?: IStaffGetRequest) {
@@ -92,19 +93,16 @@ const getCountries = async (): Promise<IFilterGetResponse[]> => {
 
 const getDirectors = async (params?: IStaffGetRequest): Promise<IStaff[]> => {
   try {
-    const directorsData = await customAxios.get<IStaffGetResponse[]>(
-      '/staffs',
-      {
+    const directorsData = (
+      await customAxios.get<IStaffGetResponse[]>('/staffs', {
         params: {
           type: 'director',
           ...params,
         },
-      }
-    )
+      })
+    ).data
 
-    const directors = directorsData.data.map(director =>
-      transformStaff(director)
-    )
+    const directors = transformStaff(directorsData)
     return directors
   } catch (_) {
     return []
@@ -113,14 +111,16 @@ const getDirectors = async (params?: IStaffGetRequest): Promise<IStaff[]> => {
 
 const getActors = async (params?: IStaffGetRequest): Promise<IStaff[]> => {
   try {
-    const actorsData = await customAxios.get<IStaffGetResponse[]>('/staffs', {
-      params: {
-        type: 'actor',
-        ...params,
-      },
-    })
+    const actorsData = (
+      await customAxios.get<IStaffGetResponse[]>('/staffs', {
+        params: {
+          type: 'actor',
+          ...params,
+        },
+      })
+    ).data
 
-    const actors = actorsData.data.map(actor => transformStaff(actor))
+    const actors = transformStaff(actorsData)
 
     return actors
   } catch (_) {
@@ -132,7 +132,7 @@ const getStaffById = async (id: number): Promise<IStaff | undefined> => {
   try {
     const staff = (await customAxios.get<IStaffGetResponse>(`/staffs/${id}`))
       .data
-    const formattedStaff = transformStaff(staff)
+    const formattedStaff = formatStaffTypestoType(staff)
 
     return formattedStaff
   } catch (_) {
@@ -148,7 +148,7 @@ const getStaffByParams = async (
       await customAxios.get<IStaffGetResponse[]>('/staffs', { params })
     ).data
 
-    const formattedStaffs = staffs.map(staff => transformStaff(staff))
+    const formattedStaffs = transformStaff(staffs)
 
     return formattedStaffs
   } catch (_) {
