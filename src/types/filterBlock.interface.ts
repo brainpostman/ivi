@@ -1,3 +1,5 @@
+import { IQueryMinMax } from './staffs.interface'
+
 export type IFilterTitle =
   | 'genres'
   | 'country'
@@ -47,9 +49,9 @@ export interface IFilterSuggestProps {
 
 export interface IFilterSliderProps {
   title: string
-  query: string
-  range?: {
-    min: number
+  query: string | IQueryMinMax
+  range: {
+    min?: number
     max: number
   }
   maxValue?: number
