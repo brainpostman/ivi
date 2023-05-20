@@ -8,9 +8,9 @@ import style from './Header.module.scss'
 import HeaderHoverBlock from './HeaderHoverBlock/HeaderHoverBlock'
 import HeaderLeftSide from './HeaderLeftSide/HeaderLeftSide'
 import HeaderRightSide from './HeaderRightSide/HeaderRightSide'
-import { staffsAPI } from '@/api/queries/staffs.api'
 import { IFilterGetResponse } from '@/types/filters.interface'
 import { FiltersContext } from '@/contexts/filters.context'
+import { filtersAPI } from '@/api/queries/filters.api'
 
 const Header = () => {
   const { pathname, locale } = useRouter()
@@ -39,8 +39,8 @@ const Header = () => {
   }
 
   const getAndSetFilters = async () => {
-    const genres = await staffsAPI.getGenres(locale ?? 'ru')
-    const countries = await staffsAPI.getCountries()
+    const genres = await filtersAPI.getGenres(locale ?? 'ru')
+    const countries = await filtersAPI.getCountries()
 
     setGenres(genres.slice(0, 22))
     setCountries(countries.slice(0, 22))
