@@ -7,7 +7,7 @@
 
 */
 
-const multiple = 100
+const multiple = 10
 const digitsAfterComma = 1
 
 const formatScoreAVG = (scoreAVG: number | undefined): number => {
