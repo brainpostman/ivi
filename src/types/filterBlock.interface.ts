@@ -1,4 +1,4 @@
-import { IQueryMinMax } from './staffs.interface'
+import { IQueryRange, IRange, IRangeWithPartial } from './utils.interface'
 
 export type IFilterTitle =
   | 'genres'
@@ -49,11 +49,8 @@ export interface IFilterSuggestProps {
 
 export interface IFilterSliderProps {
   title: string
-  query: string | IQueryMinMax
-  range: {
-    min?: number
-    max: number
-  }
+  query: string | IQueryRange
+  range: IRangeWithPartial
   maxValue?: number
 }
 

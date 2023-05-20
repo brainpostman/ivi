@@ -7,10 +7,6 @@ export interface IStaffGetResponse {
 }
 
 export type IQuerySuggest = 'director' | 'actor'
-export interface IQueryMinMax {
-  min: string
-  max: string
-}
 
 export interface IStaff extends Omit<IStaffGetResponse, 'types'> {
   type: IStaffType
