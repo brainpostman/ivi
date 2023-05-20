@@ -3,12 +3,12 @@ import { useSetStringParam } from '@/hooks/useSetStringParam'
 import { ChangeEvent, FC, useState } from 'react'
 import ReactSlider from 'react-slider'
 import styleParent from '../FilterSlider.module.scss'
-import { IQueryMinMax } from '@/types/staffs.interface'
+import { IQueryRange, IRange } from '@/types/utils.interface'
 
 interface IProps {
   min: number
   max: number
-  query: IQueryMinMax
+  query: IQueryRange
   title: string
 }
 
