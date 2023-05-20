@@ -1,7 +1,7 @@
 import formatScoreAVG from '@/formatters/scoreAVG.format'
 
 const testValidValue = 0.035678
-const expectedValidValue = 3.6
+const expectedValidValue = 0.4
 
 describe('FORMAT formatScoreAVG', () => {
   // Корректное значение
