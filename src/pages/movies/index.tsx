@@ -20,6 +20,7 @@ import { formatFilmsParams } from '@/formatters/filmsParams.format'
 import { staffsAPI } from '@/api/queries/staffs.api'
 import BreadCrumbsFilms from '@/components/BreadCrumbs/BreadCrumbsFilms/BreadCrumbsFilms'
 import { IFilterGetResponse } from '@/types/filters.interface'
+import { filtersAPI } from '@/api/queries/filters.api'
 
 export const getServerSideProps: GetServerSideProps = async ({
   locale,
@@ -32,8 +33,8 @@ export const getServerSideProps: GetServerSideProps = async ({
   const { films, totalCount, maxYear, minYear, maxCountScore, minCountScore } =
     await filmsAPI.getFilms(currentParams)
 
-  const genres = await staffsAPI.getGenres(locale ?? 'ru')
-  const countries = await staffsAPI.getCountries()
+  const genres = await filtersAPI.getGenres(locale ?? 'ru')
+  const countries = await filtersAPI.getCountries()
 
   const directors = await staffsAPI.getDirectors()
   const actors = await staffsAPI.getActors()
