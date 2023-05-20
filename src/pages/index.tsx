@@ -20,10 +20,10 @@ const imgLongButton_2 =
   'https://solea-parent.dfs.ivi.ru/picture/ffffff,ffffff/gift.svg'
 
 export const getStaticProps: GetStaticProps = async ({ locale }) => {
-  const { films: firstCarouselFilms } = await filmsAPI.getFilmsHomePage()
-  const { films: secondCarouselFilms } = await filmsAPI.getFilmsHomePage({
-    page: 2,
-  })
+  const { films } = await filmsAPI.getFilms({ take: 20 })
+
+  const firstCarouselFilms = films.slice(0, 11)
+  const secondCarouselFilms = films.slice(10, 21)
 
   return {
     props: {
