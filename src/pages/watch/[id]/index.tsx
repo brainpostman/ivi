@@ -30,7 +30,8 @@ export const getServerSideProps: GetServerSideProps = async ({ locale, params })
             },
         };
     }
-
+    const reviewCount = await filmsAPI.getFilmReviewCount(Number(params.id));
+    const reviews = await filmsAPI.getFilmReviews(Number(params.id));
     const film = await filmsAPI.getFilmsById(Number(params.id));
     const { films } = await filmsAPI.getFilmsHomePage();
 
@@ -105,7 +106,7 @@ const Film: FC<IProps> = ({ film, films }) => {
                     <WatchActors film={film} />
                 </div>
 
-                <WatchReviews filmName={film.name} />
+                <WatchReviews reviewData={{}} filmName={film.name} />
                 <WatchFooter filmName={film.name} mainImg={film.mainImg} />
             </section>
         </PageLayout>
