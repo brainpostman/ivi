@@ -1,5 +1,5 @@
 import { filmsAPI } from '@/api/queries/films.api'
-import { ICRUDMovie } from '@/types/ICrudMovie'
+import { ICRUDFilm } from '@/types/ICrudMovie'
 import { IMovieById } from '@/types/films.api.interface'
 import { IMovie } from '@/types/films.api.interface'
 import { checkObjHaveProperties } from '@/utils/checkObjHaveProperties.utils'
@@ -66,7 +66,7 @@ describe('API-FILMS', () => {
   let filmById: IMovieById | undefined
   let homePageFilms: IMovie[]
 
-  let crudFilms: ICRUDMovie[]
+  let crudFilms: ICRUDFilm[]
 
   beforeAll(async () => {
     const filmsData = await filmsAPI.getFilms()
