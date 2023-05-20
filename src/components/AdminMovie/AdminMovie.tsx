@@ -2,8 +2,8 @@ import {
     CrudDetailedFilm,
     ICrudDetailedFilm,
     ICrudFilm,
-    ICRUDDetailedMovie,
-    ICRUDMovie,
+    ICRUDDetailedFilm,
+    ICRUDFilm,
 } from '@/types/ICrudMovie';
 import ExpandBlock from '../ExpandBlock/ExpandBlock';
 import Image from 'next/image';
@@ -19,7 +19,7 @@ import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
 
 interface IAdminMovieProps {
-    movie: ICRUDMovie;
+    movie: ICRUDFilm;
     className?: string;
 }
 
@@ -30,12 +30,12 @@ const AdminMovie = ({ movie, className: propsClassName }: IAdminMovieProps) => {
     const { locale } = useRouter();
     const [showModal, setShowModal] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
-    const [detailedMovie, setDetailedMovie] = useState<ICRUDDetailedMovie | null>(null);
+    const [detailedMovie, setDetailedMovie] = useState<ICRUDDetailedFilm | null>(null);
 
     const handleShowDetails = async () => {
         setIsLoading(true);
         try {
-            const response = await customAxios.get<ICRUDDetailedMovie>(`/films/${movie.id}`);
+            const response = await customAxios.get<ICRUDDetailedFilm>(`/films/${movie.id}`);
             const film = response.data;
             setIsLoading(false);
             setDetailedMovie(film);

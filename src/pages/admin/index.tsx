@@ -10,7 +10,7 @@ import { checkAdminRole, getSerializableSession } from '@/utils/auth.util';
 import { Session } from 'next-auth';
 import { useRouter } from 'next/router';
 import AdminMovie from '@/components/AdminMovie/AdminMovie';
-import { ICRUDMovie, ICRUDGenre } from '@/types/ICrudMovie';
+import { ICRUDFilm, ICRUDGenre } from '@/types/ICrudMovie';
 import Link from 'next/link';
 import AdminGenres from '@/components/AdminGenres/AdminGenres';
 import { IFilmsGetRequest } from '@/types/films.api.interface';
@@ -96,7 +96,7 @@ export default function Admin({
     const [isLoading, setIsLoading] = useState(true);
     const [totalItems, setTotalItems] = useState(totalCount);
     const [page, setPage] = useState(2);
-    const [films, setFilms] = useState<ICRUDMovie[]>(JSON.parse(defaultFilms) || []);
+    const [films, setFilms] = useState<ICRUDFilm[]>(JSON.parse(defaultFilms) || []);
     const [crudGenres, setCrudGenres] = useState<ICRUDGenre[]>(JSON.parse(genres) || []);
     const scrollFetchTrigger = useRef<HTMLDivElement>(null);
     const observer = useRef<IntersectionObserver>();
@@ -233,11 +233,10 @@ export default function Admin({
                                         return (
                                             <h2
                                                 key={str}
-                                                className={`${styles.heading__page} ${
-                                                    chosenTab === str
+                                                className={`${styles.heading__page} ${chosenTab === str
                                                         ? styles.heading__page_active
                                                         : ''
-                                                }`}
+                                                    }`}
                                                 onClick={() => changeTab(str)}>
                                                 {t(normalizeKey(`admin:${str}`))}
                                             </h2>
