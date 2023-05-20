@@ -19,10 +19,10 @@ const formatStrToNum = (value: string | number | undefined): number => {
   const formattedValue = Number(value)
 
   if (Number.isNaN(formattedValue)) {
-    console.error('Wrong formattedValue in formatStrToNum')
+    console.error('Wrong formattedValue {Nan} in formatStrToNum')
     return 0
   }
-  console.log(formattedValue)
+
   return formattedValue
 }
 
