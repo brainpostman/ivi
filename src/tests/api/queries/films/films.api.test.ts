@@ -14,7 +14,6 @@ describe('API-FILMS', () => {
   let films: IMovie[]
   let totalCount: number
   let filmById: IMovieById | undefined
-  let homePageFilms: IMovie[]
 
   let crudFilms: ICRUDMovie[]
 
@@ -24,7 +23,6 @@ describe('API-FILMS', () => {
     totalCount = filmsData.totalCount
     filmById = await filmsAPI.getFilmsById(1)
 
-    homePageFilms = (await filmsAPI.getFilmsHomePage()).films
     crudFilms = (await filmsAPI.getCrudFilms()).films
   })
 
@@ -48,13 +46,6 @@ describe('API-FILMS', () => {
     if (filmById) {
       checkObjHaveProperties(filmById, specificFilmRequiredProperites)
     }
-  })
-
-  // Проверяем фильмы на главной странице
-  it('Films on home page', () => {
-    expect(homePageFilms).toBeTruthy()
-
-    expect(homePageFilms.length === 19).toBeTruthy()
   })
 
   // Проверяем круд фильмов

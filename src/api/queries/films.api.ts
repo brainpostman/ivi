@@ -27,9 +27,6 @@ export const filmsAPI = {
   getFilms(params?: IFilmsGetRequest) {
     return getFilms(params)
   },
-  getFilmsHomePage(params?: { page?: number }) {
-    return getFilms({ take: 19, page: params?.page || 1 })
-  },
   getCrudFilms(params?: IFilmsGetRequest) {
     return getCrudFilms(params)
   },
