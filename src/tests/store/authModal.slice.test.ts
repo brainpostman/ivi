@@ -19,13 +19,13 @@ const getAction = (payload: boolean = false) => ({
 
 describe('STORE AUTH MODAL', () => {
   // Проверяем состояние слайса по умолчанию
-  it("Check default slice's state", () => {
+  it("Default slice's state", () => {
     const slice = authModalSlice.reducer(state, getAction())
     expect(slice.showAuthModal).toBe(false)
   })
 
   // Показываем модалку
-  it('Check show showAuthModal', () => {
+  it('Show showAuthModal', () => {
     const slice = authModalSlice.reducer(state, getAction(true))
     expect(slice.showAuthModal).toBe(true)
   })
