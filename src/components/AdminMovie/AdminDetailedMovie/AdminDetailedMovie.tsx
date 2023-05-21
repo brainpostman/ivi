@@ -1,4 +1,8 @@
-import { CRUDDetailedFilmRequest, ICRUDDetailedFilm, ICRUDDetailedFilmRequest } from '@/types/ICrudMovie';
+import {
+    CRUDDetailedFilmRequest,
+    ICRUDDetailedFilm,
+    ICRUDDetailedFilmRequest,
+} from '@/types/ICrudMovie';
 import Image from 'next/image';
 import { escapeHtmlNbsp } from '@/utils/escapeHtml';
 import parentStyles from '../AdminMovie.module.scss';

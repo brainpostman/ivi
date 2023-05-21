@@ -1,11 +1,4 @@
-import {
-    CrudDetailedFilm,
-    ICrudDetailedFilm,
-    ICrudFilm,
-    ICRUDDetailedFilm,
-    ICRUDFilm,
-} from '@/types/ICrudMovie';
-import ExpandBlock from '../ExpandBlock/ExpandBlock';
+import { ICRUDDetailedFilm, ICRUDFilm } from '@/types/ICrudMovie';
 import Image from 'next/image';
 import { escapeHtmlNbsp } from '@/utils/escapeHtml';
 import styles from './AdminMovie.module.scss';
@@ -97,8 +90,6 @@ const AdminMovie = ({ movie, className: propsClassName }: IAdminMovieProps) => {
                         {t('title-eng')}:{' '}
                         <span className={styles.info__item__value}> {movie.name_en || '-'}</span>
                     </p>
-                </div>
-                <div className={`${styles.info__row} ${styles.info__row_2}`}>
                     <p className={styles.info__item}>
                         {t('year')}:{' '}
                         <span className={styles.info__item__value}>{movie.year || '-'}</span>
@@ -107,6 +98,8 @@ const AdminMovie = ({ movie, className: propsClassName }: IAdminMovieProps) => {
                         {t('type')}:{' '}
                         <span className={styles.info__item__value}>{movie.type || '-'}</span>
                     </p>
+                </div>
+                <div className={`${styles.info__row} ${styles.info__row_2}`}>
                     <p className={styles.info__item}>
                         {t('countries')}:{' '}
                         <span className={styles.info__item__value}>
