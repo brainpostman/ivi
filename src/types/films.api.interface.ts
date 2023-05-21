@@ -56,6 +56,7 @@ export interface IReview {
     user_id: number;
     film_id: number;
     parent: number | null;
+    name: string;
     user_email: string;
     createdAt: string;
 }
