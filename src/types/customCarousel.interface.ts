@@ -34,6 +34,8 @@ export type ICustomCarouselWidth = 'full' | 'fit' | 'fit-shadow'
   * @param {IBreakPoint[]} breakpoints - брейкпоинты
   *  при достижении брейкпоинта @param elementsView уменьшается на 1
   * @param {number} padding - допольнительный отступ
+  * @param {boolean} autoplay - автовоспроизведение анимации
+   
 */
 
 export interface ICustomCarouselProps {
@@ -51,4 +53,5 @@ export interface ICustomCarouselProps {
   width?: ICustomCarouselWidth
   breakpoints?: IBreakPoint[]
   padding?: number
+  autoplay?: boolean
 }
