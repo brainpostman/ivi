@@ -35,7 +35,7 @@ export const getServerSideProps: GetServerSideProps = async ({
   }
 
   const film = await filmsAPI.getFilmsById(Number(params.id))
-  const { films } = await filmsAPI.getFilmsHomePage()
+  const { films } = await filmsAPI.getFilms({ take: 19 })
 
   return {
     props: {
