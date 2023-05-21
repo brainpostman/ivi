@@ -115,7 +115,6 @@ const MoviesPage: NextPage<IProps> = ({
     filmsAPI
       .getFilms(currentParams)
       .then(({ films, totalCount }) => {
-        console.log(films)
         setFilms(prev => [...prev, ...films])
       })
       .finally(() => {

@@ -26,7 +26,7 @@
 
   @include ui-margin(bottom, 8);
 
-  > li {
+  >li {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -43,11 +43,11 @@
     @include ui-padding(ver, 3);
     @include ui-padding(hor, 3);
 
-    > p {
+    >p {
       max-width: 150px;
     }
 
-    > svg {
+    >svg {
       width: 22px;
       height: 22px;
     }
@@ -55,18 +55,23 @@
     &:nth-child(1) {
       grid-area: a;
     }
+
     &:nth-child(2) {
       grid-area: b;
-      > p {
+
+      >p {
         max-width: 350px;
       }
     }
+
     &:nth-child(3) {
       grid-area: c;
     }
+
     &:nth-child(4) {
       grid-area: d;
     }
+
     &:nth-child(5) {
       grid-area: e;
     }
@@ -83,7 +88,7 @@
   }
 
   &__info {
-    color: #a5a1b2;
+    color: $gray-soft;
     max-width: 150px;
     @include font(1);
   }

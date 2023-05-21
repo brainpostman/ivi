@@ -33,16 +33,16 @@ const HoverFilterBlock: FC<IProps> = ({ currentBlock }) => {
 
   return (
     <ul className={style.filterList}>
-      {currentBlock?.columns.map(block => (
-        <li key={block.title} className={classNameCurrentBlock(block.title)}>
+      {currentBlock?.columns.map((block, index) => (
+        <li key={index} className={classNameCurrentBlock(block.title)}>
           {block.title && <p className={styleParent.title}>{block.title}</p>}
           <ul
             className={style.block_list}
             style={blockListStyles(block.rows.length)}
           >
-            {block.rows.map(el => (
+            {block.rows.map((el, index) => (
               <li
-                key={el.id}
+                key={index}
                 onMouseEnter={() => hoverNovetly(block.title, el.name)}
               >
                 <Link

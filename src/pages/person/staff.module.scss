@@ -28,11 +28,11 @@
 
   @include ui-margin(bottom, 2);
 
-  &:hover > svg {
+  &:hover>svg {
     transform: scale(1.1);
   }
 
-  > svg {
+  >svg {
     width: 18px;
     height: 18px;
 
@@ -71,7 +71,7 @@
   }
 
   &__subtitle {
-    color: #a5a1b2;
+    color: $gray-soft;
     font-size: 15px;
     font-weight: 400;
 
@@ -87,7 +87,7 @@
   font-size: 18px;
   font-weight: 400;
 
-  > p {
+  >p {
     color: #ffffffe0;
     cursor: pointer;
 
@@ -96,7 +96,7 @@
     }
   }
 
-  > p:last-child::before {
+  >p:last-child::before {
     content: '•';
     @include ui-margin(right, 3);
   }
@@ -152,7 +152,7 @@
   flex-direction: column;
   gap: 8px;
 
-  > li > a {
+  >li>a {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -199,7 +199,7 @@
   }
 
   h3 {
-    color: #a5a1b2;
+    color: $gray-soft;
     font-weight: 400;
     font-size: 15px;
 
