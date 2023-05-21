@@ -11,6 +11,9 @@ import HeaderRightSide from './HeaderRightSide/HeaderRightSide'
 import { IFilterGetResponse } from '@/types/filters.interface'
 import { FiltersContext } from '@/contexts/filters.context'
 import { filtersAPI } from '@/api/queries/filters.api'
+import { filmsAPI } from '@/api/queries/films.api'
+import { IMovie } from '@/types/films.api.interface'
+import { FilmsContext } from '@/contexts/films.context'
 
 const Header = () => {
   const { pathname, locale } = useRouter()
@@ -19,6 +22,8 @@ const Header = () => {
 
   const [genres, setGenres] = useState<IFilterGetResponse[]>([])
   const [countries, setCountries] = useState<IFilterGetResponse[]>([])
+
+  const [miniCarouselFilms, setMiniCarouselFilms] = useState<IMovie[]>([])
 
   const [hoverTabs, setHoverTabs] = useState<IHeaderBlock>({
     isShow: false,
@@ -39,15 +44,21 @@ const Header = () => {
   }
 
   const getAndSetFilters = async () => {
-    const genres = await filtersAPI.getGenres(locale ?? 'ru')
-    const countries = await filtersAPI.getCountries()
+    const countriesIncoming = await filtersAPI.getCountries()
+    const genresIncoming = await filtersAPI.getGenres(locale ?? 'ru')
 
-    setGenres(genres.slice(0, 22))
-    setCountries(countries.slice(0, 22))
+    setCountries(countriesIncoming.slice(0, 22))
+    setGenres(genresIncoming.slice(0, 22))
+  }
+
+  const getMiniCarouselFilms = async () => {
+    const { films } = await filmsAPI.getFilms({ take: 30 })
+    setMiniCarouselFilms(films)
   }
 
   useEffect(() => {
     getAndSetFilters()
+    getMiniCarouselFilms()
   }, [])
 
   useEffect(() => {
@@ -65,15 +76,18 @@ const Header = () => {
         <HeaderLeftSide showHoverBlock={showHoverBlock} />
         <HeaderRightSide showHoverBlock={showHoverBlock} />
         {hoverTabs.isShow && hoverTabs.tab && (
-          <HeaderHoverBlock
-            hideHoverBlock={hideHoverBlock}
-            tab={hoverTabs.tab}
-            genres={genres}
-            countries={countries}
-          />
+          <FilmsContext.Provider value={{ films: miniCarouselFilms }}>
+            <HeaderHoverBlock
+              hideHoverBlock={hideHoverBlock}
+              tab={hoverTabs.tab}
+              genres={genres}
+              countries={countries}
+            />
+          </FilmsContext.Provider>
         )}
       </section>
       {showAuthModal && <AuthWindow modalShown={showAuthModal} />}
+
       <FiltersContext.Provider value={{ genres, countries }}>
         <HeaderMobile />
       </FiltersContext.Provider>
