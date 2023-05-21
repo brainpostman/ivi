@@ -43,17 +43,25 @@ const getFilms = async (params?: IFilmsGetRequest): Promise<IGetFilms> => {
 
     const films = filmsData.data.map(film => transformFilms(film))
 
-    const totalCount = formatStrToNum(filmsData.headers['x-total-count'])
+    let totalCount = films.length
+    let minYear = 0
+    let maxYear = 0
+    let minCountScore = 0
+    let maxCountScore = 0
 
-    const minYear = formatStrToNum(filmsData.headers['x-min-year'])
-    const maxYear = formatStrToNum(filmsData.headers['x-max-year'])
+    if (typeof window === 'undefined') {
+      console.log('WORK!')
+      totalCount = formatStrToNum(filmsData.headers['x-total-count'])
+      minYear = formatStrToNum(filmsData.headers['x-min-year'])
+      maxYear = formatStrToNum(filmsData.headers['x-max-year'])
 
-    const minCountScore = formatStrToNum(filmsData.headers['x-min-count-score'])
-    const maxCountScore = formatStrToNum(filmsData.headers['x-max-count-score'])
+      minCountScore = formatStrToNum(filmsData.headers['x-min-count-score'])
+      maxCountScore = formatStrToNum(filmsData.headers['x-max-count-score'])
+    }
 
     return {
       films,
-      totalCount: totalCount,
+      totalCount,
       minYear,
       maxYear,
       minCountScore,
