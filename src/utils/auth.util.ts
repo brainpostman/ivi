@@ -8,7 +8,7 @@ type CheckEmailResponse = {
 
 i18n?.loadNamespaces(['auth_modal'])
 
-const domain = process.env.NEXT_PUBLIC_API_PATH
+const domain = process.env.NEXT_PUBLIC_SERVER_ADDRESS
 
 /*
     * @param {string} email - почта
