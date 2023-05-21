@@ -9,7 +9,7 @@ import { MdArrowBackIosNew } from 'react-icons/md';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { GetServerSideProps } from 'next';
 import { filmsAPI } from '@/api/queries/films.api';
-import { IMovie, IMovieById } from '@/types/films.api.interface';
+import { IMovie, IMovieById, IReview } from '@/types/films.api.interface';
 import TrailerBlock from '@/components/TrailerBlock/TrailerBlock';
 import FilmFields from '@/components/FilmFields/FilmFields';
 import FilmFeatures from '@/components/FilmFeatures/FilmFeatures';
@@ -45,6 +45,7 @@ export const getServerSideProps: GetServerSideProps = async ({ locale, params })
             ])),
             film,
             films,
+            reviewData: { reviewCount, reviews },
         },
     };
 };
@@ -52,9 +53,10 @@ export const getServerSideProps: GetServerSideProps = async ({ locale, params })
 interface IProps {
     film: IMovieById;
     films: IMovie[];
+    reviewData: { reviewCount: number; reviews: IReview[] };
 }
 
-const Film: FC<IProps> = ({ film, films }) => {
+const Film: FC<IProps> = ({ film, films, reviewData }) => {
     return (
         <PageLayout title={film.name}>
             <section className={style.wrapper}>
@@ -106,7 +108,7 @@ const Film: FC<IProps> = ({ film, films }) => {
                     <WatchActors film={film} />
                 </div>
 
-                <WatchReviews reviewData={{}} filmName={film.name} />
+                <WatchReviews reviewData={reviewData} filmName={film.name} />
                 <WatchFooter filmName={film.name} mainImg={film.mainImg} />
             </section>
         </PageLayout>
