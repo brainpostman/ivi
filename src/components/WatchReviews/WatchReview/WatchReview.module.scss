@@ -1,0 +1,63 @@
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border-radius: 8px;
+    background-color: $dark;
+    @include ui-padding(default, 5);
+    height: 162px;
+    transition: all 0.4s;
+    cursor: pointer;
+    &:hover {
+        transition: all 0.2s;
+        background-color: $violet;
+    }
+}
+
+.user {
+    @include ui-margin(bottom, 2);
+    @include font(1);
+    font-weight: 800;
+    color: $gray-soft;
+}
+
+.content {
+    @include font(2);
+    line-clamp: 3;
+    line-height: 1.47;
+    color: white;
+    overflow: hidden;
+    //почему это так???77
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+}
+
+.info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    @include ui-margin(top, 3);
+}
+
+.date {
+    @include font(1);
+    color: $gray-soft;
+    line-height: 1.2;
+}
+
+.likes {
+    display: flex;
+    align-items: center;
+    &__num {
+        color: $green;
+        @include font(2);
+        font-weight: 700;
+        @include ui-padding(hor, 4);
+    }
+    &__icon {
+        width: 16px;
+        height: 16px;
+        cursor: pointer;
+    }
+}

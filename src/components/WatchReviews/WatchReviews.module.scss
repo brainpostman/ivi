@@ -11,30 +11,33 @@
 }
 
 .title {
-  position: relative;
-  font-size: 24px;
-  line-height: 28px;
+  @include ui-font(6);
+  line-height: 1.17;
   font-weight: 700;
+  &__reviews {
+    position: relative;
+  }
+}
+
+.reviews {
+  display: flex;
+  gap: 24px;
+}
+
+.makeReview {
+  height: 32px;
 }
 
 .quantity {
   position: absolute;
-
-  top: 0;
-  right: -40px;
-
   width: 40px;
 
   color: #a5a1b2;
   @include font(1);
-  overflow: hidden;
-
-  @include ui-padding(left, 1);
+  @include ui-padding(left, 0.5);
 }
 
 .subtitle {
-  position: absolute;
-
   color: #a5a1b2;
   font-size: 15px;
   line-height: 20px;
