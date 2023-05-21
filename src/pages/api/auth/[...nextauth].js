@@ -136,9 +136,9 @@ export const authOptions = {
                     return token;
                 } catch (err) {
                     console.error(err.message);
+                    throw Error(err);
                 }
             }
-            return token;
         },
         async session({ session, token }) {
             session.provider = token.provider;
