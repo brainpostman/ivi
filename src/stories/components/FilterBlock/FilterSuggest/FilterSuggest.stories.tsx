@@ -23,7 +23,7 @@ const meta: Meta = {
     suggestList: { table: { disable: true } },
     query: {
       description: 'Название параметра',
-      options: ['producer', 'actor'],
+      options: ['director', 'actor'],
       control: 'select',
     },
     title: {
