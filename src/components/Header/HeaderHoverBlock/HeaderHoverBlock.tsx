@@ -1,4 +1,4 @@
-import { DetailedHTMLProps, FC, HTMLAttributes } from 'react'
+import { DetailedHTMLProps, FC, HTMLAttributes, useContext } from 'react'
 import { IHeaderTab } from '@/types/header.interface'
 import style from './HeaderHoverBlock.module.scss'
 import HeaderProfileBlock from './HeaderProfileBlock/HeaderProfileBlock'
@@ -10,6 +10,7 @@ import { useTranslation } from 'next-i18next'
 import { IHeaderHoverBlockContent } from '@/types/hoverblock.interface'
 import { novetlyFilterData } from '@/data/filters.data'
 import { IFilterGetResponse } from '@/types/filters.interface'
+import { IMovie } from '@/types/films.api.interface'
 
 interface IProps
   extends DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement> {
@@ -17,6 +18,7 @@ interface IProps
   hideHoverBlock: () => void
   genres: IFilterGetResponse[]
   countries: IFilterGetResponse[]
+  films: IMovie[]
 }
 
 const HeaderHoverBlock: FC<IProps> = ({
@@ -24,6 +26,7 @@ const HeaderHoverBlock: FC<IProps> = ({
   hideHoverBlock,
   genres,
   countries,
+  films,
   ...props
 }) => {
   const { t } = useTranslation('header', { keyPrefix: 'left-side' })
@@ -63,7 +66,7 @@ const HeaderHoverBlock: FC<IProps> = ({
       ) : (
         <></>
       )}
-      {tabsWithMovieBlock.includes(tab) && <HeaderMovieBlock />}
+      {tabsWithMovieBlock.includes(tab) && <HeaderMovieBlock films={films} />}
     </article>
   )
 }
