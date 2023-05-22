@@ -17,17 +17,46 @@ const meta: Meta = {
     },
   },
   component: FilterBlock,
-  argTypes: {},
+  argTypes: {
+    minYear: {
+      description: 'Минимальный год выпуска',
+    },
+    maxYear: {
+      description: 'Максимальный год выпуска',
+    },
+    minCountScore: {
+      description: 'Минимальное количество оценок',
+    },
+    maxCountScore: {
+      description: 'Максимальное количество оценок',
+    },
+  },
 }
 
-export const Primary = () => (
+interface IProps {
+  maxCountScore: number
+  minCountScore: number
+  maxYear: number
+  minYear: number
+}
+
+export const Primary = (props: IProps) => (
   <div className={style.wrapper}>
     <FilterBlock
       actors={filterActorData}
       genres={filterGenreListData}
       countries={filterCountryListData}
       directors={filterDirectorData}
+      {...props}
     />
   </div>
 )
+
+Primary.args = {
+  minYear: 1996,
+  maxYear: 2022,
+  minCountScore: 10,
+  maxCountScore: 1000,
+}
+
 export default meta
