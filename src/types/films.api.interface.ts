@@ -51,7 +51,7 @@ export interface IMovieById extends Omit<IFilmByIdGetResponse, 'countries' | 'ge
     genres: string;
 }
 
-export interface IReview {
+export interface IReviewGetResponse {
     id: number;
     text: string;
     user_id: number;
@@ -60,4 +60,11 @@ export interface IReview {
     name: string;
     user_email: string;
     createdAt: string;
+}
+
+export interface IReviewPostRequest {
+    text: string;
+    user_id: number;
+    film_id: number;
+    parent: number | null;
 }

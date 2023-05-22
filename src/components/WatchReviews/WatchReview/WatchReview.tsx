@@ -1,12 +1,12 @@
 import { FC } from 'react';
 import styles from './WatchReview.module.scss';
-import { IReview } from '@/types/films.api.interface';
+import { IReviewGetResponse } from '@/types/films.api.interface';
 import { localizeDateString } from '@/formatters/localizeDateString.format';
 import { FiThumbsDown, FiThumbsUp } from 'react-icons/fi';
 
 interface IProps {
     locale: string;
-    review: IReview;
+    review: IReviewGetResponse;
     className?: string;
 }
 
