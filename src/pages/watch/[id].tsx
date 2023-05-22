@@ -78,6 +78,7 @@ const FilmPage: FC<IProps> = ({ film, films }) => {
           <TrailerBlock
             mainImg={film.mainImg}
             actors={film.actors.slice(0, 4)}
+            scoreAVG={film.scoreAVG}
           />
 
           <div className={style.container_info}>
@@ -90,6 +91,7 @@ const FilmPage: FC<IProps> = ({ film, films }) => {
               <FilmActors
                 actors={film.actors.slice(0, 4)}
                 className={styleMobile.film_actors_mobile}
+                scoreAVG={film.scoreAVG}
               />
             </div>
 
@@ -102,7 +104,7 @@ const FilmPage: FC<IProps> = ({ film, films }) => {
               </ExpandBlock>
             </div>
 
-            <IviRaiting />
+            <IviRaiting scoreAVG={film.scoreAVG} />
           </div>
         </div>
         {films ? <MovieCarousel films={films} /> : <Loader />}
