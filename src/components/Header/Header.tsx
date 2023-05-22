@@ -13,7 +13,6 @@ import { FiltersContext } from '@/contexts/filters.context'
 import { filtersAPI } from '@/api/queries/filters.api'
 import { filmsAPI } from '@/api/queries/films.api'
 import { IMovie } from '@/types/films.api.interface'
-import { FilmsContext } from '@/contexts/films.context'
 
 const Header = () => {
   const { pathname, locale } = useRouter()
@@ -76,14 +75,13 @@ const Header = () => {
         <HeaderLeftSide showHoverBlock={showHoverBlock} />
         <HeaderRightSide showHoverBlock={showHoverBlock} />
         {hoverTabs.isShow && hoverTabs.tab && (
-          <FilmsContext.Provider value={{ films: miniCarouselFilms }}>
-            <HeaderHoverBlock
-              hideHoverBlock={hideHoverBlock}
-              tab={hoverTabs.tab}
-              genres={genres}
-              countries={countries}
-            />
-          </FilmsContext.Provider>
+          <HeaderHoverBlock
+            hideHoverBlock={hideHoverBlock}
+            tab={hoverTabs.tab}
+            genres={genres}
+            countries={countries}
+            films={miniCarouselFilms}
+          />
         )}
       </section>
       {showAuthModal && <AuthWindow modalShown={showAuthModal} />}
