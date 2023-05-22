@@ -2,7 +2,6 @@ import {
     ChangeEvent,
     DetailedHTMLProps,
     FC,
-    InputHTMLAttributes,
     MutableRefObject,
     Ref,
     TextareaHTMLAttributes,
@@ -40,6 +39,13 @@ const TextArea: FC<ICustomTextArea> = ({
             textareaRef.current.style.overflow = 'hidden';
         }
     }, []);
+
+    useEffect(() => {
+        if (textareaRef.current && textareaRef.current.value === '') {
+            textareaRef.current.style.height = '35px';
+            textareaRef.current.style.overflow = 'hidden';
+        }
+    }, [value]);
 
     useEffect(() => {
         if (textareaRef.current?.value) {
