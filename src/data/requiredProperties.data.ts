@@ -13,6 +13,8 @@ export const filmsRequiredProperites = [
   'time',
   'premiereRU',
   'premiere',
+  'scoreAVG',
+  'countScore',
 ]
 
 export const crudFilmsRequiredProperties = [
@@ -29,6 +31,8 @@ export const crudFilmsRequiredProperties = [
   'feesRU',
   'premiere',
   'premiereRU',
+  'scoreAVG',
+  'countScore',
   'releaseDVD',
   'releaseBluRay',
   'age',
