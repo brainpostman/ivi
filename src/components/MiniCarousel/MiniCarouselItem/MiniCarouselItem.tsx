@@ -9,7 +9,7 @@ interface IProps {
 const MiniCarouselItem: FC<IProps> = ({ img }) => {
   return (
     <div className={style.wrapper}>
-      <Image src={img} alt='film' fill />
+      <Image src={img} alt='film' fill loading='eager' />
     </div>
   )
 }
