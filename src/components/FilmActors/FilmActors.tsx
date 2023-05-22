@@ -7,15 +7,16 @@ import Link from 'next/link'
 interface IProps {
   actors: IStaffGetResponse[]
   className?: string
+  scoreAVG: number
 }
 
-const FilmActors: FC<IProps> = ({ actors, className }) => {
+const FilmActors: FC<IProps> = ({ actors, className, scoreAVG }) => {
   return (
     <div className={`${style.wrapper} ${className}`}>
       <div className={style.card}>
         <div className={style.wrapper_img}>
           <div className={style.ivi_raiting}>
-            <h4>8,9</h4>
+            <h4>{scoreAVG}</h4>
           </div>
         </div>
         <p className={style.name}>Рейтинг Иви</p>
