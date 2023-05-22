@@ -8,6 +8,7 @@ import { useRouter } from 'next/router'
 import style from './HeaderRightSide.module.scss'
 import { useTranslation } from 'next-i18next'
 import LanguageChanger from '@/components/LanguageSwitcher/LanguageSwitcher'
+import Link from 'next/link'
 
 interface IProps {
   showHoverBlock: (tab: IHeaderTab) => void
@@ -33,9 +34,11 @@ const HeaderRightSide: FC<IProps> = ({ showHoverBlock }) => {
   return (
     <article className={style.wrapper}>
       {isViewSubscribeButton ? (
-        <SubscribeButton className={style.subscribe_button}>
-          {t('buy-sub')}
-        </SubscribeButton>
+        <Link href='https://www.ivi.ru/'>
+          <SubscribeButton className={style.subscribe_button}>
+            {t('buy-sub')}
+          </SubscribeButton>
+        </Link>
       ) : (
         <HighlightButton
           className={style.highlight_button}
