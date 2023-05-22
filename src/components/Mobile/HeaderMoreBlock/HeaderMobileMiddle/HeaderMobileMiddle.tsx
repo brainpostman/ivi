@@ -1,9 +1,5 @@
 import BasicBtn from '@/components/UI/BasicBtn/BasicBtn'
 import { getHeaderMobileMiddleContent } from '@/data/headerMobile.data'
-import {
-  headerPopularBroadcastsData,
-  headerTvBlockData,
-} from '@/data/headerTVBlock.data'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useContext, useState } from 'react'
@@ -12,9 +8,12 @@ import styleParent from '../HeaderMoreBlock.module.scss'
 import style from './HeaderMobileMiddle.module.scss'
 import { FiltersContext } from '@/contexts/filters.context'
 import LanguageChanger from '@/components/LanguageSwitcher/LanguageSwitcher'
+import { useTranslation } from 'react-i18next'
 
 const HeaderMobileMiddle = () => {
   const { countries, genres } = useContext(FiltersContext)
+
+  const { t } = useTranslation('header')
 
   const [contentLists, setContentLists] = useState(
     getHeaderMobileMiddleContent({ genres, countries }).map(el => ({
@@ -98,7 +97,7 @@ const HeaderMobileMiddle = () => {
 
                   <div>
                     <ul className={style.channel_list}>
-                      {headerTvBlockData.map(data => (
+                      {t('left-side.tv-block.carousels').map(data => (
                         <li key={data.title}>
                           <p>{data.title}</p>
                           <ul className={style.inner_channel_list}>
@@ -114,7 +113,7 @@ const HeaderMobileMiddle = () => {
 
                     <p>Популярные трансляции</p>
                     <ul className={style.broadcast_list}>
-                      {headerPopularBroadcastsData
+                      {t('left-side.tv-block.popular-broadcasts')
                         .slice(0, 12)
                         .map(broadcast => (
                           <li key={broadcast.title} className={style.broadcast}>
