@@ -82,7 +82,7 @@ const CustomCarousel: FC<ICustomCarouselProps> = ({
   useBreakPoints(setElementsView, elementsView, breakpoints)
 
   // Container width
-  useIsomorphicLayoutEffect(() => {
+  useEffect(() => {
     const newContainerWidth =
       formatCarouselWidth(width, gap, padding, elementLens, elementsView) || 0
 
@@ -90,7 +90,7 @@ const CustomCarousel: FC<ICustomCarouselProps> = ({
   }, [width, gap, padding, elementLens, elementsView, items])
 
   // Ререндер при изменении elementsViewIncoming
-  useIsomorphicLayoutEffect(() => {
+  useEffect(() => {
     setElementsView(elementsViewIncoming)
   }, [elementsViewIncoming])
 
@@ -135,15 +135,15 @@ const CustomCarousel: FC<ICustomCarouselProps> = ({
     }, speedIncoming)
 
     return () => clearInterval(interval)
-  }, [items])
+  }, [items, autoplay])
 
   useEffect(() => {
     setAutoplayMove(prev => prev + containerWidth)
     setSpeed(prev => prev + speedIncoming)
-  }, [containerWidth])
+  }, [containerWidth, autoplay])
 
   // Element lengths
-  useIsomorphicLayoutEffect(() => {
+  useEffect(() => {
     setterElements()
   }, [children])
 
