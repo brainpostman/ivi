@@ -1,0 +1,62 @@
+.modal_poster {
+    max-width: 200px;
+
+    box-sizing: border-box;
+    color: #fff;
+
+    &_img {
+        transition: all 0.4s;
+        @include ui-margin(bottom, 3);
+        & img {
+            border-radius: 8px;
+        }
+        &:hover {
+            transform: scale(1.1);
+        }
+    }
+
+    &_rating {
+        font-size: 24px;
+        line-height: 28px;
+        font-weight: 700;
+        @include ui-margin(bottom, 2);
+    }
+
+    &_genres {
+        @include ui-margin(bottom, 2);
+        white-space: pre-wrap;
+        overflow-wrap: break-word;
+        font-size: 13px;
+        line-height: 16px;
+        font-weight: 400;
+        color: #a5a1b2;
+    }
+
+    &_duratin {
+        display: flex;
+        gap: 6px;
+        font-size: 13px;
+        line-height: 16px;
+        font-weight: 400;
+        color: #a5a1b2;
+    }
+
+    @media (max-width: 880px) {
+        display: none;
+    }
+}
+
+.modal_poster_img {
+    position: relative;
+    width: 128px;
+    height: 196px;
+    @media (max-width: 1280px) {
+        @include adaptive-size(width, 128, 116, 1160, 1280);
+        @include adaptive-size(height, 196, 178, 1160, 1280);
+    }
+
+    @media (max-width: 1160px) {
+        @include adaptive-size(width, 162, 116, 880, 1160);
+        @include adaptive-size(height, 249, 178, 880, 1160);
+    }
+}
