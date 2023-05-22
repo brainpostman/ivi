@@ -10,12 +10,14 @@ interface IProps {
   films: IMovie[]
   lines?: number
   className?: string
+  autoplay?: boolean
 }
 
 const MiniCarousel: FC<IProps> = ({
   films: filmsIncoming,
   lines = 3,
   className = '',
+  autoplay = true,
 }) => {
   const filmsArraysArray = formatSplitFilms(filmsIncoming, lines)
 
@@ -30,7 +32,7 @@ const MiniCarousel: FC<IProps> = ({
             arrowSize={0}
             speed={1000}
             width='fit'
-            autoplay
+            autoplay={autoplay}
           >
             {filmArray.map(film => (
               <Link href={`/watch/${film.id}`} key={film.id}>
