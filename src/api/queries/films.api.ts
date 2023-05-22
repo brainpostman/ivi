@@ -5,13 +5,16 @@ import {
   IMovie,
   IMovieById,
 } from '@/types/films.api.interface'
-import { transformFilms } from '../transforms/films.transform'
+import {
+  transformFilmById,
+  transformFilms,
+} from '../transforms/films.transform'
 import { customAxios } from './customAxios'
 import { ICRUDMovie } from '@/types/ICrudMovie'
 import formatStrToNum from '@/formatters/strToNum.format'
 
 interface IGetFilms {
-  films: IMovie[]
+  films: (IMovie | undefined)[]
   totalCount: number
   minYear: number
   maxYear: number
@@ -41,7 +44,7 @@ const getFilms = async (params?: IFilmsGetRequest): Promise<IGetFilms> => {
       params,
     })
 
-    const films = filmsData.data.map(film => transformFilms(film))
+    const films = transformFilms(filmsData.data)
 
     let totalCount = films.length
     let minYear = 0
@@ -50,7 +53,6 @@ const getFilms = async (params?: IFilmsGetRequest): Promise<IGetFilms> => {
     let maxCountScore = 0
 
     if (typeof window === 'undefined') {
-      console.log('WORK!')
       totalCount = formatStrToNum(filmsData.headers['x-total-count'])
       minYear = formatStrToNum(filmsData.headers['x-min-year'])
       maxYear = formatStrToNum(filmsData.headers['x-max-year'])
@@ -118,7 +120,7 @@ const getCrudFilms = async (
 const getFilmsById = async (id: number): Promise<IMovieById | undefined> => {
   try {
     const filmData = await customAxios.get<IFilmByIdGetResponse>(`/films/${id}`)
-    const film = transformFilms(filmData.data)
+    const film = transformFilmById(filmData.data)
 
     return film
   } catch (_) {
