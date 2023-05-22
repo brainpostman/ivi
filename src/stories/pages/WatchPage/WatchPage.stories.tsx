@@ -21,7 +21,16 @@ const meta: Meta = {
 
 export const Primary: Story = {
   args: {
-    film: { ...transformFilms(filmsListData[0]), actors: [{}] },
+    film: {
+      ...transformFilms(filmsListData[0]),
+      actors: [],
+      artists: [],
+      compositors: [],
+      directors: [],
+      montages: [],
+      scenario: [],
+      operators: [],
+    },
   },
 }
 
