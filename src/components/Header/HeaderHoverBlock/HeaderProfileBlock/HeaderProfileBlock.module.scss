@@ -81,6 +81,7 @@
 
     &__name {
       color: #fff;
+      @include font(3, bold);
     }
   }
 }

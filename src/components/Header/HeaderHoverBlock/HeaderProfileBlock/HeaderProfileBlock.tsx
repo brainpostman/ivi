@@ -9,13 +9,19 @@ import { RiShareLine } from 'react-icons/ri'
 import { SlDiamond } from 'react-icons/sl'
 import { TbCertificate } from 'react-icons/tb'
 import style from './HeaderProfileBlock.module.scss'
+import Link from 'next/link'
 
 const HeaderProfileBlock = () => {
   const { setAuthModal } = useActions()
-  const { status } = useSession()
+  const { status, data } = useSession()
   const { t } = useTranslation('header', {
     keyPrefix: 'right-side.profile-block',
   })
+
+  const email = data ? data.user.email : ''
+  const isAdmin = data
+    ? data.user.roles.some(role => role.value === 'admin')
+    : false
 
   return (
     <div className={style.wrapper}>
@@ -65,10 +71,16 @@ const HeaderProfileBlock = () => {
           </HighlightButton>
         ) : (
           <div className={style.right_side__auth_block}>
-            <p className={style.right_side__auth_block__name}>Name</p>
+            <p className={style.right_side__auth_block__name}>{email}</p>
             <HighlightButton onClick={() => signOut()}>
               {t('sign-out')}
             </HighlightButton>
+
+            {isAdmin && (
+              <Link href='/admin'>
+                <HighlightButton>{t('admin')}</HighlightButton>
+              </Link>
+            )}
           </div>
         )}
 
