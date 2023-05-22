@@ -1,17 +1,17 @@
-import { FC, useContext, useState } from 'react'
+import { FC, useState } from 'react'
 import style from './HeaderMovieBlock.module.scss'
 import BasicBtn from '@/components/UI/BasicBtn/BasicBtn'
 import { FaTv } from 'react-icons/fa'
 import MiniCarousel from '@/components/MiniCarousel/MiniCarousel'
-import { FilmsContext } from '@/contexts/films.context'
 import MiniCarouselIviBlock from '@/components/MiniCarousel/MiniCarouselIviBlock/MiniCarouselIviBlock'
+import { IMovie } from '@/types/films.api.interface'
 
 interface IProps {
   isShow?: boolean
+  films: IMovie[]
 }
 
-const HeaderMovieBlock: FC<IProps> = ({ isShow = true }) => {
-  const { films } = useContext(FilmsContext)
+const HeaderMovieBlock: FC<IProps> = ({ isShow = true, films }) => {
   const [isHover, setIsHover] = useState(false)
 
   if (!isShow) return <></>
