@@ -19,8 +19,7 @@ describe('API-FILTERS ERROR', () => {
   })
 
   // Проверяем ошибку круда жанров
-  //it('Check crud genres error', () => {
-  //  // FIXME: Не считает page=-1 за ошибку
-  //  expect(errorCrudGenres).toStrictEqual([])
-  //})
+  it('Check crud genres error', () => {
+    expect(errorCrudGenres).toStrictEqual([])
+  })
 })
