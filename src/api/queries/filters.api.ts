@@ -35,7 +35,7 @@ const getGenres = async (
             .filter(genre => genre.name_en)
             .map(genre => ({
               ...genre,
-              name: formatCapitalize(genre.name_en ?? ''),
+              name: formatCapitalize(genre.name_en),
             }))
 
     return genres
@@ -52,6 +52,11 @@ const getCrudGenres = async (
       params,
     })
     const crudGenres = crudGenresData.data
+
+    if (!crudGenres) {
+      console.error('Undefined crud genres')
+      throw new Error('Undefined crud genres')
+    }
 
     return crudGenres
   } catch (_) {
