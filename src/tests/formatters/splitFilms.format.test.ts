@@ -3,7 +3,7 @@ import { filmsListData } from '@/data/films.data'
 import formatSplitFilms from '@/formatters/splitFilms.format'
 import { IMovie } from '@/types/films.api.interface'
 
-const testValidFilms: IMovie[] = filmsListData.map(film => transformFilms(film))
+const testValidFilms: IMovie[] = transformFilms(filmsListData)
 const testSplittedNum = 3
 
 const testInvalidSpecificFilm = [
