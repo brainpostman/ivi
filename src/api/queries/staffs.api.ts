@@ -3,7 +3,7 @@ import {
   IStaffGetRequest,
   IStaffGetResponse,
 } from '@/types/staffs.interface'
-import { transformStaff } from '../transforms/staff.transform'
+import { transformStaffs } from '../transforms/staff.transform'
 import { customAxios } from './customAxios'
 import formatStaffTypestoType from '@/formatters/staffTypesToType.format'
 
@@ -33,7 +33,7 @@ const getDirectors = async (params?: IStaffGetRequest): Promise<IStaff[]> => {
       })
     ).data
 
-    const directors = transformStaff(directorsData)
+    const directors = transformStaffs(directorsData)
     return directors
   } catch (_) {
     return []
@@ -51,7 +51,7 @@ const getActors = async (params?: IStaffGetRequest): Promise<IStaff[]> => {
       })
     ).data
 
-    const actors = transformStaff(actorsData)
+    const actors = transformStaffs(actorsData)
 
     return actors
   } catch (_) {
@@ -79,7 +79,7 @@ const getStaffByParams = async (
       await customAxios.get<IStaffGetResponse[]>('/staffs', { params })
     ).data
 
-    const formattedStaffs = transformStaff(staffs)
+    const formattedStaffs = transformStaffs(staffs)
 
     return formattedStaffs
   } catch (_) {
