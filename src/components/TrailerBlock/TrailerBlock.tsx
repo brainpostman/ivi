@@ -10,9 +10,10 @@ import { BsCollectionPlay } from 'react-icons/bs'
 interface IProps {
   mainImg: string
   actors: IStaffGetResponse[]
+  scoreAVG: number
 }
 
-const TrailerBlock: FC<IProps> = ({ mainImg, actors }) => {
+const TrailerBlock: FC<IProps> = ({ mainImg, scoreAVG, actors }) => {
   return (
     <div className={style.wrapper}>
       <div className={style.wrapper_img}>
@@ -22,7 +23,11 @@ const TrailerBlock: FC<IProps> = ({ mainImg, actors }) => {
 
       <div className={style.under_trailer_mobile}>
         <div>
-          <FilmActors actors={actors} className={style.film_actors_mobile} />
+          <FilmActors
+            actors={actors}
+            className={style.film_actors_mobile}
+            scoreAVG={scoreAVG}
+          />
           {/*MOBILE FREE FILMS BUTTON*/}
           <BasicBtn
             btnType='icon'
