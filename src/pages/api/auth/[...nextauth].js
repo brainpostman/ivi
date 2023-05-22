@@ -75,13 +75,15 @@ export const authOptions = {
         signin: '/auth/signin',
     },
     callbacks: {
-        //ошибки не перехватываются специально, перехват должен происходить при использовании signIn() на клиенте, либо произойдет редирект на /pages/auth/error
-        async signIn({ user, account, profile }) {
+        async signIn({ user, account }) {
             if (account.provider === 'google') {
                 user.provider = 'google';
-                const response = await axios.post(
-                    `${process.env.GOOGLE}/${encodeURIComponent(`${profile.email}.oauth`)}`
-                );
+                const response = await axios.post(`${process.env.GOOGLE}`, undefined, {
+                    params: {
+                        email: user.email + '.oauth',
+                        name: user.name,
+                    },
+                });
                 user.accessToken = response.data.token;
                 user.refreshToken = response.data.refreshToken;
                 return true;
@@ -92,6 +94,7 @@ export const authOptions = {
                     access_token: account.access_token,
                     expires_in: 86400,
                     user_id: account.user_id,
+                    name: user.name,
                 };
                 const response = await axios.post(process.env.VK, data);
                 user.accessToken = response.data.token;
