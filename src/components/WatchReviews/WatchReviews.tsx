@@ -1,35 +1,42 @@
-import { FC } from 'react';
+import { FC, useState } from 'react';
 import style from './WatchReviews.module.scss';
 import SimpleButton from '../UI/SimpleButton/SimpleButton';
-import { IReview } from '@/types/films.api.interface';
+import { IMovieById, IReview } from '@/types/films.api.interface';
 import CustomCarousel from '../CustomCarousel/CustomCarousel';
 import WatchReview from './WatchReview/WatchReview';
 import { useRouter } from 'next/router';
-
-const review = {
-    id: 1,
-    text: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus numquam accusantium voluptates officia nam! Sed, ea odio. Dolores excepturi itaque facilis placeat doloribus. Libero odit dignissimos, magni eius magnam sit!',
-    user_id: 1,
-    film_id: 1,
-    parent: null,
-    name: 'Brain',
-    user_email: 'kopo6ko@mail.ru',
-    createdAt: '2023-05-20T18:28:59.142Z',
-};
+import ModalWindow from '../ModalWindow/ModalWindow';
+import { useSession } from 'next-auth/react';
+import ModalFilmPoster from '../ModalFilmPoster/ModalFilmPoster';
+import TextArea from '../UI/TextArea/TextArea';
 
 interface IProps {
     filmName: string;
     reviewData: { reviewCount: number; reviews: IReview[] };
     className?: string;
+    film: IMovieById;
 }
 
 const WatchReviews: FC<IProps> = ({
     filmName,
     reviewData: { reviewCount, reviews },
     className: propsClassName,
+    film,
 }) => {
-    const { locale } = useRouter();
-    
+    const router = useRouter();
+    const { locale } = router;
+    const [showModal, setShowModal] = useState(false);
+    const { status } = useSession();
+    const handleLeaveReview = () => {
+        if (status === 'authenticated') {
+            setShowModal(true);
+        } else {
+            router.push('/auth/signin');
+        }
+    };
+
+    const [text, setText] = useState('');
+
     return (
         <div className={`${style.wrapper} ${style.propsClassName}`}>
             <div className={style.container}>
@@ -39,15 +46,46 @@ const WatchReviews: FC<IProps> = ({
                     </p>
                     <p className={style.subtitle}>о фильме &#171;{filmName}&#187;</p>
                 </div>
-                <SimpleButton className={style.makeReview}>Оставить отзыв</SimpleButton>
+                <SimpleButton className={style.makeReview} onClick={handleLeaveReview}>
+                    Оставить отзыв
+                </SimpleButton>
             </div>
             <div className={style.reviews}>
-                <WatchReview review={review} locale={locale ?? 'ru'} className={style.review} />
-                <WatchReview review={review} locale={locale ?? 'ru'} className={style.review} />
-                <WatchReview review={review} locale={locale ?? 'ru'} className={style.review} />
-                <WatchReview review={review} locale={locale ?? 'ru'} className={style.review} />
-                {/* <CustomCarousel elementsView={0} elementsMove={0} children={[]}></CustomCarousel> */}
+                <CustomCarousel
+                    elementsView={3}
+                    elementsMove={3}
+                    arrowSize={16}
+                    classNameWrapper={''}
+                    space={[24, 24]}
+                    width='full'>
+                    {reviews.map((review) => (
+                        <WatchReview key={review.id} locale={locale ?? 'ru'} review={review} />
+                    ))}
+                </CustomCarousel>
             </div>
+            <ModalWindow
+                isShow={showModal}
+                closeFunc={() => {
+                    setShowModal(false);
+                }}>
+                <div className={style.modal}>
+                    <h1 className={style.title__reviews}>Оставить отзыв</h1>
+                    <div className={style.commentForm}>
+                        <div className={style.textarea_wrapper}>
+                            <TextArea
+                                value={text}
+                                onChange={(e) => {
+                                    setText(e.target.value);
+                                }}
+                                placeholder='Написать отзыв'
+                                className={style.textarea}
+                            />
+                            <SimpleButton className={style.sendReview}>Отправить</SimpleButton>
+                        </div>
+                        <ModalFilmPoster film={film} />
+                    </div>
+                </div>
+            </ModalWindow>
         </div>
     );
 };

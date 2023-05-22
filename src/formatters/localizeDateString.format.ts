@@ -1,14 +1,18 @@
 export function localizeDateString(date: Date, locale: string): string {
     let dateStr = String(date.getDate());
     if (locale !== 'ru') {
-        switch (dateStr[dateStr.length - 1]) {
+        switch (dateStr) {
             case '1':
+            case '21':
+            case '31':
                 dateStr += 'st';
                 break;
             case '2':
+            case '22':
                 dateStr += 'nd';
                 break;
             case '3':
+            case '23':
                 dateStr += 'rd';
                 break;
             default:
@@ -55,5 +59,7 @@ export function localizeDateString(date: Date, locale: string): string {
             monthStr = locale === 'ru' ? 'декабря' : 'December';
             break;
     }
-    return `${dateStr} ${monthStr} ${date.getFullYear()}`;
+    return locale === 'ru'
+        ? `${dateStr} ${monthStr} ${date.getFullYear()}`
+        : `${monthStr} ${dateStr}, ${date.getFullYear()}`;
 }

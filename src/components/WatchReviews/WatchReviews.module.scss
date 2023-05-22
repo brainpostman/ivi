@@ -46,3 +46,34 @@
   white-space: nowrap;
   @include ui-margin(top, 4);
 }
+
+.modal {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.commentForm {
+  @include ui-margin(top, 2);
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-evenly;
+  max-width: $max-width;
+  gap: 60px;
+}
+
+.textarea {
+    width: 500px;
+    &_wrapper {
+      display: flex;
+      flex-direction: column;
+    }
+}
+
+.sendReview {
+  align-self: flex-end;
+  @include ui-margin(top, 2);
+  height: 32px;
+  width:fit-content;
+}

@@ -6,6 +6,7 @@
     background-color: $dark;
     @include ui-padding(default, 5);
     height: 162px;
+    width: 286px;
     transition: all 0.4s;
     cursor: pointer;
     &:hover {
