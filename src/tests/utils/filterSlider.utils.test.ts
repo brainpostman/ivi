@@ -40,7 +40,7 @@ const testInvalidSlider = {
 const expectedSingleSlider: IFilterSliderType = 'single'
 const expectedPairedSlider: IFilterSliderType = 'paired'
 
-describe('getFilterSliderType', () => {
+describe('UTIL getFilterSliderType', () => {
   // Одиночный слайдер
   it('SingleSlider', () => {
     const sliderType = getFilterSliderType(
@@ -62,7 +62,7 @@ describe('getFilterSliderType', () => {
   })
 })
 
-describe('ERROR getFilterSliderType', () => {
+describe('UTIL ERROR getFilterSliderType', () => {
   // Некорректные значения
   it('Invalid values', () => {
     const sliderType = getFilterSliderType(
