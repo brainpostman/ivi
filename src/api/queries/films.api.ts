@@ -4,7 +4,8 @@ import {
     IFilmsgGetResponse,
     IMovie,
     IMovieById,
-    IReview,
+    IReviewGetResponse,
+    IReviewPostRequest,
 } from '@/types/films.api.interface';
 import { transformFilms } from '../transforms/films.transform';
 import { customAxios } from './customAxios';
@@ -28,6 +29,9 @@ export const filmsAPI = {
     },
     getFilmReviews(param: number) {
         return getFilmReviews(param);
+    },
+    postFilmReview(data: IReviewPostRequest, accessToken: string | null) {
+        return postFilmReview(data, accessToken);
     },
 };
 
@@ -76,19 +80,33 @@ const getFilmsById = async (id: number): Promise<IMovieById | undefined> => {
 const getFilmReviewCount = async (id: number): Promise<number> => {
     try {
         const response = await customAxios.get<number>(`/reviews/count/${id}`);
-        console.log(response.data);
         return response.data;
     } catch (_) {
         return 0;
     }
 };
 
-const getFilmReviews = async (id: number): Promise<IReview[]> => {
+const getFilmReviews = async (id: number): Promise<IReviewGetResponse[]> => {
     try {
-        const response = await customAxios.get<IReview[]>(`/reviews/parents/${id}`);
-        console.log(response.data);
+        const response = await customAxios.get<IReviewGetResponse[]>(`/reviews/parents/${id}`);
         return response.data;
     } catch (_) {
         return [];
+    }
+};
+
+const postFilmReview = async (
+    data: IReviewPostRequest,
+    accessToken: string | null
+): Promise<IReviewGetResponse | null> => {
+    try {
+        const response = await customAxios.post<IReviewGetResponse>(`/reviews`, data, {
+            headers: {
+                Authorization: `Bearer ${accessToken}`,
+            },
+        });
+        return response.data;
+    } catch (_) {
+        return null;
     }
 };
