@@ -11,7 +11,7 @@ import { checkObjHaveProperties } from '@/utils/test-utils/checkObjHavePropertie
 
 // Тестируем API фильмов
 describe('API-FILMS', () => {
-  let films: IMovie[]
+  let films: (IMovie | undefined)[]
   let totalCount: number
   let filmById: IMovieById | undefined
 
