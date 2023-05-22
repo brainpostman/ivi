@@ -1,7 +1,9 @@
-export function validateComment(minLength: number, comment: string) {
-    if (comment.length > minLength) {
+export function validateComment(minLength: number, maxLength: number, comment: string): boolean {
+    if (comment.length < minLength || comment.length > maxLength) {
+        return false;
+    } else {
         return true;
-    } else return false;
+    }
 }
 
 export function trimComment(comment: string) {

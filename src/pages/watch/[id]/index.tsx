@@ -9,7 +9,7 @@ import { MdArrowBackIosNew } from 'react-icons/md';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { GetServerSideProps } from 'next';
 import { filmsAPI } from '@/api/queries/films.api';
-import { IMovie, IMovieById, IReview } from '@/types/films.api.interface';
+import { IMovie, IMovieById, IReviewGetResponse } from '@/types/films.api.interface';
 import TrailerBlock from '@/components/TrailerBlock/TrailerBlock';
 import FilmFields from '@/components/FilmFields/FilmFields';
 import FilmFeatures from '@/components/FilmFeatures/FilmFeatures';
@@ -53,7 +53,7 @@ export const getServerSideProps: GetServerSideProps = async ({ locale, params })
 interface IProps {
     film: IMovieById;
     films: IMovie[];
-    reviewData: { reviewCount: number; reviews: IReview[] };
+    reviewData: { reviewCount: number; reviews: IReviewGetResponse[] };
 }
 
 const Film: FC<IProps> = ({ film, films, reviewData }) => {

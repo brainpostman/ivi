@@ -1,8 +1,6 @@
 import axios from 'axios';
 import { i18n } from 'next-i18next';
-import jwt from 'jsonwebtoken';
 import { Session } from 'next-auth';
-import { signOut } from 'next-auth/react';
 
 type CheckEmailResponse = {
     status: number;
