@@ -32,6 +32,7 @@ export interface IFilmsgGetResponse {
     genres: { id: number; name: string; name_en: string | null }[];
     tagline: string;
     scoreAVG: number | null;
+    countScore: number;
     age: string;
     description: string;
     mainImg: string;

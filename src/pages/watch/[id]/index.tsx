@@ -75,7 +75,11 @@ const Film: FC<IProps> = ({ film, films, reviewData }) => {
                 <BreadCrumbsSpecificFilm genre={film.genres.split(',')[0]} />
 
                 <div className={style.container}>
-                    <TrailerBlock mainImg={film.mainImg} actors={film.actors.slice(0, 4)} />
+                    <TrailerBlock
+                        mainImg={film.mainImg}
+                        actors={film.actors.slice(0, 4)}
+                        className={style.trailerblock}
+                    />
 
                     <div className={style.container_info}>
                         <h1 className={style.container_info__title}>{film.name}</h1>
@@ -85,6 +89,7 @@ const Film: FC<IProps> = ({ film, films, reviewData }) => {
 
                         <div className={style.films_actors_wrapper}>
                             <FilmActors
+                                scoreAvg={film.scoreAVG}
                                 actors={film.actors.slice(0, 4)}
                                 className={styleMobile.film_actors_mobile}
                             />
@@ -98,7 +103,7 @@ const Film: FC<IProps> = ({ film, films, reviewData }) => {
                             </ExpandBlock>
                         </div>
 
-                        <IviRaiting />
+                        <IviRaiting film={film} />
                     </div>
                 </div>
                 {films ? <MovieCarousel films={films} /> : <Loader />}
@@ -108,7 +113,7 @@ const Film: FC<IProps> = ({ film, films, reviewData }) => {
                     <WatchActors film={film} />
                 </div>
 
-                <WatchReviews reviewData={reviewData} filmName={film.name} />
+                <WatchReviews reviewData={reviewData} filmName={film.name} film={film} />
                 <WatchFooter filmName={film.name} mainImg={film.mainImg} />
             </section>
         </PageLayout>

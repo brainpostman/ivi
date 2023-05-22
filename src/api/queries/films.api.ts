@@ -28,7 +28,7 @@ export const filmsAPI = {
     },
     getFilmReviews(param: number) {
         return getFilmReviews(param);
-    }
+    },
 };
 
 const getFilms = async (

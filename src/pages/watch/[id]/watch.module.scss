@@ -16,11 +16,11 @@
 
   cursor: pointer;
 
-  &:hover>svg {
+  &:hover > svg {
     transform: scale(1.1);
   }
 
-  >svg {
+  > svg {
     width: 18px;
     height: 18px;
 
@@ -31,24 +31,23 @@
 .container {
   position: relative;
 
-  display: grid;
-  grid-template-columns: repeat(2, auto);
-  column-gap: 60px;
+  display: flex;
+  gap: 30px;
 
   @include ui-margin(top, 8);
 
   @media (max-width: 1159px) {
+    display: grid;
+    column-gap: 60px;
     grid-template-columns: repeat(1, auto);
   }
 }
 
 .container_info {
+  flex: 0 1 auto;
   position: relative;
   display: flex;
   flex-direction: column;
-
-  width: fit-content;
-
   color: #fff;
   text-align: center;
 
