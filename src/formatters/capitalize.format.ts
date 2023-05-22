@@ -1,5 +1,5 @@
 /*
-  * @param {string} value - значение для капитализации певрого символа 
+  * @param {string | null} value - значение для капитализации певрого символа 
   (toUpperCase)
   * @param {IFormatCapitalizeOptions} options - параметры
     options -> reverse - обратная капитализация первого символа (toLowerCase)
@@ -11,7 +11,7 @@ interface IFormatCapitalizeOptions {
 }
 
 export const formatCapitalize = (
-  value?: string,
+  value?: string | null,
   options?: IFormatCapitalizeOptions
 ): string => {
   if (!value) return ''
