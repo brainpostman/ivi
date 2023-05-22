@@ -1,8 +1,7 @@
-import FilterSlider from '@/components/FilterBlock/FilterSlider/FilterSlider'
-import { IFilterSliderProps } from '@/types/filterBlock.interface'
 import { Meta, StoryObj } from '@storybook/react'
+import FilterSliderModif from './FilterSliderModif'
 
-type Story = StoryObj<typeof FilterSlider>
+type Story = StoryObj<typeof FilterSliderModif>
 
 const meta: Meta = {
   title: 'FilterBlock/FilterSlider',
@@ -14,7 +13,7 @@ const meta: Meta = {
       },
     },
   },
-  component: FilterSlider,
+  component: FilterSliderModif,
   argTypes: {
     range: { table: { disable: true } },
     typeSlider: {
@@ -23,14 +22,34 @@ const meta: Meta = {
       control: 'select',
     },
     maxValue: {
+      name: 'max',
       description: 'Максимальное значение',
     },
     minValue: {
+      name: 'min',
       description: 'Минимальное значение',
-      if: { arg: 'typeSlider', eq: 'paired' },
     },
-    query: {
+    querySingle: {
+      name: 'query',
       description: 'Название параметра',
+      if: {
+        arg: 'typeSlider',
+        eq: 'single',
+      },
+    },
+    queryMin: {
+      description: 'Название параметра для минимального значения',
+      if: {
+        arg: 'typeSlider',
+        eq: 'paired',
+      },
+    },
+    queryMax: {
+      description: 'Название параметра для максимального значения',
+      if: {
+        arg: 'typeSlider',
+        eq: 'paired',
+      },
     },
     title: {
       description: 'Заголовок',
@@ -38,54 +57,25 @@ const meta: Meta = {
   },
 }
 
-export const Paired = {
-  render: ({
-    maxValue,
-    minValue,
-    range,
-    typeSlider,
-    ...props
-  }: IFilterSliderProps & {
-    minValue: number
-    maxValue: number
-    typeSlider: 'single' | 'paired'
-  }) => {
-    const currentRange =
-      typeSlider === 'paired' ? { min: minValue, max: maxValue } : undefined
-
-    const singleMaxValue = maxValue
-
-    return (
-      <div style={{ width: 250 }}>
-        <FilterSlider
-          maxValue={singleMaxValue}
-          range={currentRange}
-          {...props}
-        />
-      </div>
-    )
-  },
+export const Paired: Story = {
   args: {
-    minValue: 0,
-    maxValue: 200,
-    query: 'rating',
+    minRange: 0,
+    maxRange: 200,
+    queryPaired: {
+      min: 'minRating',
+      max: 'maxRating',
+    },
     title: 'Рейтинг',
     typeSlider: 'paired',
   },
 }
 
-export const Single = {
-  render: ({ range, ...props }: IFilterSliderProps) => {
-    return (
-      <div style={{ width: 250 }}>
-        <FilterSlider {...props} />
-      </div>
-    )
-  },
+export const Single: Story = {
   args: {
-    query: 'minCountScore',
-    title: 'Оценки',
-    maxValue: 100,
+    minRange: 0,
+    maxRange: 200,
+    querySingle: 'rating',
+    title: 'Рейтинг',
     typeSlider: 'single',
   },
 }
