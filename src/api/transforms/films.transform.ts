@@ -1,26 +1,55 @@
 import formatFilterToNames from '@/formatters/filterToNames.format'
 import { formatImgUrl } from '@/formatters/imgUrl.format'
 import formatScoreAVG from '@/formatters/scoreAVG.format'
-import { IFilmsgGetResponse, IMovie } from '@/types/films.api.interface'
+import {
+  IFilmByIdGetResponse,
+  IFilmsgGetResponse,
+  IMovie,
+  IMovieById,
+} from '@/types/films.api.interface'
 
 /*
-  * Преобразует данные о фильме
-  * @param {extends IFilmsgGetResponse} filmsData - данные о фильме
-  * @returns ITransformFilms - преобразованные данные о фильме
+  * Преобразует данные о фильмах
+  * @param {extends IFilmsgGetResponse[] | undefined} filmsData - данные о 
+    фильмах
+  * @returns IMovie[] - преобразованные данные о фильмах
 
 */
 
-type ITransformFilms<T> = T & IMovie
+export const transformFilms = (
+  filmsData: IFilmsgGetResponse[] | undefined
+): IMovie[] => {
+  if (!filmsData) return []
 
-export const transformFilms = <T extends IFilmsgGetResponse>(
-  filmsData: T
-): ITransformFilms<T> => {
-  const result = {
-    ...filmsData,
-    mainImg: formatImgUrl(filmsData.mainImg),
-    countries: formatFilterToNames(filmsData.countries),
-    genres: formatFilterToNames(filmsData.genres),
-    scoreAVG: formatScoreAVG(filmsData.scoreAVG),
+  const result: IMovie[] = filmsData.map(film => ({
+    ...film,
+    mainImg: formatImgUrl(film.mainImg),
+    countries: formatFilterToNames(film.countries),
+    genres: formatFilterToNames(film.genres),
+    scoreAVG: formatScoreAVG(film.scoreAVG),
+  }))
+
+  return result
+}
+
+/*
+  * Преобразует данные о фильме по id
+  * @param {IFilmByIdGetResponse | undefined} - данные о фильме
+  * @returns IMovieById | undefined - преобразованные данные о фильме
+
+*/
+
+export const transformFilmById = (
+  filmData: IFilmByIdGetResponse | undefined
+): IMovieById | undefined => {
+  if (!filmData) return undefined
+
+  const result: IMovieById = {
+    ...filmData,
+    mainImg: formatImgUrl(filmData.mainImg),
+    countries: formatFilterToNames(filmData.countries),
+    genres: formatFilterToNames(filmData.genres),
+    scoreAVG: formatScoreAVG(filmData.scoreAVG),
   }
 
   return result
