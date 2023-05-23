@@ -52,8 +52,9 @@ const WatchReviews: FC<IProps> = ({
 
     const handleClick = async () => {
         toast.dismiss();
-        setText((prev) => trimComment(prev));
-        if (!validateComment(100, 10000, text)) {
+        const str = trimComment(text);
+        setText(str);
+        if (!validateComment(100, 10000, str)) {
             toast.warn('Отзыв должен иметь не менее 100 и не более 10000 символов.');
             return;
         }
@@ -104,7 +105,7 @@ const WatchReviews: FC<IProps> = ({
             <div className={style.container}>
                 <div className={style.title}>
                     <p className={style.title__reviews}>
-                        Отзывы<span className={style.quantity}>{reviewCount}</span>
+                        Отзывы<span className={style.quantity}>{reviews.length}</span>
                     </p>
                     <p className={style.subtitle}>о фильме &#171;{filmName}&#187;</p>
                 </div>
