@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from 'react';
+import { ChangeEvent, FC, useEffect, useState } from 'react';
 import style from './WatchReviews.module.scss';
 import SimpleButton from '../UI/SimpleButton/SimpleButton';
 import { IMovieById, IReviewGetResponse } from '@/types/films.api.interface';
@@ -13,6 +13,7 @@ import { trimComment, validateComment } from '@/utils/comment.utils';
 import { filmsAPI } from '@/api/queries/films.api';
 import { toast } from 'react-toastify';
 import Loader from '../Loader/Loader';
+import CommentForm from '../UI/CommentForm/CommentForm';
 
 interface IProps {
     filmName: string;
@@ -43,6 +44,11 @@ const WatchReviews: FC<IProps> = ({
     };
 
     const [text, setText] = useState('');
+
+    const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
+        setText(e.target.value);
+        toast.dismiss();
+    };
 
     const handleClick = async () => {
         toast.dismiss();
@@ -84,7 +90,6 @@ const WatchReviews: FC<IProps> = ({
             if (reviewCountReq) setReviewCount(reviewCountReq);
             const reviewsReq = await filmsAPI.getFilmReviews(film.id);
             if (reviewsReq.length > 0) {
-                console.log(reviewsReq, 'cool');
                 setReviews(reviewsReq);
             }
         };
@@ -133,20 +138,12 @@ const WatchReviews: FC<IProps> = ({
                 <div className={style.modal}>
                     <h1 className={style.title__reviews}>Оставить отзыв</h1>
                     <div className={style.commentForm}>
-                        <div className={style.textarea_wrapper}>
-                            <TextArea
-                                value={text}
-                                onChange={(e) => {
-                                    setText(e.target.value);
-                                    toast.dismiss();
-                                }}
-                                placeholder='Написать отзыв'
-                                className={style.textarea}
-                            />
-                            <SimpleButton className={style.sendReview} onClick={handleClick}>
-                                Отправить
-                            </SimpleButton>
-                        </div>
+                        <CommentForm
+                            textareaValue={text}
+                            textareaPlaceholder='Напишите отзыв'
+                            textareaOnChangeFn={handleChange}
+                            sendButtonClickFn={handleClick}
+                        />
                         <ModalFilmPoster film={film} />
                     </div>
                 </div>
