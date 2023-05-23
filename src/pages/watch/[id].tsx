@@ -104,7 +104,7 @@ const FilmPage: FC<IProps> = ({ film, films }) => {
               </ExpandBlock>
             </div>
 
-            <IviRaiting scoreAVG={film.scoreAVG} />
+            <IviRaiting scoreAVG={film.scoreAVG} countScore={film.countScore} />
           </div>
         </div>
         {films ? <MovieCarousel films={films} /> : <Loader />}
