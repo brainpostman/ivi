@@ -138,9 +138,14 @@ const CustomCarousel: FC<ICustomCarouselProps> = ({
   }, [items, autoplay])
 
   useEffect(() => {
+    if (!autoplay) {
+      setSpeed(speedIncoming)
+      return
+    }
+
     setAutoplayMove(prev => prev + containerWidth)
     setSpeed(prev => prev + speedIncoming)
-  }, [containerWidth, autoplay])
+  }, [containerWidth, autoplay, speedIncoming])
 
   // Element lengths
   useEffect(() => {
