@@ -1,0 +1,14 @@
+.textarea {
+    width: 500px;
+    &_wrapper {
+        display: flex;
+        flex-direction: column;
+    }
+}
+
+.sendReview {
+    align-self: flex-end;
+    @include ui-margin(top, 2);
+    height: 32px;
+    width: fit-content;
+}

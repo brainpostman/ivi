@@ -4,11 +4,12 @@ import { IMovieById } from '@/types/films.api.interface';
 
 interface IFilmPosterProps {
     film: IMovieById;
+    className?: string;
 }
 
-const ModalFilmPoster = ({ film }: IFilmPosterProps) => {
+const ModalFilmPoster = ({ film, className: propsClassName }: IFilmPosterProps) => {
     return (
-        <div className={style.modal_poster}>
+        <div className={`${style.modal_poster} ${propsClassName}`}>
             <div className={style.modal_poster_img}>
                 <Image src={film.mainImg} alt='постер' fill />
             </div>
