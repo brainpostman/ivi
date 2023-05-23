@@ -17,17 +17,23 @@ import {
 */
 
 export const transformFilms = (
-  filmsData: IFilmsgGetResponse[] | undefined
+  filmsData: IFilmsgGetResponse[] | undefined,
+  locale: string = 'ru'
 ): IMovie[] => {
   if (!filmsData) return []
 
-  const result: IMovie[] = filmsData.map(film => ({
-    ...film,
-    mainImg: formatImgUrl(film.mainImg),
-    countries: formatFilterToNames(film.countries),
-    genres: formatFilterToNames(film.genres),
-    scoreAVG: formatScoreAVG(film.scoreAVG),
-  }))
+  const result: IMovie[] = filmsData.map(film => {
+    const name = locale === 'en' && film.name_en ? film.name_en : film.name
+
+    return {
+      ...film,
+      name,
+      mainImg: formatImgUrl(film.mainImg),
+      countries: formatFilterToNames(film.countries),
+      genres: formatFilterToNames(film.genres),
+      scoreAVG: formatScoreAVG(film.scoreAVG),
+    }
+  })
 
   return result
 }
@@ -40,12 +46,17 @@ export const transformFilms = (
 */
 
 export const transformFilmById = (
-  filmData: IFilmByIdGetResponse | undefined
+  filmData: IFilmByIdGetResponse | undefined,
+  locale: string = 'ru'
 ): IMovieById | undefined => {
   if (!filmData) return undefined
 
+  const name =
+    locale === 'en' && filmData.name_en ? filmData.name_en : filmData.name
+
   const result: IMovieById = {
     ...filmData,
+    name,
     mainImg: formatImgUrl(filmData.mainImg),
     countries: formatFilterToNames(filmData.countries),
     genres: formatFilterToNames(filmData.genres),

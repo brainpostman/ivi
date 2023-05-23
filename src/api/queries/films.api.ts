@@ -14,7 +14,7 @@ import { ICRUDMovie } from '@/types/ICrudMovie'
 import formatStrToNum from '@/formatters/strToNum.format'
 
 interface IGetFilms {
-  films: (IMovie | undefined)[]
+  films: IMovie[]
   totalCount: number
   minYear: number
   maxYear: number
@@ -27,24 +27,27 @@ interface IGetCrudFilms extends Omit<IGetFilms, 'films'> {
 }
 
 export const filmsAPI = {
-  getFilms(params?: IFilmsGetRequest) {
-    return getFilms(params)
+  getFilms(locale?: string, params?: IFilmsGetRequest) {
+    return getFilms(locale, params)
   },
-  getCrudFilms(params?: IFilmsGetRequest) {
-    return getCrudFilms(params)
+  getCrudFilms(locale?: string, params?: IFilmsGetRequest) {
+    return getCrudFilms(locale, params)
   },
-  getFilmsById(param: number) {
-    return getFilmsById(param)
+  getFilmsById(param: number, locale: string) {
+    return getFilmsById(param, locale)
   },
 }
 
-const getFilms = async (params?: IFilmsGetRequest): Promise<IGetFilms> => {
+const getFilms = async (
+  locale?: string,
+  params?: IFilmsGetRequest
+): Promise<IGetFilms> => {
   try {
     const filmsData = await customAxios.get<IFilmsgGetResponse[]>('/films', {
       params,
     })
 
-    const films = transformFilms(filmsData.data)
+    const films = transformFilms(filmsData.data, locale)
 
     let totalCount = films.length
     let minYear = 0
@@ -82,11 +85,20 @@ const getFilms = async (params?: IFilmsGetRequest): Promise<IGetFilms> => {
 }
 
 const getCrudFilms = async (
+  locale: string = 'ru',
   params?: IFilmsGetRequest
 ): Promise<IGetCrudFilms> => {
   try {
     const response = await customAxios.get<ICRUDMovie[]>('/films', {
       params,
+    })
+
+    const films = response.data.map(film => {
+      const name = locale === 'en' && film.name_en ? film.name_en : film.name
+      return {
+        ...film,
+        name,
+      }
     })
 
     const totalCount = formatStrToNum(response.headers['x-total-count'])
@@ -98,7 +110,7 @@ const getCrudFilms = async (
     const maxCountScore = formatStrToNum(response.headers['x-max-count-score'])
 
     return {
-      films: response.data,
+      films,
       totalCount,
       maxCountScore,
       maxYear,
@@ -117,10 +129,13 @@ const getCrudFilms = async (
   }
 }
 
-const getFilmsById = async (id: number): Promise<IMovieById | undefined> => {
+const getFilmsById = async (
+  id: number,
+  locale: string = 'ru'
+): Promise<IMovieById | undefined> => {
   try {
     const filmData = await customAxios.get<IFilmByIdGetResponse>(`/films/${id}`)
-    const film = transformFilmById(filmData.data)
+    const film = transformFilmById(filmData.data, locale)
 
     return film
   } catch (_) {

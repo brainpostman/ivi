@@ -6,7 +6,7 @@ import { IFilmsGetRequest } from '@/types/films.api.interface'
 import { ICRUDGenre } from '@/types/ICrudMovie'
 
 export const filtersAPI = {
-  getGenres(locale: string, params?: IStaffGetRequest) {
+  getGenres(locale?: string, params?: IStaffGetRequest) {
     return getGenres(locale, params)
   },
   getCrudGenres(params?: IFilmsGetRequest) {
@@ -18,7 +18,7 @@ export const filtersAPI = {
 }
 
 const getGenres = async (
-  locale: string,
+  locale: string = 'ru',
   params?: IStaffGetRequest
 ): Promise<IFilterGetResponse[]> => {
   try {
@@ -31,12 +31,13 @@ const getGenres = async (
             ...genre,
             name: formatCapitalize(genre.name),
           }))
-        : genresData.data
-            .filter(genre => genre.name_en)
-            .map(genre => ({
+        : genresData.data.map(genre => {
+            const name = genre.name_en || genre.name
+            return {
               ...genre,
-              name: formatCapitalize(genre.name_en),
-            }))
+              name: formatCapitalize(name),
+            }
+          })
 
     return genres
   } catch (_) {
