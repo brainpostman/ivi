@@ -12,6 +12,7 @@ import { useSession } from 'next-auth/react';
 import CommentForm from '@/components/UI/CommentForm/CommentForm';
 import { ChangeEvent, useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
+import Comment from '@/components/UI/Comment/Comment';
 
 interface IReviewProps {
     film: IMovieById;
