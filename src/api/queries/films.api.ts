@@ -30,6 +30,12 @@ export const filmsAPI = {
     getFilmReviews(param: number) {
         return getFilmReviews(param);
     },
+    getFilmReviewById(param: number) {
+        return getFilmReviewById(param);
+    },
+    getComments(film_id: number, parent_id: number) {
+        return getComments(film_id, parent_id);
+    },
     postFilmReview(data: IReviewPostRequest, accessToken: string | null) {
         return postFilmReview(data, accessToken);
     },
@@ -92,6 +98,26 @@ const getFilmReviews = async (id: number): Promise<IReviewGetResponse[]> => {
         return response.data;
     } catch (_) {
         return [];
+    }
+};
+
+const getComments = async (film_id: number, parent_id: number) => {
+    try {
+        const response = await customAxios.get<IReviewGetResponse[]>(
+            `/reviews/film/${film_id}/${parent_id}`
+        );
+        return response.data;
+    } catch (_) {
+        return [];
+    }
+};
+
+const getFilmReviewById = async (id: number): Promise<IReviewGetResponse | null> => {
+    try {
+        const response = await customAxios.get<IReviewGetResponse>(`/reviews/${id}`);
+        return response.data;
+    } catch (_) {
+        return null;
     }
 };
 
