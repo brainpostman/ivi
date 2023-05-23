@@ -5,6 +5,8 @@
 
   cursor: pointer;
 
+  border-radius: 8px;
+
   transition: transform 0.2s;
 
   width: 224px;
@@ -14,7 +16,7 @@
     transform: scale(1.05);
   }
 
-  >img {
+  > img {
     z-index: 3;
 
     &:first-child {

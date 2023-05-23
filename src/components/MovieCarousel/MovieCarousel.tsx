@@ -35,6 +35,7 @@ const MovieCarousel: FC<IProps> = ({ films, ...props }) => {
       breakpoints={breakpoints}
       classNameList={style.movie_carousel_list}
       padding={6}
+      speed={700}
       width='fit'
       {...props}
     >
