@@ -9,6 +9,7 @@ import style from './HeaderMobileMiddle.module.scss'
 import { FiltersContext } from '@/contexts/filters.context'
 import LanguageChanger from '@/components/LanguageSwitcher/LanguageSwitcher'
 import { useTranslation } from 'react-i18next'
+import { formatSplitArray } from '@/formatters/splitArray.format'
 
 const HeaderMobileMiddle = () => {
   const { countries, genres } = useContext(FiltersContext)
@@ -16,7 +17,7 @@ const HeaderMobileMiddle = () => {
   const { t } = useTranslation('header')
 
   const [contentLists, setContentLists] = useState(
-    getHeaderMobileMiddleContent({ genres, countries }).map(el => ({
+    getHeaderMobileMiddleContent({ genres, countries, t }).map(el => ({
       ...el,
       isSelect: false,
     }))
@@ -74,8 +75,16 @@ const HeaderMobileMiddle = () => {
                           </p>
                         )}
                         <ul className={style.filter_list}>
-                          {list.specificList.map(element => (
-                            <li>{element.name}</li>
+                          {formatSplitArray(list.specificList, 2, {
+                            evenly: true,
+                          }).map((list, index) => (
+                            <li key={index}>
+                              <ul className={style.filter_list_inner}>
+                                {list.map(el => (
+                                  <li key={el.id}>{el.name}</li>
+                                ))}
+                              </ul>
+                            </li>
                           ))}
                         </ul>
                       </li>
@@ -115,7 +124,7 @@ const HeaderMobileMiddle = () => {
                       ))}
                     </ul>
 
-                    <p>Популярные трансляции</p>
+                    <p>{t('left-side.tv-block.popular-broadcasts-title')}</p>
                     <ul className={style.broadcast_list}>
                       {t('left-side.tv-block.popular-broadcasts', {
                         returnObjects: true,
@@ -146,7 +155,7 @@ const HeaderMobileMiddle = () => {
           </li>
         ))}
       </ul>
-      <p>Что посмотреть</p>
+      <p>{t('mobile.what-to-see')}</p>
     </div>
   )
 }

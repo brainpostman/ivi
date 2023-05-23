@@ -42,7 +42,7 @@
 
 .inner_lists {
   display: flex;
-  justify-content: space-between;
+  gap: 84px;
 
   &__title {
     @include ui-margin(bottom, 3);
@@ -51,12 +51,16 @@
 
 .filter_list {
   display: flex;
+  gap: 48px;
+}
+
+.filter_list_inner {
+  display: flex;
   flex-direction: column;
   gap: 12px;
 
   color: #ffffffb8;
 }
-
 
 .tv_list {
   display: flex;
