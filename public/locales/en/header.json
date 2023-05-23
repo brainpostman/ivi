@@ -2,6 +2,7 @@
   "genres": "Genres",
   "countries": "Countries",
   "mobile": {
+    "what-to-see": "What to see",
     "more-block": {
       "connect-subscription": "Connect subscription",
       "certificate-activation": "Certificate activation",
@@ -19,7 +20,29 @@
       "my-ivi": "My Ivi",
       "whats-new": "What's new",
       "tv-program": "TV Program"
-    }
+    },
+    "tabs": [
+      {
+        "title": "Films",
+        "listTitle": "All films",
+        "lists": [{ "query": "Genres" }, { "query": "Countries" }]
+      },
+      {
+        "title": "Series",
+        "listTitle": "All series",
+        "lists": [{ "query": "Genres" }, { "query": "Countries" }]
+      },
+      {
+        "title": "Cartoons",
+        "listTitle": "All cartoons",
+        "lists": [{ "query": "Genres" }, { "query": "Countries" }]
+      },
+      {
+        "title": "TV+",
+        "listTitle": "TV Online",
+        "lists": [{ "query": "Genres" }, { "query": "Countries" }]
+      }
+    ]
   },
   "left-side": {
     "novetly": [
@@ -68,182 +91,6 @@
       "animation": "Cartoons",
       "tv+": "TV+"
     },
-    "lists": [
-      {
-        "tab": "movies",
-        "columns": [
-          {
-            "title": "Genres",
-            "rows": [
-              "Arthouse",
-              "Comedy",
-              "Action",
-              "Crime",
-              "Western",
-              "Melodramas",
-              "Military",
-              "Mystical",
-              "Detectives",
-              "According to comics",
-              "For the whole family",
-              "Adventures",
-              "For children",
-              "Sports",
-              "Documentaries",
-              "Thrillers",
-              "Dramas",
-              "Horror",
-              "Historical",
-              "Science Fiction",
-              "Disasters",
-              "Fantasy"
-            ]
-          },
-          {
-            "title": "Countries",
-            "rows": ["Russian", "Foreign", "Soviet cinema"]
-          },
-          {
-            "title": "Years",
-            "rows": [
-              "Films of 2023",
-              "Films of 2022",
-              "Films of 2021",
-              "Films of 2020"
-            ]
-          },
-          {
-            "rows": [
-              "New items",
-              "Selections",
-              "Ivy.Rating",
-              "Coming soon on Ivi",
-              "Trailers",
-              "What to watch",
-              "Movies in HD",
-              "Choice on Ivi",
-              "New Subscriptions",
-              "Amediateka Movies",
-              "Popular Movies",
-              "Ivi Movies"
-            ]
-          }
-        ]
-      },
-      {
-        "tab": "series",
-        "columns": [
-          {
-            "title": "Genres",
-            "rows": [
-              "Biography",
-              "Medical",
-              "Action Movies",
-              "Melodramas",
-              "Military",
-              "Mystical",
-              "Detectives",
-              "Adventures",
-              "For the whole family",
-              "Romantic",
-              "Documentary",
-              "Tv Shows",
-              "Dramas",
-              "Thrillers",
-              "Dramas",
-              "Turkish",
-              "Historical",
-              "Horror",
-              "Comedy",
-              "Fantastic",
-              "Criminal",
-              "Fantasy"
-            ]
-          },
-          {
-            "title": "Countries",
-            "rows": [
-              "Russian",
-              "Foreign",
-              "American",
-              "Ukrainian",
-              "Korean",
-              "Turkish"
-            ]
-          },
-          {
-            "title": "Years",
-            "rows": [
-              "TV series of 2023",
-              "TV Series of 2022",
-              "TV Series of 2021",
-              "TV Series of 2020"
-            ]
-          },
-          {
-            "rows": [
-              "New",
-              "HD Series",
-              "Free Series",
-              "Amediateka Series",
-              "Paramount Play Series"
-            ]
-          }
-        ]
-      },
-      {
-        "tab": "cartoons",
-        "columns": [
-          {
-            "title": "Genres",
-            "rows": [
-              "Anime",
-              "Full-length",
-              "Action Movie",
-              "Adventures",
-              "Detective",
-              "Educational",
-              "For adults",
-              "TV series",
-              "For the whole family",
-              "Sports",
-              "For children",
-              "Thriller",
-              "Drama",
-              "Horror",
-              "History",
-              "Fiction",
-              "Comedy",
-              "Fantasy",
-              "Criminal",
-              "Musical"
-            ]
-          },
-          {
-            "title": "Countries",
-            "rows": ["Soviet", "Russian", "American", "Foreign"]
-          },
-          {
-            "title": "Years",
-            "rows": [
-              "Cartoons of 2023",
-              "Cartoons of 2022",
-              "Cartoons of 2021",
-              "Cartoons of 2020"
-            ]
-          },
-          {
-            "rows": [
-              "New items",
-              "Cartoons in HD",
-              "Multifiles in Paramount Play / Nickelodeon",
-              "Dreamworks Cartoons",
-              "CTC Kids Cartoons"
-            ]
-          }
-        ]
-      }
-    ],
     "tv-block": {
       "list-tv": [
         { "title": "TV online", "href": "www.ivi.ru" },
