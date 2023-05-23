@@ -9,7 +9,7 @@ export function validateComment(minLength: number, maxLength: number, comment: s
 }
 
 export function trimComment(comment: string) {
-    return comment.replace(/\s+/g, ' ').trim();
+    return comment.trim().replace(/\s+/g, ' ');
 }
 
 export function buildDateString(date: Date, locale: string) {
