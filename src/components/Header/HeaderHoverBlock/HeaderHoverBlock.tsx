@@ -39,8 +39,6 @@ const HeaderHoverBlock: FC<IProps> = ({
     'TV+',
   ]
 
-  console.log(t('left-side.novetly', { returnObjects: true }))
-
   const currentBlock: IHeaderHoverBlockContent = {
     tab,
     columns: [
