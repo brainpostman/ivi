@@ -2,8 +2,9 @@
     width: 100%;
     display: flex;
     justify-content: space-between;
-    gap: 40px;
+    gap: 20px;
     @include ui-padding(ver, 4);
+    @include ui-padding(right, 2);
 }
 
 .commentSection {
@@ -89,7 +90,8 @@
 }
 
 .commentForm {
-    @include ui-margin(ver, 2);
+    @include ui-margin(top, 2);
+    @include ui-margin(left, 2);
     display: flex;
     align-items: flex-start;
     justify-content: space-evenly;
@@ -98,14 +100,31 @@
 }
 
 .comments {
-    &__title {
+    @include ui-padding(default, 2);
+    width: 100%;
+    &__separator {
         width: 100%;
         display: flex;
         align-items: center;
-        & span {
-            @include ui-font(4);
-            @include ui-margin(hor, 2);
-            font-weight: 700;
-        }
+        @include ui-margin(bottom, 4);
+        @include ui-font(4);
+        font-weight: 700;
+    }
+    &__title {
+        @include ui-margin(left, 2);
+        @include ui-margin(right, 2);
+    }
+    &__list {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+    }
+}
+
+.link {
+    transition: all 0.4s;
+    &:hover {
+        color: white;
+        transition: all 0.2s;
     }
 }

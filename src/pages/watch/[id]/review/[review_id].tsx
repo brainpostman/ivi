@@ -5,14 +5,15 @@ import { IMovieById, IReviewGetResponse } from '@/types/films.api.interface';
 import { GetServerSidePropsContext } from 'next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import styles from './index.module.scss';
-import { localizeDateString } from '@/formatters/localizeDateString.format';
 import { useRouter } from 'next/router';
 import { buildDateString, trimComment, validateComment } from '@/utils/comment.utils';
 import { useSession } from 'next-auth/react';
 import CommentForm from '@/components/UI/CommentForm/CommentForm';
 import { ChangeEvent, useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
-import Comment from '@/components/UI/Comment/Comment';
+import ReviewComment from '@/components/UI/ReviewComment/ReviewComment';
+import Loader from '@/components/Loader/Loader';
+import Link from 'next/link';
 
 interface IReviewProps {
     film: IMovieById;
@@ -68,8 +69,9 @@ const Review = ({ film, review, comments: propsComments }: IReviewProps) => {
 
     const handleClick = async () => {
         toast.dismiss();
-        setText((prev) => trimComment(prev));
-        if (!validateComment(10, 10000, text)) {
+        const str = trimComment(text);
+        setText(str);
+        if (!validateComment(10, 10000, str)) {
             toast.warn('Комментарий должен иметь не менее 10 и не более 10000 символов.');
             return;
         }
@@ -99,14 +101,14 @@ const Review = ({ film, review, comments: propsComments }: IReviewProps) => {
     }, [router.asPath]);
 
     useEffect(() => {
-        const getReviews = async () => {
+        const getComments = async () => {
             const commentsReq = await filmsAPI.getComments(film.id, review.id);
             if (commentsReq.length > 0) {
                 setComments(commentsReq);
             }
         };
         if (isLoading) {
-            getReviews();
+            getComments();
             setIsLoading(false);
         }
     }, [isLoading]);
@@ -116,9 +118,10 @@ const Review = ({ film, review, comments: propsComments }: IReviewProps) => {
             <div className={styles.wrapper}>
                 <section className={styles.commentSection}>
                     <h1 className={styles.title}>
-                        {review.parent
-                            ? 'Комментарий к '
-                            : 'Отзыв к фильму ' + (locale === 'ru' ? film.name : film.name_en)}
+                        {review.parent ? 'Комментарий к ' : 'Отзыв к фильму '}
+                        <Link className={styles.link} href={`/watch/${film.id}`}>
+                            {locale === 'ru' ? film.name : film.name_en}
+                        </Link>
                     </h1>
                     <section className={styles.openingPost}>
                         <article className={styles.comment}>
@@ -161,17 +164,39 @@ const Review = ({ film, review, comments: propsComments }: IReviewProps) => {
                             textareaValue={text}
                             textareaOnChangeFn={handleChange}
                             sendButtonClickFn={handleClick}
-                            textareaPlaceholder='Оставьте комментарий'
+                            textareaPlaceholder='Оставьте комментарий к отзыву'
                         />
                     </div>
-                    <div className={styles.comments__title}>
-                        <p className={styles.comment__line} />
-                        <span>Комментарии</span>
-                        <p className={styles.comment__line} />
+                    <div className={styles.comments}>
+                        <div className={styles.comments__separator}>
+                            <p className={styles.comment__line} />
+                            <span className={styles.comments__title}>
+                                Комментарии (<span>{comments.length}</span>)
+                            </span>
+                            <p className={styles.comment__line} />
+                        </div>
+                        {isLoading ? (
+                            <Loader />
+                        ) : (
+                            <div className={styles.comments__list}>
+                                {comments.map((comment) => {
+                                    return (
+                                        <ReviewComment
+                                            key={comment.id}
+                                            sessionStatus={status}
+                                            sessionData={data}
+                                            film={film}
+                                            comment={comment}
+                                        />
+                                    );
+                                })}
+                            </div>
+                        )}
                     </div>
-                    <Comment />
                 </section>
-                <ModalFilmPoster film={film} />
+                <Link href={`/watch/${film.id}`}>
+                    <ModalFilmPoster film={film} className={styles.poster} />
+                </Link>
             </div>
         </PageLayout>
     );
