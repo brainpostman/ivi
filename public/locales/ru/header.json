@@ -1,5 +1,63 @@
 {
+  "genres": "Жанры",
+  "countries": "Страны",
+  "mobile": {
+    "more-block": {
+      "connect-subscription": "Подключить подписку",
+      "certificate-activation": "Активация сертификата",
+      "ivi-rating-films": "Иви.Рейтинг фильмы",
+      "ivi-rating-series": "Иви.Рейтинг сериалы"
+    },
+    "nav": [
+      { "title": "Мой иви", "href": "/" },
+      { "title": "Каталог", "href": "movies" },
+      { "title": "Поиск", "href": "https://www.ivi.ru/tvplus?ivi_search" },
+      { "title": "TV+", "href": "https://www.ivi.ru/tvplus" },
+      { "title": "Ещё", "href": "/more" }
+    ],
+    "middle": {
+      "my-ivi": "Мой иви",
+      "whats-new": "Что нового",
+      "tv-program": "Телепрограмма"
+    }
+  },
+
   "left-side": {
+    "novetly": [
+      { "name": "Новинки", "href": "https://www.ivi.ru/new/animation-new" },
+      { "name": "Подборки", "href": "https://www.ivi.ru/collections" },
+      {
+        "name": "Иви.Рейтинг",
+        "href": "https://www.ivi.ru/series/all?ivi_rating_10_gte=7&sort=ivi&rating_part=main&rating_model=ready"
+      },
+      { "name": "Скоро на Иви", "href": "https://www.ivi.ru/new/soon-ivi" },
+      { "name": "Трейлеры", "href": "https://www.ivi.ru/trailers" },
+      { "name": "Что посмотреть", "href": "https://www.ivi.ru/goodmovies" },
+      {
+        "name": "Фильмы в HD",
+        "href": "https://www.ivi.ru/collections/movies-hd"
+      },
+      {
+        "name": "Выбор Иви",
+        "href": "https://www.ivi.ru/collections/vyibor-ivi"
+      },
+      {
+        "name": "Новинки подписки",
+        "href": "https://www.ivi.ru/collections/very-new-svod?sort=priority_in_collection"
+      },
+      {
+        "name": "Фильмы Amediateka",
+        "href": "https://www.ivi.ru/collections/filmyi-amediateka"
+      },
+      {
+        "name": "Популярные фильмы",
+        "href": "https://www.ivi.ru/collections/best-movies"
+      },
+      {
+        "name": "Фильмы Иви",
+        "href": "https://www.ivi.ru/collections/ivi-originals"
+      }
+    ],
     "titles": {
       "my-ivi": "Мой Иви",
       "new-releases": "Что нового",
@@ -455,7 +513,14 @@
       "sign-out": "Выйти",
       "settings": "Настройки",
       "support": "Помощь",
-      "admin": "Админка"
+      "admin": "Админка",
+      "movie-block": {
+        "watch-on-smart-tv": "Смотреть на SmartTV",
+        "connect": "Подключить",
+        "subscription": "Иви Подписка",
+        "turn-off": "Отключить можно в любой момент",
+        "payment": "От 199 ₽ за месяц"
+      }
     }
   }
 }

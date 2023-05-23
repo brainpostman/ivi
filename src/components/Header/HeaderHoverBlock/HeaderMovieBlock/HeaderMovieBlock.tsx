@@ -5,6 +5,7 @@ import { FaTv } from 'react-icons/fa'
 import MiniCarousel from '@/components/MiniCarousel/MiniCarousel'
 import MiniCarouselIviBlock from '@/components/MiniCarousel/MiniCarouselIviBlock/MiniCarouselIviBlock'
 import { IMovie } from '@/types/films.api.interface'
+import { useTranslation } from 'next-i18next'
 
 interface IProps {
   isShow?: boolean
@@ -13,6 +14,10 @@ interface IProps {
 
 const HeaderMovieBlock: FC<IProps> = ({ isShow = true, films }) => {
   const [isHover, setIsHover] = useState(false)
+
+  const { t } = useTranslation('header', {
+    keyPrefix: 'right-side.profile-block.movie-block',
+  })
 
   if (!isShow) return <></>
 
@@ -29,7 +34,7 @@ const HeaderMovieBlock: FC<IProps> = ({ isShow = true, films }) => {
 
       <BasicBtn
         btnType='icon'
-        title='Смотреть на SmartTV'
+        title={t('watch-on-smart-tv')}
         className={style.watch_tv_button}
         href='https://www.ivi.ru/pages/tvsmart/'
       >

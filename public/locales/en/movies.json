@@ -161,7 +161,7 @@
     "genres": "Genres",
     "countries": "Countries",
     "year": "Years",
-    "rating": "Ivy Rating",
+    "rating": "Ivi Rating",
     "director": "Directors",
     "actor": "Actors"
   },
@@ -171,7 +171,8 @@
   },
   "sliders": {
     "rating": "Ivi Rating",
-    "scores": "User scores"
+    "scores": "User scores",
+    "years": "Years"
   },
   "reset-filters": "Reset filters",
   "show-more": "Show more"

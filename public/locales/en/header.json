@@ -1,5 +1,65 @@
 {
+  "genres": "Genres",
+  "countries": "Countries",
+  "mobile": {
+    "more-block": {
+      "connect-subscription": "Connect subscription",
+      "certificate-activation": "Certificate activation",
+      "ivi-rating-films": "Ivi.Rating Films",
+      "ivi-rating-series": "Ivi.Rating Series"
+    },
+    "nav": [
+      { "title": "My Ivi", "href": "/" },
+      { "title": "Сatalog", "href": "/movies" },
+      { "title": "Search", "href": "https://www.ivi.ru/tvplus?ivi_search" },
+      { "title": "TV+", "href": "https://www.ivi.ru/tvplus" },
+      { "title": "More", "href": "/more" }
+    ],
+    "middle": {
+      "my-ivi": "My Ivi",
+      "whats-new": "What's new",
+      "tv-program": "TV Program"
+    }
+  },
   "left-side": {
+    "novetly": [
+      { "name": "Novetly", "href": "https://www.ivi.ru/new/animation-new" },
+      { "name": "Collections", "href": "https://www.ivi.ru/collections" },
+      {
+        "name": "Ivi.Rating",
+        "href": "https://www.ivi.ru/series/all?ivi_rating_10_gte=7&sort=ivi&rating_part=main&rating_model=ready"
+      },
+      {
+        "name": "Coming soon to Ivi",
+        "href": "https://www.ivi.ru/new/soon-ivi"
+      },
+      { "name": "Trailers", "href": "https://www.ivi.ru/trailers" },
+      { "name": "What to see", "href": "https://www.ivi.ru/goodmovies" },
+      {
+        "name": "HD films",
+        "href": "https://www.ivi.ru/collections/movies-hd"
+      },
+      {
+        "name": "Ivi's choice",
+        "href": "https://www.ivi.ru/collections/vyibor-ivi"
+      },
+      {
+        "name": "Subscription news",
+        "href": "https://www.ivi.ru/collections/very-new-svod?sort=priority_in_collection"
+      },
+      {
+        "name": "Amediateka films",
+        "href": "https://www.ivi.ru/collections/filmyi-amediateka"
+      },
+      {
+        "name": "Popular films",
+        "href": "https://www.ivi.ru/collections/best-movies"
+      },
+      {
+        "name": "Ivi's films",
+        "href": "https://www.ivi.ru/collections/ivi-originals"
+      }
+    ],
     "titles": {
       "my-ivi": "My Ivi",
       "new-releases": "New Releases",
@@ -455,7 +515,14 @@
       "sign-out": "Sign out",
       "settings": "Settings",
       "support": "Help",
-      "admin": "Admin Panel"
+      "admin": "Admin Panel",
+      "movie-block": {
+        "watch-on-smart-tv": "Watch on SmartTV",
+        "connect": "Connect",
+        "subscription": "Ivi Subscription",
+        "turn-off": "You can turn it off at any time",
+        "payment": "From 199 ₽ per month"
+      }
     }
   }
 }

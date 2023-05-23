@@ -144,7 +144,7 @@ const FilterBlock: FC<IProps> = ({
       <FilterSlider
         query={{ min: 'yearStart', max: 'yearEnd' }}
         range={{ min: minYear, max: maxYear }}
-        title='Годы'
+        title={t('sliders.years')}
       />
       <FilterSlider
         query='minCountScore'

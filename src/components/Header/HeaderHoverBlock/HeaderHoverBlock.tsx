@@ -1,4 +1,4 @@
-import { DetailedHTMLProps, FC, HTMLAttributes, useContext } from 'react'
+import { DetailedHTMLProps, FC, HTMLAttributes } from 'react'
 import { IHeaderTab } from '@/types/header.interface'
 import style from './HeaderHoverBlock.module.scss'
 import HeaderProfileBlock from './HeaderProfileBlock/HeaderProfileBlock'
@@ -6,11 +6,10 @@ import HeaderTvBlock from './HeaderTvBlock/HeaderTvBlock'
 import HeaderWatchBlock from './HeaderWatchBlock/HeaderWatchBlock'
 import HeaderMovieBlock from './HeaderMovieBlock/HeaderMovieBlock'
 import HoverTabBlock from './HoverFilterBlock/HoverTabBlock'
-import { useTranslation } from 'next-i18next'
 import { IHeaderHoverBlockContent } from '@/types/hoverblock.interface'
-import { novetlyFilterData } from '@/data/filters.data'
 import { IFilterGetResponse } from '@/types/filters.interface'
 import { IMovie } from '@/types/films.api.interface'
+import { useTranslation } from 'next-i18next'
 
 interface IProps
   extends DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement> {
@@ -29,7 +28,7 @@ const HeaderHoverBlock: FC<IProps> = ({
   films,
   ...props
 }) => {
-  const { t } = useTranslation('header', { keyPrefix: 'left-side' })
+  const { t } = useTranslation('header')
 
   const tabList: IHeaderTab[] = ['movies', 'series', 'cartoons']
 
@@ -40,16 +39,25 @@ const HeaderHoverBlock: FC<IProps> = ({
     'TV+',
   ]
 
+  console.log(t('left-side.novetly', { returnObjects: true }))
+
   const currentBlock: IHeaderHoverBlockContent = {
     tab,
     columns: [
-      { title: 'Жанры', filter: 'genres', rows: genres.slice(0, 22) },
+      { title: t('genres'), filter: 'genres', rows: genres.slice(0, 22) },
       {
-        title: 'Страны',
+        title: t('countries'),
         filter: 'countries',
         rows: countries.slice(0, 22),
       },
-      { rows: novetlyFilterData },
+      {
+        rows: t('left-side.novetly', { returnObjects: true }).map(
+          (novetly, index) => ({
+            ...novetly,
+            id: index + 1,
+          })
+        ),
+      },
     ],
   }
 

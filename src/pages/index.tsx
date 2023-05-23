@@ -91,7 +91,7 @@ const Home: NextPage<IProps> = ({
       <section className={style.carousels}>
         {firstCarouselFilms ? (
           <MovieCarousel
-            title='Драмы'
+            title={t('carousel-titles.drama')}
             href='https://www.ivi.ru/collections/dramatical-piece'
             films={firstCarouselFilms}
           />
@@ -101,7 +101,7 @@ const Home: NextPage<IProps> = ({
 
         {secondCarouselFilms ? (
           <MovieCarousel
-            title='Российские детективные сериалы'
+            title={t('carousel-titles.rus-detective-series')}
             href='https://www.ivi.ru/collections/russkyi-detektiv'
             films={secondCarouselFilms}
           />

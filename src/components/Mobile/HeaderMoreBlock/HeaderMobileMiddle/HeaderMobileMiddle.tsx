@@ -36,10 +36,12 @@ const HeaderMobileMiddle = () => {
       <LanguageChanger className={style.language_changer} />
       <nav className={style.nav}>
         <p>
-          <Link href='/'>Мой иви</Link>
+          <Link href='/'>{t('mobile.middle.my-ivi')}</Link>
         </p>
         <p>
-          <a href='https://www.ivi.ru/new'>Что нового</a>
+          <Link href='https://www.ivi.ru/new'>
+            {t('mobile.middle.whats-new')}
+          </Link>
         </p>
       </nav>
 
@@ -84,20 +86,22 @@ const HeaderMobileMiddle = () => {
                 <div>
                   <p>{element.listTitle}</p>
                   <ul className={style.tv_list}>
-                    <li>ТВ-каналы</li>
-                    <li>ТВ-развлекательное</li>
-                    <li>Дети</li>
-                    <li>Спортивное ТВ</li>
-                    <li>Документальное</li>
+                    {t('left-side.tv-block.list-tv', {
+                      returnObjects: true,
+                    }).map((tv, index) => (
+                      <li key={index}>{tv.title}</li>
+                    ))}
                   </ul>
 
                   <BasicBtn className={style.tv_program_button}>
-                    Телепрограмма
+                    {t('mobile.middle.tv-program')}
                   </BasicBtn>
 
                   <div>
                     <ul className={style.channel_list}>
-                      {t('left-side.tv-block.carousels').map(data => (
+                      {t('left-side.tv-block.carousels', {
+                        returnObjects: true,
+                      }).map(data => (
                         <li key={data.title}>
                           <p>{data.title}</p>
                           <ul className={style.inner_channel_list}>
@@ -113,7 +117,9 @@ const HeaderMobileMiddle = () => {
 
                     <p>Популярные трансляции</p>
                     <ul className={style.broadcast_list}>
-                      {t('left-side.tv-block.popular-broadcasts')
+                      {t('left-side.tv-block.popular-broadcasts', {
+                        returnObjects: true,
+                      })
                         .slice(0, 12)
                         .map(broadcast => (
                           <li key={broadcast.title} className={style.broadcast}>
