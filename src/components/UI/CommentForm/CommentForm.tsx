@@ -8,6 +8,7 @@ interface ICommentFormProps {
     textareaOnChangeFn: (e: ChangeEvent<HTMLTextAreaElement>) => void;
     textareaPlaceholder?: string;
     sendButtonClickFn: () => void;
+    cancelButtonCallback?: () => void;
 }
 
 const CommentForm = ({
@@ -15,6 +16,7 @@ const CommentForm = ({
     textareaOnChangeFn,
     textareaPlaceholder = '',
     sendButtonClickFn,
+    cancelButtonCallback,
 }: ICommentFormProps) => {
     return (
         <div className={styles.textarea_wrapper}>
@@ -26,9 +28,16 @@ const CommentForm = ({
                 placeholder={textareaPlaceholder}
                 className={styles.textarea}
             />
-            <SimpleButton className={styles.sendReview} onClick={sendButtonClickFn}>
-                Отправить
-            </SimpleButton>
+            <div className={styles.controls}>
+                <SimpleButton className={styles.button} onClick={sendButtonClickFn}>
+                    Отправить
+                </SimpleButton>
+                {cancelButtonCallback && (
+                    <SimpleButton className={styles.button} onClick={cancelButtonCallback}>
+                        Отменить
+                    </SimpleButton>
+                )}
+            </div>
         </div>
     );
 };

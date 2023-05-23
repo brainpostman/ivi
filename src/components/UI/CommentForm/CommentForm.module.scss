@@ -6,9 +6,14 @@
     }
 }
 
-.sendReview {
-    align-self: flex-end;
+.controls {
     @include ui-margin(top, 2);
+    display: flex;
+    gap: 8px;
+    align-self: flex-end;
+}
+
+.button {
     height: 32px;
     width: fit-content;
 }
