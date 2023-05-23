@@ -2,9 +2,9 @@ import { IMovie } from '@/types/films.api.interface'
 import CustomCarousel from '../CustomCarousel/CustomCarousel'
 import style from './MiniCarousel.module.scss'
 import { FC } from 'react'
-import formatSplitFilms from '@/formatters/splitFilms.format'
 import MiniCarouselItem from './MiniCarouselItem/MiniCarouselItem'
 import Link from 'next/link'
+import { formatSplitArray } from '@/formatters/splitArray.format'
 
 interface IProps {
   films: IMovie[]
@@ -19,7 +19,9 @@ const MiniCarousel: FC<IProps> = ({
   className = '',
   autoplay = true,
 }) => {
-  const filmsArraysArray = formatSplitFilms(filmsIncoming, lines)
+  const filmsArraysArray = formatSplitArray(filmsIncoming, lines, {
+    evenly: true,
+  })
 
   return (
     <ul className={`${style.wrapper} ${className}`}>

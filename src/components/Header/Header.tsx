@@ -51,7 +51,7 @@ const Header = () => {
   }
 
   const getMiniCarouselFilms = async () => {
-    const { films } = await filmsAPI.getFilms({ take: 30 })
+    const { films } = await filmsAPI.getFilms(locale, { take: 30 })
     setMiniCarouselFilms(films)
   }
 
