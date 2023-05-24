@@ -169,7 +169,7 @@ const Review = ({ film, review, comments: propsComments }: IReviewProps) => {
                                     <span className={styles.comment__from}>
                                         {review.parent ? '' : 'Отзыв от '}
                                         <span className={styles.comment__sender}>
-                                            {review.name || review.user_email}
+                                            {review.user_name || review.user_email}
                                         </span>
                                     </span>
                                     <span>
