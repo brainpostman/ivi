@@ -1,5 +1,5 @@
 .wrapper {
-    width: 100%;
+    width: $max-width;
     display: flex;
     justify-content: space-between;
     gap: 20px;
@@ -82,11 +82,6 @@
         }
     }
     transition: border-color 0.4s, box-shadow 0.4s;
-    // &:hover {
-    //     border-color: $gray-soft;
-    //     transition: border-color 0.2s, box-shadow 0.2s;
-    //     box-shadow: 0 0 20px 5px rgba($color: #fff, $alpha: 0.15);
-    // }
 }
 
 .commentForm {

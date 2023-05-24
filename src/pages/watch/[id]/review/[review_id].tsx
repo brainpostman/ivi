@@ -14,6 +14,7 @@ import { toast } from 'react-toastify';
 import ReviewComment from '@/components/UI/ReviewComment/ReviewComment';
 import Loader from '@/components/Loader/Loader';
 import Link from 'next/link';
+import ModalWindow from '@/components/ModalWindow/ModalWindow';
 
 interface IReviewProps {
     film: IMovieById;
@@ -31,8 +32,10 @@ export const getServerSideProps = async ({ locale, params }: GetServerSidePropsC
         };
     }
 
-    const film = await filmsAPI.getFilmsById(Number(params.id));
     const review = await filmsAPI.getFilmReviewById(Number(params.review_id));
+
+    const film = await filmsAPI.getFilmsById(Number(params.id));
+
     const comments = await filmsAPI.getComments(Number(params.id), Number(params.review_id));
 
     return {
@@ -61,17 +64,48 @@ const Review = ({ film, review, comments: propsComments }: IReviewProps) => {
     const [comments, setComments] = useState([...propsComments]);
     const [isLoading, setIsLoading] = useState(false);
     const [text, setText] = useState('');
+    const [reviewText, setReviewText] = useState(review.text);
+    const [showModal, setShowModal] = useState(false);
 
     const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
         setText(e.target.value);
         toast.dismiss();
     };
 
+    const handleEditChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
+        setReviewText(e.target.value);
+        toast.dismiss();
+    };
+
+    const handleEditClick = async () => {
+        toast.dismiss();
+        const str = trimComment(reviewText);
+        setReviewText(str);
+        if (!validateComment(5, 10000, str)) {
+            toast.warn('Отзыв должен иметь не менее 100 и не более 10000 символов.');
+            return;
+        }
+        if (data) {
+            const response = await filmsAPI.putFilmReview(
+                {
+                    id: data.user.id,
+                    text: reviewText,
+                },
+                data.accessToken
+            );
+            if (response) {
+                router.replace(router.asPath);
+            } else {
+                toast.error('При редактировании возникла проблема, пожалуйста повторите позже.');
+            }
+        }
+    };
+
     const handleClick = async () => {
         toast.dismiss();
         const str = trimComment(text);
         setText(str);
-        if (!validateComment(10, 10000, str)) {
+        if (!validateComment(5, 10000, str)) {
             toast.warn('Комментарий должен иметь не менее 10 и не более 10000 символов.');
             return;
         }
@@ -150,7 +184,12 @@ const Review = ({ film, review, comments: propsComments }: IReviewProps) => {
                                 <p className={styles.comment__line} />
                                 {status === 'authenticated' && data.user.id === review.user_id ? (
                                     <div className={styles.comment__buttons}>
-                                        <span>Редактировать</span>
+                                        <span
+                                            onClick={() => {
+                                                setShowModal(true);
+                                            }}>
+                                            Редактировать
+                                        </span>
                                     </div>
                                 ) : (
                                     <p className={styles.comment__line} />
@@ -170,9 +209,7 @@ const Review = ({ film, review, comments: propsComments }: IReviewProps) => {
                     <div className={styles.comments}>
                         <div className={styles.comments__separator}>
                             <p className={styles.comment__line} />
-                            <span className={styles.comments__title}>
-                                Комментарии (<span>{comments.length}</span>)
-                            </span>
+                            <span className={styles.comments__title}>Комментарии</span>
                             <p className={styles.comment__line} />
                         </div>
                         {isLoading ? (
@@ -198,6 +235,25 @@ const Review = ({ film, review, comments: propsComments }: IReviewProps) => {
                     <ModalFilmPoster film={film} className={styles.poster} />
                 </Link>
             </div>
+            <ModalWindow
+                isShow={showModal}
+                closeFunc={() => {
+                    setShowModal(false);
+                    setReviewText(review.text);
+                }}>
+                <div className={styles.modal}>
+                    <h1 className={styles.title__reviews}>Оставить отзыв</h1>
+                    <div className={styles.commentForm}>
+                        <CommentForm
+                            textareaValue={reviewText}
+                            textareaPlaceholder='Напишите отзыв'
+                            textareaOnChangeFn={handleEditChange}
+                            sendButtonClickFn={handleEditClick}
+                        />
+                        <ModalFilmPoster film={film} />
+                    </div>
+                </div>
+            </ModalWindow>
         </PageLayout>
     );
 };
