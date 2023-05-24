@@ -6,41 +6,41 @@ import VkProvider from 'next-auth/providers/vk';
 import jwtLib from 'jsonwebtoken';
 
 export const authOptions = {
-  session: {
-    jwt: true,
-    maxAge: 7 * 24 * 60 * 60,
-  },
-  providers: [
-    CredentialsProvider({
-      id: 'login',
-      name: 'login',
-      async authorize(credentials) {
-        const response = await axios.post(process.env.LOGIN, {
-          email: credentials.email,
-          password: credentials.password,
-        })
-        if (response.status === 201 && response.data.token) {
-          const user = {
-            provider: 'database',
-            email: credentials.email,
-            accessToken: response.data.token,
-            refreshToken: response.data.refreshToken,
-          }
-          return user
-        } else {
-          return null
-        }
-      },
-    }),
-    CredentialsProvider({
-      id: 'register',
-      name: 'register',
-      async authorize(credentials) {
-        const response = await axios.post(process.env.REGISTRATION, {
-          provider: 'database',
-          email: credentials.email,
-          password: credentials.password,
-        })
+    session: {
+        jwt: true,
+        maxAge: 7 * 24 * 60 * 60,
+    },
+    providers: [
+        CredentialsProvider({
+            id: 'login',
+            name: 'login',
+            async authorize(credentials) {
+                const response = await axios.post(process.env.LOGIN, {
+                    email: credentials.email,
+                    password: credentials.password,
+                });
+                if (response.status === 201 && response.data.token) {
+                    const user = {
+                        provider: 'database',
+                        email: credentials.email,
+                        accessToken: response.data.token,
+                        refreshToken: response.data.refreshToken,
+                    };
+                    return user;
+                } else {
+                    return null;
+                }
+            },
+        }),
+        CredentialsProvider({
+            id: 'register',
+            name: 'register',
+            async authorize(credentials) {
+                const response = await axios.post(process.env.REGISTRATION, {
+                    provider: 'database',
+                    email: credentials.email,
+                    password: credentials.password,
+                });
 
                 if (response.status === 201 && response.data.token) {
                     const user = {
