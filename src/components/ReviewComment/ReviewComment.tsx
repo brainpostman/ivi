@@ -5,14 +5,7 @@ import {
   trimComment,
   validateComment,
 } from '@/utils/comment.utils'
-import {
-  ChangeEvent,
-  Dispatch,
-  SetStateAction,
-  useEffect,
-  useState,
-} from 'react'
-import { filmsAPI } from '@/api/queries/films.api'
+import { ChangeEvent, useEffect, useState } from 'react'
 import { toast } from 'react-toastify'
 import { Session } from 'next-auth'
 import CommentForm from '../UI/CommentForm/CommentForm'
