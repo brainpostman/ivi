@@ -58,6 +58,7 @@ export const getServerSideProps = async ({ locale, params }: GetServerSidePropsC
 };
 
 const Review = ({ film, review, comments: propsComments }: IReviewProps) => {
+    console.log(propsComments);
     const { t } = useTranslation('review');
     const { status, data } = useSession();
     const router = useRouter();
@@ -136,6 +137,7 @@ const Review = ({ film, review, comments: propsComments }: IReviewProps) => {
     };
 
     useEffect(() => {
+        setComments([...propsComments]);
         setText('');
     }, [router.asPath]);
 
@@ -229,6 +231,7 @@ const Review = ({ film, review, comments: propsComments }: IReviewProps) => {
                                             sessionData={data}
                                             film={film}
                                             comment={comment}
+                                            depth={1}
                                         />
                                     );
                                 })}

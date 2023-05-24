@@ -19,6 +19,7 @@ interface ICommentProps {
     film: IMovieById;
     comment: IReviewGetResponse;
     className?: string;
+    depth: number;
 }
 
 const ReviewComment = ({
@@ -27,6 +28,7 @@ const ReviewComment = ({
     film,
     comment,
     className: propsClassName = '',
+    depth,
 }: ICommentProps) => {
     const { t } = useTranslation('review');
     const router = useRouter();
@@ -37,7 +39,7 @@ const ReviewComment = ({
     const locTime = date.toLocaleTimeString();
     const [showForm, setShowForm] = useState(false);
     const [showModal, setShowModal] = useState(false);
-    const [comments, setChildComments] = useState<IReviewGetResponse[]>([]);
+    const [childComments, setChildComments] = useState<IReviewGetResponse[]>([]);
     const [isLoading, setIsLoading] = useState(false);
     const [text, setText] = useState('');
     const [commentText, setCommentText] = useState(comment.text);
@@ -156,14 +158,25 @@ const ReviewComment = ({
                 <div className={styles.comment__controls}>
                     <p className={styles.comment__line} />
                     <div className={styles.comment__buttons}>
-                        <span onClick={handleReplyClick}>{t('review-comment.reply')}</span>
-                        {data && data.user.id === comment.user_id && (
+                        {depth > 5 && childComments.length > 0 ? (
                             <span
                                 onClick={() => {
-                                    setShowModal(true);
+                                    router.push(`/watch/${film.id}/review/${comment.id}`);
                                 }}>
-                                {t('edit')}
+                                Загрузить другие комментарии этой ветки
                             </span>
+                        ) : (
+                            <>
+                                <span onClick={handleReplyClick}>{t('review-comment.reply')}</span>
+                                {data && data.user.id === comment.user_id && (
+                                    <span
+                                        onClick={() => {
+                                            setShowModal(true);
+                                        }}>
+                                        {t('edit')}
+                                    </span>
+                                )}
+                            </>
                         )}
                     </div>
                     <p className={styles.comment__line} />
@@ -183,9 +196,9 @@ const ReviewComment = ({
                 )}
                 {isLoading ? (
                     <Loader />
-                ) : comments.length > 0 ? (
+                ) : depth < 6 && childComments.length > 0 ? (
                     <div className={styles.comments__list}>
-                        {comments.map((comment) => {
+                        {childComments.map((comment) => {
                             return (
                                 <ReviewComment
                                     key={comment.id}
@@ -193,6 +206,7 @@ const ReviewComment = ({
                                     sessionData={data}
                                     film={film}
                                     comment={comment}
+                                    depth={depth + 1}
                                 />
                             );
                         })}
