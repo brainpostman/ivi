@@ -5,9 +5,9 @@ import BasicBtn from '@/components/UI/BasicBtn/BasicBtn'
 import { validateEmail } from '@/utils/auth.util'
 import { signIn } from 'next-auth/react'
 import { FaGoogle, FaVk } from 'react-icons/fa'
-import { Dispatch, SetStateAction } from 'react'
+import { ChangeEvent, Dispatch, SetStateAction } from 'react'
 import { useTranslation } from 'next-i18next'
-import styles from './AuthOptions.module.scss'
+import styles from './EmailInput.module.scss'
 
 interface IEmailInputProps {
   emailInput: string
@@ -30,30 +30,34 @@ const EmailInput = ({
 }: IEmailInputProps) => {
   const { t } = useTranslation('auth_modal')
 
+  const onClickContinueBtn = () => {
+    let emailError = validateEmail(emailInput)
+    if (emailError) {
+      setError([emailError])
+      return
+    }
+    handleEmail(emailInput)
+  }
+
+  const onChangeEmailInput = (event: ChangeEvent<HTMLInputElement>) => {
+    if (errorMessages.length > 0) resetError()
+    setEmailInput(event.target.value)
+  }
+
   return (
     <div className={`${styles.container} ${className}`}>
       <div className={styles.inputs}>
         <Input
           type='email'
           value={emailInput}
-          onChange={e => {
-            if (errorMessages.length > 0) resetError()
-            setEmailInput(e.target.value)
-          }}
+          onChange={event => onChangeEmailInput(event)}
           placeholder={t('email-placeholder')}
           autoFocus
         />
         <HighlightButton
           className={parentStyles.highlightbtn}
           disabled={emailInput ? false : true}
-          onClick={() => {
-            let emailError = validateEmail(emailInput)
-            if (emailError) {
-              setError([emailError])
-              return
-            }
-            handleEmail(emailInput)
-          }}
+          onClick={onClickContinueBtn}
         >
           {t('continue')}
         </HighlightButton>
