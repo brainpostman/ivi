@@ -67,3 +67,14 @@ export const crudGenreRequiredProperties = [
 
 export const staffRequiredProperties = ['id', 'name', 'type']
 export const filterRequiredProperties = ['id', 'name']
+
+export const reviewRequiredProperties = [
+  'id',
+  'text',
+  'user_id',
+  'filmd_id',
+  'parent',
+  'name',
+  'user_email',
+  'createdAt',
+]
