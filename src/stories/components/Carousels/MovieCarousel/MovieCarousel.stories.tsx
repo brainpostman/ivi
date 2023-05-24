@@ -2,7 +2,7 @@ import { transformFilms } from '@/api/transforms/films.transform'
 import MovieCarousel from '@/components/MovieCarousel/MovieCarousel'
 import { filmsListData } from '@/data/films.data'
 import { Meta } from '@storybook/react'
-import { IFilmsgGetResponse } from '@/types/films.api.interface'
+import { IFilmsgGetResponse } from '@/types/api/films.api.interface'
 import { ICustomCarouselProps } from '@/types/customCarousel.interface'
 
 type IProps = Omit<
@@ -79,7 +79,7 @@ const meta: Meta = {
 }
 
 export const Primary = ({ films: filmsIncoming, ...props }: IProps) => {
-  const films = filmsIncoming.map(film => transformFilms(film))
+  const films = transformFilms(filmsIncoming)
   return (
     <div
       style={{
