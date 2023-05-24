@@ -60,7 +60,6 @@ export const getServerSideProps = async ({ locale, params }: GetServerSidePropsC
 
 const Review = ({ film, review, comments: propsComments }: IReviewProps) => {
     const { t } = useTranslation('review');
-    const [childCounter, setChildCounter] = useState<Set<number>>(new Set());
     const { status, data } = useSession();
     const router = useRouter();
     const { locale } = router;
@@ -225,9 +224,7 @@ const Review = ({ film, review, comments: propsComments }: IReviewProps) => {
                     <div className={styles.comments}>
                         <div className={styles.comments__separator}>
                             <p className={styles.comment__line} />
-                            <span className={styles.comments__title}>
-                                {t('comments')} ({childCounter.size})
-                            </span>
+                            <span className={styles.comments__title}>{t('comments')}</span>
                             <p className={styles.comment__line} />
                         </div>
                         {isLoading ? (
@@ -243,7 +240,6 @@ const Review = ({ film, review, comments: propsComments }: IReviewProps) => {
                                             film={film}
                                             comment={comment}
                                             depth={1}
-                                            setChildCounter={setChildCounter}
                                         />
                                     );
                                 })}
