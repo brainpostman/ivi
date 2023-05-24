@@ -100,18 +100,18 @@ const getComments = async (
 
   * @param {number} id - id отзыва
   
-  * @returns Promise<IReviewGetResponse[]>
+  * @returns Promise<IReviewGetResponse | null>
 
 */
 
 const getFilmReviewById = async (
   id: number
-): Promise<IReviewGetResponse | null> => {
+): Promise<IReviewGetResponse | undefined> => {
   try {
     const response = await customAxios.get<IReviewGetResponse>(`/reviews/${id}`)
     return response.data
   } catch (_) {
-    return null
+    return undefined
   }
 }
 
