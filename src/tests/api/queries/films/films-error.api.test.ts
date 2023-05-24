@@ -11,7 +11,7 @@ const expectedFilmsError = {
   maxCountScore: 0,
 }
 
-describe('FILMS-API ERRORS', () => {
+describe('API-FILMS ERRORS', () => {
   let errorFilmsData: { films: IMovie[]; totalCount: number }
 
   let errorFilmById: IMovieById | undefined
