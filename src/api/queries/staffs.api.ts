@@ -2,7 +2,7 @@ import {
   IStaff,
   IStaffGetRequest,
   IStaffGetResponse,
-} from '@/types/staffs.interface'
+} from '@/types/api/staffs.api.interface'
 import { transformStaffs } from '../transforms/staff.transform'
 import { customAxios } from './customAxios'
 import formatStaffTypestoType from '@/formatters/staffTypesToType.format'
@@ -22,6 +22,14 @@ export const staffsAPI = {
   },
 }
 
+/*
+  * Получаем режиссёров
+
+  * @param {IStaffGetRequest} params - параметры
+  * @returns Promise<IStaff[]>
+
+*/
+
 const getDirectors = async (params?: IStaffGetRequest): Promise<IStaff[]> => {
   try {
     const directorsData = (
@@ -39,6 +47,14 @@ const getDirectors = async (params?: IStaffGetRequest): Promise<IStaff[]> => {
     return []
   }
 }
+
+/*
+  * Получаем актёров
+
+  * @param {IStaffGetRequest} params - параметры
+  * @returns Promise<IStaff[]>
+
+*/
 
 const getActors = async (params?: IStaffGetRequest): Promise<IStaff[]> => {
   try {
@@ -59,6 +75,14 @@ const getActors = async (params?: IStaffGetRequest): Promise<IStaff[]> => {
   }
 }
 
+/*
+  * Получаем участника по id
+
+  * @param {number} id - id участника
+  * @returns Promise<IStaff | undefined>
+
+*/
+
 const getStaffById = async (id: number): Promise<IStaff | undefined> => {
   try {
     const staff = (await customAxios.get<IStaffGetResponse>(`/staffs/${id}`))
@@ -70,6 +94,14 @@ const getStaffById = async (id: number): Promise<IStaff | undefined> => {
     return undefined
   }
 }
+
+/*
+  * Получаем участников по параметрам
+
+  * @param {IStaffGetRequest} params - параметры
+  * @returns Promise<IStaff[]>
+
+*/
 
 const getStaffByParams = async (
   params: IStaffGetRequest

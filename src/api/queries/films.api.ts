@@ -38,6 +38,15 @@ export const filmsAPI = {
   },
 }
 
+/*
+  * Получаем фильмы
+
+  * @param {locale} string - локаль
+  * @param {IFilmsGetRequest} params - параметры
+  * @returns Promise<IGetFilms>
+
+*/
+
 const getFilms = async (
   locale: string,
   params?: IFilmsGetRequest
@@ -84,6 +93,14 @@ const getFilms = async (
   }
 }
 
+/*
+  * Получаем круд фильмов
+
+  * @param {IFilmsGetRequest} params - параметры
+  * @returns Promise<IGetCrudFilms>
+
+*/
+
 const getCrudFilms = async (
   params?: IFilmsGetRequest
 ): Promise<IGetCrudFilms> => {
@@ -118,6 +135,15 @@ const getCrudFilms = async (
     }
   }
 }
+
+/*
+  * Получаем фильм по id
+
+  * @param {locale} string - локаль
+  * @param {number} id - id фильма
+  * @returns Promise<IMovieById | undefined>
+
+*/
 
 const getFilmsById = async (
   locale = 'ru',

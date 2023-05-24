@@ -28,6 +28,20 @@ export const reviewsAPI = {
   },
 }
 
+interface IPutFilmReviewData {
+  id: number
+  text: string
+}
+
+/*
+  * Получить количество отзывов
+
+  * @param {number} id - id фильма
+
+  * @returns Promise<number>
+
+*/
+
 const getFilmReviewCount = async (id: number): Promise<number> => {
   try {
     const response = await customAxios.get<number>(`/reviews/count/${id}`)
@@ -36,6 +50,15 @@ const getFilmReviewCount = async (id: number): Promise<number> => {
     return 0
   }
 }
+
+/*
+  * Получить родительские комментарии к фильму
+
+  * @param {number} id - id фильма
+
+  * @returns Promise<IReviewGetResponse[]>
+
+*/
 
 const getFilmReviews = async (id: number): Promise<IReviewGetResponse[]> => {
   try {
@@ -48,7 +71,20 @@ const getFilmReviews = async (id: number): Promise<IReviewGetResponse[]> => {
   }
 }
 
-const getComments = async (film_id: number, parent_id: number) => {
+/*
+  * Получить все дочерние комментарии
+
+  * @param {number} film_id - id фильма
+  * @param {number} parent_id - id отзыва
+  
+  * @returns Promise<IReviewGetResponse[]>
+
+*/
+
+const getComments = async (
+  film_id: number,
+  parent_id: number
+): Promise<IReviewGetResponse[]> => {
   try {
     const response = await customAxios.get<IReviewGetResponse[]>(
       `/reviews/film/${film_id}/${parent_id}`
@@ -58,6 +94,15 @@ const getComments = async (film_id: number, parent_id: number) => {
     return []
   }
 }
+
+/*
+  * Получить отзыв по id
+
+  * @param {number} id - id отзыва
+  
+  * @returns Promise<IReviewGetResponse[]>
+
+*/
 
 const getFilmReviewById = async (
   id: number
@@ -69,6 +114,16 @@ const getFilmReviewById = async (
     return null
   }
 }
+
+/*
+  * Создать отзыв
+
+  * @param {IReviewPostRequest} data - отзыв
+  * @param {string | null} accessToken - токен
+  
+  * @returns Promise<IReviewGetResponse | null>
+
+*/
 
 const postFilmReview = async (
   data: IReviewPostRequest,
@@ -90,8 +145,18 @@ const postFilmReview = async (
   }
 }
 
+/*
+  * Обновить отзыв
+
+  * @param {IPutFilmReviewData} data - отзыв
+  * @param {string | null} accessToken - токен
+  
+  * @returns Promise<IReviewGetResponse | null>
+
+*/
+
 const putFilmReview = async (
-  data: { id: number; text: string },
+  data: IPutFilmReviewData,
   accessToken: string | null
 ): Promise<IReviewGetResponse | null> => {
   try {

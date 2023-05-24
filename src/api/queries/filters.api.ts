@@ -1,9 +1,12 @@
 import { IFilterGetResponse } from '@/types/api/filters.api.interface'
-import { IStaffGetRequest, IStaffGetResponse } from '@/types/staffs.interface'
 import { customAxios } from './customAxios'
 import { formatCapitalize } from '@/formatters/capitalize.format'
-import { IFilmsGetRequest } from '@/types/films.api.interface'
-import { ICRUDGenre } from '@/types/ICrudMovie'
+import { ICRUDGenre } from '@/types/api/ICrudMovie'
+import {
+  IStaffGetRequest,
+  IStaffGetResponse,
+} from '@/types/api/staffs.api.interface'
+import { IFilmsGetRequest } from '@/types/api/films.api.interface'
 
 export const filtersAPI = {
   getGenres(locale?: string, params?: IStaffGetRequest) {
@@ -16,6 +19,15 @@ export const filtersAPI = {
     return getCountries()
   },
 }
+
+/*
+  * Получаем жанры
+
+  * @param {string} locale - локаль
+  * @param {IStaffGetRequest} params - параметры
+  * @returns Promise<IFilterGetResponse[]>
+
+*/
 
 const getGenres = async (
   locale = 'ru',
@@ -45,6 +57,14 @@ const getGenres = async (
   }
 }
 
+/*
+  * Получаем круд жанров
+
+  * @param {IStaffGetRequest} params - параметры
+  * @returns Promise<ICRUDGenre[]>
+
+*/
+
 const getCrudGenres = async (
   params?: IFilmsGetRequest
 ): Promise<ICRUDGenre[]> => {
@@ -64,6 +84,13 @@ const getCrudGenres = async (
     return []
   }
 }
+
+/*
+  * Получаем страны
+
+  * @returns Promise<IFilterGetResponse[]>
+
+*/
 
 const getCountries = async (): Promise<IFilterGetResponse[]> => {
   try {
