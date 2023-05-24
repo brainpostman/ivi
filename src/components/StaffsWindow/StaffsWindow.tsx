@@ -5,19 +5,21 @@ import { FC } from 'react';
 import StaffCard from '../StaffCard/StaffCard';
 import Link from 'next/link';
 import ModalFilmPoster from '../ModalFilmPoster/ModalFilmPoster';
+import { useTranslation } from 'next-i18next';
 
 interface IProps {
     film: IMovieById;
 }
 
 const StaffsWindow: FC<IProps> = ({ film }) => {
+    const { t } = useTranslation('watch', { keyPrefix: 'watch-actors.staffs-window' });
     const staffs = [
-        { title: 'Режиссёры', list: film.directors },
-        { title: 'Актёры', list: film.actors },
-        { title: 'Операторы', list: film.operators },
-        { title: 'Художники', list: film.artists },
-        { title: 'Сценаристы', list: film.scenario },
-        { title: 'Монтаж', list: film.compositors },
+        { title: t('directors'), list: film.directors },
+        { title: t('actors'), list: film.actors },
+        { title: t('operators'), list: film.operators },
+        { title: t('artists'), list: film.artists },
+        { title: t('writers'), list: film.scenario },
+        { title: t('editors'), list: film.compositors },
     ];
 
     return (
@@ -25,7 +27,7 @@ const StaffsWindow: FC<IProps> = ({ film }) => {
             <div className={style.modal_conteiner}>
                 <div className={style.modal_info}>
                     <div className={style.modal_info_title}>
-                        {film.name}: актеры и создатели фильма
+                        {film.name}: {t('actors-n-creators')}
                     </div>
                     <ul className={style.staff_grid_outer}>
                         {staffs.map(

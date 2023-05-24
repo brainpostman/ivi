@@ -6,6 +6,7 @@ import ModalWindow from '../ModalWindow/ModalWindow';
 import StaffsWindow from '../StaffsWindow/StaffsWindow';
 import { useBreakPoints } from '@/hooks/useBreakPoints';
 import Link from 'next/link';
+import { useTranslation } from 'next-i18next';
 
 const breakpoints = [
     { point: 1160, view: 8 },
@@ -31,7 +32,7 @@ const WatchActors: React.FC<IProps> = ({ film }) => {
     const closeModal = () => setIsShowModal(false);
 
     useBreakPoints(setStaffsView, 10, breakpoints);
-
+    const { t } = useTranslation('watch', { keyPrefix: 'watch-actors' });
     return (
         <div className={style.wrapper}>
             <div className={style.container}>
@@ -47,12 +48,12 @@ const WatchActors: React.FC<IProps> = ({ film }) => {
                                 />
                             </div>
                             <p className={style.card__name}>{actor.name}</p>
-                            <p className={style.card__title}>актер</p>
+                            <p className={style.card__title}>{t('actor')}</p>
                         </div>
                     </Link>
                 ))}
                 <button className={style.more_button} onClick={() => setIsShowModal(true)}>
-                    Ещё
+                    {t('more')}
                 </button>
             </div>
 

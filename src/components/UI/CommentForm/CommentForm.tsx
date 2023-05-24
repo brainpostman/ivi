@@ -2,6 +2,7 @@ import styles from './CommentForm.module.scss';
 import SimpleButton from '../SimpleButton/SimpleButton';
 import TextArea from '../TextArea/TextArea';
 import { ChangeEvent } from 'react';
+import { useTranslation } from 'next-i18next';
 
 interface ICommentFormProps {
     textareaValue: string;
@@ -18,6 +19,7 @@ const CommentForm = ({
     sendButtonClickFn,
     cancelButtonCallback,
 }: ICommentFormProps) => {
+    const { t } = useTranslation('common', { keyPrefix: 'comment-form' });
     return (
         <div className={styles.textarea_wrapper}>
             <TextArea
@@ -30,11 +32,11 @@ const CommentForm = ({
             />
             <div className={styles.controls}>
                 <SimpleButton className={styles.button} onClick={sendButtonClickFn}>
-                    Отправить
+                    {t('send')}
                 </SimpleButton>
                 {cancelButtonCallback && (
                     <SimpleButton className={styles.button} onClick={cancelButtonCallback}>
-                        Отменить
+                        {t('cancel')}
                     </SimpleButton>
                 )}
             </div>

@@ -14,6 +14,7 @@ import { filmsAPI } from '@/api/queries/films.api';
 import { toast } from 'react-toastify';
 import Loader from '../Loader/Loader';
 import CommentForm from '../UI/CommentForm/CommentForm';
+import { useTranslation } from 'next-i18next';
 
 interface IProps {
     filmName: string;
@@ -28,6 +29,7 @@ const WatchReviews: FC<IProps> = ({
     className: propsClassName,
     film,
 }) => {
+    const { t } = useTranslation('watch', { keyPrefix: 'watch-reviews' });
     const [reviews, setReviews] = useState<IReviewGetResponse[]>([...propsReviews]);
     const [reviewCount, setReviewCount] = useState(propsReviewCount);
     const [isLoading, setIsLoading] = useState(false);
@@ -55,7 +57,7 @@ const WatchReviews: FC<IProps> = ({
         const str = trimComment(text);
         setText(str);
         if (!validateComment(100, 10000, str)) {
-            toast.warn('Отзыв должен иметь не менее 100 и не более 10000 символов.');
+            toast.warn(t('messages.review-length'));
             return;
         }
         if (data) {
@@ -69,12 +71,12 @@ const WatchReviews: FC<IProps> = ({
                 data.accessToken
             );
             if (response) {
-                toast.success('Спасибо за Ваш отзыв!');
+                toast.success(t('messages.thanks'));
                 setShowModal(false);
                 setText('');
                 setIsLoading(true);
             } else {
-                toast.error('При отправке отзыва возникла проблема, пожалуйста повторите позже.');
+                toast.error(t('messages.problem'));
             }
         }
     };
@@ -105,12 +107,15 @@ const WatchReviews: FC<IProps> = ({
             <div className={style.container}>
                 <div className={style.title}>
                     <p className={style.title__reviews}>
-                        Отзывы<span className={style.quantity}>{reviews.length}</span>
+                        {t('reviews')}
+                        <span className={style.quantity}>{reviews.length}</span>
                     </p>
-                    <p className={style.subtitle}>о фильме &#171;{filmName}&#187;</p>
+                    <p className={style.subtitle}>
+                        {t('about')} &#171;{filmName}&#187;
+                    </p>
                 </div>
                 <SimpleButton className={style.makeReview} onClick={handleLeaveReview}>
-                    Оставить отзыв
+                    {t('leave-review')}
                 </SimpleButton>
             </div>
             <div className={style.reviews}>
@@ -139,11 +144,11 @@ const WatchReviews: FC<IProps> = ({
                     setText('');
                 }}>
                 <div className={style.modal}>
-                    <h1 className={style.title__reviews}>Оставить отзыв</h1>
+                    <h1 className={style.title__reviews}>{t('leave-review')}</h1>
                     <div className={style.commentForm}>
                         <CommentForm
                             textareaValue={text}
-                            textareaPlaceholder='Напишите отзыв'
+                            textareaPlaceholder={t('placeholder')}
                             textareaOnChangeFn={handleChange}
                             sendButtonClickFn={handleClick}
                         />

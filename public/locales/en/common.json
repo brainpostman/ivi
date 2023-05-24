@@ -2,5 +2,9 @@
     "expand-block": {
         "expand": "Expand",
         "collapse": "Collapse"
+    },
+    "comment-form": {
+        "send": "Send",
+        "cancel": "Cancel"
     }
 }

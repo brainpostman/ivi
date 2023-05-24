@@ -6,6 +6,7 @@ import { IStaffGetResponse } from '@/types/staffs.interface';
 import FilmActors from '../FilmActors/FilmActors';
 import BasicBtn from '../UI/BasicBtn/BasicBtn';
 import { BsCollectionPlay } from 'react-icons/bs';
+import { useTranslation } from 'next-i18next';
 
 interface IProps {
     mainImg: string;
@@ -14,10 +15,11 @@ interface IProps {
 }
 
 const TrailerBlock: FC<IProps> = ({ mainImg, actors, className: propsClassName = '' }) => {
+    const { t } = useTranslation('watch', { keyPrefix: 'trailer-block' });
     return (
         <div className={`${style.wrapper} ${propsClassName}`}>
             <div className={style.wrapper_img}>
-                <Image src={mainImg} alt='трейлер' className={style.main_img} fill />
+                <Image src={mainImg} alt={t('trailer')} className={style.main_img} fill />
             </div>
             <TrailerButtons className={style.trailer_buttons_pc} />
 
@@ -27,7 +29,7 @@ const TrailerBlock: FC<IProps> = ({ mainImg, actors, className: propsClassName =
                     {/*MOBILE FREE FILMS BUTTON*/}
                     <BasicBtn
                         btnType='icon'
-                        title='Бесплатные фильмы'
+                        title={t('free-movies')}
                         className={style.button_free_films}
                         dark>
                         <BsCollectionPlay />

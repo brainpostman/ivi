@@ -1,6 +1,6 @@
 .wrapper {
   height: 100%;
-
+  max-width: $max-width;
   @include ui-padding(top, 4);
   @include ui-margin(bottom, 5);
 }

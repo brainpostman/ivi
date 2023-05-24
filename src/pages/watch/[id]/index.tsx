@@ -20,6 +20,7 @@ import Loader from '@/components/Loader/Loader';
 import MovieCarousel from '@/components/MovieCarousel/MovieCarousel';
 import style from './watch.module.scss';
 import styleMobile from './watch-mobile.module.scss';
+import { useTranslation } from 'next-i18next';
 
 export const getServerSideProps: GetServerSideProps = async ({ locale, params }) => {
     if (!params || !parseInt(params.id as string)) {
@@ -42,6 +43,7 @@ export const getServerSideProps: GetServerSideProps = async ({ locale, params })
                 'auth_modal',
                 'common',
                 'footer',
+                'watch',
             ])),
             film,
             films,
@@ -57,12 +59,13 @@ interface IProps {
 }
 
 const Film: FC<IProps> = ({ film, films, reviewData }) => {
+    const { t } = useTranslation('watch');
     return (
         <PageLayout title={film.name}>
             <section className={style.wrapper}>
                 <div className={style.back_button}>
                     <MdArrowBackIosNew />
-                    <p>Назад</p>
+                    <p>{t('back')}</p>
                 </div>
 
                 {/*MOBILE FILM TITLE*/}
@@ -98,7 +101,7 @@ const Film: FC<IProps> = ({ film, films, reviewData }) => {
                         <div className={style.expand_block_wrapper}>
                             <ExpandBlock
                                 visibleBlock={film.description}
-                                expandWord='Детали о фильме'>
+                                expandWord={t('film-details')}>
                                 <WatchBlock />
                             </ExpandBlock>
                         </div>
@@ -109,7 +112,7 @@ const Film: FC<IProps> = ({ film, films, reviewData }) => {
                 {films ? <MovieCarousel films={films} /> : <Loader />}
 
                 <div className={style.actors_wrapper}>
-                    <h1>Актеры и создатели</h1>
+                    <h1>{t('actors-n-creators')}</h1>
                     <WatchActors film={film} />
                 </div>
 

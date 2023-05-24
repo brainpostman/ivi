@@ -1,12 +1,14 @@
 import { IMovieById } from '@/types/films.api.interface';
 import SimpleButton from '../UI/SimpleButton/SimpleButton';
 import style from './IviRaiting.module.scss';
+import { useTranslation } from 'next-i18next';
 
 interface IIviRatingProps {
     film: IMovieById;
 }
 
 const IviRaiting = ({ film }: IIviRatingProps) => {
+    const { t } = useTranslation('watch', { keyPrefix: 'ivi-rating' });
     return (
         <div className={style.wrapper}>
             <div className={style.wrapper_rating}>
@@ -14,13 +16,15 @@ const IviRaiting = ({ film }: IIviRatingProps) => {
                     {film.scoreAVG ? film.scoreAVG.toFixed(2) : '-'}
                 </div>
                 <div className={style.raiting_info}>
-                    <h1 className={style.raiting_info__title}>Рейтинг Иви</h1>
-                    <h4 className={style.raiting_info__subtitle}>Интересный сюжет</h4>
-                    <h4 className={style.raiting_info__subtitle}>Оценили: {film.countScore}</h4>
+                    <h1 className={style.raiting_info__title}>{t('ivi-rating')}</h1>
+                    <h4 className={style.raiting_info__subtitle}>{t('interest')}</h4>
+                    <h4 className={style.raiting_info__subtitle}>
+                        {t('scored')} {film.countScore}
+                    </h4>
                 </div>
             </div>
 
-            <SimpleButton>Оценить</SimpleButton>
+            <SimpleButton>{t('score')}</SimpleButton>
         </div>
     );
 };
