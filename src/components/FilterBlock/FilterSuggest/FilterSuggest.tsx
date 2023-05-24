@@ -9,7 +9,7 @@ import { normalizeKey } from '@/utils/normalize.utils'
 import style from './FilterSuggest.module.scss'
 import { staffsAPI } from '@/api/queries/staffs.api'
 import { IQuerySuggest } from '@/types/staffs.interface'
-import { IFilterGetResponse } from '@/types/filters.interface'
+import { IFilterGetResponse } from '@/types/api/filters.api.interface'
 import { useDebounce } from '@/hooks/useDebounce'
 
 interface IProps {

@@ -7,7 +7,7 @@ import HeaderWatchBlock from './HeaderWatchBlock/HeaderWatchBlock'
 import HeaderMovieBlock from './HeaderMovieBlock/HeaderMovieBlock'
 import HoverTabBlock from './HoverFilterBlock/HoverTabBlock'
 import { IHeaderHoverBlockContent } from '@/types/hoverblock.interface'
-import { IFilterGetResponse } from '@/types/filters.interface'
+import { IFilterGetResponse } from '@/types/api/filters.api.interface'
 import { IMovie } from '@/types/films.api.interface'
 import { useTranslation } from 'next-i18next'
 

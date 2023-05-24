@@ -4,7 +4,7 @@ import {
   filterRequiredProperties,
 } from '@/data/requiredProperties.data'
 import { ICRUDGenre } from '@/types/ICrudMovie'
-import { IFilterGetResponse } from '@/types/filters.interface'
+import { IFilterGetResponse } from '@/types/api/filters.api.interface'
 import { checkObjHaveProperties } from '@/utils/test-utils/checkObjHaveProperties.utils'
 
 const enReg = /^[a-zA-Z]+$/

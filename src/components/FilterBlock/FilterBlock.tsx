@@ -11,7 +11,7 @@ import FilterListBig from './FilterListBig/FilterListBig'
 import FilterSlider from './FilterSlider/FilterSlider'
 import FilterSuggest from './FilterSuggest/FilterSuggest'
 import { IStaffGetResponse } from '@/types/staffs.interface'
-import { IFilterGetResponse } from '@/types/filters.interface'
+import { IFilterGetResponse } from '@/types/api/filters.api.interface'
 import { useSetListParam } from '@/hooks/useSetListParam'
 
 const filterList: Omit<IFilterBlockEl, 'isExpand'>[] = [

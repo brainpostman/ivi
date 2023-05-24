@@ -19,7 +19,7 @@ import { IStaffGetResponse } from '@/types/staffs.interface'
 import { formatFilmsParams } from '@/formatters/filmsParams.format'
 import { staffsAPI } from '@/api/queries/staffs.api'
 import BreadCrumbsFilms from '@/components/BreadCrumbs/BreadCrumbsFilms/BreadCrumbsFilms'
-import { IFilterGetResponse } from '@/types/filters.interface'
+import { IFilterGetResponse } from '@/types/api/filters.api.interface'
 import { filtersAPI } from '@/api/queries/filters.api'
 
 export const getServerSideProps: GetServerSideProps = async ({

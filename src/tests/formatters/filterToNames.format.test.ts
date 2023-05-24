@@ -1,5 +1,5 @@
 import formatFilterToNames from '@/formatters/filterToNames.format'
-import { IFilterGetResponse } from '@/types/filters.interface'
+import { IFilterGetResponse } from '@/types/api/filters.api.interface'
 
 const testValidFilter = [
   { name: 'Австралия' },

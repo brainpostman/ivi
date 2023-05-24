@@ -8,7 +8,7 @@ import style from './Header.module.scss'
 import HeaderHoverBlock from './HeaderHoverBlock/HeaderHoverBlock'
 import HeaderLeftSide from './HeaderLeftSide/HeaderLeftSide'
 import HeaderRightSide from './HeaderRightSide/HeaderRightSide'
-import { IFilterGetResponse } from '@/types/filters.interface'
+import { IFilterGetResponse } from '@/types/api/filters.api.interface'
 import { FiltersContext } from '@/contexts/filters.context'
 import { filtersAPI } from '@/api/queries/filters.api'
 import { filmsAPI } from '@/api/queries/films.api'
@@ -29,16 +29,18 @@ const Header = () => {
     tab: undefined,
   })
 
-    const classNameContainer =
-        hoverTabs.isShow && hoverTabs.tab ? `${style.container} ${style.effect}` : style.container;
+  const classNameContainer =
+    hoverTabs.isShow && hoverTabs.tab
+      ? `${style.container} ${style.effect}`
+      : style.container
 
-    const showHoverBlock = (tab: IHeaderTab) => {
-        setHoverTabs({ isShow: true, tab });
-    };
+  const showHoverBlock = (tab: IHeaderTab) => {
+    setHoverTabs({ isShow: true, tab })
+  }
 
-    const hideHoverBlock = () => {
-        setHoverTabs({ tab: undefined, isShow: false });
-    };
+  const hideHoverBlock = () => {
+    setHoverTabs({ tab: undefined, isShow: false })
+  }
 
   const getAndSetFilters = async () => {
     const countriesIncoming = await filtersAPI.getCountries()
@@ -64,8 +66,8 @@ const Header = () => {
       return
     }
 
-        setClassNameHeader(`${style.wrapper} ${style.border_bottom}`);
-    }, [pathname]);
+    setClassNameHeader(`${style.wrapper} ${style.border_bottom}`)
+  }, [pathname])
 
   return (
     <header className={classNameHeader}>
@@ -91,4 +93,4 @@ const Header = () => {
   )
 }
 
-export default Header;
+export default Header

@@ -1,6 +1,6 @@
 import { filtersAPI } from '@/api/queries/filters.api'
 import { ICRUDGenre } from '@/types/ICrudMovie'
-import { IFilterGetResponse } from '@/types/filters.interface'
+import { IFilterGetResponse } from '@/types/api/filters.api.interface'
 
 describe('API-FILTERS ERROR', () => {
   let errorGenres: IFilterGetResponse[]

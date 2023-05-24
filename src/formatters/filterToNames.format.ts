@@ -1,4 +1,4 @@
-import { IFilterGetResponse } from '@/types/filters.interface'
+import { IFilterGetResponse } from '@/types/api/filters.api.interface'
 
 /*
   * Преобразует фильтр: вытаскивает из него названия и склеивает в строку
