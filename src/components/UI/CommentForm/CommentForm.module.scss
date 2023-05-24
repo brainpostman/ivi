@@ -1,0 +1,19 @@
+.textarea {
+    width: 500px;
+    &_wrapper {
+        display: flex;
+        flex-direction: column;
+    }
+}
+
+.controls {
+    @include ui-margin(top, 2);
+    display: flex;
+    gap: 8px;
+    align-self: flex-end;
+}
+
+.button {
+    height: 32px;
+    width: fit-content;
+}

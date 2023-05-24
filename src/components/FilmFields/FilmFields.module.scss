@@ -2,21 +2,20 @@
   color: #ffffffb8;
   @include font(2);
 
-  >span {
+  > span {
     display: inline-flex;
     align-items: center;
   }
 
-  >*:not(:last-child)::after {
+  > *:not(:last-child)::after {
     @extend .dot;
   }
 }
 
-
 .filter {
   cursor: pointer;
 
-  transition: color .2s;
+  transition: color 0.2s;
 
   &:hover {
     color: #fff;
@@ -25,9 +24,9 @@
 
 .genre_list {
   display: inline-flex;
-
-
-  >li {
+  flex-wrap: wrap;
+  justify-content: center;
+  > li {
     display: flex;
     align-items: center;
 
@@ -38,11 +37,11 @@
 }
 
 .dot {
-  content: '';
+  content: "";
   width: 2px;
   height: 2px;
 
   background-color: #ffffffb8;
 
-  @include ui-margin(hor, 1.5)
+  @include ui-margin(hor, 1.5);
 }

@@ -1,0 +1,56 @@
+{
+    "back": "Back",
+    "film-features": {
+        "rus": "Rus"
+    },
+    "trailer-block": {
+        "free-movies": "Free movies",
+        "trailer": "Trailer"
+    },
+    "film-details": "Details about the film",
+    "watch-block": {
+        "languages": "Languages",
+        "rus-eng": "Russian, English",
+        "subs": "Subtitles",
+        "rus": "Russian",
+        "pic-n-sound": "Image and sound.",
+        "pic-n-sound-descr": "The actual quality depends on the device and the restrictions of the copyright holder"
+    },
+    "ivi-rating": {
+        "ivi-rating": "Ivi rating",
+        "interest": "Interesting plot",
+        "scored": "Rated by:",
+        "score": "Rate"
+    },
+    "actors-n-creators": "Actors and creators",
+    "watch-actors": {
+        "actor": "actor",
+        "more": "More",
+        "staffs-window": {
+            "directors": "Directors",
+            "actors": "Actors",
+            "operators": "Operators",
+            "artists": "Artists",
+            "writers": "Screenwriters",
+            "editors": "Editors",
+            "actors-n-creators": "actors and creators"
+        }
+    },
+    "watch-reviews": {
+        "reviews": "Reviews",
+        "about": "about ",
+        "leave-review": "Leave a review",
+        "placeholder": "Write a review",
+        "messages": {
+            "review-length": "The review must have at least 100 and no more than 10000 characters",
+            "thanks": "Thank you for your review!",
+            "problem": "There was a problem when sending the review, please repeat later"
+        }
+    },
+    "watch-footer": {
+        "watch": "Watch",
+        "on-all-devices": "on all devices",
+        "app-on-devices": "The app is available for download on iOS, Android, SmartTV and TV consoles",
+        "connect-devices": "Connect devices"
+    }
+}

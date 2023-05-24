@@ -1,4 +1,8 @@
-import { CRUDDetailedMovieRequest, ICRUDDetailedMovie, ICRUDDetailedMovieRequest } from '@/types/ICrudMovie';
+import {
+    CRUDDetailedFilmRequest,
+    ICRUDDetailedFilm,
+    ICRUDDetailedFilmRequest,
+} from '@/types/ICrudMovie';
 import Image from 'next/image';
 import { escapeHtmlNbsp } from '@/utils/escapeHtml';
 import parentStyles from '../AdminMovie.module.scss';
@@ -13,7 +17,7 @@ import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
 
 interface IAdminDetailedMovieProps {
-    movie: ICRUDDetailedMovie;
+    movie: ICRUDDetailedFilm;
     className?: string;
 }
 
@@ -28,8 +32,8 @@ const AdminDetailedMovie = ({ movie, className: propsClassName }: IAdminDetailed
 
     const handleFieldChanges = async () => {
         if (name !== movie.name || engName !== movie.name_en) {
-            const newMovie: ICRUDDetailedMovieRequest = {
-                ...new CRUDDetailedMovieRequest(movie),
+            const newMovie: ICRUDDetailedFilmRequest = {
+                ...new CRUDDetailedFilmRequest(movie),
                 name: name,
                 name_en: engName,
             };

@@ -1,0 +1,56 @@
+{
+    "back": "Назад",
+    "film-features": {
+        "rus": "Рус"
+    },
+    "trailer-block": {
+        "free-movies": "Бесплатные фильмы",
+        "trailer": "Трейлер"
+    },
+    "film-details": "Детали о фильме",
+    "watch-block": {
+        "languages": "Языки",
+        "rus-eng": "Русский, Английский",
+        "subs": "Субтитры",
+        "rus": "Русский",
+        "pic-n-sound": "Изображение и звук.",
+        "pic-n-sound-descr": "Фактическое качество зависит от устройства и ограничений правообладателя"
+    },
+    "ivi-rating": {
+        "ivi-rating": "Рейтинг Иви",
+        "interest": "Интересный сюжет",
+        "scored": "Оценили:",
+        "score": "Оценить"
+    },
+    "actors-n-creators": "Актеры и создатели",
+    "watch-actors": {
+        "actor": "актер",
+        "more": "Ещё",
+        "staffs-window": {
+            "directors": "Режиссёры",
+            "actors": "Актёры",
+            "operators": "Операторы",
+            "artists": "Художники",
+            "writers": "Сценаристы",
+            "editors": "Монтажёры",
+            "actors-n-creators": "актёры и создатели"
+        }
+    },
+    "watch-reviews": {
+        "reviews": "Отзывы",
+        "about": "о фильме",
+        "leave-review": "Оставить отзыв",
+        "placeholder": "Напишите отзыв",
+        "messages": {
+            "review-length": "Отзыв должен иметь не менее 100 и не более 10000 символов",
+            "thanks": "Спасибо за Ваш отзыв!",
+            "problem": "При отправке отзыва возникла проблема, пожалуйста повторите позже"
+        }
+    },
+    "watch-footer": {
+        "watch": "Cмотреть",
+        "on-all-devices": "на всех устройствах",
+        "app-on-devices": "Приложение доступно для скачивания на iOS, Android, SmartTV и приставках",
+        "connect-devices": "Подключить устройства"
+    }
+}

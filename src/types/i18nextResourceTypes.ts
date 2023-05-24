@@ -6,6 +6,7 @@ import common from '../../public/locales/ru/common.json';
 import footer from '../../public/locales/ru/footer.json';
 import movies from '../../public/locales/ru/movies.json';
 import admin from '../../public/locales/ru/admin.json';
+import watch from '../../public/locales/ru/watch.json';
 
 export interface Resources {
     auth_modal: typeof auth_modal;
@@ -16,4 +17,5 @@ export interface Resources {
     footer: typeof footer;
     movies: typeof movies;
     admin: typeof admin;
+    watch: typeof watch;
 }

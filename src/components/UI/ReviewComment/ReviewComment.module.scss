@@ -1,0 +1,92 @@
+.openingPost {
+    width: 100%;
+}
+
+.comment {
+    border: 1px solid $border-gray;
+    border-radius: 8px;
+    @include ui-padding(default, 2);
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    &__info {
+        display: flex;
+        align-items: center;
+        @include ui-margin(bottom, 2);
+        @include ui-font(3);
+    }
+    &__title {
+        @include ui-margin(hor, 2);
+    }
+    &__sender {
+        color: white;
+    }
+    &__date {
+        color: white;
+        cursor: default;
+    }
+    &__line {
+        border-top: 1px solid $border-gray;
+        height: 0;
+        &:first-of-type {
+            width: 20px;
+        }
+        &:last-of-type {
+            flex: 1 1 auto;
+        }
+    }
+    &__content {
+        color: $gray-soft;
+        text-align: justify;
+        @include ui-font(3.5);
+        width: 100%;
+        @include ui-padding(hor, 2);
+        @include ui-margin(bottom, 2);
+        text-indent: 20px;
+        line-height: 1.5;
+    }
+    &__controls {
+        display: flex;
+        align-items: center;
+    }
+    &__buttons {
+        @include ui-font(3);
+        @include ui-margin(hor, 2);
+        & span {
+            cursor: pointer;
+            transition: all 0.4s;
+            @include ui-margin(right, 2);
+            &:last-of-type {
+                margin-right: 0;
+            }
+            &:hover {
+                color: white;
+                transition: all 0.2s;
+            }
+        }
+    }
+    transition: border-color 0.4s 0.2s, box-shadow 0.4s 0.2s;
+    &:hover {
+        border-color: $gray-soft;
+        transition: border-color 0.2s 0.1s, box-shadow 0.2s 0.1s;
+        box-shadow: 0 0 20px 5px rgba($color: #fff, $alpha: 0.15);
+    }
+}
+
+.commentForm {
+    @include ui-margin(ver, 2);
+    @include ui-margin(left, 2);
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-evenly;
+    max-width: $max-width;
+    gap: 60px;
+    align-self: flex-start;
+}
+
+.comments__list {
+    @include ui-padding(default, 2);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}

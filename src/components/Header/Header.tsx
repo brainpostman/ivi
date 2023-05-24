@@ -29,18 +29,16 @@ const Header = () => {
     tab: undefined,
   })
 
-  const classNameContainer =
-    hoverTabs.isShow && hoverTabs.tab
-      ? `${style.container} ${style.effect}`
-      : style.container
+    const classNameContainer =
+        hoverTabs.isShow && hoverTabs.tab ? `${style.container} ${style.effect}` : style.container;
 
-  const showHoverBlock = (tab: IHeaderTab) => {
-    setHoverTabs({ isShow: true, tab })
-  }
+    const showHoverBlock = (tab: IHeaderTab) => {
+        setHoverTabs({ isShow: true, tab });
+    };
 
-  const hideHoverBlock = () => {
-    setHoverTabs({ tab: undefined, isShow: false })
-  }
+    const hideHoverBlock = () => {
+        setHoverTabs({ tab: undefined, isShow: false });
+    };
 
   const getAndSetFilters = async () => {
     const countriesIncoming = await filtersAPI.getCountries()
@@ -66,8 +64,8 @@ const Header = () => {
       return
     }
 
-    setClassNameHeader(`${style.wrapper} ${style.border_bottom}`)
-  }, [pathname])
+        setClassNameHeader(`${style.wrapper} ${style.border_bottom}`);
+    }, [pathname]);
 
   return (
     <header className={classNameHeader}>
@@ -93,4 +91,4 @@ const Header = () => {
   )
 }
 
-export default Header
+export default Header;

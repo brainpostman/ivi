@@ -63,5 +63,5 @@ export const transformFilmById = (
     scoreAVG: formatScoreAVG(filmData.scoreAVG),
   }
 
-  return result
-}
+    return result;
+};
