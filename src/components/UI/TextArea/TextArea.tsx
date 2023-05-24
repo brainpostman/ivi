@@ -34,9 +34,12 @@ const TextArea: FC<ICustomTextArea> = ({
     const placeholderActive = active ? styles.placeholder_active : '';
 
     useEffect(() => {
-        if (textareaRef.current) {
+        if (textareaRef.current && textareaRef.current.value === '') {
             textareaRef.current.style.height = '35px';
             textareaRef.current.style.overflow = 'hidden';
+        } else if (textareaRef.current && textareaRef.current.value !== '') {
+            textareaRef.current.style.height = '300px';
+            textareaRef.current.style.overflow = 'initial';
         }
     }, []);
 
