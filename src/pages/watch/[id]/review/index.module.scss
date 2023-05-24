@@ -8,6 +8,30 @@
     @include ui-padding(right, 2);
 }
 
+.back_button {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    @include ui-margin(bottom, 4);
+    color: #fff;
+    font-size: 15px;
+    line-height: 20px;
+    font-weight: 500;
+
+    cursor: pointer;
+
+    &:hover > svg {
+        transform: scale(1.1);
+    }
+
+    > svg {
+        width: 18px;
+        height: 18px;
+
+        transition: transform 0.2s;
+    }
+}
+
 .commentSection {
     display: flex;
     flex-direction: column;
@@ -129,4 +153,3 @@
         transition: all 0.2s;
     }
 }
-
