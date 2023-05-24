@@ -1,12 +1,13 @@
 import { IMovieById, IReviewGetResponse } from '@/types/films.api.interface';
 import styles from './ReviewComment.module.scss';
 import { buildDateString, trimComment, validateComment } from '@/utils/comment.utils';
-import { ChangeEvent, useEffect, useState } from 'react';
+import { ChangeEvent, Dispatch, SetStateAction, useEffect, useState } from 'react';
 import { filmsAPI } from '@/api/queries/films.api';
 import { toast } from 'react-toastify';
 import { Session } from 'next-auth';
 import CommentForm from '../CommentForm/CommentForm';
 import { useRouter } from 'next/router';
+import Loader from '@/components/Loader/Loader';
 
 interface ICommentProps {
     sessionStatus: 'authenticated' | 'loading' | 'unauthenticated';
@@ -34,6 +35,10 @@ const ReviewComment = ({
     const [isLoading, setIsLoading] = useState(false);
     const [text, setText] = useState('');
 
+    useEffect(() => {
+        setIsLoading(true);
+    }, []);
+
     const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
         setText(e.target.value);
         toast.dismiss();
@@ -42,7 +47,7 @@ const ReviewComment = ({
     const handleClick = async () => {
         toast.dismiss();
         setText((prev) => trimComment(prev));
-        if (!validateComment(10, 10000, text)) {
+        if (!validateComment(5, 10000, text)) {
             toast.warn('Комментарий должен иметь не менее 10 и не более 10000 символов.');
             return;
         }
@@ -58,6 +63,7 @@ const ReviewComment = ({
             );
             if (response) {
                 setText('');
+                setShowForm(false);
                 setIsLoading(true);
             } else {
                 toast.error(
@@ -129,6 +135,25 @@ const ReviewComment = ({
                             }}
                         />
                     </div>
+                )}
+                {isLoading ? (
+                    <Loader />
+                ) : comments.length > 0 ? (
+                    <div className={styles.comments__list}>
+                        {comments.map((comment) => {
+                            return (
+                                <ReviewComment
+                                    key={comment.id}
+                                    sessionStatus={status}
+                                    sessionData={data}
+                                    film={film}
+                                    comment={comment}
+                                />
+                            );
+                        })}
+                    </div>
+                ) : (
+                    <></>
                 )}
             </div>
         </article>

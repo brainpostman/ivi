@@ -65,10 +65,10 @@
             }
         }
     }
-    transition: border-color 0.4s, box-shadow 0.4s;
+    transition: border-color 0.4s 0.2s, box-shadow 0.4s 0.2s;
     &:hover {
         border-color: $gray-soft;
-        transition: border-color 0.2s, box-shadow 0.2s;
+        transition: border-color 0.2s 0.1s, box-shadow 0.2s 0.1s;
         box-shadow: 0 0 20px 5px rgba($color: #fff, $alpha: 0.15);
     }
 }
@@ -82,4 +82,11 @@
     max-width: $max-width;
     gap: 60px;
     align-self: flex-start;
+}
+
+.comments__list {
+    @include ui-padding(default, 2);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
 }
