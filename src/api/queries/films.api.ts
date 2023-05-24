@@ -39,6 +39,9 @@ export const filmsAPI = {
     postFilmReview(data: IReviewPostRequest, accessToken: string | null) {
         return postFilmReview(data, accessToken);
     },
+    putFilmReview(data: { id: number; text: string }, accessToken: string | null) {
+        return putFilmReview(data, accessToken);
+    },
 };
 
 const getFilms = async (
@@ -127,6 +130,22 @@ const postFilmReview = async (
 ): Promise<IReviewGetResponse | null> => {
     try {
         const response = await customAxios.post<IReviewGetResponse>(`/reviews`, data, {
+            headers: {
+                Authorization: `Bearer ${accessToken}`,
+            },
+        });
+        return response.data;
+    } catch (_) {
+        return null;
+    }
+};
+
+const putFilmReview = async (
+    data: { id: number; text: string },
+    accessToken: string | null
+): Promise<IReviewGetResponse | null> => {
+    try {
+        const response = await customAxios.put<IReviewGetResponse>(`/reviews`, data, {
             headers: {
                 Authorization: `Bearer ${accessToken}`,
             },
