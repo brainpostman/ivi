@@ -18,6 +18,7 @@ import ModalWindow from '@/components/ModalWindow/ModalWindow';
 import { reviewsAPI } from '@/api/queries/reviews.api';
 import { IReviewGetResponse } from '@/types/api/reviews.api.interface';
 import { useTranslation } from 'next-i18next';
+import { MdArrowBackIosNew } from 'react-icons/md';
 
 interface IReviewProps {
     film: IMovieById;
@@ -58,7 +59,6 @@ export const getServerSideProps = async ({ locale, params }: GetServerSidePropsC
 };
 
 const Review = ({ film, review, comments: propsComments }: IReviewProps) => {
-    console.log(propsComments);
     const { t } = useTranslation('review');
     const { status, data } = useSession();
     const router = useRouter();
@@ -155,9 +155,17 @@ const Review = ({ film, review, comments: propsComments }: IReviewProps) => {
     }, [isLoading]);
 
     return (
-        <PageLayout title={'review'}>
+        <PageLayout
+            title={
+                (review.parent ? t('title-comment') : t('title-review')) +
+                (locale === 'ru' ? film.name : film.name_en)
+            }>
             <div className={styles.wrapper}>
                 <section className={styles.commentSection}>
+                    <div className={styles.back_button} onClick={() => router.back()}>
+                        <MdArrowBackIosNew />
+                        <p>{t('back')}</p>
+                    </div>
                     <h1 className={styles.title}>
                         {review.parent ? t('title-comment') : t('title-review')}
                         <Link className={styles.link} href={`/watch/${film.id}`}>
