@@ -5,14 +5,14 @@ import {
 import { customAxios } from './customAxios'
 
 export const reviewsAPI = {
-  getFilmReviewCount(param: number) {
-    return getFilmReviewCount(param)
+  getFilmReviewCount(id: number) {
+    return getFilmReviewCount(id)
   },
-  getFilmReviews(param: number) {
-    return getFilmReviews(param)
+  getFilmReviews(id: number) {
+    return getFilmReviews(id)
   },
-  getFilmReviewById(param: number) {
-    return getFilmReviewById(param)
+  getFilmReviewById(id: number) {
+    return getFilmReviewById(id)
   },
   getComments(film_id: number, parent_id: number) {
     return getComments(film_id, parent_id)
