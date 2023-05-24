@@ -109,7 +109,7 @@ const CustomCarousel: FC<ICustomCarouselProps> = ({
     if (Array.isArray(children)) {
       setItems(children)
     }
-  }, [])
+  }, [children])
 
   // Autoplay
   useEffect(() => {
