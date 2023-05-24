@@ -75,6 +75,10 @@
         & span {
             cursor: pointer;
             transition: all 0.4s;
+            @include ui-margin(right, 2);
+            &:last-of-type {
+                margin-right: 0;
+            }
             &:hover {
                 color: white;
                 transition: all 0.2s;

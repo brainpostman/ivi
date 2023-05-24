@@ -116,7 +116,7 @@ const WatchReviews: FC<IProps> = ({
             <div className={style.reviews}>
                 {isLoading ? (
                     <Loader />
-                ) : (
+                ) : reviews.length > 0 ? (
                     <CustomCarousel
                         elementsView={3}
                         elementsMove={3}
@@ -128,6 +128,8 @@ const WatchReviews: FC<IProps> = ({
                             <WatchReview key={review.id} locale={locale ?? 'ru'} review={review} />
                         ))}
                     </CustomCarousel>
+                ) : (
+                    <></>
                 )}
             </div>
             <ModalWindow
