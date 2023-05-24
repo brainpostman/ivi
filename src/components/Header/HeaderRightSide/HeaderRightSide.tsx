@@ -8,6 +8,7 @@ import { useRouter } from 'next/router'
 import style from './HeaderRightSide.module.scss'
 import { useTranslation } from 'next-i18next'
 import LanguageChanger from '@/components/LanguageSwitcher/LanguageSwitcher'
+import Link from 'next/link'
 
 interface IProps {
   showHoverBlock: (tab: IHeaderTab) => void
@@ -33,7 +34,11 @@ const HeaderRightSide: FC<IProps> = ({ showHoverBlock }) => {
   return (
     <article className={style.wrapper}>
       {isViewSubscribeButton ? (
-        <SubscribeButton>{t('buy-sub')}</SubscribeButton>
+        <Link href='https://www.ivi.ru/'>
+          <SubscribeButton className={style.subscribe_button}>
+            {t('buy-sub')}
+          </SubscribeButton>
+        </Link>
       ) : (
         <HighlightButton
           className={style.highlight_button}
@@ -42,7 +47,7 @@ const HeaderRightSide: FC<IProps> = ({ showHoverBlock }) => {
           {t('watch-30-days')}
         </HighlightButton>
       )}
-      <HeaderIconButton icon='search' className={style.icon}>
+      <HeaderIconButton icon='search' className={style.icon_search}>
         {t('search')}
       </HeaderIconButton>
       <HeaderIconButton icon='notification' className={style.icon} />
@@ -50,7 +55,7 @@ const HeaderRightSide: FC<IProps> = ({ showHoverBlock }) => {
         className={classNamePersonIcon}
         onMouseEnter={() => showHoverBlock('profile')}
       />
-      <LanguageChanger />
+      <LanguageChanger className={style.language_switcher} />
     </article>
   )
 }

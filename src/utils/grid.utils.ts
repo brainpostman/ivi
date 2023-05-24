@@ -1,12 +1,15 @@
 // Ограничиваем количество строк сетки
 
-// === PROPS ===
-// @param { * } rowsLength - длина ряда
-// @param { * } gridColumnLines - количество колонок
+/*
+  * @param {number} rowsLength - длина ряда
+  * @param {number} gridColumnLines - количество колонок
+  * @returns number
+
+*/
 
 export const getNumGridColumns = (
   rowsLength: number,
   gridColumnLines: number
-) => {
+): number => {
   return Math.round(rowsLength / gridColumnLines)
 }

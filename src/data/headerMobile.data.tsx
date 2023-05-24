@@ -2,131 +2,120 @@ import { BiCameraMovie } from 'react-icons/bi'
 import { BsCollectionPlay } from 'react-icons/bs'
 import { FiMonitor } from 'react-icons/fi'
 import { GiSteamLocomotive } from 'react-icons/gi'
+import { IFilterGetResponse } from '@/types/filters.interface'
+import { RiHome6Line, RiSearchLine } from 'react-icons/ri'
 import { HiDotsHorizontal } from 'react-icons/hi'
 import { HiOutlineFolderArrowDown } from 'react-icons/hi2'
-import { RiHome6Line, RiSearchLine } from 'react-icons/ri'
-import {
-  countryFilterData,
-  genreFilterData,
-  novetlyFilterData,
-  yearsFilterData,
-} from './filters.data'
+import { TFunction } from 'i18next'
 
-export const headerMobileTabs = [
-  { icon: <RiHome6Line />, title: 'Мой иви', href: '/', isSelect: false },
-  {
-    icon: <HiOutlineFolderArrowDown />,
-    title: 'Каталог',
-    href: '/movies',
-  },
-  {
-    icon: <RiSearchLine />,
-    title: 'Поиск',
-    href: 'https://www.ivi.ru/tvplus?ivi_search',
-  },
-  {
-    icon: <FiMonitor />,
-    title: 'TV+',
-    href: 'https://www.ivi.ru/tvplus',
-  },
-  {
-    icon: <HiDotsHorizontal />,
-    title: 'Ещё',
-    href: '/more',
-  },
+export const headerMobileIcons = [
+  <RiHome6Line />,
+  <HiOutlineFolderArrowDown />,
+  <RiSearchLine />,
+  <FiMonitor />,
+  <HiDotsHorizontal />,
 ]
 
-export const headerMobileMiddleContent = [
-  {
-    icon: <BiCameraMovie />,
-    title: 'Фильмы',
-    href: '/',
-    listTitle: 'Все фильмы',
-    lists: [
-      {
-        query: 'Жанры',
-        specificList: genreFilterData,
-      },
-      {
-        query: 'Страны',
-        specificList: countryFilterData,
-      },
-      {
-        query: 'Годы',
-        specificList: yearsFilterData,
-      },
-      {
-        specificList: novetlyFilterData,
-      },
-    ],
-  },
-  {
-    icon: <BsCollectionPlay />,
-    title: 'Сериалы',
-    href: '/',
-    listTitle: 'Все сериалы',
-    lists: [
-      {
-        query: 'Жанры',
-        specificList: genreFilterData,
-      },
-      {
-        query: 'Страны',
-        specificList: countryFilterData.slice(3),
-      },
-      {
-        query: 'Годы',
-        specificList: yearsFilterData,
-      },
-      {
-        specificList: novetlyFilterData,
-      },
-    ],
-  },
-  {
-    icon: <GiSteamLocomotive />,
-    title: 'Мультфильмы',
-    href: '/',
-    listTitle: 'Все мультфильмы',
-    lists: [
-      {
-        query: 'Жанры',
-        specificList: genreFilterData,
-      },
-      {
-        query: 'Страны',
-        specificList: countryFilterData.slice(3),
-      },
-      {
-        query: 'Годы',
-        specificList: yearsFilterData,
-      },
-      {
-        specificList: novetlyFilterData,
-      },
-    ],
-  },
-  {
-    icon: <FiMonitor />,
-    title: 'TV+',
-    href: '/',
-    listTitle: 'ТВ онлайн',
-    lists: [
-      {
-        query: 'Жанры',
-        specificList: genreFilterData,
-      },
-      {
-        query: 'Страны',
-        specificList: countryFilterData.slice(3),
-      },
-      {
-        query: 'Годы',
-        specificList: yearsFilterData,
-      },
-      {
-        specificList: novetlyFilterData,
-      },
-    ],
-  },
-]
+type ITranslate = TFunction<'header', undefined, 'header'>
+
+interface IFilters {
+  genres: IFilterGetResponse[]
+  countries: IFilterGetResponse[]
+  t: ITranslate
+}
+
+export const getHeaderMobileMiddleContent = ({
+  genres,
+  countries,
+  t,
+}: IFilters) => {
+  return [
+    {
+      icon: <BiCameraMovie />,
+      title: t('mobile.tabs', { returnObjects: true })[0].title || 'Фильмы',
+      href: '/',
+      listTitle:
+        t('mobile.tabs', { returnObjects: true })[0]?.listTitle || 'Все фильмы',
+      lists: [
+        {
+          query:
+            t('mobile.tabs', { returnObjects: true })[0]?.lists[0]?.query ||
+            'Жанры',
+          specificList: genres,
+        },
+        {
+          query:
+            t('mobile.tabs', { returnObjects: true })[0]?.lists[1]?.query ||
+            'Страны',
+          specificList: countries,
+        },
+      ],
+    },
+    {
+      icon: <BsCollectionPlay />,
+      title: t('mobile.tabs', { returnObjects: true })[1]?.title || 'Сериалы',
+      href: '/',
+      listTitle:
+        t('mobile.tabs', { returnObjects: true })[1]?.listTitle ||
+        'Все сериалы',
+      lists: [
+        {
+          query:
+            t('mobile.tabs', { returnObjects: true })[1]?.lists[0]?.query ||
+            'Жанры',
+          specificList: genres,
+        },
+        {
+          query:
+            t('mobile.tabs', { returnObjects: true })[1]?.lists[1]?.query ||
+            'Страны',
+          specificList: countries.slice(3),
+        },
+      ],
+    },
+    {
+      icon: <GiSteamLocomotive />,
+      title:
+        t('mobile.tabs', { returnObjects: true })[2]?.title || 'Мультфильмы',
+      href: '/',
+      listTitle:
+        t('mobile.tabs', { returnObjects: true })[2]?.listTitle ||
+        'Все мультфильмы',
+      lists: [
+        {
+          query:
+            t('mobile.tabs', { returnObjects: true })[2]?.lists[0]?.query ||
+            'Жанры',
+          specificList: genres,
+        },
+        {
+          query:
+            t('mobile.tabs', { returnObjects: true })[2]?.lists[1]?.query ||
+            'Страны',
+          specificList: countries.slice(3),
+        },
+      ],
+    },
+    {
+      icon: <FiMonitor />,
+      title: t('mobile.tabs', { returnObjects: true })[3]?.title || 'TV+',
+      href: '/',
+      listTitle:
+        t('mobile.tabs', { returnObjects: true })[3]?.listTitle || 'TV Онлайн',
+      lists: [
+        {
+          query:
+            t('mobile.tabs', { returnObjects: true })[3]?.lists[0]?.query ||
+            'Жанры',
+          specificList: genres,
+        },
+        {
+          query:
+            t('mobile.tabs', { returnObjects: true })[3]?.lists[1]?.query ||
+            'Страны',
+          specificList: countries.slice(3),
+        },
+      ],
+    },
+  ]
+}

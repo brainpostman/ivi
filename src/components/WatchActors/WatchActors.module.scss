@@ -53,7 +53,7 @@
   }
 
   &__title {
-    color: #a5a1b2;
+    color: $gray-soft;
     @include font(1);
     @include ui-margin(top, 1);
   }

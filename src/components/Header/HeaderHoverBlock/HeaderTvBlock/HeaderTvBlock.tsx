@@ -3,6 +3,7 @@ import HeaderChannels from '../HeaderChannels/HeaderChannels'
 import HeaderPopularBroadCasts from '../HeaderPopularBroadcasts/HeaderPopularBroadcasts'
 import style from './HeaderTvBlock.module.scss'
 import { useTranslation } from 'next-i18next'
+import Link from 'next/link'
 
 const HeaderTvBlock = () => {
   const { t } = useTranslation('header', { keyPrefix: 'left-side.tv-block' })
@@ -13,8 +14,10 @@ const HeaderTvBlock = () => {
       <div className={style.left_side}>
         <ul className={style.list}>
           {t('list-tv', { returnObjects: true }).map(el => (
-            <li key={el} className='text'>
-              {el}
+            <li key={el.title}>
+              <Link href={el.href} className='text'>
+                {el.title}
+              </Link>
             </li>
           ))}
         </ul>

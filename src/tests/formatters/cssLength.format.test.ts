@@ -10,9 +10,9 @@ const testNumber = 100
 
 const testError = 'some string'
 
-describe('cssLength formatter', () => {
+describe('FORMAT formatCssLength', () => {
   // Проверяем строку с пикселями
-  it('Check string with px', () => {
+  it('String with px', () => {
     const formtattedValue = formatCssLength(testStringPx)
     const result = pxReg.test(formtattedValue)
 
@@ -20,7 +20,7 @@ describe('cssLength formatter', () => {
   })
 
   // Проверяем строку с процентами
-  it('Check string with percent', () => {
+  it('String with percent', () => {
     const formtattedValue = formatCssLength(testStringWithPercent)
     const result = percentReg.test(formtattedValue)
 
@@ -28,7 +28,7 @@ describe('cssLength formatter', () => {
   })
 
   // Проверяем число
-  it('Check number', () => {
+  it('Number', () => {
     const formtattedValue = formatCssLength(testNumber)
     const result = pxReg.test(formtattedValue)
 
@@ -37,9 +37,9 @@ describe('cssLength formatter', () => {
 })
 
 // Проверяем ошибки
-describe('cssLength formatter ERROR', () => {
+describe('FORMAT ERROR formatCssLength', () => {
   // Проверяем некорректную строку
-  it('Check wrong value', () => {
+  it('Wrong value', () => {
     const formtattedValue = formatCssLength(testError)
 
     expect(formtattedValue).toBe('0px')

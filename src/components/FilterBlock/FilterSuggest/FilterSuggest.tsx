@@ -2,14 +2,7 @@ import ModalWindow from '@/components/ModalWindow/ModalWindow'
 import Input from '@/components/UI/Input/Input'
 import { useSetStringParam } from '@/hooks/useSetStringParam'
 import { IFilterData } from '@/types/filterBlock.interface'
-import {
-  ChangeEvent,
-  FC,
-  KeyboardEvent,
-  useEffect,
-  useMemo,
-  useState,
-} from 'react'
+import { ChangeEvent, FC, KeyboardEvent, useState } from 'react'
 import FilterTab from '../FilterTab/FilterTab'
 import { useTranslation } from 'next-i18next'
 import { normalizeKey } from '@/utils/normalize.utils'

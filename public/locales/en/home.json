@@ -1,66 +1,70 @@
 {
-    "banner-carousel": [
-        {
-            "title": "Brutal and courageous",
-            "subtitle": "The best action movies of recent years",
-            "imgUrl": "/main_carousel/action.jpg",
-            "imgUrlMobile": "/main_carousel/action_mobile.jpg"
-        },
-        {
-            "title": "To the smallest Russians",
-            "subtitle": "Cartoons of domestic production",
-            "imgUrl": "/main_carousel/cartoons.jpg",
-            "imgUrlMobile": "/main_carousel/cartoons_mobile.jpg"
-        },
-        {
-            "title": "Very funny",
-            "subtitle": "Comedy films",
-            "imgUrl": "/main_carousel/comedies.jpg ",
-            "imgUrlMobile": "/main_carousel/comedies_mobile.jpg"
-        },
-        {
-            "title": "Our pride",
-            "subtitle": "Films of domestic production",
-            "imgUrl": "/main_carousel/russian.jpg",
-            "imgUrlMobile": "/main_carousel/russian_mobile.jpg"
-        },
-        {
-            "title": "Window to the Future",
-            "subtitle": "Selection of sci-fi films",
-            "imgUrl": "/main_carousel/scifi.jpg ",
-            "imgUrlMobile": "/main_carousel/scifi_mobile.jpg"
-        },
-        {
-            "title": "An exciting spectacle",
-            "subtitle": "A selection of the best thrillers of recent years",
-            "imgUrl": "/main_carousel/thrillers.jpg",
-            "imgUrlMobile": "/main_carousel/thrillers_mobile.jpg"
-        }
-    ],
-    "show-compilation": "Show compilation",
-    "html-title": "Ivi Online Cinema - movies, TV series and cartoons watch online for free in high quality",
-    "html-description": "Arrange a cinema at home! Watch good quality movies online in a pleasant home environment and at a time convenient for you. Free movies without registration for every taste are always available for you: TV series, movies, cartoons and much more.",
-    "expand-block-title": "Ivi Online Cinema: movies in high quality always bring real pleasure",
-    "visible-text": "Every day millions of people search for movies online, and no one wants to complicate their lives – and you're probably one of them! And if so, then Ivi is exactly the resource that you need. You are literally one click away from the best films in HD quality. We don't just free you from the need to go to the cinema or study the program of TV shows – visitors to our resource have much more opportunities.",
-    "30-day-sub": "30 days subscription for 1 ₽",
-    "activate-cert": "Activate certificate",
-    "carousel-title-1": "Children's animation",
-    "carousel-title-2": "Children's animation",
-    "home-page-info": {
-        "intro": "Ivi's video library is a constantly expanding collection in Runet, which has more than 60 thousand domestic and foreign content available for viewing online. We were the first in Russia to sign contracts with major Hollywood studios (Walt Disney, Warner Bros., Sony, 20th Century Fox, Universal, Paramount, MGM and others) and cooperate on an ongoing basis with major Russian companies and TV channels.",
-        "bullet-points-title": "At ivi.ru we have:",
-        "bullet-points": [
-            "a unique recommendation system that takes into account your preferences and offers to see exactly what you will definitely like;",
-            "one-touch viewing on any of the devices connected to your Ivi account – from smartphones to TVs with Smart TV technology;",
-            "the ability to download licensed content to the memory of a mobile device and watch it without Internet access;",
-            "unique conditions and benefits for the owners of the Ivi subscription, which makes the screening comfortable and enjoyable;",
-            "convenient and advanced notification system, you will not miss the release of a cool blockbuster being discussed – we will notify you of the appearance in a way suitable for you;",
-            "the ability to add movies to «watch later» to return to them in your free time;",
-            "content that does not require installing video players or searching for codecs to view;",
-            "viewing good resolution online content without registration and sms."
-        ],
-        "conclusion": "Discover the opportunity to watch movies online for free in excellent quality with the Ivi cinema!"
+  "banner-carousel": [
+    {
+      "title": "Brutal and courageous",
+      "subtitle": "The best action movies of recent years",
+      "imgUrl": "/main_carousel/action.jpg",
+      "imgUrlMobile": "/main_carousel/action_mobile.jpg"
     },
-    "top-10": "Top 10",
-    "this-week": "this week"
+    {
+      "title": "To the smallest Russians",
+      "subtitle": "Cartoons of domestic production",
+      "imgUrl": "/main_carousel/cartoons.jpg",
+      "imgUrlMobile": "/main_carousel/cartoons_mobile.jpg"
+    },
+    {
+      "title": "Very funny",
+      "subtitle": "Comedy films",
+      "imgUrl": "/main_carousel/comedies.jpg ",
+      "imgUrlMobile": "/main_carousel/comedies_mobile.jpg"
+    },
+    {
+      "title": "Our pride",
+      "subtitle": "Films of domestic production",
+      "imgUrl": "/main_carousel/russian.jpg",
+      "imgUrlMobile": "/main_carousel/russian_mobile.jpg"
+    },
+    {
+      "title": "Window to the Future",
+      "subtitle": "Selection of sci-fi films",
+      "imgUrl": "/main_carousel/scifi.jpg ",
+      "imgUrlMobile": "/main_carousel/scifi_mobile.jpg"
+    },
+    {
+      "title": "An exciting spectacle",
+      "subtitle": "A selection of the best thrillers of recent years",
+      "imgUrl": "/main_carousel/thrillers.jpg",
+      "imgUrlMobile": "/main_carousel/thrillers_mobile.jpg"
+    }
+  ],
+  "show-compilation": "Show compilation",
+  "html-title": "Ivi Online Cinema - movies, TV series and cartoons watch online for free in high quality",
+  "html-description": "Arrange a cinema at home! Watch good quality movies online in a pleasant home environment and at a time convenient for you. Free movies without registration for every taste are always available for you: TV series, movies, cartoons and much more.",
+  "expand-block-title": "Ivi Online Cinema: movies in high quality always bring real pleasure",
+  "visible-text": "Every day millions of people search for movies online, and no one wants to complicate their lives – and you're probably one of them! And if so, then Ivi is exactly the resource that you need. You are literally one click away from the best films in HD quality. We don't just free you from the need to go to the cinema or study the program of TV shows – visitors to our resource have much more opportunities.",
+  "30-day-sub": "30 days subscription for 1 ₽",
+  "activate-cert": "Activate certificate",
+  "carousel-title-1": "Children's animation",
+  "carousel-title-2": "Children's animation",
+  "home-page-info": {
+    "intro": "Ivi's video library is a constantly expanding collection in Runet, which has more than 60 thousand domestic and foreign content available for viewing online. We were the first in Russia to sign contracts with major Hollywood studios (Walt Disney, Warner Bros., Sony, 20th Century Fox, Universal, Paramount, MGM and others) and cooperate on an ongoing basis with major Russian companies and TV channels.",
+    "bullet-points-title": "At ivi.ru we have:",
+    "bullet-points": [
+      "a unique recommendation system that takes into account your preferences and offers to see exactly what you will definitely like;",
+      "one-touch viewing on any of the devices connected to your Ivi account – from smartphones to TVs with Smart TV technology;",
+      "the ability to download licensed content to the memory of a mobile device and watch it without Internet access;",
+      "unique conditions and benefits for the owners of the Ivi subscription, which makes the screening comfortable and enjoyable;",
+      "convenient and advanced notification system, you will not miss the release of a cool blockbuster being discussed – we will notify you of the appearance in a way suitable for you;",
+      "the ability to add movies to «watch later» to return to them in your free time;",
+      "content that does not require installing video players or searching for codecs to view;",
+      "viewing good resolution online content without registration and sms."
+    ],
+    "conclusion": "Discover the opportunity to watch movies online for free in excellent quality with the Ivi cinema!"
+  },
+  "top-10": "Top 10",
+  "this-week": "this week",
+  "carousel-titles": {
+    "drama": "Drama",
+    "rus-detective-series": "Russian detective series"
+  }
 }

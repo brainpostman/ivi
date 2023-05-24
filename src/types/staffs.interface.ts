@@ -9,22 +9,24 @@ export interface IStaffGetResponse {
 export type IQuerySuggest = 'director' | 'actor'
 
 export interface IStaff extends Omit<IStaffGetResponse, 'types'> {
-  type: string
+  type: IStaffType
 }
+
+export type IStaffType =
+  | 'actor'
+  | 'director'
+  | 'artist'
+  | 'operator'
+  | 'scenario'
+  | 'producer'
+  | 'compositor'
+  | 'montage'
 
 export interface IStaffGetRequest {
   order?: 'ASC' | 'DESC'
   page?: number
   take?: number
-  type?:
-    | 'actor'
-    | 'director'
-    | 'artist'
-    | 'operator'
-    | 'scenario'
-    | 'producer'
-    | 'compositor'
-    | 'montage'
+  type?: IStaffType
   search?: string
 }
 

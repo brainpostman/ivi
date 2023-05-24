@@ -3,22 +3,30 @@ import { formatCapitalize } from '@/formatters/capitalize.format'
 const testStringForCap = 'word'
 const testStringForCapReverse = 'Word'
 
-describe('capitalize formatter', () => {
+const testInvalidValue = undefined
+
+describe('FORMAT formatCapitalize', () => {
   // Проверка первой заглавной буквы
   it('Capitalize first element', () => {
-    const result = formatCapitalize(testStringForCap)
+    const formattedValue = formatCapitalize(testStringForCap)
 
-    const check = testStringForCap[0].toUpperCase() === result[0]
-
-    expect(check).toBeTruthy()
+    expect(testStringForCap[0].toUpperCase()).toBe(formattedValue[0])
   })
 
   // Проверка первой строчной буквы
   it('Capitalize reverse first element', () => {
-    const result = formatCapitalize(testStringForCapReverse, { reverse: true })
+    const formattedValue = formatCapitalize(testStringForCapReverse, {
+      reverse: true,
+    })
 
-    const check = testStringForCapReverse[0].toLowerCase() === result[0]
+    expect(testStringForCapReverse[0].toLowerCase()).toBe(formattedValue[0])
+  })
+})
 
-    expect(check).toBeTruthy()
+describe('FORMAT ERROR formatCapitalize', () => {
+  // Некорректное значение
+  it('Invalid value', () => {
+    const formattedValue = formatCapitalize(testInvalidValue)
+    expect(formattedValue).toBe('')
   })
 })

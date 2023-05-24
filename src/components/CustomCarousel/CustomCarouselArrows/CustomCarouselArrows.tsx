@@ -1,16 +1,18 @@
 import { useWindow } from '@/hooks/useWindow'
 import { adaptiveSize } from '@/utils/adaptive.utils'
-import { FC, useEffect, useState } from 'react'
+import { FC, useState } from 'react'
 import { MdArrowBackIosNew } from 'react-icons/md'
 import style from './CustomCarouselArrows.module.scss'
 
-// ==== PROPS ====
-// @param { * } arrowSize - размер стрелки
-// @param { * } arrowPosition - отступ стрелки
-// @param classNameRightArrow - класс для правой стрелки
-// @param classNameLeftArrow - класс для левой стрелки
-// @param onClickLeftArrow - действие по клику на левую стрелку
-// @param onClickRightArrow - действие по клику на правую стрелку
+/*
+ * @param {number} arrowSize - размер стрелки
+ * @param {number} arrowPosition - отступ стрелки
+ * @param {string} classNameRightArrow - класс для правой стрелки
+ * @param {string} classNameLeftArrow - класс для левой стрелки
+ * @param {() => void} onClickLeftArrow - действие по клику на левую стрелку
+ * @param {() => void} onClickRightArrow - действие по клику на правую стрелку
+
+*/
 
 interface IProps {
   arrowSize: number

@@ -5,28 +5,62 @@ import { IFilterGetResponse } from '@/types/filters.interface'
 
 type IFilterType = 'radio'
 
+type IList = (IFilterGetResponse & { isSelect: boolean; view?: string })[]
+
+/*
+  * @param {(_param: string) => () => void} onClickListEl - функция для клика по элементу
+  * @param {string} param - название параметра
+  * @param {IList} list - список параметров
+
+*/
+
+interface IUseSetListParam {
+  onClickListEl: (_param: string) => () => void
+  param: string
+  list: IList
+}
+
+/*
+  * @param {number} id - идентификатор
+  * @param {string} name - название
+  * @param {boolean} isSelect - выбран ли параметр
+  * @param {string} view - отображаемое название
+
+*/
+type IDefaultValue = {
+  id: number
+  name: string
+  isSelect: boolean
+  view?: string
+}[]
+
+/*
+  * @param {IFilterType} filterType - тип фильтра
+  * @param {string[]} extraValues - экстра значения, при которых фильтр удаляет 
+    из url
+
+*/
 interface IOptions {
   filterType?: IFilterType
   extraValues?: string[]
 }
 
+/*
+  * @param {IDefaultValue} defaultValue - список по умолчанию
+  * @param {string} query - параметр
+  * @param {IOptions} options - опции
+  * @returns IUseSetListParam
+
+*/
 export const useSetListParam = (
-  defaultValue: {
-    id: number
-    name: string
-    isSelect: boolean
-    view?: string
-  }[],
+  defaultValue: IDefaultValue,
   query: string,
   options?: IOptions
-) => {
+): IUseSetListParam => {
   const param = useGetParam(query)
   const router = useRouter()
 
-  const [list, setList] =
-    useState<(IFilterGetResponse & { isSelect: boolean; view?: string })[]>(
-      defaultValue
-    )
+  const [list, setList] = useState<IList>(defaultValue)
 
   const onClickListEl = (_param: string) => () => {
     let resultParams: string | undefined = ''

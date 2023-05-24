@@ -12,9 +12,15 @@ interface IProps {
     mainImg: string;
     actors: IStaffGetResponse[];
     className?: string;
+    scoreAVG: number | null;
 }
 
-const TrailerBlock: FC<IProps> = ({ mainImg, actors, className: propsClassName = '' }) => {
+const TrailerBlock: FC<IProps> = ({
+    mainImg,
+    actors,
+    scoreAVG,
+    className: propsClassName = '',
+}) => {
     const { t } = useTranslation('watch', { keyPrefix: 'trailer-block' });
     return (
         <div className={`${style.wrapper} ${propsClassName}`}>
@@ -25,7 +31,11 @@ const TrailerBlock: FC<IProps> = ({ mainImg, actors, className: propsClassName =
 
             <div className={style.under_trailer_mobile}>
                 <div>
-                    <FilmActors actors={actors} className={style.film_actors_mobile} />
+                    <FilmActors
+                        actors={actors}
+                        className={style.film_actors_mobile}
+                        scoreAVG={scoreAVG}
+                    />
                     {/*MOBILE FREE FILMS BUTTON*/}
                     <BasicBtn
                         btnType='icon'

@@ -32,13 +32,13 @@
   position: absolute;
   width: 40px;
 
-  color: #a5a1b2;
+  color: $gray-soft;
   @include font(1);
   @include ui-padding(left, 0.5);
 }
 
 .subtitle {
-  color: #a5a1b2;
+  color: $gray-soft;
   font-size: 15px;
   line-height: 20px;
   font-weight: 400;

@@ -2,15 +2,19 @@ import formatCssLength from '@/formatters/cssLength.format'
 import { FC, useState } from 'react'
 import style from './ExpandBlock.module.scss'
 import { useTranslation } from 'next-i18next'
+/*
+  * @param {ReactNode} children - элемент, который мы разворачиваем
+  * @param {string} className - класс для обёртки блока
+  * @param {string} title - загловок блока
+  * @param {ReactNode} visibleBlock - видимый элемент (до сворачивания)
+    Если задаём строку, то можем указать количество видимых строк
+  * @param {number} lineClamp - количество видимых строк (если visibleBlock -
+    строка)
+  * @param {string | number} width - ширина блока (в процентах или пикселях)
+  * @param {string} expandWord - текст для кнопки "Развернуть"
+  * @param {boolean} expandWordGray - серый стиль кнопки "Развернуть"
 
-// @param { * } children - элемент, который мы разворачиваем
-// @param className - класс для обёртки блока
-// @param title - загловок блока
-// @param visibleBlock - видимый элемент (до сворачивания)
-// Если задаём строку, то можем указать количество видимых строк
-// @param lineClamp - количество видимых строк (если visibleBlock - строка)
-// @param width - ширина блока (в процентах или пикселях)
-// @param expandWord - текст для кнопки "Развернуть"
+*/
 
 interface IProps {
   children: React.ReactNode

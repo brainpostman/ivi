@@ -7,7 +7,7 @@ const testValue = 'test'
 
 describe('<Input />', () => {
   // Проверяем ввод текста
-  it('Check change text', () => {
+  it('Change text', () => {
     const { container } = renderModif(<Input />)
 
     const input = container.getElementsByTagName('input')[0]

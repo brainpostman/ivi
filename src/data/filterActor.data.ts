@@ -1,12 +1,9 @@
-export const filterActorData = [
-	'актёр1',
-	'актёр2',
-	'актёр3',
-	'актёр4',
-	'актёр5',
-	'актёр6',
-	'актёр7',
-	'актёр8',
-	'актёр9',
-	'актёр10',
-]
+import { IStaffGetResponse } from '@/types/staffs.interface'
+
+export const filterActorData: IStaffGetResponse[] = new Array(22)
+  .fill(0)
+  .map((_, index) => ({
+    id: index + 1,
+    name: `актёр${index + 1}`,
+    types: [{ name: 'actor' }],
+  }))

@@ -1,18 +1,15 @@
 import { IBtnType } from '@/types/button.interface'
 import { HTMLAttributeAnchorTarget } from 'react'
+/*
+  * @param {IBtnType} btnType - тип внешнего вида кнопки
+  * @param {string} href - ссылка
+  * @param {string} suptitle - текст над текстом кнопки
+  * @param {string} title - текст кнопки
+  * @param {HTMLAttributeAnchorTarget} target - поведение при нажатии на ссылку
+    Работает, если указан href
+  * @param {boolean} circle - показать красный кружок
 
-// ==== PROPS ====
-// @param btnType - тип внешнего вида кнопки
-// @param href - ссылка
-// Испольузем либо href, либо navlink
-// @param suptitle - текст над текстом кнопки
-// Работает при btnType = 'textPlusIcon'
-// @param title - текст кнопки
-// Работает при btnType = 'textPlusIcon'
-// @param target - поведение при нажатии на ссылку
-// Работает, если указан href
-// @param circle - показать красный кружок
-
+*/
 export interface IBasicBtnProps
   extends React.DetailedHTMLProps<
     React.ButtonHTMLAttributes<HTMLButtonElement>,

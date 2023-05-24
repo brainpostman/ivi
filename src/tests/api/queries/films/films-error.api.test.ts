@@ -2,7 +2,16 @@ import { filmsAPI } from '@/api/queries/films.api'
 import { ICRUDFilm } from '@/types/ICrudMovie'
 import { IMovie, IMovieById } from '@/types/films.api.interface'
 
-describe('FILMS API ERRORS', () => {
+const expectedFilmsError = {
+  films: [],
+  totalCount: 0,
+  minYear: 0,
+  maxYear: 0,
+  minCountScore: 0,
+  maxCountScore: 0,
+}
+
+describe('FILMS-API ERRORS', () => {
   let errorFilmsData: { films: IMovie[]; totalCount: number }
 
   let errorFilmById: IMovieById | undefined
@@ -15,17 +24,17 @@ describe('FILMS API ERRORS', () => {
   })
 
   // Проверяем ошибку при получении фильмов
-  it('Check films error', () => {
-    expect(errorFilmsData).toStrictEqual({ films: [], totalCount: 0 })
+  it('Films error', () => {
+    expect(errorFilmsData).toStrictEqual(expectedFilmsError)
   })
 
   // Проверяем ошибку при получении фильма по id
-  it('Check film by id error', () => {
-    expect(!errorFilmById).toBeTruthy()
+  it('Film by id error', () => {
+    expect(errorFilmById).toBeFalsy()
   })
 
   // Проверяем ошибку при получении круда фильмов
-  it('Check crud films error', () => {
-    expect(errorCrudFilmsData).toStrictEqual({ films: [], totalCount: 0 })
+  it('Crud films error', () => {
+    expect(errorCrudFilmsData).toStrictEqual(expectedFilmsError)
   })
 })

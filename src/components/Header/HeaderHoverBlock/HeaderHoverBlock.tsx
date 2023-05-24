@@ -6,21 +6,29 @@ import HeaderTvBlock from './HeaderTvBlock/HeaderTvBlock'
 import HeaderWatchBlock from './HeaderWatchBlock/HeaderWatchBlock'
 import HeaderMovieBlock from './HeaderMovieBlock/HeaderMovieBlock'
 import HoverTabBlock from './HoverFilterBlock/HoverTabBlock'
-import { useTranslation } from 'next-i18next'
 import { IHeaderHoverBlockContent } from '@/types/hoverblock.interface'
-import { useTypedSelector } from '@/hooks/ReduxHooks'
-import { novetlyFilterData } from '@/data/filters.data'
+import { IFilterGetResponse } from '@/types/filters.interface'
+import { IMovie } from '@/types/films.api.interface'
+import { useTranslation } from 'next-i18next'
 
 interface IProps
   extends DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement> {
   tab: IHeaderTab
   hideHoverBlock: () => void
+  genres: IFilterGetResponse[]
+  countries: IFilterGetResponse[]
+  films: IMovie[]
 }
 
-const HeaderHoverBlock: FC<IProps> = ({ tab, hideHoverBlock, ...props }) => {
-  const { t } = useTranslation('header', { keyPrefix: 'left-side' })
-
-  const { genres, countries } = useTypedSelector(state => state.filters)
+const HeaderHoverBlock: FC<IProps> = ({
+  tab,
+  hideHoverBlock,
+  genres,
+  countries,
+  films,
+  ...props
+}) => {
+  const { t } = useTranslation('header')
 
   const tabList: IHeaderTab[] = ['movies', 'series', 'cartoons']
 
@@ -34,13 +42,20 @@ const HeaderHoverBlock: FC<IProps> = ({ tab, hideHoverBlock, ...props }) => {
   const currentBlock: IHeaderHoverBlockContent = {
     tab,
     columns: [
-      { title: 'Жанры', filter: 'genres', rows: genres.slice(0, 22) },
+      { title: t('genres'), filter: 'genres', rows: genres.slice(0, 22) },
       {
-        title: 'Страны',
+        title: t('countries'),
         filter: 'countries',
         rows: countries.slice(0, 22),
       },
-      { rows: novetlyFilterData },
+      {
+        rows: t('left-side.novetly', { returnObjects: true }).map(
+          (novetly, index) => ({
+            ...novetly,
+            id: index + 1,
+          })
+        ),
+      },
     ],
   }
 
@@ -57,7 +72,7 @@ const HeaderHoverBlock: FC<IProps> = ({ tab, hideHoverBlock, ...props }) => {
       ) : (
         <></>
       )}
-      {tabsWithMovieBlock.includes(tab) && <HeaderMovieBlock />}
+      {tabsWithMovieBlock.includes(tab) && <HeaderMovieBlock films={films} />}
     </article>
   )
 }

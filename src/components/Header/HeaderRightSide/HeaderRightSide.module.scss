@@ -3,6 +3,9 @@
   align-items: center;
   gap: 20px;
 
+  @media (max-width: 599px) {
+    gap: 12px;
+  }
 }
 
 .person_icon {
@@ -25,10 +28,6 @@
     border-color: #fff;
     box-shadow: 0 0 20px 5px rgba($color: #fff, $alpha: 0.15);
   }
-
-  @media (max-width: 627px) {
-    display: none;
-  }
 }
 
 .highlight_button {
@@ -40,8 +39,14 @@
   }
 }
 
-.icon {
-  @media (max-width: 556px) {
+.icon_search {
+  @media (max-width: 1160px) {
+    display: none;
+  }
+}
+
+.language_switcher {
+  @media (max-width: 394px) {
     display: none;
   }
 }

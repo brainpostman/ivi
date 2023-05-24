@@ -1,7 +1,6 @@
 import { toast } from 'react-toastify'
 
-// === PROPS ===
-// @param { * } message - ошибка / список ошибок
+// @param {string | string[] | undefined} message - ошибка / список ошибок
 
 export const displayErrorsServer = (message: string | string[] | undefined) => {
   if (!message) {
@@ -18,8 +17,7 @@ export const displayErrorsServer = (message: string | string[] | undefined) => {
   console.error(`ERROR: ${message}`)
 }
 
-// === PROPS ===
-// @param { * } message - ошибка / список ошибок
+// @param {string | string[] | undefined} message - ошибка / список ошибок
 
 export const displayErrorsClient = (message: string | string[] | undefined) => {
   if (!message) {

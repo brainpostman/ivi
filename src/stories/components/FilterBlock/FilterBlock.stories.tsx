@@ -1,11 +1,10 @@
 import FilterBlock from '@/components/FilterBlock/FilterBlock'
 import { Meta } from '@storybook/react'
 import style from './FilterBlock.stories.module.scss'
-
-const actors = [{ id: 1, name: 'actor1' }]
-const genres = [{ id: 1, name: 'genre1' }]
-const countries = [{ id: 1, name: 'country1' }]
-const directors = [{ id: 1, name: 'director1' }]
+import { filterActorData } from '@/data/filterActor.data'
+import { filterGenreListData } from '@/data/filterGenre.data'
+import { filterCountryListData } from '@/data/filterCountry.data'
+import { filterDirectorData } from '@/data/filterDirectordata'
 
 const meta: Meta = {
   title: 'FilterBlock',
@@ -18,17 +17,46 @@ const meta: Meta = {
     },
   },
   component: FilterBlock,
-  argTypes: {},
+  argTypes: {
+    minYear: {
+      description: 'Минимальный год выпуска',
+    },
+    maxYear: {
+      description: 'Максимальный год выпуска',
+    },
+    minCountScore: {
+      description: 'Минимальное количество оценок',
+    },
+    maxCountScore: {
+      description: 'Максимальное количество оценок',
+    },
+  },
 }
 
-export const Primary = () => (
+interface IProps {
+  maxCountScore: number
+  minCountScore: number
+  maxYear: number
+  minYear: number
+}
+
+export const Primary = (props: IProps) => (
   <div className={style.wrapper}>
     <FilterBlock
-      actors={actors}
-      genres={genres}
-      countries={countries}
-      directors={directors}
+      actors={filterActorData}
+      genres={filterGenreListData}
+      countries={filterCountryListData}
+      directors={filterDirectorData}
+      {...props}
     />
   </div>
 )
+
+Primary.args = {
+  minYear: 1996,
+  maxYear: 2022,
+  minCountScore: 10,
+  maxCountScore: 1000,
+}
+
 export default meta

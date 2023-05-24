@@ -8,19 +8,20 @@ import styleParent from '../FilterSlider.module.scss'
 interface IProps {
   query: string
   title: string
-  maxValue: number
+  min?: number
+  max: number
 }
 
-const FilterSliderSingle: FC<IProps> = ({ query, title, maxValue }) => {
-  const [value, setValue] = useState(0)
+const FilterSliderSingle: FC<IProps> = ({ query, title, max, min }) => {
+  const [value, setValue] = useState(min || 0)
 
   const onChangeValue = (event: ChangeEvent<HTMLInputElement>) => {
-    setValue(+event.target.value)
+    setValue(Math.round(+event.target.value))
   }
 
-  const { setUrl } = useSetStringParam(query, '0', {
+  const { setUrl } = useSetStringParam(query, (min || 0).toString(), {
     isNumber: true,
-    extraValues: ['0'],
+    extraValues: [(min || 0).toString()],
   })
 
   return (
@@ -28,7 +29,7 @@ const FilterSliderSingle: FC<IProps> = ({ query, title, maxValue }) => {
       <div className={style.wrapper_input}>
         <Input
           type='number'
-          placeholder='0'
+          placeholder={(min || 0).toString()}
           value={value}
           onChange={event => onChangeValue(event)}
         />
@@ -39,12 +40,13 @@ const FilterSliderSingle: FC<IProps> = ({ query, title, maxValue }) => {
         onChange={value => {
           setValue(value)
         }}
-        defaultValue={0}
-        max={maxValue}
+        min={min || 0}
+        max={max}
+        step={max * 0.01}
         className={styleParent.slider}
         thumbClassName={styleParent.thumb}
         trackClassName={styleParent.track}
-        onAfterChange={value => setUrl(value)}
+        onAfterChange={value => setUrl(Math.round(value))}
         pearling
       />
     </div>

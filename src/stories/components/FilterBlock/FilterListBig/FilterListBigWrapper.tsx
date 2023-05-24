@@ -23,9 +23,11 @@ const FilterListBigWrapper: FC<
   const filterData = getFilterData(title)
 
   return (
-    <FilterListBig filterData={filterData} {...props}>
-      {children}
-    </FilterListBig>
+    <div style={{ width: 250 }}>
+      <FilterListBig filterData={filterData} {...props}>
+        {children}
+      </FilterListBig>
+    </div>
   )
 }
 

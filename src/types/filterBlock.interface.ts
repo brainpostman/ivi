@@ -1,3 +1,6 @@
+import { IQuerySuggest } from './staffs.interface'
+import { IQueryRange, IRangeWithPartial } from './utils.interface'
+
 export type IFilterTitle =
   | 'genres'
   | 'country'
@@ -42,17 +45,13 @@ export interface IFilterSuggestProps {
   closeModal: () => void
   suggestList: string[]
   placeholder?: string
-  query: string
+  query: IQuerySuggest
 }
 
 export interface IFilterSliderProps {
   title: string
-  query: string
-  range?: {
-    min: number
-    max: number
-  }
-  maxValue?: number
+  query: string | IQueryRange
+  range: IRangeWithPartial
 }
 
 export interface ISortType {

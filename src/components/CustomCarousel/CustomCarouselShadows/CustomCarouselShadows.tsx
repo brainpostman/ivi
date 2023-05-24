@@ -1,9 +1,10 @@
 import { FC } from 'react'
 import style from './CustomCarouselShadows.module.scss'
+/*
+  * @param {string} classNameRightShadow - класс для правой стрелки
+  * @param {string} classNameLeftShadow - класс для левой стрелки
 
-// ==== PROPS ====
-// @param classNameRightShadow - класс для правой стрелки
-// @param classNameLeftShadow - класс для левой стрелки
+*/
 
 interface IProps {
   classNameRightShadow?: string

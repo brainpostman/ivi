@@ -33,8 +33,8 @@ export const getServerSideProps: GetServerSideProps = async ({ locale, params })
     }
     const reviewCount = await filmsAPI.getFilmReviewCount(Number(params.id));
     const reviews = await filmsAPI.getFilmReviews(Number(params.id));
-    const film = await filmsAPI.getFilmsById(Number(params.id));
-    const { films } = await filmsAPI.getFilmsHomePage();
+    const film = await filmsAPI.getFilmsById(Number(params.id), locale ?? 'ru');
+    const { films } = await filmsAPI.getFilms(locale ?? 'ru', { take: 19 });
 
     return {
         props: {
@@ -58,7 +58,7 @@ interface IProps {
     reviewData: { reviewCount: number; reviews: IReviewGetResponse[] };
 }
 
-const Film: FC<IProps> = ({ film, films, reviewData }) => {
+const FilmPage: FC<IProps> = ({ film, films, reviewData }) => {
     const { t } = useTranslation('watch');
     return (
         <PageLayout title={film.name}>
@@ -82,6 +82,7 @@ const Film: FC<IProps> = ({ film, films, reviewData }) => {
                         mainImg={film.mainImg}
                         actors={film.actors.slice(0, 4)}
                         className={style.trailerblock}
+                        scoreAVG={film.scoreAVG}
                     />
 
                     <div className={style.container_info}>
@@ -106,7 +107,7 @@ const Film: FC<IProps> = ({ film, films, reviewData }) => {
                             </ExpandBlock>
                         </div>
 
-                        <IviRaiting film={film} />
+                        <IviRaiting scoreAVG={film.scoreAVG} countScore={film.countScore} />
                     </div>
                 </div>
                 {films ? <MovieCarousel films={films} /> : <Loader />}
@@ -123,4 +124,4 @@ const Film: FC<IProps> = ({ film, films, reviewData }) => {
     );
 };
 
-export default Film;
+export default FilmPage;

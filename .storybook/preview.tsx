@@ -6,6 +6,30 @@ import '../src/styles/globals.scss'
 import i18n from './i18next'
 import { I18nextProvider } from 'react-i18next'
 
+const BREAKPOINTS = {
+  xxs: 320,
+  xs: 375,
+  sm: 600,
+  md: 900,
+  lg: 1200,
+  xl: 1536,
+}
+
+const customViewports = Object.fromEntries(
+  Object.entries(BREAKPOINTS).map(([key, value], index) => {
+    return [
+      key,
+      {
+        name: key,
+        styles: {
+          width: `${value}px`,
+          height: `${(index + 5) * 10}vh`,
+        },
+      },
+    ]
+  })
+)
+
 const OriginalNextImage = NextImage.default
 Object.defineProperty(NextImage, 'default', {
   configurable: true,
@@ -45,6 +69,7 @@ export const globalTypes = {
 
 const preview: Preview = {
   parameters: {
+    viewport: { viewports: customViewports },
     backgrounds: {
       default: 'dark',
       values: [

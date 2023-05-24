@@ -1,8 +1,9 @@
-// === PROPS ===
-// @param { * } container - контейнер
-// @param btnClassName - класс кнопки
-// @param isExistIcon - существует ли иконка
+/*
+  * @param {HTMLElement} container - контейнер
+  * @param {string} btnClassName - класс кнопки
+  * @param {boolean} isExistIcon - существует ли иконка
 
+*/
 export const checkButton = (
   container: HTMLElement,
   btnClassName?: string,

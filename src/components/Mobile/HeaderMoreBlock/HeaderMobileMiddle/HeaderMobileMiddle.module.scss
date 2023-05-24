@@ -7,6 +7,16 @@
   @include font(2, bold);
 }
 
+.language_changer {
+  width: fit-content;
+
+  @include ui-margin(bottom, 4);
+
+  @media (min-width: 395px) {
+    display: none;
+  }
+}
+
 .nav {
   >p {
     @include ui-margin(bottom, 6);
@@ -31,41 +41,26 @@
 }
 
 .inner_lists {
-  display: grid;
-  grid-template-areas: 'a b d' 'a c d' 'a c d' 'a c d' 'a c d';
-  row-gap: 16px;
+  display: flex;
+  gap: 84px;
 
   &__title {
     @include ui-margin(bottom, 3);
   }
-
-  >li {
-    &:nth-child(1) {
-      grid-area: a;
-    }
-
-    &:nth-child(2) {
-      grid-area: b;
-    }
-
-    &:nth-child(3) {
-      grid-area: c;
-    }
-
-    &:nth-child(4) {
-      grid-area: d;
-    }
-  }
 }
 
 .filter_list {
+  display: flex;
+  gap: 48px;
+}
+
+.filter_list_inner {
   display: flex;
   flex-direction: column;
   gap: 12px;
 
   color: #ffffffb8;
 }
-
 
 .tv_list {
   display: flex;
@@ -78,7 +73,7 @@
 }
 
 .tv_program_button {
-  background-color: #3a3352;
+  background-color: #282338;
 
   width: 100%;
   @include ui-margin(ver, 5);
@@ -94,11 +89,35 @@
 
 .inner_channel_list {
   display: grid;
-  grid-template-columns: repeat(4, auto);
-  column-gap: 24px;
-  row-gap: 8px;
+  grid-template-columns: repeat(6, auto);
+  column-gap: 16px;
+  row-gap: 16px;
 
   @include ui-margin(top, 4);
+
+  @media (max-width: 880px) {
+    grid-template-columns: repeat(4, auto);
+  }
+
+  @media (max-width: 600px) {
+    display: none;
+  }
+
+  >li {
+    position: relative;
+    width: 162px;
+    height: 107px;
+
+    @media (max-width: 1160px) {
+      @include adaptive-size(width, 162, 116, 880, 1160);
+      @include adaptive-size(height, 107, 76, 880, 1160);
+    }
+
+    @media (max-width: 880px) {
+      @include adaptive-size(width, 186, 116, 600, 880);
+      @include adaptive-size(height, 122, 76, 600, 880);
+    }
+  }
 
   li,
   img {
@@ -112,6 +131,10 @@
   row-gap: 12px;
 
   @include ui-margin(ver, 4);
+
+  @media (max-width: 520px) {
+    grid-template-columns: repeat(1, auto);
+  }
 }
 
 .broadcast {
@@ -120,6 +143,19 @@
 
   >img {
     border-radius: 8px;
+  }
+
+  &__info {
+    >p {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      width: 170px;
+
+      @media (max-width: 520px) {
+        width: 100%;
+      }
+    }
   }
 
   &__subtitle {

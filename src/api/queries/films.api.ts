@@ -7,22 +7,33 @@ import {
     IReviewGetResponse,
     IReviewPostRequest,
 } from '@/types/films.api.interface';
-import { transformFilms } from '../transforms/films.transform';
+import { transformFilmById, transformFilms } from '../transforms/films.transform';
 import { customAxios } from './customAxios';
 import { ICRUDFilm } from '@/types/ICrudMovie';
+import formatStrToNum from '@/formatters/strToNum.format';
+
+interface IGetFilms {
+    films: IMovie[];
+    totalCount: number;
+    minYear: number;
+    maxYear: number;
+    minCountScore: number;
+    maxCountScore: number;
+}
+
+interface IGetCrudFilms extends Omit<IGetFilms, 'films'> {
+    films: ICRUDFilm[];
+}
 
 export const filmsAPI = {
-    getFilms(params?: IFilmsGetRequest) {
-        return getFilms(params);
-    },
-    getFilmsHomePage(params?: { page?: number }) {
-        return getFilms({ take: 19, page: params?.page || 1 });
+    getFilms(locale?: string, params?: IFilmsGetRequest) {
+        return getFilms(locale, params);
     },
     getCrudFilms(params?: IFilmsGetRequest) {
         return getCrudFilms(params);
     },
-    getFilmsById(param: number) {
-        return getFilmsById(param);
+    getFilmsById(param: number, locale: string) {
+        return getFilmsById(param, locale);
     },
     getFilmReviewCount(param: number) {
         return getFilmReviewCount(param);
@@ -44,42 +55,86 @@ export const filmsAPI = {
     },
 };
 
-const getFilms = async (
-    params?: IFilmsGetRequest
-): Promise<{ films: IMovie[]; totalCount: number }> => {
+const getFilms = async (locale?: string, params?: IFilmsGetRequest): Promise<IGetFilms> => {
     try {
         const filmsData = await customAxios.get<IFilmsgGetResponse[]>('/films', {
             params,
         });
 
-        const films = filmsData.data.map((film) => transformFilms(film));
+        const films = transformFilms(filmsData.data, locale);
 
-        const totalCount = filmsData.headers['x-total-count'];
-        return { films, totalCount: totalCount || 0 };
+        let totalCount = films.length;
+        let minYear = 0;
+        let maxYear = 0;
+        let minCountScore = 0;
+        let maxCountScore = 0;
+
+        if (typeof window === 'undefined') {
+            totalCount = formatStrToNum(filmsData.headers['x-total-count']);
+            minYear = formatStrToNum(filmsData.headers['x-min-year']);
+            maxYear = formatStrToNum(filmsData.headers['x-max-year']);
+
+            minCountScore = formatStrToNum(filmsData.headers['x-min-count-score']);
+            maxCountScore = formatStrToNum(filmsData.headers['x-max-count-score']);
+        }
+
+        return {
+            films,
+            totalCount,
+            minYear,
+            maxYear,
+            minCountScore,
+            maxCountScore,
+        };
     } catch (_) {
-        return { films: [], totalCount: 0 };
+        return {
+            films: [],
+            totalCount: 0,
+            minYear: 0,
+            maxYear: 0,
+            minCountScore: 0,
+            maxCountScore: 0,
+        };
     }
 };
 
-const getCrudFilms = async (
-    params?: IFilmsGetRequest
-): Promise<{ films: ICRUDFilm[]; totalCount: number }> => {
+const getCrudFilms = async (params?: IFilmsGetRequest): Promise<IGetCrudFilms> => {
     try {
         const response = await customAxios.get<ICRUDFilm[]>('/films', {
             params,
         });
-        const totalCount = response.headers['x-total-count'];
-        return { films: response.data, totalCount: totalCount || 0 };
+        const totalCount = formatStrToNum(response.headers['x-total-count']);
+
+        const minYear = formatStrToNum(response.headers['x-min-year']);
+        const maxYear = formatStrToNum(response.headers['x-max-year']);
+
+        const minCountScore = formatStrToNum(response.headers['x-min-count-score']);
+        const maxCountScore = formatStrToNum(response.headers['x-max-count-score']);
+
+        return {
+            films: response.data,
+            totalCount,
+            maxCountScore,
+            maxYear,
+            minCountScore,
+            minYear,
+        };
     } catch (_) {
-        return { films: [], totalCount: 0 };
+        return {
+            films: [],
+            totalCount: 0,
+            maxCountScore: 0,
+            maxYear: 0,
+            minCountScore: 0,
+            minYear: 0,
+        };
     }
 };
 
-const getFilmsById = async (id: number): Promise<IMovieById | undefined> => {
+const getFilmsById = async (id: number, locale = 'ru'): Promise<IMovieById | undefined> => {
     try {
         const filmData = await customAxios.get<IFilmByIdGetResponse>(`/films/${id}`);
-        const film = transformFilms(filmData.data);
-
+        const film = transformFilmById(filmData.data, locale);
         return film;
     } catch (_) {
         return undefined;

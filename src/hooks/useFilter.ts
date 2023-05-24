@@ -6,7 +6,25 @@ import {
 } from '@/types/filterBlock.interface'
 import { useState } from 'react'
 
-export const useFilter = (defaultValue: Omit<IFilterBlockEl, 'isExpand'>[]) => {
+/*
+  * @param {(title: IFilterTitle) => () => void} expandTabFilter - функция для 
+    сворачивания / разворачивания плашки с фильтром
+  * @param {(title: IFilterTitle) => IFilterData} getFilterData - функция для получения данных фильтра
+
+*/
+interface IUseFilter {
+  expandTabFilter: (title: IFilterTitle) => () => void
+  getFilterData: (title: IFilterTitle) => IFilterData
+}
+
+type IDefaultValue = Omit<IFilterBlockEl, 'isExpand'>[]
+
+/*
+  * @param {IDefaultValue} defaultValue - фильтр по умолчанию
+  * @returns IUseFilter
+
+*/
+export const useFilter = (defaultValue: IDefaultValue): IUseFilter => {
   const [filters, setFilters] = useState(
     defaultValue.map(el => ({ ...el, isExpand: false }))
   )

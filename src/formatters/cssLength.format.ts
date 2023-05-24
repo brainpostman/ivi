@@ -1,7 +1,9 @@
-// === PROPS ===
-// @param length - длина в пикселях или процентах
+/*
+  * @param {string | number} length - длина в пикселях или процентах
+  * @returns string - ширина
 
-const formatCssLength = (length: string | number) => {
+*/
+const formatCssLength = (length: string | number): string => {
   const stringedLen = length.toString()
 
   const lastElem = stringedLen.at(-1)

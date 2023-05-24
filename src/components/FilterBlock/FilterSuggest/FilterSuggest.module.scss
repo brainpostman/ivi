@@ -7,6 +7,7 @@
   width: 860px;
 
   @include ui-margin(top, 40);
+  @include ui-padding(hor, 4);
 }
 
 .title {

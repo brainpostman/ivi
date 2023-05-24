@@ -1,21 +1,22 @@
 import { formatCapitalize } from '@/formatters/capitalize.format'
-import { formatPairSliderQuery } from '@/formatters/pairSliderQuery.format'
+import { formatMinMaxQuery } from '@/formatters/minMaxQuery.format'
 
 const testQueryParam = 'rating'
 const errorTestQueryParam = ''
 
-describe('PAIR SLIDER QUERY', () => {
-  it('Check query param', () => {
-    const { maxValueStr, minValueStr } = formatPairSliderQuery(testQueryParam)
+describe('FORMAT formatMinMaxQuery', () => {
+  it('Query param', () => {
+    const { maxValueStr, minValueStr } = formatMinMaxQuery(testQueryParam)
     const formattedQueryParam = formatCapitalize(testQueryParam)
 
     expect(maxValueStr).toBe(`max${formattedQueryParam}`)
     expect(minValueStr).toBe(`min${formattedQueryParam}`)
   })
+})
 
-  it('Check error query param', () => {
-    const { maxValueStr, minValueStr } =
-      formatPairSliderQuery(errorTestQueryParam)
+describe('FORMAT ERROR formatMinMaxQuery', () => {
+  it('ERROR query param', () => {
+    const { maxValueStr, minValueStr } = formatMinMaxQuery(errorTestQueryParam)
 
     expect(maxValueStr).toBe('max')
     expect(minValueStr).toBe('min')

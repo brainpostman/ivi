@@ -1,117 +1,118 @@
 {
-    "about-us": {
-        "heading": "About us",
-        "links": [
-            {
-                "linkType": "external",
-                "url": "https://corp.ivi.ru ",
-                "text": "About the company"
-            },
-            {
-                "linkType": "external",
-                "url": "https://corp.ivi.ru/career/#career-vacancy-block ",
-                "text": "Vacancies"
-            },
-            {
-                "linkType": "external",
-                "url": "https://www.ivi.ru/pages/beta /",
-                "text": "Beta testing program"
-            },
-            {
-                "linkType": "external",
-                "url": "https://www.ivi.ru/info/partners ",
-                "text": "Information for partners"
-            },
-            {
-                "linkType": "external",
-                "url": "https://corp.ivi.ru/advertisers /",
-                "text": "Ad placement"
-            },
-            {
-                "linkType": "external",
-                "url": "https://www.ivi.ru/info/agreement ",
-                "text": "User Agreement"
-            },
-            {
-                "linkType": "external",
-                "url": "https://www.ivi.ru/info/confidential ",
-                "text": "Privacy Policy"
-            },
-            {
-                "linkType": "external",
-                "url": "https://www.ivi.ru/info/goryachaya-liniya-komplaens ",
-                "text": "Compliance"
-            }
-        ]
+  "entrance-by-code": "Entrance by code",
+  "about-us": {
+    "heading": "About us",
+    "links": [
+      {
+        "linkType": "external",
+        "url": "https://corp.ivi.ru ",
+        "text": "About the company"
+      },
+      {
+        "linkType": "external",
+        "url": "https://corp.ivi.ru/career/#career-vacancy-block ",
+        "text": "Vacancies"
+      },
+      {
+        "linkType": "external",
+        "url": "https://www.ivi.ru/pages/beta /",
+        "text": "Beta testing program"
+      },
+      {
+        "linkType": "external",
+        "url": "https://www.ivi.ru/info/partners ",
+        "text": "Information for partners"
+      },
+      {
+        "linkType": "external",
+        "url": "https://corp.ivi.ru/advertisers /",
+        "text": "Ad placement"
+      },
+      {
+        "linkType": "external",
+        "url": "https://www.ivi.ru/info/agreement ",
+        "text": "User Agreement"
+      },
+      {
+        "linkType": "external",
+        "url": "https://www.ivi.ru/info/confidential ",
+        "text": "Privacy Policy"
+      },
+      {
+        "linkType": "external",
+        "url": "https://www.ivi.ru/info/goryachaya-liniya-komplaens ",
+        "text": "Compliance"
+      }
+    ]
+  },
+  "sections": {
+    "heading": "Sections",
+    "links": [
+      {
+        "linkType": "internal",
+        "url": "/",
+        "text": "My Ivy"
+      },
+      {
+        "linkType": "external",
+        "url": "https://www.ivi.ru/new ",
+        "text": "What's new"
+      },
+      {
+        "linkType": "internal",
+        "url": "/movies",
+        "text": "Movies"
+      },
+      {
+        "linkType": "external",
+        "url": "https://www.ivi.ru/series ",
+        "text": "Series"
+      },
+      {
+        "linkType": "external",
+        "url": "https://www.ivi.ru/animation",
+        "text": "Cartoons"
+      },
+      {
+        "linkType": "external",
+        "url": "https://www.ivi.ru/tvplus",
+        "text": "TV+"
+      },
+      {
+        "linkType": "external",
+        "url": "https://www.ivi.ru/goodmovies ",
+        "text": "What to see"
+      }
+    ]
+  },
+  "administration": "Site administration",
+  "cert-activation": "Activate certificate",
+  "copyright-ivi": "© 2023 «ivi.ru» LLC",
+  "copyright-hbo": "HBO ® and related service marks are the property of Home Box Office, Inc",
+  "devices": {
+    "app-store": {
+      "title": "App Store",
+      "subtitle": "Download in"
     },
-    "sections": {
-        "heading": "Sections",
-        "links": [
-            {
-                "linkType": "internal",
-                "url": "/",
-                "text": "My Ivy"
-            },
-            {
-                "linkType": "external",
-                "url": "https://www.ivi.ru/new ",
-                "text": "What's new"
-            },
-            {
-                "linkType": "internal",
-                "url": "/movies",
-                "text": "Movies"
-            },
-            {
-                "linkType": "external",
-                "url": "https://www.ivi.ru/series ",
-                "text": "Series"
-            },
-            {
-                "linkType": "external",
-                "url": "https://www.ivi.ru/animation",
-                "text": "Cartoons"
-            },
-            {
-                "linkType": "external",
-                "url": "https://www.ivi.ru/tvplus",
-                "text": "TV+"
-            },
-            {
-                "linkType": "external",
-                "url": "https://www.ivi.ru/goodmovies ",
-                "text": "What to see"
-            }
-        ]
+    "google-play": {
+      "title": "Google Play",
+      "subtitle": "Available in"
     },
-    "administration": "Site administration",
-    "cert-activation": "Activate certificate",
-    "copyright-ivi": "© 2023 «ivi.ru» LLC",
-    "copyright-hbo": "HBO ® and related service marks are the property of Home Box Office, Inc",
-    "devices": {
-        "app-store": {
-            "title": "App Store",
-            "subtitle": "Download in"
-        },
-        "google-play": {
-            "title": "Google Play",
-            "subtitle": "Available in"
-        },
-        "smart-tv": {
-            "title": "Smart TV",
-            "subtitle": "Watch on"
-        },
-        "all-devices": "All devices"
+    "smart-tv": {
+      "title": "Smart TV",
+      "subtitle": "Watch on"
     },
-    "support": {
-        "support-service": "Support service",
-        "we-ready": "We are always ready to help you.",
-        "online-24-7": "Our operators are online 24/7",
-        "chat": "Send a chat message",
-        "qna": "Answers to questions"
-    },
-    "ad": {
-        "line-1": "Watch movies, TV series and",
-        "line-2": "cartoons without ads"
-    }
+    "all-devices": "All devices"
+  },
+  "support": {
+    "support-service": "Support service",
+    "we-ready": "We are always ready to help you.",
+    "online-24-7": "Our operators are online 24/7",
+    "chat": "Send a chat message",
+    "qna": "Answers to questions"
+  },
+  "ad": {
+    "line-1": "Watch movies, TV series and",
+    "line-2": "cartoons without ads"
+  }
 }

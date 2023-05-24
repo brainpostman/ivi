@@ -1,10 +1,31 @@
 import { useState } from 'react'
 
+/*
+  * @param {() => void} onClickRightArrow - функция для клика на правую стрелку
+  * @param {() => void} onClickLeftArrow - функция для клика не левую стрелку
+  * @param {(direction: 'left' | 'right') => 'hide' | ''} viewArrow - className, показываем или скрываем стрелку
+  * @param {number} move - сдвиг
+
+*/
+interface IUseCustomCarousel {
+  onClickRightArrow: () => void
+  onClickLeftArrow: () => void
+  viewArrow: (direction: 'left' | 'right') => 'hide' | ''
+  move: number
+}
+/*
+  * @param {number[]} elementLens - длины элементов
+  * @param {number} elementsView - количество видимых элементов
+  * @param {number} elementsMove - количество элементов, на которое двигается 
+    карусель
+  * @returns IUseCustomCarousel
+
+*/
 export const useCustomCarousel = (
   elementLens: number[],
   elementsView: number,
   elementsMove: number
-) => {
+): IUseCustomCarousel => {
   const cuttedElementLengths = elementLens.slice(elementsView)
   const numExtraEls = cuttedElementLengths.length % elementsMove
 

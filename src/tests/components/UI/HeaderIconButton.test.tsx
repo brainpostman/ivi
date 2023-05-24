@@ -8,7 +8,7 @@ const testChildren = 'test'
 
 describe('<HeaderIconButton />', () => {
   // Проверяем стандартную кнопку
-  it('Check default', () => {
+  it('Default', () => {
     const { getByText } = renderModif(
       <HeaderIconButton>{testChildren}</HeaderIconButton>
     )
@@ -18,7 +18,7 @@ describe('<HeaderIconButton />', () => {
   })
 
   // Проверяем кастомную иконку
-  it('Check custom icon', () => {
+  it('Custom icon', () => {
     const { container } = renderModif(
       <HeaderIconButton customIcon={<AiFillCheckCircle />} />
     )
@@ -27,14 +27,14 @@ describe('<HeaderIconButton />', () => {
   })
 
   // Проверяем иконку поиска
-  it('Check icon search', () => {
+  it('Icon search', () => {
     const { container } = renderModif(<HeaderIconButton icon='search' />)
 
     checkButton(container, undefined, true)
   })
 
   // Проверяем иконку уведомления
-  it('Check icon search', () => {
+  it('Icon search', () => {
     const { container } = renderModif(<HeaderIconButton icon='notification' />)
 
     checkButton(container, undefined, true)

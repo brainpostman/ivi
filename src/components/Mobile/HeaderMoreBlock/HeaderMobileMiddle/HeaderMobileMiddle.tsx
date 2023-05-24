@@ -1,21 +1,23 @@
 import BasicBtn from '@/components/UI/BasicBtn/BasicBtn'
-import { headerMobileMiddleContent } from '@/data/headerMobile.data'
-import {
-  headerPopularBroadcastsData,
-  headerTvBlockData,
-} from '@/data/headerTVBlock.data'
+import { getHeaderMobileMiddleContent } from '@/data/headerMobile.data'
 import Image from 'next/image'
 import Link from 'next/link'
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import { MdArrowBackIosNew } from 'react-icons/md'
 import styleParent from '../HeaderMoreBlock.module.scss'
 import style from './HeaderMobileMiddle.module.scss'
-
-// FIXME: починить key prop
+import { FiltersContext } from '@/contexts/filters.context'
+import LanguageChanger from '@/components/LanguageSwitcher/LanguageSwitcher'
+import { useTranslation } from 'react-i18next'
+import { formatSplitArray } from '@/formatters/splitArray.format'
 
 const HeaderMobileMiddle = () => {
+  const { countries, genres } = useContext(FiltersContext)
+
+  const { t } = useTranslation('header')
+
   const [contentLists, setContentLists] = useState(
-    headerMobileMiddleContent.map(el => ({
+    getHeaderMobileMiddleContent({ genres, countries, t }).map(el => ({
       ...el,
       isSelect: false,
     }))
@@ -32,12 +34,15 @@ const HeaderMobileMiddle = () => {
 
   return (
     <div className={style.wrapper}>
+      <LanguageChanger className={style.language_changer} />
       <nav className={style.nav}>
         <p>
-          <Link href='/'>Мой иви</Link>
+          <Link href='/'>{t('mobile.middle.my-ivi')}</Link>
         </p>
         <p>
-          <a href='https://www.ivi.ru/new'>Что нового</a>
+          <Link href='https://www.ivi.ru/new'>
+            {t('mobile.middle.whats-new')}
+          </Link>
         </p>
       </nav>
 
@@ -63,11 +68,23 @@ const HeaderMobileMiddle = () => {
                   <p className={style.lists__title}>{element.listTitle}</p>
                   <ul className={style.inner_lists}>
                     {element.lists.map(list => (
-                      <li key={element.listTitle}>
-                        <p className={style.inner_lists__title}>{list.query}</p>
+                      <li key={list.query}>
+                        {list.query && (
+                          <p className={style.inner_lists__title}>
+                            {list.query}
+                          </p>
+                        )}
                         <ul className={style.filter_list}>
-                          {list.specificList.map(element => (
-                            <li>{element.title}</li>
+                          {formatSplitArray(list.specificList, 2, {
+                            evenly: true,
+                          }).map((list, index) => (
+                            <li key={index}>
+                              <ul className={style.filter_list_inner}>
+                                {list.map(el => (
+                                  <li key={el.id}>{el.name}</li>
+                                ))}
+                              </ul>
+                            </li>
                           ))}
                         </ul>
                       </li>
@@ -78,31 +95,28 @@ const HeaderMobileMiddle = () => {
                 <div>
                   <p>{element.listTitle}</p>
                   <ul className={style.tv_list}>
-                    <li>ТВ-каналы</li>
-                    <li>ТВ-развлекательное</li>
-                    <li>Дети</li>
-                    <li>Спортивное ТВ</li>
-                    <li>Документальное</li>
+                    {t('left-side.tv-block.list-tv', {
+                      returnObjects: true,
+                    }).map((tv, index) => (
+                      <li key={index}>{tv.title}</li>
+                    ))}
                   </ul>
 
                   <BasicBtn className={style.tv_program_button}>
-                    Телепрограмма
+                    {t('mobile.middle.tv-program')}
                   </BasicBtn>
 
                   <div>
                     <ul className={style.channel_list}>
-                      {headerTvBlockData.map(data => (
+                      {t('left-side.tv-block.carousels', {
+                        returnObjects: true,
+                      }).map(data => (
                         <li key={data.title}>
                           <p>{data.title}</p>
                           <ul className={style.inner_channel_list}>
                             {data.channels.slice(0, 8).map(channel => (
                               <li key={channel.href}>
-                                <Image
-                                  src={channel.img}
-                                  alt='channel'
-                                  width={146}
-                                  height={96}
-                                />
+                                <Image src={channel.img} alt='channel' fill />
                               </li>
                             ))}
                           </ul>
@@ -110,9 +124,11 @@ const HeaderMobileMiddle = () => {
                       ))}
                     </ul>
 
-                    <p>Популярные трансляции</p>
+                    <p>{t('left-side.tv-block.popular-broadcasts-title')}</p>
                     <ul className={style.broadcast_list}>
-                      {headerPopularBroadcastsData
+                      {t('left-side.tv-block.popular-broadcasts', {
+                        returnObjects: true,
+                      })
                         .slice(0, 12)
                         .map(broadcast => (
                           <li key={broadcast.title} className={style.broadcast}>
@@ -123,7 +139,7 @@ const HeaderMobileMiddle = () => {
                               height={38}
                             />
 
-                            <div>
+                            <div className={style.broadcast__info}>
                               <p>{broadcast.title}</p>
                               <p className={style.broadcast__subtitle}>
                                 <span>{broadcast.date}</span> •{' '}
@@ -139,7 +155,7 @@ const HeaderMobileMiddle = () => {
           </li>
         ))}
       </ul>
-      <p>Что посмотреть</p>
+      <p>{t('mobile.what-to-see')}</p>
     </div>
   )
 }

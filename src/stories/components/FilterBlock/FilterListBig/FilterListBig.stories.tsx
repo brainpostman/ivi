@@ -1,15 +1,14 @@
 import FilterListBig from '@/components/FilterBlock/FilterListBig/FilterListBig'
 import FilterGenreCard from '@/components/FilterGenreCard/FilterGenreCard'
 import VioletButton from '@/components/UI/VioletButton/VioletButton'
-import { filterCountryData } from '@/data/filterCountry.data'
-import { filterGenreData } from '@/data/filterGenre.data'
 import {
   IFilterListBigProps,
   IFilterTitle,
 } from '@/types/filterBlock.interface'
 import { Meta } from '@storybook/react'
 import FilterListBigWrapper from './FilterListBigWrapper'
-import { useTranslation } from 'react-i18next'
+import { filterGenreListData } from '@/data/filterGenre.data'
+import { filterCountryListData } from '@/data/filterCountry.data'
 
 const meta: Meta = {
   title: 'FilterBlock/FilterListBig',
@@ -39,7 +38,7 @@ const meta: Meta = {
     },
     query: {
       description: 'Название параметра',
-      options: ['genre', 'country'],
+      options: ['genres', 'countries'],
       control: 'select',
     },
     unformattedStringedList: {
@@ -67,8 +66,8 @@ export const Genre = ({
 
   return (
     <FilterListBigWrapper list={list} {...props}>
-      {filterGenreData.map(genre => (
-        <FilterGenreCard title={genre.title} />
+      {filterGenreListData.map(genre => (
+        <FilterGenreCard key={genre.id} title={genre.name} onClick={() => {}} />
       ))}
     </FilterListBigWrapper>
   )
@@ -90,7 +89,6 @@ export const Country = ({
   title: IFilterTitle
   unformattedStringedList: string
 }) => {
-  const { t } = useTranslation('movies')
   const list = unformattedStringedList?.split(',').map((el, index) => ({
     id: index,
     name: el,
@@ -99,9 +97,9 @@ export const Country = ({
 
   return (
     <FilterListBigWrapper list={list} {...props}>
-      {filterCountryData.map(country => (
-        <VioletButton variant={country.variant}>
-          {country.children}
+      {filterCountryListData.map(country => (
+        <VioletButton key={country.id} variant='secondary'>
+          {country.name}
         </VioletButton>
       ))}
     </FilterListBigWrapper>

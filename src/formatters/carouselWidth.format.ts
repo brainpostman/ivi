@@ -1,19 +1,20 @@
 import { ICustomCarouselWidth } from '@/types/customCarousel.interface'
+/*
+  * @param {ICustomCarouselWidth} width - тип ширины карусели
+  * @param {number} space - отступ между элементами
+  * @param {number} padding - внутренний отступ
+  * @param {number[]} elementLens - массив длин элементов
+  * @param {number} elementsView - количество видимых элементов
+  * @returns number
 
-// === PROPS ===
-// @param { * } width - тип ширины карусели
-// @param { * } space - отступ между элементами
-// @param padding - внутренний отступ
-// @param  elementLens - массив длин элементов
-// @param  elementsView - количество видимых элементов
-
+*/
 export const formatCarouselWidth = (
   width: ICustomCarouselWidth,
   space: number,
   padding = 0,
   elementLens?: number[],
   elementsView?: number
-) => {
+): number => {
   if (width === 'full') return 1225
 
   if (elementsView && elementLens) {

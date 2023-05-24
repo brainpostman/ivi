@@ -1,115 +1,124 @@
 @mixin slider-transition {
-    transition: transform 0.6s, opacity 0.6s; //cubic-bezier(.84,.23,.53,.95);
+  transition: transform 0.6s, opacity 0.6s; //cubic-bezier(.84,.23,.53,.95);
 }
 
 .container {
-    position: relative;
-    height: auto;
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
+  position: relative;
+  height: auto;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
 }
 
 .window {
-    z-index: 0;
-    display: flex;
-    height: 100%;
-    max-width: 1216px;
-    flex: 0 0 1216px;
-    margin: 0 auto;
+  z-index: 0;
+  display: flex;
+  height: 100%;
+  max-width: 1216px;
+  flex: 0 0 1216px;
+  margin: 0 auto;
 }
 
 .arrowArea {
-    position: absolute;
-    z-index: 950;
-    height: 100%;
-    width: 100%;
-    cursor: pointer;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    &_left {
-        right: 100%;
-        &::before {
-            z-index: 900;
-            position: absolute;
-            content: "";
-            background-image: linear-gradient(to left, rgba(31, 27, 46, 0), rgba(31, 27, 46, 0.72));
-            height: 100%;
-            width: 800px;
-            right: 0;
-            opacity: 0;
-            transition: all 200ms ease;
-        }
-        &:hover {
-            &::before {
-                opacity: 1;
-            }
-        }
-    }
+  position: absolute;
+  z-index: 950;
+  height: 100%;
+  width: 100%;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 
-    &_right {
-        left: 100%;
-        &::before {
-            z-index: 900;
-            position: absolute;
-            content: "";
-            background-image: linear-gradient(to right, rgba(31, 27, 46, 0), rgba(31, 27, 46, 0.72));
-            height: 100%;
-            width: 800px;
-            left: 0;
-            opacity: 0;
-            transition: all 200ms ease;
-        }
-        &:hover {
-            &::before {
-                opacity: 1;
-            }
-        }
+  &_left {
+    right: 100%;
+
+    &::before {
+      z-index: 900;
+      position: absolute;
+      content: "";
+      background-image: linear-gradient(to left, rgba(31, 27, 46, 0), rgba(31, 27, 46, 0.72));
+      height: 100%;
+      width: 800px;
+      right: 0;
+      opacity: 0;
+      transition: all 200ms ease;
     }
 
     &:hover {
-        & .arrow {
-            color: #fff;
-        }
+      &::before {
+        opacity: 1;
+      }
     }
-    &:active {
-        & .arrow {
-            transform: scale(0.8);
-            color: #fff;
-            transition: all 200ms ease;
-        }
+  }
+
+  &_right {
+    left: 100%;
+
+    &::before {
+      z-index: 900;
+      position: absolute;
+      content: "";
+      background-image: linear-gradient(to right, rgba(31, 27, 46, 0), rgba(31, 27, 46, 0.72));
+      height: 100%;
+      width: 800px;
+      left: 0;
+      opacity: 0;
+      transition: all 200ms ease;
     }
+
+    &:hover {
+      &::before {
+        opacity: 1;
+      }
+    }
+  }
+
+  &:hover {
+    & .arrow {
+      color: #fff;
+    }
+  }
+
+  &:active {
+    & .arrow {
+      transform: scale(0.8);
+      color: #fff;
+      transition: all 200ms ease;
+    }
+  }
 }
 
 .arrow {
-    z-index: 999;
-    color: #a6a7aa;
-    font-size: 40px;
-    font-weight: bolder;
-    transition: all 200ms ease;
-    user-select: none;
-    &_left {
-        margin-right: 3%;
-        align-self: flex-end;
-    }
-    &_right {
-        margin-left: 3%;
-        align-self: flex-start;
-    }
+  z-index: 999;
+  color: #a6a7aa;
+  font-size: 40px;
+  font-weight: bolder;
+  transition: all 200ms ease;
+  user-select: none;
+
+  &_left {
+    margin-right: 3%;
+    align-self: flex-end;
+  }
+
+  &_right {
+    margin-left: 3%;
+    align-self: flex-start;
+  }
 }
 
 @media (max-width: 1330px) {
-    .window {
-        flex-basis: 90%;
+  .window {
+    flex-basis: 90%;
+  }
+
+  .arrow {
+    &_left {
+      margin-right: -3%;
     }
 
-    .arrow {
-        &_left {
-            margin-right: -3%;
-        }
-        &_right {
-            margin-left: -3%;
-        }
+    &_right {
+      margin-left: -3%;
     }
+  }
 }

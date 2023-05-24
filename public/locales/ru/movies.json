@@ -171,7 +171,8 @@
   },
   "sliders": {
     "rating": "Рейтинг",
-    "scores": "Оценки"
+    "scores": "Оценки",
+    "years": "Годы"
   },
   "reset-filters": "Сбросить фильтры",
   "show-more": "Показать ещё"
