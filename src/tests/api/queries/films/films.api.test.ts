@@ -4,9 +4,9 @@ import {
   filmsRequiredProperites,
   specificFilmRequiredProperites,
 } from '@/data/requiredProperties.data'
-import { ICRUDFilm } from '@/types/ICrudMovie'
-import { IMovieById } from '@/types/films.api.interface'
-import { IMovie } from '@/types/films.api.interface'
+import { ICRUDFilm } from '@/types/api/ICrudMovie'
+import { IMovieById } from '@/types/api/films.api.interface'
+import { IMovie } from '@/types/api/films.api.interface'
 import { checkObjHaveProperties } from '@/utils/test-utils/checkObjHaveProperties.utils'
 
 // Тестируем API фильмов
