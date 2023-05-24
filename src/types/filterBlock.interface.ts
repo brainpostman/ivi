@@ -1,4 +1,4 @@
-import { IQuerySuggest } from './staffs.interface'
+import { IQuerySuggest } from './api/staffs.api.interface'
 import { IQueryRange, IRangeWithPartial } from './utils.interface'
 
 export type IFilterTitle =

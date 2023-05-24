@@ -1,4 +1,4 @@
-import { IFilterHeader } from './filters.interface'
+import { IFilterHeader } from './api/filters.api.interface'
 import { IHeaderTab } from './header.interface'
 
 export interface IHeaderHoverBlockContent {
