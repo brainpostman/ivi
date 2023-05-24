@@ -14,6 +14,10 @@ const meta: Meta = {
   },
   component: Input,
   argTypes: {
+    ref: { table: { disable: true } },
+    charHideBtn: {
+      description: 'Возможность скрывать текст',
+    },
     type: {
       description: 'Тип значения',
       options: ['text', 'number'],
@@ -29,6 +33,7 @@ export const Text: Story = {
   args: {
     placeholder: 'Текст при пустом поле',
     type: 'text',
+    charHideBtn: false,
   },
 }
 
@@ -36,6 +41,7 @@ export const Number: Story = {
   args: {
     placeholder: '0',
     type: 'number',
+    charHideBtn: false,
   },
 }
 
