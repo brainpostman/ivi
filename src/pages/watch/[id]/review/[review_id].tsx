@@ -72,35 +72,6 @@ const Review = ({ film, review, comments: propsComments }: IReviewProps) => {
         toast.dismiss();
     };
 
-    const handleEditChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        setReviewText(e.target.value);
-        toast.dismiss();
-    };
-
-    const handleEditClick = async () => {
-        toast.dismiss();
-        const str = trimComment(reviewText);
-        setReviewText(str);
-        if (!validateComment(5, 10000, str)) {
-            toast.warn('Отзыв должен иметь не менее 100 и не более 10000 символов.');
-            return;
-        }
-        if (data) {
-            const response = await filmsAPI.putFilmReview(
-                {
-                    id: data.user.id,
-                    text: reviewText,
-                },
-                data.accessToken
-            );
-            if (response) {
-                router.replace(router.asPath);
-            } else {
-                toast.error('При редактировании возникла проблема, пожалуйста повторите позже.');
-            }
-        }
-    };
-
     const handleClick = async () => {
         toast.dismiss();
         const str = trimComment(text);
@@ -126,6 +97,37 @@ const Review = ({ film, review, comments: propsComments }: IReviewProps) => {
                 toast.error(
                     'При отправке комментария возникла проблема, пожалуйста повторите позже.'
                 );
+            }
+        }
+    };
+
+    const handleEditChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
+        setReviewText(e.target.value);
+        toast.dismiss();
+    };
+
+    const handleEditClick = async () => {
+        toast.dismiss();
+        const str = trimComment(reviewText);
+        setReviewText(str);
+        if (!validateComment(100, 10000, str)) {
+            toast.warn('Отзыв должен иметь не менее 100 и не более 10000 символов.');
+            return;
+        }
+        if (data) {
+            const response = await filmsAPI.putFilmReview(
+                {
+                    id: review.id,
+                    text: reviewText,
+                },
+                data.accessToken
+            );
+            if (response) {
+                setShowModal(false);
+                toast.success('Отзыв успешно отредактирован');
+                router.replace(router.asPath);
+            } else {
+                toast.error('При редактировании возникла проблема, пожалуйста повторите позже.');
             }
         }
     };

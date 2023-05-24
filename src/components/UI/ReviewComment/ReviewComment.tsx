@@ -8,6 +8,8 @@ import { Session } from 'next-auth';
 import CommentForm from '../CommentForm/CommentForm';
 import { useRouter } from 'next/router';
 import Loader from '@/components/Loader/Loader';
+import ModalWindow from '@/components/ModalWindow/ModalWindow';
+import ModalFilmPoster from '@/components/ModalFilmPoster/ModalFilmPoster';
 
 interface ICommentProps {
     sessionStatus: 'authenticated' | 'loading' | 'unauthenticated';
@@ -31,9 +33,12 @@ const ReviewComment = ({
     const locDate = date.toLocaleDateString();
     const locTime = date.toLocaleTimeString();
     const [showForm, setShowForm] = useState(false);
+    const [showModal, setShowModal] = useState(false);
     const [comments, setChildComments] = useState<IReviewGetResponse[]>([]);
     const [isLoading, setIsLoading] = useState(false);
     const [text, setText] = useState('');
+    const [commentText, setCommentText] = useState(comment.text);
+    const [editText, setEditText] = useState(comment.text);
 
     useEffect(() => {
         setIsLoading(true);
@@ -46,15 +51,16 @@ const ReviewComment = ({
 
     const handleClick = async () => {
         toast.dismiss();
-        setText((prev) => trimComment(prev));
-        if (!validateComment(5, 10000, text)) {
+        const str = trimComment(text);
+        setText(str);
+        if (!validateComment(5, 10000, str)) {
             toast.warn('Комментарий должен иметь не менее 10 и не более 10000 символов.');
             return;
         }
         if (data) {
             const response = await filmsAPI.postFilmReview(
                 {
-                    text: text,
+                    text: str,
                     user_id: data.user.id,
                     film_id: film.id,
                     parent: comment.id,
@@ -69,6 +75,37 @@ const ReviewComment = ({
                 toast.error(
                     'При отправке комментария возникла проблема, пожалуйста повторите позже.'
                 );
+            }
+        }
+    };
+
+    const handleEditChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
+        setEditText(e.target.value);
+        toast.dismiss();
+    };
+
+    const handleEditClick = async () => {
+        toast.dismiss();
+        const str = trimComment(editText);
+        setEditText(str);
+        if (!validateComment(5, 10000, str)) {
+            toast.warn('Комментарий должен иметь не менее 5 и не более 10000 символов.');
+            return;
+        }
+        if (data) {
+            const response = await filmsAPI.putFilmReview(
+                {
+                    id: comment.id,
+                    text: str,
+                },
+                data.accessToken
+            );
+            if (response) {
+                setCommentText(editText);
+                setShowModal(false);
+                toast.success('Комментарий успешно отредактирован');
+            } else {
+                toast.error('При редактировании возникла проблема, пожалуйста повторите позже.');
             }
         }
     };
@@ -114,12 +151,19 @@ const ReviewComment = ({
                     </p>
                     <p className={styles.comment__line} />
                 </div>
-                <p className={styles.comment__content}>{comment.text}</p>
+                <p className={styles.comment__content}>{commentText}</p>
                 <div className={styles.comment__controls}>
                     <p className={styles.comment__line} />
                     <div className={styles.comment__buttons}>
                         <span onClick={handleReplyClick}>Ответить</span>
-                        {data && data.user.id === comment.user_id && <span>Редактировать</span>}
+                        {data && data.user.id === comment.user_id && (
+                            <span
+                                onClick={() => {
+                                    setShowModal(true);
+                                }}>
+                                Редактировать
+                            </span>
+                        )}
                     </div>
                     <p className={styles.comment__line} />
                 </div>
@@ -156,6 +200,25 @@ const ReviewComment = ({
                     <></>
                 )}
             </div>
+            <ModalWindow
+                isShow={showModal}
+                closeFunc={() => {
+                    setShowModal(false);
+                    setEditText(comment.text);
+                }}>
+                <div className={styles.modal}>
+                    <h1 className={styles.title__reviews}>Оставить комментарий</h1>
+                    <div className={styles.commentForm}>
+                        <CommentForm
+                            textareaValue={editText}
+                            textareaPlaceholder='Напишите комментарий'
+                            textareaOnChangeFn={handleEditChange}
+                            sendButtonClickFn={handleEditClick}
+                        />
+                        <ModalFilmPoster film={film} />
+                    </div>
+                </div>
+            </ModalWindow>
         </article>
     );
 };
