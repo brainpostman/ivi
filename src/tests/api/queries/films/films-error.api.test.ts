@@ -1,6 +1,6 @@
 import { filmsAPI } from '@/api/queries/films.api'
-import { ICRUDFilm } from '@/types/ICrudMovie'
-import { IMovie, IMovieById } from '@/types/films.api.interface'
+import { ICRUDFilm } from '@/types/api/ICrudMovie'
+import { IMovie, IMovieById } from '@/types/api/films.api.interface'
 
 const expectedFilmsError = {
   films: [],
@@ -18,8 +18,8 @@ describe('FILMS-API ERRORS', () => {
   let errorCrudFilmsData: { films: ICRUDFilm[]; totalCount: number }
 
   beforeAll(async () => {
-    errorFilmsData = await filmsAPI.getFilms({ page: -1 })
-    errorFilmById = await filmsAPI.getFilmsById(-1)
+    errorFilmsData = await filmsAPI.getFilms('ru', { page: -1 })
+    errorFilmById = await filmsAPI.getFilmsById('ru', -1)
     errorCrudFilmsData = await filmsAPI.getCrudFilms({ page: -1 })
   })
 
