@@ -17,6 +17,7 @@ import Link from 'next/link';
 import ModalWindow from '@/components/ModalWindow/ModalWindow';
 import { reviewsAPI } from '@/api/queries/reviews.api';
 import { IReviewGetResponse } from '@/types/api/reviews.api.interface';
+import { useTranslation } from 'next-i18next';
 
 interface IReviewProps {
     film: IMovieById;
@@ -50,12 +51,14 @@ export const getServerSideProps = async ({ locale, params }: GetServerSidePropsC
                 'auth_modal',
                 'common',
                 'footer',
+                'review',
             ])),
         },
     };
 };
 
 const Review = ({ film, review, comments: propsComments }: IReviewProps) => {
+    const { t } = useTranslation('review');
     const { status, data } = useSession();
     const router = useRouter();
     const { locale } = router;
@@ -79,7 +82,7 @@ const Review = ({ film, review, comments: propsComments }: IReviewProps) => {
         const str = trimComment(text);
         setText(str);
         if (!validateComment(5, 10000, str)) {
-            toast.warn('Комментарий должен иметь не менее 10 и не более 10000 символов.');
+            toast.warn(t('review-comment.messages.warn'));
             return;
         }
         if (data) {
@@ -96,9 +99,7 @@ const Review = ({ film, review, comments: propsComments }: IReviewProps) => {
                 setText('');
                 setIsLoading(true);
             } else {
-                toast.error(
-                    'При отправке комментария возникла проблема, пожалуйста повторите позже.'
-                );
+                toast.error(t('review-comment.messages.error'));
             }
         }
     };
@@ -113,7 +114,7 @@ const Review = ({ film, review, comments: propsComments }: IReviewProps) => {
         const str = trimComment(reviewText);
         setReviewText(str);
         if (!validateComment(100, 10000, str)) {
-            toast.warn('Отзыв должен иметь не менее 100 и не более 10000 символов.');
+            toast.warn(t('review-messages.warn'));
             return;
         }
         if (data) {
@@ -126,10 +127,10 @@ const Review = ({ film, review, comments: propsComments }: IReviewProps) => {
             );
             if (response) {
                 setShowModal(false);
-                toast.success('Отзыв успешно отредактирован');
+                toast.success(t('review-messages.success'));
                 router.replace(router.asPath);
             } else {
-                toast.error('При редактировании возникла проблема, пожалуйста повторите позже.');
+                toast.error(t('review-messages.error'));
             }
         }
     };
@@ -156,7 +157,7 @@ const Review = ({ film, review, comments: propsComments }: IReviewProps) => {
             <div className={styles.wrapper}>
                 <section className={styles.commentSection}>
                     <h1 className={styles.title}>
-                        {review.parent ? 'Комментарий к ' : 'Отзыв к фильму '}
+                        {review.parent ? t('title-comment') : t('title-review')}
                         <Link className={styles.link} href={`/watch/${film.id}`}>
                             {locale === 'ru' ? film.name : film.name_en}
                         </Link>
@@ -167,13 +168,13 @@ const Review = ({ film, review, comments: propsComments }: IReviewProps) => {
                                 <p className={styles.comment__line} />
                                 <p className={styles.comment__title}>
                                     <span className={styles.comment__from}>
-                                        {review.parent ? '' : 'Отзыв от '}
+                                        {review.parent ? '' : t('review-by')}
                                         <span className={styles.comment__sender}>
                                             {review.user_name || review.user_email}
                                         </span>
                                     </span>
                                     <span>
-                                        {', отправлен '}
+                                        {t('sent-date')}
                                         <span
                                             className={styles.comment__date}
                                             title={`${locDate}, ${locTime}`}>
@@ -192,7 +193,7 @@ const Review = ({ film, review, comments: propsComments }: IReviewProps) => {
                                             onClick={() => {
                                                 setShowModal(true);
                                             }}>
-                                            Редактировать
+                                            {t('edit')}
                                         </span>
                                     </div>
                                 ) : (
@@ -207,13 +208,13 @@ const Review = ({ film, review, comments: propsComments }: IReviewProps) => {
                             textareaValue={text}
                             textareaOnChangeFn={handleChange}
                             sendButtonClickFn={handleClick}
-                            textareaPlaceholder='Оставьте комментарий к отзыву'
+                            textareaPlaceholder={t('comment-placeholder')}
                         />
                     </div>
                     <div className={styles.comments}>
                         <div className={styles.comments__separator}>
                             <p className={styles.comment__line} />
-                            <span className={styles.comments__title}>Комментарии</span>
+                            <span className={styles.comments__title}>{t('comments')}</span>
                             <p className={styles.comment__line} />
                         </div>
                         {isLoading ? (
@@ -235,8 +236,8 @@ const Review = ({ film, review, comments: propsComments }: IReviewProps) => {
                         )}
                     </div>
                 </section>
-                <Link href={`/watch/${film.id}`}>
-                    <ModalFilmPoster film={film} className={styles.poster} />
+                <Link href={`/watch/${film.id}`} className={styles.poster}>
+                    <ModalFilmPoster film={film} />
                 </Link>
             </div>
             <ModalWindow
@@ -246,11 +247,11 @@ const Review = ({ film, review, comments: propsComments }: IReviewProps) => {
                     setReviewText(review.text);
                 }}>
                 <div className={styles.modal}>
-                    <h1 className={styles.title__reviews}>Оставить отзыв</h1>
+                    <h1 className={styles.title__reviews}>{t('leave-review')}</h1>
                     <div className={styles.commentForm}>
                         <CommentForm
                             textareaValue={reviewText}
-                            textareaPlaceholder='Напишите отзыв'
+                            textareaPlaceholder={t('review-placeholder')}
                             textareaOnChangeFn={handleEditChange}
                             sendButtonClickFn={handleEditClick}
                         />

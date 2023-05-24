@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import style from './ModalFilmPoster.module.scss';
-import { IMovieById } from '@/types/films.api.interface';
+import { IMovieById } from '@/types/api/films.api.interface';
 
 interface IFilmPosterProps {
     film: IMovieById;

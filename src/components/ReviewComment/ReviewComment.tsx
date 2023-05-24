@@ -11,6 +11,7 @@ import ModalWindow from '@/components/ModalWindow/ModalWindow';
 import ModalFilmPoster from '@/components/ModalFilmPoster/ModalFilmPoster';
 import { reviewsAPI } from '@/api/queries/reviews.api';
 import { IReviewGetResponse } from '@/types/api/reviews.api.interface';
+import { useTranslation } from 'next-i18next';
 
 interface ICommentProps {
     sessionStatus: 'authenticated' | 'loading' | 'unauthenticated';
@@ -27,6 +28,7 @@ const ReviewComment = ({
     comment,
     className: propsClassName = '',
 }: ICommentProps) => {
+    const { t } = useTranslation('review');
     const router = useRouter();
     const { locale } = router;
     const date = new Date(comment.createdAt);
@@ -55,7 +57,7 @@ const ReviewComment = ({
         const str = trimComment(text);
         setText(str);
         if (!validateComment(10, 10000, str)) {
-            toast.warn('Комментарий должен иметь не менее 10 и не более 10000 символов.');
+            toast.warn(t('review-comment.messages.warn'));
             return;
         }
         if (data) {
@@ -73,9 +75,7 @@ const ReviewComment = ({
                 setShowForm(false);
                 setIsLoading(true);
             } else {
-                toast.error(
-                    'При отправке комментария возникла проблема, пожалуйста повторите позже.'
-                );
+                toast.error(t('review-comment.messages.error'));
             }
         }
     };
@@ -90,7 +90,7 @@ const ReviewComment = ({
         const str = trimComment(editText);
         setEditText(str);
         if (!validateComment(10, 10000, str)) {
-            toast.warn('Комментарий должен иметь не менее 10 и не более 10000 символов.');
+            toast.warn(t('review-comment.messages.warn'));
             return;
         }
         if (data) {
@@ -104,9 +104,9 @@ const ReviewComment = ({
             if (response) {
                 setCommentText(editText);
                 setShowModal(false);
-                toast.success('Комментарий успешно отредактирован');
+                toast.success(t('review-comment.messages-edit.success'));
             } else {
-                toast.error('При редактировании возникла проблема, пожалуйста повторите позже.');
+                toast.error(t('review-comment.messages-edit.error'));
             }
         }
     };
@@ -144,7 +144,7 @@ const ReviewComment = ({
                             </span>
                         </span>
                         <span>
-                            {', отправлен '}
+                            {t('sent-date')}
                             <span className={styles.comment__date} title={`${locDate}, ${locTime}`}>
                                 {dateStr}
                             </span>
@@ -156,13 +156,13 @@ const ReviewComment = ({
                 <div className={styles.comment__controls}>
                     <p className={styles.comment__line} />
                     <div className={styles.comment__buttons}>
-                        <span onClick={handleReplyClick}>Ответить</span>
+                        <span onClick={handleReplyClick}>{t('review-comment.reply')}</span>
                         {data && data.user.id === comment.user_id && (
                             <span
                                 onClick={() => {
                                     setShowModal(true);
                                 }}>
-                                Редактировать
+                                {t('edit')}
                             </span>
                         )}
                     </div>
@@ -174,7 +174,7 @@ const ReviewComment = ({
                             textareaValue={text}
                             textareaOnChangeFn={handleChange}
                             sendButtonClickFn={handleClick}
-                            textareaPlaceholder='Оставьте комментарий'
+                            textareaPlaceholder={t('review-comment.leave-comment')}
                             cancelButtonCallback={() => {
                                 setShowForm(false);
                             }}
@@ -208,11 +208,11 @@ const ReviewComment = ({
                     setEditText(comment.text);
                 }}>
                 <div className={styles.modal}>
-                    <h1 className={styles.title__reviews}>Оставить комментарий</h1>
+                    <h1 className={styles.title__reviews}>{t('review-comment.edit-comment')}</h1>
                     <div className={styles.commentForm}>
                         <CommentForm
                             textareaValue={editText}
-                            textareaPlaceholder='Напишите комментарий'
+                            textareaPlaceholder={t('review-comment.edit-placeholder')}
                             textareaOnChangeFn={handleEditChange}
                             sendButtonClickFn={handleEditClick}
                         />

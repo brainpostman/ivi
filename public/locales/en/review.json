@@ -1,0 +1,30 @@
+{
+    "review-comment": {
+        "reply": "Reply",
+        "leave-comment": "Leave a comment",
+        "edit-comment": "Leave a comment",
+        "edit-placeholder": "Write a comment",
+        "messages": {
+            "warn": "The comment must have at least 10 and no more than 10000 characters",
+            "error": "There was a problem when sending the comment, please repeat later"
+        },
+        "messages-edit": {
+            "success": "Comment successfully edited",
+            "error": "There was a problem while editing, please repeat later"
+        }
+    },
+    "review-messages": {
+        "warn": "The review must have at least 100 and no more than 10000 characters",
+        "success": "The review has been successfully edited",
+        "error": "There was a problem while editing, please repeat later"
+    },
+    "title-comment": "Comment for ",
+    "title-review": "Review of ",
+    "review-by": "Review by ",
+    "sent-date": ", sent ",
+    "edit": "Edit",
+    "comment-placeholder": "Leave a comment on the review",
+    "comments": "Comments",
+    "leave-review": "Leave a review",
+    "review-placeholder": "Write a review"
+}

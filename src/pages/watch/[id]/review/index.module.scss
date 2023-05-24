@@ -1,6 +1,7 @@
 .wrapper {
     width: $max-width;
     display: flex;
+    align-items: flex-start;
     justify-content: space-between;
     gap: 20px;
     @include ui-padding(ver, 4);
@@ -128,3 +129,4 @@
         transition: all 0.2s;
     }
 }
+

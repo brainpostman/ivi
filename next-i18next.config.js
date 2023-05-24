@@ -5,5 +5,16 @@ module.exports = {
         localeDetection: false,
     },
     reloadOnPrerender: true,
-    ns: ['header', 'auth_modal', 'home', 'common', 'footer', 'error', 'movies', 'admin', 'watch'],
+    ns: [
+        'header',
+        'auth_modal',
+        'home',
+        'common',
+        'footer',
+        'error',
+        'movies',
+        'admin',
+        'watch',
+        'review',
+    ],
 };
