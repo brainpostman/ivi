@@ -15,3 +15,8 @@ export interface IReviewPostRequest {
     film_id: number;
     parent: number | null;
 }
+
+export interface IReviewPutRequest {
+    id: number;
+    text: string;
+}

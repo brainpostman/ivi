@@ -54,7 +54,7 @@ const ReviewComment = ({
         toast.dismiss();
         const str = trimComment(text);
         setText(str);
-        if (!validateComment(5, 10000, str)) {
+        if (!validateComment(10, 10000, str)) {
             toast.warn('Комментарий должен иметь не менее 10 и не более 10000 символов.');
             return;
         }
@@ -89,8 +89,8 @@ const ReviewComment = ({
         toast.dismiss();
         const str = trimComment(editText);
         setEditText(str);
-        if (!validateComment(5, 10000, str)) {
-            toast.warn('Комментарий должен иметь не менее 5 и не более 10000 символов.');
+        if (!validateComment(10, 10000, str)) {
+            toast.warn('Комментарий должен иметь не менее 10 и не более 10000 символов.');
             return;
         }
         if (data) {
