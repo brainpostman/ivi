@@ -1,7 +1,7 @@
 import { IMovieById } from '@/types/api/films.api.interface';
 import styles from './ReviewComment.module.scss';
 import { buildDateString, trimComment, validateComment } from '@/utils/comment.utils';
-import { ChangeEvent, useEffect, useState } from 'react';
+import { ChangeEvent, Dispatch, SetStateAction, useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 import { Session } from 'next-auth';
 import CommentForm from '../UI/CommentForm/CommentForm';
@@ -20,6 +20,7 @@ interface ICommentProps {
     comment: IReviewGetResponse;
     className?: string;
     depth: number;
+    setChildCounter: Dispatch<SetStateAction<Set<number>>>;
 }
 
 const ReviewComment = ({
@@ -29,6 +30,7 @@ const ReviewComment = ({
     comment,
     className: propsClassName = '',
     depth,
+    setChildCounter,
 }: ICommentProps) => {
     const { t } = useTranslation('review');
     const router = useRouter();
@@ -46,6 +48,9 @@ const ReviewComment = ({
     const [editText, setEditText] = useState(comment.text);
 
     useEffect(() => {
+        setChildCounter((prev) => {
+            return new Set(prev.add(comment.id));
+        });
         setIsLoading(true);
     }, []);
 
@@ -207,6 +212,7 @@ const ReviewComment = ({
                                     film={film}
                                     comment={comment}
                                     depth={depth + 1}
+                                    setChildCounter={setChildCounter}
                                 />
                             );
                         })}
