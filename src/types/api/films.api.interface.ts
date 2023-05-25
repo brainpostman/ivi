@@ -26,7 +26,7 @@ export interface IFilmByIdGetResponse extends IFilmsgGetResponse {
 export interface IFilmsgGetResponse {
   id: number
   name: string
-  name_en: string
+  name_en?: string
   year: number
   countries: IFilterGetResponse[]
   genres: { id: number; name: string; name_en: string | null }[]
@@ -38,7 +38,7 @@ export interface IFilmsgGetResponse {
   mainImg: string
   time: string
   premiereRU: string
-  premiere: string
+  premiere?: string
 }
 
 export interface IMovie
