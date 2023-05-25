@@ -7,8 +7,6 @@ import { topTenListImgNumbers } from '@/data/topTenList.data'
 type IProps = Omit<ITopTenCarouselElem, 'id'> & { index: number }
 
 const TopTenListCard: FC<IProps> = ({ img, index }) => {
-  console.log(index)
-
   return (
     <div className={style.wrapper}>
       <div className={style.wrapper_img}>
