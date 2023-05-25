@@ -11,7 +11,6 @@ import { reviewsAPI } from '@/api/queries/reviews.api';
 import { IReviewGetResponse } from '@/types/api/reviews.api.interface';
 import { useTranslation } from 'next-i18next';
 import ModalCommentForm from './ModalCommentForm/ModalCommentForm';
-import useMobile from '@/hooks/useMobile';
 
 interface ICommentProps {
     sessionStatus: 'authenticated' | 'loading' | 'unauthenticated';
@@ -45,7 +44,23 @@ const ReviewComment = ({
     const [commentText, setCommentText] = useState(comment.text);
     const [editText, setEditText] = useState(comment.text);
 
-    const mobile = useMobile(window.matchMedia('(max-width: 585px)'));
+    const [mobile, setMobile] = useState(false);
+
+    useEffect(() => {
+        const mediaQueryList = window.matchMedia('(max-width: 585px)');
+        handleWindowResize();
+        function handleWindowResize() {
+            if (mediaQueryList.matches) {
+                setMobile(true);
+            } else {
+                setMobile(false);
+            }
+        }
+        mediaQueryList.addEventListener('change', handleWindowResize);
+        return () => {
+            mediaQueryList.removeEventListener('change', handleWindowResize);
+        };
+    }, []);
 
     useEffect(() => {
         setIsLoading(true);
