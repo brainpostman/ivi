@@ -24,7 +24,7 @@ export const Primary: Story = {
     </div>
   ),
   args: {
-    films: filmsListData.map(film => transformFilms(film)),
+    films: transformFilms(filmsListData),
   },
 }
 

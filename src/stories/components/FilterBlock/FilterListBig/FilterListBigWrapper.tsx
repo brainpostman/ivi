@@ -1,5 +1,5 @@
 import FilterListBig from '@/components/FilterBlock/FilterListBig/FilterListBig'
-import FilterGenreCard from '@/components/FilterGenreCard/FilterGenreCard'
+import FilterGenreCard from '@/components/UI/Cards/FilterGenreCard/FilterGenreCard'
 import { useFilter } from '@/hooks/useFilter'
 import {
   IFilterBlockEl,

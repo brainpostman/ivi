@@ -1,6 +1,6 @@
 import FilterListBig from '@/components/FilterBlock/FilterListBig/FilterListBig'
-import FilterGenreCard from '@/components/FilterGenreCard/FilterGenreCard'
-import VioletButton from '@/components/UI/VioletButton/VioletButton'
+import FilterGenreCard from '@/components/UI/Cards/FilterGenreCard/FilterGenreCard'
+import VioletButton from '@/components/UI/Buttons/VioletButton/VioletButton'
 import {
   IFilterListBigProps,
   IFilterTitle,
