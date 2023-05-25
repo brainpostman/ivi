@@ -1,37 +1,30 @@
 import {
-  IReviewGetResponse,
-  IReviewPostRequest,
-} from '@/types/api/reviews.api.interface'
-import { customAxios } from './customAxios'
+    IReviewGetResponse,
+    IReviewPostRequest,
+    IReviewPutRequest,
+} from '@/types/api/reviews.api.interface';
+import { customAxios } from './customAxios';
 
 export const reviewsAPI = {
-  getFilmReviewCount(id: number) {
-    return getFilmReviewCount(id)
-  },
-  getFilmReviews(id: number) {
-    return getFilmReviews(id)
-  },
-  getFilmReviewById(id: number) {
-    return getFilmReviewById(id)
-  },
-  getComments(film_id: number, parent_id: number) {
-    return getComments(film_id, parent_id)
-  },
-  postFilmReview(data: IReviewPostRequest, accessToken: string | null) {
-    return postFilmReview(data, accessToken)
-  },
-  putFilmReview(
-    data: { id: number; text: string },
-    accessToken: string | null
-  ) {
-    return putFilmReview(data, accessToken)
-  },
-}
-
-interface IPutFilmReviewData {
-  id: number
-  text: string
-}
+    getFilmReviewCount(id: number) {
+        return getFilmReviewCount(id);
+    },
+    getFilmReviews(id: number) {
+        return getFilmReviews(id);
+    },
+    getFilmReviewById(id: number) {
+        return getFilmReviewById(id);
+    },
+    getComments(film_id: number, parent_id: number) {
+        return getComments(film_id, parent_id);
+    },
+    postFilmReview(data: IReviewPostRequest, accessToken: string | null) {
+        return postFilmReview(data, accessToken);
+    },
+    putFilmReview(data: IReviewPutRequest, accessToken: string | null) {
+        return putFilmReview(data, accessToken);
+    },
+};
 
 /*
   * Получить количество отзывов
@@ -43,13 +36,13 @@ interface IPutFilmReviewData {
 */
 
 const getFilmReviewCount = async (id: number): Promise<number> => {
-  try {
-    const response = await customAxios.get<number>(`/reviews/count/${id}`)
-    return response.data
-  } catch (_) {
-    return 0
-  }
-}
+    try {
+        const response = await customAxios.get<number>(`/reviews/count/${id}`);
+        return response.data;
+    } catch (_) {
+        return 0;
+    }
+};
 
 /*
   * Получить родительские комментарии к фильму
@@ -61,15 +54,13 @@ const getFilmReviewCount = async (id: number): Promise<number> => {
 */
 
 const getFilmReviews = async (id: number): Promise<IReviewGetResponse[]> => {
-  try {
-    const response = await customAxios.get<IReviewGetResponse[]>(
-      `/reviews/parents/${id}`
-    )
-    return response.data
-  } catch (_) {
-    return []
-  }
-}
+    try {
+        const response = await customAxios.get<IReviewGetResponse[]>(`/reviews/parents/${id}`);
+        return response.data;
+    } catch (_) {
+        return [];
+    }
+};
 
 /*
   * Получить все дочерние комментарии
@@ -81,19 +72,16 @@ const getFilmReviews = async (id: number): Promise<IReviewGetResponse[]> => {
 
 */
 
-const getComments = async (
-  film_id: number,
-  parent_id: number
-): Promise<IReviewGetResponse[]> => {
-  try {
-    const response = await customAxios.get<IReviewGetResponse[]>(
-      `/reviews/film/${film_id}/${parent_id}`
-    )
-    return response.data
-  } catch (_) {
-    return []
-  }
-}
+const getComments = async (film_id: number, parent_id: number): Promise<IReviewGetResponse[]> => {
+    try {
+        const response = await customAxios.get<IReviewGetResponse[]>(
+            `/reviews/film/${film_id}/${parent_id}`
+        );
+        return response.data;
+    } catch (_) {
+        return [];
+    }
+};
 
 /*
   * Получить отзыв по id
@@ -104,16 +92,14 @@ const getComments = async (
 
 */
 
-const getFilmReviewById = async (
-  id: number
-): Promise<IReviewGetResponse | undefined> => {
-  try {
-    const response = await customAxios.get<IReviewGetResponse>(`/reviews/${id}`)
-    return response.data
-  } catch (_) {
-    return undefined
-  }
-}
+const getFilmReviewById = async (id: number): Promise<IReviewGetResponse | undefined> => {
+    try {
+        const response = await customAxios.get<IReviewGetResponse>(`/reviews/${id}`);
+        return response.data;
+    } catch (_) {
+        return undefined;
+    }
+};
 
 /*
   * Создать отзыв
@@ -126,24 +112,20 @@ const getFilmReviewById = async (
 */
 
 const postFilmReview = async (
-  data: IReviewPostRequest,
-  accessToken: string | null
+    data: IReviewPostRequest,
+    accessToken: string | null
 ): Promise<IReviewGetResponse | null> => {
-  try {
-    const response = await customAxios.post<IReviewGetResponse>(
-      `/reviews`,
-      data,
-      {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
-      }
-    )
-    return response.data
-  } catch (_) {
-    return null
-  }
-}
+    try {
+        const response = await customAxios.post<IReviewGetResponse>(`/reviews`, data, {
+            headers: {
+                Authorization: `Bearer ${accessToken}`,
+            },
+        });
+        return response.data;
+    } catch (_) {
+        return null;
+    }
+};
 
 /*
   * Обновить отзыв
@@ -156,21 +138,17 @@ const postFilmReview = async (
 */
 
 const putFilmReview = async (
-  data: IPutFilmReviewData,
-  accessToken: string | null
+    data: IReviewPutRequest,
+    accessToken: string | null
 ): Promise<IReviewGetResponse | null> => {
-  try {
-    const response = await customAxios.put<IReviewGetResponse>(
-      `/reviews`,
-      data,
-      {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
-      }
-    )
-    return response.data
-  } catch (_) {
-    return null
-  }
-}
+    try {
+        const response = await customAxios.put<IReviewGetResponse>(`/reviews`, data, {
+            headers: {
+                Authorization: `Bearer ${accessToken}`,
+            },
+        });
+        return response.data;
+    } catch (_) {
+        return null;
+    }
+};

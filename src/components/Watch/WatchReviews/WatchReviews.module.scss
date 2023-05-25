@@ -1,12 +1,14 @@
 .wrapper {
   @include ui-margin(ver, 16);
+  @include ui-padding(hor, 4);
+  width: 100%;
 }
 
 .container {
   display: flex;
   justify-content: space-between;
   color: #fff;
-
+  width: 100%;
   @include ui-margin(bottom, 6);
 }
 
@@ -14,18 +16,17 @@
   @include ui-font(6);
   line-height: 1.17;
   font-weight: 700;
-  &__reviews {
-    position: relative;
-  }
+  flex: 1 1 auto;
 }
 
-.reviews {
-  display: flex;
-  gap: 24px;
+.subtitle {
+  width: 100%;
 }
 
 .makeReview {
+  flex: 0 0 auto;
   height: 32px;
+  width: fit-content;
 }
 
 .quantity {
@@ -42,8 +43,9 @@
   font-size: 15px;
   line-height: 20px;
   font-weight: 400;
-
-  white-space: nowrap;
+  word-wrap: break-word;
+  overflow-wrap: normal;
+  white-space: pre-wrap;
   @include ui-margin(top, 4);
 }
 
@@ -61,4 +63,20 @@
   justify-content: space-evenly;
   max-width: $max-width;
   gap: 60px;
+}
+
+.reviews {
+  width: 100%;
+}
+
+@media (max-width: 540px) {
+}
+
+@media (max-width: 890px) {
+  .wrapper {
+    width: calc(100vw + 1px);
+  }
+  .makeReview {
+    @include ui-margin(right, 8);
+  }
 }
