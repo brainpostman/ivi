@@ -1,16 +1,8 @@
 import styles from './CommentForm.module.scss'
 import SimpleButton from '../Buttons/SimpleButton/SimpleButton'
 import TextArea from '../InputFields/TextArea/TextArea'
-import { ChangeEvent } from 'react'
 import { useTranslation } from 'next-i18next'
-
-interface ICommentFormProps {
-  textareaValue: string
-  textareaOnChangeFn: (e: ChangeEvent<HTMLTextAreaElement>) => void
-  textareaPlaceholder?: string
-  sendButtonClickFn: () => void
-  cancelButtonCallback?: () => void
-}
+import { ICommentFormProps } from '@/types/inputs.interface'
 
 const CommentForm = ({
   textareaValue,
