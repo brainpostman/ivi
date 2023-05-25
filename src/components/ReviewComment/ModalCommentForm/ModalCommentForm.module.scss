@@ -1,0 +1,28 @@
+.modal {
+    max-width: $max-width;
+    width: 100%;
+    @include ui-padding(default, 4);
+}
+
+.title {
+    @include ui-font(5);
+    @include ui-margin(bottom, 2);
+    line-height: 1.17;
+    font-weight: 700;
+}
+
+.commentForm {
+    @include ui-margin(top, 2);
+    @include ui-margin(left, 2);
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    max-width: $max-width;
+    gap: 32px;
+}
+
+@media (max-width: 585px) {
+    .title {
+        @include ui-font(3.5);
+    }
+}
