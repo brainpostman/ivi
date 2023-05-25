@@ -1,4 +1,4 @@
-import { IStaffGetResponse, IStaffType } from '@/types/staffs.interface'
+import { IStaffGetResponse, IStaffType } from '@/types/api/staffs.api.interface'
 
 /*
   Преобразует массив строк в список участников

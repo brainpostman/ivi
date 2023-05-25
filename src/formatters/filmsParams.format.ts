@@ -1,4 +1,4 @@
-import { IFilmsGetRequest } from '@/types/films.api.interface'
+import { IFilmsGetRequest } from '@/types/api/films.api.interface'
 import { formatCapitalize } from './capitalize.format'
 import { ParsedUrlQuery } from 'querystring'
 /*
@@ -20,7 +20,7 @@ export const formatFilmsParams = (
     take: 14,
     page: 1,
   }
-  const currentParams = { ...defaultParams }
+  const currentParams: IFilmsGetRequest = { ...defaultParams }
 
   for (let param in queryParams) {
     let paramValue = queryParams[param]

@@ -1,24 +1,24 @@
 import { filmsAPI } from '@/api/queries/films.api'
-import CustomCarousel from '@/components/CustomCarousel/CustomCarousel'
-import ExpandBlock from '@/components/ExpandBlock/ExpandBlock'
+import CustomCarousel from '@/components/UI/Carousels/CustomCarousel/CustomCarousel'
+import ExpandBlock from '@/components/UI/ExpandBlock/ExpandBlock'
 import FilterBlock from '@/components/FilterBlock/FilterBlock'
 import MovieCardGrid from '@/components/MovieCardGrid/MovieCardGrid'
-import Sort from '@/components/Sort/Sort'
-import ViewMoreButton from '@/components/UI/ViewMoreButton/ViewMoreButton'
-import VioletButton from '@/components/UI/VioletButton/VioletButton'
+import Sort from '@/components/UI/Sort/Sort'
+import ViewMoreButton from '@/components/UI/Buttons/ViewMoreButton/ViewMoreButton'
+import VioletButton from '@/components/UI/Buttons/VioletButton/VioletButton'
 import PageLayout from '@/layouts/PageLayout/PageLayout'
-import { IFilmsGetRequest, IMovie } from '@/types/films.api.interface'
+import { IFilmsGetRequest, IMovie } from '@/types/api/films.api.interface'
 import { GetServerSideProps, NextPage } from 'next'
 import { useTranslation } from 'next-i18next'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 import style from './index.module.scss'
-import Loader from '@/components/Loader/Loader'
-import { IStaffGetResponse } from '@/types/staffs.interface'
+import Loader from '@/components/UI/Loader/Loader'
+import { IStaffGetResponse } from '@/types/api/staffs.api.interface'
 import { formatFilmsParams } from '@/formatters/filmsParams.format'
 import { staffsAPI } from '@/api/queries/staffs.api'
-import BreadCrumbsFilms from '@/components/BreadCrumbs/BreadCrumbsFilms/BreadCrumbsFilms'
+import BreadCrumbsFilms from '@/components/UI/BreadCrumbs/BreadCrumbsFilms/BreadCrumbsFilms'
 import { IFilterGetResponse } from '@/types/api/filters.api.interface'
 import { filtersAPI } from '@/api/queries/filters.api'
 
@@ -31,7 +31,7 @@ export const getServerSideProps: GetServerSideProps = async ({
   const currentParams = { ...formatFilmsParams(query), ...defaultParams }
 
   const { films, totalCount, maxYear, minYear, maxCountScore, minCountScore } =
-    await filmsAPI.getFilms(currentParams)
+    await filmsAPI.getFilms(locale ?? 'ru', currentParams)
 
   const genres = await filtersAPI.getGenres(locale ?? 'ru')
   const countries = await filtersAPI.getCountries()
@@ -113,7 +113,7 @@ const MoviesPage: NextPage<IProps> = ({
     }
 
     filmsAPI
-      .getFilms(currentParams)
+      .getFilms(router.locale ?? 'ru', currentParams)
       .then(({ films, totalCount }) => {
         setFilms(prev => [...prev, ...films])
       })

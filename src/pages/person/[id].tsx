@@ -1,5 +1,5 @@
-import ExpandBlock from '@/components/ExpandBlock/ExpandBlock'
-import BasicBtn from '@/components/UI/BasicBtn/BasicBtn'
+import ExpandBlock from '@/components/UI/ExpandBlock/ExpandBlock'
+import BasicBtn from '@/components/UI/Buttons/BasicBtn/BasicBtn'
 import PageLayout from '@/layouts/PageLayout/PageLayout'
 import { getCoordY, scrollMove } from '@/utils/coords.utils'
 import Image from 'next/image'
@@ -8,10 +8,10 @@ import { useState } from 'react'
 import { MdArrowBackIosNew } from 'react-icons/md'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { GetServerSideProps } from 'next'
-import { IStaff } from '@/types/staffs.interface'
+import { IStaff } from '@/types/api/staffs.api.interface'
 import { staffsAPI } from '@/api/queries/staffs.api'
 import { filmsAPI } from '@/api/queries/films.api'
-import { IFilmsGetRequest, IMovie } from '@/types/films.api.interface'
+import { IFilmsGetRequest, IMovie } from '@/types/api/films.api.interface'
 import { formatStaffType } from '@/formatters/staffType.format'
 import Link from 'next/link'
 import style from './staff.module.scss'
@@ -46,6 +46,7 @@ export const getServerSideProps: GetServerSideProps = async ({
     currentParams[formattedStaffType] = [staff.name]
 
     const { films: filmsIncoming, totalCount } = await filmsAPI.getFilms(
+      locale ?? 'ru',
       currentParams
     )
 
@@ -100,7 +101,7 @@ const StaffPage: React.FC<IProps> = ({
   }
 
   const onClickMoreFilms = async () => {
-    const { films } = await filmsAPI.getFilms({
+    const { films } = await filmsAPI.getFilms(router.locale ?? 'ru', {
       take: 17,
       page,
       [staff.type]: [staff.name],

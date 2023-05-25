@@ -1,5 +1,5 @@
 import formatStaffTypestoType from '@/formatters/staffTypesToType.format'
-import { IStaff, IStaffGetResponse } from '@/types/staffs.interface'
+import { IStaff, IStaffGetResponse } from '@/types/api/staffs.api.interface'
 
 /*
   * Преобразуем данные об участниках
