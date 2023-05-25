@@ -128,4 +128,4 @@ const WatchPage: FC<IProps> = ({ film, films, reviewData }) => {
     );
 };
 
-export default WatchPage
+export default WatchPage;

@@ -1,4 +1,4 @@
-import ModalFilmPoster from '@/components/ModalFilmPoster/ModalFilmPoster';
+import ModalFilmPoster from '@/components/Watch/ModalFilmPoster/ModalFilmPoster';
 import ModalWindow from '@/components/ModalWindow/ModalWindow';
 import CommentForm from '@/components/UI/CommentForm/CommentForm';
 import { IMovieById } from '@/types/api/films.api.interface';

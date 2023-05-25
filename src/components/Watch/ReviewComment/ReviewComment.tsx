@@ -4,15 +4,14 @@ import { buildDateString, trimComment, validateComment } from '@/utils/comment.u
 import { ChangeEvent, useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 import { Session } from 'next-auth';
-import CommentForm from '../UI/CommentForm/CommentForm';
+import CommentForm from '../../UI/CommentForm/CommentForm';
 import { useRouter } from 'next/router';
 import Loader from '@/components/UI/Loader/Loader';
-import ModalWindow from '@/components/ModalWindow/ModalWindow';
-import ModalFilmPoster from '@/components/Mobile/ModalFilmPoster/ModalFilmPoster';
 import { reviewsAPI } from '@/api/queries/reviews.api';
 import { IReviewGetResponse } from '@/types/api/reviews.api.interface';
 import { useTranslation } from 'next-i18next';
 import ModalCommentForm from './ModalCommentForm/ModalCommentForm';
+import useMobile from '@/hooks/useMobile';
 
 interface ICommentProps {
     sessionStatus: 'authenticated' | 'loading' | 'unauthenticated';
@@ -45,6 +44,8 @@ const ReviewComment = ({
     const [text, setText] = useState('');
     const [commentText, setCommentText] = useState(comment.text);
     const [editText, setEditText] = useState(comment.text);
+
+    const mobile = useMobile(window.matchMedia('(max-width: 585px)'));
 
     useEffect(() => {
         setIsLoading(true);
@@ -182,7 +183,7 @@ const ReviewComment = ({
                     </div>
                     <p className={styles.comment__line} />
                 </div>
-                {showForm && (
+                {showForm && !mobile && (
                     <div className={styles.commentForm}>
                         <CommentForm
                             value={text}
@@ -231,7 +232,7 @@ const ReviewComment = ({
                     film={film}
                 />
             )}
-            {showForm && (
+            {showForm && mobile && (
                 <ModalCommentForm
                     isShow={showForm}
                     closeFunc={() => {

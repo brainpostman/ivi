@@ -1,8 +1,8 @@
 import styles from './CommentForm.module.scss';
-import SimpleButton from '../SimpleButton/SimpleButton';
-import TextArea from '../TextArea/TextArea';
 import { CSSProperties, ChangeEvent } from 'react';
 import { useTranslation } from 'next-i18next';
+import SimpleButton from '../Buttons/SimpleButton/SimpleButton';
+import TextArea from '../InputFields/TextArea/TextArea';
 
 interface ICommentFormProps {
     value: string;
@@ -49,4 +49,4 @@ const CommentForm = ({
     );
 };
 
-export default CommentForm
+export default CommentForm;

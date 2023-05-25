@@ -4,7 +4,7 @@ import { IMovieById } from '@/types/api/films.api.interface'
 import { FC } from 'react'
 import StaffCard from '../UI/Cards/StaffCard/StaffCard'
 import Link from 'next/link'
-import ModalFilmPoster from '../Mobile/ModalFilmPoster/ModalFilmPoster'
+import ModalFilmPoster from '../Watch/ModalFilmPoster/ModalFilmPoster'
 import { useTranslation } from 'next-i18next'
 
 interface IProps {

@@ -6,7 +6,7 @@ import WatchReview from './WatchReview/WatchReview';
 import { useRouter } from 'next/router';
 import ModalWindow from '@/components/ModalWindow/ModalWindow';
 import { useSession } from 'next-auth/react';
-import ModalFilmPoster from '@/components/Mobile/ModalFilmPoster/ModalFilmPoster';
+import ModalFilmPoster from '@/components/Watch/ModalFilmPoster/ModalFilmPoster';
 import { trimComment, validateComment } from '@/utils/comment.utils';
 import { toast } from 'react-toastify';
 import Loader from '@/components/UI/Loader/Loader';
@@ -15,7 +15,7 @@ import { useTranslation } from 'next-i18next';
 import { IReviewGetResponse } from '@/types/api/reviews.api.interface';
 import { IMovieById } from '@/types/api/films.api.interface';
 import { reviewsAPI } from '@/api/queries/reviews.api';
-import ModalCommentForm from '../ReviewComment/ModalCommentForm/ModalCommentForm';
+import ModalCommentForm from '@/components/Watch/ReviewComment/ModalCommentForm/ModalCommentForm';
 
 interface IProps {
     filmName: string;
