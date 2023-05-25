@@ -1,4 +1,4 @@
-import { IStaff, IStaffGetResponse } from '@/types/staffs.interface'
+import { IStaff, IStaffGetResponse } from '@/types/api/staffs.api.interface'
 
 export const staffData: IStaff = {
   id: 1,
