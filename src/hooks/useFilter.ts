@@ -9,7 +9,8 @@ import { useState } from 'react'
 /*
   * @param {(title: IFilterTitle) => () => void} expandTabFilter - функция для 
     сворачивания / разворачивания плашки с фильтром
-  * @param {(title: IFilterTitle) => IFilterData} getFilterData - функция для получения данных фильтра
+  * @param {(title: IFilterTitle) => IFilterData} getFilterData - функция для 
+    получения данных фильтра
 
 */
 interface IUseFilter {
