@@ -147,10 +147,10 @@ const WatchReviews: FC<IProps> = ({
                     <h1 className={style.title__reviews}>{t('leave-review')}</h1>
                     <div className={style.commentForm}>
                         <CommentForm
-                            textareaValue={text}
-                            textareaPlaceholder={t('placeholder')}
-                            textareaOnChangeFn={handleChange}
-                            sendButtonClickFn={handleClick}
+                            value={text}
+                            placeholder={t('placeholder')}
+                            onChange={handleChange}
+                            onClickSubmit={handleClick}
                         />
                         <ModalFilmPoster film={film} />
                     </div>

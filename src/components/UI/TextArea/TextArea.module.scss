@@ -2,7 +2,7 @@
 	display: flex;
 	background-color: #d9d7e0;
 	border-radius: 8px;
-	max-width: 100%;
+
 }
 
 .textarea {
@@ -40,23 +40,6 @@
 	}
 }
 
-.number {
-	color: #1f1b2e;
-	background-color: #d9d7e0;
-	border-radius: 8px;
-	font-weight: 600;
-	width: 60px;
-	text-align: center;
-	-moz-appearance: textfield;
-	&::-webkit-outer-spin-button,
-	&::-webkit-inner-spin-button {
-		-webkit-appearance: none;
-		margin: 0;
-	}
-	@include ui-padding(ver, 2);
-	@include ui-padding(hor, 2);
-}
-
 .placeholder {
 	display: flex;
 	justify-content: flex-start;
@@ -86,12 +69,4 @@
 			transform: scale(0.85);
 		}
 	}
-}
-
-.hideicon {
-	position: relative;
-	flex: 0 0 auto;
-	@include ui-padding(hor, 3);
-	@include ui-padding(top, 3);
-	cursor: pointer;
 }

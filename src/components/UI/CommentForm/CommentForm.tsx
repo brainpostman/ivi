@@ -1,23 +1,27 @@
 import styles from './CommentForm.module.scss';
 import SimpleButton from '../SimpleButton/SimpleButton';
 import TextArea from '../TextArea/TextArea';
-import { ChangeEvent } from 'react';
+import { CSSProperties, ChangeEvent } from 'react';
 import { useTranslation } from 'next-i18next';
 
 interface ICommentFormProps {
-    textareaValue: string;
-    textareaOnChangeFn: (e: ChangeEvent<HTMLTextAreaElement>) => void;
-    textareaPlaceholder?: string;
-    sendButtonClickFn: () => void;
+    value: string;
+    onChange: (e: ChangeEvent<HTMLTextAreaElement>) => void;
+    placeholder?: string;
+    onClickSubmit: () => void;
     cancelButtonCallback?: () => void;
+    className?: string;
+    style?: CSSProperties | undefined;
 }
 
 const CommentForm = ({
-    textareaValue,
-    textareaOnChangeFn,
-    textareaPlaceholder = '',
-    sendButtonClickFn,
+    value: textareaValue,
+    onChange: textareaOnChangeFn,
+    placeholder: textareaPlaceholder = '',
+    onClickSubmit: sendButtonClickFn,
     cancelButtonCallback,
+    className: propsClassName = '',
+    style: propsStyle,
 }: ICommentFormProps) => {
     const { t } = useTranslation('common', { keyPrefix: 'comment-form' });
     return (
@@ -28,7 +32,8 @@ const CommentForm = ({
                     textareaOnChangeFn(e);
                 }}
                 placeholder={textareaPlaceholder}
-                className={styles.textarea}
+                className={`${styles.textarea} ${propsClassName}`}
+                style={propsStyle}
             />
             <div className={styles.controls}>
                 <SimpleButton className={styles.button} onClick={sendButtonClickFn}>

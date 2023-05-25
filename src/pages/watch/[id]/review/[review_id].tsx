@@ -19,6 +19,8 @@ import { reviewsAPI } from '@/api/queries/reviews.api';
 import { IReviewGetResponse } from '@/types/api/reviews.api.interface';
 import { useTranslation } from 'next-i18next';
 import { MdArrowBackIosNew } from 'react-icons/md';
+import SimpleButton from '@/components/UI/SimpleButton/SimpleButton';
+import ModalCommentForm from '@/components/ReviewComment/ModalCommentForm/ModalCommentForm';
 
 interface IReviewProps {
     film: IMovieById;
@@ -67,11 +69,29 @@ const Review = ({ film, review, comments: propsComments }: IReviewProps) => {
     const dateStr = buildDateString(date, locale ?? 'ru');
     const locDate = date.toLocaleDateString();
     const locTime = date.toLocaleTimeString();
+    const [startingDepth, setStartingDepth] = useState(1);
     const [comments, setComments] = useState([...propsComments]);
     const [isLoading, setIsLoading] = useState(false);
     const [text, setText] = useState('');
     const [reviewText, setReviewText] = useState(review.text);
-    const [showModal, setShowModal] = useState(false);
+    const [showEditModal, setShowEditModal] = useState(false);
+    const [showMobileInput, setShowMobileInput] = useState(false);
+
+    useEffect(() => {
+        const mediaQueryList = window.matchMedia('(max-width: 585px)');
+        handleWindowResize();
+        function handleWindowResize() {
+            if (mediaQueryList.matches) {
+                setStartingDepth(4);
+            } else {
+                setStartingDepth(1);
+            }
+        }
+        mediaQueryList.addEventListener('change', handleWindowResize);
+        return () => {
+            mediaQueryList.removeEventListener('change', handleWindowResize);
+        };
+    }, []);
 
     const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
         setText(e.target.value);
@@ -98,6 +118,7 @@ const Review = ({ film, review, comments: propsComments }: IReviewProps) => {
             );
             if (response) {
                 setText('');
+                setShowMobileInput(false);
                 setIsLoading(true);
             } else {
                 toast.error(t('review-comment.messages.error'));
@@ -127,7 +148,7 @@ const Review = ({ film, review, comments: propsComments }: IReviewProps) => {
                 data.accessToken
             );
             if (response) {
-                setShowModal(false);
+                setShowEditModal(false);
                 toast.success(t('review-messages.success'));
                 router.replace(router.asPath);
             } else {
@@ -197,11 +218,18 @@ const Review = ({ film, review, comments: propsComments }: IReviewProps) => {
                             <p className={styles.comment__content}>{review.text}</p>
                             <div className={styles.comment__controls}>
                                 <p className={styles.comment__line} />
+                                <div
+                                    className={`${styles.mobile__leaveComment} ${styles.comment__buttons}`}
+                                    onClick={() => {
+                                        setShowMobileInput(true);
+                                    }}>
+                                    {t('review-comment.reply')}
+                                </div>
                                 {status === 'authenticated' && data.user.id === review.user_id ? (
                                     <div className={styles.comment__buttons}>
                                         <span
                                             onClick={() => {
-                                                setShowModal(true);
+                                                setShowEditModal(true);
                                             }}>
                                             {t('edit')}
                                         </span>
@@ -215,11 +243,13 @@ const Review = ({ film, review, comments: propsComments }: IReviewProps) => {
                     </section>
                     <div className={styles.commentForm}>
                         <CommentForm
-                            textareaValue={text}
-                            textareaOnChangeFn={handleChange}
-                            sendButtonClickFn={handleClick}
-                            textareaPlaceholder={t('comment-placeholder')}
+                            value={text}
+                            onChange={handleChange}
+                            onClickSubmit={handleClick}
+                            placeholder={t('comment-placeholder')}
+                            className={styles.commentForm__textarea}
                         />
+                        {/* MOBILE COMMENT INPUT */}
                     </div>
                     <div className={styles.comments}>
                         <div className={styles.comments__separator}>
@@ -239,7 +269,7 @@ const Review = ({ film, review, comments: propsComments }: IReviewProps) => {
                                             sessionData={data}
                                             film={film}
                                             comment={comment}
-                                            depth={1}
+                                            depth={startingDepth}
                                         />
                                     );
                                 })}
@@ -251,25 +281,36 @@ const Review = ({ film, review, comments: propsComments }: IReviewProps) => {
                     <ModalFilmPoster film={film} />
                 </Link>
             </div>
-            <ModalWindow
-                isShow={showModal}
-                closeFunc={() => {
-                    setShowModal(false);
-                    setReviewText(review.text);
-                }}>
-                <div className={styles.modal}>
-                    <h1 className={styles.title__reviews}>{t('leave-review')}</h1>
-                    <div className={styles.commentForm}>
-                        <CommentForm
-                            textareaValue={reviewText}
-                            textareaPlaceholder={t('review-placeholder')}
-                            textareaOnChangeFn={handleEditChange}
-                            sendButtonClickFn={handleEditClick}
-                        />
-                        <ModalFilmPoster film={film} />
-                    </div>
-                </div>
-            </ModalWindow>
+            {showEditModal && (
+                <ModalCommentForm
+                    isShow={showEditModal}
+                    closeFunc={() => {
+                        setShowEditModal(false);
+                        setReviewText(review.text);
+                    }}
+                    title={t('leave-review')}
+                    value={reviewText}
+                    placeholder={t('review-placeholder')}
+                    onChange={handleEditChange}
+                    onClickSubmit={handleEditClick}
+                    film={film}
+                />
+            )}
+            {showMobileInput && (
+                <ModalCommentForm
+                    isShow={showMobileInput}
+                    closeFunc={() => {
+                        setShowMobileInput(false);
+                        setText('');
+                    }}
+                    title={t('review-comment.edit-comment')}
+                    value={text}
+                    placeholder={t('review-comment.edit-placeholder')}
+                    onChange={handleChange}
+                    onClickSubmit={handleClick}
+                    film={film}
+                />
+            )}
         </PageLayout>
     );
 };

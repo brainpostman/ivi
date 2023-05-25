@@ -12,6 +12,7 @@ import ModalFilmPoster from '@/components/ModalFilmPoster/ModalFilmPoster';
 import { reviewsAPI } from '@/api/queries/reviews.api';
 import { IReviewGetResponse } from '@/types/api/reviews.api.interface';
 import { useTranslation } from 'next-i18next';
+import ModalCommentForm from './ModalCommentForm/ModalCommentForm';
 
 interface ICommentProps {
     sessionStatus: 'authenticated' | 'loading' | 'unauthenticated';
@@ -184,10 +185,10 @@ const ReviewComment = ({
                 {showForm && (
                     <div className={styles.commentForm}>
                         <CommentForm
-                            textareaValue={text}
-                            textareaOnChangeFn={handleChange}
-                            sendButtonClickFn={handleClick}
-                            textareaPlaceholder={t('review-comment.leave-comment')}
+                            value={text}
+                            onChange={handleChange}
+                            onClickSubmit={handleClick}
+                            placeholder={t('review-comment.leave-comment')}
                             cancelButtonCallback={() => {
                                 setShowForm(false);
                             }}
@@ -215,25 +216,35 @@ const ReviewComment = ({
                     <></>
                 )}
             </div>
-            <ModalWindow
-                isShow={showModal}
-                closeFunc={() => {
-                    setShowModal(false);
-                    setEditText(comment.text);
-                }}>
-                <div className={styles.modal}>
-                    <h1 className={styles.title__reviews}>{t('review-comment.edit-comment')}</h1>
-                    <div className={styles.commentForm}>
-                        <CommentForm
-                            textareaValue={editText}
-                            textareaPlaceholder={t('review-comment.edit-placeholder')}
-                            textareaOnChangeFn={handleEditChange}
-                            sendButtonClickFn={handleEditClick}
-                        />
-                        <ModalFilmPoster film={film} />
-                    </div>
-                </div>
-            </ModalWindow>
+            {showModal && (
+                <ModalCommentForm
+                    isShow={showModal}
+                    closeFunc={() => {
+                        setShowModal(false);
+                        setEditText(comment.text);
+                    }}
+                    title={t('review-comment.edit-comment')}
+                    value={editText}
+                    placeholder={t('review-comment.edit-placeholder')}
+                    onChange={handleEditChange}
+                    onClickSubmit={handleEditClick}
+                    film={film}
+                />
+            )}
+            {showForm && (
+                <ModalCommentForm
+                    isShow={showForm}
+                    closeFunc={() => {
+                        setShowForm(false);
+                    }}
+                    title={t('review-comment.edit-comment')}
+                    value={text}
+                    placeholder={t('review-comment.edit-placeholder')}
+                    onChange={handleChange}
+                    onClickSubmit={handleClick}
+                    film={film}
+                />
+            )}
         </article>
     );
 };
