@@ -72,9 +72,9 @@ export const reviewRequiredProperties = [
   'id',
   'text',
   'user_id',
-  'filmd_id',
+  'film_id',
   'parent',
-  'name',
+  'user_name',
   'user_email',
   'createdAt',
 ]
