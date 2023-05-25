@@ -11,6 +11,7 @@ import style from './CustomCarousel.module.scss';
 import CustomCarouselArrows from './CustomCarouselArrows/CustomCarouselArrows';
 import CustomCarouselShadows from './CustomCarouselShadows/CustomCarouselShadows';
 import useIsomorphicLayoutEffect from '@/hooks/useIsomorphicLayoutEffect';
+import useTouchControls from '@/hooks/useTouchControls';
 
 const CustomCarousel: FC<ICustomCarouselProps> = ({
     elementsMove,
@@ -48,6 +49,8 @@ const CustomCarousel: FC<ICustomCarouselProps> = ({
         elementsView,
         elementsMove
     );
+
+    const { onTouchStart, onTouchMove } = useTouchControls(onClickLeftArrow, onClickRightArrow);
 
     const translate = `translate3d(-${autoplay ? autoplayMove : move}px, 0, 0)`;
 
@@ -169,7 +172,9 @@ const CustomCarousel: FC<ICustomCarouselProps> = ({
                             gap: `${gap}px`,
                             transitionDuration: `${speed}ms`,
                             padding,
-                        }}>
+                        }}
+                        onTouchStart={onTouchStart}
+                        onTouchMove={onTouchMove}>
                         {Array.isArray(items) &&
                             items.map((element, index) => (
                                 <div
