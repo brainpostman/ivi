@@ -1,13 +1,16 @@
 import { Meta, StoryObj } from '@storybook/react'
-import FilmPage from '@/pages/watch/[id]'
+import WatchPage from '@/pages/watch/[id]'
 import { filmsListData } from '@/data/films.data'
-import { transformFilms } from '@/api/transforms/films.transform'
-import { staffData } from '@/data/staff.data'
+import {
+  transformFilmById,
+  transformFilms,
+} from '@/api/transforms/films.transform'
+import StoryProvider from '@/provider/story.provider'
 
-type Story = StoryObj<typeof FilmPage>
+type Story = StoryObj<typeof WatchPage>
 
 const meta: Meta = {
-  title: 'pages/FilmPage',
+  title: 'pages/WatchPage',
   parameters: {
     docs: {
       description: {
@@ -15,21 +18,37 @@ const meta: Meta = {
       },
     },
   },
-  component: FilmPage,
-  argTypes: {},
+  component: WatchPage,
+  argTypes: {
+    film: { table: { disable: true } },
+    films: { table: { disable: true } },
+    reviewData: { table: { disable: true } },
+  },
 }
 
 export const Primary: Story = {
+  render: props => (
+    <StoryProvider>
+      <WatchPage {...props} />
+    </StoryProvider>
+  ),
   args: {
-    film: {
-      ...transformFilms(filmsListData[0]),
-      actors: [],
-      artists: [],
-      compositors: [],
-      directors: [],
-      montages: [],
-      scenario: [],
-      operators: [],
+    film: transformFilmById(filmsListData[0]),
+    films: transformFilms(filmsListData),
+    reviewData: {
+      reviewCount: 1,
+      reviews: [
+        {
+          id: 1,
+          user_id: 1,
+          user_email: 'test@test.ru',
+          text: 'Some text',
+          parent: 2,
+          film_id: 1,
+          createdAt: '2023-05-24T12:09:26.037Z',
+          name: 'test',
+        },
+      ],
     },
   },
 }

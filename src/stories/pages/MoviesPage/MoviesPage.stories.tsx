@@ -1,17 +1,11 @@
-import { Meta, StoryObj } from '@storybook/react'
-import { Provider } from 'react-redux'
-import { store } from '@/store'
-import { SessionProvider } from 'next-auth/react'
+import { Meta } from '@storybook/react'
 import MoviesPage from '@/pages/movies'
-import { filterGenreListData } from '@/data/filterGenre.data'
-import { filterCountryListData } from '@/data/filterCountry.data'
-import { filterDirectorData } from '@/data/filterDirectordata'
-import { filterActorData } from '@/data/filterActor.data'
 import { filmsListData } from '@/data/films.data'
 import { transformFilms } from '@/api/transforms/films.transform'
 import formatStringArrToStaff from '@/formatters/stringArrToStaff.format'
 import formatStringArrToFilters from '@/formatters/stringArrToFilters.format'
-import { IMovie } from '@/types/films.api.interface'
+import { IMovie } from '@/types/api/films.api.interface'
+import StoryProvider from '@/provider/story.provider'
 
 const meta: Meta = {
   title: 'pages/MoviesPage',
@@ -70,17 +64,15 @@ export const Primary = ({
   const genres = formatStringArrToFilters(genresIncoming.split(','))
 
   return (
-    <SessionProvider>
-      <Provider store={store}>
-        <MoviesPage
-          actors={actors}
-          directors={directors}
-          countries={countries}
-          genres={genres}
-          {...props}
-        />
-      </Provider>
-    </SessionProvider>
+    <StoryProvider>
+      <MoviesPage
+        actors={actors}
+        directors={directors}
+        countries={countries}
+        genres={genres}
+        {...props}
+      />
+    </StoryProvider>
   )
 }
 
@@ -89,7 +81,7 @@ Primary.args = {
   directors: 'director1',
   countries: 'country1',
   genres: 'genre1',
-  defaultFilms: filmsListData.map(film => transformFilms(film)),
+  defaultFilms: transformFilms(filmsListData),
   totalCount: filmsListData.length,
   minYear: 1996,
   maxYear: 2023,

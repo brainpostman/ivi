@@ -1,13 +1,10 @@
 import { Meta } from '@storybook/react'
-import { Provider } from 'react-redux'
-import { store } from '@/store'
-import { SessionProvider } from 'next-auth/react'
 import StaffPage from '@/pages/person/[id]'
-import { staffData } from '@/data/staff.data'
 import { filmsListData } from '@/data/films.data'
 import { transformFilms } from '@/api/transforms/films.transform'
-import { IStaff, IStaffType } from '@/types/staffs.interface'
-import { IMovie } from '@/types/films.api.interface'
+import { IStaff, IStaffType } from '@/types/api/staffs.api.interface'
+import { IMovie } from '@/types/api/films.api.interface'
+import StoryProvider from '@/provider/story.provider'
 
 const meta: Meta = {
   title: 'pages/StaffPage',
@@ -27,7 +24,16 @@ const meta: Meta = {
     },
     type: {
       description: 'Тип участинка',
-      options: ['actor', 'director'],
+      options: [
+        'director',
+        'artist',
+        'actor',
+        'scenario',
+        'montage',
+        'operator',
+        'producer',
+        'compositor',
+      ],
       control: 'select',
     },
     biography: {
@@ -60,11 +66,9 @@ export const Primary = ({
   }
 
   return (
-    <SessionProvider>
-      <Provider store={store}>
-        <StaffPage staff={staff} films={films} totalCount={totalCount} />
-      </Provider>
-    </SessionProvider>
+    <StoryProvider>
+      <StaffPage staff={staff} films={films} totalCount={totalCount} />
+    </StoryProvider>
   )
 }
 
@@ -72,7 +76,7 @@ Primary.args = {
   name: 'Участник 1',
   type: 'actor',
   biography: 'Биография',
-  films: filmsListData.map(film => transformFilms(film)),
+  films: transformFilms(filmsListData),
   totalCount: filmsListData.length,
 }
 
