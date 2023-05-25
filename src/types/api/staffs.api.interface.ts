@@ -1,5 +1,6 @@
 export interface IStaffGetResponse {
   id: number
+  img?: string
   name: string
   name_en?: string | null
   biography?: string
