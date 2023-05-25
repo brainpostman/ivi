@@ -1,14 +1,14 @@
-import { useState } from 'react';
+import { useState, TouchEvent } from 'react';
 
 export default function useTouchControls(prevCallback: () => void, nextCallback: () => void) {
     const [touchPosition, setTouchPosition] = useState<number | null>(null);
 
-    const onTouchStart = (e: TouchEventHandler<HTMLDivElement>) => {
+    const onTouchStart = (e: TouchEvent<HTMLDivElement>) => {
         const touchDown = e.touches[0].clientX;
         setTouchPosition(touchDown);
     };
 
-    const onTouchMove = (e: TouchEventHandler<HTMLDivElement>) => {
+    const onTouchMove = (e: TouchEvent<HTMLDivElement>) => {
         const touchDown = touchPosition;
 
         if (touchDown === null) {
