@@ -1,6 +1,9 @@
-import { IFilmsgGetResponse } from '@/types/films.api.interface'
+import {
+  IFilmByIdGetResponse,
+  IFilmsgGetResponse,
+} from '@/types/api/films.api.interface'
 
-const tmpFilmOne: IFilmsgGetResponse = {
+const tmpFilmOne: IFilmByIdGetResponse = {
   id: 1,
   name: 'Джентльмены (2019)',
   name_en: 'The Gentlemen',
@@ -39,8 +42,17 @@ const tmpFilmOne: IFilmsgGetResponse = {
       name: 'США',
     },
   ],
+  directors: [{ id: 1, name: 'director1', types: [{ name: 'director' }] }],
+  artists: [{ id: 1, name: 'artist1', types: [{ name: 'artist' }] }],
+  actors: [{ id: 1, name: 'actor1', types: [{ name: 'actor' }] }],
+  compositors: [
+    { id: 1, name: 'compositor1', types: [{ name: 'compositor' }] },
+  ],
+  montages: [{ id: 1, name: 'montage1', types: [{ name: 'montage' }] }],
+  operators: [{ id: 1, name: 'operator1', types: [{ name: 'operator' }] }],
+  scenario: [{ id: 1, name: 'scenario1', types: [{ name: 'scenario' }] }],
 }
 
-export const filmsListData: IFilmsgGetResponse[] = new Array(19)
+export const filmsListData: IFilmByIdGetResponse[] = new Array(19)
   .fill(tmpFilmOne)
   .map((film, index) => ({ ...film, id: index + 1 }))
