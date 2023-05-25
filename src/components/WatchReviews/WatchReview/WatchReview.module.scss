@@ -6,12 +6,43 @@
     background-color: $dark;
     @include ui-padding(default, 5);
     height: 162px;
-    width: 286px;
+    max-width: 286px;
+    width: 100%;
+    width: 100%;
     transition: all 0.4s;
     cursor: pointer;
     &:hover {
         transition: all 0.2s;
         background-color: $violet;
+    }
+
+    @media (max-width: 1272px) {
+        @include adaptive-size(width, 240, 240, 1097, 1272);
+        max-width: initial;
+    }
+
+    @media (max-width: 1096px) {
+        @include adaptive-size(width, 310, 280, 971, 1096);
+    }
+
+    @media (max-width: 970px) {
+        @include adaptive-size(width, 280, 200, 776, 970);
+    }
+
+    @media (max-width: 775px) {
+        @include adaptive-size(width, 300, 280, 670, 775);
+    }
+
+    @media (max-width: 669px) {
+        @include adaptive-size(width, 260, 220, 583, 669);
+    }
+
+    @media (max-width: 582px) {
+        @include adaptive-size(width, 480, 380, 460, 582);
+    }
+
+    @media (max-width: 459px) {
+        @include adaptive-size(width, 360, 220, 320, 459);
     }
 }
 

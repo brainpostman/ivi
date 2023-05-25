@@ -164,7 +164,7 @@ const ReviewComment = ({
                                 onClick={() => {
                                     router.push(`/watch/${film.id}/review/${comment.id}`);
                                 }}>
-                                Загрузить другие комментарии этой ветки
+                                {t('review-comment.load-comments')}
                             </span>
                         ) : (
                             <>

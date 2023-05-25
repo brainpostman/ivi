@@ -5,6 +5,7 @@
         "leave-comment": "Leave a comment",
         "edit-comment": "Leave a comment",
         "edit-placeholder": "Write a comment",
+        "load-comments": "Look at other comments",
         "messages": {
             "warn": "The comment must have at least 10 and no more than 10000 characters",
             "error": "There was a problem when sending the comment, please repeat later"

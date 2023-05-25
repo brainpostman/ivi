@@ -15,6 +15,7 @@ import { useTranslation } from 'next-i18next';
 import { IReviewGetResponse } from '@/types/api/reviews.api.interface';
 import { IMovieById } from '@/types/api/films.api.interface';
 import { reviewsAPI } from '@/api/queries/reviews.api';
+import ModalCommentForm from '../ReviewComment/ModalCommentForm/ModalCommentForm';
 
 interface IProps {
     filmName: string;
@@ -102,6 +103,16 @@ const WatchReviews: FC<IProps> = ({
         }
     }, [isLoading]);
 
+    const breakpoints = [
+        { point: 1272, view: 4 },
+        { point: 1096, view: 3 },
+        { point: 970, view: 3 },
+        { point: 775, view: 2 },
+        { point: 669, view: 2 },
+        { point: 582, view: 1 },
+        { point: 459, view: 1 },
+    ];
+
     return (
         <div className={`${style.wrapper} ${style.propsClassName}`}>
             <div className={style.container}>
@@ -123,12 +134,12 @@ const WatchReviews: FC<IProps> = ({
                     <Loader />
                 ) : reviews.length > 0 ? (
                     <CustomCarousel
-                        elementsView={3}
+                        elementsView={4}
                         elementsMove={3}
-                        arrowSize={16}
-                        classNameWrapper={''}
+                        classNameList={style.reviews}
                         space={[24, 24]}
-                        width='full'>
+                        width='fit'
+                        breakpoints={breakpoints}>
                         {reviews.map((review) => (
                             <WatchReview key={review.id} locale={locale ?? 'ru'} review={review} />
                         ))}
@@ -137,25 +148,19 @@ const WatchReviews: FC<IProps> = ({
                     <></>
                 )}
             </div>
-            <ModalWindow
+            <ModalCommentForm
                 isShow={showModal}
                 closeFunc={() => {
                     setShowModal(false);
                     setText('');
-                }}>
-                <div className={style.modal}>
-                    <h1 className={style.title__reviews}>{t('leave-review')}</h1>
-                    <div className={style.commentForm}>
-                        <CommentForm
-                            value={text}
-                            placeholder={t('placeholder')}
-                            onChange={handleChange}
-                            onClickSubmit={handleClick}
-                        />
-                        <ModalFilmPoster film={film} />
-                    </div>
-                </div>
-            </ModalWindow>
+                }}
+                title={t('leave-review')}
+                value={text}
+                placeholder={t('placeholder')}
+                onChange={handleChange}
+                onClickSubmit={handleClick}
+                film={film}
+            />
         </div>
     );
 };
