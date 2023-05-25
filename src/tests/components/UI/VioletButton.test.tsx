@@ -1,4 +1,4 @@
-import VioletButton from '@/components/UI/VioletButton/VioletButton'
+import VioletButton from '@/components/UI/Buttons/VioletButton/VioletButton'
 import { checkButton } from '@/utils/test-utils/button.util'
 import { renderModif } from '@/utils/test-utils/renderModif.util'
 import '@testing-library/jest-dom'

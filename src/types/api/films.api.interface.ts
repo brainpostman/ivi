@@ -24,21 +24,21 @@ export interface IFilmByIdGetResponse extends IFilmsgGetResponse {
 }
 
 export interface IFilmsgGetResponse {
-    id: number;
-    name: string;
-    name_en: string;
-    year: number;
-    countries: IFilterGetResponse[];
-    genres: { id: number; name: string; name_en: string | null }[];
-    tagline: string;
-    scoreAVG: number;
-    countScore: number;
-    age: string;
-    description: string;
-    mainImg: string;
-    time: string;
-    premiereRU: string;
-    premiere: string;
+  id: number
+  name: string
+  name_en?: string
+  year: number
+  countries: IFilterGetResponse[]
+  genres: { id: number; name: string; name_en: string | null }[]
+  tagline: string
+  scoreAVG: number
+  countScore: number
+  age: string
+  description: string
+  mainImg: string
+  time: string
+  premiereRU: string
+  premiere?: string
 }
 
 export interface IMovie extends Omit<IFilmsgGetResponse, 'countries' | 'genres'> {

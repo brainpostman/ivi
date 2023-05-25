@@ -4,13 +4,13 @@ import { useTranslation } from 'next-i18next'
 import { useRouter } from 'next/router'
 import { FC, useEffect } from 'react'
 import { IoCloseOutline } from 'react-icons/io5'
-import FilterGenreCard from '../FilterGenreCard/FilterGenreCard'
-import VioletButton from '../UI/VioletButton/VioletButton'
+import FilterGenreCard from '../UI/Cards/FilterGenreCard/FilterGenreCard'
+import VioletButton from '../UI/Buttons/VioletButton/VioletButton'
 import style from './FilterBlock.module.scss'
 import FilterListBig from './FilterListBig/FilterListBig'
 import FilterSlider from './FilterSlider/FilterSlider'
 import FilterSuggest from './FilterSuggest/FilterSuggest'
-import { IStaffGetResponse } from '@/types/staffs.interface'
+import { IStaffGetResponse } from '@/types/api/staffs.api.interface'
 import { IFilterGetResponse } from '@/types/api/filters.api.interface'
 import { useSetListParam } from '@/hooks/useSetListParam'
 
@@ -102,8 +102,9 @@ const FilterBlock: FC<IProps> = ({
           <FilterGenreCard
             key={genre.id}
             onClick={onClickGenreCard(genre.name)}
-            title={genre.name}
-          />
+          >
+            {genre.name}
+          </FilterGenreCard>
         ))}
       </FilterListBig>
 

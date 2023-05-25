@@ -1,4 +1,4 @@
-import CustomCarousel from '@/components/CustomCarousel/CustomCarousel'
+import CustomCarousel from '@/components/UI/Carousels/CustomCarousel/CustomCarousel'
 import { useTranslation } from 'next-i18next'
 import Image from 'next/image'
 import styleParent from '../HeaderHoverBlock.module.scss'

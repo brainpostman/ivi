@@ -1,5 +1,5 @@
 import FooterSocials from '@/components/Footer/FooterSocials/FooterSocials'
-import BasicBtn from '@/components/UI/BasicBtn/BasicBtn'
+import BasicBtn from '@/components/UI/Buttons/BasicBtn/BasicBtn'
 import { useState } from 'react'
 import { BiDevices, BiMessage } from 'react-icons/bi'
 import { FaTv } from 'react-icons/fa'

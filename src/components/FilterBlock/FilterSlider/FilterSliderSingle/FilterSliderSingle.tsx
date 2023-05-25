@@ -1,7 +1,7 @@
 import ReactSlider from 'react-slider'
 import { ChangeEvent, FC, useState } from 'react'
 import { useSetStringParam } from '@/hooks/useSetStringParam'
-import Input from '@/components/UI/Input/Input'
+import Input from '@/components/UI/InputFields/Input/Input'
 import style from './FilterSlideSingle.module.scss'
 import styleParent from '../FilterSlider.module.scss'
 

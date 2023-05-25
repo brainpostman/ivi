@@ -1,48 +1,58 @@
-import { filmsAPI } from '@/api/queries/films.api';
-import ModalFilmPoster from '@/components/ModalFilmPoster/ModalFilmPoster';
-import PageLayout from '@/layouts/PageLayout/PageLayout';
-import { IMovieById } from '@/types/api/films.api.interface';
-import { GetServerSidePropsContext } from 'next';
-import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
-import styles from './index.module.scss';
-import { useRouter } from 'next/router';
-import { buildDateString, trimComment, validateComment } from '@/utils/comment.utils';
-import { useSession } from 'next-auth/react';
-import CommentForm from '@/components/UI/CommentForm/CommentForm';
-import { ChangeEvent, useEffect, useState } from 'react';
-import { toast } from 'react-toastify';
-import ReviewComment from '@/components/ReviewComment/ReviewComment';
-import Loader from '@/components/Loader/Loader';
-import Link from 'next/link';
-import ModalWindow from '@/components/ModalWindow/ModalWindow';
-import { reviewsAPI } from '@/api/queries/reviews.api';
-import { IReviewGetResponse } from '@/types/api/reviews.api.interface';
+import { filmsAPI } from '@/api/queries/films.api'
+import ModalFilmPoster from '@/components/Mobile/ModalFilmPoster/ModalFilmPoster'
+import PageLayout from '@/layouts/PageLayout/PageLayout'
+import { IMovieById } from '@/types/api/films.api.interface'
+import { GetServerSidePropsContext } from 'next'
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
+import styles from './index.module.scss'
+import { useRouter } from 'next/router'
+import {
+  buildDateString,
+  trimComment,
+  validateComment,
+} from '@/utils/comment.utils'
+import { useSession } from 'next-auth/react'
+import CommentForm from '@/components/UI/CommentForm/CommentForm'
+import { ChangeEvent, useEffect, useState } from 'react'
+import { toast } from 'react-toastify'
+import ReviewComment from '@/components/ReviewComment/ReviewComment'
+import Loader from '@/components/UI/Loader/Loader'
+import Link from 'next/link'
+import ModalWindow from '@/components/ModalWindow/ModalWindow'
+import { reviewsAPI } from '@/api/queries/reviews.api'
+import { IReviewGetResponse } from '@/types/api/reviews.api.interface'
 import { useTranslation } from 'next-i18next';
 import { MdArrowBackIosNew } from 'react-icons/md';
 import SimpleButton from '@/components/UI/SimpleButton/SimpleButton';
 import ModalCommentForm from '@/components/ReviewComment/ModalCommentForm/ModalCommentForm';
 
 interface IReviewProps {
-    film: IMovieById;
-    review: IReviewGetResponse;
-    comments: IReviewGetResponse[];
+  film: IMovieById
+  review: IReviewGetResponse
+  comments: IReviewGetResponse[]
 }
 
-export const getServerSideProps = async ({ locale, params }: GetServerSidePropsContext) => {
-    if (!params || !parseInt(params.id as string)) {
-        return {
-            redirect: {
-                destination: '/error',
-                permanent: false,
-            },
-        };
+export const getServerSideProps = async ({
+  locale,
+  params,
+}: GetServerSidePropsContext) => {
+  if (!params || !parseInt(params.id as string)) {
+    return {
+      redirect: {
+        destination: '/error',
+        permanent: false,
+      },
     }
+  }
 
-    const review = await reviewsAPI.getFilmReviewById(Number(params.review_id));
+  const review = await reviewsAPI.getFilmReviewById(Number(params.review_id))
 
-    const film = await filmsAPI.getFilmsById(locale ?? 'ru', Number(params.id));
+  const film = await filmsAPI.getFilmsById(locale ?? 'ru', Number(params.id))
 
-    const comments = await reviewsAPI.getComments(Number(params.id), Number(params.review_id));
+  const comments = await reviewsAPI.getComments(
+    Number(params.id),
+    Number(params.review_id)
+  )
 
     return {
         props: {
@@ -93,10 +103,10 @@ const Review = ({ film, review, comments: propsComments }: IReviewProps) => {
         };
     }, []);
 
-    const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        setText(e.target.value);
-        toast.dismiss();
-    };
+  const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
+    setText(e.target.value)
+    toast.dismiss()
+  }
 
     const handleClick = async () => {
         toast.dismiss();
@@ -126,10 +136,10 @@ const Review = ({ film, review, comments: propsComments }: IReviewProps) => {
         }
     };
 
-    const handleEditChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        setReviewText(e.target.value);
-        toast.dismiss();
-    };
+  const handleEditChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
+    setReviewText(e.target.value)
+    toast.dismiss()
+  }
 
     const handleEditClick = async () => {
         toast.dismiss();
@@ -162,18 +172,18 @@ const Review = ({ film, review, comments: propsComments }: IReviewProps) => {
         setText('');
     }, [router.asPath]);
 
-    useEffect(() => {
-        const getComments = async () => {
-            const commentsReq = await reviewsAPI.getComments(film.id, review.id);
-            if (commentsReq.length > 0) {
-                setComments(commentsReq);
-            }
-        };
-        if (isLoading) {
-            getComments();
-            setIsLoading(false);
-        }
-    }, [isLoading]);
+  useEffect(() => {
+    const getComments = async () => {
+      const commentsReq = await reviewsAPI.getComments(film.id, review.id)
+      if (commentsReq.length > 0) {
+        setComments(commentsReq)
+      }
+    }
+    if (isLoading) {
+      getComments()
+      setIsLoading(false)
+    }
+  }, [isLoading])
 
     return (
         <PageLayout
@@ -315,4 +325,4 @@ const Review = ({ film, review, comments: propsComments }: IReviewProps) => {
     );
 };
 
-export default Review;
+export default Review

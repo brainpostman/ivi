@@ -1,4 +1,4 @@
-import BasicBtn from '@/components/UI/BasicBtn/BasicBtn'
+import BasicBtn from '@/components/UI/Buttons/BasicBtn/BasicBtn'
 import { useState } from 'react'
 import { FiPhone } from 'react-icons/fi'
 import { GoMail } from 'react-icons/go'

@@ -6,7 +6,7 @@ import {
   IFilmsgGetResponse,
   IMovie,
   IMovieById,
-} from '@/types/films.api.interface'
+} from '@/types/api/films.api.interface'
 
 /*
   * Преобразует данные о фильмах
@@ -25,6 +25,9 @@ export const transformFilms = (
   const result: IMovie[] = filmsData.map(film => {
     const name = locale === 'en' && film.name_en ? film.name_en : film.name
 
+    const premiereRU =
+      locale === 'en' && film.premiere ? film.premiere : film.premiereRU
+
     return {
       ...film,
       name,
@@ -32,6 +35,7 @@ export const transformFilms = (
       countries: formatFilterToNames(film.countries),
       genres: formatFilterToNames(film.genres),
       scoreAVG: formatScoreAVG(film.scoreAVG),
+      premiereRU,
     }
   })
 
@@ -54,6 +58,11 @@ export const transformFilmById = (
   const name =
     locale === 'en' && filmData.name_en ? filmData.name_en : filmData.name
 
+  const premiereRU =
+    locale === 'en' && filmData.premiere
+      ? filmData.premiere
+      : filmData.premiereRU
+
   const result: IMovieById = {
     ...filmData,
     name,
@@ -61,7 +70,8 @@ export const transformFilmById = (
     countries: formatFilterToNames(filmData.countries),
     genres: formatFilterToNames(filmData.genres),
     scoreAVG: formatScoreAVG(filmData.scoreAVG),
+    premiereRU,
   }
 
-    return result;
-};
+  return result
+}

@@ -4,7 +4,7 @@ import style from './FilterBlock.stories.module.scss'
 import { filterActorData } from '@/data/filterActor.data'
 import { filterGenreListData } from '@/data/filterGenre.data'
 import { filterCountryListData } from '@/data/filterCountry.data'
-import { filterDirectorData } from '@/data/filterDirectordata'
+import { filterDirectorData } from '@/data/filterDirector.data'
 
 const meta: Meta = {
   title: 'FilterBlock',

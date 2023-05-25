@@ -1,4 +1,4 @@
-import BasicBtn from '@/components/UI/BasicBtn/BasicBtn'
+import BasicBtn from '@/components/UI/Buttons/BasicBtn/BasicBtn'
 import { useTranslation } from 'next-i18next'
 import { BiDevices } from 'react-icons/bi'
 import { FaApple, FaGooglePlay, FaTv } from 'react-icons/fa'

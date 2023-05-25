@@ -1,17 +1,17 @@
-import BannerCarousel from '@/components/BannerCarousel/BannerCarousel'
-import ExpandBlock from '@/components/ExpandBlock/ExpandBlock'
+import BannerCarousel from '@/components/UI/Carousels/BannerCarousel/BannerCarousel'
+import ExpandBlock from '@/components/UI/ExpandBlock/ExpandBlock'
 import HomePageInfo from '@/components/HomePageInfo/HomePageInfo'
-import TopTenList from '@/components/TopTenList/TopTenList'
-import LongButton from '@/components/UI/LongButton/LongButton'
+import TopTenList from '@/components/UI/Carousels/TopTenList/TopTenList'
+import LongButton from '@/components/UI/Buttons/LongButton/LongButton'
 import PageLayout from '@/layouts/PageLayout/PageLayout'
-import { IMovie } from '@/types/films.api.interface'
+import { IMovie } from '@/types/api/films.api.interface'
 import { GetStaticProps, NextPage } from 'next'
 import { useTranslation } from 'next-i18next'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import style from './index.module.scss'
-import Loader from '@/components/Loader/Loader'
+import Loader from '@/components/UI/Loader/Loader'
 import { filmsAPI } from '@/api/queries/films.api'
-import MovieCarousel from '@/components/MovieCarousel/MovieCarousel'
+import MovieCarousel from '@/components/UI/Carousels/MovieCarousel/MovieCarousel'
 
 const imgLongButton_1 =
   'https://solea-parent.dfs.ivi.ru/picture/ffffff,ffffff/lightning.svg'
@@ -20,7 +20,7 @@ const imgLongButton_2 =
   'https://solea-parent.dfs.ivi.ru/picture/ffffff,ffffff/gift.svg'
 
 export const getStaticProps: GetStaticProps = async ({ locale }) => {
-  const { films } = await filmsAPI.getFilms(locale, { take: 20 })
+  const { films } = await filmsAPI.getFilms(locale ?? 'ru', { take: 20 })
 
   const firstCarouselFilms = films.slice(0, 11)
   const secondCarouselFilms = films.slice(10, 21)

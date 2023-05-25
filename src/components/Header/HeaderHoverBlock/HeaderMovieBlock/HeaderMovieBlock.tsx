@@ -1,10 +1,10 @@
 import { FC, useState } from 'react'
 import style from './HeaderMovieBlock.module.scss'
-import BasicBtn from '@/components/UI/BasicBtn/BasicBtn'
+import BasicBtn from '@/components/UI/Buttons/BasicBtn/BasicBtn'
 import { FaTv } from 'react-icons/fa'
-import MiniCarousel from '@/components/MiniCarousel/MiniCarousel'
-import MiniCarouselIviBlock from '@/components/MiniCarousel/MiniCarouselIviBlock/MiniCarouselIviBlock'
-import { IMovie } from '@/types/films.api.interface'
+import MiniCarousel from '@/components/UI/Carousels/MiniCarousel/MiniCarousel'
+import MiniCarouselIviBlock from '@/components/UI/Carousels/MiniCarousel/MiniCarouselIviBlock/MiniCarouselIviBlock'
+import { IMovie } from '@/types/api/films.api.interface'
 import { useTranslation } from 'next-i18next'
 
 interface IProps {

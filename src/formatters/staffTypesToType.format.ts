@@ -1,4 +1,8 @@
-import { IStaff, IStaffGetResponse, IStaffType } from '@/types/staffs.interface'
+import {
+  IStaff,
+  IStaffGetResponse,
+  IStaffType,
+} from '@/types/api/staffs.api.interface'
 
 /*
   * Форматирует данные об участнике: достаёт название типа

@@ -1,4 +1,4 @@
-import { IStaffGetResponse } from '@/types/staffs.interface'
+import { IStaffGetResponse } from '@/types/api/staffs.api.interface'
 
 export const filterActorData: IStaffGetResponse[] = new Array(22)
   .fill(0)

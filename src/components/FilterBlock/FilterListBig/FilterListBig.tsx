@@ -1,4 +1,4 @@
-import CustomCarousel from '@/components/CustomCarousel/CustomCarousel'
+import CustomCarousel from '@/components/UI/Carousels/CustomCarousel/CustomCarousel'
 import { useSetListParam } from '@/hooks/useSetListParam'
 import { IFilterListBigProps } from '@/types/filterBlock.interface'
 import { FC } from 'react'

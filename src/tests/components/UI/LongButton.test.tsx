@@ -1,4 +1,4 @@
-import LongButton from '@/components/UI/LongButton/LongButton'
+import LongButton from '@/components/UI/Buttons/LongButton/LongButton'
 import { checkButton } from '@/utils/test-utils/button.util'
 import { renderModif } from '@/utils/test-utils/renderModif.util'
 import '@testing-library/jest-dom'

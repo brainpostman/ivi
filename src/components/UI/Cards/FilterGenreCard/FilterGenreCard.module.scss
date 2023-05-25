@@ -1,0 +1,51 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  gap: 4px;
+
+  @include font(2);
+
+  color: #fff;
+
+  border: 1px solid $dark-gray;
+  border-radius: 6px;
+
+  cursor: pointer;
+
+  min-width: 108px;
+  min-height: 88px;
+  max-width: 108px;
+  max-height: 88px;
+
+  transition: background-color 0.08s;
+
+  &:hover {
+    background-color: #7e798f;
+  }
+
+  >svg {
+    width: 32px;
+    height: 32px;
+  }
+
+}
+
+.title {
+  display: -webkit-box;
+
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  text-overflow: ellipsis;
+  word-wrap: break-word;
+
+  text-align: center;
+
+  width: 100%;
+
+  @include ui-padding(hor, 2);
+}

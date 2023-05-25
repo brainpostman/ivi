@@ -1,4 +1,4 @@
-import HeaderIconButton from '@/components/UI/HeaderIconButton/HeaderIconButton'
+import HeaderIconButton from '@/components/UI/Buttons/HeaderIconButton/HeaderIconButton'
 import { checkButton } from '@/utils/test-utils/button.util'
 import { renderModif } from '@/utils/test-utils/renderModif.util'
 import { AiFillCheckCircle } from 'react-icons/ai'
