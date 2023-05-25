@@ -1,11 +1,12 @@
 import { useSetListParam } from '@/hooks/useSetListParam'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { MdArrowBackIosNew } from 'react-icons/md'
 import style from './Sort.module.scss'
 import SortDirection from './SortDirection/SortDirection'
 import { ISortType } from '@/types/filterBlock.interface'
 import { useTranslation } from 'next-i18next'
 import { useRouter } from 'next/router'
+import useOutside from '@/hooks/useOutside'
 
 interface ISortProps {
   sortTypes: ISortType[]
@@ -16,6 +17,8 @@ const Sort = ({ sortTypes, defaultSort }: ISortProps) => {
   const [isExpand, setIsExpand] = useState(false)
   const { t } = useTranslation('movies')
   const router = useRouter()
+
+  const ref = useRef<HTMLInputElement>(null)
 
   const { list: sorts, onClickListEl } = useSetListParam(
     sortTypes.map(data => ({
@@ -40,8 +43,10 @@ const Sort = ({ sortTypes, defaultSort }: ISortProps) => {
     onClickListEl(defaultSort)()
   }, [])
 
+  useOutside(ref, () => setIsExpand(false), isExpand)
+
   return (
-    <div className={style.wrapper}>
+    <div className={style.wrapper} ref={ref}>
       <div className={style.title} onClick={() => setIsExpand(prev => !prev)}>
         <div className={style.lines}>
           <div></div>

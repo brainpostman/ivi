@@ -1,10 +1,11 @@
 import CustomCarousel from '@/components/UI/Carousels/CustomCarousel/CustomCarousel'
 import { useSetListParam } from '@/hooks/useSetListParam'
 import { IFilterListBigProps } from '@/types/filterBlock.interface'
-import { FC } from 'react'
+import { FC, useRef } from 'react'
 import { BsCheckLg } from 'react-icons/bs'
 import FilterTab from '../FilterTab/FilterTab'
 import style from './FilterListBig.module.scss'
+import useOutside from '@/hooks/useOutside'
 
 const FilterListBig: FC<IFilterListBigProps> = ({
   filterData,
@@ -21,8 +22,17 @@ const FilterListBig: FC<IFilterListBigProps> = ({
 
   const { filter, selectFilter } = filterData
 
+  const ref = useRef<HTMLDivElement>(null)
+
+  useOutside(ref, selectFilter, filter?.isExpand)
+
   return (
-    <FilterTab selectFilter={selectFilter} filter={filter} paramValue={param}>
+    <FilterTab
+      selectFilter={selectFilter}
+      filter={filter}
+      paramValue={param}
+      elementRef={ref}
+    >
       {filter?.isExpand && (
         <div className={style.container}>
           {children && (
