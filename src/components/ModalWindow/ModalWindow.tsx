@@ -39,8 +39,10 @@ const ModalWindow: FC<IProps> = ({
   }, [isShow])
 
   useIsomorphicLayoutEffect(() => {
-    modalRef.current?.focus()
-  }, [])
+    if (!modalRef.current) return
+
+    modalRef.current.focus()
+  }, [modalRef])
 
   return (
     <section

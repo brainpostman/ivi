@@ -1,5 +1,5 @@
 import { IFilterBlockEl } from '@/types/filterBlock.interface'
-import { DetailedHTMLProps, FC, HTMLAttributes } from 'react'
+import { DetailedHTMLProps, FC, HTMLAttributes, RefObject } from 'react'
 import { MdArrowBackIosNew } from 'react-icons/md'
 import style from './FilterTab.module.scss'
 import { useTranslation } from 'next-i18next'
@@ -10,6 +10,7 @@ interface IProps
   selectFilter: () => void
   filter?: IFilterBlockEl
   paramValue?: string
+  elementRef?: RefObject<HTMLElement>
 }
 
 const FilterTab: FC<IProps> = ({
@@ -17,6 +18,7 @@ const FilterTab: FC<IProps> = ({
   filter,
   paramValue,
   children,
+  elementRef,
 }) => {
   const titleClassName = `${style.title} ${
     filter?.isExpand ? style.title__active : ''
@@ -29,7 +31,7 @@ const FilterTab: FC<IProps> = ({
   const { t } = useTranslation('movies', { keyPrefix: 'filters' })
 
   return (
-    <article className={style.wrapper}>
+    <article className={style.wrapper} ref={elementRef}>
       <div className={titleClassName} onClick={selectFilter}>
         <div>
           <h1>{t(normalizeKey(filter?.title ?? 'Фильтр'))}</h1>
