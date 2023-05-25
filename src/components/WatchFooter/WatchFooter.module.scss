@@ -73,14 +73,15 @@
 
 @media (max-width: 1072px) {
   .wrapper {
+    width: 100vw;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
   }
 }
 
 @media (max-width: 540px) {
   .info {
-    max-width: 300px;
+    max-width: 320px;
   }
   .images {
     display: none;
