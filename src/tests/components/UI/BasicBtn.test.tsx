@@ -1,4 +1,4 @@
-import BasicBtn from '@/components/UI/BasicBtn/BasicBtn'
+import BasicBtn from '@/components/UI/Buttons/BasicBtn/BasicBtn'
 import { renderModif } from '@/utils/test-utils/renderModif.util'
 import '@testing-library/jest-dom'
 import { FaViber } from 'react-icons/fa'

@@ -1,4 +1,4 @@
-import Input from '@/components/UI/Input/Input'
+import Input from '@/components/UI/InputFields/Input/Input'
 import { renderModif } from '@/utils/test-utils/renderModif.util'
 import '@testing-library/jest-dom'
 import { fireEvent } from '@testing-library/react'
