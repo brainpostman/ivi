@@ -1,4 +1,4 @@
-import BasicBtn from '@/components/UI/BasicBtn/BasicBtn'
+import BasicBtn from '@/components/UI/Buttons/BasicBtn/BasicBtn'
 import HeaderChannels from '../HeaderChannels/HeaderChannels'
 import HeaderPopularBroadCasts from '../HeaderPopularBroadcasts/HeaderPopularBroadcasts'
 import style from './HeaderTvBlock.module.scss'

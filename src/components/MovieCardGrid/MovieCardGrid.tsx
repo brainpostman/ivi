@@ -1,7 +1,7 @@
 import { DetailedHTMLProps, FC, HTMLAttributes } from 'react'
-import MovieCard from '../MovieCard/MovieCard'
+import MovieCard from '../UI/Cards/MovieCard/MovieCard'
 import style from './MovieCardGrid.module.scss'
-import { IMovie } from '@/types/films.api.interface'
+import { IMovie } from '@/types/api/films.api.interface'
 
 interface IProps
   extends DetailedHTMLProps<

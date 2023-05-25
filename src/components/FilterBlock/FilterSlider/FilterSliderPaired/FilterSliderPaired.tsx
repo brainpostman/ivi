@@ -1,4 +1,4 @@
-import Input from '@/components/UI/Input/Input'
+import Input from '@/components/UI/InputFields/Input/Input'
 import { useSetStringParam } from '@/hooks/useSetStringParam'
 import { ChangeEvent, FC, useState } from 'react'
 import ReactSlider from 'react-slider'

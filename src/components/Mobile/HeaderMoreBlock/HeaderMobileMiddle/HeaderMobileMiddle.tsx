@@ -1,4 +1,4 @@
-import BasicBtn from '@/components/UI/BasicBtn/BasicBtn'
+import BasicBtn from '@/components/UI/Buttons/BasicBtn/BasicBtn'
 import { getHeaderMobileMiddleContent } from '@/data/headerMobile.data'
 import Image from 'next/image'
 import Link from 'next/link'
