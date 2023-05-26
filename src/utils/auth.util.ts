@@ -1,45 +1,7 @@
-import axios from 'axios';
 import { i18n } from 'next-i18next';
 import { Session } from 'next-auth';
 
-type CheckEmailResponse = {
-    status: number;
-};
-
 i18n?.loadNamespaces(['auth_modal']);
-
-const domain = process.env.NEXT_PUBLIC_SERVER_ADDRESS;
-
-/*e
-    * @param {string} email - почта
-    * @returns Promise<string>
-
-*/
-
-export async function checkEmailVacancy(email: string): Promise<string> {
-    try {
-        const response = await axios.get(`${domain}/check-email/${encodeURIComponent(email)}`);
-        if (response.status === 200) {
-            return 'register';
-        } else {
-            throw new Error();
-        }
-    } catch (err) {
-        if (axios.isAxiosError(err)) {
-            if (err.response?.status === 400) {
-                return 'login';
-            }
-            console.error('Error: ', err.message);
-            return err.message;
-        } else {
-            console.error('Error: ', err);
-            return (
-                i18n?.t('auth_modal:error-messages.unforeseen-error') ??
-                'Произошла непредвиденная ошибка'
-            );
-        }
-    }
-}
 
 /*
     * @param {string} email - почта
@@ -129,21 +91,4 @@ export function getSerializableSession(inputSession: Session): Session | null {
         }
     }
     return inputSession;
-}
-
-/*
-    * @param {string | null} accessToken - токен
-    * @returns Promise<boolean>
-
-*/
-
-export async function checkAdminRole(accessToken: string | null): Promise<boolean> {
-    try {
-        const checkAdmin = await axios.get(`${domain}/check-admin`, {
-            headers: { Authorization: `Bearer ${accessToken}` },
-        });
-        return true;
-    } catch (err) {
-        return false;
-    }
 }

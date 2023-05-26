@@ -2,6 +2,7 @@ import { getSession, signOut, useSession } from 'next-auth/react';
 import { useEffect } from 'react';
 import { useTranslation } from 'next-i18next';
 import { toast } from 'react-toastify';
+import { authAPI } from '@/api/queries/auth.api';
 
 export function useSessionRefresh() {
     const { status, data } = useSession();
@@ -11,7 +12,7 @@ export function useSessionRefresh() {
     let currentTime = Date.now();
 
     useEffect(() => {
-        const func = async () => {
+        const setTimedRefresh = async () => {
             if (status === 'authenticated') {
                 if (currentTime >= data.expires_at * 1000) {
                     const session = await getSession();
@@ -19,7 +20,7 @@ export function useSessionRefresh() {
                         expiration = session?.expires_at ?? 0;
                     } else {
                         toast.error(t('error-messages.refresh-token-error'));
-                        signOut();
+                        authAPI.signOut(data.accessToken, data.user.id);
                     }
                 }
                 timeout = window.setTimeout(async function callback() {
@@ -33,12 +34,12 @@ export function useSessionRefresh() {
                         );
                     } else {
                         toast.error(t('error-messages.refresh-token-error'));
-                        signOut();
+                        authAPI.signOut(data.accessToken, data.user.id);
                     }
                 }, (expiration || data.expires_at) * 1000 - currentTime);
             }
         };
-        func();
+        setTimedRefresh();
         return () => {
             window.clearTimeout(timeout);
         };

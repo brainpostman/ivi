@@ -29,6 +29,7 @@
         "no-confirmation-match": "Passwords must match",
         "no-email-match": "Password can't match your email",
         "incorrect-pass": "Incorrect password",
-        "refresh-token-error": "An unexpected authorization error has occurred. Please, authorize again"
+        "refresh-token-error": "An unexpected authorization error has occurred. Please, authorize again",
+        "session-signout-failed": "Session sign out failed, please try again later or contact support"
     }
 }
