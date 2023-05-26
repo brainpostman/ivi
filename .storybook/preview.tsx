@@ -69,6 +69,12 @@ export const globalTypes = {
 
 const preview: Preview = {
   parameters: {
+    options: {
+      storySort: {
+        method: 'alphabetical',
+        order: ['UI', ['Buttons', 'InputFields', 'Carousels', 'Cards']],
+      },
+    },
     viewport: { viewports: customViewports },
     backgrounds: {
       default: 'dark',
