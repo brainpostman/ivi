@@ -53,17 +53,24 @@
 
   transition: all 0.2s;
   opacity: 0;
-
   white-space: nowrap;
 
   padding: 24px 57px 24px 15px;
-
   & a {
     color: white;
+  }
+
+  &__wrapper {
+    visibility: hidden;
+    &__active {
+      visibility: visible;
+    }
   }
 }
 
 .popupActive {
-  @include ui-margin(top, 3);
   opacity: 1;
+  @include ui-margin(top, 3);
 }
+
+
