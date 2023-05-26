@@ -6,5 +6,8 @@
     "comment-form": {
         "send": "Send",
         "cancel": "Cancel"
+    },
+    "movie-carousel": {
+        "show-all": "Show all"
     }
 }

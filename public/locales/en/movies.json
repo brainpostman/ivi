@@ -134,11 +134,6 @@
     },
     {
       "id": 3,
-      "name": "ratingAVG",
-      "view": "Ivi rating"
-    },
-    {
-      "id": 4,
       "name": "name",
       "view": "Title"
     }

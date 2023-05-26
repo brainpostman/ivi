@@ -6,5 +6,8 @@
     "comment-form": {
         "send": "Отправить",
         "cancel": "Отменить"
+    },
+    "movie-carousel": {
+        "show-all": "Показать всё"
     }
 }

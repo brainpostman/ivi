@@ -4,37 +4,43 @@
       "title": "Брутально и мужественно",
       "subtitle": "Лучшие боевики последних лет",
       "imgUrl": "/main_carousel/action.jpg",
-      "imgUrlMobile": "/main_carousel/action_mobile.jpg"
+      "imgUrlMobile": "/main_carousel/action_mobile.jpg",
+      "catalogLink": "/movies?genres=Боевик&orderBy=year&order=DESC&yearStart=2012"
     },
     {
       "title": "Самым маленьким россиянам",
       "subtitle": "Мультфильмы отечественного производства",
       "imgUrl": "/main_carousel/cartoons.jpg",
-      "imgUrlMobile": "/main_carousel/cartoons_mobile.jpg"
+      "imgUrlMobile": "/main_carousel/cartoons_mobile.jpg",
+      "catalogLink": "/movies?genres=Мультфильм&orderBy=year&order=ASC&countries=Россия"
     },
     {
       "title": "Очень смешно",
       "subtitle": "Комедийные фильмы",
       "imgUrl": "/main_carousel/comedies.jpg",
-      "imgUrlMobile": "/main_carousel/comedies_mobile.jpg"
+      "imgUrlMobile": "/main_carousel/comedies_mobile.jpg",
+      "catalogLink": "/movies?genres=Комедия&orderBy=year&order=DESC"
     },
     {
       "title": "Наша гордость",
       "subtitle": "Фильмы отечественного производства",
       "imgUrl": "/main_carousel/russian.jpg",
-      "imgUrlMobile": "/main_carousel/russian_mobile.jpg"
+      "imgUrlMobile": "/main_carousel/russian_mobile.jpg",
+      "catalogLink": "/movies?countries=Россия&orderBy=year&order=ASC"
     },
     {
       "title": "Окно в будущее",
       "subtitle": "Подборка научно-фантастических фильмов",
       "imgUrl": "/main_carousel/scifi.jpg",
-      "imgUrlMobile": "/main_carousel/scifi_mobile.jpg"
+      "imgUrlMobile": "/main_carousel/scifi_mobile.jpg",
+      "catalogLink": "/movies?genres=Фантастика&orderBy=year&order=ASC"
     },
     {
       "title": "Захватывающее зрелище",
       "subtitle": "Подборка лучших триллеров последних лет",
       "imgUrl": "/main_carousel/thrillers.jpg",
-      "imgUrlMobile": "/main_carousel/thrillers_mobile.jpg"
+      "imgUrlMobile": "/main_carousel/thrillers_mobile.jpg",
+      "catalogLink": "/movies?genres=Триллер&orderBy=year&order=DESC&yearStart=2012"
     }
   ],
   "show-compilation": "Показать подборку",
@@ -44,8 +50,6 @@
   "visible-text": "Каждый день миллионы людей ищут фильмы онлайн, и никто не хочет усложнять себе жизнь – и вы наверняка один из них! А раз так, то Иви – это именно тот ресурс, который вам нужен. От лучших кинолент в HD-качестве вас отделяет буквально один клик. Мы не просто освобождаем от необходимости идти в кинотеатр или изучать программу телепередач – у посетителей нашего ресурса гораздо больше возможностей.",
   "30-day-sub": "30 дней подписки за 1 ₽",
   "activate-cert": "Активировать сертификат",
-  "carousel-title-1": "Добрые мультфильмы",
-  "carousel-title-2": "Добрые мультфильмы",
   "home-page-info": {
     "intro": "Видеотека Иви – это постоянно пополняющаяся коллекция в рунете, которая насчитывает более 60 тысяч отечественного и зарубежного контента, доступного для просмотра онлайн. Мы первыми в России подписали контракты с крупнейшими голливудскими студиями (Walt Disney, Warner Bros., Sony, 20th Century Fox, Universal, Paramount, MGM и другими) и на постоянной основе сотрудничаем с крупнейшими российскими компаниями и телеканалами.",
     "bullet-points-title": "Онлайн-кинотеатр ivi.ru – это:",
@@ -64,7 +68,9 @@
   "top-10": "Топ 10",
   "this-week": "за неделю",
   "carousel-titles": {
-    "drama": "Драмы",
-    "rus-detective-series": "Российские детективные сериалы"
+    "carousel-1": "Драмы",
+    "carousel-1-link": "/movies?genres=Драма&orderBy=year&order=ASC",
+    "carousel-2": "Биографии",
+    "carousel-2-link": "/movies?genres=Биография&orderBy=year&order=ASC"
   }
 }

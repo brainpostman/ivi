@@ -3,4 +3,5 @@ export interface IBannerCarouselItem {
     subtitle: string;
     imgUrl: string;
     imgUrlMobile: string;
+    catalogLink: string;
 }

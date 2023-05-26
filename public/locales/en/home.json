@@ -4,37 +4,43 @@
       "title": "Brutal and courageous",
       "subtitle": "The best action movies of recent years",
       "imgUrl": "/main_carousel/action.jpg",
-      "imgUrlMobile": "/main_carousel/action_mobile.jpg"
+      "imgUrlMobile": "/main_carousel/action_mobile.jpg",
+      "catalogLink": "/movies?genres_en=Action&orderBy=year&order=DESC&yearStart=2012"
     },
     {
       "title": "To the smallest Russians",
       "subtitle": "Cartoons of domestic production",
       "imgUrl": "/main_carousel/cartoons.jpg",
-      "imgUrlMobile": "/main_carousel/cartoons_mobile.jpg"
+      "imgUrlMobile": "/main_carousel/cartoons_mobile.jpg",
+      "catalogLink": "/movies?genres_en=Animation&orderBy=year&order=ASC&countries=Россия"
     },
     {
       "title": "Very funny",
       "subtitle": "Comedy films",
       "imgUrl": "/main_carousel/comedies.jpg ",
-      "imgUrlMobile": "/main_carousel/comedies_mobile.jpg"
+      "imgUrlMobile": "/main_carousel/comedies_mobile.jpg",
+      "catalogLink": "/movies?genres_en=Comedy&orderBy=year&order=DESC"
     },
     {
       "title": "Our pride",
       "subtitle": "Films of domestic production",
       "imgUrl": "/main_carousel/russian.jpg",
-      "imgUrlMobile": "/main_carousel/russian_mobile.jpg"
+      "imgUrlMobile": "/main_carousel/russian_mobile.jpg",
+      "catalogLink": "/movies?countries=Россия&orderBy=year&order=ASC"
     },
     {
       "title": "Window to the Future",
       "subtitle": "Selection of sci-fi films",
       "imgUrl": "/main_carousel/scifi.jpg ",
-      "imgUrlMobile": "/main_carousel/scifi_mobile.jpg"
+      "imgUrlMobile": "/main_carousel/scifi_mobile.jpg",
+      "catalogLink": "/movies?genres_en=Sci-fi&orderBy=year&order=ASC"
     },
     {
       "title": "An exciting spectacle",
       "subtitle": "A selection of the best thrillers of recent years",
       "imgUrl": "/main_carousel/thrillers.jpg",
-      "imgUrlMobile": "/main_carousel/thrillers_mobile.jpg"
+      "imgUrlMobile": "/main_carousel/thrillers_mobile.jpg",
+      "catalogLink": "/movies?genres_en=Thriller&orderBy=year&order=DESC&yearStart=2012"
     }
   ],
   "show-compilation": "Show compilation",
@@ -64,7 +70,9 @@
   "top-10": "Top 10",
   "this-week": "this week",
   "carousel-titles": {
-    "drama": "Drama",
-    "rus-detective-series": "Russian detective series"
+    "carousel-1": "Dramas",
+    "carousel-1-link": "/movies?genres_en=Drama&orderBy=year&order=ASC",
+    "carousel-2": "Biographies",
+    "carousel-2-link": "/movies?genres_en=Biography&orderBy=year&order=ASC"
   }
 }
