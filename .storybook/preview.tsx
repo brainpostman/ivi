@@ -5,6 +5,8 @@ import DocsTemplate from '../src/stories/DocsTemplate.mdx'
 import '../src/styles/globals.scss'
 import i18n from './i18next'
 import { I18nextProvider } from 'react-i18next'
+import iviTheme from './themes/ivi.theme'
+import lightTheme from './themes/light.theme'
 
 const BREAKPOINTS = {
   xxs: 320,
@@ -74,6 +76,11 @@ const preview: Preview = {
         method: 'alphabetical',
         order: ['UI', ['Buttons', 'InputFields', 'Carousels', 'Cards']],
       },
+    },
+    darkMode: {
+      current: iviTheme,
+      dark: iviTheme,
+      light: lightTheme,
     },
     viewport: { viewports: customViewports },
     backgrounds: {
