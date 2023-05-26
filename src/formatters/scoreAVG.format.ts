@@ -7,26 +7,24 @@
 
 */
 
-const multiple = 10
-const digitsAfterComma = 1
+const digitsAfterComma = 2;
 
 const formatScoreAVG = (scoreAVG: number | undefined): number => {
-  if (!scoreAVG) {
-    console.error('Wrong scoreAVG value {undefined}')
-    return 0
-  }
+    if (!scoreAVG) {
+        console.error('Wrong scoreAVG value {undefined}');
+        return 0;
+    }
 
-  const isNumber = !!Number(scoreAVG)
+    const isNumber = !!Number(scoreAVG);
 
-  if (!isNumber) {
-    console.error('Wrong scoreAVG value {not number}')
-    return 0
-  }
+    if (!isNumber) {
+        console.error('Wrong scoreAVG value {not number}');
+        return 0;
+    }
 
-  const multipliedScore = scoreAVG * multiple
-  const result = Number(multipliedScore.toFixed(digitsAfterComma))
+    const result = Number(scoreAVG.toFixed(digitsAfterComma));
 
-  return result
-}
+    return result;
+};
 
-export default formatScoreAVG
+export default formatScoreAVG;

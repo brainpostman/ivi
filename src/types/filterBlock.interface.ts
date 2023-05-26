@@ -52,6 +52,7 @@ export interface IFilterSliderProps {
   title: string
   query: string | IQueryRange
   range: IRangeWithPartial
+  step?: number
 }
 
 export interface ISortType {
