@@ -101,7 +101,7 @@
     overflow-y: auto;
     &__container {
         max-width: 290px;
-        width: 30%;
+        width: 100%;
         margin: 0 auto;
         display: flex;
         flex-direction: column;
@@ -237,3 +237,53 @@
     }
 }
 
+@media (max-width: 610.98px) {
+    .chat {
+        &__container {
+            max-width: 290px;
+        }
+    }
+
+    .message {
+        color: white;
+        @include ui-padding(default, 4);
+        font-size: 15px;
+        font-weight: bold;
+        &__prompt {
+            background-color: $violet;
+            margin-left: 0;
+            width: 100%;
+            border-top-left-radius: 16px;
+            border-top-right-radius: 16px;
+            border-bottom-right-radius: 16px;
+            border-bottom-left-radius: 0;
+        }
+        &__success {
+            background-color: $green;
+            margin-left: 0;
+            width: 100%;
+            border-top-left-radius: 16px;
+            border-top-right-radius: 16px;
+            border-bottom-right-radius: 16px;
+            border-bottom-left-radius: 0;
+        }
+        &__reply {
+            background-color: $dark;
+            margin-right: 0;
+            width: 100%;
+            border-top-left-radius: 16px;
+            border-top-right-radius: 16px;
+            border-bottom-right-radius: 0;
+            border-bottom-left-radius: 16px;
+        }
+    }
+
+    .useremail {
+        width: 100%;
+        margin-right: 0;
+    }
+
+    .error {
+        width: 290px;
+    }
+}
