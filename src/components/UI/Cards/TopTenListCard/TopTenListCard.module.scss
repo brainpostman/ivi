@@ -21,8 +21,6 @@
 
     &:first-child {
       object-fit: cover;
-      border-radius: 8px;
-
       z-index: 1;
     }
   }
@@ -49,4 +47,8 @@
   z-index: 2;
 
   background-image: linear-gradient(0deg, #100e19, rgba(16, 14, 25, 0));
+}
+.img {
+  border-radius: 8px;
+  object-fit: cover;
 }

@@ -33,6 +33,12 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
         genres: ['биография'],
     });
 
+    const topTenFilms = await filmsAPI.getFilms(locale ?? 'ru', {
+        order: 'DESC',
+        take: 10,
+        orderBy: 'scoreAVG',
+    });
+
     return {
         props: {
             ...(await serverSideTranslations(locale ?? 'ru', [
@@ -45,6 +51,7 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
             ])),
             firstCarouselFilms: firstCarouselFilms.films,
             secondCarouselFilms: secondCarouselFilms.films,
+            topTenFilms: topTenFilms.films,
         },
     };
 };
@@ -58,9 +65,10 @@ const VisibleText = () => {
 interface IProps {
     firstCarouselFilms: IMovie[];
     secondCarouselFilms: IMovie[];
+    topTenFilms: IMovie[];
 }
 
-const Home: NextPage<IProps> = ({ firstCarouselFilms, secondCarouselFilms }) => {
+const Home: NextPage<IProps> = ({ firstCarouselFilms, secondCarouselFilms, topTenFilms }) => {
     const { t } = useTranslation('home');
 
     return (
@@ -85,13 +93,13 @@ const Home: NextPage<IProps> = ({ firstCarouselFilms, secondCarouselFilms }) => 
                 </ExpandBlock>
             </div>
 
-            <TopTenList />
+            <TopTenList topTenFilms={topTenFilms} />
 
             <section className={style.carousels}>
                 {firstCarouselFilms ? (
                     <MovieCarousel
                         title={t('carousel-titles.carousel-1')}
-                        href='/movies?genres=Драма&orderBy=year&order=ASC'
+                        href={t('carousel-titles.carousel-1-link')}
                         films={firstCarouselFilms}
                     />
                 ) : (
@@ -101,7 +109,7 @@ const Home: NextPage<IProps> = ({ firstCarouselFilms, secondCarouselFilms }) => 
                 {secondCarouselFilms ? (
                     <MovieCarousel
                         title={t('carousel-titles.carousel-2')}
-                        href='/movies?genres=Биография&orderBy=year&order=ASC'
+                        href={t('carousel-titles.carousel-2-link')}
                         films={secondCarouselFilms}
                     />
                 ) : (
