@@ -2,10 +2,6 @@
   transition: transform 0.6s, opacity 0.6s; //cubic-bezier(.84,.23,.53,.95);
 }
 
-$init-image-width: 1216px;
-$init-image-height-mobile: 1368px;
-$init-image-height: 524px;
-
 .container {
   position: relative;
   height: auto;
@@ -18,9 +14,8 @@ $init-image-height: 524px;
   z-index: 0;
   display: flex;
   height: 100%;
-  width: 1216px;
-  flex-shrink: 0;
-  flex-grow: 0;
+  max-width: 1216px;
+  flex: 0 0 1216px;
   margin: 0 auto;
 }
 
@@ -33,7 +28,7 @@ $init-image-height: 524px;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  background-color: red;
+
   &_left {
     right: 100%;
 
@@ -114,165 +109,16 @@ $init-image-height: 524px;
 
 @media (max-width: 1330px) {
   .window {
-    @include keep-aspect-ratio($init-image-width, $init-image-height, 1016px);
-  }
-
-  .arrowArea {
-    &_left {
-      right: 91%;
-    }
-    &_right {
-      left: 91%;
-    }
+    flex-basis: 90%;
   }
 
   .arrow {
     &_left {
-      margin-right: 1%;
+      margin-right: -3%;
     }
 
     &_right {
-      margin-left: 1%;
-    }
-  }
-}
-
-@media (max-width: 1246px) {
-  .window {
-    @include keep-aspect-ratio($init-image-width, $init-image-height, 916px);
-  }
-  .arrowArea {
-    &_left {
-      right: 88%;
-    }
-    &_right {
-      left: 88%;
-    }
-  }
-}
-
-@media (max-width: 1162px) {
-  .window {
-    @include keep-aspect-ratio($init-image-width, $init-image-height, 816px);
-  }
-  .arrowArea {
-    &_left {
-      right: 92%;
-    }
-    &_right {
-      left: 92%;
-    }
-  }
-}
-
-@media (max-width: 1046px) {
-  .window {
-    @include keep-aspect-ratio($init-image-width, $init-image-height, 716px);
-  }
-  .arrowArea {
-    &_left {
-      right: 86%;
-    }
-    &_right {
-      left: 86%;
-    }
-  }
-}
-
-@media (max-width: 930px) {
-  .window {
-    @include keep-aspect-ratio($init-image-width, $init-image-height, 616px);
-  }
-  .arrowArea {
-    &_left {
-      right: 85%;
-    }
-    &_right {
-      left: 85%;
-    }
-  }
-}
-
-@media (max-width: 810px) {
-  .window {
-    @include keep-aspect-ratio($init-image-width, $init-image-height, 558px);
-  }
-  .arrowArea {
-    &_left {
-      right: 84%;
-    }
-    &_right {
-      left: 84%;
-    }
-  }
-}
-
-@media (max-width: 690px) {
-  .window {
-    @include keep-aspect-ratio($init-image-width, $init-image-height-mobile, 500px);
-  }
-  .arrowArea {
-    &_left {
-      right: 87%;
-    }
-    &_right {
-      left: 87%;
-    }
-  }
-}
-
-@media (max-width: 625px) {
-  .window {
-    @include keep-aspect-ratio($init-image-width, $init-image-height-mobile, 425px);
-  }
-  .arrowArea {
-    &_left {
-      right: 86%;
-    }
-    &_right {
-      left: 86%;
-    }
-  }
-}
-
-@media (max-width: 560px) {
-  .window {
-    @include keep-aspect-ratio($init-image-width, $init-image-height-mobile, 350px);
-  }
-  .arrowArea {
-    &_left {
-      right: 82%;
-    }
-    &_right {
-      left: 82%;
-    }
-  }
-}
-
-@media (max-width: 490px) {
-  .window {
-    @include keep-aspect-ratio($init-image-width, $init-image-height-mobile, 275px);
-  }
-  .arrowArea {
-    &_left {
-      right: 80%;
-    }
-    &_right {
-      left: 80%;
-    }
-  }
-}
-
-@media (max-width: 420px) {
-  .window {
-    @include keep-aspect-ratio($init-image-width, $init-image-height-mobile, 200px);
-  }
-  .arrowArea {
-    &_left {
-      right: 74%;
-    }
-    &_right {
-      left: 74%;
+      margin-left: -3%;
     }
   }
 }
