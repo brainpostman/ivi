@@ -59,7 +59,7 @@ const Input: FC<ICustomInput> = ({
       <label className={style.label}>
         <input
           type={hideChars ? type : 'text'}
-          className={`${style.input} ${inputClassName}`}
+          className={inputClassName}
           placeholder={type === 'number' ? placeholder : ''}
           value={value}
           {...props}
