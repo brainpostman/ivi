@@ -123,7 +123,7 @@ const FilterBlock: FC<IProps> = ({
                 closeModal={expandTabFilter('director')}
                 suggestList={directors}
                 placeholder={t('searches.director-placeholder')}
-                query='director'
+                query='directors'
             />
 
             <FilterSuggest
@@ -131,7 +131,7 @@ const FilterBlock: FC<IProps> = ({
                 closeModal={expandTabFilter('actor')}
                 suggestList={actors}
                 placeholder={t('searches.actor-placeholder')}
-                query='actor'
+                query='actors'
             />
 
             <FilterSlider
