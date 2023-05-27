@@ -1,14 +1,36 @@
 import formatValueCondition from '@/formatters/valueCondition.format'
 import checkEnLang from '../utils/checkEnLang.utils'
 
-const genreCondition = (locale: string) => (query: string) => {
-  const check = checkEnLang(query)
-  const isEng = locale === 'en'
-  return check && isEng
-}
+/*
+  * Проверяем язык параметра
+
+  * @param {string} locale - локаль
+
+  * @returns () => boolean
+
+*/
+
+const conditionCallback =
+  (locale: string) =>
+  (query: string): boolean => {
+    const check = checkEnLang(query)
+    const isEng = locale === 'en'
+    return check && isEng
+  }
+
+/*
+  * Форматируем параметр в зависимости от языка
+
+  * @param {string} query - параметр для русского языка
+  * @param {string} enQuery - параметр для английского языка
+  * @param {string} locale - локаль
+   
+  * @returns () => string
+
+*/
 
 const formatQueryLocale =
-  (value: string, enValue: string, locale: string) => () =>
-    formatValueCondition(value, enValue, genreCondition(locale))
+  (query: string, enQuery: string, locale: string) => (): string =>
+    formatValueCondition(query, enQuery, conditionCallback(locale))
 
 export default formatQueryLocale
