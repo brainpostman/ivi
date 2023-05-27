@@ -1,7 +1,4 @@
-import {
-  IFilmByIdGetResponse,
-  IFilmsgGetResponse,
-} from '@/types/api/films.api.interface'
+import { IFilmByIdGetResponse } from '@/types/api/films.api.interface'
 
 const tmpFilmOne: IFilmByIdGetResponse = {
   id: 1,
