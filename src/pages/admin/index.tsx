@@ -28,7 +28,6 @@ import { filtersAPI } from '@/api/queries/filters.api';
 import { authAPI } from '@/api/queries/auth.api';
 
 interface IAdminProps {
-    authSession: Session;
     defaultFilms: string;
     genres: string;
     filterGenres: IStaffGetResponse[];
@@ -70,7 +69,6 @@ export const getServerSideProps = async ({
 
     return {
         props: {
-            authSession,
             ...(await serverSideTranslations(locale ?? 'ru', ['common', 'admin', 'movies'])),
             defaultFilms: serializedFilms,
             maxCountScore,
@@ -89,7 +87,6 @@ export const getServerSideProps = async ({
 
 export default function Admin({
     defaultFilms,
-    authSession,
     genres,
     filterGenres,
     countries,
@@ -137,6 +134,7 @@ export default function Admin({
     }, [isLoading]);
 
     const getFilmsWithParams = () => {
+        console.log('QUERY');
         setPage(page + 1);
 
         const defaultParams: IFilmsGetRequest = { take: 14, page };

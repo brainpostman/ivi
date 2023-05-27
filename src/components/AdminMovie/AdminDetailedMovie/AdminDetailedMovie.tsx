@@ -156,10 +156,10 @@ const AdminDetailedMovie = ({ movie, className: propsClassName }: IAdminDetailed
                     <p className={parentStyles.info__item}>
                         {t('score')}:{' '}
                         <span className={parentStyles.info__item__value}>
-                            {movie.scoreAVG || '-'}
+                            {movie.scoreAVG ? movie.scoreAVG.toFixed(2) : '-'}
                         </span>
                     </p>
-                    <p className={styles.info__item}>
+                    <p className={parentStyles.info__item}>
                         {t('score-count')}:{' '}
                         <span className={parentStyles.info__item__value}>
                             {movie.countScore || '-'}
