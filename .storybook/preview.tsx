@@ -6,8 +6,7 @@ import i18n from './i18next'
 import { I18nextProvider } from 'react-i18next'
 import iviTheme from './themes/ivi.theme'
 import lightTheme from './themes/light.theme'
-import { MyDocsContainer } from './docs.container'
-import { DocsContainer } from '@storybook/blocks'
+import DocsTemplate from './DocsTemplate.mdx'
 
 const BREAKPOINTS = {
   xxs: 320,
@@ -93,7 +92,7 @@ const preview: Preview = {
       ],
     },
     docs: {
-      container: MyDocsContainer,
+      page: DocsTemplate,
     },
     actions: { argTypesRegex: '^on[A-Z].*' },
     controls: {
