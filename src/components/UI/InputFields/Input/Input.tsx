@@ -4,6 +4,7 @@ import {
     InputHTMLAttributes,
     MutableRefObject,
     Ref,
+    useEffect,
     useRef,
     useState,
 } from 'react';
@@ -35,6 +36,20 @@ const Input: FC<ICustomInput> = ({
 
     const inputClassName = type === 'number' ? style.number : style.text;
     const placeholderActive = active ? style.placeholder_active : '';
+
+    useEffect(() => {
+        if (inputRef.current?.value) {
+            setActive(true);
+        } else if (!inputRef.current?.value && !focus) {
+            setActive(false);
+        }
+    }, [value]);
+
+    useEffect(() => {
+        if (autoFocus) {
+            setActive(true);
+        }
+    }, [autoFocus]);
 
     return (
         <div className={`${style.wrapper} ${propsClassName}`} style={propsStyle}>
