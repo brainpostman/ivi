@@ -14,7 +14,7 @@ import useIsomorphicLayoutEffect from '@/hooks/useIsomorphicLayoutEffect';
 import useTouchControls from '@/hooks/useTouchControls';
 
 const CustomCarousel: FC<ICustomCarouselProps> = ({
-    elementsMove,
+    elementsMove: elementsMoveIncoming,
     elementsView: elementsViewIncoming,
     title,
     href,
@@ -34,6 +34,7 @@ const CustomCarousel: FC<ICustomCarouselProps> = ({
     const [elementLens, setElementLens] = useState<number[]>([]);
     const refs = useRef<(HTMLDivElement | null)[]>([]);
     const [elementsView, setElementsView] = useState(elementsViewIncoming);
+    const [elementsMove, setElementsMove] = useState(elementsMoveIncoming);
     const [gap, setGap] = useState(space[0]);
     const [arrowSize, setArrowSize] = useState(arrowSizeIncoming);
 
@@ -83,6 +84,16 @@ const CustomCarousel: FC<ICustomCarouselProps> = ({
 
     // Брейкпоинты
     useBreakPoints(setElementsView, elementsView, breakpoints);
+
+    // Изменение кол-ва передвигаемых элементов
+    useEffect(() => {
+        if (elementsView === elementsViewIncoming) {
+            setElementsMove(elementsMoveIncoming);
+            return;
+        }
+        const ratio = elementsMoveIncoming / elementsViewIncoming;
+        setElementsMove(Math.round(elementsView * ratio));
+    }, [elementsView]);
 
     // Container width
     useEffect(() => {

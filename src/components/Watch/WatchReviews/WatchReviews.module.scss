@@ -1,6 +1,14 @@
 .wrapper {
   @include ui-margin(ver, 16);
   width: 100%;
+
+  @media (max-width: 1072px) {
+    @include ui-margin(ver, 8);
+  }
+
+  @media (max-width: 540px) {
+    @include ui-margin(ver, 4);
+  }
 }
 
 .container {

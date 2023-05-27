@@ -2,8 +2,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-
-  background-color: rgba(255, 255, 255, .08);
+  background-color: rgba(255, 255, 255, 0.08);
 
   border-radius: 12px;
   text-align: start;
@@ -39,7 +38,6 @@
   @include ui-padding(top, 5);
 }
 
-
 .raiting_info {
   display: block;
   @include ui-margin(top, 1);
@@ -59,4 +57,8 @@
   }
 }
 
-.raiting_button {}
+@media (max-width: 716px) {
+  .wrapper {
+    width: calc(100vw - 32px);
+  }
+}

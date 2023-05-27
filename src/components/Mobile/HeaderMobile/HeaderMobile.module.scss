@@ -1,12 +1,14 @@
 .wrapper {
   position: fixed;
-
   width: 100%;
 
   z-index: 999;
 
   @media (min-width: 1161px) {
     display: none;
+  }
+  @media (max-width: 599.98px) {
+      @include ui-padding(top, 1);
   }
 }
 
@@ -18,6 +20,7 @@
   bottom: 0;
 
   backdrop-filter: blur(8px);
+
   background-color: rgba(31, 27, 46, 0.88);
 
   box-shadow: 0 -20px 40px rgba(7, 5, 14, 0.626);

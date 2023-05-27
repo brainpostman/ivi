@@ -77,6 +77,10 @@
     flex-direction: column;
     align-items: center;
   }
+  .info {
+    @include ui-padding(top, 0);
+    @include ui-padding(bottom, 4);
+  }
 }
 
 @media (max-width: 540px) {

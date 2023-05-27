@@ -26,6 +26,12 @@
 
   box-shadow: 0 0 40px 40px rgba(0, 0, 0, 0.3);
   clip-path: inset(0px -80px -80px -80px);
+  @media (max-width: 1161px) {
+    @include ui-padding(top, 4);
+  }
+  @media (max-width: 599.98px) {
+    top: 51px;
+  }
 }
 
 .title {

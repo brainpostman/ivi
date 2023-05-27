@@ -3,6 +3,12 @@
     max-width: $max-width;
     width: 100%;
     margin: 0 auto;
+    @media (max-width: 1161px) {
+        @include ui-margin(top, 18);
+    }
+    @media (max-width: 599.98px) {
+        @include ui-margin(top, 12.5);
+    }
 }
 
 .wrapper {

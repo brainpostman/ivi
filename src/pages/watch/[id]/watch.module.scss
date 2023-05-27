@@ -2,6 +2,11 @@
   @include ui-margin(bottom, 5);
   @include ui-padding(top, 4);
   @include ui-padding(left, 4);
+
+  @media (max-width: 1072px) {
+    @include ui-padding(bottom, 14);
+  }
+
 }
 
 .back_button {

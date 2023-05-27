@@ -14,7 +14,7 @@
   @include ui-padding(right, 6);
   @include ui-margin(right, 6);
 
-  >li {
+  > li {
     position: relative;
     display: flex;
     flex-direction: column;
@@ -79,7 +79,7 @@
     flex-direction: column;
     gap: 8px;
 
-    >a>button {
+    > a > button {
       width: 100%;
     }
 
@@ -94,4 +94,67 @@
   display: flex;
   flex-direction: column;
   gap: 4px;
+}
+
+@media (max-width: 1161px) {
+  .wrapper {
+    flex-direction: column-reverse;
+    align-items: center;
+  }
+
+  .right_side {
+    max-width: 320px;
+  }
+
+  .labels {
+    @include ui-padding(top, 4);
+  }
+
+  .list {
+    border-right: none;
+    align-items: center;
+    margin: 0 auto;
+    padding: 0;
+    @include ui-padding(top, 4);
+  }
+}
+
+@media (max-width: 829.98px) {
+  .list {
+    column-gap: 12px;
+    row-gap: 14px;
+    & > li {
+      width: 130px;
+      height: 100px;
+      @include ui-padding(default, 2);
+    }
+  }
+}
+
+@media (max-width: 604.98px) {
+  .list {
+    grid-template-columns: repeat(3, auto);
+    column-gap: 6px;
+    row-gap: 7px;
+    & > li {
+      width: 130px;
+      height: 60px;
+    }
+  }
+  .icon {
+    display: none;
+  }
+}
+
+@media (max-width: 449.98px) {
+  .list {
+    grid-template-columns: repeat(2, auto);
+    column-gap: 6px;
+    row-gap: 7px;
+    & > li {
+      width: 130px;
+      height: 50px;
+      @include ui-padding(default, 1.5);
+    }
+  }
 }
