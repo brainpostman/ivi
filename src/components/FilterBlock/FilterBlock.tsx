@@ -1,5 +1,4 @@
 import { useFilter } from '@/hooks/useFilter'
-import { IFilterBlockEl } from '@/types/filterBlock.interface'
 import { useTranslation } from 'next-i18next'
 import { useRouter } from 'next/router'
 import { FC, useEffect } from 'react'
@@ -14,14 +13,8 @@ import { IStaffGetResponse } from '@/types/api/staffs.api.interface'
 import { IFilterGetResponse } from '@/types/api/filters.api.interface'
 import { useSetListParam } from '@/hooks/useSetListParam'
 import formatQueryLocale from '@/formatters/queryLocale.format'
-
-const filterList: Omit<IFilterBlockEl, 'isExpand'>[] = [
-  { title: 'genres' },
-  { title: 'countries' },
-  { title: 'rating' },
-  { title: 'director' },
-  { title: 'actor' },
-]
+import { filterList } from '@/data/filters.data'
+import getFilterClassName from '@/utils/filterClassName.utils'
 
 interface IProps {
   genres: IFilterGetResponse[]
@@ -85,17 +78,6 @@ const FilterBlock: FC<IProps> = ({
     })
   }
 
-  const filterGenreCardClassName = (genre: string): string => {
-    const queryGenres = router.query.genres as string | undefined
-    if (!queryGenres) return ''
-
-    const isIncludeCurrentGenre = queryGenres
-      .split(',')
-      .some(queryGenre => queryGenre === genre)
-
-    return isIncludeCurrentGenre ? style.filter_genre_card_active : ''
-  }
-
   useEffect(() => {
     const copy = { ...router.query }
     const paramKeys = Object.keys(copy)
@@ -123,7 +105,11 @@ const FilterBlock: FC<IProps> = ({
           <FilterGenreCard
             key={genre.id}
             onClick={onClickGenreCard(genre.name)}
-            className={filterGenreCardClassName(genre.name)}
+            className={getFilterClassName(
+              genre.name,
+              style.filter_card_active,
+              router.query.genres as string | undefined
+            )}
           >
             {genre.name}
           </FilterGenreCard>
@@ -142,6 +128,11 @@ const FilterBlock: FC<IProps> = ({
             key={country.id}
             onClick={onClickCountry(country.name)}
             variant='secondary'
+            className={getFilterClassName(
+              country.name,
+              style.filter_card_active,
+              router.query.countries as string | undefined
+            )}
           >
             {country.name}
           </VioletButton>
