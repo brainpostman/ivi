@@ -1,7 +1,7 @@
 import formatScoreAVG from '@/formatters/scoreAVG.format'
 
 const testValidValue = 0.035678
-const expectedValidValue = 0.4
+const expectedValidValue = 0.04
 
 const testInvalidNumber = 'abc' as unknown as number
 

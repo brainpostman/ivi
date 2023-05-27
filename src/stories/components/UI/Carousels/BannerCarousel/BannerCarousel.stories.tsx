@@ -1,5 +1,4 @@
 import BannerCarousel from '@/components/UI/Carousels/BannerCarousel/BannerCarousel'
-import { bannerCarouselItems } from '@/data/bannerCarousel.data'
 import { Meta } from '@storybook/react'
 import { useTranslation } from 'react-i18next'
 

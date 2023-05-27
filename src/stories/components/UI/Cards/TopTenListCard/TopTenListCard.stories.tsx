@@ -1,6 +1,6 @@
 import { Meta, StoryObj } from '@storybook/react'
 import TopTenListCard from '@/components/UI/Cards/TopTenListCard/TopTenListCard'
-import { topTenListData } from '@/data/topTenList.data'
+import { topTenListImgNumbers } from '@/data/topTenList.data'
 
 type Story = StoryObj<typeof TopTenListCard>
 
@@ -32,7 +32,6 @@ const meta: Meta = {
 
 export const Primary: Story = {
   args: {
-    img: topTenListData[0].img,
     index: 0,
   },
 }

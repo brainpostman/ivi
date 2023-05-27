@@ -40,10 +40,10 @@ export const Primary = ({
   return (
     <div style={{ width: 600 }}>
       <CommentForm
-        textareaValue={value}
-        textareaPlaceholder={textareaPlaceholder}
-        sendButtonClickFn={emptyFunc}
-        textareaOnChangeFn={event => onChange(event)}
+        value={value}
+        placeholder={textareaPlaceholder}
+        onClickSubmit={emptyFunc}
+        onChange={event => onChange(event)}
       />
     </div>
   )

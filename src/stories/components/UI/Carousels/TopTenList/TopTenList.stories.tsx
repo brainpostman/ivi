@@ -1,4 +1,6 @@
+import { transformFilms } from '@/api/transforms/films.transform'
 import TopTenList from '@/components/UI/Carousels/TopTenList/TopTenList'
+import { filmsListData } from '@/data/films.data'
 import { Meta } from '@storybook/react'
 
 const meta: Meta = {
@@ -19,7 +21,7 @@ export const Primary = () => {
     <div
       style={{ backgroundColor: '#000', width: '1350px', paddingLeft: '32px' }}
     >
-      <TopTenList />
+      <TopTenList topTenFilms={transformFilms(filmsListData.slice(0, 10))} />
     </div>
   )
 }

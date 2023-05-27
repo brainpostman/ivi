@@ -46,7 +46,7 @@ export const Primary: Story = {
           parent: 2,
           film_id: 1,
           createdAt: '2023-05-24T12:09:26.037Z',
-          name: 'test',
+          user_name: 'test',
         },
       ],
     },
