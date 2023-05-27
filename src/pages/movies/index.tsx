@@ -12,7 +12,7 @@ import { GetServerSideProps, NextPage } from 'next'
 import { useTranslation } from 'next-i18next'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { useRouter } from 'next/router'
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import style from './index.module.scss'
 import Loader from '@/components/UI/Loader/Loader'
 import { IStaffGetResponse } from '@/types/api/staffs.api.interface'
@@ -96,6 +96,8 @@ const MoviesPage: NextPage<IProps> = ({
   const [page, setPage] = useState(2)
   const [films, setFilms] = useState<IMovie[]>(defaultFilms || [])
 
+  const [currentQueries, setCurrentQueries] = useState({})
+
   const defaultSort = 'year'
 
   const urlGenres = (router.query.genres as string) || ''
@@ -157,6 +159,10 @@ const MoviesPage: NextPage<IProps> = ({
     const orderBy = queries.orderBy
     const order = queries.order
 
+    const filteredKeys = Object.keys(queries).filter(
+      filter => !['orderBy', 'order'].includes(filter)
+    )
+
     const queriesLength = Object.keys(queries).length
 
     if ((!orderBy || !order) && queriesLength) {
@@ -171,7 +177,18 @@ const MoviesPage: NextPage<IProps> = ({
       return
     }
 
-    if (!isLoadedFirstFilms || isLoading) return
+    if (JSON.stringify(currentQueries) === JSON.stringify(queries)) {
+      return
+    }
+
+    setCurrentQueries(router.query)
+
+    if (
+      !isLoadedFirstFilms ||
+      isLoading ||
+      (!filteredKeys.length && (order || orderBy))
+    )
+      return
 
     setPage(1)
     setFilms([])
