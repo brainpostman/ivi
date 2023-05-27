@@ -12,7 +12,7 @@ import { GetServerSideProps, NextPage } from 'next'
 import { useTranslation } from 'next-i18next'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { useRouter } from 'next/router'
-import { useCallback, useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import style from './index.module.scss'
 import Loader from '@/components/UI/Loader/Loader'
 import { IStaffGetResponse } from '@/types/api/staffs.api.interface'
@@ -21,6 +21,8 @@ import { staffsAPI } from '@/api/queries/staffs.api'
 import BreadCrumbsFilms from '@/components/UI/BreadCrumbs/BreadCrumbsFilms/BreadCrumbsFilms'
 import { IFilterGetResponse } from '@/types/api/filters.api.interface'
 import { filtersAPI } from '@/api/queries/filters.api'
+import { useSetListParam } from '@/hooks/useSetListParam'
+import getFilterClassName from '@/utils/filterClassName.utils'
 
 export const getServerSideProps: GetServerSideProps = async ({
   locale,
@@ -106,13 +108,16 @@ const MoviesPage: NextPage<IProps> = ({
   const [page, setPage] = useState(2)
   const [films, setFilms] = useState<IMovie[]>(defaultFilms || [])
 
-  const [currentQueries, setCurrentQueries] = useState({})
-
   const defaultSort = 'year'
 
-  const urlGenres = (router.query.genres as string) || ''
+  const urlGenres = (router.query.genres as string | undefined) || ''
 
   const [isLoading, setIsLoading] = useState(true)
+
+  const { onClickListEl } = useSetListParam(
+    countries.slice(0, 20).map(country => ({ ...country, isSelect: false })),
+    'countries'
+  )
 
   const getFilmsWithParams = () => {
     // Не работает через prev => prev++
@@ -151,8 +156,6 @@ const MoviesPage: NextPage<IProps> = ({
   }
 
   useEffect(() => {
-    if (!defaultFilms || isLoadedFirstFilms) return
-
     setIsLoadedFirstFilms(true)
     setIsLoading(false)
   }, [defaultFilms])
@@ -173,26 +176,6 @@ const MoviesPage: NextPage<IProps> = ({
       filter => !['orderBy', 'order'].includes(filter)
     )
 
-    const queriesLength = Object.keys(queries).length
-
-    if ((!orderBy || !order) && queriesLength) {
-      router.push(
-        {
-          query: { ...router.query, orderBy: defaultSort, order: 'ASC' },
-        },
-        undefined,
-        { shallow: true }
-      )
-
-      return
-    }
-
-    if (JSON.stringify(currentQueries) === JSON.stringify(queries)) {
-      return
-    }
-
-    setCurrentQueries(router.query)
-
     if (
       !isLoadedFirstFilms ||
       isLoading ||
@@ -203,6 +186,7 @@ const MoviesPage: NextPage<IProps> = ({
     setPage(1)
     setFilms([])
     setIsLoading(true)
+    console.log('QUERY')
   }, [router.query])
 
   useEffect(() => {
@@ -238,7 +222,17 @@ const MoviesPage: NextPage<IProps> = ({
             width='fit'
           >
             {countries?.slice(0, 20).map(country => (
-              <VioletButton key={country.id}>{country.name}</VioletButton>
+              <VioletButton
+                key={country.id}
+                onClick={onClickListEl(country.name)}
+                className={getFilterClassName(
+                  country.name,
+                  style.filter_country_card_active,
+                  router.query.countries as string | undefined
+                )}
+              >
+                {country.name}
+              </VioletButton>
             ))}
           </CustomCarousel>
         </div>
