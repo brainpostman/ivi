@@ -7,6 +7,7 @@ const expectedFilmsError = {
   totalCount: 0,
   minYear: 0,
   maxYear: 0,
+  maxRating: 0,
   minCountScore: 0,
   maxCountScore: 0,
 }
