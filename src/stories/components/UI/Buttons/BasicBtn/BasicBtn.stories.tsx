@@ -1,5 +1,4 @@
 import BasicBtn from '@/components/UI/Buttons/BasicBtn/BasicBtn'
-import { DocsContainer, DocsContainerProps } from '@storybook/blocks'
 import { Meta } from '@storybook/react'
 import React from 'react'
 import { BiDevices } from 'react-icons/bi'
@@ -16,7 +15,6 @@ import {
 } from 'react-icons/fa'
 import { FiPhone } from 'react-icons/fi'
 import { GoMail } from 'react-icons/go'
-import { MDXProvider } from '@mdx-js/react'
 
 const icons = {
   empty: <></>,
