@@ -39,11 +39,21 @@ export const useSetStringParam = (
       delete router.query[query]
       router.push({ query: router.query }, undefined, { shallow: true })
     } else {
-      router.push(
-        { query: { ...router.query, [query]: resultValue } },
-        undefined,
-        { shallow: true }
-      )
+      const fullQueries = {
+        [query]: resultValue,
+      }
+
+      if (!router.query.orderBy) {
+        fullQueries.orderBy = 'year'
+      }
+
+      if (!router.query.order) {
+        fullQueries.order = 'ASC'
+      }
+
+      router.push({ query: { ...router.query, ...fullQueries } }, undefined, {
+        shallow: true,
+      })
     }
   }
 

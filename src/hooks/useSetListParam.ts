@@ -38,6 +38,7 @@ type IDefaultValue = {
   * @param {IFilterType} filterType - тип фильтра
   * @param {string[]} extraValues - экстра значения, при которых фильтр удаляет 
     из url
+  * @param {(filter?: string) => string} queryFormatter - форматтер параметра
 
 */
 interface IOptions {
@@ -50,7 +51,7 @@ interface IOptions {
   * @param {IDefaultValue} defaultValue - список по умолчанию
   * @param {string} query - параметр
   * @param {IOptions} options - опции
-  * @param {(filter?: string) => string} queryFormatter - форматтер параметра
+  
   * @returns IUseSetListParam
 
 */
@@ -87,14 +88,22 @@ export const useSetListParam = (
       ? options.queryFormatter(query)
       : query
 
+    const fullQueries = {
+      [formattedQuery]: resultParams,
+    }
+
+    if (!router.query.orderBy) {
+      fullQueries.orderBy = 'year'
+    }
+
+    if (!router.query.order) {
+      fullQueries.order = 'ASC'
+    }
+
     if (resultParams) {
-      router.push(
-        { query: { ...router.query, [formattedQuery]: resultParams } },
-        undefined,
-        {
-          shallow: true,
-        }
-      )
+      router.push({ query: { ...router.query, ...fullQueries } }, undefined, {
+        shallow: true,
+      })
     } else {
       // Если @param resultParams пустой, то удаляем соответствующий параметр query
       delete router.query[query]
