@@ -67,7 +67,9 @@ export const Genre = ({
   return (
     <FilterListBigWrapper list={list} {...props}>
       {filterGenreListData.map(genre => (
-        <FilterGenreCard key={genre.id} title={genre.name} onClick={() => {}} />
+        <FilterGenreCard key={genre.id} onClick={() => {}}>
+          {genre.name}
+        </FilterGenreCard>
       ))}
     </FilterListBigWrapper>
   )
