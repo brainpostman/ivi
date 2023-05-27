@@ -30,8 +30,15 @@ export const getServerSideProps: GetServerSideProps = async ({
 
   const currentParams = { ...formatFilmsParams(query), ...defaultParams }
 
-  const { films, totalCount, maxYear, minYear, maxCountScore, minCountScore } =
-    await filmsAPI.getFilms(locale ?? 'ru', currentParams)
+  const {
+    films,
+    totalCount,
+    maxYear,
+    minYear,
+    maxCountScore,
+    minCountScore,
+    maxRating,
+  } = await filmsAPI.getFilms(locale ?? 'ru', currentParams)
 
   const genres = await filtersAPI.getGenres(locale ?? 'ru')
   const countries = await filtersAPI.getCountries()
@@ -59,6 +66,7 @@ export const getServerSideProps: GetServerSideProps = async ({
       maxYear,
       minCountScore,
       maxCountScore,
+      maxRating,
     },
   }
 }
@@ -72,6 +80,7 @@ interface IProps {
   minYear: number
   minCountScore: number
   maxCountScore: number
+  maxRating: number
   genres: IFilterGetResponse[]
   countries: IFilterGetResponse[]
 }
@@ -87,6 +96,7 @@ const MoviesPage: NextPage<IProps> = ({
   countries,
   minCountScore,
   maxCountScore,
+  maxRating,
 }) => {
   const router = useRouter()
   const { t } = useTranslation('movies')
@@ -247,6 +257,7 @@ const MoviesPage: NextPage<IProps> = ({
           maxYear={maxYear}
           minCountScore={minCountScore}
           maxCountScore={maxCountScore}
+          maxRating={maxRating}
         />
         <div className={style.moviegrid_wrapper}>
           <MovieCardGrid

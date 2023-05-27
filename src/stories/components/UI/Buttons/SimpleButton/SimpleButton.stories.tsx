@@ -8,6 +8,8 @@ const meta: Meta = {
   tags: ['autodocs'],
   parameters: {
     docs: {
+      codeLink:
+        'https://github.com/Hapnees/ivi/tree/development/src/components/UI/Buttons/SimpleButton',
       description: {
         component: 'Простая кнопка',
       },

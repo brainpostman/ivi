@@ -34,6 +34,7 @@ interface IProps {
   maxYear: number
   minCountScore: number
   maxCountScore: number
+  maxRating: number
 }
 
 const FilterBlock: FC<IProps> = ({
@@ -47,6 +48,7 @@ const FilterBlock: FC<IProps> = ({
   maxYear,
   minCountScore,
   maxCountScore,
+  maxRating,
 }) => {
   const router = useRouter()
   const { t } = useTranslation('movies')
@@ -175,7 +177,7 @@ const FilterBlock: FC<IProps> = ({
       />
       <FilterSlider
         query='ratingStart'
-        range={{ max: 10 }}
+        range={{ max: Math.floor(maxRating) }}
         title={t('sliders.rating')}
         step={0.1}
       />
