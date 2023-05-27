@@ -21,7 +21,6 @@ const useOutside = <T extends HTMLElement = HTMLElement>(
     if (!attached) return
     const onClick = (event: MouseEvent) => {
       if (!ref.current) return
-      console.log('CLICK')
       if (!ref.current.contains(event.target as Node)) {
         latestCallback.current()
       }

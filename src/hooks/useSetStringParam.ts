@@ -4,8 +4,8 @@ import { useGetParam } from './useGetParam'
 
 /*
   * @param {boolean} isNumber - является ли числом
-  * @param {string[]} extraValues - экстра значения, при которых фильтр удаляет 
-    из url
+  * @param {string[]} extraValues - экстра значения, при которых фильтр 
+    удаляется из url
 
 */
 interface IOptions {
