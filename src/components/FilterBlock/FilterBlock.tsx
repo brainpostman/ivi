@@ -144,13 +144,12 @@ const FilterBlock: FC<IProps> = ({
                 query='minCountScore'
                 title={t('sliders.scores')}
                 range={{ min: minCountScore, max: maxCountScore }}
-                step={1}
             />
             <FilterSlider
                 query='ratingStart'
                 range={{ max: 10 }}
                 title={t('sliders.rating')}
-                step={1}
+                step={0.1}
             />
 
             <div

@@ -47,7 +47,11 @@ const FilterSliderSingle: FC<IProps> = ({ query, title, max, min, step }) => {
                 className={styleParent.slider}
                 thumbClassName={styleParent.thumb}
                 trackClassName={styleParent.track}
-                onAfterChange={(value) => setUrl(Math.round(value))}
+                onAfterChange={(value) =>
+                    setUrl(
+                        value.toString().indexOf('.') === -1 ? Math.round(value) : value.toFixed(1)
+                    )
+                }
                 pearling
             />
         </div>
