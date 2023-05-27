@@ -22,7 +22,7 @@
 
   width: 75%;
 
-  > p {
+  >p {
     @include ui-margin(bottom, 2);
   }
 }
@@ -69,8 +69,8 @@
     grid-template-columns: repeat(2, auto);
   }
 
-  > li > a > div,
-  > li > a > div > div {
+  >li>a>div,
+  >li>a>div>div {
     @media (max-width: 1272px) {
       @include adaptive-size(width, 180, 152, 1096, 1272);
       @include adaptive-size(height, 278, 233, 1096, 1272);
@@ -108,5 +108,6 @@
   }
 }
 
-.top_carousel_wrapper {
+.filter_country_card_active {
+  background-color: #231e35;
 }
