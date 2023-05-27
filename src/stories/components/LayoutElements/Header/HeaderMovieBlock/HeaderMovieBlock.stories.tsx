@@ -1,12 +1,12 @@
 import { transformFilms } from '@/api/transforms/films.transform'
-import HeaderMovieBlock from '@/components/Header/HeaderHoverBlock/HeaderMovieBlock/HeaderMovieBlock'
+import HeaderMovieBlock from '@/components/LayoutElements/Header/HeaderHoverBlock/HeaderMovieBlock/HeaderMovieBlock'
 import { filmsListData } from '@/data/films.data'
 import { Meta, StoryObj } from '@storybook/react'
 
 type Story = StoryObj<typeof HeaderMovieBlock>
 
 const meta: Meta = {
-  title: 'Header/HeaderMovieBlock',
+  title: 'LayoutElements/Header/HeaderMovieBlock',
   parameters: {
     docs: {
       description: {
