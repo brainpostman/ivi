@@ -46,6 +46,7 @@ interface IPrimary {
   maxYear: number
   minCountScore: number
   maxCountScore: number
+  maxRating: number
 }
 
 export const Primary = ({
@@ -87,6 +88,7 @@ Primary.args = {
   maxYear: 2023,
   minCountScore: 74396,
   maxCountScore: 497326,
+  maxRating: 10,
 }
 
 export default meta
