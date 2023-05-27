@@ -43,12 +43,14 @@ type IDefaultValue = {
 interface IOptions {
   filterType?: IFilterType
   extraValues?: string[]
+  queryFormatter?: (filter: string) => string
 }
 
 /*
   * @param {IDefaultValue} defaultValue - список по умолчанию
   * @param {string} query - параметр
   * @param {IOptions} options - опции
+  * @param {(filter?: string) => string} queryFormatter - форматтер параметра
   * @returns IUseSetListParam
 
 */
@@ -81,9 +83,13 @@ export const useSetListParam = (
       }
     }
 
+    const formattedQuery = options?.queryFormatter
+      ? options.queryFormatter(query)
+      : query
+
     if (resultParams) {
       router.push(
-        { query: { ...router.query, [query]: resultParams } },
+        { query: { ...router.query, [formattedQuery]: resultParams } },
         undefined,
         {
           shallow: true,
