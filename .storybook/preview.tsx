@@ -1,12 +1,13 @@
 import type { Preview } from '@storybook/react'
 import * as NextImage from 'next/image'
 import React, { Suspense, useEffect } from 'react'
-import DocsTemplate from '../src/stories/DocsTemplate.mdx'
 import '../src/styles/globals.scss'
 import i18n from './i18next'
 import { I18nextProvider } from 'react-i18next'
 import iviTheme from './themes/ivi.theme'
 import lightTheme from './themes/light.theme'
+import { MyDocsContainer } from './docs.container'
+import { DocsContainer } from '@storybook/blocks'
 
 const BREAKPOINTS = {
   xxs: 320,
@@ -92,7 +93,7 @@ const preview: Preview = {
       ],
     },
     docs: {
-      page: DocsTemplate,
+      container: MyDocsContainer,
     },
     actions: { argTypesRegex: '^on[A-Z].*' },
     controls: {
