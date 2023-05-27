@@ -1,6 +1,6 @@
-import Footer from '@/components/Footer/Footer'
+import Footer from '@/components/LayoutElements/Footer/Footer'
 import HeadModif from '@/components/HeadModif/HeadModif'
-import Header from '@/components/Header/Header'
+import Header from '@/components/LayoutElements/Header/Header'
 import { IHead } from '@/types/head.interface'
 import style from './PageLayout.module.scss'
 import { FC, PropsWithChildren } from 'react'
