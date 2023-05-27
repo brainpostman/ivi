@@ -13,11 +13,6 @@ export interface IStaff extends Omit<IStaffGetResponse, 'types'> {
   type: IStaffType
 }
 
-export interface IStaffByParamsGetRequest
-  extends Omit<IStaffGetRequest, 'type'> {
-  type: IQuerySuggest
-}
-
 export type IStaffType =
   | 'actor'
   | 'director'
