@@ -33,7 +33,7 @@ const meta: Meta = {
   },
 }
 
-export const Primary = ({
+export const OneMessage = ({
   messages: messagesIncoming,
   backgroundColor,
 }: IErrorPopupProps) => {
@@ -41,8 +41,21 @@ export const Primary = ({
   return <ErrorPopup messages={messages} style={{ backgroundColor }} />
 }
 
-Primary.args = {
+OneMessage.args = {
   messages: 'Простая ошибка',
+  backgroundColor: '#ff542e',
+}
+
+export const ListMessages = ({
+  messages: messagesIncoming,
+  backgroundColor,
+}: IErrorPopupProps) => {
+  const messages = messagesIncoming.split(',')
+  return <ErrorPopup messages={messages} style={{ backgroundColor }} />
+}
+
+ListMessages.args = {
+  messages: 'Простая ошибка #1, Простая ошибка #2, Простая ошибка #3',
   backgroundColor: '#ff542e',
 }
 
