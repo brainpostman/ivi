@@ -59,6 +59,7 @@ export interface ICRUDFilm {
     time: string | null;
     description: string | null;
     scoreAVG: number | null;
+    countScore: number | null;
     createdAt: string;
     updatedAt: string;
     countries: ICRUDCountry[];
@@ -173,6 +174,7 @@ export class CRUDDetailedFilmRequest implements ICRUDDetailedFilmRequest {
         this.time = movie.time;
         this.description = movie.description;
         this.scoreAVG = movie.scoreAVG;
+        this.countScore = movie.countScore;
     }
     genres: { id: number; name: string; name_en: string }[];
     countries: string[];
@@ -204,4 +206,5 @@ export class CRUDDetailedFilmRequest implements ICRUDDetailedFilmRequest {
     time: string | null;
     description: string | null;
     scoreAVG: number | null;
+    countScore: number | null;
 }
