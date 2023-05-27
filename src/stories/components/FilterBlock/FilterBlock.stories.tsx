@@ -38,6 +38,7 @@ interface IProps {
   minCountScore: number
   maxYear: number
   minYear: number
+  maxRating: number
 }
 
 export const Primary = (props: IProps) => (
@@ -55,6 +56,7 @@ export const Primary = (props: IProps) => (
 Primary.args = {
   minYear: 1996,
   maxYear: 2022,
+  maxRating: 10,
   minCountScore: 10,
   maxCountScore: 1000,
 }
