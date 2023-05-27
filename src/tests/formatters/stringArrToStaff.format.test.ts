@@ -1,5 +1,5 @@
 import formatStringArrToStaff from '@/formatters/stringArrToStaff.format'
-import { IStaffGetResponse, IStaffType } from '@/types/staffs.interface'
+import { IStaffGetResponse, IStaffType } from '@/types/api/staffs.api.interface'
 
 const testStaffNames = ['actor1', 'actor2', 'actor3']
 const testStaffType: IStaffType = 'actor'
