@@ -11,7 +11,9 @@
     "build-storybook": "storybook build",
     "test": "jest",
     "coverage": "jest --coverage",
-    "cy": "cypress open"
+    "cy": "cypress open",
+    "cy:open-e2e": "cypress open --e2e --browser chrome",
+    "cy:run-e2e": "cypress run --e2e --headed"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.5",

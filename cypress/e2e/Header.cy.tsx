@@ -1,20 +1,13 @@
-describe('<Header />', () => {
-  it('SMTH', () => {
-    cy.viewport('macbook-15')
-    cy.visit('http://localhost:8080', {
-      onBeforeLoad: () => {
-        Object.defineProperty(navigator, 'language', {
-          value: 'ru',
-        })
-      },
-    })
+describe('Routing through /pages', () => {
+    it('Home', () => {
+        cy.visit('http://localhost:8081');
 
-    cy.get('a[href*="/movies"]').contains('Фильмы').click()
+        cy.get('a[href*="/movies"]').contains('Фильмы').click();
 
-    cy.url().should('include', '/movies')
+        cy.url().should('include', '/movies');
 
-    cy.get('a[href*="/"]').contains('Мой иви').click()
+        cy.get('a[href*="/"]').contains('Мой иви').click();
 
-    cy.url().should('equal', 'http://localhost:8080')
-  })
-})
+        cy.url().should('equal', 'http://localhost:8081');
+    });
+});

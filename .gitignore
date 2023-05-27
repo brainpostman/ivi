@@ -12,6 +12,8 @@ yarn.lock
 
 # testing
 /coverage
+/cypress/videos
+/cypress/screenshots
 
 # next.js
 /.next/
