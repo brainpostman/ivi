@@ -1,7 +1,7 @@
 import { transformFilms } from '@/api/transforms/films.transform'
 import { filmsListData } from '@/data/films.data'
 import { formatSplitArray } from '@/formatters/splitArray.format'
-import { IMovie } from '@/types/films.api.interface'
+import { IMovie } from '@/types/api/films.api.interface'
 
 const testValidValue: IMovie[] = transformFilms(filmsListData)
 const testSplittedNum = 3

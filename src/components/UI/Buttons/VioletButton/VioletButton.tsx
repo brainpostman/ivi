@@ -12,12 +12,13 @@ interface IProps
 
 const VioletButton: FC<IProps> = ({
   children,
+  className = '',
   variant = 'primary',
   ...props
 }) => {
   const currentClassName = `${style.button} ${
     variant === 'secondary' ? style.secondary : ''
-  }`
+  } ${className}`
 
   return (
     <button className={currentClassName} {...props}>

@@ -36,13 +36,6 @@ const Sort = ({ sortTypes, defaultSort }: ISortProps) => {
     setIsExpand(false)
   }
 
-  useEffect(() => {
-    const query = router.query.orderBy as string
-    if (!query) return
-
-    onClickListEl(defaultSort)()
-  }, [])
-
   useOutside(ref, () => setIsExpand(false), isExpand)
 
   return (

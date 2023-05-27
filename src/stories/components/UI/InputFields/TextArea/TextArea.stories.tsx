@@ -13,7 +13,13 @@ const meta: Meta = {
     },
   },
   component: TextArea,
-  argTypes: {},
+  argTypes: {
+    ref: { table: { disable: true } },
+    charHideBtn: { table: { disable: true } },
+    placeholder: {
+      description: 'Текст при пустом поле',
+    },
+  },
 }
 
 export const Text: Story = {
@@ -23,7 +29,7 @@ export const Text: Story = {
     </div>
   ),
   args: {
-    placeholder: 'sdad',
+    placeholder: 'Текст при пустом поле',
   },
 }
 

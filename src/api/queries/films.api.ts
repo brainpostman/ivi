@@ -20,6 +20,7 @@ interface IGetFilms {
   maxYear: number
   minCountScore: number
   maxCountScore: number
+  maxRating: number
 }
 
 interface IGetCrudFilms extends Omit<IGetFilms, 'films'> {
@@ -63,11 +64,13 @@ const getFilms = async (
     let maxYear = 0
     let minCountScore = 0
     let maxCountScore = 0
+    let maxRating = 0
 
     if (typeof window === 'undefined') {
       totalCount = formatStrToNum(filmsData.headers['x-total-count'])
       minYear = formatStrToNum(filmsData.headers['x-min-year'])
       maxYear = formatStrToNum(filmsData.headers['x-max-year'])
+      maxRating = formatStrToNum(filmsData.headers['x-max-rating'])
 
       minCountScore = formatStrToNum(filmsData.headers['x-min-count-score'])
       maxCountScore = formatStrToNum(filmsData.headers['x-max-count-score'])
@@ -80,6 +83,7 @@ const getFilms = async (
       maxYear,
       minCountScore,
       maxCountScore,
+      maxRating,
     }
   } catch (_) {
     return {
@@ -89,6 +93,7 @@ const getFilms = async (
       maxYear: 0,
       minCountScore: 0,
       maxCountScore: 0,
+      maxRating: 0,
     }
   }
 }
@@ -113,6 +118,8 @@ const getCrudFilms = async (
     const minYear = formatStrToNum(response.headers['x-min-year'])
     const maxYear = formatStrToNum(response.headers['x-max-year'])
 
+    const maxRating = formatStrToNum(response.headers['x-max-rating'])
+
     const minCountScore = formatStrToNum(response.headers['x-min-count-score'])
     const maxCountScore = formatStrToNum(response.headers['x-max-count-score'])
 
@@ -123,6 +130,7 @@ const getCrudFilms = async (
       maxYear,
       minCountScore,
       minYear,
+      maxRating,
     }
   } catch (_) {
     return {
@@ -132,6 +140,7 @@ const getCrudFilms = async (
       maxYear: 0,
       minCountScore: 0,
       minYear: 0,
+      maxRating: 0,
     }
   }
 }

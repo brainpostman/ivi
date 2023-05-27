@@ -13,7 +13,6 @@
 }
 
 .text {
-	// FIXME: откуда появляется другой стиль при наведении
 	color: #1f1b2e !important;
 	cursor: pointer;
 	font-size: 15px;
@@ -25,6 +24,7 @@
 	width: 100%;
 	@include ui-padding(hor, 3);
 	@include ui-padding(top, 4);
+
 	&:focus {
 		cursor: text;
 	}
@@ -35,14 +35,17 @@
 	background-color: #d9d7e0;
 	border-radius: 8px;
 	font-weight: 600;
-	width: 60px;
 	text-align: center;
 	-moz-appearance: textfield;
+
 	&::-webkit-outer-spin-button,
 	&::-webkit-inner-spin-button {
 		-webkit-appearance: none;
 		margin: 0;
 	}
+
+	width: 100%;
+
 	@include ui-padding(ver, 2);
 	@include ui-padding(hor, 2);
 }
@@ -63,14 +66,17 @@
 	font-size: 15px;
 	line-height: 1.25;
 	font-weight: 600;
+
 	&_active {
 		transition: all 100ms ease-in;
 		cursor: text;
 		transform: translateY(-30%);
 	}
+
 	&__text {
 		transform-origin: 0 0;
 		transition: inherit;
+
 		&_active {
 			transform: scale(0.85);
 		}

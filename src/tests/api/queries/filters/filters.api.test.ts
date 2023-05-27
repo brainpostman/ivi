@@ -3,7 +3,7 @@ import {
   crudGenreRequiredProperties,
   filterRequiredProperties,
 } from '@/data/requiredProperties.data'
-import { ICRUDGenre } from '@/types/ICrudMovie'
+import { ICRUDGenre } from '@/types/api/ICrudMovie'
 import { IFilterGetResponse } from '@/types/api/filters.api.interface'
 import { checkObjHaveProperties } from '@/utils/test-utils/checkObjHaveProperties.utils'
 

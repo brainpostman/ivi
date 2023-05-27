@@ -1,0 +1,32 @@
+import {
+  Meta,
+  Title,
+  Description,
+  Primary,
+  Controls,
+  ColorPalette,
+  ColorItem,
+} from '@storybook/blocks'
+import * as GrayBlock from './GrayBlock.stories.tsx'
+
+<Meta of={GrayBlock} />
+
+<Title />
+<Description />
+<Primary />
+<Controls />
+
+## Цветовая палитра
+
+<br />
+
+<ColorPalette>
+  <ColorItem
+    title='Цвет блока'
+    colors={{ Default: '#1f1b2e', Hover: '#231f34' }}
+  />
+  <ColorItem
+    title='Цвет текста'
+    colors={{ Default: '#a5a1b2', Hover: '#fff' }}
+  />
+</ColorPalette>

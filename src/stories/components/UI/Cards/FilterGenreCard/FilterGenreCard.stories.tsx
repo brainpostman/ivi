@@ -16,7 +16,8 @@ const meta: Meta = {
   component: FilterGenreCard,
   argTypes: {
     onClick: { table: { disable: true } },
-    title: {
+    children: {
+      name: 'text',
       description: 'Название жанра',
     },
   },
@@ -25,7 +26,7 @@ const meta: Meta = {
 export const Primary: Story = {
   args: {
     onClick: () => {},
-    title: 'Детектив',
+    children: 'Детектив',
   },
 }
 

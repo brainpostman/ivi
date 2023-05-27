@@ -1,4 +1,4 @@
-import Header from '@/components/Header/Header'
+import Header from '@/components/LayoutElements/Header/Header'
 import { store } from '@/store'
 import { Meta, StoryObj } from '@storybook/react'
 import { Provider } from 'react-redux'
@@ -6,7 +6,7 @@ import { Provider } from 'react-redux'
 type Story = StoryObj<typeof Header>
 
 const meta: Meta = {
-  title: 'Header',
+  title: 'LayoutElements/Header',
   parameters: {
     docs: {
       description: {

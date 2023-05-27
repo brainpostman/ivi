@@ -17,12 +17,8 @@ const meta: Meta = {
   },
   component: Home,
   argTypes: {
-    firstCarouselFilms: {
-      description: 'Фильмы для первой карусели',
-    },
-    secondCarouselFilms: {
-      description: 'Фильмы для второй карусели',
-    },
+    firstCarouselFilms: { table: { disable: true } },
+    secondCarouselFilms: { table: { disable: true } },
   },
 }
 

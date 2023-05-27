@@ -17,10 +17,14 @@ const meta: Meta = {
     ref: { table: { disable: true } },
     charHideBtn: {
       description: 'Возможность скрывать текст',
+      if: {
+        arg: 'type',
+        eq: 'password',
+      },
     },
     type: {
       description: 'Тип значения',
-      options: ['text', 'number'],
+      options: ['text', 'number', 'password'],
       control: 'select',
     },
     placeholder: {
@@ -30,6 +34,11 @@ const meta: Meta = {
 }
 
 export const Text: Story = {
+  render: props => (
+    <div style={{ width: 400 }}>
+      <Input {...props} />
+    </div>
+  ),
   args: {
     placeholder: 'Текст при пустом поле',
     type: 'text',
@@ -38,10 +47,28 @@ export const Text: Story = {
 }
 
 export const Number: Story = {
+  render: props => (
+    <div style={{ width: 100 }}>
+      <Input {...props} />
+    </div>
+  ),
   args: {
     placeholder: '0',
     type: 'number',
     charHideBtn: false,
+  },
+}
+
+export const Password: Story = {
+  render: props => (
+    <div style={{ width: 400 }}>
+      <Input {...props} />
+    </div>
+  ),
+  args: {
+    placeholder: 'Пароль',
+    type: 'password',
+    charHideBtn: true,
   },
 }
 

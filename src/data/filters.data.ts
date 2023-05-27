@@ -1,3 +1,5 @@
+import { IFilterBlockEl } from '@/types/filterBlock.interface'
+
 export const genreFilterData = [
   { title: 'Артхаус', param: 'genre1' },
   { title: 'Боевики', param: 'genre2' },
@@ -37,4 +39,11 @@ export const yearsFilterData = [
   { title: 'Фильмы 2022 года', param: '2022' },
   { title: 'Фильмы 2021 года', param: '2021' },
   { title: 'Фильмы 2020 года', param: '2020' },
+]
+export const filterList: Omit<IFilterBlockEl, 'isExpand'>[] = [
+  { title: 'genres' },
+  { title: 'countries' },
+  { title: 'rating' },
+  { title: 'director' },
+  { title: 'actor' },
 ]

@@ -1,11 +1,12 @@
 import {
-	Meta,
-	Title,
-	Description,
-	Primary,
-	Controls,
-	IconGallery,
-	IconItem,
+  Meta,
+  Title,
+  Subtitle,
+  Description,
+  Primary,
+  Controls,
+  IconGallery,
+  IconItem,
 } from '@storybook/blocks'
 import * as HeaderIconButton from './HeaderIconButton.stories.tsx'
 import { MdOutlineNotifications } from 'react-icons/md'
@@ -14,6 +15,9 @@ import { RiSearchLine } from 'react-icons/ri'
 <Meta of={HeaderIconButton} />
 
 <Title />
+<Subtitle>
+  [RESOURCE](https://github.com/Hapnees/ivi/tree/development/src/components/UI/Buttons/HeaderIconButton)
+</Subtitle>
 <Description />
 <Primary />
 <Controls />
@@ -22,10 +26,10 @@ import { RiSearchLine } from 'react-icons/ri'
 
 <br />
 <IconGallery>
-	<IconItem name='Search'>
-		<RiSearchLine color='#000' />
-	</IconItem>
-	<IconItem name='Notification'>
-		<MdOutlineNotifications color='#000' />
-	</IconItem>
+  <IconItem name='Search'>
+    <RiSearchLine color='#000' />
+  </IconItem>
+  <IconItem name='Notification'>
+    <MdOutlineNotifications color='#000' />
+  </IconItem>
 </IconGallery>

@@ -1,4 +1,4 @@
-import Header from '@/components/Header/Header'
+import Header from '@/components/LayoutElements/Header/Header'
 import { createMockRouter } from '@/utils/test-utils/createMockRouter.util'
 import { renderModif } from '@/utils/test-utils/renderModif.util'
 import { screen } from '@testing-library/react'
@@ -11,7 +11,7 @@ const router = createMockRouter({
   push: mockPush,
 })
 
-jest.mock('react-i18next', () => ({
+jest.mock('next-i18next', () => ({
   useTranslation: () => {
     return {
       t: (str: string) => str,
