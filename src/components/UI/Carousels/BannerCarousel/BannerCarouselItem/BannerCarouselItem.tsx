@@ -10,6 +10,7 @@ interface IBannerCarouselItemProps {
     transition: boolean;
     speed: number;
     active: boolean;
+    mobile?: boolean;
 }
 
 const BannerCarouselItem = ({
@@ -41,13 +42,13 @@ const BannerCarouselItem = ({
                     </div>
                 </div>
                 <div className={styles.background}>
-                    <Image src={item.imgUrl} alt='Banner' fill className={styles.image} />
                     <Image
                         src={item.imgUrlMobile}
                         alt='Banner'
                         fill
                         className={`${styles.image} ${styles.image_mobile}`}
                     />
+                    <Image src={item.imgUrl} alt='Banner' fill className={styles.image} />
                 </div>
             </Link>
         </article>

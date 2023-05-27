@@ -1,4 +1,8 @@
-@import '../BannerCarousel.module.scss';
+@import "../BannerCarousel.module.scss";
+
+$init-image-width: 1216px;
+$init-image-height-mobile: 1368px;
+$init-image-height: 524px;
 
 .element {
   position: relative;
@@ -43,27 +47,18 @@
 }
 
 .background {
-
   border-radius: 20px;
-  position: unset !important;
+  position: relative;
   line-height: 0;
-
-  //width: 1216px;
-  //height: 524px;
-
-  height: 100%;
-  width: 100%;
-
+  height: $init-image-height;
+  width: $init-image-width;
+  overflow: hidden;
   z-index: 1;
 }
 
 .image {
-  object-fit: cover;
-  width: 100% !important;
-  position: relative !important;
+  object-fit: unset;
   border-radius: 20px;
-  max-width: 100%;
-
   &_mobile {
     display: none;
   }
@@ -77,6 +72,42 @@
   }
 }
 
+@media (max-width: 1330px) {
+  .background {
+    @include keep-aspect-ratio($init-image-width, $init-image-height, 1016px);
+  }
+}
+
+@media (max-width: 1246px) {
+  .background {
+    @include keep-aspect-ratio($init-image-width, $init-image-height, 916px);
+  }
+}
+
+@media (max-width: 1162px) {
+  .background {
+    @include keep-aspect-ratio($init-image-width, $init-image-height, 816px);
+  }
+}
+
+@media (max-width: 1046px) {
+  .background {
+    @include keep-aspect-ratio($init-image-width, $init-image-height, 716px);
+  }
+}
+
+@media (max-width: 930px) {
+  .background {
+    @include keep-aspect-ratio($init-image-width, $init-image-height, 616px);
+  }
+}
+
+@media (max-width: 810px) {
+  .background {
+    @include keep-aspect-ratio($init-image-width, $init-image-height, 558px);
+  }
+}
+
 @media (max-width: 919.98px) {
   .content {
     bottom: 20px;
@@ -84,13 +115,22 @@
   }
 }
 
-@media (max-width: 599.98px) {
+@media (max-width: 690px) {
   .image {
     display: none;
 
     &_mobile {
       display: unset;
     }
+  }
+  .background {
+    @include keep-aspect-ratio($init-image-width, $init-image-height-mobile, 500px);
+  }
+}
+
+@media (max-width: 625px) {
+  .background {
+    @include keep-aspect-ratio($init-image-width, $init-image-height-mobile, 425px);
   }
 }
 
@@ -99,5 +139,24 @@
 
   @media (max-width: 743px) {
     display: none;
+  }
+}
+
+@media (max-width: 560px) {
+  .background {
+    @include keep-aspect-ratio($init-image-width, $init-image-height-mobile, 350px);
+  }
+}
+
+@media (max-width: 490px) {
+  .background {
+    @include keep-aspect-ratio($init-image-width, $init-image-height-mobile, 275px);
+  }
+}
+
+
+@media (max-width: 420px) {
+  .background {
+    @include keep-aspect-ratio($init-image-width, $init-image-height-mobile, 200px);
   }
 }

@@ -3,3 +3,9 @@
   $maxWidth: $fullSize - $customSize;
   #{$property}: calc(#{$mobSize + px} + #{$addSize} * ((100vw - #{$customSize + px}) / #{$maxWidth}));
 }
+
+@mixin keep-aspect-ratio($init-width, $init-height, $new-width) {
+  $aspect-ratio: $init-width / $init-height;
+  width: $new-width;
+  height: $new-width / $aspect-ratio;
+}

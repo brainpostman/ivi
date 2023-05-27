@@ -3,6 +3,7 @@ import { useBannerCarousel } from '../../../../hooks/useBannerCarousel';
 import { IBannerCarouselItem } from '../../../../types/IBannerCarouselItem';
 import styles from './BannerCarousel.module.scss';
 import BannerCarouselItem from './BannerCarouselItem/BannerCarouselItem';
+import { useEffect, useState } from 'react';
 
 interface IBannerCarouselProps {
     items: IBannerCarouselItem[];
