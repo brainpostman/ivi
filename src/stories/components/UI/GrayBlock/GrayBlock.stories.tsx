@@ -12,7 +12,6 @@ const meta: Meta = {
       },
     },
   },
-  tags: ['autodocs'],
   component: GrayBlock,
   argTypes: {
     children: {
