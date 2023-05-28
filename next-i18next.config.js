@@ -4,6 +4,8 @@ module.exports = {
         locales: ['ru', 'en'],
         localeDetection: false,
     },
+    localePath:
+        typeof window === 'undefined' ? require('path').resolve('./public/locales') : '/locales',
     reloadOnPrerender: true,
     ns: [
         'header',

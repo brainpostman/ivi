@@ -26,5 +26,5 @@
     "custom.d.ts",
     ".storybook/docs.container.tsx"
   ],
-  "exclude": ["node_modules", "cypress/**/*.ts", "cypress.config.ts"]
+  "exclude": ["node_modules", "cypress/**/*.ts", "cypress.config.ts", "src/stories", "src/tests", "src/utils/test-utils"]
 }
