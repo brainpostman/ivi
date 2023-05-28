@@ -1,13 +1,13 @@
 {
-    "expand-block": {
-        "expand": "Развернуть",
-        "collapse": "Свернуть"
-    },
-    "comment-form": {
-        "send": "Отправить",
-        "cancel": "Отменить"
-    },
-    "movie-carousel": {
-        "show-all": "Показать всё"
-    }
+  "expand-block": {
+    "expand": "Развернуть",
+    "collapse": "Свернуть"
+  },
+  "comment-form": {
+    "send": "Отправить",
+    "cancel": "Отменить"
+  },
+  "movie-carousel": {
+    "show-all": "Посмотреть все"
+  }
 }
