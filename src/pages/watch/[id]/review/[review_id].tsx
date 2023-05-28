@@ -35,11 +35,11 @@ export const getServerSideProps = async ({ locale, params }: GetServerSidePropsC
 
     const review = await reviewsAPI.getFilmReviewById(Number(params.review_id));
 
-    const comments = await reviewsAPI.getComments(Number(params.id), Number(params.review_id));
-
     const film = await filmsAPI.getFilmsById(locale ?? 'ru', Number(params.id));
 
-    if (!review || !comments || !film) {
+    const comments = await reviewsAPI.getComments(Number(params.id), Number(params.review_id));
+
+    if (!film || !review) {
         return {
             notFound: true,
         };
