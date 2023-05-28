@@ -15,7 +15,7 @@ type IProps = Omit<
   elementsMove?: number
   elementsView?: number
   films: IMovie[]
-  viewAllHref: string
+  viewAllHref?: string
 }
 
 const breakpoints = [
@@ -33,7 +33,7 @@ const MovieCarousel: FC<IProps> = ({ films, viewAllHref, ...props }) => {
   return (
     <CustomCarousel
       additElem={
-        <Link href={viewAllHref}>
+        <Link href={viewAllHref || '/'}>
           <GrayBlock>{t('view-all')}</GrayBlock>
         </Link>
       }
