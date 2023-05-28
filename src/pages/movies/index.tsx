@@ -134,7 +134,8 @@ const MoviesPage: NextPage<IProps> = ({
       .getFilms(router.locale ?? 'ru', currentParams)
       .then(({ films, totalCount }) => {
         setFilms(prev => [...prev, ...films])
-        setPaginationCount(totalCount)
+        // totalCount не приходит на клиент
+        //setPaginationCount(totalCount)
       })
       .finally(() => {
         setIsLoading(false)
