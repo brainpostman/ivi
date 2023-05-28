@@ -112,6 +112,7 @@ const Home: NextPage<IProps> = ({
           <MovieCarousel
             title={t('carousel-titles.carousel-1')}
             href={t('carousel-titles.carousel-1-link')}
+            viewAllHref={t('carousel-titles.carousel-1-link')}
             films={firstCarouselFilms}
           />
         ) : (
@@ -122,6 +123,7 @@ const Home: NextPage<IProps> = ({
           <MovieCarousel
             title={t('carousel-titles.carousel-2')}
             href={t('carousel-titles.carousel-2-link')}
+            viewAllHref={t('carousel-titles.carousel-2-link')}
             films={secondCarouselFilms}
           />
         ) : (
