@@ -12,7 +12,6 @@ import FilterSuggest from './FilterSuggest/FilterSuggest'
 import { IStaffGetResponse } from '@/types/api/staffs.api.interface'
 import { IFilterGetResponse } from '@/types/api/filters.api.interface'
 import { useSetListParam } from '@/hooks/useSetListParam'
-import formatQueryLocale from '@/formatters/queryLocale.format'
 import { filterList } from '@/data/filters.data'
 import getFilterClassName from '@/utils/filterClassName.utils'
 
