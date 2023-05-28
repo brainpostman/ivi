@@ -6,6 +6,7 @@ import { BsCheckLg } from 'react-icons/bs'
 import FilterTab from '../FilterTab/FilterTab'
 import style from './FilterListBig.module.scss'
 import useOutside from '@/hooks/useOutside'
+import checkEnLang from '@/utils/checkEnLang.utils'
 
 const FilterListBig: FC<IFilterListBigProps> = ({
   filterData,
@@ -13,12 +14,47 @@ const FilterListBig: FC<IFilterListBigProps> = ({
   carouselElementsView = 5,
   carouselElementsMove = 2,
   query,
+  enQuery,
   children,
 }) => {
-  const { list, onClickListEl, param } = useSetListParam(
+  const {
+    list: listRu,
+    onClickListEl: onClickListElRu,
+    param: paramRu,
+  } = useSetListParam(
     listData ? listData.map(data => ({ ...data, isSelect: false })) : [],
     query
   )
+
+  const {
+    list: listEn,
+    onClickListEl: onClickListElEn,
+    param: paramEn,
+  } = useSetListParam(
+    listData ? listData.map(data => ({ ...data, isSelect: false })) : [],
+    enQuery
+  )
+
+  const onClickFilter = (_param: string): (() => void) => {
+    const isEng = checkEnLang(_param)
+    if (isEng) return onClickListElEn(_param)
+
+    return onClickListElRu(_param)
+  }
+
+  const getList = () => {
+    const result = []
+    for (let index = 0; index < listRu.length; index++) {
+      const resultListEl = {
+        ...listRu[index],
+        isSelect: listRu[index].isSelect || listEn[index].isSelect,
+      }
+
+      result.push(resultListEl)
+    }
+
+    return result
+  }
 
   const { filter, selectFilter } = filterData
 
@@ -30,7 +66,7 @@ const FilterListBig: FC<IFilterListBigProps> = ({
     <FilterTab
       selectFilter={selectFilter}
       filter={filter}
-      paramValue={param}
+      paramValue={[paramRu, paramEn]}
       elementRef={ref}
     >
       {filter?.isExpand && (
@@ -49,10 +85,10 @@ const FilterListBig: FC<IFilterListBigProps> = ({
           )}
 
           <ul className={style.list}>
-            {list.map(el => (
+            {getList()?.map(el => (
               <li
                 key={el.id}
-                onClick={onClickListEl(el.name)}
+                onClick={onClickFilter(el.name)}
                 className={el.isSelect ? style.active : ''}
               >
                 <p>{el.name}</p>

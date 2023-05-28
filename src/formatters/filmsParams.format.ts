@@ -4,17 +4,13 @@ import { ParsedUrlQuery } from 'querystring'
 /*
   * @param {ParsedUrlQuery | undefined} queryParams - параметры в адресной
     строке
-  * @param {string} locale - локаль
   * @returns IFilmsGetRequest - параметры для запроса
 
 */
 export const formatFilmsParams = (
-  queryParams: ParsedUrlQuery | undefined,
-  locale = 'ru'
+  queryParams: ParsedUrlQuery | undefined
 ): IFilmsGetRequest => {
   if (!queryParams) return {}
-
-  const genres = locale === 'ru' ? 'genres' : 'genres_en'
 
   const defaultParams: IFilmsGetRequest = {
     take: 14,
@@ -27,7 +23,14 @@ export const formatFilmsParams = (
     if (!paramValue) continue
 
     if (
-      [genres, 'countries', 'director', 'actor', 'scoreAVG'].includes(param)
+      [
+        'genres',
+        'genres_en',
+        'countries',
+        'director',
+        'actor',
+        'scoreAVG',
+      ].includes(param)
     ) {
       paramValue = (paramValue as string).split(',')
 
@@ -36,10 +39,9 @@ export const formatFilmsParams = (
           typeof currentParams,
           'take' | 'page' | 'order' | 'orderBy'
         >
-      ] =
-        param === genres
-          ? paramValue.map(genre => formatCapitalize(genre, { reverse: true }))
-          : paramValue
+      ] = ['genres', 'genres_en'].includes(param)
+        ? paramValue.map(genre => formatCapitalize(genre, { reverse: true }))
+        : paramValue
     } else {
       currentParams[
         param as keyof Pick<typeof currentParams, 'order' | 'orderBy'>

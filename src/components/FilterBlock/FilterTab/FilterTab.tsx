@@ -9,7 +9,7 @@ interface IProps
   extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
   selectFilter: () => void
   filter?: IFilterBlockEl
-  paramValue?: string
+  paramValue?: string | string[]
   elementRef?: RefObject<HTMLElement>
 }
 
@@ -20,6 +20,21 @@ const FilterTab: FC<IProps> = ({
   children,
   elementRef,
 }) => {
+  const viewParams = () => {
+    if (!paramValue) return ''
+
+    const paramsArray = Array.isArray(paramValue)
+      ? paramValue.filter(param => !!param)
+      : [paramValue]
+
+    const result = paramsArray.reduce((accum, item, index) => {
+      const commaOrEmpty = index % 2 ? ',' : ''
+      return accum + commaOrEmpty + item
+    }, '')
+
+    return result
+  }
+
   const titleClassName = `${style.title} ${
     filter?.isExpand ? style.title__active : ''
   }`
@@ -35,7 +50,7 @@ const FilterTab: FC<IProps> = ({
       <div className={titleClassName} onClick={selectFilter}>
         <div>
           <h1>{t(normalizeKey(filter?.title ?? 'Фильтр'))}</h1>
-          {!!paramValue && <p className={style.param}>{paramValue}</p>}
+          {!!viewParams() && <p className={style.param}>{viewParams()}</p>}
         </div>
         <MdArrowBackIosNew className={arrowClassName} />
       </div>

@@ -12,13 +12,17 @@
 const getFilterClassName = (
   filter: string,
   className: string,
-  urlFilter: string | undefined
+  urlFilter: string | string[] | undefined
 ): string => {
   if (!urlFilter) return ''
 
-  const isIncludeCurrentFilter = urlFilter
-    .split(',')
-    .some(queryGenre => queryGenre === filter)
+  const arrayUrlFilter = Array.isArray(urlFilter)
+    ? urlFilter.filter(filter => !!filter)
+    : [urlFilter]
+
+  const isIncludeCurrentFilter = arrayUrlFilter.some(urlFilter =>
+    urlFilter.split(',').some(query => query === filter)
+  )
 
   return isIncludeCurrentFilter ? className : ''
 }
