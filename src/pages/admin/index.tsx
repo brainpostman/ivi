@@ -174,7 +174,7 @@ export default function Admin({
 
     const defaultParams: IFilmsGetRequest = { take: 14, page }
     const currentParams = {
-      ...formatFilmsParams(router.query, router.locale ?? 'ru'),
+      ...formatFilmsParams(router.query),
       ...defaultParams,
     }
 
@@ -190,7 +190,7 @@ export default function Admin({
   }
 
   const getSortedGenres = () => {
-    const requestParams = formatFilmsParams(router.query, router.locale ?? 'ru')
+    const requestParams = formatFilmsParams(router.query)
     requestParams.take = undefined
     requestParams.page = undefined
     filtersAPI
