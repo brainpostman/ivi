@@ -3,7 +3,9 @@ import { IQueryRange, IRangeWithPartial } from './utils.interface'
 
 export type IFilterTitle =
   | 'genres'
-  | 'country'
+  | 'genres_en'
+  | 'countries'
+  | 'fk_countries'
   | 'rating'
   | 'director'
   | 'actor'
@@ -31,6 +33,7 @@ export interface IFilterListBigProps {
   carouselElementsView?: number
   carouselElementsMove?: number
   query: string
+  enQuery: string
   children?: React.ReactNode[]
 }
 

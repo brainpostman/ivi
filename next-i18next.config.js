@@ -7,6 +7,9 @@ module.exports = {
     localePath:
         typeof window === 'undefined' ? require('path').resolve('./public/locales') : '/locales',
     reloadOnPrerender: true,
+    //vercel deployment fix
+    localePath:
+        typeof window === 'undefined' ? require('path').resolve('./public/locales') : '/locales',
     ns: [
         'header',
         'auth_modal',

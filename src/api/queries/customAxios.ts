@@ -2,7 +2,7 @@ import { displayErrorsServer } from '@/utils/error.util'
 import axios, { AxiosError } from 'axios'
 
 export const customAxios = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_SERVER_ADDRESS,
+  baseURL: process.env.NEXT_PUBLIC_API_PATH,
 })
 
 customAxios.interceptors.response.use(

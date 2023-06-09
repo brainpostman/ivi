@@ -44,7 +44,6 @@ type IDefaultValue = {
 interface IOptions {
   filterType?: IFilterType
   extraValues?: string[]
-  queryFormatter?: (filter: string) => string
 }
 
 /*
@@ -61,6 +60,7 @@ export const useSetListParam = (
   options?: IOptions
 ): IUseSetListParam => {
   const param = useGetParam(query)
+
   const router = useRouter()
 
   const [list, setList] = useState<IList>(defaultValue)
@@ -84,12 +84,8 @@ export const useSetListParam = (
       }
     }
 
-    const formattedQuery = options?.queryFormatter
-      ? options.queryFormatter(query)
-      : query
-
     const fullQueries = {
-      [formattedQuery]: resultParams,
+      [query]: resultParams,
     }
 
     if (!router.query.orderBy) {

@@ -1,5 +1,5 @@
 .movie_carousel_list {
-  > div > a > div {
+  >div>a>div {
     @media (max-width: 1272px) {
       @include adaptive-size(width, 172, 145, 1096, 1272);
       @include adaptive-size(height, 260, 242, 1096, 1272);

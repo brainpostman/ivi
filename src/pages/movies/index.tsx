@@ -24,10 +24,13 @@ import { filtersAPI } from '@/api/queries/filters.api'
 import { useSetListParam } from '@/hooks/useSetListParam'
 import getFilterClassName from '@/utils/filterClassName.utils'
 
-export const getServerSideProps: GetServerSideProps = async ({ locale, query }) => {
-    const defaultParams: IFilmsGetRequest = { take: 14, page: 1 };
+export const getServerSideProps: GetServerSideProps = async ({
+  locale,
+  query,
+}) => {
+  const defaultParams: IFilmsGetRequest = { take: 14, page: 1 }
 
-    const currentParams = { ...formatFilmsParams(query), ...defaultParams };
+  const currentParams = { ...formatFilmsParams(query), ...defaultParams }
 
   const {
     films,
@@ -39,11 +42,11 @@ export const getServerSideProps: GetServerSideProps = async ({ locale, query }) 
     maxRating,
   } = await filmsAPI.getFilms(locale ?? 'ru', currentParams)
 
-    const genres = await filtersAPI.getGenres(locale ?? 'ru');
-    const countries = await filtersAPI.getCountries();
+  const genres = await filtersAPI.getGenres(locale ?? 'ru')
+  const countries = await filtersAPI.getCountries()
 
-    const directors = await staffsAPI.getDirectors();
-    const actors = await staffsAPI.getActors();
+  const directors = await staffsAPI.getDirectors()
+  const actors = await staffsAPI.getActors()
 
   return {
     props: {
@@ -97,20 +100,20 @@ const MoviesPage: NextPage<IProps> = ({
   maxCountScore,
   maxRating,
 }) => {
-    const router = useRouter();
-    const { t } = useTranslation('movies');
+  const router = useRouter()
+  const { t } = useTranslation('movies')
 
-    const [isLoadedFirstFilms, setIsLoadedFirstFilms] = useState(false);
-    const [isClickedViewMore, setIsClickedViewMore] = useState(false);
-    const [page, setPage] = useState(2);
-    const [films, setFilms] = useState<IMovie[]>(defaultFilms || []);
-    const [paginationCount, setPaginationCount] = useState(totalCount);
+  const [isLoadedFirstFilms, setIsLoadedFirstFilms] = useState(false)
+  const [isClickedViewMore, setIsClickedViewMore] = useState(false)
+  const [page, setPage] = useState(2)
+  const [films, setFilms] = useState<IMovie[]>(defaultFilms || [])
+  const [paginationCount, setPaginationCount] = useState(totalCount)
 
-    const defaultSort = 'year';
+  const defaultSort = 'year'
 
   const urlGenres = (router.query.genres as string | undefined) || ''
 
-    const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(true)
 
   const { onClickListEl } = useSetListParam(
     countries.slice(0, 20).map(country => ({ ...country, isSelect: false })),
@@ -121,53 +124,55 @@ const MoviesPage: NextPage<IProps> = ({
     // Не работает через prev => prev++
     setPage(page + 1)
 
-        const defaultParams: IFilmsGetRequest = { take: 14, page };
-        const currentParams = {
-            ...formatFilmsParams(router.query),
-            ...defaultParams,
-        };
+    const defaultParams: IFilmsGetRequest = { take: 14, page }
+    const currentParams = {
+      ...formatFilmsParams(router.query),
+      ...defaultParams,
+    }
 
-        filmsAPI
-            .getFilms(router.locale ?? 'ru', currentParams)
-            .then(({ films, totalCount }) => {
-                setFilms((prev) => [...prev, ...films]);
-                setPaginationCount(totalCount);
-            })
-            .finally(() => {
-                setIsLoading(false);
-            });
-    };
+    filmsAPI
+      .getFilms(router.locale ?? 'ru', currentParams)
+      .then(({ films, totalCount }) => {
+        setFilms(prev => [...prev, ...films])
+        // totalCount не приходит на клиент
+        //setPaginationCount(totalCount)
+      })
+      .finally(() => {
+        setIsLoading(false)
+      })
+  }
 
-    const onClickViewMore = () => {
-        setIsClickedViewMore(true);
-        setIsLoading(true);
-    };
+  const onClickViewMore = () => {
+    setIsClickedViewMore(true)
+    setIsLoading(true)
+  }
 
-    const onScroll = () => {
-        const docElement = document.documentElement;
-        if (
-            docElement.scrollHeight - (docElement.scrollTop + window.innerHeight) < 800 &&
-            films.length < paginationCount
-        ) {
-            setIsLoading(true);
-        }
-    };
+  const onScroll = () => {
+    const docElement = document.documentElement
+    if (
+      docElement.scrollHeight - (docElement.scrollTop + window.innerHeight) <
+        800 &&
+      films.length < paginationCount
+    ) {
+      setIsLoading(true)
+    }
+  }
 
   useEffect(() => {
     setIsLoadedFirstFilms(true)
     setIsLoading(false)
   }, [defaultFilms])
 
-    useEffect(() => {
-        if (!isLoading || !isLoadedFirstFilms) return;
-        getFilmsWithParams();
-    }, [isLoading]);
+  useEffect(() => {
+    if (!isLoading || !isLoadedFirstFilms) return
+    getFilmsWithParams()
+  }, [isLoading])
 
-    // Запрос при изменении фильтров
-    useEffect(() => {
-        const queries = router.query;
-        const orderBy = queries.orderBy;
-        const order = queries.order;
+  // Запрос при изменении фильтров
+  useEffect(() => {
+    const queries = router.query
+    const orderBy = queries.orderBy
+    const order = queries.order
 
     const filteredKeys = Object.keys(queries).filter(
       filter => !['orderBy', 'order'].includes(filter)
@@ -183,15 +188,14 @@ const MoviesPage: NextPage<IProps> = ({
     setPage(1)
     setFilms([])
     setIsLoading(true)
-    console.log('QUERY')
   }, [router.query])
 
-    useEffect(() => {
-        if (!isClickedViewMore) return;
-        document.addEventListener('scroll', onScroll);
+  useEffect(() => {
+    if (!isClickedViewMore) return
+    document.addEventListener('scroll', onScroll)
 
-        return () => document.removeEventListener('scroll', onScroll);
-    }, [isClickedViewMore, films]);
+    return () => document.removeEventListener('scroll', onScroll)
+  }, [isClickedViewMore, films])
 
   return (
     <PageLayout title={t('html-title')}>
@@ -263,4 +267,4 @@ const MoviesPage: NextPage<IProps> = ({
   )
 }
 
-export default MoviesPage;
+export default MoviesPage

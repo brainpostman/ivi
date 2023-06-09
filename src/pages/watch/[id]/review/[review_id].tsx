@@ -29,10 +29,7 @@ interface IReviewProps {
 export const getServerSideProps = async ({ locale, params }: GetServerSidePropsContext) => {
     if (!params || !parseInt(params.id as string)) {
         return {
-            redirect: {
-                destination: '/error',
-                permanent: false,
-            },
+            notFound: true,
         };
     }
 
@@ -41,6 +38,12 @@ export const getServerSideProps = async ({ locale, params }: GetServerSidePropsC
     const film = await filmsAPI.getFilmsById(locale ?? 'ru', Number(params.id));
 
     const comments = await reviewsAPI.getComments(Number(params.id), Number(params.review_id));
+
+    if (!film || !review) {
+        return {
+            notFound: true,
+        };
+    }
 
     return {
         props: {

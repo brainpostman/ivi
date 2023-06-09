@@ -7,10 +7,10 @@
   @include ui-margin(ver, 6);
   @include ui-padding(hor, 4);
 
-  > a {
+  >a {
     width: 100%;
 
-    > button {
+    >button {
       width: 100%;
     }
   }
@@ -28,7 +28,7 @@
 
   @include ui-margin(top, 5);
 
-  > article {
+  >article {
     @include ui-margin(bottom, 11);
   }
 }
